@@ -1,0 +1,222 @@
+{
+  "_documentation": "Schema Person/Attorney per ciascuno dei 4 avvocati. Iniettare nel template single-avvocato.php usando @id pattern: https://studiolegalesaltelli.it/avvocati/{slug}/#person. I campi marcati TODO vanno completati con dati forniti dal cliente.",
+  "_attorneys": [
+    {
+      "@context": "https://schema.org",
+      "@type": ["Person", "Attorney"],
+      "@id": "https://studiolegalesaltelli.it/avvocati/emiliano-saltelli/#person",
+      "givenName": "Emiliano",
+      "familyName": "Saltelli",
+      "name": "Avv. Emiliano Saltelli",
+      "honorificPrefix": "Avv.",
+      "jobTitle": "Avvocato fondatore",
+      "description": "Avvocato fondatore dello Studio Legale Saltelli & Partners. Tributarista e civilista con oltre 20 anni di esperienza. Laureato all'Università degli Studi di Napoli Federico II.",
+      "url": "https://studiolegalesaltelli.it/avvocati/emiliano-saltelli/",
+      "image": "https://studiolegalesaltelli.it/wp-content/uploads/avv-emiliano-saltelli.jpg",
+      "telephone": "+390811813119",
+      "email": "info@studiolegalesaltelli.it",
+      "worksFor": {"@id": "https://studiolegalesaltelli.it/#organization"},
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Università degli Studi di Napoli Federico II",
+        "url": "https://www.unina.it"
+      },
+      "memberOf": {
+        "@type": "Organization",
+        "name": "Ordine degli Avvocati di Napoli",
+        "url": "https://www.ordineavvocatinapoli.it"
+      },
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Avvocato",
+        "occupationLocation": {"@type": "City", "name": "Napoli"},
+        "skills": "Diritto tributario, diritto civile, contenzioso fiscale, cartelle esattoriali, accertamenti dell'Agenzia delle Entrate"
+      },
+      "knowsAbout": [
+        "Diritto tributario",
+        "Cartelle esattoriali",
+        "Contenzioso fiscale",
+        "Accertamenti tributari",
+        "Diritto civile",
+        "Recupero crediti"
+      ],
+      "knowsLanguage": [
+        {"@type": "Language", "name": "Italian", "alternateName": "it"}
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Vannella Gaetani, 27",
+        "addressLocality": "Napoli",
+        "postalCode": "80121",
+        "addressCountry": "IT"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/emilianosaltelli/"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": ["Person", "Attorney"],
+      "@id": "https://studiolegalesaltelli.it/avvocati/fabiana-saltelli/#person",
+      "givenName": "Fabiana",
+      "familyName": "Saltelli",
+      "name": "Avv. Fabiana Saltelli",
+      "honorificPrefix": "Avv.",
+      "jobTitle": "Avvocato giuslavorista",
+      "description": "Avvocato giuslavorista dello Studio Legale Saltelli & Partners. Si occupa di diritto del lavoro, diritto civile e diritto tributario.",
+      "url": "https://studiolegalesaltelli.it/avvocati/fabiana-saltelli/",
+      "image": "https://studiolegalesaltelli.it/wp-content/uploads/avv-fabiana-saltelli.jpg",
+      "telephone": "+390811813119",
+      "email": "info@studiolegalesaltelli.it",
+      "worksFor": {"@id": "https://studiolegalesaltelli.it/#organization"},
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Università degli Studi di Napoli Federico II",
+        "url": "https://www.unina.it"
+      },
+      "memberOf": {
+        "@type": "Organization",
+        "name": "Ordine degli Avvocati di Napoli",
+        "url": "https://www.ordineavvocatinapoli.it"
+      },
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Avvocato giuslavorista",
+        "occupationLocation": {"@type": "City", "name": "Napoli"},
+        "skills": "Diritto del lavoro, licenziamenti, mobbing, contenzioso INPS, contratti di lavoro, vertenze sindacali"
+      },
+      "knowsAbout": [
+        "Diritto del lavoro",
+        "Licenziamenti",
+        "Mobbing e demansionamento",
+        "Contenzioso INPS",
+        "Contratti di lavoro",
+        "Diritto civile",
+        "Diritto tributario"
+      ],
+      "knowsLanguage": [
+        {"@type": "Language", "name": "Italian", "alternateName": "it"}
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Vannella Gaetani, 27",
+        "addressLocality": "Napoli",
+        "postalCode": "80121",
+        "addressCountry": "IT"
+      },
+      "sameAs": [
+        "_TODO_linkedin_fabiana_saltelli"
+      ],
+      "_sameAs_comment": "LinkedIn personale Fabiana — in attesa Ludovica (2026-04-28)."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": ["Person", "Attorney"],
+      "@id": "https://studiolegalesaltelli.it/avvocati/antonia-battista/#person",
+      "givenName": "Antonia",
+      "familyName": "Battista",
+      "name": "Avv. Antonia Battista",
+      "honorificPrefix": "Avv.",
+      "jobTitle": "Avvocato civilista — diritto di famiglia",
+      "description": "Avvocato dello Studio Legale Saltelli & Partners. Si occupa di diritto di famiglia, divorzi, unioni civili e tutela legale delle famiglie LGBTQ+.",
+      "url": "https://studiolegalesaltelli.it/avvocati/antonia-battista/",
+      "image": "https://studiolegalesaltelli.it/wp-content/uploads/avv-antonia-battista.jpg",
+      "telephone": "+390811813119",
+      "email": "info@studiolegalesaltelli.it",
+      "worksFor": {"@id": "https://studiolegalesaltelli.it/#organization"},
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Università degli Studi di Napoli Federico II",
+        "url": "https://www.unina.it"
+      },
+      "memberOf": {
+        "@type": "Organization",
+        "name": "Ordine degli Avvocati di Napoli",
+        "url": "https://www.ordineavvocatinapoli.it"
+      },
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Avvocato",
+        "occupationLocation": {"@type": "City", "name": "Napoli"},
+        "skills": "Diritto di famiglia, separazioni, divorzi, affidamento minori, unioni civili, tutela famiglie LGBTQ+"
+      },
+      "knowsAbout": [
+        "Diritto di famiglia",
+        "Separazioni e divorzi",
+        "Affidamento minori",
+        "Unioni civili",
+        "Tutela famiglie LGBTQ+",
+        "Diritto civile"
+      ],
+      "knowsLanguage": [
+        {"@type": "Language", "name": "Italian", "alternateName": "it"}
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Vannella Gaetani, 27",
+        "addressLocality": "Napoli",
+        "postalCode": "80121",
+        "addressCountry": "IT"
+      },
+      "sameAs": [
+        "_TODO_linkedin_antonia_battista"
+      ],
+      "_sameAs_comment": "LinkedIn personale Antonia — in attesa Ludovica (2026-04-28)."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": ["Person", "Attorney"],
+      "@id": "https://studiolegalesaltelli.it/avvocati/stefano-gaetano-tedesco/#person",
+      "_scope_note": "Inclusione nello scope incerta al 2026-04-28: Stefano mostra basso engagement; possibile sostituzione con Avv. Fabrizio D'Onofrio (penalista) che segue il progetto con costanza. Decisione in attesa cliente.",
+      "givenName": "Stefano Gaetano",
+      "familyName": "Tedesco",
+      "name": "Avv. Stefano Gaetano Tedesco",
+      "honorificPrefix": "Avv.",
+      "jobTitle": "Avvocato civilista — diritto condominiale e immobiliare",
+      "description": "Avvocato dello Studio Legale Saltelli & Partners. Si occupa di diritto condominiale e diritto immobiliare.",
+      "url": "https://studiolegalesaltelli.it/avvocati/stefano-gaetano-tedesco/",
+      "image": "https://studiolegalesaltelli.it/wp-content/uploads/avv-stefano-tedesco.jpg",
+      "telephone": "+390811813119",
+      "email": "info@studiolegalesaltelli.it",
+      "worksFor": {"@id": "https://studiolegalesaltelli.it/#organization"},
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Università degli Studi di Napoli Federico II",
+        "url": "https://www.unina.it"
+      },
+      "memberOf": {
+        "@type": "Organization",
+        "name": "Ordine degli Avvocati di Napoli",
+        "url": "https://www.ordineavvocatinapoli.it"
+      },
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Avvocato",
+        "occupationLocation": {"@type": "City", "name": "Napoli"},
+        "skills": "Diritto condominiale, diritto immobiliare, contenzioso tra condòmini, locazioni, compravendite immobiliari"
+      },
+      "knowsAbout": [
+        "Diritto condominiale",
+        "Diritto immobiliare",
+        "Locazioni",
+        "Compravendite immobiliari",
+        "Contenzioso condominiale",
+        "Diritto civile"
+      ],
+      "knowsLanguage": [
+        {"@type": "Language", "name": "Italian", "alternateName": "it"}
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Vannella Gaetani, 27",
+        "addressLocality": "Napoli",
+        "postalCode": "80121",
+        "addressCountry": "IT"
+      },
+      "sameAs": [
+        "_TODO_linkedin_stefano_tedesco"
+      ],
+      "_sameAs_comment": "LinkedIn personale Stefano — in attesa Ludovica + decisione su scope (2026-04-28)."
+    }
+  ]
+}

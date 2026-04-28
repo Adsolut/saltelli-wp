@@ -1,0 +1,96 @@
+# Studio Legale Saltelli — robots.txt
+# AI-ready: explicitly allow major AI training/retrieval crawlers
+# Last updated: 2026-04-28
+
+# ===== Default: allow all standard search crawlers =====
+User-agent: *
+Allow: /
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/cache/
+Disallow: /wp-content/upgrade/
+Disallow: /xmlrpc.php
+Disallow: /readme.html
+Disallow: /license.txt
+Disallow: /?s=
+Disallow: /search/
+Allow: /wp-admin/admin-ajax.php
+Allow: /wp-content/uploads/
+
+# ===== AI crawlers — explicitly ALLOWED =====
+# These bots train and/or retrieve for generative AI engines.
+# We WANT to be cited by ChatGPT, Claude, Perplexity, Gemini, Copilot.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# ===== Aggressive scrapers — BLOCKED =====
+# These do not contribute to legitimate search/AI visibility.
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# ===== Sitemap =====
+Sitemap: https://studiolegalesaltelli.it/sitemap.xml
+Sitemap: https://studiolegalesaltelli.it/sitemap_index.xml

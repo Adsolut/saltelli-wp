@@ -1,0 +1,170 @@
+{
+  "key": "group_saltelli_avvocato",
+  "title": "Avvocato — dati profilo",
+  "fields": [
+    {
+      "key": "field_saltelli_avv_foto_ritratto",
+      "label": "Foto ritratto",
+      "name": "foto_ritratto",
+      "type": "image",
+      "instructions": "Foto professionale verticale (3:4). Verrà ridimensionata in saltelli-attorney-portrait.",
+      "required": 0,
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all",
+      "min_width": 600,
+      "min_height": 800
+    },
+    {
+      "key": "field_saltelli_avv_ruolo_breve",
+      "label": "Ruolo breve",
+      "name": "ruolo_breve",
+      "type": "text",
+      "instructions": "Es. \"Fondatore\", \"Giuslavorista\", \"Civilista — diritto di famiglia\". Mostrato sotto al nome.",
+      "required": 0,
+      "maxlength": 80
+    },
+    {
+      "key": "field_saltelli_avv_specializzazioni",
+      "label": "Specializzazioni",
+      "name": "specializzazioni",
+      "type": "repeater",
+      "instructions": "Una specializzazione per riga (popola knowsAbout nello schema JSON-LD). Se ACF Free, sostituire con textarea e splittare \\n.",
+      "required": 0,
+      "min": 0,
+      "max": 12,
+      "layout": "table",
+      "button_label": "Aggiungi specializzazione",
+      "sub_fields": [
+        {
+          "key": "field_saltelli_avv_spec_label",
+          "label": "Specializzazione",
+          "name": "label",
+          "type": "text",
+          "required": 1,
+          "maxlength": 80
+        }
+      ]
+    },
+    {
+      "key": "field_saltelli_avv_bio_breve",
+      "label": "Bio breve",
+      "name": "bio_breve",
+      "type": "textarea",
+      "instructions": "Max 300 caratteri. Usata in archive avvocati e nello schema description.",
+      "required": 0,
+      "maxlength": 300,
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_saltelli_avv_bio_estesa",
+      "label": "Bio estesa",
+      "name": "bio_estesa",
+      "type": "wysiwyg",
+      "instructions": "Bio professionale completa, mostrata su single-avvocato.php.",
+      "required": 0,
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 1
+    },
+    {
+      "key": "field_saltelli_avv_formazione",
+      "label": "Formazione",
+      "name": "formazione",
+      "type": "repeater",
+      "instructions": "Tappe accademiche e professionali in ordine cronologico.",
+      "required": 0,
+      "min": 0,
+      "max": 12,
+      "layout": "table",
+      "button_label": "Aggiungi voce",
+      "sub_fields": [
+        {
+          "key": "field_saltelli_avv_form_anno",
+          "label": "Anno",
+          "name": "anno",
+          "type": "text",
+          "required": 0,
+          "maxlength": 9
+        },
+        {
+          "key": "field_saltelli_avv_form_titolo",
+          "label": "Titolo / qualifica",
+          "name": "titolo",
+          "type": "text",
+          "required": 1
+        },
+        {
+          "key": "field_saltelli_avv_form_istituzione",
+          "label": "Istituzione",
+          "name": "istituzione",
+          "type": "text",
+          "required": 0
+        }
+      ]
+    },
+    {
+      "key": "field_saltelli_avv_email_pubblica",
+      "label": "Email pubblica",
+      "name": "email_pubblica",
+      "type": "email",
+      "instructions": "Email mostrata pubblicamente (può essere quella generale dello studio)."
+    },
+    {
+      "key": "field_saltelli_avv_telefono_pubblico",
+      "label": "Telefono pubblico",
+      "name": "telefono_pubblico",
+      "type": "text",
+      "instructions": "Numero in formato E.164 quando possibile (es. +390811813119)."
+    },
+    {
+      "key": "field_saltelli_avv_whatsapp",
+      "label": "WhatsApp",
+      "name": "whatsapp",
+      "type": "text",
+      "instructions": "Numero WhatsApp E.164 (es. +393517138006)."
+    },
+    {
+      "key": "field_saltelli_avv_same_as_linkedin",
+      "label": "LinkedIn URL",
+      "name": "same_as_linkedin",
+      "type": "url",
+      "instructions": "Profilo LinkedIn personale (popola sameAs nello schema JSON-LD)."
+    },
+    {
+      "key": "field_saltelli_avv_aree_correlate",
+      "label": "Aree di competenza correlate",
+      "name": "aree_competenza_correlate",
+      "type": "post_object",
+      "instructions": "Aree di pratica di cui questo avvocato si occupa.",
+      "required": 0,
+      "post_type": ["competenza"],
+      "taxonomy": "",
+      "allow_null": 1,
+      "multiple": 1,
+      "return_format": "id",
+      "ui": 1
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "avvocato"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Campi profilo avvocato — alimentano single-avvocato.php e schema partial-attorney.php.",
+  "show_in_rest": 0,
+  "modified": 1714305600
+}

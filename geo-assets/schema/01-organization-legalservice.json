@@ -1,0 +1,171 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "LegalService"],
+      "@id": "https://studiolegalesaltelli.it/#organization",
+      "name": "Studio Legale Emiliano Saltelli & Partners",
+      "alternateName": [
+        "Studio Legale Saltelli",
+        "Studio Saltelli Napoli"
+      ],
+      "url": "https://studiolegalesaltelli.it",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://studiolegalesaltelli.it/wp-content/uploads/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://studiolegalesaltelli.it/wp-content/uploads/sede-studio-saltelli.jpg",
+      "description": "Studio legale a Napoli (Chiaia) fondato dall'Avv. Emiliano Saltelli. Quattro avvocati, 19 aree di pratica. Specializzati in diritto tributario, del lavoro, di famiglia e cartelle esattoriali.",
+      "slogan": "Avvocati a Napoli — competenza, trasparenza, risultati.",
+      "vatID": "IT06685101211",
+      "taxID": "06685101211",
+      "telephone": "+390811813119",
+      "email": "info@studiolegalesaltelli.it",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Vannella Gaetani, 27",
+        "addressLocality": "Napoli",
+        "addressRegion": "Campania",
+        "postalCode": "80121",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.830267,
+        "longitude": 14.237217,
+        "_comment": "Confermati 2026-04-28 da cliente via Google Maps."
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "10:00",
+          "closes": "19:00"
+        }
+      ],
+      "priceRange": "€€",
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Napoli"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Campania"
+        },
+        {
+          "@type": "Country",
+          "name": "Italia"
+        }
+      ],
+      "knowsAbout": [
+        "Diritto tributario",
+        "Cartelle esattoriali",
+        "Diritto del lavoro",
+        "Diritto di famiglia",
+        "Diritto civile",
+        "Diritto penale",
+        "Responsabilità medica",
+        "Malasanità",
+        "Diritto dell'immigrazione",
+        "Diritto condominiale",
+        "Diritto immobiliare",
+        "Diritto bancario",
+        "Recupero crediti",
+        "Diritto previdenziale",
+        "Diritto delle successioni",
+        "Risarcimento danni",
+        "Diritto amministrativo",
+        "Diritto commerciale",
+        "Domiciliazione d'impresa"
+      ],
+      "founder": {
+        "@id": "https://studiolegalesaltelli.it/avvocati/emiliano-saltelli/#person"
+      },
+      "foundingDate": "2019-01",
+      "_foundingDate_comment": "Studio attuale fondato gennaio 2019 (cliente, 2026-04-28). Lineage: studio precedente con ex socio (studiolegaleavvass.it) dal 2008, abilitazione piena 2013.",
+      "foundingLocation": {
+        "@type": "Place",
+        "name": "Napoli, Italia"
+      },
+      "employee": [
+        {"@id": "https://studiolegalesaltelli.it/avvocati/emiliano-saltelli/#person"},
+        {"@id": "https://studiolegalesaltelli.it/avvocati/fabiana-saltelli/#person"},
+        {"@id": "https://studiolegalesaltelli.it/avvocati/antonia-battista/#person"},
+        {"@id": "https://studiolegalesaltelli.it/avvocati/stefano-gaetano-tedesco/#person"}
+      ],
+      "memberOf": {
+        "@type": "Organization",
+        "name": "Ordine degli Avvocati di Napoli",
+        "url": "https://www.ordineavvocatinapoli.it"
+      },
+      "sameAs": [
+        "https://www.facebook.com/share/1D1jCY7BnW/",
+        "https://www.instagram.com/studiolegalesaltelli/",
+        "_TODO_google_business_profile_url"
+      ],
+      "_sameAs_comment": "Facebook + Instagram confermati 2026-04-28 (Ludovica). Lo studio NON ha LinkedIn Company Page: il profilo LinkedIn 'pagina dello studio' fornito dal cliente è in realtà il profilo personale di Emiliano (https://www.linkedin.com/in/emilianosaltelli/) — agganciato a Person.sameAs su 02-attorneys.json, non qui.",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+390811813119",
+          "contactType": "customer service",
+          "email": "info@studiolegalesaltelli.it",
+          "availableLanguage": ["Italian", "English", "French"],
+          "areaServed": "IT"
+        },
+        {
+          "@type": "ContactPoint",
+          "telephone": "+393517138006",
+          "contactType": "customer service",
+          "contactOption": "TollFree",
+          "availableLanguage": "Italian",
+          "_comment": "WhatsApp"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Aree di pratica legale",
+        "itemListElement": [
+          {"@type": "OfferCatalog", "name": "Diritto tributario", "url": "https://studiolegalesaltelli.it/competenze/diritto-tributario/"},
+          {"@type": "OfferCatalog", "name": "Cartelle esattoriali e multe", "url": "https://studiolegalesaltelli.it/competenze/cartelle-esattoriali/"},
+          {"@type": "OfferCatalog", "name": "Recupero crediti", "url": "https://studiolegalesaltelli.it/competenze/recupero-crediti/"},
+          {"@type": "OfferCatalog", "name": "Diritto del lavoro", "url": "https://studiolegalesaltelli.it/competenze/diritto-del-lavoro/"},
+          {"@type": "OfferCatalog", "name": "Diritto di famiglia e divorzi", "url": "https://studiolegalesaltelli.it/competenze/diritto-di-famiglia/"},
+          {"@type": "OfferCatalog", "name": "Responsabilità medica (malasanità)", "url": "https://studiolegalesaltelli.it/competenze/malasanita/"},
+          {"@type": "OfferCatalog", "name": "Diritto bancario", "url": "https://studiolegalesaltelli.it/competenze/diritto-bancario/"},
+          {"@type": "OfferCatalog", "name": "Diritto condominiale e immobiliare", "url": "https://studiolegalesaltelli.it/competenze/diritto-condominiale/"},
+          {"@type": "OfferCatalog", "name": "Diritto dell'immigrazione", "url": "https://studiolegalesaltelli.it/competenze/diritto-immigrazione/"},
+          {"@type": "OfferCatalog", "name": "Diritto penale", "url": "https://studiolegalesaltelli.it/competenze/diritto-penale/"},
+          {"@type": "OfferCatalog", "name": "Diritto previdenziale", "url": "https://studiolegalesaltelli.it/competenze/diritto-previdenziale/"},
+          {"@type": "OfferCatalog", "name": "Diritto delle assicurazioni", "url": "https://studiolegalesaltelli.it/competenze/diritto-assicurazioni/"},
+          {"@type": "OfferCatalog", "name": "Diritto delle successioni", "url": "https://studiolegalesaltelli.it/competenze/successioni/"},
+          {"@type": "OfferCatalog", "name": "Risarcimento danni", "url": "https://studiolegalesaltelli.it/competenze/risarcimento-danni/"},
+          {"@type": "OfferCatalog", "name": "Responsabilità civile", "url": "https://studiolegalesaltelli.it/competenze/responsabilita-civile/"},
+          {"@type": "OfferCatalog", "name": "Domiciliazione d'impresa", "url": "https://studiolegalesaltelli.it/competenze/domiciliazione-impresa/"},
+          {"@type": "OfferCatalog", "name": "Consulenze online", "url": "https://studiolegalesaltelli.it/competenze/consulenze-online/"},
+          {"@type": "OfferCatalog", "name": "Diritto amministrativo", "url": "https://studiolegalesaltelli.it/competenze/diritto-amministrativo/"},
+          {"@type": "OfferCatalog", "name": "Diritto commerciale", "url": "https://studiolegalesaltelli.it/competenze/diritto-commerciale/"}
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://studiolegalesaltelli.it/#website",
+      "url": "https://studiolegalesaltelli.it",
+      "name": "Studio Legale Saltelli",
+      "publisher": {"@id": "https://studiolegalesaltelli.it/#organization"},
+      "inLanguage": "it-IT",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://studiolegalesaltelli.it/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}

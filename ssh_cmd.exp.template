@@ -1,0 +1,15 @@
+#!/usr/bin/expect -f
+set timeout 60
+set cmd [lindex $argv 0]
+spawn ssh -i {{SSH_KEY_PATH}} -o StrictHostKeyChecking=no {{SSH_USER}}@{{SSH_HOST}} $cmd
+expect {
+    "Enter passphrase for key" {
+        send "{{SSH_PASSPHRASE}}\r"
+        exp_continue
+    }
+    "passphrase:" {
+        send "{{SSH_PASSPHRASE}}\r"
+        exp_continue
+    }
+    eof
+}

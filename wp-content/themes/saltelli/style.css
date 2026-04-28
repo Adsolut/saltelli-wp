@@ -1,0 +1,14 @@
+/*
+Theme Name: Saltelli
+Theme URI: https://studiolegalesaltelli.it
+Author: Adsolut SRLS
+Author URI: https://adsolut.it
+Description: Custom theme — AI-Ready, GEO-optimized — built for Studio Legale Emiliano Saltelli & Partners. No page builder. Pure PHP, GSAP+Lenis ready, schema JSON-LD inline.
+Version: 0.1.0-scaffold
+Requires at least: 6.5
+Requires PHP: 8.2
+License: Proprietary — © 2026 Studio Legale Saltelli & Partners
+Text Domain: saltelli
+*/
+
+/* Tutto lo styling vive in assets/css/. Questo file esiste solo per WP. */

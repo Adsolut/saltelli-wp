@@ -1,0 +1,87 @@
+{
+  "_documentation": "Template BreadcrumbList. Iniettare in tutte le pagine non-home. Il PHP del tema deve generare dinamicamente l'array itemListElement basandosi su get_post_ancestors() per le pagine gerarchiche e sulla tassonomia per i CPT.",
+
+  "_examples": {
+
+    "homepage_avvocati_emiliano": {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": "https://studiolegalesaltelli.it/avvocati/emiliano-saltelli/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://studiolegalesaltelli.it/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Avvocati",
+          "item": "https://studiolegalesaltelli.it/avvocati/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Avv. Emiliano Saltelli"
+        }
+      ]
+    },
+
+    "homepage_competenze_tributario": {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": "https://studiolegalesaltelli.it/competenze/diritto-tributario/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://studiolegalesaltelli.it/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Competenze",
+          "item": "https://studiolegalesaltelli.it/competenze/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Diritto tributario"
+        }
+      ]
+    },
+
+    "homepage_blog_post": {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": "https://studiolegalesaltelli.it/blog/{slug-post}/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://studiolegalesaltelli.it/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://studiolegalesaltelli.it/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{Categoria}",
+          "item": "https://studiolegalesaltelli.it/blog/categoria/{slug-categoria}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "{Titolo articolo}"
+        }
+      ]
+    }
+  }
+}

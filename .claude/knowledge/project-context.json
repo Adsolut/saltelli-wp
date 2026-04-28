@@ -1,0 +1,328 @@
+{
+  "project": "Studio Legale Saltelli — WordPress Custom Theme (AI-Ready)",
+  "client": "Studio Legale Emiliano Saltelli & Partners",
+  "vendor": "Adsolut SRLS",
+  "url_production": "https://studiolegalesaltelli.it",
+  "url_staging": "TBD (es. dev.studiolegalesaltelli.it)",
+  "url_local": "http://localhost:8080",
+  "type": "WordPress 6.x Custom Theme — Pure PHP, NO page builder",
+  "current_phase": "Phase 0 COMPLETED (2026-04-28) — Site dump fatto: DB 73 tabelle, 326 post, 31 pagine importati nel container Docker. Uploads 896MB sincronizzati. Search-replace URL completato. Sito locale risponde su http://localhost:8080. Pronti per Phase 1: sviluppo tema custom.",
+  "next_phase": "Phase 1 — Sviluppo tema custom in wp-content/themes/saltelli/ (Theme Architect scaffolding + Style/Animation + GEO Engineer in parallelo)",
+  "phase_0_artifacts": {
+    "db_dump": "db-dump/saltelli_20260428-132414.sql (58MB)",
+    "db_baseline": "db-dump/baseline-saltelli_20260428-132414.sql (58MB, snapshot intoccabile)",
+    "uploads_local": "wp-content/uploads/ (896MB, 3288 file)",
+    "local_url": "http://localhost:8080",
+    "phpmyadmin_url": "http://localhost:8081",
+    "phpmyadmin_creds": "saltelli / saltelli_dev (anche in config.local.json local_dev)",
+    "note_homepage_empty": "Body homepage vuoto (200 OK ma 0 bytes) perché Elementor non installato. Atteso, non bloccante. Se serve content audit visivo, installare Elementor temporaneamente nel container."
+  },
+  "team": [
+    "Aldo Santoro / Duccio — Founder & CEO Adsolut, Lead",
+    "Elena — Content & Client Communications"
+  ],
+  "contract": {
+    "value": "€14.000 + IVA (rateizzato €2.000/mese × 7 mensilità)",
+    "duration": "7 mesi",
+    "scope": "Programma GEO completo (Audit + 5 fasi)",
+    "current_phase_scope": "Fase 1 — GEO Audit (completato, score 2.3/10) + Sito WordPress AI-ready",
+    "fase_1_deliverables": [
+      "Tema WordPress custom installabile (.zip)",
+      "Schema JSON-LD su tutte le pagine (Organization, LegalService, Attorney, FAQPage, Article, BreadcrumbList)",
+      "File llms.txt configurato",
+      "Robots.txt ottimizzato per crawler AI",
+      "Heading H1 corretti (1 per pagina), meta description uniche, Open Graph",
+      "Google Business Profile attivo",
+      "Lighthouse > 90 su tutte le metriche"
+    ],
+    "fase_1_timeline": "Settimane 1-4 dal kickoff sviluppo"
+  },
+  "client_data": {
+    "legal_name": "Studio Legale Emiliano Saltelli & Partners",
+    "address": {
+      "street": "Via Vannella Gaetani, 27",
+      "postal_code": "80121",
+      "city": "Napoli",
+      "neighborhood": "Chiaia",
+      "country": "Italia"
+    },
+    "phone": "+39 081 1813 1119",
+    "phone_e164": "+390811813119",
+    "whatsapp": "+39 351 713 8006",
+    "email": "info@studiolegalesaltelli.it",
+    "pec": "emilianosaltelli@avvocatinapoli.legalmail.it",
+    "vat": "06685101211",
+    "opening_hours": "Mo-Fr 10:00-19:00 (solo su appuntamento)",
+    "founder": "Avv. Emiliano Saltelli (Federico II Napoli, 20+ anni esperienza)",
+    "team_count": 4,
+    "practice_areas_count": 19
+  },
+  "team_members": [
+    {
+      "slug": "emiliano-saltelli",
+      "full_name": "Avv. Emiliano Saltelli",
+      "role": "Fondatore",
+      "specializations": ["Diritto tributario", "Diritto civile"],
+      "education": "Università degli Studi di Napoli Federico II",
+      "experience_years": "20+"
+    },
+    {
+      "slug": "fabiana-saltelli",
+      "full_name": "Avv. Fabiana Saltelli",
+      "role": "Avvocato giuslavorista",
+      "specializations": ["Diritto del lavoro", "Diritto civile", "Diritto tributario"]
+    },
+    {
+      "slug": "antonia-battista",
+      "full_name": "Avv. Antonia Battista",
+      "role": "Avvocato civilista (famiglia)",
+      "specializations": ["Diritto di famiglia", "Divorzi", "Unioni civili", "Famiglie LGBTQ+"]
+    },
+    {
+      "slug": "stefano-gaetano-tedesco",
+      "full_name": "Avv. Stefano Gaetano Tedesco",
+      "role": "Avvocato civilista (immobiliare)",
+      "specializations": ["Diritto condominiale", "Diritto immobiliare"]
+    }
+  ],
+  "practice_areas": [
+    "Diritto tributario",
+    "Cartelle esattoriali e multe",
+    "Recupero crediti",
+    "Diritto del lavoro",
+    "Diritto di famiglia e divorzi",
+    "Responsabilità medica (malasanità)",
+    "Diritto bancario",
+    "Diritto condominiale e immobiliare",
+    "Diritto dell'immigrazione",
+    "Diritto penale",
+    "Diritto previdenziale",
+    "Assicurazioni",
+    "Diritto delle successioni",
+    "Risarcimento danni",
+    "Responsabilità civile",
+    "Domiciliazione d'impresa",
+    "Consulenze online",
+    "Diritto amministrativo",
+    "Diritto commerciale"
+  ],
+  "strategic_focus_decision": {
+    "status": "CONFIRMED — 2026-04-28",
+    "decided_by": "Aldo Santoro (Adsolut) — accepted Claude's recommendation",
+    "rationale": "Audit GEO recommends focusing on 2-3 vertical niches to build topical authority (vs broad coverage of all 19 areas). Decision aligns the new site architecture with the GEO strategy from kickoff.",
+    "tier_1_deep_clusters": [
+      {
+        "slug": "diritto-tributario",
+        "label": "Diritto tributario / cartelle esattoriali",
+        "lead_attorneys": ["emiliano-saltelli", "fabiana-saltelli"],
+        "strategic_reason": "Specializzazione di Emiliano (fondatore) e Fabiana. Contrasta competitor diretto Di Fiore Nunziato che opera nello stesso indirizzo (Via Vannella Gaetani 27) ed è pluripremiato Sole24Ore."
+      },
+      {
+        "slug": "diritto-del-lavoro",
+        "label": "Diritto del lavoro",
+        "lead_attorneys": ["fabiana-saltelli"],
+        "strategic_reason": "Fabiana è giuslavorista. Query in crescita post-riforme. Competitor specialisti (Studio Baccari, Legalilavoro) presidiano la nicchia ma c'è spazio per nuovo posizionamento authority."
+      },
+      {
+        "slug": "diritto-di-famiglia",
+        "label": "Diritto di famiglia e tutela LGBTQ+",
+        "lead_attorneys": ["antonia-battista"],
+        "strategic_reason": "Antonia presidia un sub-verticale (famiglie arcobaleno, unioni civili) poco coperto a Napoli. Differenziazione difendibile + alto valore reputazionale + alta intent commerciale per le query."
+      }
+    ],
+    "tier_2_standard_pages": "Le altre 16 aree mantengono pagina CPT competenza standard: H1 + answer capsule + 400-600 parole + FAQ leggera (3 domande) + CTA. Stesso schema markup, profondità contenutistica inferiore.",
+    "tier_1_content_depth": "Le 3 aree tier-1 ricevono 1500-2500 parole, 5 FAQ, sezione 'casi rappresentativi' (anonimizzati), articoli blog correlati clusterizzati, possibile guida scaricabile (lead magnet) in Fase 3 del programma.",
+    "implementation_flag": "ACF: campo booleano 'is_tier_1_focus' su CPT competenza, valore true per i 3 sopra, false per gli altri 16. Il template single-competenza.php condiziona profondità sezioni e CTA su questo flag.",
+    "phase_alignment": {
+      "fase_1_settimane_1_4": "Build CPT struttura + tier-1 con 3 contenuti depth (lavoro Elena), tier-2 con stub minimo + answer capsule",
+      "fase_3_mese_2_3": "Estensione FAQ su tutte le 19 aree (5 FAQ tier-1, 3 FAQ tier-2)",
+      "fase_5_mesi_5_6": "Cluster di contenuti profondi su tier-1: guide, case study, FAQ esaustive, video"
+    }
+  },
+  "current_site": {
+    "platform": "WordPress 6.9.4 + Elementor Pro 4.0.3",
+    "active_theme": "twentysixteen (con functions.php customizzato ~19KB)",
+    "available_themes": ["twentysixteen", "twentytwentyfive"],
+    "hosting": "SiteGround (sg-security 1.6.0, sg-cachepress 7.7.9)",
+    "php_version": "8.3.30",
+    "pages_count": 31,
+    "posts_count": 326,
+    "blog_categories": {
+      "Informazioni legali": 113,
+      "Diritto del lavoro": 92,
+      "Diritto di Famiglia ed Ereditario": 52,
+      "Diritto tributario": 46,
+      "Contratti": 22,
+      "Immigrazione": 9,
+      "Diritto Previdenziale - Invalidità": 7,
+      "Diritto successorio": 7,
+      "Diritto societario": 4,
+      "Diritto Condominiale": 3
+    },
+    "active_plugins": [
+      "all-in-one-wp-migration 7.105",
+      "mailin (Brevo) 3.3.4",
+      "click-to-chat-for-whatsapp 4.39",
+      "duplicate-page 4.5.8",
+      "elementor 4.0.3",
+      "elementor-pro 4.0.3",
+      "duracelltomi-google-tag-manager 1.22.3",
+      "iubenda-cookie-law-solution 3.13.1",
+      "redirection 5.7.5",
+      "saltelli 1.0.0 (custom plugin: solo custom-avatar.js + config.php — non critico)",
+      "sg-security 1.6.0",
+      "sg-cachepress 7.7.9",
+      "honeypot 2.3.04",
+      "wordpress-seo (Yoast) 27.4"
+    ],
+    "existing_custom_post_types": [
+      "Standard WP (post, page, attachment, ecc.)",
+      "Elementor (elementor_library, elementor_snippet, e-floating-buttons, elementor_font, elementor_icons)",
+      "iubenda_form",
+      "NESSUN CPT 'avvocato' o 'competenza' esistente — i nostri sono nuovi"
+    ],
+    "geo_score": "2.3/10",
+    "main_issues": [
+      "Zero schema markup JSON-LD",
+      "H1 duplicati su homepage, contatti, lavoro",
+      "Meta description gestite da Yoast ma da audit risultavano assenti su molte pagine — verificare",
+      "Open Graph: presente via Yoast — ma da verificare configurazione",
+      "Nessun llms.txt",
+      "Robots.txt: presente via SG/Yoast — da verificare AI crawlers",
+      "Nessun Google Business Profile",
+      "Zero earned media / zero recensioni esterne",
+      "Contenuti narrativi non estraibili da AI (no FAQ strutturate, no answer capsules)"
+    ],
+    "preserved_assets": [
+      "326 post blog (forte SEO equity storica)",
+      "31 pagine (di cui 19 dovrebbero essere le pratiche)",
+      "Top 4 categorie blog: Informazioni legali (113), Diritto del lavoro (92), Famiglia (52), Tributario (46) — ALLINEATE alla strategia tier-1 confermata oggi",
+      "Plugin Yoast SEO già configurato (meta non vanno persi)",
+      "Plugin redirection già installato (utile per non perdere SEO equity al cambio permalink)",
+      "Plugin all-in-one-wp-migration installato (alternativa al dump SSH se serve)",
+      "Plugin saltelli custom (banale, non critico — possiamo replicare il custom avatar nel nuovo tema)",
+      "Plugin Iubenda già configurato (GDPR compliance preservata)",
+      "Profilo Instagram con video brevi"
+    ],
+    "data_validates_strategy": "Le 4 categorie blog top (lavoro 92, famiglia 52, tributario 46) confermano i tier-1 cluster scelti. Il volume contenuti esistente è una base eccellente per il content cluster GEO."
+  },
+  "tech_stack": {
+    "wordpress": "6.x (latest stable)",
+    "php": "8.2+",
+    "theme_approach": "Custom theme — pure PHP template hierarchy",
+    "no_page_builder": "NO Elementor, NO WPBakery, NO Divi, NO Bricks",
+    "custom_fields": "ACF Pro (avvocati, competenze, FAQ, settings)",
+    "custom_post_types": ["avvocato", "competenza"],
+    "seo_plugin": "Rank Math (preferito) o Yoast SEO",
+    "schema_strategy": "Custom JSON-LD inline nei template (NO Schema Pro plugin per controllo totale)",
+    "cache_plugin": "WP Rocket o LiteSpeed Cache",
+    "form_plugin": "Contact Form 7 o WPForms",
+    "smtp": "Da configurare (es. SendGrid, Mailgun, o SMTP studio)",
+    "animation_libs": {
+      "core": "GSAP 3.15+ (free commercial, SplitText incluso)",
+      "scroll": "Lenis (smooth momentum scrolling)",
+      "scroll_trigger": "GSAP ScrollTrigger",
+      "forbidden": ["AOS", "WOW.js", "Locomotive Scroll", "ScrollMagic", "Anime.js"]
+    }
+  },
+  "design_direction": {
+    "concept": "Legal Luxury Minimal",
+    "fonts": {
+      "display_serif": "Playfair Display oppure Cormorant Garamond",
+      "body_sans": "DM Sans oppure Satoshi"
+    },
+    "palette": {
+      "background": "#FAFAF8 (crema)",
+      "primary_dark": "#1B2B4B (navy)",
+      "accent": "#B8860B (oro/bronzo)",
+      "text_dark": "#2D2D2D (grigio scuro, NO nero pieno)",
+      "forbidden_colors": ["#000000 puro", "rossi aggressivi", "viola/magenta (sono colori Adsolut, non Saltelli)"]
+    },
+    "layout": "Asimmetrico, spazio bianco generoso, tipografia dominante",
+    "responsive_breakpoints": ["375px", "768px", "1024px", "1440px"],
+    "mobile_first": true,
+    "forbidden_visuals": [
+      "Icone bilancia/martelletto",
+      "Stock photo strette di mano",
+      "Slideshow homepage",
+      "Font generici (Inter, Roboto, Arial)"
+    ]
+  },
+  "geo_requirements": {
+    "schema_jsonld_required_pages": "TUTTE",
+    "schema_types": [
+      "Organization + LegalService (header globale)",
+      "Attorney/Person (pagine avvocato)",
+      "FAQPage (pagine competenza)",
+      "Article (post blog)",
+      "BreadcrumbList (tutte le pagine non-home)"
+    ],
+    "llms_txt_path": "/llms.txt (root dominio)",
+    "robots_txt_allow": ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended", "Applebot-Extended"],
+    "answer_capsule_pattern": "Sotto H1, paragrafo 40-60 parole che risponde direttamente alla query target",
+    "faq_per_practice_page": "3-5 domande con schema FAQPage",
+    "core_web_vitals_targets": {
+      "LCP": "< 2.5s",
+      "CLS": "< 0.1",
+      "INP": "< 200ms"
+    },
+    "lighthouse_targets": "> 90 su Performance, Accessibility, Best Practices, SEO"
+  },
+  "workflow": {
+    "phases": [
+      "0. Site dump (in attesa credenziali SSH cliente)",
+      "1. Setup ambiente locale Docker",
+      "2. Claude Design — prototipo visivo + approvazione cliente",
+      "3. Claude Code multi-agent in tmux (3 agenti paralleli)",
+      "4. Staging su sottodominio per review cliente",
+      "5. Deploy produzione + monitoraggio 48h"
+    ],
+    "agents": {
+      "theme_architect": "Template hierarchy PHP, functions.php, ACF, CPT, menu",
+      "style_animation": "CSS tokens, layout, GSAP+Lenis animations, micro-interactions",
+      "geo_engineer": "Schema JSON-LD, llms.txt, robots.txt, meta, performance, Lighthouse"
+    }
+  },
+  "blockers_and_pending": [
+    "✅ Credenziali SSH/FTP server attuale Saltelli — RICEVUTE (in config.local.json, gitignored)",
+    "✅ Dump del sito attuale — COMPLETATO (Phase 0, 2026-04-28)",
+    "✅ URL Facebook + Instagram studio — RICEVUTI 2026-04-28 (Ludovica). NB: il LinkedIn 'studio' è in realtà il profilo personale di Emiliano, agganciato a Person.sameAs non a Organization.sameAs.",
+    "✅ Coordinate GPS sede — CONFERMATE 2026-04-28 (40.830267, 14.237217)",
+    "✅ Anno fondazione studio — CONFERMATO 2026-04-28 (gennaio 2019). Lineage: studio precedente con ex socio (studiolegaleavvass.it) dal 2008, abilitazione piena 2013.",
+    "✅ Università di laurea avvocati — CONFERMATA 2026-04-28: tutti e 4 alla Federico II (Emiliano, Fabiana, Antonia, Stefano)",
+    "⏳ Account Google per creazione Google Business Profile",
+    "⏳ LinkedIn personali Fabiana, Antonia, Stefano (Ludovica)",
+    "⏳ Foto professionali 4 avvocati ad alta risoluzione (Ludovica)",
+    "⏳ Foto studio/sede in Chiaia (Ludovica)",
+    "⏳ Decisione scope team — Stefano Tedesco mostra basso engagement; possibile sostituzione/integrazione con Avv. Fabrizio D'Onofrio (penalista) che segue il progetto con costanza. Ribadito da Duccio 2026-04-28: NON auto-scaffoldare un 5° avvocato fino a decisione esplicita.",
+    "⏳ Conferma cliente su sitemap finale e sign-off design (vedi workflow CLAUDE_DESIGN_PROMPT.md)"
+  ],
+  "credentials_strategy": {
+    "_doc": "Le credenziali del cliente NON vivono in questo file né in alcun file versionato. Vivono in config.local.json (gitignored) o in ~/.ssh/ (chiave privata).",
+    "config_file": "config.local.json (root del progetto, gitignored)",
+    "config_template": "config.local.example.json (versionato come template)",
+    "ssh_key_location": "~/.ssh/saltelli_id_ed25519 (fuori dal repo, gestita da ssh-agent)",
+    "claude_code_rule": "Vedi PROMPT_LEAD_AGENT.md sezione 'REGOLE SICUREZZA CREDENZIALI'"
+  },
+  "safety_protocols": [
+    "SEMPRE backup database e files prima di qualsiasi modifica al sito attuale",
+    "Sviluppo SOLO in locale o staging, MAI direttamente in produzione",
+    "Validare schema JSON-LD su https://validator.schema.org/ e https://search.google.com/test/rich-results prima di deploy",
+    "Test Lighthouse desktop + mobile dopo ogni milestone",
+    "Test heading hierarchy (1 solo H1) con tool tipo HeadingsMap prima di deploy",
+    "Verificare llms.txt e robots.txt accessibili pubblicamente post-deploy",
+    "Test cross-browser: Chrome, Safari, Firefox, mobile iOS+Android"
+  ],
+  "knowledge_files": {
+    "brief": "BRIEF_Saltelli_WordPress.md",
+    "lead_agent_prompt": ".claude/PROMPT_LEAD_AGENT.md",
+    "claude_code_instructions": "CLAUDE.md",
+    "claude_design_prompt": "CLAUDE_DESIGN_PROMPT.md",
+    "geo_assets": "geo-assets/",
+    "docker_setup": "docker-compose.yml",
+    "credentials_template": "config.local.example.json",
+    "credentials_local": "config.local.json (gitignored — non leggibile da Git, solo locale)"
+  },
+  "last_updated": "2026-04-28",
+  "last_updated_by": "Claude (sync con Duccio)"
+}

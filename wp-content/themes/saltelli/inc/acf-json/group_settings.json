@@ -1,0 +1,32 @@
+{
+  "key": "group_saltelli_settings",
+  "title": "Saltelli — Impostazioni tema",
+  "fields": [
+    {
+      "key": "field_saltelli_settings_placeholder",
+      "label": "Placeholder",
+      "name": "placeholder_settings",
+      "type": "text",
+      "instructions": "Campo di scaffolding. Da rimuovere quando aggiungiamo le opzioni reali (URL social per sameAs, GBP URL, foto sede, ecc.)."
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "options_page",
+        "operator": "==",
+        "value": "saltelli-settings"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Scheletro per impostazioni globali tema (sameAs, GBP, foto sede). Richiede ACF Pro per Options Page.",
+  "show_in_rest": 0,
+  "modified": 1714305600
+}

@@ -1,0 +1,44 @@
+{
+  "_documentation": "Template Article per i post del blog. Iniettare in single.php. I campi dinamici devono essere popolati dal template PHP usando get_the_*() WordPress functions. Il campo author deve usare l'@id dell'avvocato corrispondente per riferimento incrociato (vedi 02-attorneys.json).",
+
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://studiolegalesaltelli.it/blog/{slug-post}/#article",
+  "url": "https://studiolegalesaltelli.it/blog/{slug-post}/",
+  "headline": "{the_title} — max 110 caratteri",
+  "description": "{meta_description o the_excerpt} — 150-160 caratteri",
+  "image": [
+    {
+      "@type": "ImageObject",
+      "url": "https://studiolegalesaltelli.it/{featured-image-url}",
+      "width": 1200,
+      "height": 630
+    }
+  ],
+  "datePublished": "{ISO 8601 — get_the_date('c')}",
+  "dateModified": "{ISO 8601 — get_the_modified_date('c')}",
+  "author": {
+    "@type": "Person",
+    "@id": "https://studiolegalesaltelli.it/avvocati/{slug-autore}/#person",
+    "name": "Avv. {Nome Cognome}",
+    "url": "https://studiolegalesaltelli.it/avvocati/{slug-autore}/"
+  },
+  "publisher": {
+    "@id": "https://studiolegalesaltelli.it/#organization"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://studiolegalesaltelli.it/blog/{slug-post}/"
+  },
+  "articleSection": "{categoria principale del post}",
+  "keywords": "{tags WordPress separati da virgola}",
+  "inLanguage": "it-IT",
+  "isAccessibleForFree": true,
+  "wordCount": "{contare con str_word_count(strip_tags($content))}",
+  "_implementation_notes": {
+    "author_fallback": "Se il post non ha un avvocato associato come autore (custom field ACF 'avvocato_autore'), usare Organization come fallback: {\"@id\": \"https://studiolegalesaltelli.it/#organization\"}",
+    "image_required": "Featured image OBBLIGATORIA per ogni articolo. Minimo 1200x630px per OG/Twitter. Usare WebP con fallback JPG.",
+    "headline_limit": "Google rich results richiede headline <= 110 caratteri. Il SEO plugin (Rank Math/Yoast) deve permettere SEO title separato dal post title se necessario.",
+    "datemodified_critical": "Aggiornare dateModified ad ogni edit sostanziale del contenuto. Migliora ranking AI."
+  }
+}

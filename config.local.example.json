@@ -1,0 +1,69 @@
+{
+  "_documentation": "TEMPLATE. Copia questo file in 'config.local.json' e compila i valori. config.local.json è gitignored — NON viene mai committato. Le credenziali sensibili (passphrase, password DB) vivono qui e mai nei prompt o nel contesto.",
+  "_setup_instructions": [
+    "1. cp config.local.example.json config.local.json",
+    "2. Apri config.local.json e compila i campi marcati TODO",
+    "3. Metti la chiave SSH privata in ~/.ssh/saltelli_id_ed25519 (o il path che preferisci, basta che sia FUORI dal repo)",
+    "4. Su macOS, aggiungi la chiave a ssh-agent: ssh-add --apple-use-keychain ~/.ssh/saltelli_id_ed25519",
+    "5. Test connessione: ssh -i ~/.ssh/saltelli_id_ed25519 USER@HOST 'pwd'",
+    "6. Dopo il test, leggi PROMPT_LEAD_AGENT.md sezione 'Phase 0: Site Dump Protocol'"
+  ],
+
+  "ssh": {
+    "host": "TODO_server_hostname_or_ip",
+    "port": 22,
+    "user": "TODO_ssh_username",
+    "key_path": "~/.ssh/saltelli_id_ed25519",
+    "_passphrase_strategy": "RACCOMANDATO: usa ssh-agent (vedi setup_instructions step 4). In alternativa lascia il campo qui sotto, ma considera che sarà presente in chiaro in un file locale.",
+    "passphrase": "",
+    "strict_host_key_checking": false
+  },
+
+  "wordpress_remote": {
+    "wp_path": "TODO_assoluto_es_/home/cliente/public_html",
+    "site_url": "https://studiolegalesaltelli.it",
+    "wp_admin_url": "https://studiolegalesaltelli.it/wp-admin/",
+    "wp_admin_user": "TODO_admin_username_or_email",
+    "wp_application_password": "TODO_creata_in_wp_admin_users_profile_application_passwords",
+    "_application_password_note": "NON è la password di login. Crearla in WP Admin → Utenti → Profilo → Application Passwords (sezione in fondo). Formato: 'abcd 1234 efgh 5678 ijkl 9012'."
+  },
+
+  "database_remote": {
+    "name": "TODO_da_wp-config.php_DB_NAME",
+    "user": "TODO_da_wp-config.php_DB_USER",
+    "password": "TODO_da_wp-config.php_DB_PASSWORD",
+    "host": "TODO_da_wp-config.php_DB_HOST_di_solito_localhost",
+    "table_prefix": "TODO_da_wp-config.php_table_prefix_di_solito_wp_",
+    "_how_to_retrieve": "Via SSH: cat /path/to/wordpress/wp-config.php | grep -E '(DB_NAME|DB_USER|DB_PASSWORD|DB_HOST|table_prefix)'"
+  },
+
+  "local_dev": {
+    "url": "http://localhost:8080",
+    "phpmyadmin_url": "http://localhost:8081",
+    "db_name": "saltelli_wp",
+    "db_user": "saltelli",
+    "db_password": "saltelli_dev",
+    "_note": "Questi sono i valori già impostati in docker-compose.yml. Non cambiarli a meno di motivo."
+  },
+
+  "client_contacts": {
+    "primary": {
+      "name": "Avv. Emiliano Saltelli",
+      "email": "info@studiolegalesaltelli.it",
+      "phone": "+39 081 1813 1119"
+    },
+    "technical_referent": {
+      "name": "TODO_se_diverso_dal_titolare_es_webmaster_o_consulente_IT",
+      "email": "",
+      "phone": ""
+    }
+  },
+
+  "_metadata": {
+    "created": "2026-04-28",
+    "owner": "Adsolut SRLS — Aldo Santoro",
+    "do_not_commit": true,
+    "do_not_share_in_chat": true,
+    "do_not_send_via_unencrypted_email": true
+  }
+}

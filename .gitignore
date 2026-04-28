@@ -1,0 +1,80 @@
+# ===== Credentials & secrets =====
+# NEVER commit these
+config.local.json
+config.local.*.json
+# Eccezione: il template (no secrets) va versionato.
+!config.local.example.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+saltelli_ssh_key*
+id_rsa*
+id_ed25519*
+ssh_cmd.exp                  # generato da template, contiene paths/credentials
+.htpasswd
+wp-config.php
+
+# ===== Site dump artifacts =====
+saltelli-dump/
+db-dump/*.sql
+db-dump/*.sql.gz
+db-dump/*.sql.bz2
+*.sqlite
+backup-*.sql
+backup-*.sql.gz
+
+# ===== WordPress Docker volumes =====
+wp-data/
+db-data/
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/wflogs/
+wp-content/debug.log
+wp-content/advanced-cache.php
+wp-content/object-cache.php
+
+# ===== WordPress: solo il nostro tema custom va in repo =====
+# Tutti i temi WP non nostri (twentysixteen, ecc.) sono out.
+wp-content/themes/*
+!wp-content/themes/saltelli/
+
+# Tutti i plugin: di terze parti (Yoast, Elementor, Iubenda, MainWP, ecc.)
+# e il custom plugin "saltelli" v1.0.0 importato dal dump (non critico —
+# da replicare nel tema). Se in futuro creiamo un nostro plugin custom,
+# aggiungere un'eccezione esplicita: "!wp-content/plugins/saltelli-mu/".
+wp-content/plugins/
+
+# ===== Claude Code — file locali utente =====
+.claude/settings.local.json
+.claude/projects/
+
+# ===== Build & dependencies =====
+node_modules/
+vendor/
+.composer/
+*.zip
+*.tar.gz
+
+# ===== Editor & OS =====
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+Thumbs.db
+
+# ===== Logs =====
+*.log
+logs/
+
+# ===== Archive (può contenere file sensibili) =====
+.archive-template-residui/
+
+# ===== Allow specific exceptions =====
+!geo-assets/**/*.json
+!.claude/knowledge/*.json
+!docker-compose.yml

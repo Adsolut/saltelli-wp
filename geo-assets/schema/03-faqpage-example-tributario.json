@@ -1,0 +1,59 @@
+{
+  "_documentation": "Esempio FAQPage applicato all'area 'Diritto tributario' (tier-1 deep cluster). Replicare il pattern per ciascuna delle 19 aree di pratica con domande/risposte specifiche del dominio. Le risposte devono essere ANSWER CAPSULES di 40-60 parole — risposta diretta, fattuale, citabile da AI. Le domande devono replicare query reali degli utenti.",
+  "_pattern": "Iniettare in single-competenza.php solo se la pagina ha almeno 3 FAQ compilate. Schema FAQPage richiede minimo 1 mainEntity ma per impatto GEO suggeriamo 3-5.",
+
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://studiolegalesaltelli.it/competenze/diritto-tributario/#faq",
+  "url": "https://studiolegalesaltelli.it/competenze/diritto-tributario/",
+  "inLanguage": "it-IT",
+  "isPartOf": {
+    "@id": "https://studiolegalesaltelli.it/competenze/diritto-tributario/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Diritto tributario"
+  },
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Cosa fare se ricevo una cartella esattoriale ingiustificata?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hai 60 giorni dalla notifica per presentare ricorso alla Corte di Giustizia Tributaria di primo grado. È fondamentale verificare con un avvocato tributarista la legittimità della cartella, eventuali vizi di notifica, prescrizione del credito o errori sull'importo. Lo Studio Legale Saltelli offre una valutazione preliminare per identificare i vizi opponibili e definire la strategia di opposizione."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto tempo ho per impugnare un avviso di accertamento dell'Agenzia delle Entrate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il termine è di 60 giorni dalla notifica dell'avviso di accertamento. Entro questo termine si può presentare ricorso alla Corte di Giustizia Tributaria di primo grado, eventualmente preceduto da istanza di accertamento con adesione che sospende i termini di 90 giorni. Superati i termini, l'atto diventa definitivo e non più impugnabile."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "È possibile rateizzare le cartelle esattoriali con Agenzia delle Entrate-Riscossione?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sì. Per importi fino a 120.000 euro la rateizzazione è ordinaria fino a 72 rate mensili senza dimostrazione della difficoltà economica. Oltre tale soglia o per dilazioni più lunghe (fino a 120 rate) occorre documentare la temporanea situazione di obiettiva difficoltà. La rateizzazione blocca le procedure esecutive in corso."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto costa un ricorso tributario?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il costo varia in base al valore della controversia e alla complessità del caso. Sono previsti il contributo unificato (proporzionale al valore) e l'onorario professionale dell'avvocato. Lo Studio Legale Saltelli fornisce un preventivo trasparente in fase di prima consulenza, definendo costi fissi e variabili dell'intera procedura."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cosa succede se non pago una cartella esattoriale?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Decorsi 60 giorni dalla notifica senza pagamento o opposizione, Agenzia delle Entrate-Riscossione può attivare procedure esecutive: pignoramento del conto corrente, dello stipendio o pensione, fermo amministrativo del veicolo, ipoteca sugli immobili. È sempre consigliabile rivolgersi a un avvocato prima di subire l'azione esecutiva."
+      }
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+# Docker setup — Studio Legale Saltelli WP local development
+# Run: docker compose up -d
+# WordPress:  http://localhost:8080
+# phpMyAdmin: http://localhost:8081  (user: saltelli / pass: saltelli_dev)
+# WP-CLI:     docker compose run --rm wpcli wp <command>
+
+services:
+  wordpress:
+    image: wordpress:6-php8.2-apache
+    container_name: saltelli-wp
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    volumes:
+      # Custom theme — bind mount for live editing
+      - ./wp-content/themes/saltelli:/var/www/html/wp-content/themes/saltelli
+      # Plugins folder — bind mount so plugins persist outside the volume
+      - ./wp-content/plugins:/var/www/html/wp-content/plugins
+      # Uploads — bind mount so media survives container rebuilds
+      - ./wp-content/uploads:/var/www/html/wp-content/uploads
+      # Full WP install (core files, wp-config, etc.)
+      - wp_data:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: saltelli
+      WORDPRESS_DB_PASSWORD: saltelli_dev
+      WORDPRESS_DB_NAME: saltelli_wp
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_DEBUG_LOG', true);
+        define('WP_DEBUG_DISPLAY', false);
+        define('SCRIPT_DEBUG', true);
+        define('WP_MEMORY_LIMIT', '256M');
+
+  db:
+    image: mysql:8.0
+    container_name: saltelli-db
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - db_data:/var/lib/mysql
+      # Mount this folder if you have a SQL dump to import on first boot
+      - ./db-dump:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: saltelli_wp
+      MYSQL_USER: saltelli
+      MYSQL_PASSWORD: saltelli_dev
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: saltelli-pma
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db
+      PMA_USER: saltelli
+      PMA_PASSWORD: saltelli_dev
+      UPLOAD_LIMIT: 256M
+
+  wpcli:
+    image: wordpress:cli-php8.2
+    container_name: saltelli-wpcli
+    depends_on:
+      - wordpress
+      - db
+    user: "33:33"  # www-data
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content/themes/saltelli:/var/www/html/wp-content/themes/saltelli
+      - ./wp-content/plugins:/var/www/html/wp-content/plugins
+      - ./wp-content/uploads:/var/www/html/wp-content/uploads
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: saltelli
+      WORDPRESS_DB_PASSWORD: saltelli_dev
+      WORDPRESS_DB_NAME: saltelli_wp
+    # Override entrypoint so the container doesn't exit immediately
+    entrypoint: ["wp", "--allow-root"]
+    command: ["--info"]
+
+volumes:
+  wp_data:
+  db_data:
