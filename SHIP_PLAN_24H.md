@@ -237,9 +237,64 @@ Risposte preparate alle obiezioni standard (vedi `CLAUDE_DESIGN_PROMPT.md` v2.1)
 | Ricategorizzazione 326 post blog nelle nicchie tier-1 | Elena + Claude (assistance LLM) | 2-3 giorni |
 | Setup Google Business Profile | Adsolut + cliente | 1 giorno |
 | Earned media: pitch a Altalex/Diritto.it | Adsolut + avvocati | 2 settimane |
+| **Impeccable polishing pass** (vedi sezione sotto) | Adsolut + Claude Code | 1-2 giorni |
 | Deploy produzione (cambio www → staging) | Adsolut | 1 giorno |
 
 ---
 
-*SHIP PLAN 24H — versione 1.0 — 2026-04-28 evening.*
+## 🎨 Impeccable polishing pass — Fase 1.E.10
+
+> **Quando**: dopo cliente sign-off concept dello staging, **prima** del deploy produzione.
+> **Cos'è**: integrazione della skill open-source `pbakaus/impeccable` (19k★) per raffinare la qualità UX/UI del tema custom oltre il livello "demo accettabile".
+> **Perché solo dopo sign-off**: si polishea un design **cristallizzato**, non uno in fluttuazione.
+
+### Setup (10 min)
+
+```bash
+cd /Users/aldosantoro/Desktop/DEV/saltelli-wp
+
+# Download skill bundle per Claude Code
+curl -L https://impeccable.style/api/download/claude-code -o impeccable.zip
+unzip impeccable.zip -d .  # crea .claude/skills/impeccable/ + commands
+rm impeccable.zip
+
+# CLI detector standalone (zero AI, regex-based)
+npx impeccable detect wp-content/themes/saltelli/ --json > impeccable-baseline.json
+```
+
+### Workflow polishing (1-2 giorni)
+
+| Step | Comando | Obiettivo |
+|---|---|---|
+| 1 | `/audit homepage` | Catalogo issues tecniche (a11y, performance, responsive) |
+| 2 | `/critique homepage` | UX review: gerarchia, chiarezza, risonanza emotiva |
+| 3 | `/typeset homepage` | Micro-fix tipografici: hierarchy, sizing, kerning |
+| 4 | `/layout homepage` | Spacing, ritmo verticale, grid alignment |
+| 5 | `/animate homepage` | Upgrade animazioni con purposeful motion (oltre quelle base messe da Style Agent) |
+| 6 | `/harden homepage` | Error handling, loading states, empty states, edge cases |
+| 7 | `/polish homepage` | Final pass — design system alignment, shipping readiness |
+| 8 | Ripeti steps 1-7 per `/competenze/diritto-tributario/` (tier-1 representative) | |
+| 9 | Ripeti per `/avvocati/emiliano-saltelli/` | |
+| 10 | `npx impeccable detect ... --json > impeccable-final.json` + diff vs baseline | Verifica miglioramenti misurabili |
+
+### Cosa NON fare con Impeccable
+
+- **Non lanciarla durante SHIP MODE 24H.** Aggiungerebbe attrito cognitivo agli agent core.
+- **Non lanciarla prima del cliente sign-off.** Si raffina un design fermo, non uno che potrebbe cambiare.
+- **Non confondere `/critique` di Impeccable con la nostra "internal review Adsolut"**: l'una è automatica, l'altra è umana. Vanno entrambe.
+- **Non sovrascrivere le decisioni di posizionamento del nostro `ADSOLUT_UX_REFERENCE_METHOD.md`** con suggerimenti generici di Impeccable. Se Impeccable suggerisce "aggiungi più colore" e il nostro metodo dice "palette sobria deliberata", **vince il metodo Adsolut**.
+
+### Definition of Done della Fase 1.E.10
+
+- [ ] `npx impeccable detect` finale: zero anti-pattern AI slop (purple gradients, Inter font, bounce easing, dark glows)
+- [ ] Lighthouse Performance > 92 (era > 85 al deploy demo)
+- [ ] Lighthouse Accessibility > 95
+- [ ] Cross-browser smoke test pulito (Chrome, Safari, Firefox, mobile)
+- [ ] Tutti i template touched abbiano: empty state, loading state, error state
+- [ ] Diff Impeccable baseline vs final committato come evidenza qualità
+
+---
+
+*SHIP PLAN 24H — versione 1.1 — 2026-04-29 evening.*
 *Approvato: Aldo Santoro (Adsolut). Esecuzione: Claude (chat) + Claude Code × 3 + Duccio.*
+*Add-on: Fase 1.E.10 Impeccable polishing pass.*

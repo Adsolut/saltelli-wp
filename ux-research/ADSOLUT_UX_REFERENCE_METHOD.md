@@ -176,6 +176,65 @@ La risposta entra nel report come box dedicato:
 
 ---
 
+### Upgrade 4 — Anti-pattern automated detection (CLI)
+
+**Problema risolto:** anche con la Bad list scritta (Upgrade 1) e il negative brief (Upgrade 3), un designer (umano o AI) può inavvertitamente reintrodurre un anti-pattern nelle iterazioni successive del codice. Esempio: lo Style Agent applica una palette corretta, ma in un component minore aggiunge `font-family: Inter` o usa `cubic-bezier(0.68, -0.55, 0.265, 1.55)` (bounce easing). Senza un check automatico, scopri il problema solo davanti al cliente.
+
+**Cosa si introduce:**
+
+Un **detector regex-based** che scansiona il frontend buildato e segnala 24+ pattern AI-slop e issue di design quality, senza intervento AI.
+
+**Anti-pattern catturati (lista non esaustiva):**
+
+| Categoria | Esempi |
+|---|---|
+| AI slop visivo | Side-tab borders, purple gradients, bounce easing, dark glows neon, cards nestate in cards |
+| Tipografia generica | Font generici imposti (Inter, Roboto, Arial, system-default), uso massivo di font weight 400 senza varianti |
+| Colore | Pure `#000` o `#FFF` senza tinta, gray text su colored backgrounds, palette troppo desaturate |
+| Spazio | Cramped padding (< 8px), line-length > 80ch, touch target < 44px |
+| Gerarchia | Skipped headings (h1 → h3 senza h2), multipli h1 |
+| Motion | Bounce / elastic easing, durate animazioni > 600ms, mancanza di `prefers-reduced-motion` fallback |
+| Accessibilità | Contrast ratio < 4.5, focus state mancanti, alt text generico |
+
+**Implementazione:**
+
+Il metodo Adsolut adotta `pbakaus/impeccable` come standard di detection (19k★, Apache 2.0, mantenuto). Il detector è uno **script CLI standalone** — non richiede AI, gira in locale via `npx`, output JSON o human-readable.
+
+```bash
+# Detector run su un progetto (esempio Saltelli)
+npx impeccable detect wp-content/themes/saltelli/ --json > audit.json
+
+# Detector su una URL live
+npx impeccable detect https://staging.studiolegalesaltelli.it --fast --json
+
+# Detector veloce (solo regex, no Puppeteer)
+npx impeccable detect --fast .
+```
+
+**Quando va eseguito nel processo Adsolut:**
+
+1. **Pre-commit hook (opzionale)** — gira il detector ad ogni commit del frontend. Se >0 anti-pattern critici, blocca il commit. Adatto a progetti maturi, eccessivo per prototipi.
+
+2. **Post-build sanity check (consigliato)** — gira il detector dopo ogni build/deploy. Output finisce in `audit.json` committato come evidenza, e il diff con la run precedente mostra regressioni.
+
+3. **Pre-cliente review (obbligatorio)** — gira il detector prima di mandare un design al cliente. Zero anti-pattern critici è un Definition of Done implicito.
+
+4. **Pre-deploy produzione (obbligatorio)** — ultimo gate prima del go-live. Diff vs baseline iniziale come evidenza di qualità raggiunta.
+
+**Rapporto con i 3 upgrade precedenti:**
+
+- L'**Upgrade 1 (Bad list scritta)** è la lista *qualitativa*, scritta dal team Adsolut, contiene scelte di posizionamento (es. "no bilance/martelletto"). **L'Upgrade 4 NON la sostituisce** — è il *complemento automatico* per gli anti-pattern *generici trasversali* (purple gradient, Inter, ecc.).
+- L'**Upgrade 2 (Conteggio prevalenza)** alimenta decisioni *strategiche*. L'Upgrade 4 cattura *errori di esecuzione*.
+- L'**Upgrade 3 (Negative brief)** è specifico cliente. L'Upgrade 4 è universale.
+
+I 4 upgrade insieme coprono **strategia + esecuzione + verifica**, da capo a coda.
+
+**Beneficio:** il metodo Adsolut diventa **misurabile**. Davanti a un cliente che chiede "come garantite la qualità?" si risponde con un detector run + diff. Nessun "fidatevi del nostro gusto".
+
+**Nota di posizionamento metodologico:** Impeccable include anche 18 comandi AI-driven per refining attivo (`/audit`, `/critique`, `/polish`, ecc.) che NON fanno parte di questo Upgrade 4. Quei comandi vivono in una fase separata del workflow Adsolut — vedi `SHIP_PLAN_24H.md` → "Fase 1.E.10 Impeccable polishing pass". Adsolut adotta solo il **detector standalone** come parte del metodo standard di reference research; il polishing AI-driven resta opzionale e si applica progetto-per-progetto.
+
+---
+
 ## Workflow completo del metodo (pre + durante + post ricerca)
 
 ```
@@ -207,10 +266,22 @@ La risposta entra nel report come box dedicato:
 [Esecuzione design — Photoshop + Figma]
     └─ v1 design
 
+[Post-build / Post-iterazione frontend code]
+    └─ Detector run (npx impeccable detect) ← Upgrade 4
+       └─ Se >0 anti-pattern critici → fix prima di proseguire
+
 [Internal QA — Aldo (max 2 revisioni interne)]
     └─ Sign-off
 
+[Pre-cliente review]
+    └─ Detector run finale ← Upgrade 4 obbligatorio
+       └─ Output committato come evidenza qualità
+
 [Cliente review #1]
+
+[Pre-deploy produzione]
+    └─ Detector run + diff vs baseline ← Upgrade 4 obbligatorio
+       └─ Diff committato come evidenza miglioramenti
 ```
 
 ---
