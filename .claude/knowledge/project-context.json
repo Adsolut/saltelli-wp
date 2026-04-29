@@ -6,8 +6,8 @@
   "url_staging": "TBD (es. dev.studiolegalesaltelli.it)",
   "url_local": "http://localhost:8080",
   "type": "WordPress 6.x Custom Theme — Pure PHP, NO page builder",
-  "current_phase": "Phase 0 COMPLETED (2026-04-28) — Site dump fatto: DB 73 tabelle, 326 post, 31 pagine importati nel container Docker. Uploads 896MB sincronizzati. Search-replace URL completato. Sito locale risponde su http://localhost:8080. Pronti per Phase 1: sviluppo tema custom.",
-  "next_phase": "Phase 1 — Sviluppo tema custom in wp-content/themes/saltelli/ (Theme Architect scaffolding + Style/Animation + GEO Engineer in parallelo)",
+  "current_phase": "🚀 SHIP MODE 24H — 2026-04-28 evening → 2026-04-29 mattina. Target: cliente vede staging al 99% completo (opzione A: design + struttura + homepage popolata + 1 avvocato + 3 competenze tier-1). Workflow validazione cliente SPOSTATO post-launch. Hosting staging: DigitalOcean droplet (NON SiteGround staging tool). Foto reali NON arrivate — placeholder editoriali (silhouette tipografica stile Cravath).",
+  "next_phase": "Post-launch — Elena popola contenuti restanti (16 competenze tier-2 + 3 avvocati + migrazione 326 post blog) nei giorni successivi. Validazione cliente avviene su sito già vivo in staging.",
   "phase_0_artifacts": {
     "db_dump": "db-dump/saltelli_20260428-132414.sql (58MB)",
     "db_baseline": "db-dump/baseline-saltelli_20260428-132414.sql (58MB, snapshot intoccabile)",
