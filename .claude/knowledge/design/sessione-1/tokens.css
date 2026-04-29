@@ -1,0 +1,252 @@
+/* Studio Legale Saltelli & Partners — Design Tokens (locked) */
+
+:root {
+  /* Color */
+  --background: #FAFAF8;
+  --surface: #F2F0EA;
+  --primary: #1B2B4B;
+  --accent: #B8860B;
+  --text: #2D2D2D;
+  --text-muted: #6B6B6B;
+  --border: #E5E0D5;
+
+  /* Typography */
+  --font-display: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --font-body: "DM Sans", "Satoshi", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+
+  /* Type scale (responsive clamp) */
+  --fs-display: clamp(48px, 8vw, 120px);
+  --fs-h1: clamp(36px, 5vw, 64px);
+  --fs-h2: clamp(28px, 3.5vw, 44px);
+  --fs-h3: clamp(20px, 2vw, 28px);
+  --fs-body: clamp(16px, 1.1vw, 18px);
+  --fs-small: 14px;
+  --fs-micro: 12px;
+
+  --lh-display: 1.05;
+  --lh-heading: 1.15;
+  --lh-body: 1.65;
+
+  /* Letter spacing */
+  --ls-display: -0.02em;
+  --ls-mono: 0.08em;
+
+  /* Spacing scale (8-base) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 16px;
+  --s-4: 24px;
+  --s-5: 32px;
+  --s-6: 48px;
+  --s-7: 64px;
+  --s-8: 96px;
+  --s-9: 128px;
+  --s-10: 192px;
+
+  /* Layout */
+  --container-max: 1440px;
+  --container-pad: clamp(24px, 5vw, 96px);
+  --gap-desktop: 32px;
+  --gap-tablet: 24px;
+  --gap-mobile: 16px;
+
+  /* Motion */
+  --ease-editorial: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --dur-fast: 200ms;
+  --dur-base: 300ms;
+  --dur-slow: 600ms;
+}
+
+/* Base reset (scoped) */
+.sl-root,
+.sl-root * {
+  box-sizing: border-box;
+}
+
+.sl-root {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.sl-root h1, .sl-root h2, .sl-root h3, .sl-root h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: var(--ls-display);
+  color: var(--primary);
+}
+
+.sl-root p { margin: 0; }
+.sl-root a { color: inherit; text-decoration: none; }
+
+/* Mono utility */
+.sl-mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Editorial button: text + underline, NOT filled */
+.sl-btn {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  cursor: pointer;
+  position: relative;
+  letter-spacing: 0.01em;
+}
+.sl-btn::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--text);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-editorial),
+              background var(--dur-base) var(--ease-editorial);
+}
+.sl-btn:hover::after {
+  background: var(--accent);
+  transform: scaleX(1);
+}
+.sl-btn .arrow {
+  display: inline-block;
+  transition: transform var(--dur-base) var(--ease-editorial);
+}
+.sl-btn:hover .arrow { transform: translateX(6px); }
+
+.sl-btn--primary { color: var(--primary); }
+.sl-btn--primary::after { background: var(--primary); }
+
+/* Editorial link */
+.sl-link {
+  color: var(--text);
+  position: relative;
+  transition: color var(--dur-fast) var(--ease-editorial);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+}
+.sl-link:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* List item — area di pratica */
+.sl-area {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: baseline;
+  gap: 32px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-editorial),
+              padding-left var(--dur-fast) var(--ease-editorial);
+  position: relative;
+}
+.sl-area::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-editorial);
+}
+.sl-area:hover {
+  transform: translateX(8px);
+}
+.sl-area:hover::before { transform: scaleX(1); }
+
+.sl-area__num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.sl-area__title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.sl-area--tier1 .sl-area__title::first-letter {
+  color: var(--accent);
+}
+.sl-area__meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-editorial);
+}
+.sl-area:hover .sl-area__meta { opacity: 1; }
+
+/* Accordion */
+.sl-acc {
+  border-top: 1px solid var(--border);
+}
+.sl-acc__item {
+  border-bottom: 1px solid var(--border);
+}
+.sl-acc__btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 32px;
+  padding: 24px 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.5vw, 22px);
+  font-weight: 400;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+}
+.sl-acc__icon {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 400;
+  flex-shrink: 0;
+  transition: transform var(--dur-base) var(--ease-editorial);
+}
+.sl-acc__item[data-open="true"] .sl-acc__icon { transform: rotate(45deg); }
+.sl-acc__panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--dur-base) var(--ease-editorial);
+}
+.sl-acc__item[data-open="true"] .sl-acc__panel { max-height: 400px; }
+.sl-acc__inner {
+  padding: 0 0 28px 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text);
+  max-width: 60ch;
+}
