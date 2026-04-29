@@ -14,6 +14,12 @@ if (is_front_page()) {
     return;
 }
 
+// Coabitazione: Yoast / Rank Math / AIOSEO emettono già BreadcrumbList
+// nel proprio @graph. Evitiamo duplicati che confondono Google.
+if (function_exists('saltelli_seo_plugin_active') && saltelli_seo_plugin_active()) {
+    return;
+}
+
 $chain = saltelli_get_breadcrumb_chain();
 if (empty($chain) || count($chain) < 2) {
     return;

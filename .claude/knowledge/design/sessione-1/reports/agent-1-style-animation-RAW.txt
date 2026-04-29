@@ -1,0 +1,1593 @@
+           Claude Code v2.1.123
+ ▐▛███▜▌   Opus 4.7 (1M context) w…
+▝▜█████▛▘  Claude Max
+  ▘▘ ▝▝    ~/…/DEV/saltelli-wp
+
+❯ Leggi PROMPT_AGENT_1_STYLE_ANIMATION.md ed eseguilo. Quando hai finito, mostrami il report finale
+  strutturato secondo le 5 voci richieste.
+
+  Searched for 1 pattern, read 7 files, listed 2 directories (ctrl+o to expand)
+
+⏺ Now I have a quick view of the existing scaffold. Let me also peek at the existing JS scaffolds and
+  inc/enqueue.php so I know what's there before I overwrite.
+
+  Searched for 1 pattern, read 4 files (ctrl+o to expand)
+
+⏺ Now I'll write the new tokens.css (just :root + .sl-root reset).
+
+⏺ Write(wp-content/themes/saltelli/assets/css/tokens.css)
+  ⎿  Added 104 lines, removed 29 lines
+        1  /*
+        2 - * Saltelli — design tokens (CSS variables).
+        3 - * Fonte di verità: CLAUDE.md + CLAUDE_DESIGN_PROMPT.md.
+        2 + * Studio Legale Saltelli & Partners — Design Tokens (locked)
+        3 + * Fonte di verità: .claude/knowledge/design/sessione-1/tokens.css (Sessione 1)
+        4   *
+        5 - * TODO Style & Animation agent: applicare i token finali una volta firmato il design.
+        6 - * Per ora qui ci sono solo i valori dichiarati nel brief, senza scala estesa
+        7 - * (spacing, shadow, motion). Espandi con la scala completa quando il design è chiuso.
+        5 + * Contiene SOLO :root (CSS variables) + reset scoped .sl-root.
+        6 + * I components live in components.css.
+        7   */
+        8
+        9  :root {
+       11 -  /* Palette — locked dal brief */
+       12 -  --color-bg: #FAFAF8;          /* cream */
+       13 -  --color-primary: #1B2B4B;     /* navy */
+       14 -  --color-accent: #B8860B;      /* bronze/gold */
+       15 -  --color-text: #2D2D2D;        /* deep grey, NON nero pieno */
+       16 -  --color-text-muted: #5A5A5A;
+       17 -  --color-border: #E5E1D8;
+       10 +  /* Color */
+       11 +  --background: #FAFAF8;
+       12 +  --surface: #F2F0EA;
+       13 +  --primary: #1B2B4B;
+       14 +  --accent: #B8860B;
+       15 +  --text: #2D2D2D;
+       16 +  --text-muted: #6B6B6B;
+       17 +  --border: #E5E0D5;
+       18
+       19 -  /* Tipografia — placeholder, decisione finale tra le coppie consentite */
+       19 +  /* Typography */
+       20    --font-display: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+       21 -  --font-body: "DM Sans", "Satoshi", system-ui, -apple-system, sans-serif;
+       21 +  --font-body: "DM Sans", "Satoshi", -apple-system, sans-serif;
+       22 +  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+       23
+       23 -  /* Scala spazi minimale — TODO: estendere */
+       24 -  --space-1: 0.25rem;
+       25 -  --space-2: 0.5rem;
+       26 -  --space-3: 0.75rem;
+       27 -  --space-4: 1rem;
+       28 -  --space-6: 1.5rem;
+       29 -  --space-8: 2rem;
+       30 -  --space-12: 3rem;
+       31 -  --space-16: 4rem;
+       32 -  --space-24: 6rem;
+       24 +  /* Type scale (responsive clamp) */
+       25 +  --fs-display: clamp(48px, 8vw, 120px);
+       26 +  --fs-h1: clamp(36px, 5vw, 64px);
+       27 +  --fs-h2: clamp(28px, 3.5vw, 44px);
+       28 +  --fs-h3: clamp(20px, 2vw, 28px);
+       29 +  --fs-body: clamp(16px, 1.1vw, 18px);
+       30 +  --fs-small: 14px;
+       31 +  --fs-micro: 12px;
+       32
+       34 -  /* Container */
+       35 -  --container-max: 1280px;
+       36 -  --container-padding: clamp(1rem, 4vw, 2rem);
+       33 +  --lh-display: 1.05;
+       34 +  --lh-heading: 1.15;
+       35 +  --lh-body: 1.65;
+       36
+       38 -  /* Breakpoints — usati come riferimento, non come custom media (CSS non li supporta nativ
+          -amente) */
+       39 -  /* 375 / 768 / 1024 / 1440 */
+       37 +  /* Letter spacing */
+       38 +  --ls-display: -0.02em;
+       39 +  --ls-mono: 0.08em;
+       40 +
+       41 +  /* Spacing scale (8-base) */
+       42 +  --s-1: 4px;
+       43 +  --s-2: 8px;
+       44 +  --s-3: 16px;
+       45 +  --s-4: 24px;
+       46 +  --s-5: 32px;
+       47 +  --s-6: 48px;
+       48 +  --s-7: 64px;
+       49 +  --s-8: 96px;
+       50 +  --s-9: 128px;
+       51 +  --s-10: 192px;
+       52 +
+       53 +  /* Layout */
+       54 +  --container-max: 1440px;
+       55 +  --container-pad: clamp(24px, 5vw, 96px);
+       56 +  --gap-desktop: 32px;
+       57 +  --gap-tablet: 24px;
+       58 +  --gap-mobile: 16px;
+       59 +
+       60 +  /* Motion */
+       61 +  --ease-editorial: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+       62 +  --dur-fast: 200ms;
+       63 +  --dur-base: 300ms;
+       64 +  --dur-slow: 600ms;
+       65 +
+       66 +  /* Legacy aliases — back-compat con scaffold base.css esistente */
+       67 +  --color-bg: var(--background);
+       68 +  --color-primary: var(--primary);
+       69 +  --color-accent: var(--accent);
+       70 +  --color-text: var(--text);
+       71 +  --color-text-muted: var(--text-muted);
+       72 +  --color-border: var(--border);
+       73 +  --container-padding: var(--container-pad);
+       74 +  --space-1: var(--s-1);
+       75 +  --space-2: var(--s-2);
+       76 +  --space-3: 12px;
+       77 +  --space-4: var(--s-3);
+       78 +  --space-6: var(--s-4);
+       79 +  --space-8: var(--s-5);
+       80 +  --space-12: var(--s-6);
+       81 +  --space-16: var(--s-7);
+       82 +  --space-24: var(--s-8);
+       83  }
+       84 +
+       85 +/* Base reset (scoped al wrapper .sl-root) */
+       86 +.sl-root,
+       87 +.sl-root * {
+       88 +  box-sizing: border-box;
+       89 +}
+       90 +
+       91 +.sl-root {
+       92 +  margin: 0;
+       93 +  background: var(--background);
+       94 +  color: var(--text);
+       95 +  font-family: var(--font-body);
+       96 +  font-size: var(--fs-body);
+       97 +  line-height: var(--lh-body);
+       98 +  -webkit-font-smoothing: antialiased;
+       99 +  -moz-osx-font-smoothing: grayscale;
+      100 +  font-feature-settings: "kern" 1, "liga" 1;
+      101 +}
+      102 +
+      103 +.sl-root h1,
+      104 +.sl-root h2,
+      105 +.sl-root h3,
+      106 +.sl-root h4 {
+      107 +  margin: 0;
+      108 +  font-family: var(--font-display);
+      109 +  font-weight: 400;
+      110 +  letter-spacing: var(--ls-display);
+      111 +  color: var(--primary);
+      112 +}
+      113 +
+      114 +.sl-root p { margin: 0; }
+      115 +.sl-root a { color: inherit; text-decoration: none; }
+
+⏺ Write(wp-content/themes/saltelli/assets/css/components.css)
+  ⎿  Wrote 177 lines to wp-content/themes/saltelli/assets/css/components.css
+       1 /*
+       2  * Studio Legale Saltelli & Partners — Components
+       3  * Estratto da .claude/knowledge/design/sessione-1/tokens.css (Sessione 1).
+       4  *
+       5  * Components: .sl-mono, .sl-btn, .sl-link, .sl-area, .sl-acc.
+       6  * Tutti scopati implicitamente dall'uso dentro .sl-root (vedi tokens.css).
+       7  */
+       8
+       9 /* Mono utility */
+      10 .sl-mono {
+     … +167 lines (ctrl+o to expand)
+
+⏺ Now I'll rewrite base.css for typography setup, container, layout primitives, and reduced-motion. I'll keep
+   the back-compat container/skip-link from the existing scaffold.
+
+⏺ Write(wp-content/themes/saltelli/assets/css/base.css)
+  ⎿  Added 106 lines, removed 35 lines
+       1  /*
+       2 - * Saltelli — base.
+       3 - * Reset minimale + tipografia di partenza + layout container.
+       2 + * Saltelli — base layer.
+       3 + * Caricato dopo tokens.css. Si occupa di:
+       4 + *  - font loading (Google Fonts fallback finché i WOFF2 self-hosted non arrivano)
+       5 + *  - reset globale leggero (fuori da .sl-root, per compatibilità wp-admin bar / plugin)
+       6 + *  - container & section utility
+       7 + *  - prose helpers
+       8 + *  - reduced-motion override
+       9   *
+       5 - * TODO Style & Animation agent: sostituire con il sistema definitivo
+       6 - * (typographic scale, layout system, dark/light, components/) una volta
+       7 - * firmato il design. Questo file è solo per non far apparire pagine
+       8 - * completamente unstyled in scaffold.
+      10 + * NB: i tokens (CSS variables + .sl-root reset) vivono in tokens.css.
+      11 + *     I components (.sl-btn, .sl-area, ...) vivono in components.css.
+      12   */
+      13
+      11 -/* ---- Reset ---- */
+      14 +/* TODO Duccio: caricare i WOFF2 in assets/fonts/ e attivare il blocco @font-face sotto.
+      15 +   Per ora fallback a Google Fonts con display=swap, così la pagina non resta unstyled. */
+      16 +@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfa
+         +ir+Display:wght@400;700&family=JetBrains+Mono:wght@400&display=swap");
+      17 +
+      18 +/*
+      19 +@font-face {
+      20 +  font-family: "Playfair Display";
+      21 +  src: url("../fonts/playfair-display-400.woff2") format("woff2");
+      22 +  font-weight: 400;
+      23 +  font-style: normal;
+      24 +  font-display: swap;
+      25 +}
+      26 +@font-face {
+      27 +  font-family: "Playfair Display";
+      28 +  src: url("../fonts/playfair-display-700.woff2") format("woff2");
+      29 +  font-weight: 700;
+      30 +  font-style: normal;
+      31 +  font-display: swap;
+      32 +}
+      33 +@font-face {
+      34 +  font-family: "DM Sans";
+      35 +  src: url("../fonts/dm-sans-400.woff2") format("woff2");
+      36 +  font-weight: 400;
+      37 +  font-style: normal;
+      38 +  font-display: swap;
+      39 +}
+      40 +@font-face {
+      41 +  font-family: "DM Sans";
+      42 +  src: url("../fonts/dm-sans-500.woff2") format("woff2");
+      43 +  font-weight: 500;
+      44 +  font-style: normal;
+      45 +  font-display: swap;
+      46 +}
+      47 +@font-face {
+      48 +  font-family: "DM Sans";
+      49 +  src: url("../fonts/dm-sans-700.woff2") format("woff2");
+      50 +  font-weight: 700;
+      51 +  font-style: normal;
+      52 +  font-display: swap;
+      53 +}
+      54 +*/
+      55 +
+      56 +/* ---- Reset globale leggero ---- */
+      57  *, *::before, *::after { box-sizing: border-box; }
+      58  html { -webkit-text-size-adjust: 100%; tab-size: 4; }
+      59  body {
+      60    margin: 0;
+      16 -  background: var(--color-bg);
+      17 -  color: var(--color-text);
+      61 +  background: var(--background);
+      62 +  color: var(--text);
+      63    font-family: var(--font-body);
+      19 -  font-size: 1rem;
+      20 -  line-height: 1.6;
+      64 +  font-size: var(--fs-body);
+      65 +  line-height: var(--lh-body);
+      66    -webkit-font-smoothing: antialiased;
+      67    -moz-osx-font-smoothing: grayscale;
+      68 +  font-feature-settings: "kern" 1, "liga" 1;
+      69  }
+      70  img, svg, video { max-width: 100%; height: auto; display: block; }
+      25 -a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
+      26 -a:hover { color: var(--color-accent); }
+      71
+      28 -/* ---- Tipografia minima ---- */
+      29 -h1, h2, h3, h4, h5, h6 {
+      30 -  font-family: var(--font-display);
+      31 -  color: var(--color-primary);
+      32 -  line-height: 1.2;
+      33 -  margin: 0 0 var(--space-4);
+      34 -  font-weight: 600;
+      35 -}
+      36 -h1 { font-size: clamp(2rem, 5vw, 3.25rem); }
+      37 -h2 { font-size: clamp(1.5rem, 3.5vw, 2.25rem); }
+      38 -h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+      39 -
+      40 -p { margin: 0 0 var(--space-4); }
+      41 -
+      72  /* ---- Container ---- */
+      43 -.container, .saltelli-container {
+      73 +.sl-container,
+      74 +.container,
+      75 +.saltelli-container {
+      76    width: 100%;
+      77    max-width: var(--container-max);
+      78    margin-inline: auto;
+      47 -  padding-inline: var(--container-padding);
+      79 +  padding-inline: var(--container-pad);
+      80  }
+      81
+      82 +/* ---- Section vertical rhythm ---- */
+      83 +.sl-section {
+      84 +  padding-block: clamp(64px, 10vw, 128px);
+      85 +}
+      86 +
+      87 +/* ---- Prose flow (ritmo verticale) ---- */
+      88 +.sl-flow > * + * { margin-top: 1.5em; }
+      89 +
+      90  /* ---- Skip link a11y ---- */
+      91  .skip-link {
+      92    position: absolute;
+     ...
+       97    left: 1rem;
+       98    top: 1rem;
+       99    z-index: 9999;
+       60 -  background: var(--color-primary);
+       61 -  color: var(--color-bg);
+       62 -  padding: var(--space-2) var(--space-4);
+      100 +  background: var(--primary);
+      101 +  color: var(--background);
+      102 +  padding: var(--s-2) var(--s-3);
+      103 +  font-family: var(--font-mono);
+      104 +  font-size: var(--fs-small);
+      105  }
+      106
+       65 -/* ---- Site shell ---- */
+       66 -.site-header, .site-footer { padding-block: var(--space-6); }
+       67 -.site-main { padding-block: var(--space-12); min-height: 60vh; }
+      107 +/* ---- Headings di default (fuori .sl-root) ---- */
+      108 +h1, h2, h3, h4, h5, h6 {
+      109 +  font-family: var(--font-display);
+      110 +  color: var(--primary);
+      111 +  line-height: var(--lh-heading);
+      112 +  margin: 0 0 var(--s-3);
+      113 +  font-weight: 400;
+      114 +  letter-spacing: var(--ls-display);
+      115 +}
+      116 +h1 { font-size: var(--fs-h1); }
+      117 +h2 { font-size: var(--fs-h2); }
+      118 +h3 { font-size: var(--fs-h3); }
+      119 +
+      120 +p { margin: 0 0 var(--s-3); }
+      121 +
+      122 +a { color: var(--primary); text-decoration: none; }
+      123 +
+      124 +/* ---- Site shell (back-compat con scaffold di Theme Architect) ---- */
+      125 +.site-header, .site-footer { padding-block: var(--s-4); }
+      126 +.site-main { min-height: 60vh; }
+      127 +
+      128 +/* ---- Reduced motion ---- */
+      129 +@media (prefers-reduced-motion: reduce) {
+      130 +  *,
+      131 +  *::before,
+      132 +  *::after {
+      133 +    animation-duration: 0.01ms !important;
+      134 +    animation-iteration-count: 1 !important;
+      135 +    transition-duration: 0.01ms !important;
+      136 +    scroll-behavior: auto !important;
+      137 +  }
+      138 +}
+
+⏺ Now sections.css — the big one. I'll translate the 7 homepage sections from JSX into CSS classes,
+  mobile-first, with desktop overrides at 768px+.
+
+⏺ Write(wp-content/themes/saltelli/assets/css/sections.css)
+  ⎿  Wrote 853 lines to wp-content/themes/saltelli/assets/css/sections.css
+       1 /*
+       2  * Studio Legale Saltelli & Partners — Homepage sections
+       3  * Estratto da .claude/knowledge/design/sessione-1/homepage-{desktop,mobile}.jsx
+       4  *
+       5  * Mobile-first. Tutti gli override desktop in @media (min-width: 768px+).
+       6  * Naming: .sl-section--<nome> + componenti BEM-ish (__elem, --modifier).
+       7  *
+       8  * Ordine sezioni (Frame 1 — Homepage):
+       9  *   1. .sl-header              — sticky, transparent → solid on scroll (.is-scrolled)
+      10  *   2. .sl-hero                — 100vh, headline display + colophon a destra
+     … +843 lines (ctrl+o to expand)
+
+⏺ Now I update inc/enqueue.php to wire components.css + sections.css and the GSAP/Lenis CDN scripts. I'll
+  also enqueue main.js with proper deps.
+
+⏺ Write(wp-content/themes/saltelli/inc/enqueue.php)
+  ⎿  Added 79 lines, removed 31 lines
+       2  /**
+       3   * Asset enqueue — CSS, JS, fonts.
+       4   *
+       5 - * Stato: scaffold. Carichiamo SOLO i CSS minimali e l'entrypoint JS.
+       6 - * GSAP, Lenis, font WOFF2 e Splittext NON sono ancora caricati: lasciamo
+       7 - * gli hook pronti perché lo Style & Animation agent li popoli quando il
+       8 - * design sarà firmato.
+       5 + * Style & Animation agent (SHIP MODE 24H, 2026-04-29):
+       6 + *  - CSS chain: tokens → base → components → sections
+       7 + *  - GSAP 3.12.5 + ScrollTrigger + SplitText + Lenis 1.1.13 da CDN, defer in footer
+       8 + *  - main.js dipende da gsap-core e lenis
+       9 + *  - SRI hash: TODO (hardening fase post-demo)
+      10 + *  - WOFF2 self-hosted: TODO Duccio (fallback Google Fonts via @import in base.css)
+      11   *
+      12   * @package Saltelli
+      13   */
+     ...
+      19
+      20      $ver = SALTELLI_THEME_VERSION;
+      21
+      20 -    // CSS — design tokens (CSS variables)
+      22 +    // ------------------------------------------------------------------
+      23 +    // CSS chain — tokens → base → components → sections
+      24 +    // ------------------------------------------------------------------
+      25 +
+      26      wp_enqueue_style(
+      27          'saltelli-tokens',
+      28          SALTELLI_THEME_URI . '/assets/css/tokens.css',
+     ...
+      30          $ver
+      31      );
+      32
+      28 -    // CSS — base (reset + tipografia minimale + container)
+      33      wp_enqueue_style(
+      34          'saltelli-base',
+      35          SALTELLI_THEME_URI . '/assets/css/base.css',
+     ...
+       37          $ver
+       38      );
+       39
+       36 -    // JS — entrypoint, defer in footer
+       40 +    wp_enqueue_style(
+       41 +        'saltelli-components',
+       42 +        SALTELLI_THEME_URI . '/assets/css/components.css',
+       43 +        ['saltelli-base'],
+       44 +        $ver
+       45 +    );
+       46 +
+       47 +    wp_enqueue_style(
+       48 +        'saltelli-sections',
+       49 +        SALTELLI_THEME_URI . '/assets/css/sections.css',
+       50 +        ['saltelli-components'],
+       51 +        $ver
+       52 +    );
+       53 +
+       54 +    // ------------------------------------------------------------------
+       55 +    // JS — GSAP stack + Lenis (CDN, defer, footer)
+       56 +    // SRI hash: TODO hardening post-demo.
+       57 +    // ------------------------------------------------------------------
+       58 +
+       59      wp_enqueue_script(
+       60 +        'saltelli-gsap',
+       61 +        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
+       62 +        [],
+       63 +        null,
+       64 +        ['in_footer' => true, 'strategy' => 'defer']
+       65 +    );
+       66 +
+       67 +    wp_enqueue_script(
+       68 +        'saltelli-gsap-scrolltrigger',
+       69 +        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js',
+       70 +        ['saltelli-gsap'],
+       71 +        null,
+       72 +        ['in_footer' => true, 'strategy' => 'defer']
+       73 +    );
+       74 +
+       75 +    wp_enqueue_script(
+       76 +        'saltelli-gsap-splittext',
+       77 +        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js',
+       78 +        ['saltelli-gsap'],
+       79 +        null,
+       80 +        ['in_footer' => true, 'strategy' => 'defer']
+       81 +    );
+       82 +
+       83 +    wp_enqueue_script(
+       84 +        'saltelli-lenis',
+       85 +        'https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.13/lenis.min.js',
+       86 +        [],
+       87 +        null,
+       88 +        ['in_footer' => true, 'strategy' => 'defer']
+       89 +    );
+       90 +
+       91 +    // ------------------------------------------------------------------
+       92 +    // JS — entrypoint Saltelli (dipende da gsap-core e lenis)
+       93 +    // ------------------------------------------------------------------
+       94 +
+       95 +    wp_enqueue_script(
+       96          'saltelli-main',
+       97          SALTELLI_THEME_URI . '/assets/js/main.js',
+       40 -        [],
+       98 +        ['saltelli-gsap', 'saltelli-gsap-scrolltrigger', 'saltelli-gsap-splittext', 'saltel
+          +li-lenis'],
+       99          $ver,
+      100          ['in_footer' => true, 'strategy' => 'defer']
+      101      );
+      102
+      103      // ------------------------------------------------------------------
+      104      // TODO Style & Animation agent: enqueue Playfair Display + DM Sans
+       47 -    // (o Cormorant + Satoshi se decisi diversi) come WOFF2 self-hosted,
+       48 -    // con preload sui 2 weight critici e font-display: swap.
+       49 -    // Esempio:
+      105 +    // come WOFF2 self-hosted in assets/fonts/, con preload sui 2 weight
+      106 +    // critici e font-display: swap. Per ora fallback a Google Fonts via
+      107 +    // @import dentro base.css.
+      108 +    //
+      109 +    // Esempio futuro (commentato):
+      110      // add_action('wp_head', function () {
+      111      //     echo '<link rel="preload" href="' . SALTELLI_THEME_URI . '/assets/fonts/playfair
+           -display-700.woff2" as="font" type="font/woff2" crossorigin>';
+      112 +    //     echo '<link rel="preload" href="' . SALTELLI_THEME_URI . '/assets/fonts/dm-sans-
+          +400.woff2" as="font" type="font/woff2" crossorigin>';
+      113      // }, 2);
+      114      // ------------------------------------------------------------------
+       54 -
+       55 -    // ------------------------------------------------------------------
+       56 -    // TODO Style & Animation agent: enqueue GSAP 3.15+ con SRI, ScrollTrigger, SplitText.
+       57 -    // CDN (jsdelivr) + integrity hash. Esempio (commentato finché non firmato il design):
+       58 -    //
+       59 -    // wp_enqueue_script('gsap',           'https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsa
+          -p.min.js',          [],        '3.15', ['in_footer' => true, 'strategy' => 'defer']);
+       60 -    // wp_enqueue_script('gsap-scroll',    'https://cdn.jsdelivr.net/npm/gsap@3.15/dist/Scr
+          -ollTrigger.min.js', ['gsap'],  '3.15', ['in_footer' => true, 'strategy' => 'defer']);
+       61 -    // wp_enqueue_script('gsap-splittext', 'https://cdn.jsdelivr.net/npm/gsap@3.15/dist/Spl
+          -itText.min.js',     ['gsap'],  '3.15', ['in_footer' => true, 'strategy' => 'defer']);
+       62 -    //
+       63 -    // Aggiungere SRI via filtro `script_loader_tag` se richiesto.
+       64 -    // ------------------------------------------------------------------
+       65 -
+       66 -    // ------------------------------------------------------------------
+       67 -    // TODO Style & Animation agent: enqueue Lenis (smooth momentum scroll)
+       68 -    // wp_enqueue_script('lenis', 'https://cdn.jsdelivr.net/npm/lenis@latest/dist/lenis.min
+          -.js', [], null, ['in_footer' => true, 'strategy' => 'defer']);
+       69 -    // ------------------------------------------------------------------
+      115  }
+      116
+      117  /**
+       73 - * Editor styles — placeholder.
+       74 - * TODO Style & Animation agent: caricare lo stesso tokens.css/base.css
+       75 - * sul Block Editor per parità visiva.
+      118 + * Editor styles — parità visiva nel Block Editor.
+      119   */
+      120  add_action('after_setup_theme', function () {
+       78 -    add_editor_style(['assets/css/tokens.css', 'assets/css/base.css']);
+      121 +    add_editor_style([
+      122 +        'assets/css/tokens.css',
+      123 +        'assets/css/base.css',
+      124 +        'assets/css/components.css',
+      125 +        'assets/css/sections.css',
+      126 +    ]);
+      127  });
+
+⏺ Now main.js — Lenis init, GSAP/ScrollTrigger/SplitText reveal, header solid-on-scroll, mobile-light. Around
+   150 lines.
+
+⏺ Write(wp-content/themes/saltelli/assets/js/main.js)
+  ⎿  Added 135 lines, removed 11 lines
+       1  /*
+       2 - * Saltelli — main entrypoint.
+       2 + * Saltelli & Partners — main entrypoint (Frame 1 animations)
+       3 + * Style & Animation agent · SHIP MODE 24H · 2026-04-29
+       4   *
+       4 - * Stato: scaffold. Per ora questo file non importa nulla.
+       5 - * Lo Style & Animation agent collegherà GSAP + Lenis + interaction layer
+       6 - * quando il design sarà firmato.
+       5 + * Stack: GSAP 3.12.5 + ScrollTrigger + SplitText + Lenis 1.1.13.
+       6 + * Caricato da inc/enqueue.php in footer con strategy=defer.
+       7   *
+       8 - * TODO Style & Animation agent:
+       9 - *   - import './lenis-init.js'
+      10 - *   - import './gsap-init.js'
+      11 - *   - registrare ScrollTrigger.refresh() su resize (debounced)
+      12 - *   - registrare i moduli di micro-interaction (header, accordion FAQ, ecc.)
+       8 + * Behaviors:
+       9 + *   1. Lenis smooth scroll (lerp 0.1) — disabilitato su prefers-reduced-motion
+      10 + *   2. GSAP ticker integrato con Lenis (no double rAF)
+      11 + *   3. Hero headline reveal — SplitText su parole, stagger 80ms (desktop only)
+      12 + *   4. Sezioni reveal — fade + translateY 24px su scroll, trigger 80% viewport
+      13 + *   5. List items area pratica — stagger 80ms al primo ingresso in viewport
+      14 + *   6. Header solid-on-scroll — toggle .is-scrolled dopo 80px scroll
+      15 + *   7. Mobile (< 768px) — niente SplitText, niente translate aggressivi: solo fade
+      16 + *
+      17 + * TODO Style & Animation Agent: aggiungere refinement post-demo cliente
+      18 + *   (parallax foto facciata, magnetic buttons, hover ritratto avvocato extra).
+      19   */
+      20
+      21  (function () {
+      22    'use strict';
+      23
+      18 -  // Ready guard.
+      24    const ready = () => {
+      25      document.documentElement.classList.add('is-ready');
+      21 -    // TODO: bootstrap interaction modules.
+      26 +    init();
+      27    };
+      28
+      29    if (document.readyState === 'loading') {
+     ...
+       31    } else {
+       32      ready();
+       33    }
+       34 +
+       35 +  function init() {
+       36 +    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+       37 +    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+       38 +
+       39 +    // Guards: GSAP/Lenis sono CDN async. Bail-out grazioso se mancano.
+       40 +    const hasGsap = typeof window.gsap !== 'undefined';
+       41 +    const hasScrollTrigger = typeof window.ScrollTrigger !== 'undefined';
+       42 +    const hasSplitText = typeof window.SplitText !== 'undefined';
+       43 +    const hasLenis = typeof window.Lenis !== 'undefined';
+       44 +
+       45 +    if (hasGsap && hasScrollTrigger) {
+       46 +      const plugins = [window.ScrollTrigger];
+       47 +      if (hasSplitText) plugins.push(window.SplitText);
+       48 +      window.gsap.registerPlugin.apply(window.gsap, plugins);
+       49 +    }
+       50 +
+       51 +    // 1. Lenis smooth scroll — solo desktop, no reduced-motion
+       52 +    let lenis = null;
+       53 +    if (hasLenis && !reduced && !isMobile) {
+       54 +      lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
+       55 +      if (hasGsap && hasScrollTrigger) {
+       56 +        lenis.on('scroll', window.ScrollTrigger.update);
+       57 +        window.gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+       58 +        window.gsap.ticker.lagSmoothing(0);
+       59 +      } else {
+       60 +        const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
+       61 +        requestAnimationFrame(raf);
+       62 +      }
+       63 +    }
+       64 +
+       65 +    // 2. Header solid-on-scroll
+       66 +    const header = document.querySelector('.sl-header');
+       67 +    if (header) {
+       68 +      const onScroll = () => {
+       69 +        const y = window.scrollY || window.pageYOffset || 0;
+       70 +        header.classList.toggle('is-scrolled', y > 80);
+       71 +      };
+       72 +      window.addEventListener('scroll', onScroll, { passive: true });
+       73 +      onScroll();
+       74 +    }
+       75 +
+       76 +    // 3. Mobile menu toggle
+       77 +    const menuBtn = document.querySelector('.sl-header__menu-btn');
+       78 +    const mobileMenu = document.querySelector('.sl-mobile-menu');
+       79 +    if (menuBtn && mobileMenu) {
+       80 +      menuBtn.addEventListener('click', () => {
+       81 +        mobileMenu.classList.toggle('is-open');
+       82 +      });
+       83 +    }
+       84 +
+       85 +    // Reduced motion: lascia il CSS gestire la headline (fallback class)
+       86 +    if (reduced) {
+       87 +      document.querySelectorAll('.sl-hero__headline .sl-word').forEach(w => w.classList.add
+          +('is-revealed'));
+       88 +      document.querySelectorAll('.sl-revealable').forEach(el => el.classList.add('is-reveal
+          +ed'));
+       89 +      return;
+       90 +    }
+       91 +
+       92 +    // 4. Hero headline reveal
+       93 +    const heroHeadline = document.querySelector('.sl-hero__headline');
+       94 +    if (heroHeadline) {
+       95 +      if (!isMobile && hasGsap && hasSplitText) {
+       96 +        const split = new window.SplitText(heroHeadline, { type: 'words' });
+       97 +        window.gsap.from(split.words, {
+       98 +          yPercent: 60,
+       99 +          opacity: 0,
+      100 +          duration: 0.7,
+      101 +          ease: 'power2.out',
+      102 +          stagger: 0.08,
+      103 +          delay: 0.1,
+      104 +        });
+      105 +      } else {
+      106 +        // Mobile o no-SplitText: usa il fallback CSS via class
+      107 +        heroHeadline.querySelectorAll('.sl-word').forEach(w => w.classList.add('is-revealed
+          +'));
+      108 +      }
+      109 +    }
+      110 +
+      111 +    // 5. Reveal generico — sezioni e revealable
+      112 +    if (hasGsap && hasScrollTrigger) {
+      113 +      const targets = document.querySelectorAll('.sl-revealable, [data-reveal]');
+      114 +      targets.forEach((el) => {
+      115 +        window.gsap.from(el, {
+      116 +          y: isMobile ? 12 : 24,
+      117 +          opacity: 0,
+      118 +          duration: isMobile ? 0.5 : 0.7,
+      119 +          ease: 'power2.out',
+      120 +          scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+      121 +          onComplete: () => el.classList.add('is-revealed'),
+      122 +        });
+      123 +      });
+      124 +
+      125 +      // 6. List items area — stagger di gruppo
+      126 +      const areaGroups = document.querySelectorAll('.sl-areas__list, [data-areas-list]');
+      127 +      areaGroups.forEach((group) => {
+      128 +        const items = group.querySelectorAll('.sl-area');
+      129 +        if (!items.length) return;
+      130 +        window.gsap.from(items, {
+      131 +          y: isMobile ? 8 : 16,
+      132 +          opacity: 0,
+      133 +          duration: isMobile ? 0.4 : 0.6,
+      134 +          ease: 'power2.out',
+      135 +          stagger: 0.08,
+      136 +          scrollTrigger: { trigger: group, start: 'top 80%', once: true },
+      137 +        });
+      138 +      });
+      139 +    } else {
+      140 +      // No GSAP: rivela tutto subito
+      141 +      document.querySelectorAll('.sl-revealable, [data-reveal]').forEach(el => el.classList
+          +.add('is-revealed'));
+      142 +    }
+      143 +
+      144 +    // 7. Resize debounced — ScrollTrigger refresh
+      145 +    if (hasScrollTrigger) {
+      146 +      let resizeTimer;
+      147 +      window.addEventListener('resize', () => {
+      148 +        clearTimeout(resizeTimer);
+      149 +        resizeTimer = setTimeout(() => window.ScrollTrigger.refresh(), 200);
+      150 +      });
+      151 +    }
+      152 +  }
+      153  })();
+
+⏺ Now Task 6 — verifica finale. I'll run the WP-CLI / curl checks but expect Docker may or may not be
+  running.
+
+⏺ Bash(docker compose ps 2>&1 | head -20)
+  ⎿  NAME           IMAGE                       COMMAND                  SERVICE      CREATED        STA
+     TUS                  PORTS
+     saltelli-db    mysql:8.0                   "docker-entrypoint.s…"   db           28 hours ago   Up
+     … +5 lines (ctrl+o to expand)
+  ⎿  Allowed by auto mode classifier
+
+⏺ Stack up. Running the verifica suite.
+
+⏺ Bash(docker compose run --rm wpcli theme list --status=active 2>&1 | tail -5)
+  ⎿   Container saltelli-db Healthy
+      Container saltelli-wp-wpcli-run-fdfc25338662 Creating
+      Container saltelli-wp-wpcli-run-fdfc25338662 Created
+     … +2 lines (ctrl+o to expand)
+  ⎿  Allowed by auto mode classifier
+
+⏺ Bash(docker exec saltelli-wp tail -20 /var/www/html/wp-content/debug.log 2>/dev/null || echo "no
+      debug.log")
+  ⎿  no debug.log
+  ⎿  Allowed by auto mode classifier
+
+⏺ Bash(for f in tokens.css base.css components.css sections.css; do
+        echo -n "css/$f → "; curl -sI "http://localhost:8080/wp-content/themes/saltelli/assets/css/$f" |…)
+  ⎿  css/tokens.css → HTTP/1.1 200 OK
+     css/base.css → HTTP/1.1 200 OK
+     css/components.css → HTTP/1.1 200 OK
+     … +2 lines (ctrl+o to expand)
+  ⎿  Allowed by auto mode classifier
+
+⏺ All 5 assets return 200. Now CSS variables presence.
+
+⏺ Bash(curl -s http://localhost:8080/ | grep -E "(saltelli-tokens|saltelli-base|saltelli-components|saltelli-
+      sections|saltelli-gsap|saltelli-lenis|saltelli-main)" | he…)
+  ⎿  <link rel="stylesheet" id="saltelli-tokens-css" href="http://localhost:8080/wp-content/themes/salte
+     lli/assets/css/tokens.css?ver=0.1.0-scaffold" media="all">
+     <link rel="stylesheet" id="saltelli-base-css" href="http://localhost:8080/wp-content/themes/saltell
+     … +21 lines (ctrl+o to expand)
+
+⏺ All 4 CSS + 5 JS handles present in <head>/footer with proper deps and defer.
+
+⏺ Bash(curl -s http://localhost:8080/wp-content/themes/saltelli/assets/css/tokens.css | grep -E
+      "(font-display|--background|--primary)" | head -5)
+  ⎿    --background: #FAFAF8;
+       --primary: #1B2B4B;
+       --font-display: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+     … +2 lines (ctrl+o to expand)
+
+⏺ Bash(curl -s -o /dev/null -w "homepage HTTP %{http_code}\n" http://localhost:8080/
+      curl -s http://localhost:8080/ 2>&1 | grep -ciE "fatal|warning:|notice:" | xargs -…)
+  ⎿  homepage HTTP 200
+     fatal/warn/notice count in homepage HTML: 0
+  ⎿  Allowed by auto mode classifier
+
+⏺ Bash(git status --short && echo "---" && git diff --stat)
+  ⎿   M bin/launch-tmux-agents.sh
+      M wp-content/themes/saltelli/assets/css/base.css
+      M wp-content/themes/saltelli/assets/css/tokens.css
+     … +19 lines (ctrl+o to expand)
+
+⏺ Quick sanity check: do Theme Architect's templates use my class names (.sl-root, .sl-hero, etc.)?
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+⏺ There's class-name divergence with Theme Architect's templates (.sl-hero__word vs my .sl-word,
+  [data-scrolled] attr vs .is-scrolled, .sl-header__burger, .sl-header__mobile). I'll add a compat shim to
+  sections.css so both conventions work without touching PHP — and flag in report.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+⏺ Substantial naming divergence with Theme Architect. I'll append a compat shim to sections.css mapping Theme
+   Architect's actual classes to my styles — defensive, doesn't touch PHP.
+
+  Read 1 file (ctrl+o to expand)
+
+⏺ Update(wp-content/themes/saltelli/assets/css/sections.css)
+  ⎿  Added 494 lines, removed 1 line
+       832  }
+       833
+       834  /* =========================================================
+       835 - * 10. WhatsApp mini editorial — visibile solo mobile
+       835 + * COMPAT SHIM — Theme Architect templates
+       836 + * Mappa le classi reali usate in front-page.php / header.php
+       837 + * sulle stesse regole. Da consolidare in una passata di unificazione.
+       838   * ========================================================= */
+       839 +
+       840 +/* Header — burger / mobile / scrolled state */
+       841 +.sl-header[data-scrolled="true"] {
+       842 +  background: var(--background);
+       843 +  border-bottom-color: var(--border);
+       844 +}
+       845 +.sl-header__brand-name {
+       846 +  font-family: var(--font-display);
+       847 +  font-size: 17px;
+       848 +  color: var(--primary);
+       849 +  letter-spacing: -0.01em;
+       850 +  line-height: 1.1;
+       851 +}
+       852 +.sl-header__burger {
+       853 +  background: none;
+       854 +  border: 0;
+       855 +  padding: 4px;
+       856 +  cursor: pointer;
+       857 +  display: inline-flex;
+       858 +  flex-direction: column;
+       859 +  justify-content: center;
+       860 +  gap: 6px;
+       861 +}
+       862 +.sl-header__burger-line {
+       863 +  display: block;
+       864 +  width: 24px;
+       865 +  height: 1px;
+       866 +  background: var(--text);
+       867 +}
+       868 +.sl-header__mobile {
+       869 +  display: none;
+       870 +  position: fixed;
+       871 +  inset: 60px 0 0 0;
+       872 +  background: var(--background);
+       873 +  z-index: 40;
+       874 +  padding: 32px 20px;
+       875 +  border-top: 1px solid var(--border);
+       876 +}
+       877 +.sl-header__mobile[hidden] { display: none; }
+       878 +.sl-header__mobile.is-open,
+       879 +.sl-header__mobile:not([hidden]) { display: block; }
+       880 +.sl-header__mobile-menu {
+       881 +  list-style: none;
+       882 +  margin: 0;
+       883 +  padding: 0;
+       884 +}
+       885 +.sl-header__mobile-menu a {
+       886 +  display: block;
+       887 +  padding: 16px 0;
+       888 +  border-bottom: 1px solid var(--border);
+       889 +  font-family: var(--font-display);
+       890 +  font-size: 28px;
+       891 +  color: var(--primary);
+       892 +  letter-spacing: -0.01em;
+       893 +}
+       894 +@media (min-width: 1024px) {
+       895 +  .sl-header__burger { display: none; }
+       896 +  .sl-header__brand-name { font-size: 22px; }
+       897 +}
+       898 +
+       899 +/* Hero — word reveal alt + subheadline alt */
+       900 +.sl-hero__inner {
+       901 +  display: flex;
+       902 +  flex-direction: column;
+       903 +  gap: 32px;
+       904 +  width: 100%;
+       905 +}
+       906 +.sl-hero__main { display: flex; flex-direction: column; }
+       907 +.sl-hero__word {
+       908 +  display: inline-block;
+       909 +  margin-right: 12px;
+       910 +  opacity: 0;
+       911 +  transform: translateY(30px);
+       912 +  transition:
+       913 +    opacity 700ms var(--ease-editorial),
+       914 +    transform 700ms var(--ease-editorial);
+       915 +}
+       916 +.sl-hero__word.is-revealed { opacity: 1; transform: translateY(0); }
+       917 +.sl-hero__word:nth-child(2) { transition-delay: 80ms; }
+       918 +.sl-hero__word:nth-child(3) { transition-delay: 160ms; }
+       919 +.sl-hero__word:nth-child(4) { transition-delay: 240ms; }
+       920 +.sl-hero__subheadline {
+       921 +  font-family: var(--font-display);
+       922 +  font-size: 17px;
+       923 +  font-style: italic;
+       924 +  font-weight: 400;
+       925 +  line-height: 1.5;
+       926 +  color: var(--text);
+       927 +  margin-bottom: 40px;
+       928 +  max-width: 44ch;
+       929 +}
+       930 +.sl-hero__colophon-grid {
+       931 +  display: grid;
+       932 +  grid-template-columns: 1fr;
+       933 +  gap: 24px;
+       934 +  font-size: 13px;
+       935 +  line-height: 1.7;
+       936 +}
+       937 +.sl-hero__colophon-item {
+       938 +  display: grid;
+       939 +  gap: 6px;
+       940 +}
+       941 +.sl-hero__scroll {
+       942 +  display: none;
+       943 +}
+       944 +@media (min-width: 1024px) {
+       945 +  .sl-hero__inner {
+       946 +    display: grid;
+       947 +    grid-template-columns: 8fr 4fr;
+       948 +    gap: 64px;
+       949 +    align-items: start;
+       950 +  }
+       951 +  .sl-hero__colophon {
+       952 +    align-self: end;
+       953 +    border-left: 1px solid var(--border);
+       954 +    padding-left: 32px;
+       955 +  }
+       956 +  .sl-hero__word {
+       957 +    margin-right: 24px;
+       958 +    transform: translateY(40px);
+       959 +  }
+       960 +  .sl-hero__subheadline { font-size: 22px; margin-bottom: 64px; }
+       961 +  .sl-hero__scroll {
+       962 +    display: flex;
+       963 +    align-items: center;
+       964 +    gap: 12px;
+       965 +    margin-top: 64px;
+       966 +  }
+       967 +  .sl-hero__scroll-line {
+       968 +    display: block;
+       969 +    width: 1px;
+       970 +    height: 32px;
+       971 +    background: var(--text-muted);
+       972 +  }
+       973 +}
+       974 +
+       975 +/* Section head + title (usato da front-page.php) */
+       976 +.sl-section-head {
+       977 +  display: grid;
+       978 +  gap: 16px;
+       979 +  margin-bottom: 32px;
+       980 +}
+       981 +.sl-section-title {
+       982 +  font-size: 36px;
+       983 +  letter-spacing: -0.02em;
+       984 +  line-height: 1.1;
+       985 +  font-family: var(--font-display);
+       986 +  color: var(--primary);
+       987 +  margin: 0;
+       988 +  font-weight: 400;
+       989 +}
+       990 +@media (min-width: 768px) {
+       991 +  .sl-section-head {
+       992 +    grid-template-columns: auto 1fr;
+       993 +    gap: 32px;
+       994 +    align-items: baseline;
+       995 +    margin-bottom: 48px;
+       996 +  }
+       997 +  .sl-section-title { font-size: clamp(40px, 5vw, 72px); }
+       998 +}
+       999 +
+      1000 +/* Areas — filter buttons & list (template naming) */
+      1001 +.sl-areas__filter {
+      1002 +  background: none;
+      1003 +  border: 0;
+      1004 +  cursor: pointer;
+      1005 +  padding: 4px 0;
+      1006 +  color: var(--text-muted);
+      1007 +  border-bottom: 1px solid transparent;
+      1008 +  font-family: var(--font-mono);
+      1009 +  font-size: 12px;
+      1010 +  letter-spacing: 0.08em;
+      1011 +  text-transform: uppercase;
+      1012 +  transition: color var(--dur-fast) var(--ease-editorial),
+      1013 +              border-color var(--dur-fast) var(--ease-editorial);
+      1014 +}
+      1015 +.sl-areas__filter.is-active,
+      1016 +.sl-areas__filter[aria-pressed="true"] {
+      1017 +  color: var(--primary);
+      1018 +  border-bottom-color: var(--accent);
+      1019 +}
+      1020 +.sl-areas__list {
+      1021 +  display: grid;
+      1022 +  grid-template-columns: 1fr;
+      1023 +}
+      1024 +.sl-area__preview {
+      1025 +  display: none;
+      1026 +}
+      1027 +.sl-area__preview-empty {
+      1028 +  color: var(--text-muted);
+      1029 +  font-size: 14px;
+      1030 +  line-height: 1.7;
+      1031 +  font-style: italic;
+      1032 +  font-family: var(--font-display);
+      1033 +}
+      1034 +@media (min-width: 768px) {
+      1035 +  .sl-areas__grid {
+      1036 +    display: grid;
+      1037 +    grid-template-columns: 8fr 4fr;
+      1038 +    gap: 64px;
+      1039 +    align-items: start;
+      1040 +  }
+      1041 +  .sl-area__preview {
+      1042 +    display: block;
+      1043 +    position: sticky;
+      1044 +    top: 120px;
+      1045 +    padding-top: 28px;
+      1046 +  }
+      1047 +}
+      1048 +
+      1049 +/* Studio — drop-cap helper */
+      1050 +.sl-studio__prose[data-drop-cap] > p:first-of-type::first-letter {
+      1051 +  font-family: var(--font-display);
+      1052 +  font-size: 60px;
+      1053 +  float: left;
+      1054 +  line-height: 0.85;
+      1055 +  margin-right: 12px;
+      1056 +  margin-top: 6px;
+      1057 +  color: var(--primary);
+      1058 +}
+      1059 +@media (min-width: 1024px) {
+      1060 +  .sl-studio__prose[data-drop-cap] > p:first-of-type::first-letter {
+      1061 +    font-size: 84px;
+      1062 +    margin-right: 16px;
+      1063 +    margin-top: 8px;
+      1064 +  }
+      1065 +}
+      1066 +.sl-studio__plate-placeholder {
+      1067 +  position: absolute;
+      1068 +  inset: 0;
+      1069 +  display: flex;
+      1070 +  align-items: center;
+      1071 +  justify-content: center;
+      1072 +  background: var(--surface);
+      1073 +}
+      1074 +.sl-studio__plate {
+      1075 +  position: relative;
+      1076 +  margin-top: 40px;
+      1077 +  height: 240px;
+      1078 +  background: var(--surface);
+      1079 +  border: 1px solid var(--border);
+      1080 +}
+      1081 +.sl-studio__plate img {
+      1082 +  width: 100%;
+      1083 +  height: 100%;
+      1084 +  object-fit: cover;
+      1085 +}
+      1086 +.sl-studio__plate-tl { position: absolute; top: 12px; left: 16px; }
+      1087 +.sl-studio__plate-br { position: absolute; bottom: 12px; right: 16px; }
+      1088 +.sl-studio__plate-center { display: grid; gap: 4px; text-align: center; }
+      1089 +.sl-studio__plate-line {
+      1090 +  font-family: var(--font-display);
+      1091 +  font-size: 18px;
+      1092 +  font-style: italic;
+      1093 +  color: var(--text-muted);
+      1094 +}
+      1095 +@media (min-width: 1024px) {
+      1096 +  .sl-studio__plate { margin-top: 96px; height: 480px; }
+      1097 +  .sl-studio__plate-tl { top: 24px; left: 32px; }
+      1098 +  .sl-studio__plate-br { bottom: 24px; right: 32px; }
+      1099 +  .sl-studio__plate-line { font-size: 32px; }
+      1100 +}
+      1101 +
+      1102 +/* Team — Theme Architect naming */
+      1103 +.sl-team__grid {
+      1104 +  display: grid;
+      1105 +  gap: 56px;
+      1106 +}
+      1107 +.sl-team__lawyer { display: flex; flex-direction: column; }
+      1108 +.sl-team__lawyer:nth-child(odd) { margin-right: 32px; }
+      1109 +.sl-team__lawyer:nth-child(even) { margin-left: 32px; }
+      1110 +.sl-team__portrait {
+      1111 +  display: block;
+      1112 +  aspect-ratio: 3 / 4;
+      1113 +  background: linear-gradient(135deg, #c8c5be 0%, #6e6c66 100%);
+      1114 +  margin-bottom: 16px;
+      1115 +  position: relative;
+      1116 +  border: 1px solid var(--border);
+      1117 +  overflow: hidden;
+      1118 +  filter: grayscale(1) contrast(1.05);
+      1119 +  transition:
+      1120 +    filter 600ms var(--ease-editorial),
+      1121 +    background 600ms var(--ease-editorial);
+      1122 +}
+      1123 +.sl-team__lawyer:hover .sl-team__portrait,
+      1124 +.sl-team__portrait:hover {
+      1125 +  filter: grayscale(0);
+      1126 +  background: linear-gradient(135deg, #d4c8b0 0%, #8a7a5e 100%);
+      1127 +}
+      1128 +.sl-team__portrait img {
+      1129 +  width: 100%;
+      1130 +  height: 100%;
+      1131 +  object-fit: cover;
+      1132 +  display: block;
+      1133 +}
+      1134 +.sl-team__placeholder {
+      1135 +  position: absolute;
+      1136 +  bottom: 12px;
+      1137 +  left: 12px;
+      1138 +  color: rgba(255, 255, 255, 0.85);
+      1139 +}
+      1140 +.sl-team__role { margin-bottom: 6px; font-size: 10px; }
+      1141 +.sl-team__name {
+      1142 +  font-family: var(--font-display);
+      1143 +  font-size: 26px;
+      1144 +  line-height: 1.1;
+      1145 +  color: var(--primary);
+      1146 +  margin: 0 0 12px;
+      1147 +  letter-spacing: -0.02em;
+      1148 +  font-weight: 400;
+      1149 +}
+      1150 +.sl-team__name a { color: inherit; }
+      1151 +.sl-team__specs {
+      1152 +  display: flex;
+      1153 +  gap: 6px;
+      1154 +  flex-wrap: wrap;
+      1155 +  list-style: none;
+      1156 +  margin: 0;
+      1157 +  padding: 0;
+      1158 +}
+      1159 +.sl-team__specs li {
+      1160 +  font-family: var(--font-mono);
+      1161 +  font-size: 10px;
+      1162 +  letter-spacing: 0.06em;
+      1163 +  text-transform: uppercase;
+      1164 +  color: var(--text-muted);
+      1165 +  border: 1px solid var(--border);
+      1166 +  padding: 4px 8px;
+      1167 +}
+      1168 +@media (min-width: 1024px) {
+      1169 +  .sl-team__grid {
+      1170 +    grid-template-columns: repeat(12, 1fr);
+      1171 +    gap: 32px;
+      1172 +    row-gap: 96px;
+      1173 +  }
+      1174 +  .sl-team__lawyer { margin: 0; }
+      1175 +  .sl-team__lawyer:nth-child(odd),
+      1176 +  .sl-team__lawyer:nth-child(even) { margin: 0; }
+      1177 +  .sl-team__lawyer:nth-child(1) { grid-column: 1 / span 5; }
+      1178 +  .sl-team__lawyer:nth-child(2) { grid-column: 7 / span 5; margin-top: 96px; }
+      1179 +  .sl-team__lawyer:nth-child(3) { grid-column: 2 / span 5; margin-top: 64px; }
+      1180 +  .sl-team__lawyer:nth-child(4) { grid-column: 8 / span 4; margin-top: 32px; }
+      1181 +  .sl-team__portrait { margin-bottom: 24px; }
+      1182 +  .sl-team__role { margin-bottom: 8px; font-size: 12px; }
+      1183 +  .sl-team__name { font-size: 36px; margin-bottom: 16px; }
+      1184 +  .sl-team__specs { gap: 8px; }
+      1185 +  .sl-team__specs li { font-size: 11px; padding: 5px 10px; }
+      1186 +}
+      1187 +
+      1188 +/* Cases — Theme Architect naming */
+      1189 +.sl-cases__list {
+      1190 +  list-style: none;
+      1191 +  margin: 0;
+      1192 +  padding: 0;
+      1193 +}
+      1194 +.sl-cases__row {
+      1195 +  display: grid;
+      1196 +  grid-template-columns: 1fr;
+      1197 +  gap: 12px;
+      1198 +  padding: 24px 0;
+      1199 +  border-bottom: 1px solid var(--border);
+      1200 +}
+      1201 +.sl-cases__id { font-size: 10px; }
+      1202 +.sl-cases__desc {
+      1203 +  font-size: 17px;
+      1204 +  font-family: var(--font-display);
+      1205 +  line-height: 1.4;
+      1206 +  color: var(--primary);
+      1207 +  font-style: italic;
+      1208 +  margin: 0;
+      1209 +}
+      1210 +.sl-cases__outcome {
+      1211 +  font-family: var(--font-display);
+      1212 +  font-size: 18px;
+      1213 +  color: var(--accent);
+      1214 +  letter-spacing: -0.01em;
+      1215 +}
+      1216 +@media (min-width: 1024px) {
+      1217 +  .sl-cases__row {
+      1218 +    grid-template-columns: 200px 1fr 200px;
+      1219 +    gap: 48px;
+      1220 +    padding: 32px 0;
+      1221 +    align-items: baseline;
+      1222 +  }
+      1223 +  .sl-cases__desc { font-size: 20px; }
+      1224 +  .sl-cases__outcome { font-size: 24px; text-align: right; }
+      1225 +}
+      1226 +
+      1227 +/* Press — Theme Architect naming */
+      1228 +.sl-press__outlets {
+      1229 +  list-style: none;
+      1230 +  margin: 0;
+      1231 +  padding: 0;
+      1232 +  display: grid;
+      1233 +  gap: 12px;
+      1234 +}
+      1235 +.sl-press__outlet {
+      1236 +  font-family: var(--font-display);
+      1237 +  font-size: 22px;
+      1238 +  color: var(--text);
+      1239 +  font-style: italic;
+      1240 +  border-bottom: 1px solid var(--border);
+      1241 +  padding-bottom: 12px;
+      1242 +}
+      1243 +@media (min-width: 1024px) {
+      1244 +  .sl-press__outlets {
+      1245 +    display: flex;
+      1246 +    gap: 48px;
+      1247 +    flex-wrap: wrap;
+      1248 +    align-items: center;
+      1249 +  }
+      1250 +  .sl-press__outlet {
+      1251 +    font-size: 18px;
+      1252 +    border: 0;
+      1253 +    padding: 0;
+      1254 +  }
+      1255 +}
+      1256 +
+      1257 +/* Contact — Theme Architect naming */
+      1258 +.sl-contact__title { letter-spacing: -0.025em; }
+      1259 +.sl-contact__big {
+      1260 +  font-family: var(--font-display);
+      1261 +  font-size: 22px;
+      1262 +  line-height: 1.3;
+      1263 +  color: var(--primary);
+      1264 +  word-break: break-word;
+      1265 +  margin: 0;
+      1266 +}
+      1267 +.sl-contact__big a { color: inherit; }
+      1268 +.sl-contact__cta { margin-top: 48px; }
+      1269 +@media (min-width: 1024px) {
+      1270 +  .sl-contact__big { font-size: 24px; }
+      1271 +  .sl-contact__cta { margin-top: 96px; padding-left: 20%; }
+      1272 +}
+      1273 +
+      1274 +/* Site footer (footer.php usa naming legacy) */
+      1275 +.site-footer {
+      1276 +  background: var(--primary);
+      1277 +  color: var(--background);
+      1278 +  padding: 48px 20px 24px;
+      1279 +  margin-top: 64px;
+      1280 +}
+      1281 +.site-footer .container {
+      1282 +  display: grid;
+      1283 +  gap: 40px;
+      1284 +}
+      1285 +.site-footer h3 {
+      1286 +  color: rgba(255, 255, 255, 0.6);
+      1287 +  font-family: var(--font-mono);
+      1288 +  font-size: 11px;
+      1289 +  letter-spacing: 0.08em;
+      1290 +  text-transform: uppercase;
+      1291 +  font-weight: 400;
+      1292 +  margin: 0 0 12px;
+      1293 +}
+      1294 +.site-footer .footer-col p {
+      1295 +  font-size: 13px;
+      1296 +  line-height: 1.85;
+      1297 +  opacity: 0.85;
+      1298 +  margin: 0;
+      1299 +}
+      1300 +.site-footer .footer-col a { color: inherit; }
+      1301 +.site-footer .menu--footer {
+      1302 +  list-style: none;
+      1303 +  margin: 0;
+      1304 +  padding: 0;
+      1305 +  font-size: 13px;
+      1306 +  line-height: 2;
+      1307 +  opacity: 0.85;
+      1308 +}
+      1309 +.site-footer .copyright {
+      1310 +  margin-top: 32px;
+      1311 +  padding-top: 16px;
+      1312 +  border-top: 1px solid rgba(255, 255, 255, 0.15);
+      1313 +  font-family: var(--font-mono);
+      1314 +  font-size: 10px;
+      1315 +  letter-spacing: 0.08em;
+      1316 +  text-transform: uppercase;
+      1317 +  opacity: 0.55;
+      1318 +}
+      1319 +@media (min-width: 1024px) {
+      1320 +  .site-footer { padding: 96px var(--container-pad) 32px; }
+      1321 +  .site-footer .container {
+      1322 +    grid-template-columns: 2fr 3fr 2fr 2fr;
+      1323 +    gap: 64px;
+      1324 +  }
+      1325 +}
+      1326 +
+      1327 +/* =========================================================
+      1328 + * WhatsApp mini editorial — visibile solo mobile
+      1329 + * ========================================================= */
+      1330  .sl-whatsapp {
+      1331    position: fixed;
+      1332    bottom: 16px;
+
+⏺ Also update main.js to support the actual class names from templates (.sl-hero__word, .sl-header__burger,
+  [data-scrolled], [data-split-reveal]).
+
+⏺ Update(wp-content/themes/saltelli/assets/js/main.js)
+  ⎿  Added 42 lines, removed 21 lines
+       62        }
+       63      }
+       64
+       65 -    // 2. Header solid-on-scroll
+       65 +    // 2. Header solid-on-scroll — supporta sia class .is-scrolled sia attr [data-scrolled]
+       66      const header = document.querySelector('.sl-header');
+       67      if (header) {
+       68        const onScroll = () => {
+       69          const y = window.scrollY || window.pageYOffset || 0;
+       70 -        header.classList.toggle('is-scrolled', y > 80);
+       70 +        const scrolled = y > 80;
+       71 +        header.classList.toggle('is-scrolled', scrolled);
+       72 +        header.setAttribute('data-scrolled', scrolled ? 'true' : 'false');
+       73        };
+       74        window.addEventListener('scroll', onScroll, { passive: true });
+       75        onScroll();
+       76      }
+       77
+       76 -    // 3. Mobile menu toggle
+       77 -    const menuBtn = document.querySelector('.sl-header__menu-btn');
+       78 -    const mobileMenu = document.querySelector('.sl-mobile-menu');
+       78 +    // 3. Mobile menu toggle — supporta entrambi i naming
+       79 +    const menuBtn = document.querySelector('.sl-header__menu-btn, .sl-header__burger');
+       80 +    const mobileMenu = document.querySelector('.sl-mobile-menu, .sl-header__mobile');
+       81      if (menuBtn && mobileMenu) {
+       82        menuBtn.addEventListener('click', () => {
+       81 -        mobileMenu.classList.toggle('is-open');
+       83 +        const open = mobileMenu.hasAttribute('hidden') || !mobileMenu.classList.contains('i
+          +s-open');
+       84 +        mobileMenu.classList.toggle('is-open', open);
+       85 +        if (open) mobileMenu.removeAttribute('hidden');
+       86 +        else mobileMenu.setAttribute('hidden', '');
+       87 +        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+       88        });
+       89      }
+       90
+       91      // Reduced motion: lascia il CSS gestire la headline (fallback class)
+       92      if (reduced) {
+       87 -      document.querySelectorAll('.sl-hero__headline .sl-word').forEach(w => w.classList.add
+          -('is-revealed'));
+       93 +      document.querySelectorAll('.sl-hero__headline .sl-word, .sl-hero__headline .sl-hero__
+          +word').forEach(w => w.classList.add('is-revealed'));
+       94        document.querySelectorAll('.sl-revealable').forEach(el => el.classList.add('is-reveal
+           ed'));
+       95        return;
+       96      }
+       97
+       92 -    // 4. Hero headline reveal
+       93 -    const heroHeadline = document.querySelector('.sl-hero__headline');
+       98 +    // 4. Hero headline reveal — supporta sia .sl-word sia .sl-hero__word + [data-split-rev
+          +eal]
+       99 +    const heroHeadline = document.querySelector('.sl-hero__headline, [data-split-reveal]');
+      100      if (heroHeadline) {
+       95 -      if (!isMobile && hasGsap && hasSplitText) {
+       96 -        const split = new window.SplitText(heroHeadline, { type: 'words' });
+       97 -        window.gsap.from(split.words, {
+       98 -          yPercent: 60,
+       99 -          opacity: 0,
+      100 -          duration: 0.7,
+      101 -          ease: 'power2.out',
+      102 -          stagger: 0.08,
+      103 -          delay: 0.1,
+      104 -        });
+      101 +      const wordSel = '.sl-word, .sl-hero__word';
+      102 +      const wordEls = heroHeadline.querySelectorAll(wordSel);
+      103 +      if (!isMobile && hasGsap) {
+      104 +        if (wordEls.length) {
+      105 +          // Parole già pre-segmentate dal template — anima quelle
+      106 +          window.gsap.from(wordEls, {
+      107 +            yPercent: 60,
+      108 +            opacity: 0,
+      109 +            duration: 0.7,
+      110 +            ease: 'power2.out',
+      111 +            stagger: 0.08,
+      112 +            delay: 0.1,
+      113 +            onComplete: () => wordEls.forEach(w => w.classList.add('is-revealed')),
+      114 +          });
+      115 +        } else if (hasSplitText) {
+      116 +          const split = new window.SplitText(heroHeadline, { type: 'words' });
+      117 +          window.gsap.from(split.words, {
+      118 +            yPercent: 60,
+      119 +            opacity: 0,
+      120 +            duration: 0.7,
+      121 +            ease: 'power2.out',
+      122 +            stagger: 0.08,
+      123 +            delay: 0.1,
+      124 +          });
+      125 +        }
+      126        } else {
+      106 -        // Mobile o no-SplitText: usa il fallback CSS via class
+      107 -        heroHeadline.querySelectorAll('.sl-word').forEach(w => w.classList.add('is-revealed
+          -'));
+      127 +        // Mobile o no-GSAP: usa il fallback CSS via class
+      128 +        wordEls.forEach(w => w.classList.add('is-revealed'));
+      129        }
+      130      }
+      131
+
+⏺ Re-run the asset check after edits and verify no PHP errors leaked.
+
+⏺ Bash(for f in tokens.css base.css components.css sections.css; do
+        echo -n "css/$f → "; curl -sI "http://localhost:8080/wp-content/themes/saltelli/assets/css/$f" |…)
+  ⎿  Running in the background (↓ to manage)
+  ⎿  Allowed by auto mode classifier
+
+⏺ Bash(sleep 3 && cat /private/tmp/claude-501/-Users-aldosantoro-Desktop-DEV-saltelli-wp/13134e40-f013-44d8-8
+      f31-954df71e5175/tasks/bcizs97sn.output)
+  ⎿  css/tokens.css → HTTP/1.1 200 OK
+     css/base.css → HTTP/1.1 200 OK
+     css/components.css → HTTP/1.1 200 OK
+     … +4 lines (ctrl+o to expand)
+
+⏺ All green. CSS bytes after final shim:
+
+  Read 1 file (ctrl+o to expand)
+
+⏺ Tutto pronto. Ecco il report finale strutturato secondo le 5 voci richieste.
+
+  ---
+  📋 Report finale — Style & Animation Agent (SHIP MODE 24H)
+
+  1. Stato test Task 6
+
+  ┌────────────────────────────────────────────────────────────────────────┬─────────────────────────────┐
+  │                                 Check                                  │            Esito            │
+  ├────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
+  │ wp theme list --status=active → saltelli attivo                        │ ✅                          │
+  ├────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
+  │ debug.log no PHP fatal/warning/notice                                  │ ✅ (file non presente;      │
+  │                                                                        │ homepage HTML pulita)       │
+  ├────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
+  │ tokens.css → 200 OK                                                    │ ✅                          │
+  ├────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
+  │ base.css → 200 OK                                                      │ ✅                          │
+  ├────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
+  │ components.css → 200 OK                                                │ ✅                          │
+  ├────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
+  │ sections.css → 200 OK                                                  │ ✅                          │
+  ├────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
+  │ main.js → 200 OK                                                       │ ✅                          │
+  ├────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
+  │ Homepage HTTP 200                                                      │ ✅                          │
+  ├────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
+  │ 4 CSS handle + 5 JS handle (GSAP/ScrollTrigger/SplitText/Lenis/main)   │ ✅                          │
+  │ presenti in HTML con defer                                             │                             │
+  ├────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
+  │ CSS variables (--background, --primary, --font-display) presenti in    │ ✅                          │
+  │ tokens.css                                                             │                             │
+  └────────────────────────────────────────────────────────────────────────┴─────────────────────────────┘
+
+  2. File creati/modificati
+
+  Modificati
+  - wp-content/themes/saltelli/assets/css/tokens.css — sostituito scaffold con :root completo (Sessione 1) +
+  .sl-root reset; aggiunto blocco alias legacy (--color-bg, --space-*) per back-compat
+  - wp-content/themes/saltelli/assets/css/base.css — riscritto: font loading (Google Fonts via @import con
+  TODO WOFF2), reset globale, .sl-container, .sl-section, .sl-flow, headings di default,
+  prefers-reduced-motion override
+  - wp-content/themes/saltelli/assets/js/main.js — riscritto: Lenis (lerp 0.1, desktop-only),
+  GSAP+ScrollTrigger+SplitText init, hero word-reveal, sezioni reveal, header solid-on-scroll (.is-scrolled +
+   [data-scrolled]), mobile menu toggle, mobile-light branch, prefers-reduced-motion bail-out,
+  ScrollTrigger.refresh debounced
+  - wp-content/themes/saltelli/inc/enqueue.php — chain CSS tokens→base→components→sections; CDN GSAP 3.12.5 +
+   ScrollTrigger + SplitText + Lenis 1.1.13 con defer in footer; deps di saltelli-main; editor styles esteso
+
+  Creati
+  - wp-content/themes/saltelli/assets/css/components.css — .sl-mono, .sl-btn, .sl-link, .sl-area, .sl-acc
+  (estratto dai tokens Sessione 1)
+  - wp-content/themes/saltelli/assets/css/sections.css — 7 sezioni Frame 1 (header, hero, areas, studio,
+  team, cases, press, contact, footer) mobile-first con breakpoint @768/1024 + compat-shim Theme Architect
+
+  NON toccati (out of scope come da prompt): *.php template, inc/schema/*, inc/acf-json/*, lenis-init.js,
+  gsap-init.js (tenuti come stub legacy, possono essere rimossi in cleanup successivo).
+
+  3. Differenze prese rispetto al tokens.css di Claude Design
+
+  Nessuna modifica ai valori. Solo riorganizzazione strutturale come richiesto:
+
+  - :root { ... } + reset .sl-root rimangono in tokens.css
+  - I 5 component (.sl-mono, .sl-btn, .sl-link, .sl-area, .sl-acc) sono stati spostati 1:1 in components.css
+  - Aggiunto un blocco di alias legacy in tokens.css (--color-bg → --background, --space-3 → 12px, ecc.) per
+  non rompere base.css/template scaffold che usavano la naming v0
+  - Font loading: aggiunto @import Google Fonts come fallback temporaneo dichiarato (TODO Duccio per i WOFF2
+  self-hosted) — il blocco @font-face finale è già scritto, basta rimuovere il commento e droppare i file in
+  assets/fonts/
+
+  4. Note per Theme Architect
+
+  🔴 Blocker da risolvere — naming divergence
+  Il template front-page.php/header.php usa una naming convention diversa da quella del JSX di Sessione 1. Ho
+   aggiunto un compat-shim in fondo a sections.css per coprire entrambe, ma andrebbe consolidato:
+
+  ┌───────────────────────────────────────────┬────────────────────────────────────┬────────────────────┐
+  │               Template usa                │              JSX usa               │     Decisione      │
+  │                                           │                                    │    consigliata     │
+  ├───────────────────────────────────────────┼────────────────────────────────────┼────────────────────┤
+  │ body class="sl-root" ✅                   │ .sl-root                           │ OK — già allineato │
+  ├───────────────────────────────────────────┼────────────────────────────────────┼────────────────────┤
+  │                                           │                                    │ tenere             │
+  │ .sl-header__brand-name                    │ .sl-header__brand-title            │ __brand-name       │
+  Template usa: .sl-header__burger
+  JSX usa: .sl-header__menu-btn
+  Decisione consigliata: tenere __burger (template, più semantico)
+  ────────────────────────────────────────
+  Template usa: .sl-header__mobile
+  JSX usa: .sl-mobile-menu
+  Decisione consigliata: tenere __mobile (template)
+  ────────────────────────────────────────
+  Template usa: [data-scrolled="true"]
+  JSX usa: .is-scrolled
+  Decisione consigliata: il main.js ora setta entrambi — convergere su [data-scrolled]
+  ────────────────────────────────────────
+  Template usa: .sl-hero__word + [data-split-reveal]
+  JSX usa: .sl-word
+  Decisione consigliata: tenere .sl-hero__word (block-element)
+  ────────────────────────────────────────
+  Template usa: .sl-hero__subheadline
+  JSX usa: .sl-hero__lede
+  Decisione consigliata: tenere __subheadline (template)
+  ────────────────────────────────────────
+  Template usa: .sl-team__lawyer/__portrait/__name/__specs
+  JSX usa: .sl-lawyer/__portrait/__name/__specs
+  Decisione consigliata: tenere .sl-team__* (più consistente con altre sezioni)
+  ────────────────────────────────────────
+  Template usa: .sl-cases__list/__row/__id/__desc/__outcome
+  JSX usa: .sl-case/__id/__desc/__outcome
+  Decisione consigliata: tenere .sl-cases__row (parallelo a .sl-press__outlets)
+  ────────────────────────────────────────
+  Template usa: .sl-press__outlets/__outlet
+  JSX usa: .sl-press__list/__item
+  Decisione consigliata: tenere .sl-press__outlets (più chiaro)
+  ────────────────────────────────────────
+  Template usa: .sl-contact__big, .sl-contact__cta
+  JSX usa: .sl-contact__item-value, .sl-contact__cta-wrap
+  Decisione consigliata: tenere __big/__cta
+  ────────────────────────────────────────
+  Template usa: .sl-section-head + .sl-section-title
+  JSX usa: inline
+  Decisione consigliata: tenere — è una buona astrazione
+  ────────────────────────────────────────
+  Template usa: footer.php usa .site-footer + .footer-col legacy
+  JSX usa: mai progettato .sl-footer__*
+  Decisione consigliata: il mio .sl-footer__* non viene mai renderizzato; ho aggiunto styling per
+  .site-footer
+    legacy
+
+  Azione consigliata: dopo questa pass, una rapida unificazione (1 commit) per adottare la naming dei
+  template come canonica e rimuovere i blocchi duplicati nella prima parte di sections.css. Il compat-shim
+  oggi rende tutto funzionante ma è ridondante.
+
+  Altri punti:
+  - Il body deve avere class sl-root per attivare il reset scoped — già fatto in header.php ✅
+  - Il footer attuale è ancora lo scaffold legacy con .footer-col. Quando lo rifai in versione Sessione 1 (3
+  colonne dark navy), usa la naming .sl-footer__brand, .sl-footer__cols, .sl-footer__nav,
+  .sl-footer__areas-list, .sl-footer__legal — già stilati in sections.css
+  - header.php ha già un suo inline JS minimale per il burger toggle: il mio main.js lo gestisce nativamente,
+   valuta se rimuoverlo per evitare doppia sottoscrizione
+
+  5. Note per gli agent successivi
+
+  GEO Engineer
+  - Le animazioni JS defer non bloccano il rendering iniziale — buono per LCP. Lighthouse Performance
+  dovrebbe rimanere alto.
+  - Lenis è disabilitato su prefers-reduced-motion e su mobile (<768px), così non impatta INP/CLS in scenari
+  critici.
+  - Google Fonts via @import in base.css è temporaneo e penalizza Lighthouse: una volta caricati i WOFF2
+  self-hosted in assets/fonts/, rimuovere l'@import e attivare il blocco @font-face (già scritto,
+  commentato).
+
+  Tutti
+  - L'header reveal richiede markup con <h1 class="sl-hero__headline" data-split-reveal> e parole
+  pre-segmentate in <span class="sl-hero__word"> — il template attuale è già conforme ✅
+  - Per qualunque elemento da rivelare in scroll, aggiungere class sl-revealable o attributo data-reveal — il
+   main.js fa il pickup automatico via ScrollTrigger
+  - Filtri aree (.sl-areas__filter) hanno styling pronto per [aria-pressed="true"] e .is-active — il JS di
+  filtraggio non è ancora stato scritto (out of scope di questo prompt: TODO una volta firmato il behavior)
+  - Hover preview area pratica (.sl-area__preview) ha styling base ma il binding mouseenter/mouseleave +
+  popolamento da data-area-lead non è ancora scritto — appartiene a una pass successiva
+
+  Verifica visuale finale: il rendering della homepage va testato in browser su http://localhost:8080/ per
+  validare visualmente il design. Lighthouse run consigliato dopo che GEO Engineer ha finito le sue
+  ottimizzazioni.
+
+  ---
+  Mi fermo qui. Aspetto istruzioni.
+
+✻ Worked for 12m 58s · 1 shell still running
+
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ 
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  ⏵⏵ auto mode on · 1 shell · ↓ to manage
+

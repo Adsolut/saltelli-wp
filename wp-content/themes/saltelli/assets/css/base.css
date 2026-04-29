@@ -1,51 +1,91 @@
 /*
- * Saltelli — base.
- * Reset minimale + tipografia di partenza + layout container.
+ * Saltelli — base layer.
+ * Caricato dopo tokens.css. Si occupa di:
+ *  - font loading (Google Fonts fallback finché i WOFF2 self-hosted non arrivano)
+ *  - reset globale leggero (fuori da .sl-root, per compatibilità wp-admin bar / plugin)
+ *  - container & section utility
+ *  - prose helpers
+ *  - reduced-motion override
  *
- * TODO Style & Animation agent: sostituire con il sistema definitivo
- * (typographic scale, layout system, dark/light, components/) una volta
- * firmato il design. Questo file è solo per non far apparire pagine
- * completamente unstyled in scaffold.
+ * NB: i tokens (CSS variables + .sl-root reset) vivono in tokens.css.
+ *     I components (.sl-btn, .sl-area, ...) vivono in components.css.
  */
 
-/* ---- Reset ---- */
+/* TODO Duccio: caricare i WOFF2 in assets/fonts/ e attivare il blocco @font-face sotto.
+   Per ora fallback a Google Fonts con display=swap, così la pagina non resta unstyled. */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@400;700&family=JetBrains+Mono:wght@400&display=swap");
+
+/*
+@font-face {
+  font-family: "Playfair Display";
+  src: url("../fonts/playfair-display-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("../fonts/playfair-display-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../fonts/dm-sans-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../fonts/dm-sans-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../fonts/dm-sans-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+/* ---- Reset globale leggero ---- */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; tab-size: 4; }
 body {
   margin: 0;
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--background);
+  color: var(--text);
   font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1, "liga" 1;
 }
 img, svg, video { max-width: 100%; height: auto; display: block; }
-a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
-a:hover { color: var(--color-accent); }
-
-/* ---- Tipografia minima ---- */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  color: var(--color-primary);
-  line-height: 1.2;
-  margin: 0 0 var(--space-4);
-  font-weight: 600;
-}
-h1 { font-size: clamp(2rem, 5vw, 3.25rem); }
-h2 { font-size: clamp(1.5rem, 3.5vw, 2.25rem); }
-h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
-
-p { margin: 0 0 var(--space-4); }
 
 /* ---- Container ---- */
-.container, .saltelli-container {
+.sl-container,
+.container,
+.saltelli-container {
   width: 100%;
   max-width: var(--container-max);
   margin-inline: auto;
-  padding-inline: var(--container-padding);
+  padding-inline: var(--container-pad);
 }
+
+/* ---- Section vertical rhythm ---- */
+.sl-section {
+  padding-block: clamp(64px, 10vw, 128px);
+}
+
+/* ---- Prose flow (ritmo verticale) ---- */
+.sl-flow > * + * { margin-top: 1.5em; }
 
 /* ---- Skip link a11y ---- */
 .skip-link {
@@ -57,11 +97,42 @@ p { margin: 0 0 var(--space-4); }
   left: 1rem;
   top: 1rem;
   z-index: 9999;
-  background: var(--color-primary);
-  color: var(--color-bg);
-  padding: var(--space-2) var(--space-4);
+  background: var(--primary);
+  color: var(--background);
+  padding: var(--s-2) var(--s-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
 }
 
-/* ---- Site shell ---- */
-.site-header, .site-footer { padding-block: var(--space-6); }
-.site-main { padding-block: var(--space-12); min-height: 60vh; }
+/* ---- Headings di default (fuori .sl-root) ---- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--primary);
+  line-height: var(--lh-heading);
+  margin: 0 0 var(--s-3);
+  font-weight: 400;
+  letter-spacing: var(--ls-display);
+}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+
+p { margin: 0 0 var(--s-3); }
+
+a { color: var(--primary); text-decoration: none; }
+
+/* ---- Site shell (back-compat con scaffold di Theme Architect) ---- */
+.site-header, .site-footer { padding-block: var(--s-4); }
+.site-main { min-height: 60vh; }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

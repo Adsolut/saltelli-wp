@@ -14,6 +14,17 @@
       "new_lines": ""
     },
     {
+      "key": "field_saltelli_comp_lead_breve",
+      "label": "Lead breve (sticky preview)",
+      "name": "lead_breve",
+      "type": "textarea",
+      "instructions": "Sintesi di una riga (60-100 caratteri) mostrata nello sticky preview della homepage al hover sull'area. Usata anche come description in archive listing.",
+      "required": 0,
+      "maxlength": 160,
+      "rows": 2,
+      "new_lines": ""
+    },
+    {
       "key": "field_saltelli_comp_is_tier_1",
       "label": "Tier-1 deep cluster",
       "name": "is_tier_1_focus",

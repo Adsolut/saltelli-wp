@@ -1,0 +1,177 @@
+/*
+ * Studio Legale Saltelli & Partners — Components
+ * Estratto da .claude/knowledge/design/sessione-1/tokens.css (Sessione 1).
+ *
+ * Components: .sl-mono, .sl-btn, .sl-link, .sl-area, .sl-acc.
+ * Tutti scopati implicitamente dall'uso dentro .sl-root (vedi tokens.css).
+ */
+
+/* Mono utility */
+.sl-mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Editorial button: text + underline, NOT filled */
+.sl-btn {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  cursor: pointer;
+  position: relative;
+  letter-spacing: 0.01em;
+}
+.sl-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--text);
+  transform-origin: left;
+  transition:
+    transform var(--dur-base) var(--ease-editorial),
+    background var(--dur-base) var(--ease-editorial);
+}
+.sl-btn:hover::after {
+  background: var(--accent);
+  transform: scaleX(1);
+}
+.sl-btn .arrow {
+  display: inline-block;
+  transition: transform var(--dur-base) var(--ease-editorial);
+}
+.sl-btn:hover .arrow { transform: translateX(6px); }
+
+.sl-btn--primary { color: var(--primary); }
+.sl-btn--primary::after { background: var(--primary); }
+
+/* Editorial link */
+.sl-link {
+  color: var(--text);
+  position: relative;
+  transition: color var(--dur-fast) var(--ease-editorial);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+}
+.sl-link:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* List item — area di pratica */
+.sl-area {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: baseline;
+  gap: 32px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition:
+    transform var(--dur-fast) var(--ease-editorial),
+    padding-left var(--dur-fast) var(--ease-editorial);
+  position: relative;
+}
+.sl-area::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-editorial);
+}
+.sl-area:hover {
+  transform: translateX(8px);
+}
+.sl-area:hover::before { transform: scaleX(1); }
+
+.sl-area__num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.sl-area__title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.sl-area--tier1 .sl-area__title::first-letter {
+  color: var(--accent);
+}
+.sl-area__meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-editorial);
+}
+.sl-area:hover .sl-area__meta { opacity: 1; }
+
+/* Accordion */
+.sl-acc {
+  border-top: 1px solid var(--border);
+}
+.sl-acc__item {
+  border-bottom: 1px solid var(--border);
+}
+.sl-acc__btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 32px;
+  padding: 24px 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.5vw, 22px);
+  font-weight: 400;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+}
+.sl-acc__icon {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 400;
+  flex-shrink: 0;
+  transition: transform var(--dur-base) var(--ease-editorial);
+}
+.sl-acc__item[data-open="true"] .sl-acc__icon { transform: rotate(45deg); }
+.sl-acc__panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--dur-base) var(--ease-editorial);
+}
+.sl-acc__item[data-open="true"] .sl-acc__panel { max-height: 400px; }
+.sl-acc__inner {
+  padding: 0 0 28px 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text);
+  max-width: 60ch;
+}

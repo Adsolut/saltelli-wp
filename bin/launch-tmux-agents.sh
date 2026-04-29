@@ -91,11 +91,18 @@ tmux set-option -t "$SESSION" pane-border-status top
 tmux set-option -t "$SESSION" pane-border-format "#{?pane_active,#[reverse],}#{pane_index} · #{pane_title}#[default]"
 
 # ===== INVIA COMANDI AI PANE =====
+# IMPORTANTE: Il prompt va inviato in DUE step a Claude Code:
+#   1. send-keys del testo del prompt (no Enter finale)
+#   2. attesa breve perché Claude Code carichi l'editor input
+#   3. send-keys "Enter" come keystroke separata
+# Senza il secondo step, il prompt resta scritto in attesa di conferma manuale.
+
 # Pane 0 — Agent 1
 if [[ -n "$CLAUDE_CMD" ]]; then
     tmux send-keys -t "$SESSION:0.0" "echo '🎨 STYLE & ANIMATION AGENT — apro Claude Code...' && $CLAUDE_CMD" Enter
-    sleep 1
+    sleep 3  # tempo per Claude Code di mostrare l'input prompt
     tmux send-keys -t "$SESSION:0.0" "Leggi PROMPT_AGENT_1_STYLE_ANIMATION.md ed eseguilo. Quando hai finito, mostrami il report finale strutturato secondo le 5 voci richieste."
+    tmux send-keys -t "$SESSION:0.0" Enter
 else
     tmux send-keys -t "$SESSION:0.0" "echo 'Lancia manualmente Claude Code qui, poi incolla:' && echo 'Leggi PROMPT_AGENT_1_STYLE_ANIMATION.md ed eseguilo.'" Enter
 fi
@@ -103,8 +110,9 @@ fi
 # Pane 1 — Agent 2
 if [[ -n "$CLAUDE_CMD" ]]; then
     tmux send-keys -t "$SESSION:0.1" "echo '🏗  THEME ARCHITECT AGENT — apro Claude Code...' && $CLAUDE_CMD" Enter
-    sleep 1
+    sleep 3
     tmux send-keys -t "$SESSION:0.1" "Leggi PROMPT_AGENT_2_THEME_ARCHITECT.md ed eseguilo. Quando hai finito, mostrami il report finale strutturato secondo le 6 voci richieste."
+    tmux send-keys -t "$SESSION:0.1" Enter
 else
     tmux send-keys -t "$SESSION:0.1" "echo 'Lancia manualmente Claude Code qui, poi incolla:' && echo 'Leggi PROMPT_AGENT_2_THEME_ARCHITECT.md ed eseguilo.'" Enter
 fi
@@ -112,8 +120,9 @@ fi
 # Pane 2 — Agent 3
 if [[ -n "$CLAUDE_CMD" ]]; then
     tmux send-keys -t "$SESSION:0.2" "echo '🤖 GEO ENGINEER AGENT — apro Claude Code...' && $CLAUDE_CMD" Enter
-    sleep 1
+    sleep 3
     tmux send-keys -t "$SESSION:0.2" "Leggi PROMPT_AGENT_3_GEO_ENGINEER.md ed eseguilo. Quando hai finito, mostrami il report finale strutturato secondo le 6 voci richieste."
+    tmux send-keys -t "$SESSION:0.2" Enter
 else
     tmux send-keys -t "$SESSION:0.2" "echo 'Lancia manualmente Claude Code qui, poi incolla:' && echo 'Leggi PROMPT_AGENT_3_GEO_ENGINEER.md ed eseguilo.'" Enter
 fi

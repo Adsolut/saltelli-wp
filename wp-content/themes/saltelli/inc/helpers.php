@@ -305,3 +305,207 @@ function saltelli_attorney_linkedin($slug) {
     ];
     return $map[$slug] ?? '';
 }
+
+/**
+ * Fallback menu primario quando l'admin non ha ancora assegnato un menu alla location 'primary'.
+ * Usato anche dalla mobile menu copy.
+ */
+function saltelli_header_menu_fallback() {
+    $items = [
+        ['Studio',     '/lo-studio/'],
+        ['Avvocati',   '/avvocati/'],
+        ['Competenze', '/competenze/'],
+        ['Casi',       '/#casi'],
+        ['Editoriale', '/blog/'],
+        ['Contatti',   '/contatti/'],
+    ];
+    echo '<ul class="sl-header__menu">';
+    foreach ($items as $i) {
+        echo '<li class="menu-item"><a href="' . esc_url(home_url($i[1])) . '">' . esc_html($i[0]) . '</a></li>';
+    }
+    echo '</ul>';
+}
+
+/**
+ * Fallback footer "Lo Studio" quando il menu non è assegnato.
+ */
+function saltelli_footer_studio_fallback() {
+    $items = [
+        ['Lo studio', '/lo-studio/'],
+        ['Avvocati',  '/avvocati/'],
+        ['Casi',      '/#casi'],
+        ['Editoriale','/blog/'],
+        ['Contatti',  '/contatti/'],
+    ];
+    echo '<ul class="sl-footer__menu">';
+    foreach ($items as $i) {
+        echo '<li><a href="' . esc_url(home_url($i[1])) . '">' . esc_html($i[0]) . '</a></li>';
+    }
+    echo '</ul>';
+}
+
+/**
+ * Fallback footer "Aree" — popolato dal CPT competenza ordinato per menu_order.
+ */
+function saltelli_footer_aree_fallback() {
+    $posts = get_posts([
+        'post_type'   => 'competenza',
+        'numberposts' => 19,
+        'orderby'     => ['menu_order' => 'ASC', 'title' => 'ASC'],
+    ]);
+    if (empty($posts)) {
+        echo '<ul class="sl-footer__menu"><li><a href="' . esc_url(home_url('/competenze/')) . '">Tutte le aree</a></li></ul>';
+        return;
+    }
+    echo '<ul class="sl-footer__menu sl-footer__menu--aree">';
+    foreach ($posts as $p) {
+        echo '<li><a href="' . esc_url(get_permalink($p)) . '">' . esc_html(get_the_title($p)) . '</a></li>';
+    }
+    echo '</ul>';
+}
+
+/**
+ * Fallback footer "Legal".
+ */
+function saltelli_footer_legal_fallback() {
+    $items = [
+        ['Privacy',   '/privacy/'],
+        ['Cookie',    '/cookie/'],
+        ['Note legali', '/note-legali/'],
+    ];
+    echo '<ul class="sl-footer__menu">';
+    foreach ($items as $i) {
+        echo '<li><a href="' . esc_url(home_url($i[1])) . '">' . esc_html($i[0]) . '</a></li>';
+    }
+    echo '</ul>';
+}
+
+/**
+ * Wrapper per leggere campi ACF Options.
+ * Funziona sia con ACF Pro (true) che con ACF Free (degrada a default).
+ *
+ * @param string $name Nome campo.
+ * @param mixed $default Default se ACF/options non disponibile.
+ * @return mixed
+ */
+function saltelli_option($name, $default = null) {
+    if (!function_exists('get_field')) {
+        return $default;
+    }
+    $value = get_field($name, 'option');
+    if ($value === null || $value === '' || $value === false) {
+        return $default;
+    }
+    return $value;
+}
+
+/**
+ * Layout asimmetrico avvocati homepage (4 ritratti). Indicizzato per posizione (0-3).
+ * Replica esattamente i valori del homepage-desktop.jsx:
+ *   #0 Emiliano   col 1  span 5  offset 0
+ *   #1 Fabiana    col 7  span 5  offset 96
+ *   #2 Antonia    col 2  span 5  offset 64
+ *   #3 Stefano    col 8  span 4  offset 32
+ *
+ * @return array<int, array{col:int, span:int, offset:int}>
+ */
+function saltelli_team_grid_layout() {
+    return [
+        ['col' => 1, 'span' => 5, 'offset' => 0],
+        ['col' => 7, 'span' => 5, 'offset' => 96],
+        ['col' => 2, 'span' => 5, 'offset' => 64],
+        ['col' => 8, 'span' => 4, 'offset' => 32],
+    ];
+}
+
+/**
+ * Categoria tassonomia "tipo-area" leggibile (etichetta filtro pillole) di una competenza.
+ * Ritorna la prima term name oppure stringa vuota.
+ *
+ * @param int $post_id
+ * @return string
+ */
+function saltelli_competenza_category_label($post_id) {
+    $terms = get_the_terms($post_id, 'tipo-area');
+    if (is_wp_error($terms) || empty($terms)) {
+        return '';
+    }
+    return (string) $terms[0]->name;
+}
+
+/**
+ * Slug categoria competenza (utile per data-attribute filtro).
+ *
+ * @param int $post_id
+ * @return string
+ */
+function saltelli_competenza_category_slug($post_id) {
+    $terms = get_the_terms($post_id, 'tipo-area');
+    if (is_wp_error($terms) || empty($terms)) {
+        return '';
+    }
+    return (string) $terms[0]->slug;
+}
+
+/**
+ * Reading time stimato per un blog post (200 parole/min).
+ *
+ * @param int $post_id
+ * @return int Minuti.
+ */
+function saltelli_reading_time($post_id) {
+    $content = get_post_field('post_content', $post_id);
+    $words   = str_word_count(wp_strip_all_tags((string) $content));
+    return max(1, (int) ceil($words / 200));
+}
+
+/**
+ * Casi rappresentativi homepage — ritorna repeater ACF, fallback editoriale 4 casi.
+ *
+ * @return array<int, array{identifier:string, descrizione:string, outcome:string}>
+ */
+function saltelli_homepage_cases() {
+    $casi = saltelli_option('casi_rappresentativi_home', []);
+    if (is_array($casi) && !empty($casi)) {
+        $out = [];
+        foreach ($casi as $row) {
+            if (!empty($row['identifier']) && !empty($row['descrizione']) && !empty($row['outcome'])) {
+                $out[] = [
+                    'identifier'  => (string) $row['identifier'],
+                    'descrizione' => (string) $row['descrizione'],
+                    'outcome'     => (string) $row['outcome'],
+                ];
+            }
+        }
+        if (!empty($out)) {
+            return $out;
+        }
+    }
+    return [
+        ['identifier' => 'vs. AGE Riscossione · 2024', 'descrizione' => 'Annullamento di cartella esattoriale per importo superiore a 240.000 € a carico di società in liquidazione.', 'outcome' => 'Annullamento'],
+        ['identifier' => 'Cassazione · 2024',          'descrizione' => 'Conferma in Cassazione di sentenza favorevole in materia di licenziamento per giusta causa illegittimo.',                          'outcome' => 'Vittoria'],
+        ['identifier' => 'Tribunale di Napoli · 2023', 'descrizione' => 'Primo riconoscimento in Campania di trascrizione integrale di nascita di minore con due madri.',                                  'outcome' => 'Riconoscimento'],
+        ['identifier' => "Corte d'Appello · 2023",     'descrizione' => "Riforma di sentenza di primo grado in materia di accertamento sintetico, con riduzione dell'80% del dovuto.",                     'outcome' => 'Riforma'],
+    ];
+}
+
+/**
+ * Earned media outlets — ritorna repeater ACF, fallback editoriale.
+ *
+ * @return array<int, string>
+ */
+function saltelli_press_outlets() {
+    $outlets = saltelli_option('press_outlets', []);
+    if (is_array($outlets) && !empty($outlets)) {
+        $out = [];
+        foreach ($outlets as $row) {
+            if (!empty($row['nome'])) {
+                $out[] = (string) $row['nome'];
+            }
+        }
+        if (!empty($out)) {
+            return $out;
+        }
+    }
+    return ['Il Mattino', 'La Repubblica · Napoli', 'Il Sole 24 Ore', 'Diritto.it', 'Altalex', 'Camera Avvocati Napoli'];
+}

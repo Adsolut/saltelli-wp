@@ -13,6 +13,14 @@ if (!is_singular('post')) {
     return;
 }
 
+// Coabitazione: Yoast / Rank Math / AIOSEO emettono Article nel proprio
+// @graph (con WebPage isPartOf). Evitiamo duplicati: skippiamo il nostro
+// Article quando un plugin SEO è attivo. FAQPage e Person/Attorney NON
+// vengono emessi dai plugin, quindi quei partial restano sempre attivi.
+if (function_exists('saltelli_seo_plugin_active') && saltelli_seo_plugin_active()) {
+    return;
+}
+
 $post_id = get_the_ID();
 $url     = get_permalink($post_id);
 $title   = get_the_title($post_id);

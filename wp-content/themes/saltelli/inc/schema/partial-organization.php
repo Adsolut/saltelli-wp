@@ -171,6 +171,44 @@ $website = [
     ],
 ];
 
+/*
+ * Coabitazione plugin SEO.
+ *
+ * Yoast / Rank Math / AIOSEO emettono già Organization + WebSite come
+ * default (non disattivabile da template). Per evitare duplicati che
+ * confondono Google e i crawler AI, in presenza di un plugin SEO
+ * emettiamo SOLO il sotto-schema LegalService — che NESSUN plugin
+ * standard genera nativamente — come nodo standalone, mantenendo @id
+ * canonico legato al grafo Organization gestito dal plugin.
+ */
+if (function_exists('saltelli_seo_plugin_active') && saltelli_seo_plugin_active()) {
+    // Estrai dal nodo Organization solo i campi rilevanti per LegalService.
+    $legal_service = [
+        '@context'    => 'https://schema.org',
+        '@type'       => 'LegalService',
+        '@id'         => $home . '#legalservice',
+        'name'        => $organization['name'],
+        'url'         => $organization['url'],
+        'image'       => $organization['image'] ?? null,
+        'logo'        => $organization['logo'] ?? null,
+        'description' => $organization['description'] ?? null,
+        'telephone'   => $organization['telephone'],
+        'email'       => $organization['email'],
+        'address'     => $organization['address'],
+        'geo'         => $organization['geo'],
+        'openingHoursSpecification' => $organization['openingHoursSpecification'],
+        'priceRange'  => $organization['priceRange'],
+        'areaServed'  => $organization['areaServed'],
+        'knowsAbout'  => $organization['knowsAbout'],
+        'hasOfferCatalog' => $organization['hasOfferCatalog'],
+        // Linka l'Organization gestita dal plugin SEO (knowledge-graph coerente).
+        'parentOrganization' => ['@id' => $home . '#organization'],
+    ];
+    $legal_service = array_filter($legal_service, fn($v) => $v !== null && $v !== '');
+    saltelli_emit_jsonld($legal_service);
+    return;
+}
+
 $schema = [
     '@context' => 'https://schema.org',
     '@graph'   => [$organization, $website],

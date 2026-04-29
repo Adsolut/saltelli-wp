@@ -3,11 +3,221 @@
   "title": "Saltelli — Impostazioni tema",
   "fields": [
     {
-      "key": "field_saltelli_settings_placeholder",
-      "label": "Placeholder",
-      "name": "placeholder_settings",
+      "key": "field_saltelli_set_hero_eyebrow",
+      "label": "Hero — Eyebrow",
+      "name": "hero_eyebrow",
       "type": "text",
-      "instructions": "Campo di scaffolding. Da rimuovere quando aggiungiamo le opzioni reali (URL social per sameAs, GBP URL, foto sede, ecc.)."
+      "instructions": "Riga mono sopra l'H1. Es: \"Studio Legale · Napoli · Chiaia · Dal 1999\".",
+      "default_value": "Studio Legale · Napoli · Chiaia · Dal 1999",
+      "maxlength": 120
+    },
+    {
+      "key": "field_saltelli_set_hero_headline",
+      "label": "Hero — Headline (H1)",
+      "name": "hero_headline",
+      "type": "textarea",
+      "instructions": "Headline serif gigante. Andate a capo se vuoi spezzare visivamente. Default: \"Diritto, con misura.\"",
+      "default_value": "Diritto, con misura.",
+      "rows": 2,
+      "new_lines": "br"
+    },
+    {
+      "key": "field_saltelli_set_hero_subheadline",
+      "label": "Hero — Subheadline",
+      "name": "hero_subheadline",
+      "type": "wysiwyg",
+      "instructions": "Paragrafo serif italic 22px. 1-2 frasi.",
+      "default_value": "Studio Legale Saltelli & Partners. Quattro avvocati a Chiaia, diciannove aree di pratica, vent'anni di lavoro accanto a famiglie e imprese di Napoli.",
+      "tabs": "visual",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 1
+    },
+    {
+      "key": "field_saltelli_set_hero_cta_label",
+      "label": "Hero — CTA label",
+      "name": "hero_cta_label",
+      "type": "text",
+      "default_value": "Prenota un primo incontro",
+      "maxlength": 80
+    },
+    {
+      "key": "field_saltelli_set_hero_cta_url",
+      "label": "Hero — CTA URL",
+      "name": "hero_cta_url",
+      "type": "url",
+      "default_value": "/contatti/"
+    },
+    {
+      "key": "field_saltelli_set_colophon_indirizzo",
+      "label": "Colophon — Indirizzo",
+      "name": "colophon_indirizzo",
+      "type": "textarea",
+      "default_value": "Via Vannella Gaetani, 27\n80121 Napoli — Chiaia",
+      "rows": 2,
+      "new_lines": "br"
+    },
+    {
+      "key": "field_saltelli_set_colophon_orari",
+      "label": "Colophon — Orari",
+      "name": "colophon_orari",
+      "type": "textarea",
+      "default_value": "Lun – Ven · 10:00 – 19:00\nSolo su appuntamento",
+      "rows": 2,
+      "new_lines": "br"
+    },
+    {
+      "key": "field_saltelli_set_colophon_email",
+      "label": "Colophon — Email pubblica",
+      "name": "colophon_email",
+      "type": "email",
+      "default_value": "info@studiolegalesaltelli.it"
+    },
+    {
+      "key": "field_saltelli_set_colophon_telefono",
+      "label": "Colophon — Telefono pubblico",
+      "name": "colophon_telefono",
+      "type": "text",
+      "default_value": "+39 081 1813 1119",
+      "maxlength": 30
+    },
+    {
+      "key": "field_saltelli_set_studio_titolo",
+      "label": "Studio — Titolo sezione",
+      "name": "studio_titolo_sezione",
+      "type": "text",
+      "default_value": "Una bottega, in senso napoletano.",
+      "maxlength": 120
+    },
+    {
+      "key": "field_saltelli_set_studio_body",
+      "label": "Studio — Prose editoriale",
+      "name": "studio_body",
+      "type": "wysiwyg",
+      "instructions": "Prose 3-4 paragrafi. La prima lettera del primo paragrafo viene resa come drop-cap dal CSS.",
+      "tabs": "all",
+      "toolbar": "full",
+      "media_upload": 0,
+      "delay": 1
+    },
+    {
+      "key": "field_saltelli_set_studio_foto",
+      "label": "Studio — Foto facciata",
+      "name": "studio_foto_facciata",
+      "type": "image",
+      "instructions": "Foto B/N facciata 1440×480. Se vuota, mostra placeholder editoriale.",
+      "return_format": "array",
+      "preview_size": "large",
+      "library": "all"
+    },
+    {
+      "key": "field_saltelli_set_team_titolo",
+      "label": "Team — Titolo sezione",
+      "name": "team_titolo",
+      "type": "text",
+      "default_value": "Quattro\nprofessionisti.",
+      "instructions": "Andate a capo per spezzare il display serif. <em> per la riga in italic muted.",
+      "maxlength": 80
+    },
+    {
+      "key": "field_saltelli_set_cases_titolo",
+      "label": "Casi — Titolo sezione",
+      "name": "cases_titolo",
+      "type": "text",
+      "default_value": "Casi rappresentativi.",
+      "maxlength": 120
+    },
+    {
+      "key": "field_saltelli_set_casi",
+      "label": "Casi — Lista (homepage)",
+      "name": "casi_rappresentativi_home",
+      "type": "repeater",
+      "instructions": "REQUIRES ACF PRO. Casi anonimizzati: identifier (es. \"vs. AGE Riscossione · 2024\"), descrizione editoriale, outcome (es. \"Annullamento\"). Se ACF Free attivo, il template usa un fallback hardcoded di 4 casi rappresentativi.",
+      "required": 0,
+      "min": 0,
+      "max": 8,
+      "layout": "block",
+      "button_label": "Aggiungi caso",
+      "sub_fields": [
+        {
+          "key": "field_saltelli_set_caso_id",
+          "label": "Identifier",
+          "name": "identifier",
+          "type": "text",
+          "required": 1,
+          "maxlength": 120
+        },
+        {
+          "key": "field_saltelli_set_caso_desc",
+          "label": "Descrizione",
+          "name": "descrizione",
+          "type": "textarea",
+          "required": 1,
+          "maxlength": 300,
+          "rows": 3,
+          "new_lines": ""
+        },
+        {
+          "key": "field_saltelli_set_caso_outcome",
+          "label": "Outcome",
+          "name": "outcome",
+          "type": "text",
+          "required": 1,
+          "maxlength": 60
+        }
+      ]
+    },
+    {
+      "key": "field_saltelli_set_press",
+      "label": "Press — Outlets",
+      "name": "press_outlets",
+      "type": "repeater",
+      "instructions": "REQUIRES ACF PRO. Testate che hanno parlato dello studio. Se ACF Free, fallback hardcoded.",
+      "required": 0,
+      "min": 0,
+      "max": 12,
+      "layout": "table",
+      "button_label": "Aggiungi testata",
+      "sub_fields": [
+        {
+          "key": "field_saltelli_set_press_nome",
+          "label": "Nome",
+          "name": "nome",
+          "type": "text",
+          "required": 1,
+          "maxlength": 80
+        }
+      ]
+    },
+    {
+      "key": "field_saltelli_set_contact_email",
+      "label": "Contatti — Email pubblica",
+      "name": "contact_email_pubblica",
+      "type": "email",
+      "default_value": "info@studiolegalesaltelli.it"
+    },
+    {
+      "key": "field_saltelli_set_contact_tel",
+      "label": "Contatti — Telefono pubblico",
+      "name": "contact_telefono_pubblico",
+      "type": "text",
+      "default_value": "+39 081 1813 1119",
+      "maxlength": 30
+    },
+    {
+      "key": "field_saltelli_set_contact_pec",
+      "label": "Contatti — PEC",
+      "name": "contact_pec",
+      "type": "email",
+      "default_value": "emilianosaltelli@avvocatinapoli.legalmail.it"
+    },
+    {
+      "key": "field_saltelli_set_contact_piva",
+      "label": "Contatti — P.IVA",
+      "name": "contact_piva",
+      "type": "text",
+      "default_value": "06685101211",
+      "maxlength": 20
     }
   ],
   "location": [
@@ -26,7 +236,7 @@
   "instruction_placement": "label",
   "hide_on_screen": "",
   "active": true,
-  "description": "Scheletro per impostazioni globali tema (sameAs, GBP, foto sede). Richiede ACF Pro per Options Page.",
+  "description": "Impostazioni globali tema (hero, colophon, studio, casi, press, contatti). Repeater `casi_rappresentativi_home` e `press_outlets` richiedono ACF PRO. Senza ACF Pro, il template usa fallback hardcoded.",
   "show_in_rest": 0,
-  "modified": 1714305600
+  "modified": 1714402800
 }
