@@ -17,12 +17,11 @@ function saltelli_setup() {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
     add_theme_support('automatic-feed-links');
-    add_theme_support('custom-logo', [
-        'height'      => 80,
-        'width'       => 240,
-        'flex-height' => true,
-        'flex-width'  => true,
-    ]);
+    /*
+     * NO custom-logo support — il tema usa un wordmark testuale "Saltelli & Partners"
+     * dentro <a class="sl-header__brand"> (vedi header.php).
+     * add_theme_support('custom-logo', [...]) deliberatamente assente.
+     */
     add_theme_support('html5', [
         'search-form',
         'comment-form',

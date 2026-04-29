@@ -1344,3 +1344,129 @@
 @media (min-width: 1024px) {
   .sl-whatsapp { display: none; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   FIX A — Header navigation: forza display flex inline
+   per i menu emessi da wp_nav_menu (con classe .menu o variations)
+   ═══════════════════════════════════════════════════════════════ */
+.sl-header__nav ul,
+.sl-header__nav .menu,
+.sl-header__menu {
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: center;
+}
+
+.sl-header__nav li,
+.sl-header__nav .menu-item {
+  list-style: none !important;
+  display: block;
+}
+
+.sl-header__nav li::marker {
+  content: '';
+}
+
+.sl-header__nav a {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color var(--dur-fast) var(--ease-editorial);
+}
+
+.sl-header__nav a:hover {
+  color: var(--accent);
+}
+
+/* Skip link visibile only on focus */
+.sl-skip-link {
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+.sl-skip-link:focus {
+  position: fixed !important;
+  left: 8px !important;
+  top: 8px !important;
+  width: auto !important;
+  height: auto !important;
+  z-index: 9999 !important;
+  padding: 8px 16px !important;
+  background: var(--primary) !important;
+  color: var(--background) !important;
+  text-decoration: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FIX A2 — Empty state per liste vuote (CPT non popolati)
+   Quando 0 risultati, mostro un placeholder editoriale
+   ═══════════════════════════════════════════════════════════════ */
+.sl-areas__list:empty::before {
+  content: 'Le 19 aree saranno popolate prossimamente. Nel frattempo, contattaci direttamente per la tua pratica.';
+  display: block;
+  padding: 48px 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--text-muted);
+  max-width: 60ch;
+}
+
+.sl-team__grid:empty::before {
+  content: 'I quattro profili degli avvocati saranno presto disponibili.';
+  display: block;
+  padding: 48px 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FIX D — Override opacity:0 iniziale di SplitText
+   Il reveal animato GSAP non parte affidabilmente in beta locale
+   senza fonts WOFF2 self-hosted (i Google Fonts via @import si
+   caricano dopo il document-ready e bloccano il reveal trigger).
+   Per la beta interna mostriamo le parole subito visibili.
+   Il refinement con animazione vera va in Fase 1.E.10.
+   ═══════════════════════════════════════════════════════════════ */
+
+.sl-hero__word,
+[data-split-reveal] .sl-hero__word,
+[data-split-reveal] > span {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Override anche per altre classi reveal che potrebbero essere stuck */
+.sl-revealable,
+[data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FIX D2 — Hero headline width: forza 3 righe
+   con max-width: 12ch sulla h1 in modo che le 3 parole
+   "Diritto," "con" "misura." vadano a capo come da JSX
+   ═══════════════════════════════════════════════════════════════ */
+
+.sl-hero__headline {
+  max-width: 12ch;
+}
+
+@media (max-width: 768px) {
+  .sl-hero__headline {
+    max-width: 100%;
+  }
+}
