@@ -1,21 +1,21 @@
 /*
- * Saltelli & Partners — main entrypoint (Frame 1 animations)
- * Style & Animation agent · SHIP MODE 24H · 2026-04-29
+ * Saltelli & Partners — main entrypoint
+ * Style & Animation · v0.3.0-beta-polish · 2026-04-29
  *
  * Stack: GSAP 3.12.5 + ScrollTrigger + SplitText + Lenis 1.1.13.
  * Caricato da inc/enqueue.php in footer con strategy=defer.
  *
  * Behaviors:
- *   1. Lenis smooth scroll (lerp 0.1) — disabilitato su prefers-reduced-motion
+ *   1. Lenis smooth scroll (lerp 0.1) — disabilitato su prefers-reduced-motion + mobile
  *   2. GSAP ticker integrato con Lenis (no double rAF)
- *   3. Hero headline reveal — SplitText su parole, stagger 80ms (desktop only)
- *   4. Sezioni reveal — fade + translateY 24px su scroll, trigger 80% viewport
- *   5. List items area pratica — stagger 80ms al primo ingresso in viewport
- *   6. Header solid-on-scroll — toggle .is-scrolled dopo 80px scroll
- *   7. Mobile (< 768px) — niente SplitText, niente translate aggressivi: solo fade
+ *   3. Header solid-on-scroll — toggle .is-scrolled dopo 80px scroll
+ *   4. Mobile menu toggle (burger / hidden attr)
+ *   5. Hero headline reveal — stagger 80ms su .sl-hero__word (desktop only, no reduced-motion)
+ *   6. Sezioni fade-in scroll-trigger 80% viewport (.sl-areas/.sl-studio/.sl-team/.sl-cases/.sl-press/.sl-contact)
+ *   7. List items area pratica — stagger 80ms al primo ingresso in viewport (desktop only)
+ *   8. Hover preview .sl-area — popola .sl-area__preview con cat / lead / CTA (desktop only)
  *
- * TODO Style & Animation Agent: aggiungere refinement post-demo cliente
- *   (parallax foto facciata, magnetic buttons, hover ritratto avvocato extra).
+ * Idempotente: re-init non duplica handler grazie a flag su elementi.
  */
 
 (function () {
@@ -36,7 +36,6 @@
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile = window.matchMedia('(max-width: 767px)').matches;
 
-    // Guards: GSAP/Lenis sono CDN async. Bail-out grazioso se mancano.
     const hasGsap = typeof window.gsap !== 'undefined';
     const hasScrollTrigger = typeof window.ScrollTrigger !== 'undefined';
     const hasSplitText = typeof window.SplitText !== 'undefined';
@@ -62,9 +61,9 @@
       }
     }
 
-    // 2. Header solid-on-scroll — supporta sia class .is-scrolled sia attr [data-scrolled]
+    // 2. Header solid-on-scroll
     const header = document.querySelector('.sl-header');
-    if (header) {
+    if (header && !header.dataset.slScrollBound) {
       const onScroll = () => {
         const y = window.scrollY || window.pageYOffset || 0;
         const scrolled = y > 80;
@@ -73,12 +72,13 @@
       };
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
+      header.dataset.slScrollBound = '1';
     }
 
-    // 3. Mobile menu toggle — supporta entrambi i naming
+    // 3. Mobile menu toggle
     const menuBtn = document.querySelector('.sl-header__menu-btn, .sl-header__burger');
     const mobileMenu = document.querySelector('.sl-mobile-menu, .sl-header__mobile');
-    if (menuBtn && mobileMenu) {
+    if (menuBtn && mobileMenu && !menuBtn.dataset.slMenuBound) {
       menuBtn.addEventListener('click', () => {
         const open = mobileMenu.hasAttribute('hidden') || !mobileMenu.classList.contains('is-open');
         mobileMenu.classList.toggle('is-open', open);
@@ -86,83 +86,111 @@
         else mobileMenu.setAttribute('hidden', '');
         menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+      menuBtn.dataset.slMenuBound = '1';
     }
 
-    // Reduced motion: lascia il CSS gestire la headline (fallback class)
+    // Gate per CSS: appena JS è in piedi, togliamo il fallback opacity:1 !important
+    // che il foglio applica solo a html:not(.js-reveal-ready) (vedi sections.css FIX D).
+    if (hasGsap && !reduced) {
+      document.documentElement.classList.add('js-reveal-ready');
+    }
+
+    // Reduced motion: lascia il CSS gestire la headline (fallback class) e bail-out
     if (reduced) {
-      document.querySelectorAll('.sl-hero__headline .sl-word, .sl-hero__headline .sl-hero__word').forEach(w => w.classList.add('is-revealed'));
-      document.querySelectorAll('.sl-revealable').forEach(el => el.classList.add('is-revealed'));
+      document.querySelectorAll('.sl-hero__headline .sl-word, .sl-hero__headline .sl-hero__word').forEach((w) => w.classList.add('is-revealed'));
+      document.querySelectorAll('.sl-revealable').forEach((el) => el.classList.add('is-revealed'));
+      bindAreaHover();
       return;
     }
 
-    // 4. Hero headline reveal — supporta sia .sl-word sia .sl-hero__word + [data-split-reveal]
+    // 4. Hero headline reveal — stagger 80ms su .sl-hero__word
     const heroHeadline = document.querySelector('.sl-hero__headline, [data-split-reveal]');
     if (heroHeadline) {
-      const wordSel = '.sl-word, .sl-hero__word';
-      const wordEls = heroHeadline.querySelectorAll(wordSel);
-      if (!isMobile && hasGsap) {
-        if (wordEls.length) {
-          // Parole già pre-segmentate dal template — anima quelle
-          window.gsap.from(wordEls, {
-            yPercent: 60,
-            opacity: 0,
-            duration: 0.7,
-            ease: 'power2.out',
-            stagger: 0.08,
-            delay: 0.1,
-            onComplete: () => wordEls.forEach(w => w.classList.add('is-revealed')),
-          });
-        } else if (hasSplitText) {
-          const split = new window.SplitText(heroHeadline, { type: 'words' });
-          window.gsap.from(split.words, {
-            yPercent: 60,
-            opacity: 0,
-            duration: 0.7,
-            ease: 'power2.out',
-            stagger: 0.08,
-            delay: 0.1,
-          });
-        }
+      const wordEls = heroHeadline.querySelectorAll('.sl-word, .sl-hero__word');
+      if (!isMobile && hasGsap && wordEls.length) {
+        window.gsap.set(wordEls, { opacity: 0, y: 40 });
+        window.gsap.to(wordEls, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power2.out',
+          stagger: 0.08,
+          delay: 0.08,
+          onComplete: () => wordEls.forEach((w) => w.classList.add('is-revealed')),
+        });
+      } else if (!isMobile && hasGsap && hasSplitText && !wordEls.length) {
+        const split = new window.SplitText(heroHeadline, { type: 'words' });
+        window.gsap.set(split.words, { opacity: 0, y: 40 });
+        window.gsap.to(split.words, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power2.out',
+          stagger: 0.08,
+          delay: 0.08,
+        });
       } else {
-        // Mobile o no-GSAP: usa il fallback CSS via class
-        wordEls.forEach(w => w.classList.add('is-revealed'));
+        wordEls.forEach((w) => w.classList.add('is-revealed'));
       }
     }
 
-    // 5. Reveal generico — sezioni e revealable
+    // 5. Reveal generico — sezioni hero-down + altri .sl-revealable / [data-reveal]
     if (hasGsap && hasScrollTrigger) {
-      const targets = document.querySelectorAll('.sl-revealable, [data-reveal]');
-      targets.forEach((el) => {
-        window.gsap.from(el, {
-          y: isMobile ? 12 : 24,
-          opacity: 0,
-          duration: isMobile ? 0.5 : 0.7,
-          ease: 'power2.out',
-          scrollTrigger: { trigger: el, start: 'top 85%', once: true },
-          onComplete: () => el.classList.add('is-revealed'),
-        });
-      });
+      // ScrollTrigger.matchMedia rispetta reduced-motion nativo
+      const ST = window.ScrollTrigger;
 
-      // 6. List items area — stagger di gruppo
-      const areaGroups = document.querySelectorAll('.sl-areas__list, [data-areas-list]');
-      areaGroups.forEach((group) => {
-        const items = group.querySelectorAll('.sl-area');
-        if (!items.length) return;
-        window.gsap.from(items, {
-          y: isMobile ? 8 : 16,
-          opacity: 0,
-          duration: isMobile ? 0.4 : 0.6,
-          ease: 'power2.out',
-          stagger: 0.08,
-          scrollTrigger: { trigger: group, start: 'top 80%', once: true },
-        });
+      ST.matchMedia({
+        '(prefers-reduced-motion: no-preference)': function () {
+          const sectionSel = '.sl-areas, .sl-studio, .sl-team, .sl-cases, .sl-press, .sl-contact';
+          document.querySelectorAll(sectionSel).forEach((section) => {
+            window.gsap.from(section, {
+              opacity: 0,
+              y: 24,
+              duration: 0.6,
+              ease: 'power2.out',
+              scrollTrigger: { trigger: section, start: 'top 80%', toggleActions: 'play none none none' },
+            });
+          });
+
+          // Revealable e data-reveal generici (titoli, sotto-elementi marcati esplicitamente)
+          document.querySelectorAll('.sl-revealable, [data-reveal]').forEach((el) => {
+            window.gsap.from(el, {
+              y: isMobile ? 12 : 24,
+              opacity: 0,
+              duration: isMobile ? 0.5 : 0.7,
+              ease: 'power2.out',
+              scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+              onComplete: () => el.classList.add('is-revealed'),
+            });
+          });
+
+          // 6. List items area — stagger desktop only (mobile = perf skip)
+          if (!isMobile) {
+            const areaGroups = document.querySelectorAll('.sl-areas__list, [data-areas-list]');
+            areaGroups.forEach((group) => {
+              const items = group.querySelectorAll('.sl-area');
+              if (!items.length) return;
+              window.gsap.from(items, {
+                y: 16,
+                opacity: 0,
+                duration: 0.5,
+                ease: 'power2.out',
+                stagger: 0.08,
+                scrollTrigger: { trigger: group, start: 'top 70%', toggleActions: 'play none none none' },
+              });
+            });
+          }
+        },
       });
     } else {
       // No GSAP: rivela tutto subito
-      document.querySelectorAll('.sl-revealable, [data-reveal]').forEach(el => el.classList.add('is-revealed'));
+      document.querySelectorAll('.sl-revealable, [data-reveal]').forEach((el) => el.classList.add('is-revealed'));
     }
 
-    // 7. Resize debounced — ScrollTrigger refresh
+    // 7. Hover preview aree (desktop only, touch device escluso)
+    bindAreaHover();
+
+    // 8. Resize debounced — ScrollTrigger refresh
     if (hasScrollTrigger) {
       let resizeTimer;
       window.addEventListener('resize', () => {
@@ -170,5 +198,65 @@
         resizeTimer = setTimeout(() => window.ScrollTrigger.refresh(), 200);
       });
     }
+  }
+
+  // ---- Hover preview .sl-area ---------------------------------------------
+  function bindAreaHover() {
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    if (isMobile) return;
+
+    const preview = document.querySelector('[data-area-preview], .sl-area__preview');
+    const areas = document.querySelectorAll('.sl-area[data-area-lead]');
+    if (!preview || !areas.length) return;
+    if (preview.dataset.slHoverBound === '1') return;
+
+    const defaultHTML = preview.innerHTML;
+
+    const buildPreviewHTML = (area) => {
+      const cat = area.dataset.areaLabel || area.dataset.areaCat || '';
+      const lead = area.dataset.areaLead || '';
+      const href = area.getAttribute('href') || '#';
+      const num = area.dataset.areaNum || '';
+
+      // Costruzione DOM via template stringa, ma con escape minimo: i data-attr arrivano già da PHP esc_attr.
+      // Per sicurezza li ri-escape lato JS (nel caso siano stati toccati altrove).
+      const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
+      const numLabel = num ? `${esc(num)} · ` : '';
+      return [
+        `<div class="sl-mono sl-area__preview-cat">${numLabel}${esc(cat)}</div>`,
+        `<p class="sl-area__preview-lead">${esc(lead)}</p>`,
+        `<a class="sl-btn" href="${esc(href)}">`,
+        `  <span>Approfondisci</span>`,
+        `  <span class="arrow" aria-hidden="true">→</span>`,
+        `</a>`,
+      ].join('');
+    };
+
+    let raf = 0;
+    const setPreview = (html) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        preview.innerHTML = html;
+      });
+    };
+
+    areas.forEach((area) => {
+      area.addEventListener('mouseenter', () => setPreview(buildPreviewHTML(area)));
+      area.addEventListener('focus', () => setPreview(buildPreviewHTML(area)));
+      area.addEventListener('mouseleave', () => {
+        // ripristina solo se nessun'altra area è hovered
+        if (!document.querySelector('.sl-area:hover, .sl-area:focus-within')) {
+          setPreview(defaultHTML);
+        }
+      });
+      area.addEventListener('blur', () => {
+        if (!document.querySelector('.sl-area:hover, .sl-area:focus-within')) {
+          setPreview(defaultHTML);
+        }
+      });
+    });
+
+    preview.dataset.slHoverBound = '1';
   }
 })();

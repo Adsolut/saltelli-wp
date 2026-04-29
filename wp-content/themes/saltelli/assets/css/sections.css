@@ -1433,26 +1433,23 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   FIX D — Override opacity:0 iniziale di SplitText
-   Il reveal animato GSAP non parte affidabilmente in beta locale
-   senza fonts WOFF2 self-hosted (i Google Fonts via @import si
-   caricano dopo il document-ready e bloccano il reveal trigger).
-   Per la beta interna mostriamo le parole subito visibili.
-   Il refinement con animazione vera va in Fase 1.E.10.
+   FIX D — Fallback no-JS / pre-GSAP per reveal elements
+   Quando GSAP è pronto, main.js aggiunge .js-reveal-ready su <html>
+   e questi override decadono, permettendo a GSAP di gestire l'opacity.
+   Senza JS / con GSAP non disponibile, le parole restano visibili.
    ═══════════════════════════════════════════════════════════════ */
 
-.sl-hero__word,
-[data-split-reveal] .sl-hero__word,
-[data-split-reveal] > span {
-  opacity: 1 !important;
-  transform: none !important;
+html:not(.js-reveal-ready) .sl-hero__word,
+html:not(.js-reveal-ready) [data-split-reveal] .sl-hero__word,
+html:not(.js-reveal-ready) [data-split-reveal] > span {
+  opacity: 1;
+  transform: none;
 }
 
-/* Override anche per altre classi reveal che potrebbero essere stuck */
-.sl-revealable,
-[data-reveal] {
-  opacity: 1 !important;
-  transform: none !important;
+html:not(.js-reveal-ready) .sl-revealable,
+html:not(.js-reveal-ready) [data-reveal] {
+  opacity: 1;
+  transform: none;
 }
 
 /* ═══════════════════════════════════════════════════════════════
