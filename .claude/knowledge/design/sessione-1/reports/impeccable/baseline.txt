@@ -1,0 +1,6 @@
+
+/Users/aldosantoro/Desktop/DEV/saltelli-wp/wp-content/themes/saltelli/assets/css/components.css
+  line 168: [layout-transition] transition: max-height
+    → Animating width, height, padding, or margin causes layout thrash and janky performance. Use transform and opacity instead, or grid-template-rows for height animations.
+
+1 anti-pattern found.

@@ -15,6 +15,25 @@
   color: var(--text-muted);
 }
 
+/*
+ * Dark-context override per .sl-mono — footer scuro o future dark CTA banner.
+ * Fix Impeccable Step C: contrast 2.6:1 → ~9.4:1 (AAA).
+ */
+.sl-footer .sl-mono,
+.sl-footer .sl-mono a {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/*
+ * Footer copy: stringa lunga (49 char "© 2026 …"), NON è un'etichetta corta.
+ * De-uppercased per leggibilità (anti-pattern all-caps-body fix).
+ */
+.sl-footer__copy.sl-mono {
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-size: 11px;
+}
+
 /* Editorial button: text + underline, NOT filled */
 .sl-btn {
   display: inline-flex;
@@ -100,6 +119,10 @@
   transform: translateX(8px);
 }
 .sl-area:hover::before { transform: scaleX(1); }
+.sl-area:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
 
 .sl-area__num {
   font-family: var(--font-mono);
@@ -127,7 +150,13 @@
   opacity: 0;
   transition: opacity var(--dur-base) var(--ease-editorial);
 }
-.sl-area:hover .sl-area__meta { opacity: 1; }
+.sl-area:hover .sl-area__meta,
+.sl-area:focus-visible .sl-area__meta { opacity: 1; }
+
+/* Touch device: niente :hover, mostra meta sempre per dare l'indicatore Tier 1/2 */
+@media (hover: none), (max-width: 767px) {
+  .sl-area__meta { opacity: 1; }
+}
 
 /* Accordion */
 .sl-acc {
@@ -162,13 +191,23 @@
   transition: transform var(--dur-base) var(--ease-editorial);
 }
 .sl-acc__item[data-open="true"] .sl-acc__icon { transform: rotate(45deg); }
+/*
+ * Accordion panel — grid-template-rows 0fr/1fr per evitare layout-thrash
+ * (animare max-height triggera reflow ogni frame). Tecnica grid-rows è GPU-friendly
+ * e supporta auto-height senza JS measure.
+ * Fix Impeccable Step C: anti-pattern "layout-transition" risolto.
+ */
 .sl-acc__panel {
+  display: grid;
+  grid-template-rows: 0fr;
   overflow: hidden;
-  max-height: 0;
-  transition: max-height var(--dur-base) var(--ease-editorial);
+  transition: grid-template-rows var(--dur-base) var(--ease-editorial);
 }
-.sl-acc__item[data-open="true"] .sl-acc__panel { max-height: 400px; }
+.sl-acc__item[data-open="true"] .sl-acc__panel {
+  grid-template-rows: 1fr;
+}
 .sl-acc__inner {
+  min-height: 0;
   padding: 0 0 28px 0;
   font-size: 16px;
   line-height: 1.65;

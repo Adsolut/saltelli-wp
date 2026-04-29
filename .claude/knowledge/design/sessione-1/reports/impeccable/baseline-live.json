@@ -1,0 +1,42 @@
+[
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "file": "http://localhost:8080",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 42 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "file": "http://localhost:8080",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 44 chars of body text"
+  },
+  {
+    "antipattern": "gray-on-color",
+    "name": "Gray text on colored background",
+    "description": "Gray text looks washed out on colored backgrounds. Use a darker shade of the background color instead, or white/near-white for contrast.",
+    "file": "http://localhost:8080",
+    "line": 0,
+    "snippet": "text #6b6b6b on bg #1b2b4b"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "file": "http://localhost:8080",
+    "line": 0,
+    "snippet": "2.6:1 (need 4.5:1) — text #6b6b6b on #1b2b4b"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "file": "http://localhost:8080",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 49 chars of body text"
+  }
+]
