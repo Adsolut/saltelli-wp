@@ -137,14 +137,11 @@
  * 2. HERO
  * ========================================================= */
 .sl-hero {
-  min-height: 700px;
-  padding: 48px 20px 32px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   position: relative;
-  max-width: var(--container-max);
+  min-height: 100vh;
+  padding-block: clamp(48px, 8vh, 120px);
   margin: 0 auto;
+  overflow: visible;
 }
 .sl-hero__eyebrow { margin-bottom: 40px; font-size: 10px; }
 .sl-hero__headline {
@@ -896,14 +893,24 @@
   .sl-header__brand-name { font-size: 22px; }
 }
 
-/* Hero — word reveal alt + subheadline alt */
+/* Hero — word reveal alt + subheadline alt
+ * FIX P0.3: grid 1col mobile / 8fr 4fr desktop, align-content space-between
+ * per evitare overlap tra eyebrow/headline/colophon durante scroll.
+ */
 .sl-hero__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  width: 100%;
+  min-height: calc(100vh - clamp(96px, 16vh, 240px)); /* 100vh meno padding-block */
+  align-content: space-between;
+}
+.sl-hero__main {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  width: 100%;
+  gap: 16px;
+  max-width: 100%;
 }
-.sl-hero__main { display: flex; flex-direction: column; }
 .sl-hero__word {
   display: inline-block;
   margin-right: 12px;
@@ -943,12 +950,18 @@
 }
 @media (min-width: 1024px) {
   .sl-hero__inner {
-    display: grid;
-    grid-template-columns: 8fr 4fr;
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
     gap: 64px;
-    align-items: start;
+    align-content: space-between;
+    align-items: stretch;
+  }
+  .sl-hero__main {
+    grid-column: 1;
+    align-self: end;
+    gap: 24px;
   }
   .sl-hero__colophon {
+    grid-column: 2;
     align-self: end;
     border-left: 1px solid var(--border);
     padding-left: 32px;
@@ -957,12 +970,12 @@
     margin-right: 24px;
     transform: translateY(40px);
   }
-  .sl-hero__subheadline { font-size: 22px; margin-bottom: 64px; }
+  .sl-hero__subheadline { font-size: 22px; margin-bottom: 16px; }
   .sl-hero__scroll {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-top: 64px;
+    margin-top: 32px;
   }
   .sl-hero__scroll-line {
     display: block;
@@ -1587,29 +1600,113 @@ html:not(.js-reveal-ready) [data-reveal] {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   AUDIT ALIGNMENT — Hero CTA note + Competenza CTA note + Contact eyebrow
-   "Prima consulenza conoscitiva gratuita" gancio editoriale
+   FIX P1.4 — Subline "consulenza gratuita" softer italic serif
+   Hero + Competenza CTA: serif italic 15px, tone editoriale.
+   Contact eyebrow: mono ridotto (mantiene coerenza con § 06 — CONTATTI).
    ═══════════════════════════════════════════════════════════════ */
 .sl-hero__cta-note,
-.sl-competenza__cta-note,
-.sl-contact__eyebrow {
+.sl-competenza__cta-note {
     margin-top: 16px;
+    color: var(--text-muted);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1.5;
+}
+.sl-competenza__cta-note {
+    margin-top: 12px;
+}
+
+.sl-contact__eyebrow {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FIX P0.2 — h2 nel content competenza: scala più contenuta + no transform
+   I content da source page possono contenere h2/h3 con kerning Playfair
+   troppo display. Riduciamo a max 48px + reset text-transform.
+   ═══════════════════════════════════════════════════════════════ */
+.sl-competenza__prose h2,
+.sl-competenza__prose h3,
+.sl-page__prose h2,
+.sl-page__prose h3,
+.entry-content h2,
+.entry-content h3 {
+    text-transform: none;
+    font-family: var(--font-display);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--primary);
+    font-weight: 400;
+}
+.sl-competenza__prose h2,
+.sl-page__prose h2,
+.entry-content h2 {
+    font-size: clamp(28px, 3.5vw, 48px);
+    margin-block: 56px 20px;
+}
+.sl-competenza__prose h3,
+.sl-page__prose h3,
+.entry-content h3 {
+    font-size: clamp(22px, 2vw, 32px);
+    margin-block: 40px 16px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FIX P0.1 — Pagina standard (page.php) layout editoriale centrato
+   page.php usa .sl-page > .sl-page__hero / .sl-page__content > .sl-container
+   ═══════════════════════════════════════════════════════════════ */
+
+.sl-page {
+    padding-block: clamp(64px, 8vw, 128px);
+}
+.sl-page__hero {
+    margin-bottom: 48px;
+}
+.sl-page__breadcrumb {
+    margin-bottom: 24px;
     color: var(--text-muted);
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    font-family: var(--font-mono);
 }
-.sl-competenza__cta-note { margin-top: 12px; }
-.sl-contact__eyebrow { margin-top: 0; margin-bottom: 24px; }
+.sl-page__breadcrumb a {
+    color: inherit;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-fast) var(--ease-editorial);
+}
+.sl-page__breadcrumb a:hover { border-bottom-color: var(--accent); }
+.sl-page__title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 6vw, 96px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+    margin: 0;
+    max-width: 18ch;
+    font-weight: 400;
+}
+.sl-page__prose {
+    max-width: 1100px;
+    margin-inline: auto;
+}
 
 /* ═══════════════════════════════════════════════════════════════
-   AUDIT ALIGNMENT — Pagina /costi/ layout editoriale
+   FIX P0.1 — /costi/ layout asimmetrico editoriale
+   Mobile: stack verticale. Desktop: eyebrow mono a sinistra | body a destra.
+   NB: nessun padding-inline (siamo dentro .sl-container = già padded).
    ═══════════════════════════════════════════════════════════════ */
 .sl-costi__intro {
     max-width: 720px;
-    margin: 64px auto 64px;
-    padding-inline: clamp(24px, 5vw, 96px);
+    margin: 0 auto 96px;
 }
 .sl-costi__capsule {
     font-family: var(--font-display);
@@ -1622,7 +1719,9 @@ html:not(.js-reveal-ready) [data-reveal] {
 .sl-costi__section {
     max-width: 720px;
     margin: 0 auto 64px;
-    padding-inline: clamp(24px, 5vw, 96px);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
 }
 .sl-costi__section h2 {
     font-family: var(--font-display);
@@ -1647,53 +1746,33 @@ html:not(.js-reveal-ready) [data-reveal] {
     line-height: 1.7;
     font-size: 16px;
 }
-.sl-costi__section .sl-acc {
-    border: 0;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 0;
+
+@media (min-width: 1024px) {
+    .sl-costi__section {
+        grid-template-columns: 200px 1fr;
+        gap: 64px;
+        max-width: 1100px;
+    }
+    .sl-costi__section > .sl-mono {
+        grid-column: 1;
+        grid-row: 1 / span 99;
+        text-align: right;
+        padding-top: 28px;
+        align-self: start;
+        position: sticky;
+        top: 120px;
+    }
+    .sl-costi__section > h2,
+    .sl-costi__section > p,
+    .sl-costi__section > ul,
+    .sl-costi__section > details,
+    .sl-costi__section > .sl-acc {
+        grid-column: 2;
+    }
 }
-.sl-costi__section .sl-acc:first-of-type {
-    border-top: 1px solid var(--border);
-}
-.sl-costi__section .sl-acc[open] .sl-acc__summary::after {
-    transform: rotate(45deg);
-}
-.sl-costi__section .sl-acc__summary {
-    cursor: pointer;
-    list-style: none;
-    padding: 24px 0;
-    font-family: var(--font-display);
-    font-size: clamp(18px, 1.5vw, 22px);
-    color: var(--primary);
-    letter-spacing: -0.01em;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 32px;
-}
-.sl-costi__section .sl-acc__summary::-webkit-details-marker {
-    display: none;
-}
-.sl-costi__section .sl-acc__summary::after {
-    content: "+";
-    font-family: var(--font-mono);
-    font-size: 14px;
-    color: var(--text-muted);
-    flex-shrink: 0;
-    transition: transform var(--dur-base) var(--ease-editorial);
-}
-.sl-costi__section .sl-acc__panel {
-    padding: 0 0 24px;
-    max-width: 60ch;
-}
-.sl-costi__section .sl-acc__panel p {
-    margin: 0;
-    font-size: 16px;
-    line-height: 1.65;
-    color: var(--text);
-}
+
 .sl-costi__cta {
-    max-width: 720px;
+    max-width: 1100px;
     margin: 96px auto 0;
     padding: 64px clamp(24px, 5vw, 96px);
     background: var(--surface);

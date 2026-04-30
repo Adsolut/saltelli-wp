@@ -8,7 +8,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '0.6.0-beta-audit-aligned');
+define('SALTELLI_THEME_VERSION', '0.7.0-beta-pain-points-fixed');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 

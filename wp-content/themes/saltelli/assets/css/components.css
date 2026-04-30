@@ -129,7 +129,22 @@
   font-size: 12px;
   letter-spacing: 0.08em;
   color: var(--text-muted);
+  /* FIX P1.1: nascosto mobile (la numerazione 01/19 mescola tier-1 e tier-2). */
+  display: none;
 }
+
+@media (min-width: 1024px) {
+  .sl-area__num {
+    display: inline-block;
+    opacity: 0.4;
+    font-feature-settings: "tnum" 1;
+  }
+  .sl-area--tier1 .sl-area__num {
+    opacity: 1;
+    color: var(--accent);
+  }
+}
+
 .sl-area__title {
   font-family: var(--font-display);
   font-size: clamp(28px, 3vw, 40px);
@@ -137,6 +152,13 @@
   color: var(--primary);
   letter-spacing: -0.01em;
   line-height: 1.1;
+}
+
+/* FIX P1.2: drop-cap oro SOLO su tier-1 (reset esplicito sugli altri).
+   Reset paranoia: garantiamo che le 16 non-tier-1 ereditino var(--primary). */
+.sl-area:not(.sl-area--tier1) .sl-area__title::first-letter {
+  color: inherit;
+  font-size: inherit;
 }
 .sl-area--tier1 .sl-area__title::first-letter {
   color: var(--accent);
@@ -213,4 +235,98 @@
   line-height: 1.65;
   color: var(--text);
   max-width: 60ch;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FIX P1.3 — FAQ accordion editoriale unificato
+   Markup details/summary nativi:
+     a. /costi/         → <details class="sl-acc"><summary class="sl-acc__summary">
+     b. /competenze/    → <details class="sl-faq__item"><summary class="sl-faq__question">
+   Stesso pattern visuale (no triangle browser, +/− editoriale a destra).
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Container */
+.sl-faq {
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+}
+.sl-faq__item {
+  border-bottom: 1px solid var(--border);
+  list-style: none;
+}
+
+/* Summary (la "domanda") */
+.sl-faq__question,
+details.sl-acc > summary,
+.sl-acc__summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 32px;
+  padding: 24px 0;
+  padding-right: 8px;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.5vw, 22px);
+  color: var(--primary);
+  letter-spacing: -0.01em;
+  position: relative;
+  transition: color var(--dur-fast) var(--ease-editorial);
+}
+.sl-faq__question:hover,
+details.sl-acc > summary:hover,
+.sl-acc__summary:hover {
+  color: var(--accent);
+}
+
+/* Rimuove triangle browser default (Webkit + Firefox) */
+.sl-faq__question::-webkit-details-marker,
+details.sl-acc > summary::-webkit-details-marker,
+.sl-acc__summary::-webkit-details-marker {
+  display: none;
+}
+.sl-faq__question::marker,
+details.sl-acc > summary::marker,
+.sl-acc__summary::marker {
+  content: "";
+  display: none;
+}
+
+/* Icona +/− editoriale a destra */
+.sl-faq__question::after,
+details.sl-acc > summary::after,
+.sl-acc__summary::after {
+  content: "+";
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--accent);
+  flex-shrink: 0;
+  line-height: 1;
+  transition: transform var(--dur-fast) var(--ease-editorial);
+}
+details[open] > .sl-faq__question::after,
+details.sl-acc[open] > summary::after,
+details.sl-faq__item[open] > .sl-faq__question::after {
+  content: "−";
+}
+
+/* Answer panel */
+.sl-faq__answer,
+details.sl-acc > div,
+.sl-acc__panel {
+  padding: 0 0 24px 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  max-width: 60ch;
+}
+.sl-faq__answer p,
+.sl-acc__panel p {
+  margin: 0 0 12px 0;
+}
+.sl-faq__answer p:last-child,
+.sl-acc__panel p:last-child {
+  margin-bottom: 0;
 }
