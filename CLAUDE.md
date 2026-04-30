@@ -17,7 +17,16 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 **Demo:** ✅ presented to client today (passed first visual test)
 **Active phase:** Step E (Template Polish + Mobile Fix) — `PROMPT_AGENT_E_TEMPLATE_POLISH_V2.md`
 **Next:** Step F (Production Readiness) → Step G (Deploy DigitalOcean)
-**Infra staging (provisioned 2026-04-30, dormiente in attesa GO):** droplet DO `saltelli-staging-ams3-01` ID `568158213`, IPv4 `178.62.207.50`, ams3, s-1vcpu-2gb, Ubuntu 24.04 LTS, project Adsolut Web Agency. Runbook: `PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md`. DNS `staging.studiolegalesaltelli.it` da puntare a quell'IP quando l'orchestratore dà GO.
+**Infra staging (provisioned + setup 2026-04-30, in attesa GO per Fase 3+4):**
+- Droplet DO `saltelli-staging-ams3-01` ID `568158213` · IPv4 `178.62.207.50` · ams3 · s-1vcpu-2gb · Ubuntu 24.04 LTS · project Adsolut Web Agency
+- DNS `staging.studiolegalesaltelli.it` → `178.62.207.50` propagato (TTL ~300s)
+- Stack pronto: nginx 1.24 + PHP 8.2.30 + MySQL 8.0.45 + WP-CLI · DB `saltelli_wp` creato (vuoto) · user `saltelli` autenticato
+- HTTPS attivo: cert Let's Encrypt valido fino al **2026-07-29**, auto-renew via certbot.timer · TLS 1.2+1.3 · HTTP→HTTPS 301
+- URL pubblico ora: https://staging.studiolegalesaltelli.it → **holding page** `noindex,nofollow` (design system rispettato)
+- Hardening: UFW (22/80/443), fail2ban, SSH no-root no-password, swap 2GB, unattended-upgrades
+- Secrets locali: `.saltelli-staging-secrets` (gitignored) · droplet: `/home/deploy/.saltelli-secrets` (600)
+- Runbook: `PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` (Fasi 0-2, 5-6 completate; 3-4-7-8 in attesa GO)
+- Pending: reboot droplet per kernel 6.8.0-110 (non urgente, da fare dopo Fase 4)
 
 ### What's done
 

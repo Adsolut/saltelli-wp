@@ -1,8 +1,21 @@
 # Prompt — Step G: Deploy DigitalOcean (`staging.studiolegalesaltelli.it`)
 
-> **Stato 2026-04-30 (post-aggiornamento 2):** Fase 0 ✅ droplet attivo · Fase 6 ✅ DNS propagato · Fasi 1-5+7-8 ⏸ in attesa GO orchestratore.
-> **Sessione consigliata:** Claude Code in chat con Duccio side-by-side, non agente autonomo. Tutte le azioni shared-state (push DB, certbot, riscritture URL) richiedono conferma puntuale.
-> **Tempo stimato dal GO al sito live HTTPS:** ~90 minuti se nessun blocker.
+> **Stato 2026-04-30 (post-aggiornamento 3):**
+> ✅ Fase 0 — droplet attivo (`saltelli-staging-ams3-01` / `178.62.207.50`)
+> ✅ Fase 1 — hardening (deploy user, UFW, fail2ban, SSH no-root, swap)
+> ✅ Fase 2 — LEMP (nginx 1.24, PHP 8.2.30, MySQL 8.0.45, WP-CLI, DB `saltelli_wp` vuoto)
+> ✅ Fase 5 — nginx vhost + holding page + SSL Let's Encrypt valido fino al 2026-07-29
+> ✅ Fase 6 — DNS `staging.studiolegalesaltelli.it → 178.62.207.50`
+> ⏸ Fase 3 — WP install (in attesa GO orchestratore)
+> ⏸ Fase 4 — Migrazione DB + uploads dal locale (in attesa GO orchestratore)
+> ⏸ Fase 7 — Smoke test post-deploy
+> ⏸ Fase 8 — Hand-off + monitoring
+>
+> **URL pubblico ora:** https://staging.studiolegalesaltelli.it → holding page `noindex,nofollow` con design system Saltelli (palette navy/cream/bronze, Playfair + DM Sans).
+> **Tempo residuo stimato dal GO:** ~30-45 minuti (Fasi 3+4+7+8).
+> **Secrets locali:** `~/Desktop/DEV/saltelli-wp/.saltelli-staging-secrets` (gitignored, 600).
+> **Secrets droplet:** `/root/.saltelli-secrets` + `/home/deploy/.saltelli-secrets` (600).
+> **Pending kernel reboot:** kernel 6.8.0-110 installato, in esecuzione 6.8.0-71 — reboot consigliato dopo Fase 4 al GO.
 
 ---
 
@@ -280,7 +293,29 @@ wp transient delete --all
 
 ---
 
-## Fase 5 — nginx vhost + SSL (15 min)
+## Fase 5 — nginx vhost + SSL — ✅ COMPLETATA 2026-04-30
+
+```
+✅ Doc root /var/www/saltelli (deploy:www-data, 755)
+✅ Holding page index.html (design system Saltelli, ~2.7KB, noindex+nofollow)
+✅ Vhost /etc/nginx/sites-available/saltelli con HTTPS auto-redirect
+✅ Cert Let's Encrypt:
+   issuer:     C=US, O=Let's Encrypt, CN=E8
+   subject:    CN=staging.studiolegalesaltelli.it
+   notBefore:  2026-04-30 09:57:49 GMT
+   notAfter:   2026-07-29 09:57:48 GMT
+   path:       /etc/letsencrypt/live/staging.studiolegalesaltelli.it/
+✅ TLS 1.2 + TLS 1.3 supportati (cipher: AES256-GCM-SHA384)
+✅ Auto-renew via certbot.timer (next: 2026-05-01 01:29 CEST)
+✅ HTTP → HTTPS 301 Moved Permanently
+✅ wp-config.php / xmlrpc.php / dotfile → 404/deny
+```
+
+**Note operative per Fase 3 al GO:**
+- Il vhost ha già `location ~ \.php$` configurato per PHP-FPM 8.2 socket → quando arriva WP basta sostituire `try_files $uri $uri/ /index.html` con `try_files $uri $uri/ /index.php?$args`.
+- Holding page in `/var/www/saltelli/index.html` va rimossa (o rinominata in `_holding.html`) prima del `wp core install`, altrimenti WP non risponde sulla `/`.
+
+Vhost finale (post-certbot) è già produttivo. Snippet originale conservato qui per riferimento:
 
 ```bash
 # Vhost
