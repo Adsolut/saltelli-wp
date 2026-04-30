@@ -10,39 +10,65 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 
 **Strategy:** "Legal Luxury Minimal" — boutique editoriale italiano, tipografia dominante, palette navy/crema/bronzo. Tier-1 deep clusters: Tributario · Lavoro · Famiglia LGBTQ+. The other 16 practice areas get tier-2 lighter pages.
 
-## Current state — v0.7.0-beta-pain-points-fixed
+## Current state — v0.17.4-beta-consolidation
 
-**Last updated:** 2026-04-30
+**Last updated:** 2026-04-30 (post-demo iteration)
 **Branch:** `main`
-**Demo:** ✅ presented to client today (passed first visual test)
-**Active phase:** Step E (Template Polish + Mobile Fix) — `PROMPT_AGENT_E_TEMPLATE_POLISH_V2.md`
-**Next:** Step F (Production Readiness) → Step G (Deploy DigitalOcean)
-**Infra staging (provisioned + setup 2026-04-30, in attesa GO per Fase 3+4):**
-- Droplet DO `saltelli-staging-ams3-01` ID `568158213` · IPv4 `178.62.207.50` · ams3 · s-1vcpu-2gb · Ubuntu 24.04 LTS · project Adsolut Web Agency
-- DNS `staging.studiolegalesaltelli.it` → `178.62.207.50` propagato (TTL ~300s)
-- Stack pronto: nginx 1.24 + PHP 8.2.30 + MySQL 8.0.45 + WP-CLI · DB `saltelli_wp` creato (vuoto) · user `saltelli` autenticato
-- HTTPS attivo: cert Let's Encrypt valido fino al **2026-07-29**, auto-renew via certbot.timer · TLS 1.2+1.3 · HTTP→HTTPS 301
-- URL pubblico ora: https://staging.studiolegalesaltelli.it → **holding page** `noindex,nofollow` (design system rispettato)
+**Demo:** ✅ presentata al cliente · in fase di feedback iteration
+**Live staging:** https://staging.studiolegalesaltelli.it allineato a v0.17.4 (Fasi 3+4 deploy completate de facto via rsync ad-hoc, runbook G non eseguito formalmente)
+**Active phase:** Demo feedback iteration (post-presentation polish)
+**Next:** Step F (Production Readiness — WOFF2, SRI, Lighthouse ≥92) → Cut produzione
+
+**Infra staging (consolidata 2026-04-30):**
+- Droplet DO `saltelli-staging-ams3-01` · IPv4 `178.62.207.50` · ams3 · s-1vcpu-2gb · Ubuntu 24.04 LTS
+- DNS `staging.studiolegalesaltelli.it` → propagato · HTTPS Let's Encrypt notAfter `2026-07-29` (auto-renew certbot.timer)
+- Stack: nginx 1.24 + PHP 8.2.30 + MySQL 8.0.45 + WP-CLI · DB `saltelli_wp` popolato
+- WP installato in `/var/www/saltelli` · theme su `wp-content/themes/saltelli/` (rsync da locale, NON git clone)
 - Hardening: UFW (22/80/443), fail2ban, SSH no-root no-password, swap 2GB, unattended-upgrades
-- Secrets locali: `.saltelli-staging-secrets` (gitignored) · droplet: `/home/deploy/.saltelli-secrets` (600)
-- Runbook: `PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` (Fasi 0-2, 5-6 completate; 3-4-7-8 in attesa GO)
-- Pending: reboot droplet per kernel 6.8.0-110 (non urgente, da fare dopo Fase 4)
+- Secrets locali: `.saltelli-staging-secrets` (gitignored) · droplet: `/home/deploy/.saltelli-secrets`
+- Runbook deploy: `PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` (Fasi 0-2, 5-6 originarie completate; 3-4 fatte ad-hoc fuori runbook; 7-8 ancora aperte)
+- Pending: reboot droplet per kernel 6.8.0-110
 
 ### What's done
 
 | Phase | Version | Status |
 |---|---|---|
-| Scaffolding | 0.1.0-scaffold | ✅ |
-| Multi-agent build (Style/Architect/GEO) | 0.2.0 | ✅ |
-| Beta locale Adsolut review | 0.2.1-beta-local | ✅ |
-| Polish (animations, hover, scroll) | 0.3.0-beta-polish | ✅ |
-| Impeccable refinement (6→2 issues) | 0.4.0-beta-impeccable | ✅ |
-| Content Migration (CPT populated, foto Emiliano) | 0.5.x-beta-content | ✅ |
-| Audit Alignment (sitemap Privati/Imprese/Contenzioso, /costi/, "consulenza gratuita" gancio) | 0.6.0-beta-audit-aligned | ✅ |
-| **Pain Points Refinement (7/7 fix CSS+H1 cleanup)** | **0.7.0-beta-pain-points-fixed** | **✅ CURRENT** |
-| Template Polish + Mobile Fix | 0.8.0-beta-templates-mobile | 🔄 IN FLIGHT |
-| Production Readiness (WOFF2, SRI, Lighthouse ≥92) | 1.0.0-rc1 | ⏸ |
-| Deploy DigitalOcean | 1.0.0 | ⏸ |
+| Scaffolding → Multi-agent → Polish → Impeccable | 0.1.0 → 0.4.0 | ✅ |
+| Content Migration + Audit Alignment + Pain Points | 0.5.0 → 0.7.0 | ✅ |
+| Template Polish + Mobile Fix | 0.8.0 | ✅ (storico) |
+| Pre-presentation polish (homepage, hero, eyebrow, atelier, ToV "tu") | 0.16.0 → 0.16.3 | ✅ |
+| Logo system v1.1 + sitemap audit + favicon fix + home fix | 0.17.0 → 0.17.1 | ✅ |
+| Contatti rework + rhythm + sede no-iframe + pills + wp_site_icon unhook | 0.17.2 → 0.17.3 | ✅ |
+| **Version consolidation + numbering policy (questo file)** | **0.17.4-beta-consolidation** | **✅ CURRENT** |
+| Step F — Production Readiness (WOFF2, SRI, Lighthouse ≥92) | 1.0.0-rc1 | ⏸ |
+| Cut produzione | 1.0.0 | ⏸ |
+
+### 0.17.x — consolidation log (4 collisioni di numbering risolte)
+
+Fra `Codencore` (istanza esterna) e `me`/Aldo c'è stato un parallel work che ha generato 8 commit con numerazione duplicata `0.17.0 / .1 / .2 / .3` (2 commit ciascuno, file disgiunti, nessun conflict tecnico). Storia git lasciata immutabile, version interna `SALTELLI_THEME_VERSION` riflette sempre l'ultimo arrivato.
+
+| SHA | Author | Tag interno | Cosa porta |
+|---|---|---|---|
+| `e63d989` | me | v0.17.0 | Logo system v1.1 (header/footer + favicon SVG monogramma) |
+| `0426aa3` | Codencore | v0.17.0 | Sitemap audit: 3 nuove competenze + 8 page top-level + menu rebuild gerarchico |
+| `8a7b36b` | me | v0.17.1 | Favicon fix (SVG corrotti 7B → ricostruiti dal brief) |
+| `5fbca6e` | Codencore | v0.17.1 | Home fix: areas list opacity stuck + hero white-space + tassonomia 3 nuove |
+| `ccb0ed8` | me | v0.17.2 | /contatti/ rework: form sopra contatti classici + rename + aria submit |
+| `e02a254` | Codencore | v0.17.2 | Hero white-space cleanup + section rhythm armonia 80/80 |
+| `2e9189f` | me | v0.17.3 | Sede text-only (iframe rimosso) + wp_site_icon legacy unhooked |
+| `7df2bb3` | Codencore | v0.17.3 | Tag pills text centered + padding symmetric |
+
+### Versioning policy (da v0.17.4 in poi)
+
+Per evitare future collisioni quando più agent committano in parallelo:
+
+1. **Prima di scegliere la version**, controllare l'ultimo `SALTELLI_THEME_VERSION` su `origin/main`:
+   ```sh
+   git fetch origin main && git show origin/main:wp-content/themes/saltelli/functions.php | grep SALTELLI_THEME_VERSION
+   ```
+2. **Bump monotonic**: se sull'origin c'è `0.X.Y`, il nuovo commit usa `0.X.(Y+1)` — mai lo stesso `Y`.
+3. **Suffix sempre presente** (`-beta-<topic>`) per leggibilità human nel `git log`.
+4. **Se push fallisce** per non-fast-forward, `git pull --rebase`, ribumpa e ripusha — non risolvere a mano i conflitti su `style.css` / `functions.php` mantenendo la propria version.
 
 ### What's where
 
