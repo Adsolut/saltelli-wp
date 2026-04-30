@@ -222,6 +222,11 @@
     // 7. Hover preview aree (desktop only, touch device escluso)
     bindAreaHover();
 
+    // 9. Filter tabs §01 Aree di pratica — v0.16.2
+    // Markup: <button class="sl-areas__filter" data-filter="<slug>"> + .sl-area data-area-cat="<slug>"
+    // data-filter="*" mostra tutte; altri filtri mostrano solo .sl-area con matching data-area-cat
+    bindAreaFilters();
+
     // 8. Resize debounced — ScrollTrigger refresh
     if (hasScrollTrigger) {
       let resizeTimer;
@@ -230,6 +235,44 @@
         resizeTimer = setTimeout(() => window.ScrollTrigger.refresh(), 200);
       });
     }
+  }
+
+  // ---- Filter tabs §01 Aree di pratica ------------------------------------
+  function bindAreaFilters() {
+    const containers = document.querySelectorAll('.sl-areas__filters');
+    if (!containers.length) return;
+
+    containers.forEach((tabs) => {
+      if (tabs.dataset.slFilterBound === '1') return;
+      const buttons = tabs.querySelectorAll('.sl-areas__filter');
+      // Risale al wrapper sl-areas/__list per individuare i target da filtrare
+      const section = tabs.closest('.sl-areas, .sl-areas--archive, .sl-areas-archive') || tabs.parentElement;
+      const items = section ? section.querySelectorAll('.sl-area') : document.querySelectorAll('.sl-area');
+      if (!buttons.length || !items.length) return;
+
+      const applyFilter = (filter) => {
+        items.forEach((item) => {
+          const cat = item.dataset.areaCat || '';
+          const visible = filter === '*' || cat === filter;
+          item.classList.toggle('is-filtered-out', !visible);
+        });
+      };
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const filter = btn.dataset.filter || '*';
+          buttons.forEach((b) => {
+            const isActive = b === btn;
+            b.classList.toggle('is-active', isActive);
+            b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+          });
+          applyFilter(filter);
+        });
+      });
+
+      tabs.dataset.slFilterBound = '1';
+    });
   }
 
   // ---- Hover preview .sl-area ---------------------------------------------

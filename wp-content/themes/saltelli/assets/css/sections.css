@@ -259,10 +259,9 @@
  * 3. AREAS — 19 aree di pratica
  * ========================================================= */
 .sl-areas {
-  /* v0.14.1 — padding-block ONLY: padding-inline e max-width sono delegati a .sl-container interno
-     (front-page.php:120, archive-competenza.php:30). Era `padding: 80px 20px` hardcoded → conflitto
-     col `--container-pad` clamp(24,5vw,96). Override successivo a riga 2761 ora ridondante ma lasciato. */
-  padding-block: 80px;
+  /* v0.14.1 padding-block ONLY (.sl-container delega inline);
+     v0.16.2 — ridotto da 80 → 56 mobile per gap sezioni più stretto */
+  padding-block: 56px;
 }
 .sl-areas__head {
   display: grid;
@@ -377,8 +376,8 @@
  * 4. STUDIO — prose editoriale
  * ========================================================= */
 .sl-studio {
-  /* v0.14.1 — padding-block ONLY (delegato a .sl-container interno) */
-  padding-block: 80px;
+  /* v0.14.1 padding-block; v0.16.2 80 → 56 mobile */
+  padding-block: 56px;
 }
 .sl-studio__head {
   display: grid;
@@ -442,7 +441,7 @@
 .sl-studio__plate-meta { margin-top: 4px; text-align: center; }
 
 @media (min-width: 1024px) {
-  .sl-studio { padding-block: 128px; }
+  .sl-studio { padding-block: 80px; /* v0.16.2 era 128, ridotto per gap sezioni più stretto */ }
   .sl-studio__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
@@ -474,8 +473,8 @@
  * 5. TEAM — Avvocati
  * ========================================================= */
 .sl-team {
-  /* v0.14.1 — padding-block ONLY (delegato a .sl-container interno) */
-  padding-block: 80px;
+  /* v0.14.1 padding-block; v0.16.2 80 → 56 mobile */
+  padding-block: 56px;
 }
 .sl-team__head {
   display: grid;
@@ -545,7 +544,7 @@
 }
 
 @media (min-width: 1024px) {
-  .sl-team { padding-block: 128px; }
+  .sl-team { padding-block: 80px; /* v0.16.2 era 128 */ }
   .sl-team__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
@@ -585,8 +584,8 @@
  * 6. CASES — Casi rappresentativi
  * ========================================================= */
 .sl-cases {
-  /* v0.14.1 — padding-block ONLY (delegato a .sl-container interno) */
-  padding-block: 80px;
+  /* v0.14.1 padding-block; v0.16.2 80 → 56 mobile */
+  padding-block: 56px;
 }
 .sl-cases__head {
   display: grid;
@@ -623,7 +622,7 @@
 }
 
 @media (min-width: 1024px) {
-  .sl-cases { padding-block: 128px; }
+  .sl-cases { padding-block: 80px; /* v0.16.2 era 128 */ }
   .sl-cases__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
@@ -644,8 +643,8 @@
  * 7. PRESS — Earned media strip
  * ========================================================= */
 .sl-press {
-  /* v0.14.1 — padding-block ONLY (delegato a .sl-container interno) */
-  padding-block: 64px;
+  /* v0.14.1 padding-block; v0.16.2 64 → 48 mobile */
+  padding-block: 48px;
   background: var(--surface);
 }
 .sl-press__inner {
@@ -667,7 +666,7 @@
 }
 
 @media (min-width: 1024px) {
-  .sl-press { padding-block: 96px; }
+  .sl-press { padding-block: 64px; /* v0.16.2 era 96 */ }
   .sl-press__inner {
     display: flex;
     align-items: center;
@@ -693,8 +692,8 @@
  * 8. CONTACT
  * ========================================================= */
 .sl-contact {
-  /* v0.14.1 — padding-block ONLY (delegato a .sl-container interno) */
-  padding-block: 96px 64px;
+  /* v0.14.1 padding-block; v0.16.2 96/64 → 64/48 mobile */
+  padding-block: 64px 48px;
 }
 .sl-contact__head {
   display: grid;
@@ -724,7 +723,7 @@
 .sl-contact__cta-wrap { margin-top: 48px; }
 
 @media (min-width: 1024px) {
-  .sl-contact { padding-block: 160px 128px; }
+  .sl-contact { padding-block: 96px 80px; /* v0.16.2 era 160/128 */ }
   .sl-contact__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
@@ -999,9 +998,14 @@
   }
 }
 
-/* Section head + title (usato da front-page.php) */
+/* Section head + title (usato da front-page.php)
+   v0.16.2 — Direttiva orchestrator: eyebrow SOPRA title, mai side-by-side.
+   Era grid `auto 1fr` desktop → eyebrow + title affiancati ("§ 01 — AREE DI PRATICA"
+   a sinistra del titolo). Cambiato a single column con gap 16-24px tra
+   eyebrow e title. */
 .sl-section-head {
   display: grid;
+  grid-template-columns: 1fr;
   gap: 16px;
   margin-bottom: 32px;
 }
@@ -1016,9 +1020,8 @@
 }
 @media (min-width: 768px) {
   .sl-section-head {
-    grid-template-columns: auto 1fr;
-    gap: 32px;
-    align-items: baseline;
+    grid-template-columns: 1fr;
+    gap: 24px;
     margin-bottom: 48px;
   }
   .sl-section-title { font-size: clamp(40px, 5vw, 72px); }
@@ -3244,6 +3247,20 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 }
 .sl-footer__areas-list {
     line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   v0.16.2 — Filter tabs §01 (.sl-areas__filter)
+   JS bindAreaFilters() in main.js aggiunge .is-filtered-out su .sl-area
+   non-matching del filtro corrente. CSS nasconde con transition fade.
+   ─────────────────────────────────────────────────────────────── */
+.sl-area.is-filtered-out {
+    display: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+    .sl-area {
+        transition: opacity var(--dur-fast) var(--ease-editorial);
+    }
 }
 
 /* ═══════════════════════════════════════════════════════════════

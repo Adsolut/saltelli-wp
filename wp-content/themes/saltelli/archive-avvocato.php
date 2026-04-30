@@ -24,7 +24,7 @@ $layout_team = saltelli_team_grid_layout();
                 <em><?php esc_html_e('professionisti.', 'saltelli'); ?></em>
             </h1>
             <p class="sl-team__archive-lede">
-                <?php esc_html_e('Una bottega di quattro avvocati a Chiaia. Ogni cliente è una storia, e ogni storia merita il tempo di essere capita.', 'saltelli'); ?>
+                <?php esc_html_e('Un atelier di quattro avvocati a Chiaia. Ogni cliente è una storia, e ogni storia merita il tempo di essere capita.', 'saltelli'); ?>
             </p>
         </header>
 
