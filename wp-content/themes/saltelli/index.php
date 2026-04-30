@@ -12,8 +12,6 @@ get_header();
 
         <header class="sl-section-head">
             <?php saltelli_render_breadcrumb(); ?>
-
-            <div class="sl-mono"><?php esc_html_e('Editoriale', 'saltelli'); ?></div>
             <h1 class="sl-section-title">
                 <?php
                 if (is_home() && !is_front_page() && get_option('page_for_posts')) {

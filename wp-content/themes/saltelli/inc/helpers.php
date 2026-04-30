@@ -140,6 +140,28 @@ function saltelli_get_attorneys_for_competenza($competenza_id) {
  * @param int|null $post_id
  * @return array<int, array{name:string, url?:string}>
  */
+/**
+ * v0.13.8 — Centralizza il label visualizzato nel breadcrumb per post-type
+ * archive node. Risolve incoerenza CPT label "Competenze" vs menu nav
+ * "Aree di Pratica" vs H1 "Diciannove aree." → unico label "Aree di pratica"
+ * sul frontend (admin WP labels restano "Competenze" per Duccio UX).
+ *
+ * @param string $post_type
+ * @return string Friendly label
+ */
+function saltelli_breadcrumb_pt_label($post_type) {
+    $map = [
+        'competenza' => __('Aree di pratica', 'saltelli'),
+        'avvocato'   => __('Avvocati', 'saltelli'),
+        'post'       => __('Editoriale', 'saltelli'),
+    ];
+    if (isset($map[$post_type])) {
+        return $map[$post_type];
+    }
+    $obj = get_post_type_object($post_type);
+    return $obj ? (string) $obj->labels->name : (string) $post_type;
+}
+
 function saltelli_get_breadcrumb_chain($post_id = null) {
     $post_id = $post_id ?: get_queried_object_id();
     $chain = [];
@@ -157,21 +179,23 @@ function saltelli_get_breadcrumb_chain($post_id = null) {
         // get_post_type() può essere vuoto su archive senza post.
         // get_queried_object() ritorna il WP_Post_Type su archive CPT.
         $obj = get_queried_object();
-        if ($obj instanceof WP_Post_Type) {
-            $chain[] = ['name' => $obj->labels->name];
-        } else {
-            $pt  = get_query_var('post_type');
-            $pto = $pt ? get_post_type_object(is_array($pt) ? $pt[0] : $pt) : null;
-            if ($pto) {
-                $chain[] = ['name' => $pto->labels->name];
-            }
-        }
+        $pt  = $obj instanceof WP_Post_Type ? $obj->name : (string) get_query_var('post_type');
+        $chain[] = ['name' => saltelli_breadcrumb_pt_label($pt)];
         return $chain;
     }
 
     if (is_tax() || is_category() || is_tag()) {
         $term = get_queried_object();
         if ($term && !is_wp_error($term)) {
+            // v0.13.8 — aggiungi parent CPT archive node per taxonomy 'tipo-area'
+            // (collegata al CPT 'competenza'). Risolve breadcrumb truncation
+            // 'Home / Per i Privati' → 'Home / Aree di pratica / Per i Privati'.
+            if (is_tax('tipo-area')) {
+                $chain[] = [
+                    'name' => saltelli_breadcrumb_pt_label('competenza'),
+                    'url'  => get_post_type_archive_link('competenza'),
+                ];
+            }
             $chain[] = ['name' => $term->name];
         }
         return $chain;
@@ -188,9 +212,9 @@ function saltelli_get_breadcrumb_chain($post_id = null) {
 
     // CPT singolo: aggiungi link archive
     if ($post->post_type === 'avvocato') {
-        $chain[] = ['name' => __('Avvocati', 'saltelli'), 'url' => get_post_type_archive_link('avvocato')];
+        $chain[] = ['name' => saltelli_breadcrumb_pt_label('avvocato'), 'url' => get_post_type_archive_link('avvocato')];
     } elseif ($post->post_type === 'competenza') {
-        $chain[] = ['name' => __('Competenze', 'saltelli'), 'url' => get_post_type_archive_link('competenza')];
+        $chain[] = ['name' => saltelli_breadcrumb_pt_label('competenza'), 'url' => get_post_type_archive_link('competenza')];
     } elseif ($post->post_type === 'post') {
         $blog_page_id = (int) get_option('page_for_posts');
         if ($blog_page_id) {
