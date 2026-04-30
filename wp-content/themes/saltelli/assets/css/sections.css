@@ -1918,21 +1918,32 @@ html:not(.js-reveal-ready) [data-reveal] {
 }
 
 /* ───────────────────────────────────────────────────────────────
-   FIX M2 — Mobile (≤767px): hero headline forza wrap su 3 righe
-   Ogni .sl-hero__word diventa block per garantire un word-per-line.
-   Risolve il pattern attuale "Diritto, con" + "misura." (2 righe)
-   richiesto dal design "Diritto," / "con" / "misura." (3 righe).
+   FIX M2 v2 (v0.16.1) — Hero headline pattern "Diritto," / "con misura."
+   Direttiva orchestrator: "sposta 'con' giù insieme a misura"
+   Pattern target su TUTTI i viewport:
+     riga 1: "Diritto,"
+     riga 2: "con misura."
+   Solo la PRIMA parola va a capo (display block), le successive restano
+   inline-block così "con" + "misura." stanno sulla stessa riga.
+   v0.15 markup: <span class="sl-word sl-hero__word"> dual class.
    ─────────────────────────────────────────────────────────────── */
+.sl-hero__headline .sl-hero__word:first-child,
+.sl-hero__headline .sl-word:first-child {
+    display: block;
+    margin-right: 0;
+}
+
 @media (max-width: 767px) {
     .sl-hero__headline {
         font-size: clamp(56px, 14vw, 80px);
         line-height: 1.05;
         letter-spacing: -0.02em;
     }
-    .sl-hero__headline .sl-hero__word,
-    .sl-hero__headline .sl-word {
-        display: block;
-        margin-right: 0;
+    /* Parole successive "con" + "misura." → inline-block, restano insieme */
+    .sl-hero__headline .sl-hero__word:not(:first-child),
+    .sl-hero__headline .sl-word:not(:first-child) {
+        display: inline-block;
+        margin-right: 12px;
     }
 }
 

@@ -8,7 +8,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '0.16.0-beta-tone-of-voice');
+define('SALTELLI_THEME_VERSION', '0.16.1-beta-hero-mobile-2lines');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
