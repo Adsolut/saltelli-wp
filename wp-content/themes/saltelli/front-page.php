@@ -72,7 +72,7 @@ $press = saltelli_press_outlets();
                 foreach ($words as $i => $w) :
                     if ($w === '') continue;
                     ?>
-                    <span class="sl-hero__word" data-i="<?php echo (int) $i; ?>"><?php echo esc_html($w); ?></span>
+                    <span class="sl-word sl-hero__word" data-i="<?php echo (int) $i; ?>"><?php echo esc_html($w); ?></span>
                 <?php endforeach; ?>
             </h1>
 
