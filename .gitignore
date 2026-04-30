@@ -4,6 +4,8 @@ config.local.json
 config.local.*.json
 # Eccezione: il template (no secrets) va versionato.
 !config.local.example.json
+.saltelli-staging-secrets*
+.saltelli-prod-secrets*
 .env
 .env.*
 !.env.example

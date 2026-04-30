@@ -8,7 +8,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '0.12.0-beta-layout-harmonized');
+define('SALTELLI_THEME_VERSION', '0.13.5-beta-homepage-fidelity');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
@@ -21,3 +21,4 @@ require_once SALTELLI_THEME_DIR . '/inc/acf-fields.php';
 require_once SALTELLI_THEME_DIR . '/inc/schema/schema-loader.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/meta-tags.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/ai-files.php';
+require_once SALTELLI_THEME_DIR . '/inc/seo/legacy-redirects.php';

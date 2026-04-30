@@ -222,6 +222,46 @@ function saltelli_get_breadcrumb_chain($post_id = null) {
 }
 
 /**
+ * IA Unification v0.13.0 — Render breadcrumb HTML uniforme.
+ *
+ * Emit del solo markup HTML (`<nav class="sl-page__breadcrumb">`).
+ * Lo schema BreadcrumbList JSON-LD è già emesso a livello sito da
+ * `inc/schema/schema-loader.php` (active su 12/12 pagine, verificato
+ * in DOM audit). Questo helper unifica solo la presentazione visiva
+ * cross-template (audit CRO §1.3.1 + Audit GEO requirement).
+ *
+ * Skip rendering quando chain ha < 2 nodi (homepage o catena vuota).
+ *
+ * @param int|null $post_id Post id override; default = queried object.
+ * @return void
+ */
+function saltelli_render_breadcrumb($post_id = null) {
+    if (!function_exists('saltelli_get_breadcrumb_chain')) return;
+    $chain = saltelli_get_breadcrumb_chain($post_id);
+    if (empty($chain) || count($chain) < 2) return;
+
+    $last_idx = count($chain) - 1;
+    ?>
+    <nav class="sl-mono sl-page__breadcrumb" aria-label="<?php esc_attr_e('Breadcrumb', 'saltelli'); ?>">
+        <?php foreach ($chain as $i => $node) :
+            $name = isset($node['name']) ? (string) $node['name'] : '';
+            $url  = isset($node['url'])  ? (string) $node['url']  : '';
+            $is_last = ($i === $last_idx);
+            ?>
+            <?php if ($i > 0) : ?>
+                <span class="sl-page__breadcrumb-sep" aria-hidden="true"> / </span>
+            <?php endif; ?>
+            <?php if (!$is_last && $url !== '') : ?>
+                <a href="<?php echo esc_url($url); ?>"><?php echo esc_html($name); ?></a>
+            <?php else : ?>
+                <span aria-current="page"><?php echo esc_html($name); ?></span>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </nav>
+    <?php
+}
+
+/**
  * Ritorna il numero di FAQ compilate per una competenza.
  * Utile per decidere se iniettare schema FAQPage.
  *

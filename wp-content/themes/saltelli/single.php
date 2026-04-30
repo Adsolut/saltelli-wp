@@ -33,6 +33,8 @@ while (have_posts()) :
 
         <header class="sl-post__hero">
             <div class="sl-container sl-post__hero-inner">
+                <?php saltelli_render_breadcrumb(); ?>
+
                 <a class="sl-mono sl-post__back" href="<?php echo esc_url(home_url('/blog/')); ?>">
                     ← <?php esc_html_e('Editoriale', 'saltelli'); ?>
                 </a>

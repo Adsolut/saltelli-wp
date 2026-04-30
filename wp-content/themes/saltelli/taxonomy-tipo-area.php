@@ -36,11 +36,7 @@ $competenze = get_posts([
     <div class="sl-container">
 
         <header class="sl-section-head sl-areas__archive-head">
-            <nav class="sl-mono sl-page__breadcrumb" aria-label="<?php esc_attr_e('Breadcrumb', 'saltelli'); ?>">
-                <a href="<?php echo esc_url(home_url('/')); ?>"><?php esc_html_e('Home', 'saltelli'); ?></a>
-                / <a href="<?php echo esc_url(get_post_type_archive_link('competenza')); ?>"><?php esc_html_e('Competenze', 'saltelli'); ?></a>
-                / <span><?php echo esc_html($term_name); ?></span>
-            </nav>
+            <?php saltelli_render_breadcrumb(); ?>
 
             <h1 class="sl-section-title">
                 <?php echo esc_html($term_name); ?><br>

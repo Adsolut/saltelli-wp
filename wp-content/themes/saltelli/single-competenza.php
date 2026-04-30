@@ -26,6 +26,8 @@ while (have_posts()) :
 
         <header class="sl-competenza__hero">
             <div class="sl-container">
+                <?php saltelli_render_breadcrumb(); ?>
+
                 <a class="sl-mono sl-competenza__back" href="<?php echo esc_url(get_post_type_archive_link('competenza')); ?>">
                     ← <?php esc_html_e('Tutte le aree', 'saltelli'); ?>
                 </a>

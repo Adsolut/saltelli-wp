@@ -17,6 +17,7 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 **Demo:** ✅ presented to client today (passed first visual test)
 **Active phase:** Step E (Template Polish + Mobile Fix) — `PROMPT_AGENT_E_TEMPLATE_POLISH_V2.md`
 **Next:** Step F (Production Readiness) → Step G (Deploy DigitalOcean)
+**Infra staging (provisioned 2026-04-30, dormiente in attesa GO):** droplet DO `saltelli-staging-ams3-01` ID `568158213`, IPv4 `178.62.207.50`, ams3, s-1vcpu-2gb, Ubuntu 24.04 LTS, project Adsolut Web Agency. Runbook: `PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md`. DNS `staging.studiolegalesaltelli.it` da puntare a quell'IP quando l'orchestratore dà GO.
 
 ### What's done
 
@@ -46,6 +47,7 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 **Agent prompts:**
 - `PROMPT_AGENT_E_TEMPLATE_POLISH_V2.md` — current
 - `PROMPT_AGENT_F_PRODUCTION_READINESS.md` — next
+- `PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` — runbook deploy (Fase 0 completata, Fasi 1-8 in attesa GO)
 - `_archive/prompts-completed/` — past prompts (informational, do NOT execute)
 
 **Reports** (in `.claude/knowledge/design/sessione-1/reports/`):

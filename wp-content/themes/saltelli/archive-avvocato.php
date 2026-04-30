@@ -18,6 +18,8 @@ $layout_team = saltelli_team_grid_layout();
 <section class="sl-team sl-team--archive">
     <div class="sl-container">
         <header class="sl-section-head">
+            <?php saltelli_render_breadcrumb(); ?>
+
             <div class="sl-mono"><?php esc_html_e('Studio · Avvocati', 'saltelli'); ?></div>
             <h1 class="sl-section-title">
                 <?php esc_html_e('Quattro', 'saltelli'); ?><br>

@@ -30,6 +30,8 @@ while (have_posts()) :
 
         <header class="sl-attorney__hero">
             <div class="sl-container sl-attorney__hero-inner">
+                <?php saltelli_render_breadcrumb(); ?>
+
                 <a class="sl-mono sl-attorney__back" href="<?php echo esc_url(get_post_type_archive_link('avvocato')); ?>">
                     ← <?php esc_html_e('Tutti gli avvocati', 'saltelli'); ?>
                 </a>

@@ -102,7 +102,9 @@
 
 @media (min-width: 1024px) {
   .sl-header__inner {
-    padding: 24px var(--container-pad);
+    /* D2 fidelity — JSX exact: padding fisso 24px 96px desktop (no clamp).
+       Mobile resta padding 16px 20px del base. */
+    padding: 24px 96px;
     display: grid;
     grid-template-columns: auto 1fr auto;
     gap: 48px;
@@ -975,11 +977,17 @@
     transform: translateY(40px);
   }
   .sl-hero__subheadline { font-size: 22px; margin-bottom: 16px; }
+  /* D9 fidelity — JSX exact: scroll indicator orizzontale absolute bottom-left.
+     Mobile (<1024) display: none ereditato da .sl-hero__scroll base. */
   .sl-hero__scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 96px;
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-top: 32px;
+    margin-top: 0;
+    z-index: 5;
   }
   .sl-hero__scroll-line {
     display: block;
@@ -2800,23 +2808,21 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     margin-top: var(--sl-space-6);  /* 64px sopra h3 sub-sezione */
 }
 
-/* TASK 5 — Homepage Hero compattata (colophon above-fold @1440x900)
-   Pre v0.12: hero padding-block clamp(48,8vh,120) + colophon align:end →
-   colophon top:725px su 900px viewport → SOTTO il fold.
-   Fix: padding-block ridotto a --space-7/--space-5 (80/48), grid layout
-   con colophon align-self:start (top-right) invece di end (bottom-right).
-   Risultato: hero text occupa full vertical, colophon visibile above-fold. */
-.sl-hero {
-    padding-block: var(--space-hero-top) var(--space-hero-bottom);
-    min-height: calc(100vh - var(--space-hero-top));
-}
+/* HOMEPAGE FIDELITY v0.13.5 — Return-to-source vs Claude Design JSX
+   Sostituisce il blocco TASK 5 v0.12 che batteva i valori JSX-esatti
+   già presenti a riga 147-252. Restoring D3 + D4 + D8 fidelity:
+   D3 .sl-hero min-height 820px desktop (era calc 100vh override)
+   D4 .sl-hero__headline clamp(80,9vw,132) lh 0.98 ls -0.035 (era clamp 116)
+   D8 .sl-hero__colophon align-self: end (era start) + grid 8fr/4fr
+   Mobile mantiene .sl-hero base (riga 147-200) coerente col design responsive.
+*/
 
 @media (min-width: 1024px) {
     .sl-hero__inner {
         display: grid;
-        grid-template-columns: minmax(0, 8fr) minmax(280px, 4fr);
-        column-gap: var(--sl-space-7);
-        align-items: start;
+        grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+        column-gap: 64px;
+        align-items: stretch;
     }
     .sl-hero__main {
         grid-column: 1;
@@ -2824,16 +2830,49 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     }
     .sl-hero__colophon {
         grid-column: 2;
-        align-self: start;
-        padding-top: var(--sl-space-5);
+        align-self: end;
+        padding-top: 0;
         margin-top: 0;
     }
 }
 
-/* Headline scaled per garantire 3 righe + colophon above-fold @1440x900 */
-.sl-hero__headline {
-    font-size: clamp(56px, 7.5vw, 116px);
-    line-height: 1;
+/* ═══════════════════════════════════════════════════════════════
+   IA UNIFICATION v0.13.0 — Breadcrumb cross-template consistency
+   Audit CRO §1.3.1: "breadcrumb diverso da pagina a pagina va unificato".
+   Helper saltelli_render_breadcrumb() emette markup uniforme su 11/12 template.
+   Schema BreadcrumbList già delegato a meta-tags.php (12/12 pagine).
+   ═══════════════════════════════════════════════════════════════ */
+.sl-page__breadcrumb {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--sl-space-3);
+    display: block;
+    line-height: 1.4;
+}
+.sl-page__breadcrumb a {
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color var(--dur-fast) var(--ease-editorial),
+                border-color var(--dur-fast) var(--ease-editorial);
+}
+.sl-page__breadcrumb a:hover,
+.sl-page__breadcrumb a:focus-visible {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+.sl-page__breadcrumb-sep {
+    color: var(--text-muted);
+    opacity: 0.5;
+    margin-inline: 4px;
+    font-size: 11px;
+}
+.sl-page__breadcrumb [aria-current="page"] {
+    color: var(--primary);
+    font-weight: 500;
 }
 
 /* TASK 6 — Touch target 48×48 minimo mobile (audit CRO §12.3 compliance)

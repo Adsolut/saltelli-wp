@@ -30,6 +30,8 @@ $tipo_terms = get_terms([
     <div class="sl-container">
 
         <header class="sl-section-head sl-areas__archive-head">
+            <?php saltelli_render_breadcrumb(); ?>
+
             <div class="sl-mono"><?php esc_html_e('Studio · Aree di pratica', 'saltelli'); ?></div>
             <h1 class="sl-section-title">
                 <?php esc_html_e('Diciannove aree.', 'saltelli'); ?><br>
