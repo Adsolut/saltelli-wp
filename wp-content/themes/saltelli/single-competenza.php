@@ -186,6 +186,9 @@ while (have_posts()) :
                     <span><?php echo esc_html($cta_label); ?></span>
                     <span class="arrow" aria-hidden="true">→</span>
                 </a>
+                <div class="sl-mono sl-competenza__cta-note">
+                    <?php esc_html_e('Prima consulenza conoscitiva gratuita · Risposta entro 24 ore · In studio o online', 'saltelli'); ?>
+                </div>
             </div>
         </section>
 

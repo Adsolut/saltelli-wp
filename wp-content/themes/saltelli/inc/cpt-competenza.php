@@ -97,7 +97,7 @@ function saltelli_register_cpt_competenza() {
         'show_in_rest'      => true,
         'query_var'         => true,
         'rewrite'           => [
-            'slug'         => 'tipo',
+            'slug'         => 'tipo-area',
             'with_front'   => false,
             'hierarchical' => true,
         ],

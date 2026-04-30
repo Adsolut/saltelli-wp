@@ -1519,3 +1519,198 @@ html:not(.js-reveal-ready) [data-reveal] {
     border-color: var(--primary);
     transform: translateX(2px);
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   AUDIT ALIGNMENT — Dropdown menu primary (Aree di Pratica)
+   Sub-menu emesso da wp_nav_menu con classi menu-item-has-children + sub-menu
+   ═══════════════════════════════════════════════════════════════ */
+.sl-header__nav .menu-item-has-children {
+    position: relative;
+}
+.sl-header__nav .menu-item-has-children > a::after {
+    content: " ↓";
+    font-size: 10px;
+    margin-left: 4px;
+    opacity: 0.6;
+}
+.sl-header__nav .sub-menu {
+    list-style: none;
+    margin: 0;
+    padding: 16px 20px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 240px;
+    background: var(--background);
+    border: 1px solid var(--border);
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 100;
+    box-shadow: 0 8px 32px rgba(27, 43, 75, 0.08);
+}
+.sl-header__nav .menu-item-has-children:hover > .sub-menu,
+.sl-header__nav .menu-item-has-children:focus-within > .sub-menu {
+    display: flex;
+}
+.sl-header__nav .sub-menu li {
+    list-style: none;
+    margin: 0;
+}
+.sl-header__nav .sub-menu a {
+    display: block;
+    font-size: 13px;
+    padding: 6px 0;
+    white-space: nowrap;
+    color: var(--text);
+    transition: color var(--dur-fast) var(--ease-editorial);
+}
+.sl-header__nav .sub-menu a:hover,
+.sl-header__nav .sub-menu a:focus-visible {
+    color: var(--accent);
+}
+
+/* Mobile / tablet: stack inline, no overlay positioning */
+@media (max-width: 1023px) {
+    .sl-header__nav .menu-item-has-children > a::after {
+        content: "";
+    }
+    .sl-header__nav .sub-menu {
+        position: static;
+        display: flex;
+        border: none;
+        box-shadow: none;
+        padding: 8px 0 8px 16px;
+        background: transparent;
+        min-width: 0;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AUDIT ALIGNMENT — Hero CTA note + Competenza CTA note + Contact eyebrow
+   "Prima consulenza conoscitiva gratuita" gancio editoriale
+   ═══════════════════════════════════════════════════════════════ */
+.sl-hero__cta-note,
+.sl-competenza__cta-note,
+.sl-contact__eyebrow {
+    margin-top: 16px;
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+}
+.sl-competenza__cta-note { margin-top: 12px; }
+.sl-contact__eyebrow { margin-top: 0; margin-bottom: 24px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   AUDIT ALIGNMENT — Pagina /costi/ layout editoriale
+   ═══════════════════════════════════════════════════════════════ */
+.sl-costi__intro {
+    max-width: 720px;
+    margin: 64px auto 64px;
+    padding-inline: clamp(24px, 5vw, 96px);
+}
+.sl-costi__capsule {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2vw, 26px);
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--primary);
+    margin: 0;
+}
+.sl-costi__section {
+    max-width: 720px;
+    margin: 0 auto 64px;
+    padding-inline: clamp(24px, 5vw, 96px);
+}
+.sl-costi__section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 44px);
+    color: var(--primary);
+    letter-spacing: -0.02em;
+    margin-block: 16px 24px;
+    font-weight: 400;
+}
+.sl-costi__section p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    margin-block: 16px;
+}
+.sl-costi__section ul {
+    padding-left: 24px;
+    margin-block: 16px;
+}
+.sl-costi__section li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+    font-size: 16px;
+}
+.sl-costi__section .sl-acc {
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+}
+.sl-costi__section .sl-acc:first-of-type {
+    border-top: 1px solid var(--border);
+}
+.sl-costi__section .sl-acc[open] .sl-acc__summary::after {
+    transform: rotate(45deg);
+}
+.sl-costi__section .sl-acc__summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 24px 0;
+    font-family: var(--font-display);
+    font-size: clamp(18px, 1.5vw, 22px);
+    color: var(--primary);
+    letter-spacing: -0.01em;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 32px;
+}
+.sl-costi__section .sl-acc__summary::-webkit-details-marker {
+    display: none;
+}
+.sl-costi__section .sl-acc__summary::after {
+    content: "+";
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: transform var(--dur-base) var(--ease-editorial);
+}
+.sl-costi__section .sl-acc__panel {
+    padding: 0 0 24px;
+    max-width: 60ch;
+}
+.sl-costi__section .sl-acc__panel p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text);
+}
+.sl-costi__cta {
+    max-width: 720px;
+    margin: 96px auto 0;
+    padding: 64px clamp(24px, 5vw, 96px);
+    background: var(--surface);
+    text-align: center;
+}
+.sl-costi__cta h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 44px);
+    color: var(--primary);
+    margin-bottom: 16px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+}
+.sl-costi__cta p {
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+.sl-costi__cta .sl-btn {
+    margin-top: 8px;
+}

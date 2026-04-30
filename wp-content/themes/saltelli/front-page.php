@@ -12,7 +12,7 @@ $studio = saltelli_studio_data();
 $hero_eyebrow    = saltelli_option('hero_eyebrow', 'Studio Legale · Napoli · Chiaia · Dal 1999');
 $hero_headline   = saltelli_option('hero_headline', 'Diritto, con misura.');
 $hero_sub        = saltelli_option('hero_subheadline', "Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, diciannove aree di pratica, vent'anni di lavoro accanto a famiglie e imprese di Napoli.");
-$hero_cta_label  = saltelli_option('hero_cta_label', 'Prenota un primo incontro');
+$hero_cta_label  = saltelli_option('hero_cta_label', 'Prenota una consulenza gratuita');
 $hero_cta_url    = saltelli_option('hero_cta_url', '/contatti/');
 
 $col_indirizzo = saltelli_option('colophon_indirizzo', "Via Vannella Gaetani, 27\n80121 Napoli — Chiaia");
@@ -84,6 +84,9 @@ $press = saltelli_press_outlets();
                 <span><?php echo esc_html($hero_cta_label); ?></span>
                 <span class="arrow" aria-hidden="true">→</span>
             </a>
+            <div class="sl-mono sl-hero__cta-note">
+                <?php esc_html_e('Prima consulenza conoscitiva — risposta entro 24 ore', 'saltelli'); ?>
+            </div>
         </div>
 
         <aside class="sl-hero__colophon" aria-label="<?php esc_attr_e('Colophon studio', 'saltelli'); ?>">
@@ -318,11 +321,16 @@ $press = saltelli_press_outlets();
     <div class="sl-container">
         <div class="sl-section-head">
             <div class="sl-mono">§ 06 — <?php esc_html_e('Contatti', 'saltelli'); ?></div>
-            <h2 class="sl-section-title sl-contact__title" id="contact-h">
-                <?php esc_html_e('Prenoti', 'saltelli'); ?><br>
-                <?php esc_html_e('un primo', 'saltelli'); ?><br>
-                <em><?php esc_html_e('incontro.', 'saltelli'); ?></em>
-            </h2>
+            <div>
+                <div class="sl-mono sl-contact__eyebrow">
+                    <?php esc_html_e('Prima consulenza conoscitiva gratuita · Risposta entro 24 ore', 'saltelli'); ?>
+                </div>
+                <h2 class="sl-section-title sl-contact__title" id="contact-h">
+                    <?php esc_html_e('Prenoti', 'saltelli'); ?><br>
+                    <?php esc_html_e('un primo', 'saltelli'); ?><br>
+                    <em><?php esc_html_e('incontro.', 'saltelli'); ?></em>
+                </h2>
+            </div>
         </div>
 
         <div class="sl-contact__grid">
