@@ -34,18 +34,12 @@ while (have_posts()) :
             </div>
         </header>
 
-        <section class="sl-page__content">
-            <div class="sl-container">
-                <div class="sl-page__prose"><?php the_content(); ?></div>
-            </div>
-        </section>
-
         <?php if (is_page('contatti')) : ?>
             <section class="sl-page-contatti__form" aria-labelledby="contatti-form-h">
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Scrivici', 'saltelli'); ?></div>
                     <h2 class="sl-section-title" id="contatti-form-h">
-                        <?php esc_html_e('Raccontaci la tua pratica', 'saltelli'); ?>
+                        <?php esc_html_e('Raccontaci il tuo problema', 'saltelli'); ?>
                     </h2>
                     <p class="sl-page-contatti__form-lede">
                         <?php esc_html_e('Compila i campi qui sotto. La prima consulenza conoscitiva è gratuita e dura circa 30 minuti. Risponderemo entro 24 ore.', 'saltelli'); ?>
@@ -65,7 +59,15 @@ while (have_posts()) :
                     ?>
                 </div>
             </section>
+        <?php endif; ?>
 
+        <section class="sl-page__content">
+            <div class="sl-container">
+                <div class="sl-page__prose"><?php the_content(); ?></div>
+            </div>
+        </section>
+
+        <?php if (is_page('contatti')) : ?>
             <section class="sl-page-contatti__map" id="mappa" aria-labelledby="contatti-map-h">
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Sede', 'saltelli'); ?></div>

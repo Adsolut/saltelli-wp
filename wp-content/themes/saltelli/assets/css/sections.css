@@ -3101,10 +3101,18 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     border-bottom-color: var(--accent);
 }
 
+/* Privacy row — più aria sopra il submit */
+.sl-page-contatti__form .sl-form__row--privacy,
+.wpcf7-form .wpcf7-acceptance {
+    margin-top: 8px;
+    margin-bottom: 36px;
+}
+
 /* Submit button — usa .sl-btn editorial */
 .sl-form__row--submit,
 .wpcf7-form > p.submit {
-    margin-top: 32px;
+    margin-top: 40px;
+    margin-bottom: 32px;
 }
 .wpcf7-form input[type="submit"],
 .wpcf7-form .wpcf7-submit {
@@ -3130,7 +3138,8 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 
 /* Footer note + CF7 response messages */
 .sl-form__note {
-    margin-top: 16px;
+    margin-top: 28px;
+    margin-bottom: 16px;
     color: var(--text-muted);
     font-size: 11px;
 }
