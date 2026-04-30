@@ -41,6 +41,31 @@ while (have_posts()) :
         </section>
 
         <?php if (is_page('contatti')) : ?>
+            <section class="sl-page-contatti__form" aria-labelledby="contatti-form-h">
+                <div class="sl-container">
+                    <div class="sl-mono">§ <?php esc_html_e('Scrivici', 'saltelli'); ?></div>
+                    <h2 class="sl-section-title" id="contatti-form-h">
+                        <?php esc_html_e('Raccontaci la tua pratica', 'saltelli'); ?>
+                    </h2>
+                    <p class="sl-page-contatti__form-lede">
+                        <?php esc_html_e('Compila i campi qui sotto. La prima consulenza conoscitiva è gratuita e dura circa 30 minuti. Risponderemo entro 24 ore.', 'saltelli'); ?>
+                    </p>
+                    <?php
+                    if (shortcode_exists('contact-form-7')) {
+                        // Form ID locale 2703 (droplet) — shortcode tag-aware via slug fallback
+                        $form_post = get_page_by_path('saltelli-contatti', OBJECT, 'wpcf7_contact_form');
+                        if ($form_post) {
+                            echo do_shortcode('[contact-form-7 id="' . (int) $form_post->ID . '" title="Saltelli Contatti"]');
+                        } else {
+                            echo '<p class="sl-mono">' . esc_html__('Modulo non disponibile. Scrivici a info@studiolegalesaltelli.it.', 'saltelli') . '</p>';
+                        }
+                    } else {
+                        echo '<p class="sl-mono">' . esc_html__('Plugin form non attivo. Scrivici a info@studiolegalesaltelli.it.', 'saltelli') . '</p>';
+                    }
+                    ?>
+                </div>
+            </section>
+
             <section class="sl-page-contatti__map" aria-labelledby="contatti-map-h">
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Sede', 'saltelli'); ?></div>

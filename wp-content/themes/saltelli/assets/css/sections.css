@@ -2895,3 +2895,247 @@ body.single-post .entry-content > p:first-of-type::first-letter {
         align-items: center;
     }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   CONVERSION QUICKWIN v0.13.6 — WhatsApp sticky mobile (audit CRO §3 #5)
+   Visible solo mobile (<1024px). Brand WhatsApp green #25D366.
+   Touch target 56x56 mobile-friendly. NO bordo/shadow per editorial feel.
+   ═══════════════════════════════════════════════════════════════ */
+.sl-whatsapp-sticky {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    background: #25D366;
+    color: #FFFFFF;
+    border-radius: 50%;
+    display: none; /* default hidden, mostrato in mobile media query */
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 100;
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.32);
+    transition: transform var(--dur-fast) var(--ease-editorial),
+                box-shadow var(--dur-fast) var(--ease-editorial);
+}
+.sl-whatsapp-sticky:hover,
+.sl-whatsapp-sticky:focus-visible {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.42);
+    outline: none;
+}
+.sl-whatsapp-sticky__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Mobile only — display:flex sotto 1024 */
+@media (max-width: 1023px) {
+    .sl-whatsapp-sticky {
+        display: flex;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CONVERSION QUICKWIN v0.13.6 — Contact form CF7 editorial styling
+   Audit CRO §3 #4. Form sobrio, tipografia coerente Playfair+DM Sans.
+   ═══════════════════════════════════════════════════════════════ */
+.sl-page-contatti__form {
+    padding-block: clamp(64px, 8vw, 128px);
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
+}
+.sl-page-contatti__form .sl-mono {
+    margin-bottom: 16px;
+}
+.sl-page-contatti__form h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 44px);
+    color: var(--primary);
+    letter-spacing: -0.02em;
+    margin: 0 0 24px;
+    font-weight: 400;
+    max-width: 24ch;
+    line-height: 1.15;
+}
+.sl-page-contatti__form-lede {
+    font-family: var(--font-display);
+    font-size: clamp(16px, 1.4vw, 18px);
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 60ch;
+    margin: 0 0 48px;
+}
+
+/* CF7 form base */
+.sl-form,
+.wpcf7-form {
+    max-width: 640px;
+}
+.sl-form__row,
+.wpcf7-form > p {
+    margin-block: 0 24px;
+}
+.sl-form__row label,
+.wpcf7-form label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+.sl-form__required {
+    color: var(--accent);
+    margin-left: 2px;
+}
+.sl-form__input,
+.wpcf7-form input[type="text"],
+.wpcf7-form input[type="email"],
+.wpcf7-form input[type="tel"],
+.wpcf7-form select,
+.wpcf7-form textarea {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--text);
+    transition: border-color var(--dur-fast) var(--ease-editorial);
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+}
+.wpcf7-form select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B6B6B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    padding-right: 32px;
+}
+.sl-form__input:focus,
+.wpcf7-form input:focus,
+.wpcf7-form select:focus,
+.wpcf7-form textarea:focus {
+    outline: none;
+    border-bottom-color: var(--accent);
+    border-bottom-width: 2px;
+    padding-bottom: 11px; /* compensa border 2px */
+}
+.wpcf7-form textarea {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.6;
+}
+
+/* Privacy checkbox row */
+.sl-form__row--privacy,
+.wpcf7-form .wpcf7-acceptance {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+.sl-form__row--privacy label,
+.wpcf7-form .wpcf7-acceptance label {
+    font-family: var(--font-body);
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+}
+.wpcf7-form .wpcf7-acceptance input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 2px 0 0;
+    flex-shrink: 0;
+    accent-color: var(--accent);
+}
+.sl-form__row--privacy a,
+.wpcf7-form .wpcf7-acceptance a {
+    color: var(--accent);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-fast) var(--ease-editorial);
+}
+.sl-form__row--privacy a:hover,
+.wpcf7-form .wpcf7-acceptance a:hover {
+    border-bottom-color: var(--accent);
+}
+
+/* Submit button — usa .sl-btn editorial */
+.sl-form__row--submit,
+.wpcf7-form > p.submit {
+    margin-top: 32px;
+}
+.wpcf7-form input[type="submit"],
+.wpcf7-form .wpcf7-submit {
+    background: var(--primary);
+    color: var(--background);
+    border: 0;
+    padding: 16px 32px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease-editorial),
+                transform var(--dur-fast) var(--ease-editorial);
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+.wpcf7-form input[type="submit"]:hover,
+.wpcf7-form .wpcf7-submit:hover {
+    background: var(--accent);
+    transform: translateX(2px);
+}
+
+/* Footer note + CF7 response messages */
+.sl-form__note {
+    margin-top: 16px;
+    color: var(--text-muted);
+    font-size: 11px;
+}
+.wpcf7-response-output {
+    margin-top: 24px !important;
+    padding: 16px 20px !important;
+    border-width: 1px !important;
+    border-radius: 0 !important;
+    font-family: var(--font-body);
+    font-size: 14px;
+}
+.wpcf7-form.sent .wpcf7-response-output {
+    border-color: #2D7A4F !important;
+    background: rgba(45, 122, 79, 0.06);
+    color: #1F5234;
+}
+.wpcf7-form.invalid .wpcf7-response-output,
+.wpcf7-form.failed .wpcf7-response-output {
+    border-color: #B83232 !important;
+    background: rgba(184, 50, 50, 0.06);
+    color: #7A2222;
+}
+.wpcf7-not-valid-tip {
+    color: #B83232;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+}
