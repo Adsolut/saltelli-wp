@@ -166,22 +166,11 @@
             });
           });
 
-          // 6. List items area — stagger desktop only (mobile = perf skip)
-          if (!isMobile) {
-            const areaGroups = document.querySelectorAll('.sl-areas__list, [data-areas-list]');
-            areaGroups.forEach((group) => {
-              const items = group.querySelectorAll('.sl-area');
-              if (!items.length) return;
-              window.gsap.from(items, {
-                y: 16,
-                opacity: 0,
-                duration: 0.5,
-                ease: 'power2.out',
-                stagger: 0.08,
-                scrollTrigger: { trigger: group, start: 'top 70%', toggleActions: 'play none none none' },
-              });
-            });
-          }
+          // 6. List items area — stagger DISABILITATO v0.17.1
+          // Bug: con 22+ items la stagger 0.08s × N + ScrollTrigger 'top 70%'
+          // lasciava molti items a opacity:0 stuck. La section fade-in (.sl-areas)
+          // già fornisce il movimento di entrata visivo, la stagger su lista lunga
+          // è ridondante e causa bug UX. Items visibili immediatamente.
 
           // REVEAL 2 v0.15 — Drop-cap §02 Lo studio entrance (desktop only ≥1024)
           // Aggiunge classe .drop-cap-revealed a .sl-studio quando entra viewport top 80%.
