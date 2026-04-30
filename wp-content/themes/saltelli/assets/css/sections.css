@@ -2148,13 +2148,23 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 
 /* ───────────────────────────────────────────────────────────────
    A3 — Lists editoriali con em-dash accent (no bullet std)
+   v0.11.0 R3: scope esteso a .sl-competenza__prose/__body/__content.
+   Esclusioni liste meta tema (areas/articles/specs/blog/menu/footer)
+   gestite con regola SEPARATA `content: none` in fondo (più robusto
+   di `:not()` chain anti-leak quando markup nested).
    ─────────────────────────────────────────────────────────────── */
 .sl-post__body ul,
 .sl-post__body ol,
 .entry-content ul,
 .entry-content ol,
-.sl-page__prose ul:not(.sl-areas__list):not(.sl-articles):not(.sl-team__specs):not(.sl-attorney__specs),
-.sl-page__prose ol {
+.sl-page__prose ul,
+.sl-page__prose ol,
+.sl-competenza__prose ul,
+.sl-competenza__prose ol,
+.sl-competenza__body ul,
+.sl-competenza__body ol,
+.sl-competenza__content ul,
+.sl-competenza__content ol {
     margin-block: 32px;
     padding-left: 28px;
     max-width: 60ch;
@@ -2162,7 +2172,10 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 
 .sl-post__body ul li,
 .entry-content ul li,
-.sl-page__prose ul:not(.sl-areas__list):not(.sl-articles):not(.sl-team__specs):not(.sl-attorney__specs) li {
+.sl-page__prose ul li,
+.sl-competenza__prose ul li,
+.sl-competenza__body ul li,
+.sl-competenza__content ul li {
     list-style: none;
     position: relative;
     margin-bottom: 12px;
@@ -2171,7 +2184,10 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 
 .sl-post__body ul li::before,
 .entry-content ul li::before,
-.sl-page__prose ul:not(.sl-areas__list):not(.sl-articles):not(.sl-team__specs):not(.sl-attorney__specs) li::before {
+.sl-page__prose ul li::before,
+.sl-competenza__prose ul li::before,
+.sl-competenza__body ul li::before,
+.sl-competenza__content ul li::before {
     content: "—";
     position: absolute;
     left: -28px;
@@ -2181,17 +2197,68 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 
 .sl-post__body ol li,
 .entry-content ol li,
-.sl-page__prose ol li {
+.sl-page__prose ol li,
+.sl-competenza__prose ol li,
+.sl-competenza__body ol li,
+.sl-competenza__content ol li {
     margin-bottom: 12px;
     line-height: 1.7;
 }
 
 .sl-post__body ol li::marker,
 .entry-content ol li::marker,
-.sl-page__prose ol li::marker {
+.sl-page__prose ol li::marker,
+.sl-competenza__prose ol li::marker,
+.sl-competenza__body ol li::marker,
+.sl-competenza__content ol li::marker {
     color: var(--accent);
     font-family: var(--font-mono);
     font-size: 0.9em;
+}
+
+/* Liste meta del tema: reset esplicito per non ereditare em-dash A3.
+   Vince per cascade order (viene dopo) e per padding/margin override. */
+.sl-areas__list,
+.sl-articles,
+.sl-team__specs,
+.sl-attorney__specs,
+.sl-blog__list,
+.sl-mobile-menu,
+.sl-header__nav .menu,
+.sl-footer__nav,
+.sl-footer .menu,
+.sl-faq {
+    list-style: none;
+    padding-left: 0;
+    max-width: none;
+}
+
+.sl-areas__list li,
+.sl-articles li,
+.sl-team__specs li,
+.sl-attorney__specs li,
+.sl-blog__list li,
+.sl-mobile-menu li,
+.sl-header__nav .menu li,
+.sl-footer__nav li,
+.sl-footer .menu li,
+.sl-faq li {
+    list-style: none;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.sl-areas__list li::before,
+.sl-articles li::before,
+.sl-team__specs li::before,
+.sl-attorney__specs li::before,
+.sl-blog__list li::before,
+.sl-mobile-menu li::before,
+.sl-header__nav .menu li::before,
+.sl-footer__nav li::before,
+.sl-footer .menu li::before,
+.sl-faq li::before {
+    content: none;
 }
 
 /* ───────────────────────────────────────────────────────────────

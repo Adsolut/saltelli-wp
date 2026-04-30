@@ -52,7 +52,7 @@ while (have_posts()) :
                     </p>
                     <div class="sl-page-contatti__map-wrap">
                         <iframe
-                            src="https://www.openstreetmap.org/export/embed.html?bbox=14.235%2C40.828%2C14.243%2C40.832&amp;layer=mapnik&amp;marker=40.830%2C14.239"
+                            src="https://www.openstreetmap.org/export/embed.html?bbox=14.232%2C40.829%2C14.240%2C40.835&amp;layer=mapnik&amp;marker=40.832%2C14.235"
                             width="100%"
                             height="400"
                             loading="lazy"
@@ -62,7 +62,7 @@ while (have_posts()) :
                     </div>
                     <div class="sl-page-contatti__map-meta">
                         <a class="sl-mono sl-page-contatti__map-link"
-                           href="https://www.openstreetmap.org/?mlat=40.830&amp;mlon=14.239#map=17/40.830/14.239"
+                           href="https://www.openstreetmap.org/?mlat=40.832&amp;mlon=14.235#map=17/40.832/14.235"
                            target="_blank" rel="noopener">
                             <?php esc_html_e('Apri in OpenStreetMap', 'saltelli'); ?> →
                         </a>
