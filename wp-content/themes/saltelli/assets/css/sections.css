@@ -2103,3 +2103,548 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
         margin-top: 0;
     }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   EDITORIAL REFINEMENT v0.10.0 — Wall of text breaker
+   Pattern target: rivista (Aeon / Atlantic / Bick Law) NON blog WP std
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────────────────────
+   A1 — H1 ↔ lede ↔ first paragraph respiro + drop-cap
+   ─────────────────────────────────────────────────────────────── */
+.sl-post__title,
+.sl-post__hero h1,
+.sl-page__title {
+    margin-bottom: 32px;
+}
+
+/* Lede: primo paragrafo del body OR .sl-post__lede esplicito.
+   Italic Playfair medio per stacco gerarchico H1 vs body. */
+.sl-post__lede,
+.sl-post__body > p:first-of-type,
+.entry-content > p:first-of-type {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 1.6vw, 24px);
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--text);
+    margin-block: 0 56px;
+    max-width: 56ch;
+    font-weight: 400;
+}
+
+/* Drop-cap solo su single blog post (non su CPT, non su page).
+   `+ p` permette di trattare il SECONDO p come dropcap se primo è lede. */
+body.single-post .sl-post__body > p:first-of-type::first-letter,
+body.single-post .entry-content > p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    float: left;
+    font-size: 4.2em;
+    line-height: 0.85;
+    margin: 8px 14px 0 0;
+    color: var(--primary);
+    font-weight: 400;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   A3 — Lists editoriali con em-dash accent (no bullet std)
+   ─────────────────────────────────────────────────────────────── */
+.sl-post__body ul,
+.sl-post__body ol,
+.entry-content ul,
+.entry-content ol,
+.sl-page__prose ul:not(.sl-areas__list):not(.sl-articles):not(.sl-team__specs):not(.sl-attorney__specs),
+.sl-page__prose ol {
+    margin-block: 32px;
+    padding-left: 28px;
+    max-width: 60ch;
+}
+
+.sl-post__body ul li,
+.entry-content ul li,
+.sl-page__prose ul:not(.sl-areas__list):not(.sl-articles):not(.sl-team__specs):not(.sl-attorney__specs) li {
+    list-style: none;
+    position: relative;
+    margin-bottom: 12px;
+    line-height: 1.7;
+}
+
+.sl-post__body ul li::before,
+.entry-content ul li::before,
+.sl-page__prose ul:not(.sl-areas__list):not(.sl-articles):not(.sl-team__specs):not(.sl-attorney__specs) li::before {
+    content: "—";
+    position: absolute;
+    left: -28px;
+    color: var(--accent);
+    font-weight: 400;
+}
+
+.sl-post__body ol li,
+.entry-content ol li,
+.sl-page__prose ol li {
+    margin-bottom: 12px;
+    line-height: 1.7;
+}
+
+.sl-post__body ol li::marker,
+.entry-content ol li::marker,
+.sl-page__prose ol li::marker {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   A4 — Body paragraph max-width 60ch + blockquote pull-quote
+   ─────────────────────────────────────────────────────────────── */
+.sl-post__body > p,
+.entry-content > p,
+.sl-page__prose > p {
+    max-width: 60ch;
+    line-height: 1.75;
+    margin-block: 0 24px;
+}
+
+/* Blockquote pull-quote pattern editoriale */
+.sl-post__body blockquote,
+.entry-content blockquote,
+.sl-page__prose blockquote {
+    margin-block: 56px;
+    padding: 0 0 0 32px;
+    border-left: 2px solid var(--accent);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(22px, 2vw, 28px);
+    line-height: 1.5;
+    color: var(--primary);
+    max-width: 60ch;
+}
+
+.sl-post__body blockquote p,
+.entry-content blockquote p,
+.sl-page__prose blockquote p {
+    max-width: none;
+    margin-block: 0 16px;
+    font-size: inherit;
+    line-height: inherit;
+    font-style: inherit;
+}
+
+.sl-post__body blockquote p:last-child,
+.entry-content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+/* Strong/em treatment editoriale */
+.sl-post__body strong,
+.entry-content strong,
+.sl-page__prose strong {
+    font-weight: 500;
+    color: var(--primary);
+}
+
+.sl-post__body em,
+.entry-content em,
+.sl-page__prose em {
+    font-style: italic;
+    color: var(--text);
+}
+
+/* ───────────────────────────────────────────────────────────────
+   B1 — Inline images: cornice editoriale + caption mono
+   Scope esclusivo body post (NON applica a foto avvocato/team).
+   ─────────────────────────────────────────────────────────────── */
+.sl-post__body img:not(.attachment-saltelli-attorney-square):not(.attachment-saltelli-attorney-portrait):not(.alignleft):not(.alignright),
+.entry-content img:not(.attachment-saltelli-attorney-square):not(.attachment-saltelli-attorney-portrait):not(.alignleft):not(.alignright) {
+    display: block;
+    max-width: min(720px, 100%);
+    height: auto;
+    margin: 56px auto;
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.sl-post__body figure:not(.sl-post__featured):not(.sl-post__author-portrait),
+.entry-content figure:not(.sl-post__featured):not(.sl-post__author-portrait) {
+    max-width: 720px;
+    margin: 56px auto;
+}
+
+.sl-post__body figure img,
+.entry-content figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    border: 0;
+    background: transparent;
+}
+
+.sl-post__body figcaption,
+.entry-content figcaption,
+.wp-caption-text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 16px;
+    padding-inline: 16px;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   B2 — Featured image hero ridimensionata (anti gigantismo)
+   Stock images del cliente: NON sostituite, SOLO ridimensionate.
+   Aspect ratio 16/9 forzato per coerenza visuale (foto verticali
+   come quella PNG 764x1080 vengono croppate al centro).
+   ─────────────────────────────────────────────────────────────── */
+.sl-post__featured {
+    max-width: 960px;
+    margin: 32px auto 56px;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.sl-post__featured img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin: 0;
+    border: 0;
+    max-width: none;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   B3 — Author bio card piccolo (foto 80x80 + nome + ruolo + link)
+   Sostituisce il rendering full-width della foto Emiliano in fondo.
+   Markup template: <section class="sl-post__author-card">
+                      <a class="sl-team__portrait sl-post__author-portrait">
+                        <img class="attachment-saltelli-attorney-square">
+                      </a>
+                      <div class="sl-post__author-text">...</div>
+                    </section>
+   ─────────────────────────────────────────────────────────────── */
+.sl-post__author-card {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    align-items: start;
+    max-width: 60ch;
+    margin: 80px auto 48px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+/* Override portrait wrapper SOLO dentro author-card (preserva archive/single avvocato).
+   Specificità: .sl-post__author-card .sl-team__portrait (0,2,0) batte .sl-team__portrait (0,1,0). */
+.sl-post__author-card .sl-team__portrait,
+.sl-post__author-card .sl-post__author-portrait {
+    width: 80px !important;
+    height: 80px !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 0 !important;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 0;
+    flex-shrink: 0;
+    filter: grayscale(0.2);
+    transition: filter 200ms var(--ease-editorial);
+}
+
+.sl-post__author-card .sl-team__portrait:hover,
+.sl-post__author-card .sl-post__author-portrait:hover {
+    filter: grayscale(0);
+}
+
+.sl-post__author-card .sl-team__portrait img,
+.sl-post__author-card .sl-post__author-portrait img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    object-position: center top;
+    margin: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    max-width: none !important;
+    display: block;
+}
+
+.sl-post__author-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sl-post__author-text .sl-mono {
+    font-size: 10px;
+    margin-bottom: 4px;
+}
+
+.sl-post__author-text .sl-team__name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    margin: 0;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.sl-post__author-text .sl-team__name a {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 200ms var(--ease-editorial);
+}
+
+.sl-post__author-text .sl-team__name a:hover {
+    border-bottom-color: var(--accent);
+}
+
+.sl-post__author-text p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 4px 0 0;
+    max-width: 50ch;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   C3 — /contatti/ map embed + CTA editoriale
+   Render condizionale via is_page('contatti') in page.php.
+   ─────────────────────────────────────────────────────────────── */
+.sl-page-contatti__map {
+    margin-top: 80px;
+    padding-block: clamp(48px, 6vw, 96px);
+    background: var(--surface);
+}
+
+.sl-page-contatti__map .sl-mono {
+    margin-bottom: 16px;
+}
+
+.sl-page-contatti__map h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 44px);
+    color: var(--primary);
+    letter-spacing: -0.02em;
+    margin: 0 0 24px;
+    font-weight: 400;
+    max-width: 24ch;
+}
+
+.sl-page-contatti__map-lede {
+    font-family: var(--font-display);
+    font-size: clamp(16px, 1.4vw, 18px);
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 60ch;
+    margin: 0 0 40px;
+}
+
+.sl-page-contatti__map-wrap {
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 24px;
+    background: var(--background);
+}
+
+.sl-page-contatti__map-wrap iframe {
+    display: block;
+    border: 0;
+}
+
+.sl-page-contatti__map-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: baseline;
+    justify-content: space-between;
+    font-size: 11px;
+}
+
+.sl-page-contatti__map-link {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 200ms var(--ease-editorial);
+}
+
+.sl-page-contatti__map-link:hover {
+    border-bottom-color: var(--accent);
+}
+
+.sl-page-contatti__cta {
+    padding-block: clamp(64px, 8vw, 128px);
+    text-align: center;
+}
+
+.sl-page-contatti__cta .sl-contact__eyebrow {
+    margin-bottom: 24px;
+    display: block;
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+}
+
+.sl-page-contatti__cta h2 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 56px);
+    color: var(--primary);
+    letter-spacing: -0.02em;
+    margin: 0 auto 24px;
+    font-weight: 400;
+    line-height: 1.1;
+    max-width: 18ch;
+}
+
+.sl-page-contatti__cta-lede {
+    font-family: var(--font-display);
+    font-size: clamp(16px, 1.4vw, 18px);
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--text-muted);
+    max-width: 56ch;
+    margin: 0 auto 48px;
+}
+
+.sl-page-contatti__cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   C2 — /blog/ archive layout (template index.php)
+   Markup: <section class="sl-blog sl-blog--archive">
+             <ul class="sl-blog__list">
+               <li class="sl-blog__row"><a class="sl-blog__row-inner">...</a></li>
+   ─────────────────────────────────────────────────────────────── */
+.sl-blog {
+    padding-block: clamp(64px, 8vw, 128px);
+}
+
+.sl-blog__list {
+    list-style: none;
+    margin: 64px 0 0;
+    padding: 0;
+    max-width: 1100px;
+}
+
+.sl-blog__row {
+    border-top: 1px solid var(--border);
+}
+
+.sl-blog__row:last-child {
+    border-bottom: 1px solid var(--border);
+}
+
+.sl-blog__row-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 32px 0;
+    text-decoration: none;
+    color: inherit;
+    transition: padding 200ms var(--ease-editorial);
+}
+
+.sl-blog__row:hover .sl-blog__row-inner {
+    padding-left: 16px;
+}
+
+.sl-blog__date,
+.sl-blog__cat {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.sl-blog__cat {
+    color: var(--accent);
+}
+
+.sl-blog__title {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2vw, 30px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--primary);
+    margin: 8px 0 0;
+    letter-spacing: -0.01em;
+    max-width: 32ch;
+}
+
+.sl-blog__excerpt {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 8px 0 0;
+    max-width: 60ch;
+}
+
+@media (min-width: 768px) {
+    .sl-blog__row-inner {
+        grid-template-columns: 160px 160px 1fr;
+        gap: 32px;
+        align-items: baseline;
+    }
+    .sl-blog__date {
+        grid-column: 1;
+    }
+    .sl-blog__cat {
+        grid-column: 2;
+    }
+    .sl-blog__title,
+    .sl-blog__excerpt {
+        grid-column: 3;
+    }
+    .sl-blog__title {
+        margin: 0;
+    }
+}
+
+.sl-blog__pagination {
+    margin-top: 64px;
+    text-align: center;
+}
+
+.sl-blog__pagination .nav-links {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+.sl-blog__pagination a,
+.sl-blog__pagination .current,
+.sl-blog__pagination .dots {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 8px 12px;
+    border: 1px solid transparent;
+    transition: border-color 200ms var(--ease-editorial),
+                color 200ms var(--ease-editorial);
+}
+
+.sl-blog__pagination a:hover {
+    color: var(--primary);
+    border-bottom-color: var(--accent);
+}
+
+.sl-blog__pagination .current {
+    color: var(--primary);
+    border-bottom-color: var(--accent);
+}

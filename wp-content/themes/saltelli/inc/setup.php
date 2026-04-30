@@ -57,3 +57,26 @@ add_filter('upload_mimes', function ($mimes) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 });
+
+/**
+ * Editorial Refinement v0.10.0 (C1) — Map /lo-studio/ legacy slug → /chi-siamo/.
+ *
+ * Background: il menu "Studio" puntava a /lo-studio/ (URL custom storica).
+ * Non esiste page WP con slug `lo-studio`, quindi WP rewrite catturava il
+ * primo blog post che inizia con "lo-studio-..." → redirect canonical 301
+ * indesiderato. Fix v0.10.0: aggiornato menu_item _menu_item_url a /chi-siamo/
+ * (link OK). Questo hook copre bookmark/link diretti / backlinks SEO.
+ *
+ * Hook su `init` priority 1 (PRIMA di WP_Query parse_request → prima di
+ * redirect_canonical). template_redirect è troppo tardi: redirect canonical
+ * WP fa il match al post che inizia con "lo-studio-..." prima di noi.
+ */
+add_action('init', function () {
+    if (is_admin() || (defined('WP_CLI') && WP_CLI)) return;
+    $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
+    $path = (string) parse_url($request_uri, PHP_URL_PATH);
+    if ($path === '/lo-studio/' || $path === '/lo-studio') {
+        wp_safe_redirect(home_url('/chi-siamo/'), 301);
+        exit;
+    }
+}, 1);
