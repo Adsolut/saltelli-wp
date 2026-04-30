@@ -1,1 +1,8 @@
-Æioz»"¢
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-label="Studio Legale Saltelli">
+  <rect width="180" height="180" fill="#FAFAF8"/>
+  <circle cx="90" cy="90" r="78" fill="none" stroke="#1B2B4B" stroke-width="3"/>
+  <circle cx="90" cy="90" r="64" fill="none" stroke="#B8860B" stroke-width="2" stroke-opacity="0.55"/>
+  <text x="90" y="120" text-anchor="middle"
+        font-family="'Playfair Display', 'Cormorant Garamond', Georgia, 'Times New Roman', serif"
+        font-style="italic" font-weight="400" font-size="100" fill="#1B2B4B">S</text>
+</svg>

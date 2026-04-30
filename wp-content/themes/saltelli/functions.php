@@ -8,7 +8,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '0.17.0-beta-logo-system');
+define('SALTELLI_THEME_VERSION', '0.17.1-beta-favicon-fix');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
