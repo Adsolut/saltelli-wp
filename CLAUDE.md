@@ -1,136 +1,178 @@
 # CLAUDE.md — Studio Legale Saltelli WordPress Theme
 
-> **Read this file first.** Then read `BRIEF_Saltelli_WordPress.md` and `.claude/PROMPT_LEAD_AGENT.md`.
-> Project context machine-readable: `.claude/knowledge/project-context.json`.
+> **Single source of truth for Claude Code agents working on this project.**
+> Read this FIRST. Then read only the prompt assigned to you (`PROMPT_AGENT_*.md`).
+> Project context machine-readable: [`.claude/knowledge/project-context.json`](./.claude/knowledge/project-context.json).
 
 ## Identity
 
-You are working as part of the build team for **Studio Legale Emiliano Saltelli & Partners** — a premium law firm in Naples (Chiaia district). The vendor is **Adsolut SRLS**, an AI Agency. You are NOT building a generic legal site. You are building a deliberately differentiated, AI-ready, performance-obsessed custom WordPress theme that should make the existing Naples legal market look dated.
+Building a deliberately differentiated, AI-ready, performance-obsessed custom WordPress theme for **Studio Legale Emiliano Saltelli & Partners** — a premium law firm in Naples (Chiaia). The vendor is **Adsolut SRLS**, an AI Agency. The theme should make the existing Naples legal market look dated.
 
-## Project state
+**Strategy:** "Legal Luxury Minimal" — boutique editoriale italiano, tipografia dominante, palette navy/crema/bronzo. Tier-1 deep clusters: Tributario · Lavoro · Famiglia LGBTQ+. The other 16 practice areas get tier-2 lighter pages.
 
-**Current phase:** Pre-development setup. Awaiting SSH/FTP credentials from client to dump the existing site (`studiolegalesaltelli.it`).
+## Current state — v0.7.0-beta-pain-points-fixed
 
-**Active deliverables (Fase 1 — €8.500 of €14.000 program):**
+**Last updated:** 2026-04-30
+**Branch:** `main`
+**Demo:** ✅ presented to client today (passed first visual test)
+**Active phase:** Step E (Template Polish + Mobile Fix) — `PROMPT_AGENT_E_TEMPLATE_POLISH_V2.md`
+**Next:** Step F (Production Readiness) → Step G (Deploy DigitalOcean)
 
-1. WordPress custom theme `.zip`, installable
-2. Schema JSON-LD coverage on every page
-3. `llms.txt` + AI-optimized `robots.txt`
-4. Heading hierarchy fix, meta descriptions, Open Graph
-5. Google Business Profile activation
-6. Lighthouse > 90 across all metrics
+### What's done
+
+| Phase | Version | Status |
+|---|---|---|
+| Scaffolding | 0.1.0-scaffold | ✅ |
+| Multi-agent build (Style/Architect/GEO) | 0.2.0 | ✅ |
+| Beta locale Adsolut review | 0.2.1-beta-local | ✅ |
+| Polish (animations, hover, scroll) | 0.3.0-beta-polish | ✅ |
+| Impeccable refinement (6→2 issues) | 0.4.0-beta-impeccable | ✅ |
+| Content Migration (CPT populated, foto Emiliano) | 0.5.x-beta-content | ✅ |
+| Audit Alignment (sitemap Privati/Imprese/Contenzioso, /costi/, "consulenza gratuita" gancio) | 0.6.0-beta-audit-aligned | ✅ |
+| **Pain Points Refinement (7/7 fix CSS+H1 cleanup)** | **0.7.0-beta-pain-points-fixed** | **✅ CURRENT** |
+| Template Polish + Mobile Fix | 0.8.0-beta-templates-mobile | 🔄 IN FLIGHT |
+| Production Readiness (WOFF2, SRI, Lighthouse ≥92) | 1.0.0-rc1 | ⏸ |
+| Deploy DigitalOcean | 1.0.0 | ⏸ |
+
+### What's where
+
+**Source of truth files (always read first):**
+- `CLAUDE.md` (this file)
+- `BRIEF_Saltelli_WordPress.md` — original brief
+- `.claude/knowledge/project-context.json` — machine-readable context
+- `.claude/knowledge/design/sessione-1/tokens.css` — design tokens locked
+- `.claude/knowledge/design/sessione-1/homepage-desktop.jsx` — JSX reference for Frame 1
+
+**Agent prompts:**
+- `PROMPT_AGENT_E_TEMPLATE_POLISH_V2.md` — current
+- `PROMPT_AGENT_F_PRODUCTION_READINESS.md` — next
+- `_archive/prompts-completed/` — past prompts (informational, do NOT execute)
+
+**Reports** (in `.claude/knowledge/design/sessione-1/reports/`):
+- `audit-alignment/REPORT.md` — Step Audit Alignment (sitemap + /costi/)
+- `content-migration/REPORT.md` — Step D content migration
+- `impeccable/REPORT.md` — Step C Impeccable refinement
+- `pain-points-refinement/REPORT.md` — Step Pain Points (most recent)
+- `visual-walkthrough/CHECKLIST.md` — 12-point checklist (reusable)
+- `visual-walkthrough/REPORT-v0.7.0.md` — last walkthrough result (10 PASS · 1 WARN · 1 FAIL)
 
 ## Hard constraints (non-negotiable)
 
 | Rule | Reason |
 |---|---|
-| **No page builder** (no Elementor, Bricks, Divi, WPBakery) | Removes JS bloat, gives full control over markup for schema injection |
+| **No page builder** (no Elementor, Bricks, Divi, WPBakery) | Removes JS bloat, full markup control for schema injection |
 | **Pure PHP template hierarchy** | Standard WP, predictable, auditable |
-| **Custom Post Types** for `avvocato` and `competenza` | Scales schema markup automatically per entity |
-| **GSAP 3.15+ + Lenis only** for animations | Industry-standard 2026 stack. NO AOS, WOW.js, ScrollMagic, Locomotive |
-| **Schema JSON-LD inline in templates** | NOT plugin-generated. We need full control |
-| **1 H1 per page**, ever | Audit found duplicate H1s on the current site. Don't repeat the mistake |
+| **Custom Post Types** for `avvocato` and `competenza` | Scales schema markup automatically |
+| **GSAP 3.12+ + Lenis only** for animations | NO AOS, WOW.js, ScrollMagic, Locomotive |
+| **Schema JSON-LD inline in templates** | NOT plugin-generated, full control |
+| **Single H1 per page**, ever | Audit found duplicate H1s on the source site. Don't repeat |
 | **Mobile-first**, every breakpoint | 60%+ traffic is mobile, AI Overviews trigger 81% from mobile |
-| **No #000000 black**, no aggressive red, no purple/magenta | Purple/magenta is the Adsolut brand. Saltelli is its own brand: cream, navy, bronze |
+| **No `#000000` black**, no aggressive red, no purple/magenta | Purple/magenta is Adsolut brand, not Saltelli's |
+| **Design tokens locked** in `tokens.css` — never modify them | The whole system depends on stability |
+| **Yoast coabitation respected** — never emit Organization/Article/Breadcrumb if Yoast active | No schema duplicates |
+| **Foto Emiliano `_thumbnail_id=2683`** + **bio_estesa avvocati** preserved across all runs | Step D content + Step C.5 photo integration |
 
 ## Design system (locked)
 
 ```
-Background:    #FAFAF8 (cream)
-Primary dark:  #1B2B4B (navy)
-Accent:        #B8860B (bronze/gold)
-Text:          #2D2D2D (deep grey, NOT black)
+COLOR
+  --background:   #FAFAF8   (cream)
+  --surface:      #F2F0EA   (cream darker)
+  --primary:      #1B2B4B   (navy)
+  --accent:       #B8860B   (bronze, parsimonious use)
+  --text:         #2D2D2D   (NOT pure black)
+  --text-muted:   #6B6B6B
+  --border:       #E5E0D5
 
-Display font:  Playfair Display OR Cormorant Garamond (serif)
-Body font:     DM Sans OR Satoshi (sans-serif)
+TYPOGRAPHY
+  --font-display: "Playfair Display" 400/700
+  --font-body:    "DM Sans" 400/500/700
+  --font-mono:    "JetBrains Mono" 400 (for metadata: dates, tags, eyebrows)
+
+BREAKPOINTS: 375 / 768 / 1024 / 1440 (mobile-first)
 ```
 
-Breakpoints: 375 / 768 / 1024 / 1440.
-
-## Information architecture
+## Information architecture (current)
 
 ```
-/                                   Homepage
-/lo-studio/                         About
-/avvocati/                          Team archive
-/avvocati/{slug}/                   CPT: avvocato
-/competenze/                        Practice areas archive
-/competenze/{slug}/                 CPT: competenza (19 entries)
-/blog/                              Blog archive (with categories)
-/blog/{slug}/                       Single post
-/contatti/                          Contact (form + map + hours)
-/llms.txt                           Static AI crawler file
+/                                   Homepage (front-page.php)
+/lo-studio/                         About (page.php)
+/avvocati/                          Team archive (archive-avvocato.php)
+/avvocati/{slug}/                   CPT avvocato (single-avvocato.php) × 4
+/competenze/                        Practice areas archive (archive-competenza.php)
+/competenze/{slug}/                 CPT competenza × 19 — branched tier-1/tier-2 (single-competenza.php)
+/tipo-area/{privati,imprese,contenzioso,altri}/   Taxonomy archive (currently fallback archive.php)
+/casi/                              Cases (page or archive — TBD)
+/costi/                             Costs page (page.php) — added at Audit Alignment
+/blog/                              Blog archive
+/{slug}/                            Single post (single.php) × 326 historical posts
+/contatti/                          Contact (page.php)
+/llms.txt                           Static AI crawler file (served dynamically)
 ```
 
-## File conventions
+## Tech stack
 
-- Theme path: `wp-content/themes/saltelli/`
-- CSS: NO Tailwind, NO Bootstrap. Custom CSS with CSS variables (design tokens) in `assets/css/tokens.css` + module files
-- JS: ES modules where possible, `defer` everywhere, GSAP + Lenis loaded from CDN with SRI hashes
-- Fonts: self-hosted WOFF2, `font-display: swap`, preload only the 2 critical weights
-- Images: WebP/AVIF with fallback, native `loading="lazy"` except above-the-fold hero
-- Schema: one PHP partial per type in `inc/schema/` — see `geo-assets/schema/` for ready-to-inject templates
+```
+WordPress 6.x          (current Docker local)
+PHP 8.2+
+ACF Pro                (NOT installed — all fallbacks editorial hardcoded)
+Yoast SEO              (active — coabitation enforced)
+Custom theme path:     wp-content/themes/saltelli/
+Animation libs:        GSAP 3.12.5 + ScrollTrigger from CDN (deferred)
+                       Lenis 1.1.13 (currently disabled by Polish Agent — re-evaluate Step F)
+                       SplitText: NOT used (Polish Agent animated <span>s directly)
+```
 
-## Mandatory pre-coding reads
+## Convention summary for agents
 
-Before writing any code, read in order:
+**Naming:**
+- All custom CSS classes use `.sl-*` prefix
+- Sections in homepage: `.sl-hero`, `.sl-areas`, `.sl-studio`, `.sl-team`, `.sl-cases`, `.sl-press`, `.sl-contact`, `.sl-footer`
+- BEM-like: `.sl-area__title`, `.sl-area--tier1` (modifier), `.sl-team__lawyer`, ecc.
 
-1. `CLAUDE.md` (this file)
-2. `BRIEF_Saltelli_WordPress.md`
-3. `.claude/PROMPT_LEAD_AGENT.md`
-4. `.claude/knowledge/project-context.json`
-5. `geo-assets/schema/README.md`
-6. Any `SKILL.md` files in `~/.claude/skills/` and `.claude/skills/`
+**Files structure:**
+- `assets/css/tokens.css` — variables only, never edit
+- `assets/css/base.css` — reset, container, typography setup
+- `assets/css/components.css` — buttons, links, accordion, area-list, attorney sticky
+- `assets/css/sections.css` — section layouts + page-specific (`.sl-hero`, `.sl-costi__section`, ecc.)
+- `assets/js/main.js` — entrypoint, GSAP+ScrollTrigger init, hover bindings
+- `inc/schema/` — 5 PHP partials for JSON-LD (organization, attorney, faqpage, breadcrumb, article)
+- `inc/seo/` — meta-tags + ai-files (llms.txt + robots filter)
+- `inc/cpt-*.php` — CPT registration
+- `inc/acf-json/` — field group definitions (works with or without ACF Pro)
 
-## Multi-agent decomposition
+## Working rules for agents
 
-When the lead agent decomposes work for tmux parallel execution:
-
-AgentOwnsReads from**Theme Architect**Template hierarchy, `functions.php`, ACF field groups, CPT registration, menus, widget areasBrief sections "Architettura sito" + "Stack tecnico"**Style & Animation**Design tokens, layout system, typography loading, GSAP+Lenis setup, all WOW effects, micro-interactionsBrief sections "Design direction" + "Stack effetti WOW", `CLAUDE_DESIGN_PROMPT.md` (for visual reference)**GEO Engineer**Schema JSON-LD partials, `llms.txt`, `robots.txt`, meta tag system, OG/Twitter, performance optimization, Lighthouse iterationBrief section "Requisiti tecnici GEO", `geo-assets/` directory
-
-Agents communicate via the lead. They do NOT edit each other's files without coordination.
-
-## Strategic content decision (CONFIRMED 2026-04-28)
-
-GEO Audit recommended focus on **2-3 vertical niches** for topical authority. Decision confirmed: tier-1 deep clusters are:
-
-1. **Diritto tributario / cartelle esattoriali** (Emiliano + Fabiana)
-2. **Diritto del lavoro** (Fabiana giuslavorista)
-3. **Diritto di famiglia e tutela LGBTQ+** (Antonia)
-
-The other 16 practice areas get tier-2 standard pages: H1 + answer capsule + 400-600 words + 3-FAQ + CTA. Tier-1 areas get 1500-2500 words + 5-FAQ + casi rappresentativi + cluster di articoli blog correlati.
-
-**Implementation:** add ACF boolean field `is_tier_1_focus` on CPT `competenza`. The `single-competenza.php` template branches on this flag to render the appropriate depth. Set `true` for the three slugs above, `false` for the others. Full breakdown in `project-context.json` → `strategic_focus_decision`.
-
-## Quality gates before any deploy
-
-- \[ \] Schema validated on `validator.schema.org` AND `search.google.com/test/rich-results`
-- \[ \] Lighthouse Performance/Accessibility/Best-Practices/SEO all &gt; 90 on mobile + desktop
-- \[ \] Single H1 per page (verify with HeadingsMap or DevTools)
-- \[ \] `llms.txt` and `robots.txt` reachable at root
-- \[ \] No console errors, no 404s on assets
-- \[ \] Cross-browser pass: Chrome, Safari, Firefox, mobile iOS Safari + Android Chrome
-- \[ \] Forms tested with real SMTP (not WP default mail)
-- \[ \] Schema markup test on `/`, `/avvocati/emiliano-saltelli/`, `/competenze/diritto-tributario/`, one blog post
+1. **Read this file first.** Then read your assigned prompt + project-context.json. Then read ONLY the files relevant to your scope.
+2. **Cache flush + curl test after EVERY non-trivial change.** Don't batch 5 changes and verify at end — catch regression early.
+3. **Idempotency:** re-running your script must not duplicate menu/page/term entries.
+4. **Touch only what's in your scope.** If you find a bug outside scope, document it in your report — don't fix it.
+5. **Decisions autonomously taken must be reported.** Better verbose than mute.
+6. **Never write to:** `_thumbnail_id` on CPT avvocato, `bio_estesa` on existing avvocati, `tokens.css` design variables, `config.local.json` (gitignored — credentials).
+7. **Never disable plugins** during a run.
 
 ## Tone of communication when reporting back to Duccio
+
 Direct. Concrete. Zero filler. He values: precise diagnosis, ranked options with rationale, explicit blockers, no apology padding. Mirror this tone in commit messages and status updates.
 
 ## What NOT to do
 
-- Don't invent client data. Phone, email, addresses are in `project-context.json`. Don't make up VAT numbers, social URLs, attorney bios.
-- Don't reuse Adsolut brand colors (magenta, purple, galaxy theme) — those are for Adsolut decks, not for Saltelli's site.
-- Don't ship "AI slop" — generic legal stock imagery, lorem ipsum, placeholder unsplash photos of handshakes. Mark every visual placeholder with a `<!-- TODO: replace with real Saltelli photo -->` comment.
-- Don't treat the 19 practice areas as content blockers. Build the structure now; content depth comes in Fase 3 of the program.
-- Don't optimize for desktop hero "wow" at the cost of mobile LCP. Cinematic but lean.
+- Don't invent client data. Real data is in `project-context.json`.
+- Don't reuse Adsolut brand colors (magenta, purple, galaxy theme).
+- Don't ship "AI slop" — generic legal stock imagery, lorem ipsum, placeholder unsplash photos of handshakes.
+- Don't optimize desktop "wow" at the cost of mobile LCP.
+- Don't add new dependencies (libraries, plugins, fonts) without explicit instruction.
+- Don't refactor template hierarchy without explicit instruction.
+- Don't sentence-case Italian sigle (INPS, IRPEF, IMU, RC, LGBTQ+) or proper nouns (Napoli, Cassazione, Federico) when normalizing case.
 
 ## When in doubt
 
-Re-read the brief. If still in doubt, ask Duccio. Don't guess on:
+Re-read this file. If still in doubt, ask Duccio. Don't guess on:
 - Client-facing copy
 - Attorney specialization details
 - Pricing or commercial terms
 - Anything that would appear in schema markup as fact
 
 ---
-*Last updated: 2026-04-28 by Claude in sync with Duccio.*
+*Last updated: 2026-04-30 · v0.7.0-beta-pain-points-fixed*
+*Maintained by orchestrator (Claude in chat) after each milestone.*

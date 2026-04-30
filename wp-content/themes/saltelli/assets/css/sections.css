@@ -1482,30 +1482,33 @@ html:not(.js-reveal-ready) [data-reveal] {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   FIX — Sticky margine sinistro pagina avvocato
-   I bottoni "Tel/Email/WhatsApp" devono essere visibili come
-   tag editoriali allineati al body, non tagliati ai bordi viewport
+   FIX M3 — Sticky avvocato: position safe, mai overlap con foto
+   I bottoni TEL/EMAIL/WhatsApp ancorati a sinistra del viewport
+   con offset fisso di 8px (era clamp(16px,3vw,48px) → finiva sopra
+   foto a 1440px). Width fisso 56px desktop / auto mobile.
    ═══════════════════════════════════════════════════════════════ */
 
 .sl-attorney__sticky {
     position: fixed;
     top: 50%;
-    left: clamp(16px, 3vw, 48px);
+    left: 8px;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     z-index: 50;
     pointer-events: auto;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
     .sl-attorney__sticky {
         position: static;
         flex-direction: row;
-        gap: 12px;
+        gap: 8px;
         margin-block: 24px;
         transform: none;
+        padding-inline: 24px;
+        left: auto;
     }
 }
 
@@ -1513,13 +1516,16 @@ html:not(.js-reveal-ready) [data-reveal] {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 14px;
+    width: 56px;
+    min-height: 32px;
+    padding: 4px 8px;
     background: var(--surface);
     border: 1px solid var(--border);
     color: var(--text);
     text-decoration: none;
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     transition: all var(--dur-fast) var(--ease-editorial);
     border-radius: 0;
@@ -1531,6 +1537,15 @@ html:not(.js-reveal-ready) [data-reveal] {
     color: var(--background);
     border-color: var(--primary);
     transform: translateX(2px);
+}
+
+@media (max-width: 1023px) {
+    .sl-attorney__sticky-btn {
+        width: auto;
+        flex: 1;
+        min-height: 44px;
+        font-size: 11px;
+    }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1792,4 +1807,79 @@ html:not(.js-reveal-ready) [data-reveal] {
 }
 .sl-costi__cta .sl-btn {
     margin-top: 8px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STEP E · TASK 0 — MOBILE FIX CRITICI (post visual walkthrough v0.7.0)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────────────────────
+   FIX M1 — Mobile (≤1023px): tag .sl-area__meta sotto titolo
+   Il tag "TIER 1 · APPROFONDIMENTO →" non deve sovrapporsi al titolo
+   serif gigante. Forziamo flex column, meta in order:2 sotto title.
+   Vince in cascade su .sl-areas .sl-area (sections.css §3) e .sl-area
+   (components.css base) perché viene dopo nello stesso file.
+   ─────────────────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+    .sl-area,
+    .sl-areas .sl-area,
+    .sl-areas-archive .sl-area {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding-block: 24px;
+        grid-template-columns: none;
+    }
+
+    .sl-area .sl-area__num,
+    .sl-areas .sl-area .sl-area__num,
+    .sl-areas-archive .sl-area .sl-area__num {
+        display: none;
+    }
+
+    .sl-area .sl-area__title,
+    .sl-areas .sl-area .sl-area__title,
+    .sl-areas-archive .sl-area .sl-area__title {
+        order: 1;
+        font-size: clamp(28px, 6vw, 36px);
+        line-height: 1.2;
+    }
+
+    .sl-area .sl-area__meta,
+    .sl-areas .sl-area .sl-area__meta,
+    .sl-areas-archive .sl-area .sl-area__meta {
+        order: 2;
+        position: static;
+        margin-top: 4px;
+        font-size: 11px;
+        color: var(--text-muted);
+        letter-spacing: 0.06em;
+        opacity: 0.85;
+        text-transform: uppercase;
+    }
+
+    .sl-area .sl-area__lead,
+    .sl-areas .sl-area .sl-area__lead,
+    .sl-areas-archive .sl-area .sl-area__lead {
+        order: 3;
+    }
+}
+
+/* ───────────────────────────────────────────────────────────────
+   FIX M2 — Mobile (≤767px): hero headline forza wrap su 3 righe
+   Ogni .sl-hero__word diventa block per garantire un word-per-line.
+   Risolve il pattern attuale "Diritto, con" + "misura." (2 righe)
+   richiesto dal design "Diritto," / "con" / "misura." (3 righe).
+   ─────────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+    .sl-hero__headline {
+        font-size: clamp(56px, 14vw, 80px);
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+    }
+    .sl-hero__headline .sl-hero__word,
+    .sl-hero__headline .sl-word {
+        display: block;
+        margin-right: 0;
+    }
 }
