@@ -148,8 +148,8 @@
  * ========================================================= */
 .sl-hero {
   position: relative;
-  min-height: 80vh; /* v0.17.1 era 100vh → 80vh per ridurre white space mobile */
-  padding-block: clamp(32px, 6vh, 80px); /* v0.17.1 era 48-120 → 32-80 */
+  /* v0.17.2 — min-height rimosso (auto = content-driven). Padding-block compatto. */
+  padding-block: clamp(32px, 5vh, 56px);
   margin: 0 auto;
   overflow: visible;
 }
@@ -203,13 +203,12 @@
 
 @media (min-width: 1024px) {
   .sl-hero {
-    min-height: 640px; /* v0.17.1 era 820px → 640 per ridurre white-space sotto headline */
+    min-height: auto; /* v0.17.2 era 640 → auto (content-driven, no white-space forzato) */
     /* F06 v0.14 — padding-inline azzerato: .sl-hero__inner ha class .sl-container
        (front-page.php:65) che già applica padding-inline: var(--container-pad).
-       Doppio padding 72+72=144px → homepage scostata di ~72px vs altre pagine.
        F01 v0.14 — display:grid rimosso (collide con .sl-hero__inner 8fr/4fr).
-       Layout grid resta ESCLUSIVAMENTE su .sl-hero__inner (riga 957 + 2820). */
-    padding: 80px 0 32px; /* v0.17.1 era 120 0 80 → 80 0 32 (ridotto top 40px, bottom 48px) */
+       v0.17.2 — padding 64 0 32 (era 80 0 32) per rhythm armonioso section spacing */
+    padding: 64px 0 32px;
   }
   .sl-hero__eyebrow { margin-bottom: 64px; }
   .sl-hero__headline {
@@ -260,8 +259,11 @@
  * ========================================================= */
 .sl-areas {
   /* v0.14.1 padding-block ONLY (.sl-container delega inline);
-     v0.16.2 — ridotto da 80 → 56 mobile per gap sezioni più stretto */
+     v0.17.2 — armonizzato a 56 mobile (default) */
   padding-block: 56px;
+}
+@media (min-width: 1024px) {
+  .sl-areas { padding-block: 80px; /* v0.17.2 armonia rhythm desktop */ }
 }
 .sl-areas__head {
   display: grid;
@@ -317,9 +319,10 @@
 .sl-areas__more { padding-top: 32px; }
 
 @media (min-width: 768px) {
-  .sl-areas {
-    padding: 128px var(--container-pad);
-  }
+  /* v0.17.2 — legacy `.sl-areas { padding: 128px var(--container-pad) }` rimossa
+     (dirty code v0.12 che batteva il padding-block 80 desktop + ri-introduceva
+     padding-inline doppio col .sl-container interno). Padding ora unificato:
+     56 mobile / 80 desktop via rule a riga 266. */
   .sl-areas__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
@@ -643,8 +646,8 @@
  * 7. PRESS — Earned media strip
  * ========================================================= */
 .sl-press {
-  /* v0.14.1 padding-block; v0.16.2 64 → 48 mobile */
-  padding-block: 48px;
+  /* v0.17.2 — armonizzato a 56px mobile (era 48) per rhythm cross-section */
+  padding-block: 56px;
   background: var(--surface);
 }
 .sl-press__inner {
@@ -666,7 +669,7 @@
 }
 
 @media (min-width: 1024px) {
-  .sl-press { padding-block: 64px; /* v0.16.2 era 96 */ }
+  .sl-press { padding-block: 80px; /* v0.17.2 armonizzato a 80 desktop */ }
   .sl-press__inner {
     display: flex;
     align-items: center;
@@ -692,8 +695,8 @@
  * 8. CONTACT
  * ========================================================= */
 .sl-contact {
-  /* v0.14.1 padding-block; v0.16.2 96/64 → 64/48 mobile */
-  padding-block: 64px 48px;
+  /* v0.17.2 — armonizzato a 56px mobile uniforme */
+  padding-block: 56px;
 }
 .sl-contact__head {
   display: grid;
@@ -723,7 +726,7 @@
 .sl-contact__cta-wrap { margin-top: 48px; }
 
 @media (min-width: 1024px) {
-  .sl-contact { padding-block: 96px 80px; /* v0.16.2 era 160/128 */ }
+  .sl-contact { padding-block: 80px; /* v0.17.2 armonizzato a 80 desktop */ }
   .sl-contact__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
@@ -907,10 +910,12 @@
 .sl-hero__inner {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 48px;
+  gap: 32px; /* v0.17.2 era 48 → 32 (rhythm più stretto) */
   width: 100%;
-  min-height: calc(100vh - clamp(96px, 16vh, 240px)); /* 100vh meno padding-block */
-  align-content: space-between;
+  /* v0.17.2 — rimosso min-height + space-between che forzavano hero a ~756px+
+     creando ~250px di white-space sotto il content. Ora hero prende natural
+     height dal content, allineato top-down. */
+  align-content: start;
 }
 .sl-hero__main {
   display: flex;
@@ -959,17 +964,18 @@
   .sl-hero__inner {
     grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
     gap: 64px;
-    align-content: space-between;
-    align-items: stretch;
+    /* v0.17.2 — align-content: start (era space-between) + align-items: start
+       (era stretch). Rimosso anche align-self: end su .sl-hero__main e
+       .sl-hero__colophon. Tutto allineato top-down naturale, no forced spread. */
+    align-content: start;
+    align-items: start;
   }
   .sl-hero__main {
     grid-column: 1;
-    align-self: end;
     gap: 24px;
   }
   .sl-hero__colophon {
     grid-column: 2;
-    align-self: end;
     border-left: 1px solid var(--border);
     padding-left: 32px;
   }
