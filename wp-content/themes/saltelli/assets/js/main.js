@@ -1,6 +1,6 @@
 /*
  * Saltelli & Partners — main entrypoint
- * Style & Animation · v0.3.0-beta-polish · 2026-04-29
+ * Style & Animation · v0.15.0-beta-impeccable-typography
  *
  * Stack: GSAP 3.12.5 + ScrollTrigger + SplitText + Lenis 1.1.13.
  * Caricato da inc/enqueue.php in footer con strategy=defer.
@@ -10,10 +10,12 @@
  *   2. GSAP ticker integrato con Lenis (no double rAF)
  *   3. Header solid-on-scroll — toggle .is-scrolled dopo 80px scroll
  *   4. Mobile menu toggle (burger / hidden attr)
- *   5. Hero headline reveal — stagger 80ms su .sl-hero__word (desktop only, no reduced-motion)
+ *   5. Hero headline reveal — REVEAL 1 v0.15: stagger 80ms su .sl-hero__word, power3.out (true quart-out)
  *   6. Sezioni fade-in scroll-trigger 80% viewport (.sl-areas/.sl-studio/.sl-team/.sl-cases/.sl-press/.sl-contact)
  *   7. List items area pratica — stagger 80ms al primo ingresso in viewport (desktop only)
  *   8. Hover preview .sl-area — popola .sl-area__preview con cat / lead / CTA (desktop only)
+ *   9. Drop-cap §02 reveal — REVEAL 2 v0.15: classe .drop-cap-revealed su .sl-studio quando entra viewport
+ *      (CSS poi anima ::first-letter con scale 0.8→1 + opacity 0→1, 600ms quart-out)
  *
  * Idempotente: re-init non duplica handler grazie a flag su elementi.
  */
@@ -113,7 +115,7 @@
           opacity: 1,
           y: 0,
           duration: 0.7,
-          ease: 'power2.out',
+          ease: 'power3.out',
           stagger: 0.08,
           delay: 0.08,
           onComplete: () => wordEls.forEach((w) => w.classList.add('is-revealed')),
@@ -125,7 +127,7 @@
           opacity: 1,
           y: 0,
           duration: 0.7,
-          ease: 'power2.out',
+          ease: 'power3.out',
           stagger: 0.08,
           delay: 0.08,
         });
@@ -178,6 +180,36 @@
                 stagger: 0.08,
                 scrollTrigger: { trigger: group, start: 'top 70%', toggleActions: 'play none none none' },
               });
+            });
+          }
+
+          // REVEAL 2 v0.15 — Drop-cap §02 Lo studio entrance (desktop only ≥1024)
+          // Aggiunge classe .drop-cap-revealed a .sl-studio quando entra viewport top 80%.
+          // CSS poi transition opacity 0→1 + transform scale(0.8)→1 sul ::first-letter,
+          // 600ms quart-out. Mobile escluso perché drop-cap è desktop-only via CSS @media.
+          // prefers-reduced-motion gestito a monte (early return riga ~99) — class non aggiunta,
+          // CSS fallback rivela direttamente senza transform.
+          if (!isMobile) {
+            document.querySelectorAll('.sl-studio[data-drop-cap], .sl-studio:has([data-drop-cap])').forEach((studio) => {
+              ST.create({
+                trigger: studio,
+                start: 'top 80%',
+                once: true,
+                onEnter: () => studio.classList.add('drop-cap-revealed'),
+              });
+            });
+            // Fallback browser senza :has() support — query padre direttamente
+            const dropCapHosts = document.querySelectorAll('[data-drop-cap]');
+            dropCapHosts.forEach((host) => {
+              const parent = host.closest('.sl-studio');
+              if (!parent || parent.dataset.slDropCapBound === '1') return;
+              ST.create({
+                trigger: parent,
+                start: 'top 80%',
+                once: true,
+                onEnter: () => parent.classList.add('drop-cap-revealed'),
+              });
+              parent.dataset.slDropCapBound = '1';
             });
           }
         },

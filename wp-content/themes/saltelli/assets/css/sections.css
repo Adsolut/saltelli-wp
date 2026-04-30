@@ -259,9 +259,10 @@
  * 3. AREAS — 19 aree di pratica
  * ========================================================= */
 .sl-areas {
-  padding: 80px 20px;
-  max-width: var(--container-max);
-  margin: 0 auto;
+  /* v0.14.1 — padding-block ONLY: padding-inline e max-width sono delegati a .sl-container interno
+     (front-page.php:120, archive-competenza.php:30). Era `padding: 80px 20px` hardcoded → conflitto
+     col `--container-pad` clamp(24,5vw,96). Override successivo a riga 2761 ora ridondante ma lasciato. */
+  padding-block: 80px;
 }
 .sl-areas__head {
   display: grid;
@@ -376,9 +377,8 @@
  * 4. STUDIO — prose editoriale
  * ========================================================= */
 .sl-studio {
-  padding: 80px 20px;
-  max-width: var(--container-max);
-  margin: 0 auto;
+  /* v0.14.1 — padding-block ONLY (delegato a .sl-container interno) */
+  padding-block: 80px;
 }
 .sl-studio__head {
   display: grid;
@@ -442,7 +442,7 @@
 .sl-studio__plate-meta { margin-top: 4px; text-align: center; }
 
 @media (min-width: 1024px) {
-  .sl-studio { padding: 128px var(--container-pad); }
+  .sl-studio { padding-block: 128px; }
   .sl-studio__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
@@ -474,9 +474,8 @@
  * 5. TEAM — Avvocati
  * ========================================================= */
 .sl-team {
-  padding: 80px 20px;
-  max-width: var(--container-max);
-  margin: 0 auto;
+  /* v0.14.1 — padding-block ONLY (delegato a .sl-container interno) */
+  padding-block: 80px;
 }
 .sl-team__head {
   display: grid;
@@ -546,7 +545,7 @@
 }
 
 @media (min-width: 1024px) {
-  .sl-team { padding: 128px var(--container-pad); }
+  .sl-team { padding-block: 128px; }
   .sl-team__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
@@ -586,9 +585,8 @@
  * 6. CASES — Casi rappresentativi
  * ========================================================= */
 .sl-cases {
-  padding: 80px 20px;
-  max-width: var(--container-max);
-  margin: 0 auto;
+  /* v0.14.1 — padding-block ONLY (delegato a .sl-container interno) */
+  padding-block: 80px;
 }
 .sl-cases__head {
   display: grid;
@@ -625,7 +623,7 @@
 }
 
 @media (min-width: 1024px) {
-  .sl-cases { padding: 128px var(--container-pad); }
+  .sl-cases { padding-block: 128px; }
   .sl-cases__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
@@ -646,7 +644,8 @@
  * 7. PRESS — Earned media strip
  * ========================================================= */
 .sl-press {
-  padding: 64px 20px;
+  /* v0.14.1 — padding-block ONLY (delegato a .sl-container interno) */
+  padding-block: 64px;
   background: var(--surface);
 }
 .sl-press__inner {
@@ -668,7 +667,7 @@
 }
 
 @media (min-width: 1024px) {
-  .sl-press { padding: 96px var(--container-pad); }
+  .sl-press { padding-block: 96px; }
   .sl-press__inner {
     display: flex;
     align-items: center;
@@ -694,9 +693,8 @@
  * 8. CONTACT
  * ========================================================= */
 .sl-contact {
-  padding: 96px 20px 64px;
-  max-width: var(--container-max);
-  margin: 0 auto;
+  /* v0.14.1 — padding-block ONLY (delegato a .sl-container interno) */
+  padding-block: 96px 64px;
 }
 .sl-contact__head {
   display: grid;
@@ -726,7 +724,7 @@
 .sl-contact__cta-wrap { margin-top: 48px; }
 
 @media (min-width: 1024px) {
-  .sl-contact { padding: 160px var(--container-pad) 128px; }
+  .sl-contact { padding-block: 160px 128px; }
   .sl-contact__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
@@ -747,6 +745,8 @@
  * 9. FOOTER — tema scuro --primary
  * ========================================================= */
 .sl-footer {
+  /* v0.14.1 — padding-block + .sl-footer__inner ha .sl-container-like behavior (max-width + margin auto + padding-inline)
+     ma NON ha class .sl-container. Manteniamo padding-inline minimale a footer mobile (20px) per fallback. */
   background: var(--primary);
   color: var(--background);
   padding: 48px 20px 24px;
@@ -801,7 +801,7 @@
 }
 
 @media (min-width: 1024px) {
-  .sl-footer { padding: 96px var(--container-pad) 32px; }
+  .sl-footer { padding: 96px 20px 32px; /* v0.14.1 — footer NON usa .sl-container, mantiene padding-inline 20px desktop */ }
   .sl-footer__cols {
     display: grid;
     grid-template-columns: 2fr 4fr 2fr;
@@ -3172,4 +3172,100 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 .sl-page__prose h2 + p,
 .sl-page__prose h3 + p {
     margin-top: 24px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   IMPECCABLE TYPESET v0.15.0 — refinement, NOT redesign
+   PRODUCT.md register=brand; DESIGN.md hierarchy ratios ≥1.25 OK,
+   weights 400+500 only, italic stress disciplined, no #000/#fff.
+   Audit baseline post-v0.14.1 ha trovato 5 gap residui:
+   T1. Line-length 60ch missing on .sl-competenza__prose p +
+       .sl-attorney__bio-prose (DM Sans → leggi senza confine = >120ch)
+   T2. tabular-nums missing su mono numerali (.sl-area__num "01 / 19",
+       .sl-cases__id, .sl-blog__date) → drift visivo "0" vs "1" larghezza
+   T3. .sl-hero__colophon-label 9px sotto soglia mobile readability
+   T4. .sl-footer__nav line-height 2 troppo aerato (legge come elenco vuoto)
+   T5. .sl-footer__areas-list idem
+   ─────────────────────────────────────────────────────────────── */
+
+/* T1 — Line-length editorial 60ch su prose lunghi non ancora coperti.
+   Coerente con .sl-page__prose già 60ch (riga 1796+). Eredita line-height
+   1.7 da DM Sans body, no-op su mobile (60ch < 100% width <1024). */
+.sl-competenza__prose p,
+.sl-competenza__body p,
+.sl-competenza__content p,
+.sl-attorney__bio-prose p,
+.sl-attorney__bio-prose {
+    max-width: 60ch;
+}
+/* Nei contesti bio breve singolo paragrafo, il max-width sul wrapper non basta
+   se il p è singolo; entrambi i selettori coprono ambiguità markup. */
+
+/* T2 — tabular-nums per allineamento numerali mono.
+   "01 / 19" deve avere "0" e "1" stessa width per griglia ottica.
+   Riguarda anche date blog "30 aprile 2026" se uniche con altri numerals.
+   font-feature-settings sopravvive cross-browser anche su variabili Playfair
+   ma DM Sans/JetBrains Mono lo onorano via font-variant-numeric. */
+.sl-mono,
+.sl-area__num,
+.sl-cases__id,
+.sl-blog__date,
+.sl-page__breadcrumb,
+.sl-attorney__role,
+.sl-team__role,
+.sl-competenza__cta-note,
+.sl-hero__colophon-tel {
+    font-variant-numeric: tabular-nums;
+}
+
+/* T3 — Colophon label mobile leggibilità: 9px → 10px (floor minimo retina).
+   Desktop @media riga 237 già porta a 11px implicitamente (font-size del
+   parent .sl-hero__colophon = 13px ereditato), nessuna regressione. */
+.sl-hero__colophon-label {
+    font-size: 10px;
+}
+
+/* T4+T5 — Footer line-height 2 → 1.7 (allinea body global lh-body 1.65-1.7).
+   line-height 2 lasciava 16px gap interno, leggeva come "spaced list", non
+   come navigation menu. 1.7 mantiene respiro senza sembrare elenco morto. */
+.sl-footer__nav {
+    line-height: 1.7;
+}
+.sl-footer__areas-list {
+    line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   IMPECCABLE ANIMATE v0.15.0 — REVEAL 2: drop-cap §02 entrance
+   Trigger: .sl-studio entra viewport top 80% → main.js aggiunge
+   .drop-cap-revealed sul section. CSS transition ::first-letter:
+   opacity 0→1 + transform scale(0.8)→1 in 600ms quart-out.
+   Cubic-bezier inline (no nuovi token) — quart-out: 0.25,1,0.5,1.
+   Solo desktop ≥1024 (drop-cap è desktop-only via @media).
+   prefers-reduced-motion: skip transform, fade opacity 200ms only.
+   Initial state senza class .drop-cap-revealed = invisibile.
+   Fallback senza JS (html senza .js-reveal-ready) = visibile direttamente.
+   ─────────────────────────────────────────────────────────────── */
+@media (min-width: 1024px) {
+    .sl-studio__prose[data-drop-cap] > p:first-of-type::first-letter {
+        opacity: 0;
+        transform: scale(0.8);
+        transform-origin: top left;
+        transition: opacity 600ms cubic-bezier(0.25, 1, 0.5, 1),
+                    transform 600ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    /* Reveal: classe sul parent .sl-studio (aggiunta da main.js ScrollTrigger).
+       Fallback senza JS: html:not(.js-reveal-ready) rivela direttamente. */
+    .sl-studio.drop-cap-revealed .sl-studio__prose[data-drop-cap] > p:first-of-type::first-letter,
+    html:not(.js-reveal-ready) .sl-studio__prose[data-drop-cap] > p:first-of-type::first-letter {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .sl-studio__prose[data-drop-cap] > p:first-of-type::first-letter {
+        opacity: 1;
+        transform: none;
+        transition: opacity 200ms linear;
+    }
 }
