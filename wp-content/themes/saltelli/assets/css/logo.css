@@ -1,0 +1,342 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   SALTELLI LOGO SYSTEM v1.1
+   ═══════════════════════════════════════════════════════════════════════
+   Lockup editoriale tipografico in tre piani.
+   Source: Studio Legale Saltelli - Logo.html (Claude Design)
+   
+   Naming convention: .sl-logo (primary system)
+                     .sl-logo--horizontal (variant A header)
+                     .sl-logo--mono (variant B monogram favicon/avatar)
+                     .sl-logo--stack (variant C footer compact)
+   
+   Color modes: cream (default) / surface / navy (auto-applies on dark bg)
+   Scale: XL hero 132px / M header 38px / S footer 28px / XS favicon 32x32
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────────────────────────────────────
+   LOGO PRIMARIO — composizione editoriale a tre piani
+   Riga 1 — KICKER "STUDIO · LEGALE" — DM Sans 500, lockup con regole
+   Riga 2 — WORDMARK "Saltelli" — Playfair Italic, S iniziale bronze
+   Riga 3 — PAYOFF — JetBrains Mono, dot bronze
+   ────────────────────────────────────────────────────────────────────── */
+.sl-logo {
+    display: inline-grid;
+    justify-items: center;
+    gap: 0;
+    color: var(--primary);
+    text-align: center;
+}
+
+.sl-logo__kicker {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 18px;
+    width: 100%;
+    min-width: 280px;
+}
+
+.sl-logo__kicker::before,
+.sl-logo__kicker::after {
+    content: "";
+    height: 1px;
+    background: var(--primary);
+    align-self: center;
+}
+
+.sl-logo__kicker-text {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(13px, 1vw, 16px);
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--primary);
+    white-space: nowrap;
+    /* Compensate optical right-shift from letter-spacing */
+    padding-left: 0.42em;
+}
+
+.sl-logo__kicker-text .sl-logo__mark {
+    display: inline-block;
+    margin: 0 6px;
+}
+
+.sl-logo__name {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(72px, 9vw, 132px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    color: var(--primary);
+}
+
+.sl-logo__name .sl-logo__swash {
+    color: var(--accent);
+}
+
+.sl-logo__payoff {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: clamp(11px, 0.85vw, 13px);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 18px;
+}
+
+.sl-logo__payoff .sl-logo__dot {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translateY(-3px);
+    margin: 0 10px;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   VARIANTE A — ORIZZONTALE (Header sito · Email signature)
+   Layout 3-col: [text-stack] | [hairline rule] | [wordmark]
+   ────────────────────────────────────────────────────────────────────── */
+.sl-logo--horizontal {
+    display: inline-grid;
+    grid-template-columns: auto 1px auto;
+    align-items: center;
+    gap: 24px;
+    text-align: left;
+    color: var(--primary);
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.sl-logo--horizontal .sl-logo__h-left {
+    display: grid;
+    justify-items: end;
+    gap: 2px;
+}
+
+.sl-logo--horizontal .sl-logo__h-top {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+
+.sl-logo--horizontal .sl-logo__h-bot {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.sl-logo--horizontal .sl-logo__h-rule {
+    height: 36px;
+    background: var(--primary);
+    width: 1px;
+}
+
+.sl-logo--horizontal .sl-logo__h-name {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+    white-space: nowrap;
+}
+
+.sl-logo--horizontal .sl-logo__h-name .sl-logo__swash {
+    color: var(--accent);
+}
+
+/* Hover state header (subtle) */
+.sl-logo--horizontal:hover .sl-logo__h-name,
+.sl-logo--horizontal:focus-visible .sl-logo__h-name {
+    color: var(--accent);
+    transition: color var(--dur-fast, 200ms) var(--ease-quart-out, cubic-bezier(0.25, 1, 0.5, 1));
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   VARIANTE B — MONOGRAMMA (Favicon · Avatar social · Sigillo atti)
+   Cerchio doppio: outer primary 1px, inner accent 1px (offset 4px)
+   "S" centrato Playfair italic
+   ────────────────────────────────────────────────────────────────────── */
+.sl-logo--mono {
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+    color: var(--primary);
+    text-align: center;
+}
+
+.sl-logo--mono .sl-logo__seal {
+    width: 88px;
+    height: 88px;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--primary);
+    position: relative;
+}
+
+.sl-logo--mono .sl-logo__seal::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    opacity: 0.55;
+}
+
+.sl-logo--mono .sl-logo__seal--small {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    border-width: 1px;
+}
+
+.sl-logo--mono .sl-logo__seal--small::after {
+    inset: 2px;
+}
+
+.sl-logo--mono .sl-logo__m-name {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+}
+
+.sl-logo--mono .sl-logo__m-pay {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   VARIANTE C — STACK COMPATTO (Footer · Watermark documenti)
+   3 righe: kicker | wordmark italic | payoff
+   ────────────────────────────────────────────────────────────────────── */
+.sl-logo--stack {
+    display: grid;
+    justify-items: center;
+    gap: 4px;
+    text-align: center;
+    color: var(--primary);
+}
+
+.sl-logo--stack .sl-logo__s-row1 {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+}
+
+.sl-logo--stack .sl-logo__s-row2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 56px;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+}
+
+.sl-logo--stack .sl-logo__s-row3 {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   COLOR MODES — Adattamento automatico su sfondo navy (footer)
+   ────────────────────────────────────────────────────────────────────── */
+
+/* Su fondo navy (footer dark): testo cream, accento bronze preservato */
+.sl-footer .sl-logo,
+.sl-footer .sl-logo--horizontal,
+.sl-footer .sl-logo--mono,
+.sl-footer .sl-logo--stack,
+[data-logo-mode="navy"] .sl-logo,
+[data-logo-mode="navy"] .sl-logo--horizontal,
+[data-logo-mode="navy"] .sl-logo--mono,
+[data-logo-mode="navy"] .sl-logo--stack {
+    color: var(--background);
+}
+
+.sl-footer .sl-logo__kicker-text,
+.sl-footer .sl-logo__name,
+.sl-footer .sl-logo--horizontal .sl-logo__h-top,
+.sl-footer .sl-logo--horizontal .sl-logo__h-name,
+.sl-footer .sl-logo--stack .sl-logo__s-row1,
+.sl-footer .sl-logo--stack .sl-logo__s-row2 {
+    color: var(--background);
+}
+
+.sl-footer .sl-logo__kicker::before,
+.sl-footer .sl-logo__kicker::after,
+.sl-footer .sl-logo--horizontal .sl-logo__h-rule {
+    background: var(--background);
+}
+
+.sl-footer .sl-logo__payoff,
+.sl-footer .sl-logo--horizontal .sl-logo__h-bot,
+.sl-footer .sl-logo--stack .sl-logo__s-row3 {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.sl-footer .sl-logo--mono .sl-logo__seal {
+    color: var(--background);
+    border-color: var(--background);
+}
+
+/* L'accento bronze "S" è SEMPRE preservato */
+.sl-footer .sl-logo__swash,
+.sl-footer .sl-logo--horizontal .sl-logo__swash,
+[data-logo-mode="navy"] .sl-logo__swash {
+    color: var(--accent);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   RESPONSIVE — Mobile sotto 768px
+   ────────────────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+    .sl-logo--horizontal {
+        gap: 16px;
+    }
+    .sl-logo--horizontal .sl-logo__h-name {
+        font-size: 24px;
+    }
+    .sl-logo--horizontal .sl-logo__h-top {
+        font-size: 9px;
+        letter-spacing: 0.28em;
+    }
+    .sl-logo--horizontal .sl-logo__h-bot {
+        font-size: 8px;
+        letter-spacing: 0.20em;
+    }
+    .sl-logo--horizontal .sl-logo__h-rule {
+        height: 28px;
+    }
+
+    .sl-logo--stack .sl-logo__s-row2 {
+        font-size: 40px;
+    }
+}

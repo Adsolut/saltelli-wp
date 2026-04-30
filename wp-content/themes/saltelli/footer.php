@@ -20,16 +20,11 @@ $ftr_tel_e164  = saltelli_studio_phone_e164();
 
         <div class="sl-footer__cols">
             <div class="sl-footer__col sl-footer__col--brand">
-                <div class="sl-footer__brand">
-                    <?php
-                    $name = get_bloginfo('name');
-                    if ($name === 'Saltelli &amp; Partners' || stripos($name, 'Saltelli') !== false) {
-                        echo 'Saltelli<br>&amp; Partners';
-                    } else {
-                        echo esc_html($name);
-                    }
-                    ?>
-                </div>
+                <a class="sl-footer__brand sl-logo--stack" href="<?php echo esc_url(home_url('/')); ?>" rel="home" aria-label="Studio Legale Saltelli — Home">
+                    <span class="sl-logo__s-row1">Studio Legale</span>
+                    <span class="sl-logo__s-row2"><span class="sl-logo__swash">S</span>altelli</span>
+                    <span class="sl-logo__s-row3">Napoli · Dal 1999</span>
+                </a>
                 <?php
                 wp_nav_menu([
                     'theme_location' => 'footer-studio',

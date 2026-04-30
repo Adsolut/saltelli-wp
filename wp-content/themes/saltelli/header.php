@@ -24,9 +24,13 @@ $saltelli_phone_e164  = saltelli_studio_phone_e164();
 <header class="sl-header" data-scrolled="false" role="banner">
     <div class="sl-header__inner sl-container">
 
-        <a class="sl-header__brand" href="<?php echo esc_url(home_url('/')); ?>" rel="home" aria-label="<?php echo esc_attr(get_bloginfo('name')); ?>">
-            <span class="sl-header__brand-name">Saltelli &amp; Partners</span>
-            <span class="sl-header__brand-sub sl-mono">Studio Legale · Napoli</span>
+        <a class="sl-header__brand sl-logo--horizontal" href="<?php echo esc_url(home_url('/')); ?>" rel="home" aria-label="Studio Legale Saltelli — Home">
+            <span class="sl-logo__h-left">
+                <span class="sl-logo__h-top">Studio Legale</span>
+                <span class="sl-logo__h-bot">Napoli · 1999</span>
+            </span>
+            <span class="sl-logo__h-rule" aria-hidden="true"></span>
+            <span class="sl-logo__h-name"><span class="sl-logo__swash">S</span>altelli</span>
         </a>
 
         <nav class="sl-header__nav" aria-label="<?php esc_attr_e('Menu principale', 'saltelli'); ?>">

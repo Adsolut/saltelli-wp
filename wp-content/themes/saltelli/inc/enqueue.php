@@ -45,9 +45,16 @@ function saltelli_enqueue_assets() {
     );
 
     wp_enqueue_style(
+        'saltelli-logo',
+        SALTELLI_THEME_URI . '/assets/css/logo.css',
+        ['saltelli-components'],
+        $ver
+    );
+
+    wp_enqueue_style(
         'saltelli-sections',
         SALTELLI_THEME_URI . '/assets/css/sections.css',
-        ['saltelli-components'],
+        ['saltelli-logo'],
         $ver
     );
 
@@ -122,6 +129,20 @@ add_action('after_setup_theme', function () {
         'assets/css/tokens.css',
         'assets/css/base.css',
         'assets/css/components.css',
+        'assets/css/logo.css',
         'assets/css/sections.css',
     ]);
 });
+
+/**
+ * Favicon — Logo system v1.1 monogramma SVG.
+ * Saltelli "S" Playfair italic con cerchio doppio (navy + bronze accent).
+ * Override eventuale Site Icon WP fallback.
+ */
+add_action('wp_head', function () {
+    $brand = SALTELLI_THEME_URI . '/assets/img/brand';
+    $ver = SALTELLI_THEME_VERSION;
+    echo '<link rel="icon" type="image/svg+xml" href="' . esc_url($brand . '/favicon.svg?v=' . $ver) . '">' . "\n";
+    echo '<link rel="apple-touch-icon" href="' . esc_url($brand . '/apple-touch-icon.svg?v=' . $ver) . '">' . "\n";
+    echo '<meta name="apple-mobile-web-app-title" content="Saltelli">' . "\n";
+}, 1);
