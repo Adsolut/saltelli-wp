@@ -1,0 +1,66 @@
+[
+  {
+    "sev": "P0",
+    "area": "UX",
+    "code": "A01",
+    "url": "/contatti/",
+    "desc": "NO FORM DI CONTATTO. Solo info testuali (NAP + map). Quick Win CRO #4 audit non implementato.",
+    "fix": "Aggiungere form Brevo o WP minimal con nome/email/messaggio + privacy disclosure GDPR"
+  },
+  {
+    "sev": "P0",
+    "area": "UX",
+    "code": "A07",
+    "url": "/avvocati/fabiana-saltelli/",
+    "desc": "3 avvocati su 4 senza foto reale (Fabiana, Antonia, Stefano). Audit CRO §2.3 cita 'foto autentiche fattore #1 trust legale'.",
+    "fix": "Servizio fotografico professionale - bloccante per produzione, OK per staging"
+  },
+  {
+    "sev": "P1",
+    "area": "SEO",
+    "code": "C01",
+    "url": "/",
+    "desc": "Meta description mancante o troppo corta su 3 pagine: /contatti/, /competenze/diritto-tributario/, /avvocati/emiliano-saltelli/",
+    "fix": "Yoast meta description ≥50 chars ogni page"
+  },
+  {
+    "sev": "P1",
+    "area": "UX",
+    "code": "A02",
+    "url": "/",
+    "desc": "WhatsApp click-to-chat NON visibile homepage. Quick Win CRO #5 audit non implementato.",
+    "fix": "Aggiungere sticky button WhatsApp mobile (bottom-right) + link header desktop"
+  },
+  {
+    "sev": "P2",
+    "area": "UI",
+    "code": "B01",
+    "url": "/",
+    "desc": "Homepage fidelity gap: D1 Header sub-eyebrow Studio Legale Napoli",
+    "fix": "CSS fix puntuale 2-5 min (post-deploy hotfix v0.13.6)"
+  },
+  {
+    "sev": "P2",
+    "area": "UI",
+    "code": "B02",
+    "url": "/",
+    "desc": "Homepage fidelity gap: D9 Scroll indicator class sl-hero__scroll-indicator",
+    "fix": "CSS fix puntuale 2-5 min (post-deploy hotfix v0.13.6)"
+  },
+  {
+    "sev": "P2",
+    "area": "UI",
+    "code": "B03",
+    "url": "/",
+    "desc": "Homepage fidelity gap: D10 Sezioni padding-block 128px",
+    "fix": "CSS fix puntuale 2-5 min (post-deploy hotfix v0.13.6)"
+  },
+  {
+    "sev": "P2",
+    "area": "UI",
+    "code": "B04",
+    "url": "/",
+    "desc": "Homepage fidelity gap: D11 § 02 Lo studio asimmetria margin-left 20%",
+    "fix": "CSS fix puntuale 2-5 min (post-deploy hotfix v0.13.6)"
+  }
+]
