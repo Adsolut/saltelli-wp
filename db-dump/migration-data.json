@@ -1,0 +1,327 @@
+{
+  "competenze": {
+    "diritto-tributario": {
+      "cpt_id": 2664,
+      "source_id": 202,
+      "tier": 1,
+      "lead_breve": "Cartelle esattoriali, contenzioso fiscale, accertamenti tributari per privati e imprese.",
+      "answer_capsule": "Lo Studio Legale Saltelli & Partners assiste privati e imprese a Napoli in tutte le materie del diritto tributario: contenzioso, ricorsi su cartelle esattoriali, accertamenti, sanzioni e pianificazione fiscale. La nostra esperienza pluriennale si concentra in particolare su Commissioni Tributarie, IMU, IRPEF e contenzioso INPS. Contatta lo studio per un primo incontro.",
+      "faqs": [
+        {"q":"Quanto costa un ricorso contro una cartella esattoriale?","a":"Il costo del ricorso varia in base all'importo contestato e al grado di giudizio (Commissione Tributaria Provinciale o Regionale). Lo Studio fornisce un preventivo trasparente dopo la prima valutazione gratuita della pratica."},
+        {"q":"Entro quanti giorni devo impugnare una cartella esattoriale?","a":"Il termine ordinario è di 60 giorni dalla notifica per il ricorso davanti alla Commissione Tributaria Provinciale. Per le multe stradali il termine è di 30 giorni davanti al Giudice di Pace. Termini perentori: una valutazione tempestiva è essenziale."},
+        {"q":"Posso ottenere la sospensione della cartella?","a":"Sì, in presenza di gravi e fondati motivi è possibile richiedere alla Commissione Tributaria la sospensione dell'esecuzione. Lo Studio gestisce regolarmente istanze di sospensione contestualmente al ricorso principale."},
+        {"q":"Cosa succede se la mia società è in liquidazione?","a":"In caso di società in liquidazione il debito tributario può richiedere strategie specifiche, dalla rateizzazione alla rottamazione fino al ricorso per vizi di notifica. Abbiamo gestito casi con annullamento di cartelle superiori a 240.000€."},
+        {"q":"Quali documenti servono per la prima valutazione?","a":"Cartella esattoriale, eventuale avviso di accertamento, ricevute di notifica e l'ultima dichiarazione dei redditi. Il primo incontro presso lo Studio in via Vannella Gaetani 27 è di valutazione, senza impegno."}
+      ],
+      "casi_rappresentativi": [
+        {"titolo":"Annullamento cartella società in liquidazione","descrizione":"Annullamento di cartella esattoriale per importo superiore a 240.000 € a carico di società in liquidazione, per difetto di notifica e prescrizione del credito tributario.","esito":"Annullamento integrale"},
+        {"titolo":"Riforma accertamento sintetico — Corte d'Appello","descrizione":"Riforma di sentenza di primo grado in materia di accertamento sintetico, con riduzione dell'80% del dovuto su contestazione di tenore di vita non congruo ai redditi dichiarati.","esito":"Riduzione 80%"}
+      ]
+    },
+    "diritto-del-lavoro": {
+      "cpt_id": 2665,
+      "source_id": 292,
+      "tier": 1,
+      "lead_breve": "Licenziamenti, mobbing, contenzioso INPS e tutela del lavoratore e datore di lavoro.",
+      "answer_capsule": "Lo Studio Legale Saltelli & Partners offre assistenza completa in diritto del lavoro a Napoli: licenziamenti illegittimi, mobbing, contestazioni disciplinari, contrattualistica e contenzioso INPS. L'Avv. Fabiana Saltelli, giuslavorista con esperienza, segue lavoratori dipendenti, dirigenti e imprese. Contatta lo studio per una consulenza personalizzata.",
+      "faqs": [
+        {"q":"Cosa fare in caso di licenziamento ritenuto illegittimo?","a":"Il licenziamento può essere impugnato entro 60 giorni dalla comunicazione (180 se c'è procedimento di conciliazione). Lo Studio valuta il caso specifico per individuare se richiedere la reintegra o il risarcimento, secondo l'art. 18 dello Statuto dei Lavoratori o la disciplina del Jobs Act."},
+        {"q":"Cosa devo fare se subisco mobbing sul lavoro?","a":"Conservare ogni traccia documentale (email, certificati medici, testimonianze), denunciare al medico del lavoro, e farsi assistere da un legale per la quantificazione del danno biologico ed esistenziale. Procedibilità sia in sede civile che penale."},
+        {"q":"Posso contestare una sanzione disciplinare?","a":"Sì, la sanzione disciplinare può essere contestata entro i termini contrattuali, generalmente 5-20 giorni. La difesa scritta deve essere puntuale sui fatti e supportata da elementi documentali. Lo Studio assiste nella redazione delle difese."},
+        {"q":"Cosa fare se l'INPS rigetta la mia domanda di disoccupazione?","a":"È possibile presentare ricorso amministrativo all'INPS entro 90 giorni e, in caso di esito negativo, ricorso giudiziale al Giudice del Lavoro entro l'ulteriore termine di prescrizione. Lo Studio cura entrambe le fasi."},
+        {"q":"Lo Studio assiste anche datori di lavoro?","a":"Sì. Curiamo contrattualistica, gestione disciplinare interna, controllo a distanza ex art. 4 Statuto, licenziamenti per giusta causa o motivo oggettivo, conciliazioni in sede protetta e contenzioso INPS lato azienda."}
+      ],
+      "casi_rappresentativi": [
+        {"titolo":"Cassazione su licenziamento per giusta causa","descrizione":"Conferma in Cassazione di sentenza favorevole in materia di licenziamento per giusta causa illegittimo, con reintegra del lavoratore.","esito":"Vittoria definitiva"}
+      ]
+    },
+    "diritto-di-famiglia-lgbtq": {
+      "cpt_id": 2666,
+      "source_id": null,
+      "tier": 1,
+      "lead_breve": "Unioni civili, genitorialità, separazioni e tutela patrimoniale per coppie e famiglie LGBTQ+.",
+      "answer_capsule": "Lo Studio Legale Saltelli & Partners offre tutela legale specializzata per coppie e famiglie LGBTQ+ a Napoli e in Italia. Ci occupiamo di unioni civili, genitorialità, riconoscimento di figli, trascrizione di nascite e separazioni. L'Avv. Antonia Battista, of-counsel dedicata, segue il primo caso di trascrizione integrale di nascita di minore con due madri in Campania.",
+      "synth_body": "<h2>Diritto di famiglia LGBTQ+ a Napoli</h2><p>Lo Studio Legale Saltelli & Partners ha sviluppato un'area dedicata alla tutela giuridica delle coppie e delle famiglie LGBTQ+, in linea con l'evoluzione normativa italiana ed europea. L'Avv. <strong>Antonia Battista</strong> coordina l'area come of-counsel, con un focus specifico sulla genitorialità arcobaleno e sulla trascrizione degli atti di stato civile.</p><h2>Aree di intervento</h2><ul><li><strong>Unioni civili</strong> — costituzione, regime patrimoniale, scioglimento</li><li><strong>Genitorialità</strong> — riconoscimento di figli, adozione, GPA, accesso a tecniche di procreazione assistita</li><li><strong>Trascrizione atti di stato civile</strong> — trascrizione di nascite, matrimoni e unioni celebrate all'estero</li><li><strong>Separazioni e divorzi</strong> di coppie omoaffettive — affido, mantenimento, divisione patrimoniale</li><li><strong>Tutela patrimoniale</strong> — successioni, testamenti, regimi patrimoniali</li><li><strong>Anti-discriminazione</strong> — tutela civile e penale in caso di discriminazioni sul lavoro o nei servizi</li></ul><h2>Esperienza maturata</h2><p>Nel 2023 lo Studio ha ottenuto presso il Tribunale di Napoli il <strong>primo riconoscimento in Campania</strong> di trascrizione integrale di un atto di nascita di minore con due madri, intervenuto in seguito a sentenza dichiarativa di accertamento dello stato di figlio.</p><h2>Approccio dello Studio</h2><p>Riserviamo a ogni caso un approccio personalizzato, fondato su tre principi: <em>riservatezza assoluta</em>, <em>attenzione alle peculiarità del nucleo familiare</em>, <em>aggiornamento costante</em> sulla giurisprudenza nazionale ed europea. Operiamo in tutta Italia, con consulenze video remote per chi vive lontano da Napoli.</p><h2>Quando rivolgersi allo Studio</h2><p>Una valutazione tempestiva è particolarmente importante per i casi di stato civile (trascrizione, riconoscimento) dove i termini procedurali sono stringenti. Il primo incontro presso lo studio di Chiaia, o in videocall, è di valutazione e senza impegno.</p>",
+      "faqs": [
+        {"q":"Lo Studio assiste coppie LGBTQ+ residenti fuori Napoli?","a":"Sì. Operiamo in tutta Italia con consulenza in presenza presso lo studio di Chiaia o in videocall. Gestiamo procedimenti davanti a Tribunali italiani indipendentemente dalla sede."},
+        {"q":"Come funziona la trascrizione di un'unione civile celebrata all'estero?","a":"L'unione contratta all'estero da cittadini italiani può essere trascritta in Italia presentando documenti tradotti e legalizzati. Lo Studio cura l'intera pratica con il Comune competente, nei tempi del procedimento amministrativo."},
+        {"q":"È possibile ottenere il riconoscimento di entrambe le madri/dei due padri?","a":"In Italia il riconoscimento del doppio genitore è oggetto di evoluzione giurisprudenziale. Lo Studio è parte di alcuni dei procedimenti pilota in Campania e gestisce sia trascrizioni di nascite estere che azioni di accertamento in via giurisdizionale."},
+        {"q":"Quali sono i tempi di un procedimento di separazione di coppia in unione civile?","a":"Lo scioglimento dell'unione civile è procedura semplificata: dichiarazione congiunta o disgiunta in Comune, senza necessità di separazione. In presenza di figli o questioni patrimoniali significative interviene il Tribunale, con tempi medi 8-18 mesi."},
+        {"q":"È garantita la riservatezza assoluta?","a":"Sì. Tutti i procedimenti relativi a stato civile, genitorialità, atti riservati godono della protezione del segreto professionale. Lo Studio applica protocolli rafforzati di riservatezza fisica e digitale, con gestione dedicata della corrispondenza."}
+      ],
+      "casi_rappresentativi": [
+        {"titolo":"Primo riconoscimento Campania — due madri","descrizione":"Primo riconoscimento in Campania di trascrizione integrale di nascita di minore con due madri, ottenuto presso il Tribunale di Napoli, sezione famiglia.","esito":"Riconoscimento integrale"}
+      ]
+    },
+    "cartelle-esattoriali-e-multe": {
+      "cpt_id": 2667,
+      "source_id": 208,
+      "tier": 2,
+      "lead_breve": "Ricorsi cartelle esattoriali, multe stradali, ZTL, autovelox, ipoteche e fermi amministrativi.",
+      "answer_capsule": "Ricorsi contro cartelle esattoriali, multe stradali, ZTL, autovelox e tutor a Napoli. Lo Studio Legale Saltelli & Partners assiste in opposizioni davanti al Giudice di Pace, Tribunale e Commissioni Tributarie. Casistica consolidata su ipoteche, fermi amministrativi e crediti prescritti.",
+      "faqs": [
+        {"q":"Entro quanti giorni posso impugnare una multa?","a":"Il termine è di 30 giorni dalla notifica per il ricorso al Giudice di Pace, oppure 60 giorni per il ricorso al Prefetto. Termini perentori: rivolgersi allo Studio appena ricevuta la notifica."},
+        {"q":"Posso contestare una cartella per un debito prescritto?","a":"Sì. La prescrizione del credito tributario varia da 3 a 10 anni a seconda dell'imposta. Lo Studio verifica la legittimità della pretesa e l'eventuale prescrizione, ottenendo annullamenti."},
+        {"q":"Come funziona il ricorso contro un fermo amministrativo?","a":"Il fermo può essere impugnato per vizi di notifica, prescrizione del debito sottostante o sproporzione. La sospensione del fermo può essere ottenuta in via cautelare."}
+      ]
+    },
+    "recupero-crediti": {
+      "cpt_id": 2668,
+      "source_id": 170,
+      "tier": 2,
+      "lead_breve": "Decreti ingiuntivi, esecuzioni mobiliari e immobiliari, tutela del credito imprenditoriale e privato.",
+      "answer_capsule": "Lo Studio Legale Saltelli & Partners segue il recupero crediti in ogni fase: dalla diffida al decreto ingiuntivo, dall'esecuzione mobiliare al pignoramento immobiliare. Assistenza per imprese, professionisti e privati a Napoli e in tutta Italia, con strategia personalizzata sul tipo di credito e debitore.",
+      "faqs": [
+        {"q":"Quanto dura una procedura di recupero crediti?","a":"La fase stragiudiziale richiede 30-90 giorni; il decreto ingiuntivo viene emesso in 30-60 giorni dal deposito ricorso. L'esecuzione forzata varia in base al tipo di pignoramento (1-3 anni per immobiliare)."},
+        {"q":"Quanto costa avviare una procedura?","a":"Le spese sono inizialmente a carico del creditore (contributo unificato, marche, compenso legale) ma sono generalmente recuperabili dal debitore in caso di vittoria. Lo Studio fornisce preventivo trasparente."},
+        {"q":"Cosa fare se il debitore è nullatenente?","a":"Verifichiamo prima del decreto la patrimonialità del debitore (visura immobiliare, banche dati). Se nullatenente, valutiamo strumenti alternativi: piano di rientro garantito, escussione fideiussioni, transazione."}
+      ]
+    },
+    "diritto-di-famiglia": {
+      "cpt_id": 2669,
+      "source_id": 947,
+      "tier": 2,
+      "lead_breve": "Separazioni, divorzi, affidamento dei figli e regimi patrimoniali coniugali.",
+      "answer_capsule": "Separazione, divorzio, affidamento dei figli, regime patrimoniale e tutela del coniuge debole. Lo Studio Legale Saltelli & Partners assiste in tutto il diritto di famiglia a Napoli, con approccio riservato e orientato alla mediazione, riservando il contenzioso quando la conciliazione non è possibile.",
+      "faqs": [
+        {"q":"Quanto dura una separazione consensuale?","a":"La separazione consensuale richiede 30-60 giorni: l'accordo viene depositato in Tribunale o davanti all'Ufficiale di Stato Civile. La separazione giudiziale ha tempi più lunghi (12-24 mesi medio)."},
+        {"q":"Posso ottenere il divorzio breve dopo la separazione?","a":"Sì. Trascorsi 6 mesi dalla separazione consensuale (o 12 mesi dalla giudiziale), è possibile chiedere il divorzio. Termini ridotti dalla legge sul divorzio breve del 2015."},
+        {"q":"Come si calcola l'assegno di mantenimento?","a":"Sull'assegno influiscono redditi delle parti, tenore di vita matrimoniale, durata del matrimonio, presenza di figli, assegnazione della casa coniugale. Lo Studio fornisce stima preliminare in base alla giurisprudenza locale."}
+      ]
+    },
+    "responsabilita-medica": {
+      "cpt_id": 2670,
+      "source_id": 279,
+      "tier": 2,
+      "lead_breve": "Risarcimento del danno da malasanità, errore diagnostico, infezioni nosocomiali.",
+      "answer_capsule": "Risarcimento del danno da responsabilità medica e sanitaria. Lo Studio Legale Saltelli & Partners segue i casi di errore diagnostico, infezione nosocomiale, danno da nascita e responsabilità della struttura sanitaria, con CTU specialistica e consulenza medico-legale dedicata.",
+      "faqs": [
+        {"q":"Entro quanto tempo posso agire per malasanità?","a":"Il termine prescrizionale è 10 anni per la responsabilità contrattuale della struttura, 5 anni per quella extracontrattuale del medico. Termini decorrenti dalla scoperta del danno."},
+        {"q":"Serve una perizia medico-legale per il ricorso?","a":"Sì, è essenziale. Lo Studio si avvale di consulenti tecnici medico-legali fiduciari per la stima del danno biologico, morale ed esistenziale prima di intraprendere l'azione giudiziale."},
+        {"q":"È previsto il tentativo di mediazione?","a":"Sì. Per la responsabilità medica è obbligatorio il tentativo di accertamento tecnico preventivo (Legge Gelli-Bianco 24/2017) prima del giudizio ordinario. Lo Studio gestisce entrambe le fasi."}
+      ]
+    },
+    "diritto-bancario": {
+      "cpt_id": 2671,
+      "source_id": 297,
+      "tier": 2,
+      "lead_breve": "Anatocismo, usura, contratti di mutuo, contestazione interessi e contenzioso bancario.",
+      "answer_capsule": "Anatocismo, usura, ricalcolo interessi, contestazione di contratti di mutuo e finanziamento. Lo Studio Legale Saltelli & Partners assiste correntisti, mutuatari e imprese in tutto il contenzioso bancario, con perizia econometrica per quantificare il pregiudizio.",
+      "faqs": [
+        {"q":"Cos'è l'anatocismo bancario e quando posso contestarlo?","a":"L'anatocismo è il calcolo di interessi sugli interessi. Vietato dalla normativa post-2014, è contestabile per i conti precedenti. Lo Studio verifica gli estratti conto con perizia econometrica."},
+        {"q":"Come si dimostra l'usura?","a":"Confrontando il TEG (Tasso Effettivo Globale) del contratto con il tasso soglia trimestrale Banca d'Italia. Lo Studio fa il calcolo con CTU econometrica e procede con domanda di restituzione interessi e azione penale ove dovuta."},
+        {"q":"Posso rinegoziare un mutuo in difficoltà?","a":"Sì. Lo Studio assiste nella rinegoziazione con la banca, nell'attivazione della moratoria, nel piano di rientro, fino al saldo e stralcio nei casi più gravi."}
+      ]
+    },
+    "diritto-condominiale": {
+      "cpt_id": 2672,
+      "source_id": 285,
+      "tier": 2,
+      "lead_breve": "Liti condominiali, impugnazioni delibere assembleari, regolamenti, locazioni.",
+      "answer_capsule": "Lo Studio Legale Saltelli & Partners assiste condomìni, amministratori e singoli condòmini in tutto il diritto condominiale: impugnazioni di delibere, contestazioni di spese, regolamenti, controversie tra proprietari e in materia di locazioni. L'Avv. Stefano Tedesco coordina l'area.",
+      "faqs": [
+        {"q":"Entro quanto posso impugnare una delibera condominiale?","a":"30 giorni dalla data della delibera (per i presenti) o dalla comunicazione del verbale (per gli assenti). Termini perentori. Rivolgersi tempestivamente allo Studio per evitare decadenza."},
+        {"q":"Posso non pagare le spese di una delibera che ritengo illegittima?","a":"No. Le spese vanno pagate anche in caso di impugnazione. Il pagamento non costituisce acquiescenza. La sospensione si chiede al Tribunale in via cautelare."},
+        {"q":"Cosa fare in caso di lite tra condòmini per immissioni o danni?","a":"È obbligatorio il tentativo di mediazione prima della causa. Lo Studio assiste in entrambe le fasi e gestisce la quantificazione del danno con perizia tecnica."}
+      ]
+    },
+    "diritto-dellimmigrazione": {
+      "cpt_id": 2673,
+      "source_id": 254,
+      "tier": 2,
+      "lead_breve": "Permessi di soggiorno, ricongiungimenti familiari, cittadinanza italiana, asilo politico.",
+      "answer_capsule": "Permessi di soggiorno, cittadinanza italiana, ricongiungimento familiare, asilo politico e protezione internazionale. Lo Studio Legale Saltelli & Partners assiste cittadini stranieri e famiglie miste a Napoli e in Italia, con servizio bilingue ove necessario.",
+      "faqs": [
+        {"q":"Come ottengo la cittadinanza italiana per matrimonio?","a":"Domanda al Ministero dell'Interno dopo 2 anni di residenza in Italia (o 3 anni di matrimonio se residenza estera), dimezzati in presenza di figli. Tempi medi 24-36 mesi. Lo Studio cura tutta l'istruttoria."},
+        {"q":"Cosa fare in caso di rigetto del permesso di soggiorno?","a":"Ricorso al TAR entro 60 giorni dalla notifica. La sospensione cautelare può evitare l'allontanamento. Termini stringenti: contattare lo Studio appena notificato il diniego."},
+        {"q":"Come si gestisce un ricongiungimento familiare?","a":"Domanda al Ministero dell'Interno tramite SUI (Sportello Unico Immigrazione), con dimostrazione di reddito, alloggio idoneo e documenti del familiare. Lo Studio segue l'intero iter."}
+      ]
+    },
+    "diritto-penale": {
+      "cpt_id": 2674,
+      "source_id": 2251,
+      "tier": 2,
+      "lead_breve": "Difesa in tutti i gradi di giudizio, reati comuni e d'impresa, misure cautelari.",
+      "answer_capsule": "Difesa penale in tutti i gradi di giudizio, dai reati contro la persona ai reati d'impresa, fino al diritto penale tributario e fallimentare. Lo Studio Legale Saltelli & Partners offre assistenza nella fase delle indagini, nelle misure cautelari e in udienza, a Napoli e provincia.",
+      "faqs": [
+        {"q":"Cosa fare se ricevo un avviso di garanzia?","a":"Contattare immediatamente lo Studio. L'avviso non è una condanna ma indica un'indagine in corso. La nomina del difensore è essenziale per accedere agli atti e impostare la strategia difensiva sin dalle indagini preliminari."},
+        {"q":"Posso ottenere la sospensione condizionale della pena?","a":"Sì, in presenza di pena detentiva entro 2 anni e assenza di precedenti significativi. Lo Studio richiede la sospensione contestualmente al giudizio, valutando anche la messa alla prova ex art. 168-bis c.p."},
+        {"q":"Come funziona la difesa nel patteggiamento?","a":"Il patteggiamento (applicazione pena su richiesta) consente sconto di pena fino a 1/3. Va valutato caso per caso considerando profilo di rischio e benefici. Lo Studio gestisce la negoziazione con la Procura."}
+      ]
+    },
+    "diritto-previdenziale": {
+      "cpt_id": 2675,
+      "source_id": 2241,
+      "tier": 2,
+      "lead_breve": "Invalidità civile, INPS, pensioni, ricorsi avverso provvedimenti previdenziali.",
+      "answer_capsule": "Lo Studio Legale Saltelli & Partners assiste nei procedimenti di invalidità civile, ricorsi INPS, contestazioni pensionistiche, accertamenti tecnici preventivi e domande di accompagnamento. Esperienza nelle Commissioni Mediche Integrate e nelle CTU davanti al Giudice del Lavoro.",
+      "faqs": [
+        {"q":"Cosa fare in caso di rigetto della domanda di invalidità?","a":"È possibile ricorso giudiziale al Tribunale (Sezione Lavoro) entro 6 mesi dalla notifica del verbale. Procedura preceduta dall'ATP (accertamento tecnico preventivo) obbligatorio. Lo Studio cura entrambe le fasi."},
+        {"q":"Quali documenti servono per la domanda di invalidità?","a":"Certificato medico SS3 emesso dal medico curante, documentazione clinica completa (esami, ricoveri, terapie), eventuali precedenti verbali. Lo Studio collabora con medici legali specializzati."},
+        {"q":"Posso fare il ricorso da solo senza avvocato?","a":"Per la fase amministrativa sì, ma il ricorso giudiziale richiede assistenza legale. Lo Studio offre anche solo la valutazione preliminare per chiarire le chance di successo."}
+      ]
+    },
+    "diritto-delle-assicurazioni": {
+      "cpt_id": 2676,
+      "source_id": null,
+      "tier": 2,
+      "lead_breve": "Sinistri RC auto, polizze vita, contestazioni con compagnie assicurative.",
+      "answer_capsule": "Lo Studio Legale Saltelli & Partners assiste assicurati e danneggiati nel contenzioso assicurativo: sinistri RC auto, polizze vita, infortuni, malattie gravi e responsabilità civile professionale. Procedura conciliativa e contenzioso quando la compagnia non riconosce il dovuto.",
+      "synth_body": "<h2>Diritto delle assicurazioni e contenzioso RC</h2><p>Lo Studio Legale Saltelli & Partners assiste sia gli assicurati che i danneggiati nelle controversie con compagnie assicurative italiane ed estere. La nostra esperienza copre tutto lo spettro del contenzioso assicurativo, dalla denuncia di sinistro al ricorso giudiziale.</p><h2>Aree di intervento</h2><ul><li><strong>RC Auto</strong> — sinistri stradali, contestazione liquidazioni, recupero franchigia</li><li><strong>Polizze infortuni e malattia</strong> — riconoscimento invalidità permanente, indennizzo</li><li><strong>Polizze vita e dread disease</strong> — escussione capitale assicurato, contestazioni cause di esclusione</li><li><strong>RC professionale</strong> — assistenza ad assicurati medici, avvocati, ingegneri</li><li><strong>Responsabilità del produttore</strong> — danno da prodotto difettoso</li></ul><h2>Approccio</h2><p>Riteniamo prioritaria la fase stragiudiziale: una richiesta strutturata e tecnicamente argomentata permette spesso di ottenere il risarcimento senza causa. In caso di rigetto o offerta inadeguata, lo Studio procede con ATP medico-legale e ricorso davanti al Giudice di Pace o al Tribunale in base al valore.</p>",
+      "faqs": [
+        {"q":"Quanto tempo ho per richiedere il risarcimento RC auto?","a":"2 anni dalla data del sinistro per la richiesta civile, 5 anni in caso di reato (es. lesioni gravi). Termini prescrizionali da rispettare con la massima attenzione."},
+        {"q":"La compagnia mi offre meno del dovuto: cosa posso fare?","a":"Lo Studio confronta l'offerta con i parametri tabellari (Tabelle di Milano per il danno biologico) e procede con richiesta riformulata. In caso di mancato accordo, ricorso giudiziale."},
+        {"q":"Come funziona la procedura ATP per il risarcimento?","a":"L'accertamento tecnico preventivo è obbligatorio per RC sanitaria e in molti casi RC auto con lesioni. Si svolge davanti a un CTU nominato dal Tribunale. Lo Studio cura tutta la fase con consulenti di parte."}
+      ]
+    },
+    "diritto-delle-successioni": {
+      "cpt_id": 2677,
+      "source_id": 288,
+      "tier": 2,
+      "lead_breve": "Testamenti, successioni, divisioni ereditarie, impugnazione testamento.",
+      "answer_capsule": "Testamenti, successioni legittime e testamentarie, divisioni ereditarie, impugnazioni e azioni di riduzione. Lo Studio Legale Saltelli & Partners segue eredi e coeredi nella tutela patrimoniale e nella risoluzione di controversie successorie a Napoli e in Italia.",
+      "faqs": [
+        {"q":"Entro quanto si accetta o rinuncia all'eredità?","a":"L'accettazione tacita può avvenire entro 10 anni. La rinuncia va fatta entro lo stesso termine, salvo che il chiamato sia in possesso dei beni: in tal caso 3 mesi. Lo Studio verifica la posizione caso per caso."},
+        {"q":"Posso impugnare un testamento che mi sembra ingiusto?","a":"Sì, in caso di lesione della quota di legittima (azione di riduzione, 10 anni), incapacità del testatore o vizi formali. Lo Studio analizza il testamento e gli atti dispositivi precedenti."},
+        {"q":"Come funziona la divisione tra coeredi?","a":"Possibile in via consensuale (atto notarile) o giudiziale. Lo Studio segue entrambe le strade, con stima dei beni, perizie e mediazione obbligatoria preliminare."}
+      ]
+    },
+    "risarcimento-danni": {
+      "cpt_id": 2678,
+      "source_id": 223,
+      "tier": 2,
+      "lead_breve": "Sinistri stradali, danni da insidie, danni da animali, illecito civile.",
+      "answer_capsule": "Risarcimento danni da sinistri stradali, danni da insidia, danni da animali e responsabilità civile in genere. Lo Studio Legale Saltelli & Partners segue danneggiati nella richiesta stragiudiziale, nell'ATP e nel ricorso al Giudice, con CTU medico-legale dedicata.",
+      "faqs": [
+        {"q":"Come si calcola il danno biologico da incidente?","a":"Sulla base delle Tabelle di Milano (danno biologico permanente e temporaneo). La valutazione richiede consulenza medico-legale che lo Studio coordina con CTU fiduciario."},
+        {"q":"Cosa fare in caso di sinistro con auto pirata?","a":"Si attiva la procedura del Fondo di Garanzia Vittime della Strada presso CONSAP. Termini stringenti (2 anni). Lo Studio gestisce l'intera istruttoria documentale."},
+        {"q":"Posso chiedere il risarcimento per danni da buca stradale?","a":"Sì, dimostrando l'insidia (oggettiva imprevedibilità) e il nesso causale con il danno. Onere probatorio in capo al danneggiato. Lo Studio cura le prove fotografiche e testimoniali."}
+      ]
+    },
+    "responsabilita-civile": {
+      "cpt_id": 2679,
+      "source_id": 232,
+      "tier": 2,
+      "lead_breve": "Liti contrattuali, responsabilità extracontrattuale, recupero crediti civili.",
+      "answer_capsule": "Lo Studio Legale Saltelli & Partners assiste in tutto il contenzioso civile: liti contrattuali, responsabilità extracontrattuale, infortunistica stradale, risarcimento danni a persone e cose, recupero crediti civili. Approccio strategico calibrato sul rischio e sulla durata del giudizio.",
+      "faqs": [
+        {"q":"Conviene fare causa o cercare un accordo?","a":"Dipende dal valore della pretesa, dalla solvibilità della controparte e dai tempi. Lo Studio fornisce una valutazione preliminare costi-benefici e propone la mediazione preventiva quando opportuno."},
+        {"q":"Quanto dura una causa civile in Tribunale?","a":"In media 18-36 mesi in primo grado, ulteriori 12-24 mesi in appello. Tempi variabili per sezione e tipo di causa. Procedure sommarie più rapide per crediti certi."},
+        {"q":"Cosa fare se ricevo una citazione in giudizio?","a":"Costituirsi entro 70 giorni dalla notifica con il deposito della comparsa di costituzione. Termini decadenziali: contattare immediatamente lo Studio per evitare la contumacia."}
+      ]
+    },
+    "domiciliazione-dimpresa": {
+      "cpt_id": 2680,
+      "source_id": 305,
+      "tier": 2,
+      "lead_breve": "Domiciliazione legale per imprese, posta, gestione amministrativa, supporto fiscale.",
+      "answer_capsule": "Servizio di domiciliazione legale per imprese, professionisti e startup. Lo Studio Legale Saltelli & Partners offre indirizzo legale a Napoli, gestione posta, scansione documentale e supporto amministrativo, con coordinamento dello Studio per le pratiche legali e fiscali.",
+      "faqs": [
+        {"q":"Cosa include il servizio di domiciliazione?","a":"Indirizzo legale a Napoli, ricezione e scansione posta, custodia documenti, accesso allo Studio per consultazioni. Coordinamento con commercialista e supporto su pratiche fiscali con i nostri tributaristi."},
+        {"q":"Posso utilizzare l'indirizzo come sede legale per la Camera di Commercio?","a":"Sì. La domiciliazione presso lo Studio Legale Saltelli & Partners è valida come sede legale ai fini camerali. Forniamo dichiarazione formale per la registrazione."},
+        {"q":"Quanto costa il servizio?","a":"Canone mensile o annuale a seconda della tipologia (LLC, ditta individuale, professionista). Pacchetti che includono ore di consulenza legale e fiscale. Preventivo personalizzato."}
+      ]
+    },
+    "consulenze-online": {
+      "cpt_id": 2681,
+      "source_id": null,
+      "tier": 2,
+      "lead_breve": "Consulenza legale in videocall per clienti italiani e all'estero, su tutte le aree dello Studio.",
+      "answer_capsule": "Lo Studio Legale Saltelli & Partners offre consulenza legale in videocall per clienti residenti fuori Napoli o all'estero. Sessione mirata con uno dei nostri avvocati su qualunque area di pratica, con preventivo trasparente e documenti firmabili digitalmente.",
+      "synth_body": "<h2>Consulenze legali online — videocall con i nostri avvocati</h2><p>Lo Studio Legale Saltelli & Partners ha sviluppato un servizio di consulenza online dedicato a chi non può raggiungere lo studio di Napoli, vive all'estero, o preferisce gestire la pratica in remoto.</p><h2>Come funziona</h2><ol><li><strong>Richiesta</strong> — invii un breve formulario con la descrizione del caso</li><li><strong>Smistamento</strong> — l'orchestrazione interna assegna l'avvocato più adatto (tributarista, giuslavorista, civilista, condominialista)</li><li><strong>Videocall</strong> — sessione di 45-60 minuti su Google Meet o Zoom, riservata e crittografata</li><li><strong>Follow-up</strong> — relazione scritta con valutazione e indicazione operativa, firmabile digitalmente</li></ol><h2>Per quali pratiche</h2><p>Adatto per <strong>valutazioni preliminari</strong>, <strong>second opinion</strong>, gestione di pratiche sviluppate principalmente per via telematica (cartelle esattoriali, ricorsi tributari, pratiche INPS, contenzioso civile a distanza). Per pratiche che richiedono presenza fisica in Tribunale (es. udienze penali, contraddittori) la consulenza online è la prima fase, seguita da assistenza in presenza o tramite procura speciale.</p><h2>Riservatezza</h2><p>Tutti i materiali scambiati passano da canali cifrati, con archivio dedicato. Lo Studio applica il segreto professionale anche alla corrispondenza digitale. Su richiesta, sigliamo un NDA preliminare prima della videocall.</p>",
+      "faqs": [
+        {"q":"Devo essere in Italia per la consulenza online?","a":"No. Assistiamo regolarmente cittadini italiani all'estero (Europa, USA, Sud America) e cittadini stranieri con pratiche in Italia. Se serve, lavoriamo in inglese."},
+        {"q":"Quanto costa una consulenza online?","a":"Tariffa fissa per la prima sessione di 45-60 minuti, indipendentemente dall'area. Preventivo trasparente per attività successive (atti, ricorsi, gestione contenzioso). Nessun costo nascosto."},
+        {"q":"Posso firmare contratti e procure online?","a":"Sì, con firma digitale qualificata (CIE, SPID firma) o, in alternativa, scansione + firma autografa con autenticazione successiva. Lo Studio guida nei passaggi tecnici."}
+      ]
+    },
+    "diritto-amministrativo": {
+      "cpt_id": 2682,
+      "source_id": 2246,
+      "tier": 2,
+      "lead_breve": "Ricorsi al TAR, contenzioso con la Pubblica Amministrazione, appalti, edilizia.",
+      "answer_capsule": "Ricorsi al TAR, Consiglio di Stato e contenzioso con la Pubblica Amministrazione. Lo Studio Legale Saltelli & Partners segue gare di appalto, edilizia e urbanistica, dinieghi e silenzio della P.A., con focus particolare sulle Amministrazioni di Napoli e Campania.",
+      "faqs": [
+        {"q":"Entro quanto si fa ricorso al TAR?","a":"60 giorni dalla notifica del provvedimento o dalla piena conoscenza. Termine perentorio. La sospensione cautelare può essere richiesta contestualmente."},
+        {"q":"Cosa fare in caso di silenzio della P.A.?","a":"Decorso il termine procedimentale, si può proporre ricorso al TAR per far accertare l'obbligo di provvedere. Tempi medi 6-12 mesi. Lo Studio gestisce l'intera procedura."},
+        {"q":"Posso impugnare un'aggiudicazione di gara di appalto?","a":"Sì, entro 30 giorni dalla pubblicazione o dalla comunicazione individuale. Termini ridotti rispetto al ricorso TAR ordinario. Specializzazione richiesta in materia di appalti pubblici."}
+      ]
+    }
+  },
+  "avvocati": {
+    "emiliano-saltelli": {
+      "cpt_id": 2660,
+      "wp_user_id": 1,
+      "ruolo_breve": "Founding Partner · Tributarista",
+      "bio_breve": "Fondatore dello Studio. Si occupa di diritto tributario e contenzioso fiscale dal 2008, con casistica consolidata su cartelle esattoriali, accertamenti, IRPEF, IMU e Commissioni Tributarie. Riceve a Chiaia, Napoli.",
+      "bio_estesa": "<p>L'Avv. Emiliano Saltelli è il <strong>founding partner</strong> dello Studio Legale Saltelli & Partners. La pratica autonoma comincia nel 2008 e prende la forma attuale dello Studio nel 2019, con sede in via Vannella Gaetani 27, nel cuore di Chiaia.</p><p>La sua specializzazione è il <strong>diritto tributario</strong>: contenzioso fiscale davanti alle Commissioni Tributarie Provinciali e Regionali, ricorsi su cartelle esattoriali, accertamenti, sanzioni amministrative, contestazioni IRPEF, IRES, IRAP, IMU e tributi locali. Ha gestito casi con annullamenti di cartelle superiori a €240.000.</p><p>Affianca alla pratica tributaria una consolidata esperienza in <strong>diritto civile</strong>, in particolare contenzioso bancario (anatocismo, usura, contestazione contratti di mutuo) e recupero crediti per imprese e professionisti.</p><p>È iscritto all'Ordine degli Avvocati di Napoli. Si è formato all'Università degli Studi di Napoli Federico II.</p>",
+      "specializzazioni": [
+        "Diritto tributario",
+        "Cartelle esattoriali",
+        "Contenzioso fiscale",
+        "Diritto bancario",
+        "Recupero crediti"
+      ],
+      "formazione": [
+        {"anno":"","titolo":"Laurea in Giurisprudenza","istituzione":"Università degli Studi di Napoli Federico II"},
+        {"anno":"2008","titolo":"Avvocato — Iscrizione Ordine","istituzione":"Ordine degli Avvocati di Napoli"}
+      ],
+      "email_pubblica": "info@studiolegalesaltelli.it",
+      "telefono_pubblico": "+39 081 1813 1119"
+    },
+    "fabiana-saltelli": {
+      "cpt_id": 2661,
+      "wp_user_id": 5,
+      "ruolo_breve": "Partner · Giuslavorista",
+      "bio_breve": "Partner dello Studio, giuslavorista. Segue licenziamenti, mobbing, contestazioni disciplinari e contenzioso INPS, sia lato lavoratore che lato impresa. Coordina anche pratiche tributarie connesse al rapporto di lavoro.",
+      "bio_estesa": "<p>L'Avv. Fabiana Saltelli è <strong>partner</strong> dello Studio Legale Saltelli & Partners e si occupa principalmente di <strong>diritto del lavoro</strong>. Segue licenziamenti illegittimi, contestazioni disciplinari, mobbing, contrattualistica del lavoro e contenzioso INPS, assistendo sia lavoratori dipendenti, dirigenti e quadri, sia imprese.</p><p>La pratica giuslavoristica si estende al <strong>diritto previdenziale</strong> (invalidità civile, ricorsi INPS, pensioni di reversibilità) e alle interconnessioni con il <strong>diritto tributario</strong>, in particolare per la gestione di contenziosi su contributi previdenziali e responsabilità del datore di lavoro.</p><p>È iscritta all'Ordine degli Avvocati di Napoli e supporta lo Studio anche su pratiche di diritto civile per clienti storici dello Studio.</p>",
+      "specializzazioni": [
+        "Diritto del lavoro",
+        "Contenzioso INPS",
+        "Diritto previdenziale",
+        "Diritto tributario"
+      ],
+      "formazione": [
+        {"anno":"","titolo":"Laurea in Giurisprudenza","istituzione":"Università degli Studi di Napoli Federico II"}
+      ],
+      "email_pubblica": "fabiana@studiolegalesaltelli.it",
+      "telefono_pubblico": "+39 081 1813 1119"
+    },
+    "antonia-battista": {
+      "cpt_id": 2662,
+      "wp_user_id": 4,
+      "ruolo_breve": "Of Counsel · Famiglia LGBTQ+",
+      "bio_breve": "Of-counsel dello Studio dedicata al diritto di famiglia e alla tutela giuridica delle famiglie LGBTQ+. Coordina i procedimenti su unioni civili, genitorialità, riconoscimento di figli e trascrizione di atti di stato civile.",
+      "bio_estesa": "<p>L'Avv. Antonia Battista è <strong>of-counsel</strong> dello Studio Legale Saltelli & Partners, con specializzazione nel <strong>diritto di famiglia</strong> e una expertise distintiva nella <strong>tutela giuridica delle famiglie LGBTQ+</strong>. Coordina l'omonima area dello Studio.</p><p>Segue procedimenti di <strong>unione civile</strong> (costituzione, regime patrimoniale, scioglimento), <strong>genitorialità</strong> (riconoscimento di figli, adozioni, accesso a tecniche di procreazione assistita), <strong>trascrizione di atti di stato civile</strong> formati all'estero (matrimoni, nascite di minori con due madri o due padri).</p><p>Nel 2023 ha ottenuto presso il Tribunale di Napoli il <strong>primo riconoscimento in Campania</strong> di trascrizione integrale di un atto di nascita di minore con due madri.</p><p>Cura anche separazioni, divorzi e contenziosi successori per coppie omoaffettive ed eterosessuali, applicando un approccio fondato su riservatezza assoluta e sensibilità verso le specificità del nucleo familiare.</p>",
+      "specializzazioni": [
+        "Diritto di famiglia",
+        "Famiglie LGBTQ+",
+        "Unioni civili",
+        "Genitorialità",
+        "Divorzi"
+      ],
+      "formazione": [
+        {"anno":"","titolo":"Laurea in Giurisprudenza","istituzione":"Università degli Studi di Napoli Federico II"}
+      ],
+      "email_pubblica": "antoniabattista@studiolegalesaltelli.it",
+      "telefono_pubblico": "+39 081 1813 1119"
+    },
+    "stefano-gaetano-tedesco": {
+      "cpt_id": 2663,
+      "wp_user_id": 7,
+      "ruolo_breve": "Associate · Condominiale",
+      "bio_breve": "Associate dello Studio. Coordina l'area del diritto condominiale e immobiliare: liti tra condòmini, impugnazioni di delibere assembleari, regolamenti, locazioni e compravendite immobiliari.",
+      "bio_estesa": "<p>L'Avv. Stefano Gaetano Tedesco è <strong>associate</strong> dello Studio Legale Saltelli & Partners e coordina l'area del <strong>diritto condominiale e immobiliare</strong>.</p><p>Si occupa di liti tra condòmini, impugnazioni di delibere assembleari, redazione e revisione di regolamenti condominiali, controversie con amministratori, contenziosi su immissioni e danni in condominio. Cura inoltre <strong>locazioni</strong> (commerciali e abitative), compravendite immobiliari, servitù, usucapione, controversie tra coproprietari.</p><p>È iscritto all'Ordine degli Avvocati di Napoli.</p>",
+      "specializzazioni": [
+        "Diritto condominiale",
+        "Diritto immobiliare",
+        "Locazioni"
+      ],
+      "formazione": [
+        {"anno":"","titolo":"Laurea in Giurisprudenza","istituzione":"Università degli Studi di Napoli Federico II"}
+      ],
+      "email_pubblica": "avv.stefanotedesco@studiolegalesaltelli.it",
+      "telefono_pubblico": "+39 081 1813 1119"
+    }
+  }
+}

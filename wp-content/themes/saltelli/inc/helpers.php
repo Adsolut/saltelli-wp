@@ -17,14 +17,61 @@ defined('ABSPATH') || exit;
  * @return mixed
  */
 function saltelli_field($name, $post_id = null, $default = null) {
-    if (!function_exists('get_field')) {
-        return $default;
+    $post_id = $post_id ?: get_the_ID();
+
+    // Try ACF first
+    if (function_exists('get_field')) {
+        $value = get_field($name, $post_id);
+        if ($value !== null && $value !== '' && $value !== false) {
+            return $value;
+        }
     }
-    $value = get_field($name, $post_id);
-    if ($value === null || $value === '' || $value === false) {
-        return $default;
+
+    // Fallback: post_meta diretto. Supporta sia valori scalari sia repeater
+    // serializzati (modalità Step D Content Migration: update_post_meta(name, $array)).
+    if ($post_id) {
+        $raw = get_post_meta($post_id, $name, true);
+        if ($raw !== '' && $raw !== null && $raw !== false) {
+            // Già array (repeater seriale) o scalare → ritorna così
+            if (is_array($raw)) return $raw;
+            // Numerico = repeater style ACF (es. faq=5, faq_0_domanda=...).
+            // Rimonta righe.
+            if (is_numeric($raw) && (int) $raw > 0 && (int) $raw < 100) {
+                $rows = saltelli_field_repeater_rows($name, (int) $raw, $post_id);
+                if (!empty($rows)) return $rows;
+            }
+            return $raw;
+        }
     }
-    return $value;
+    return $default;
+}
+
+/**
+ * Rimonta le righe di un repeater ACF-style (faq_0_domanda, faq_0_risposta, ...).
+ *
+ * @param string $name
+ * @param int $count
+ * @param int $post_id
+ * @return array<int, array<string, mixed>>
+ */
+function saltelli_field_repeater_rows($name, $count, $post_id) {
+    global $wpdb;
+    $like = $wpdb->esc_like($name . '_') . '%';
+    $results = $wpdb->get_results($wpdb->prepare(
+        "SELECT meta_key, meta_value FROM {$wpdb->postmeta} WHERE post_id = %d AND meta_key LIKE %s",
+        $post_id, $like
+    ));
+    $rows = [];
+    foreach ($results as $row) {
+        if (preg_match('/^' . preg_quote($name, '/') . '_(\d+)_(.+)$/', $row->meta_key, $m)) {
+            $idx = (int) $m[1];
+            $sub = $m[2];
+            if (!isset($rows[$idx])) $rows[$idx] = [];
+            $rows[$idx][$sub] = maybe_unserialize($row->meta_value);
+        }
+    }
+    ksort($rows);
+    return array_values($rows);
 }
 
 /**

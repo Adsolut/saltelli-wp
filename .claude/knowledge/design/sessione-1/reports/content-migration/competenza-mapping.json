@@ -1,0 +1,185 @@
+{
+  "_meta": {
+    "generated_at": "2026-04-29",
+    "tier_strategy": {
+      "tier1_slugs": ["diritto-tributario", "diritto-del-lavoro", "diritto-di-famiglia-lgbtq"],
+      "tier1_treatment": "answer_capsule + body_extended (1500+ word) + 5 FAQ + casi_rappresentativi",
+      "tier2_treatment": "answer_capsule + body 400-600 word + 3 FAQ"
+    }
+  },
+  "diritto-tributario": {
+    "cpt_id": 2664,
+    "tier": "tier1",
+    "source_page_slug": "diritto-tributario",
+    "source_page_id": 202,
+    "source_chars": 3812,
+    "elementor_in_content": false,
+    "treatment": "deep"
+  },
+  "diritto-del-lavoro": {
+    "cpt_id": 2665,
+    "tier": "tier1",
+    "source_page_slug": "lavoro",
+    "source_page_id": 292,
+    "source_chars": 1374,
+    "elementor_in_content": false,
+    "treatment": "deep_with_synth_extension",
+    "note": "Source short (1374 char), bisogna estendere con sintesi additional"
+  },
+  "diritto-di-famiglia-lgbtq": {
+    "cpt_id": 2666,
+    "tier": "tier1",
+    "source_page_slug": null,
+    "source_page_id": null,
+    "source_chars": 0,
+    "elementor_in_content": false,
+    "treatment": "synth_only",
+    "note": "Nessuna source. Content generato ex-novo basato su strategy LGBTQ+ + Antonia Battista of-counsel."
+  },
+  "cartelle-esattoriali-e-multe": {
+    "cpt_id": 2667,
+    "tier": "tier2",
+    "source_page_slug": "cartelle-esattoriali-e-multe",
+    "source_page_id": 208,
+    "source_chars": 2846,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  },
+  "recupero-crediti": {
+    "cpt_id": 2668,
+    "tier": "tier2",
+    "source_page_slug": "recupero-crediti",
+    "source_page_id": 170,
+    "source_chars": 4179,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  },
+  "diritto-di-famiglia": {
+    "cpt_id": 2669,
+    "tier": "tier2",
+    "source_page_slug": "avvocato-divorzista",
+    "source_page_id": 947,
+    "source_chars": 5106,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  },
+  "responsabilita-medica": {
+    "cpt_id": 2670,
+    "tier": "tier2",
+    "source_page_slug": "responsabilita-medica",
+    "source_page_id": 279,
+    "source_chars": 2078,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  },
+  "diritto-bancario": {
+    "cpt_id": 2671,
+    "tier": "tier2",
+    "source_page_slug": "diritto-bancario",
+    "source_page_id": 297,
+    "source_chars": 1949,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  },
+  "diritto-condominiale": {
+    "cpt_id": 2672,
+    "tier": "tier2",
+    "source_page_slug": "condominio-e-locazioni",
+    "source_page_id": 285,
+    "source_chars": 2634,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  },
+  "diritto-dellimmigrazione": {
+    "cpt_id": 2673,
+    "tier": "tier2",
+    "source_page_slug": "immigrazione",
+    "source_page_id": 254,
+    "source_chars": 2438,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  },
+  "diritto-penale": {
+    "cpt_id": 2674,
+    "tier": "tier2",
+    "source_page_slug": "diritto-penale",
+    "source_page_id": 2251,
+    "source_chars": 6455,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  },
+  "diritto-previdenziale": {
+    "cpt_id": 2675,
+    "tier": "tier2",
+    "source_page_slug": "invalidita-civile-diritto-previdenziale",
+    "source_page_id": 2241,
+    "source_chars": 4449,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  },
+  "diritto-delle-assicurazioni": {
+    "cpt_id": 2676,
+    "tier": "tier2",
+    "source_page_slug": null,
+    "source_page_id": null,
+    "source_chars": 0,
+    "elementor_in_content": false,
+    "treatment": "synth_only",
+    "note": "Area marginale. Content generato ex-novo (RC auto + medica + danni terzi)."
+  },
+  "diritto-delle-successioni": {
+    "cpt_id": 2677,
+    "tier": "tier2",
+    "source_page_slug": "eredita-e-successioni",
+    "source_page_id": 288,
+    "source_chars": 1772,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  },
+  "risarcimento-danni": {
+    "cpt_id": 2678,
+    "tier": "tier2",
+    "source_page_slug": "risarcimento-del-danno",
+    "source_page_id": 223,
+    "source_chars": 2911,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  },
+  "responsabilita-civile": {
+    "cpt_id": 2679,
+    "tier": "tier2",
+    "source_page_slug": "infortunistica-stradale",
+    "source_page_id": 232,
+    "source_chars": 2510,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  },
+  "domiciliazione-dimpresa": {
+    "cpt_id": 2680,
+    "tier": "tier2",
+    "source_page_slug": "domicilia-la-tua-azienda",
+    "source_page_id": 305,
+    "source_chars": 1985,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  },
+  "consulenze-online": {
+    "cpt_id": 2681,
+    "tier": "tier2",
+    "source_page_slug": null,
+    "source_page_id": null,
+    "source_chars": 0,
+    "elementor_in_content": false,
+    "treatment": "synth_only",
+    "note": "Servizio nuovo (post-Adsolut), nessuna source. Content generato ex-novo (consulenza video remota)."
+  },
+  "diritto-amministrativo": {
+    "cpt_id": 2682,
+    "tier": "tier2",
+    "source_page_slug": "diritto-amministrativo",
+    "source_page_id": 2246,
+    "source_chars": 3879,
+    "elementor_in_content": false,
+    "treatment": "minimal_from_source"
+  }
+}

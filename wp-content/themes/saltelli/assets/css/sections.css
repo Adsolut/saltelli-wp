@@ -1467,3 +1467,55 @@ html:not(.js-reveal-ready) [data-reveal] {
     max-width: 100%;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   FIX — Sticky margine sinistro pagina avvocato
+   I bottoni "Tel/Email/WhatsApp" devono essere visibili come
+   tag editoriali allineati al body, non tagliati ai bordi viewport
+   ═══════════════════════════════════════════════════════════════ */
+
+.sl-attorney__sticky {
+    position: fixed;
+    top: 50%;
+    left: clamp(16px, 3vw, 48px);
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 50;
+    pointer-events: auto;
+}
+
+@media (max-width: 1024px) {
+    .sl-attorney__sticky {
+        position: static;
+        flex-direction: row;
+        gap: 12px;
+        margin-block: 24px;
+        transform: none;
+    }
+}
+
+.sl-attorney__sticky-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: all var(--dur-fast) var(--ease-editorial);
+    border-radius: 0;
+}
+
+.sl-attorney__sticky-btn:hover,
+.sl-attorney__sticky-btn:focus-visible {
+    background: var(--primary);
+    color: var(--background);
+    border-color: var(--primary);
+    transform: translateX(2px);
+}
