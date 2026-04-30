@@ -66,7 +66,7 @@ while (have_posts()) :
                 </div>
             </section>
 
-            <section class="sl-page-contatti__map" aria-labelledby="contatti-map-h">
+            <section class="sl-page-contatti__map" id="mappa" aria-labelledby="contatti-map-h">
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Sede', 'saltelli'); ?></div>
                     <h2 class="sl-section-title" id="contatti-map-h">
