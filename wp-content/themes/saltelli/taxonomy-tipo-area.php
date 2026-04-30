@@ -42,8 +42,6 @@ $competenze = get_posts([
                 / <span><?php echo esc_html($term_name); ?></span>
             </nav>
 
-            <div class="sl-mono"><?php esc_html_e('Studio · Aree per categoria', 'saltelli'); ?></div>
-
             <h1 class="sl-section-title">
                 <?php echo esc_html($term_name); ?><br>
                 <em><?php

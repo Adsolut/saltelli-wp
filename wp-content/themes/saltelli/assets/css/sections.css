@@ -2715,3 +2715,144 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     color: var(--primary);
     border-bottom-color: var(--accent);
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYOUT HARMONIZATION v0.12.0 — Container + Spacing system-wide
+   ═══════════════════════════════════════════════════════════════
+   Cross-reference audit CRO (target ≥8/10):
+   §2.5 "Margin/padding scala definita" → --sl-space-1..9 (8px scale)
+   §3.1 "Container 1100/1200px incoerente" → --sl-container-max 1440
+   §2.5 "Whitespace verticale 80-120px sezioni" → --space-hero-top
+   §6.2 "Padding-inline coerente" → clamp(24,5vw,96) ovunque
+   ═══════════════════════════════════════════════════════════════ */
+
+/* TASK 1 — Container UNIFICATO (un solo wrapper layout) */
+.sl-container {
+    width: 100%;
+    max-width: var(--sl-container-max);
+    margin-inline: auto;
+    padding-inline: var(--sl-container-pad);
+    box-sizing: border-box;
+}
+
+/* Sections wrapper esterne (padding-block ONLY, padding-inline delegato a .sl-container interno).
+   Desktop: il padding-inline 20px ereditato dal pre-existing pattern andava in conflitto col
+   .sl-container interno → causa dei "5 valori diversi padding-left" segnalati dal walkthrough. */
+.sl-areas,
+.sl-team,
+.sl-cases,
+.sl-press,
+.sl-contact,
+.sl-blog,
+.sl-areas-archive,
+.sl-areas--archive,
+.sl-team--archive,
+.sl-blog--archive {
+    padding-inline: 0;
+}
+
+/* TASK 2 — Spacing verticale tokenizzato (8px scale) */
+
+/* Hero/eyebrow gap — first element della page deve respirare dall'header */
+.sl-page__hero,
+.sl-areas-archive .sl-section-head,
+.sl-areas--archive .sl-section-head,
+.sl-team--archive .sl-section-head,
+.sl-blog .sl-section-head,
+.sl-blog-archive .sl-section-head,
+.sl-page-contatti__map,
+.sl-post__hero {
+    padding-top: var(--space-hero-top);
+}
+
+/* Page hero standard (page.php) — bottom padding per stacco da content */
+.sl-page__hero {
+    padding-bottom: var(--space-hero-bottom);
+}
+
+/* Eyebrow → titolo dentro hero */
+.sl-page__breadcrumb {
+    margin-bottom: var(--sl-space-3);  /* 24px */
+}
+
+/* Page title margin-bottom unificato */
+.sl-page__title {
+    margin-bottom: 0;  /* hero padding-bottom gestisce gap */
+}
+
+/* Section→Section: gap 80px tra sections sequenziali */
+.sl-page > section + section,
+.sl-page-contatti__map + .sl-page-contatti__cta {
+    margin-top: 0;  /* padding-top hero ha già spacing */
+}
+
+/* Body content spacing (paragraph rhythm) — già coperto da A1/A4 v0.10.0 */
+.sl-post__body > * + h2,
+.sl-page__prose > * + h2,
+.sl-competenza__prose > * + h2,
+.entry-content > * + h2 {
+    margin-top: var(--sl-space-7);  /* 80px sopra h2 sezione */
+}
+.sl-post__body > * + h3,
+.sl-page__prose > * + h3,
+.sl-competenza__prose > * + h3,
+.entry-content > * + h3 {
+    margin-top: var(--sl-space-6);  /* 64px sopra h3 sub-sezione */
+}
+
+/* TASK 5 — Homepage Hero compattata (colophon above-fold @1440x900)
+   Pre v0.12: hero padding-block clamp(48,8vh,120) + colophon align:end →
+   colophon top:725px su 900px viewport → SOTTO il fold.
+   Fix: padding-block ridotto a --space-7/--space-5 (80/48), grid layout
+   con colophon align-self:start (top-right) invece di end (bottom-right).
+   Risultato: hero text occupa full vertical, colophon visibile above-fold. */
+.sl-hero {
+    padding-block: var(--space-hero-top) var(--space-hero-bottom);
+    min-height: calc(100vh - var(--space-hero-top));
+}
+
+@media (min-width: 1024px) {
+    .sl-hero__inner {
+        display: grid;
+        grid-template-columns: minmax(0, 8fr) minmax(280px, 4fr);
+        column-gap: var(--sl-space-7);
+        align-items: start;
+    }
+    .sl-hero__main {
+        grid-column: 1;
+        align-self: end;
+    }
+    .sl-hero__colophon {
+        grid-column: 2;
+        align-self: start;
+        padding-top: var(--sl-space-5);
+        margin-top: 0;
+    }
+}
+
+/* Headline scaled per garantire 3 righe + colophon above-fold @1440x900 */
+.sl-hero__headline {
+    font-size: clamp(56px, 7.5vw, 116px);
+    line-height: 1;
+}
+
+/* TASK 6 — Touch target 48×48 minimo mobile (audit CRO §12.3 compliance)
+   Garantisce che CTA, link nav, breadcrumb hanno area cliccabile sufficiente
+   su touch device. Padding-block 12px assicura 24+ height per testo 16px. */
+@media (max-width: 1023px) {
+    .sl-btn,
+    .sl-link,
+    .sl-header__nav a,
+    .sl-mobile-menu a,
+    .sl-footer__nav a,
+    .sl-footer .menu a,
+    .sl-attorney__sticky-btn,
+    .sl-page__breadcrumb a,
+    .sl-page-contatti__map-link,
+    .sl-blog__pagination a,
+    .sl-areas__filter {
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+    }
+}

@@ -96,6 +96,51 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
+        <?php if (is_page('casi') && function_exists('saltelli_homepage_cases')) :
+            $cases = saltelli_homepage_cases();
+            if (!empty($cases)) : ?>
+            <section class="sl-cases sl-cases--archive" aria-labelledby="casi-archive-h">
+                <div class="sl-container">
+                    <header class="sl-section-head">
+                        <div class="sl-mono">§ <?php esc_html_e('Casi rappresentativi', 'saltelli'); ?></div>
+                        <h2 class="sl-section-title" id="casi-archive-h">
+                            <?php esc_html_e('Vittorie selezionate', 'saltelli'); ?>
+                        </h2>
+                        <p class="sl-cases__lede">
+                            <?php esc_html_e('Identificativi anonimizzati per riservatezza, documentazione integrale visionabile in studio su richiesta.', 'saltelli'); ?>
+                        </p>
+                    </header>
+                    <ol class="sl-cases__list">
+                        <?php foreach ($cases as $case) : ?>
+                            <li class="sl-cases__row">
+                                <div class="sl-mono sl-cases__id"><?php echo esc_html($case['identifier']); ?></div>
+                                <p class="sl-cases__desc"><?php echo esc_html($case['descrizione']); ?></p>
+                                <div class="sl-mono sl-cases__outcome"><?php echo esc_html($case['outcome']); ?></div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="sl-cases__cta" aria-labelledby="casi-cta-h">
+                <div class="sl-container">
+                    <div class="sl-mono sl-contact__eyebrow">
+                        <?php esc_html_e('Prima consulenza conoscitiva gratuita · Risposta entro 24 ore', 'saltelli'); ?>
+                    </div>
+                    <h2 class="sl-section-title" id="casi-cta-h">
+                        <?php esc_html_e('Hai un caso simile?', 'saltelli'); ?>
+                    </h2>
+                    <p class="sl-cases__cta-lede">
+                        <?php esc_html_e('Raccontaci la tua pratica. Trenta minuti di consulenza conoscitiva, gratuita e senza impegno.', 'saltelli'); ?>
+                    </p>
+                    <a class="sl-btn sl-btn--primary" href="<?php echo esc_url(home_url('/contatti/')); ?>">
+                        <span><?php esc_html_e('Prenota una consulenza', 'saltelli'); ?></span>
+                        <span class="arrow" aria-hidden="true">→</span>
+                    </a>
+                </div>
+            </section>
+        <?php endif; endif; ?>
+
     </article>
     <?php
 endwhile;

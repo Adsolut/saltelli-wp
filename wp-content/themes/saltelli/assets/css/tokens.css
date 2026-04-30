@@ -80,6 +80,38 @@
   --space-12: var(--s-6);
   --space-16: var(--s-7);
   --space-24: var(--s-8);
+
+  /* ─────────────────────────────────────────────────────────────
+     Layout Harmonization v0.12.0 (audit CRO 8/10 target)
+     - Container UNIFICATO 1440 max + clamp pad
+     - Scala 8px (sl- prefix per non collidere con legacy)
+     - Hero spacing per gap header→hero coerente
+     ───────────────────────────────────────────────────────────── */
+  --sl-container-max: var(--container-max);
+  --sl-container-pad: var(--container-pad);
+
+  --sl-space-1: 8px;
+  --sl-space-2: 16px;
+  --sl-space-3: 24px;
+  --sl-space-4: 32px;
+  --sl-space-5: 48px;
+  --sl-space-6: 64px;
+  --sl-space-7: 80px;
+  --sl-space-8: 96px;
+  --sl-space-9: 128px;
+
+  --space-hero-top: clamp(64px, 8vw, 120px);
+  --space-hero-bottom: clamp(48px, 6vw, 80px);
+}
+
+/* Smooth scroll globale (audit CRO §11) — opt-out automatico per reduced-motion */
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Base reset (scoped al wrapper .sl-root) */
