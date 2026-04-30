@@ -58,7 +58,7 @@ Il tuo lavoro: **chiudere TUTTI questi gap** facendo IA finale + SEO consistency
 | **Mai cancellare hard** le 19 pages vecchie (potrebbero servire per audit/rollback) | Set draft, NON delete |
 | Cache flush + smoke test 12+ URL dopo OGNI task | Comprehensive |
 | Verifica DOM via curl + grep post-fix | Validation |
-| Sequenza obbligata Task 1 → 2 → 3 → 4 → 5 → 6, NO parallel | File condivisi |
+| Sequenza obbligata Task 1 → 2 → 3 → 4 → 5 → 6 → 7, NO parallel | File condivisi |
 | **Schema BreadcrumbList su TUTTE le pagine** (audit GEO + CRO requirement) | Critico SEO |
 | Idempotenza: re-run = stesso output | Stabilità |
 
@@ -454,7 +454,333 @@ Dopo Task 4-5 implementati, l'orchestrator (Claude in chat) farà visual walkthr
 
 ---
 
-## TASK 6 — Bump version + smoke test esteso (5 min)
+## TASK 6 — Homepage Fidelity Audit vs Claude Design (35 min · CRITICO)
+
+### Obiettivo
+Match fedele tra `front-page.php` rendering e il riferimento `homepage-desktop.jsx` (Claude Design Sessione 1) + PNG `home-desktop.png` su Desktop di Duccio.
+
+Cross-iterations precedenti (Pain Points, Editorial, Layout Harmonization, IA Unification) hanno introdotto lievi drift dai valori esatti del design originale. Questo task è il **return-to-source** finale.
+
+### Letture obbligatorie aggiuntive
+
+1. `.claude/knowledge/design/sessione-1/homepage-desktop.jsx` — riferimento JSX completo (446 righe)
+2. `.claude/knowledge/design/sessione-1/tokens.css` — tokens (NON modificare valori)
+3. `wp-content/themes/saltelli/front-page.php` — implementazione corrente da matchare al JSX
+4. `wp-content/themes/saltelli/header.php` — header (D1+D2)
+5. `wp-content/themes/saltelli/assets/css/sections.css` — la maggior parte dei fix qui
+
+### 12 discrepanze identificate dal direttore d'orchestra
+
+#### D1 — Header logo: manca sub-eyebrow
+
+**JSX:**
+```jsx
+<div style={{ fontFamily: "var(--font-display)", fontSize: 22, color: "var(--primary)", letterSpacing: "-0.01em", lineHeight: 1.1 }}>
+    Saltelli &amp; Partners
+</div>
+<div className="sl-mono" style={{ fontSize: 10, marginTop: 2 }}>Studio Legale · Napoli</div>
+```
+
+**Attuale:** wordmark "Saltelli & Partners" senza sub-eyebrow.
+
+**Fix:** in `header.php`, sotto il wordmark, aggiungi:
+```html
+<div class="sl-mono sl-header__sub" style="font-size:10px;margin-top:2px;">Studio Legale · Napoli</div>
+```
+
+#### D2 — Header padding orizzontale
+
+**JSX:** `padding: "24px 96px"` desktop fisso.
+**Attuale:** `clamp(24, 5vw, 96)` post-Layout Harmonization (a 1440 = 72px).
+
+**Fix:** override desktop fisso `padding: 24px 96px` per match. Mobile resta clamp.
+
+#### D3 — Hero `min-height: 820px` (NON 100vh)
+
+**JSX:** `minHeight: 820`.
+**Attuale:** `min-height: calc(100vh - var(--space-7))` post-v0.12.
+
+**Fix:** ripristina `min-height: 820px` desktop. A 1440×900 viewport, 820 + header 78 = 898 < 900 → colophon visibile above-fold ✓.
+
+```css
+.sl-hero {
+    min-height: 820px;
+    padding: 120px 96px 80px;  /* JSX exact */
+}
+```
+
+#### D4 — Hero h1 font-size clamp esatto
+
+**JSX:** `fontSize: "clamp(80px, 9vw, 132px)"`, line-height 0.98, letter-spacing -0.035em, weight 400.
+
+**Attuale:** `clamp(64px, 8vw, 120px)` post-v0.12 (ridotto per compattezza).
+
+**Fix:** ripristina valori JSX:
+```css
+.sl-hero__headline {
+    font-size: clamp(80px, 9vw, 132px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    font-weight: 400;
+    margin-bottom: 56px;
+}
+.sl-hero__headline > span {
+    display: inline-block;
+    margin-right: 24px;
+}
+```
+
+#### D5 — Hero eyebrow margin-bottom 64px
+
+**JSX:** eyebrow "Studio Legale · Napoli · Chiaia · Dal 1999" → `marginBottom: 64`.
+
+**Fix:** `.sl-hero__eyebrow { margin-bottom: 64px; }` esplicito.
+
+#### D6 — Hero lede dimensioni esatte
+
+**JSX:**
+```jsx
+fontFamily: "var(--font-display)", fontSize: 22, fontStyle: "italic",
+fontWeight: 400, lineHeight: 1.5, color: "var(--text)",
+maxWidth: "44ch", marginBottom: 64
+```
+
+**Attuale:** `clamp(20-24)px`.
+
+**Fix:**
+```css
+.sl-hero__subheadline,
+.sl-hero__lede {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text);
+    max-width: 44ch;
+    margin-bottom: 64px;
+}
+```
+
+Testo atteso (verifica corrisponda):
+> "Studio Legale Saltelli & Partners. Quattro avvocati a Chiaia, diciannove aree di pratica, vent'anni di lavoro accanto a famiglie e imprese di Napoli."
+
+#### D7 — Hero CTA testo (DECISIONE ORCHESTRATOR)
+
+**JSX:** `<button className="sl-btn sl-btn--primary">Prenota un primo incontro →</button>`
+
+**Attuale:** "Prenota una consulenza gratuita" + subline italic "Prima consulenza conoscitiva..." (post-Audit Alignment).
+
+**Decisione orchestrator:** **MANTIENI** "Prenota una consulenza gratuita" + subline. Audit CRO Quick Win #1 esplicito ("aggiungere 'Prima consulenza conoscitiva gratuita' ovunque, +10-20% conversioni"). Il design Claude originale è pre-CRO audit.
+
+**NON ripristinare il testo JSX**. Solo verifica che la subline sia editorial italic (post v0.10) NON mono caps aggressiva.
+
+#### D8 — Hero colophon styling esatto
+
+**JSX:**
+```jsx
+alignSelf: "end", borderLeft: "1px solid var(--border)", paddingLeft: 32
+
+<div className="sl-mono" style={{ marginBottom: 16 }}>Colophon</div>
+<div style={{ display: "grid", gap: 24, fontSize: 13, color: "var(--text)", lineHeight: 1.7 }}>
+    <div>
+        <div className="sl-mono" style={{ marginBottom: 6 }}>Indirizzo</div>
+        Via Vannella Gaetani, 27<br/>80121 Napoli — Chiaia
+    </div>
+    <div>
+        <div className="sl-mono" style={{ marginBottom: 6 }}>Orari</div>
+        Lun – Ven · 09:30 – 18:30<br/>Sabato su appuntamento
+    </div>
+    <div>
+        <div className="sl-mono" style={{ marginBottom: 6 }}>Contatti</div>
+        <a className="sl-link">studio@saltellipartners.it</a><br/>
+        <span className="sl-mono">+39 081 245 67 89</span>
+    </div>
+</div>
+```
+
+**Attuale:** colophon presente con dati `info@studiolegalesaltelli.it` + `+39 081 1813 1119` (project-context corretto).
+
+**Fix:** mantieni i **dati reali** (NON quelli JSX placeholder), ma applica:
+```css
+.sl-hero__colophon {
+    align-self: end;
+    border-left: 1px solid var(--border);
+    padding-left: 32px;
+}
+
+.sl-hero__colophon-title {  /* "Colophon" */
+    margin-bottom: 16px;
+}
+
+.sl-hero__colophon-grid {
+    display: grid;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+}
+
+.sl-hero__colophon-grid .sl-mono {
+    margin-bottom: 6px;
+}
+```
+
+E verifica che il template `front-page.php` emetta esattamente queste 3 sub-section: Indirizzo + Orari + Contatti, nell'ordine indicato.
+
+#### D9 — Hero scroll indicator: orizzontale bottom-left (NON verticale destra)
+
+**JSX:**
+```jsx
+position: "absolute", bottom: 32, left: 96
+display: "flex", alignItems: "center", gap: 12
+linea 1×32px var(--text-muted) + "Scorri" sl-mono
+```
+
+**Attuale:** "SCORRI" mono uppercase **verticale a destra**.
+
+**Fix CRITICO:**
+```css
+.sl-hero__scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    left: 96px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* RIMUOVI eventuali writing-mode: vertical-rl */
+}
+
+.sl-hero__scroll-indicator::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 32px;
+    background: var(--text-muted);
+}
+```
+
+Template:
+```php
+<div class="sl-hero__scroll-indicator">
+    <span class="sl-mono">Scorri</span>
+</div>
+```
+
+#### D10 — Sezioni padding-block 128px
+
+**JSX:** TUTTE le sezioni post-hero (`§ 01 Aree`, `§ 02 Lo studio`, `§ 03 Avvocati`, `§ 04 Casi`, ecc.) hanno `padding: "128px 96px"` esatto.
+
+**Attuale:** `var(--space-7)` (80px) post-Layout Harmonization.
+
+**Fix:**
+```css
+.sl-areas,
+.sl-studio,
+.sl-team,
+.sl-cases,
+.sl-press,
+.sl-contact {
+    padding-block: 128px;
+}
+
+@media (max-width: 1023px) {
+    .sl-areas,
+    .sl-studio,
+    .sl-team,
+    .sl-cases,
+    .sl-press,
+    .sl-contact {
+        padding-block: var(--space-7);  /* 80px mobile */
+    }
+}
+```
+
+#### D11 — § 02 Lo studio asimmetria specifica
+
+**JSX:**
+```jsx
+<div style={{ maxWidth: 640, marginLeft: "20%", fontSize: 19, lineHeight: 1.75 }}>
+```
+
+**Attuale:** content centrato.
+
+**Fix asimmetria deliberata:**
+```css
+.sl-studio__body {
+    max-width: 640px;
+    margin-left: 20%;
+    font-size: 19px;
+    line-height: 1.75;
+    color: var(--text);
+}
+
+@media (max-width: 1023px) {
+    .sl-studio__body {
+        max-width: 100%;
+        margin-left: 0;
+    }
+}
+```
+
+#### D12 — Drop-cap "L" specifiche numeriche esatte
+
+**JSX:**
+```jsx
+fontFamily: "var(--font-display)", fontSize: 84, float: "left",
+lineHeight: 0.85, marginRight: 16, marginTop: 8, color: "var(--primary)"
+```
+
+**Attuale:** drop-cap presente (post Editorial v0.10) ma con valori clamp/em.
+
+**Fix valori esatti:**
+```css
+.sl-studio__body p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-size: 84px;
+    float: left;
+    line-height: 0.85;
+    margin-right: 16px;
+    margin-top: 8px;
+    color: var(--primary);
+    font-weight: 400;
+}
+```
+
+### Verify Task 6
+
+```bash
+docker compose run --rm wpcli cache flush
+
+echo "─── Homepage fidelity verify ───"
+HTML=$(curl -s "http://localhost:8080/?_=task7")
+
+echo "  D1 Header sub-eyebrow 'Studio Legale · Napoli': $(echo "$HTML" | grep -c 'sl-header__sub\|font-size:10px.*Studio Legale.*Napoli')"
+echo "  D5 Hero eyebrow 'Dal 1999': $(echo "$HTML" | grep -c 'Dal 1999')"
+echo "  D6 Lede 'Quattro avvocati a Chiaia': $(echo "$HTML" | grep -c 'Quattro avvocati a Chiaia')"
+echo "  D8 Colophon labels: $(echo "$HTML" | grep -cE 'Indirizzo|Orari|Contatti')"
+echo "  D9 Scroll indicator 'Scorri': $(echo "$HTML" | grep -c 'sl-hero__scroll-indicator')"
+echo "  D11 'Una bottega' lo studio: $(echo "$HTML" | grep -c 'Una bottega')"
+
+echo ""
+echo "─── CSS rules servite ───"
+CSS=$(curl -s "http://localhost:8080/wp-content/themes/saltelli/assets/css/sections.css?_=task7")
+echo "  D3 hero min-height 820px: $(echo "$CSS" | grep -c '820px')"
+echo "  D4 hero h1 clamp 132: $(echo "$CSS" | grep -c '132px')"
+echo "  D10 sezioni 128px padding-block: $(echo "$CSS" | grep -c 'padding-block: 128')"
+echo "  D11 .sl-studio__body marginLeft 20: $(echo "$CSS" | grep -c 'margin-left: 20%\|margin-left:20%')"
+echo "  D12 drop-cap font-size 84: $(echo "$CSS" | grep -c 'font-size: 84px\|font-size:84px')"
+```
+
+Tutti gli hit attesi ≥ 1.
+
+### Conferma visiva richiesta
+
+Dopo Task 6, l'orchestrator (Claude in chat) farà **side-by-side compare** tra screenshot homepage current e PNG reference su Desktop Duccio.
+
+---
+
+## TASK 7 — Bump version + smoke test esteso (5 min)
 
 ```bash
 sed -i.bak 's/Version: 0.12.0-beta-layout-harmonized/Version: 0.13.0-beta-ia-unified/' wp-content/themes/saltelli/style.css
@@ -485,16 +811,17 @@ Atteso:
 
 `.claude/knowledge/design/sessione-1/reports/ia-unification-v0.13.0/REPORT.md`:
 
-1. ✅/❌ Task 1-6
+1. ✅/❌ Task 1-7
 2. Smoke test 18 URL (12 nuovi + 5 legacy + homepage)
 3. Mapping legacy → nuovo eseguito (tabella)
 4. Breadcrumb cross-page audit (tabella DOM count)
 5. /casi/ doppio wrapper risolto?
 6. 19 pages vecchie status `draft`?
 7. Schema BreadcrumbList su 11/12 pagine (no homepage)?
-8. Decisioni autonome
-9. Tempo per task
-10. **GO/NO-GO per Step F** dal tuo punto di vista
+8. **Homepage Fidelity Audit (Task 6): tutte le 12 D risolte?**
+9. Decisioni autonome
+10. Tempo per task
+11. **GO/NO-GO per Step F** dal tuo punto di vista
 
 Poi **fermati**. Direttore d'orchestra eseguirà visual walkthrough esteso (Chrome MCP).
 
@@ -512,4 +839,4 @@ Poi **fermati**. Direttore d'orchestra eseguirà visual walkthrough esteso (Chro
 
 ---
 
-*v1.0 — Information Architecture Unification + SEO consistency. Direttore d'orchestra: Claude (chat). Target: v0.13.0 con breadcrumb uniforme + schema BreadcrumbList su 11/12 pagine + 19 legacy URLs redirect 301 + /casi/ doppio wrapper risolto.*
+*v1.1 — Information Architecture Unification + SEO consistency + Homepage Fidelity vs Claude Design. Direttore d'orchestra: Claude (chat). Target: v0.13.0 con breadcrumb uniforme + schema BreadcrumbList su 11/12 pagine + 19 legacy URLs redirect 301 + /casi/ doppio wrapper risolto + 12 discrepanze homepage fixate.*
