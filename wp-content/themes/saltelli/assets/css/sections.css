@@ -1883,3 +1883,62 @@ html:not(.js-reveal-ready) [data-reveal] {
         margin-right: 0;
     }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   FIX SINGLE-AVVOCATO PORTRAIT — Layout placeholder allineato a foto reale
+   ═══════════════════════════════════════════════════════════════
+   Issue post Step E v2: `.sl-attorney__portrait` non aveva regole CSS.
+   - Su Emiliano (foto reale): `<img>` rende con dimensioni HTML attr (600x800),
+     rendering "ok" per fortuna, ma senza aspect-ratio garantito.
+   - Su 3/4 lawyer (placeholder): `<span class="sl-team__placeholder">` con
+     `position: absolute; bottom:12px; left:12px` (regola homepage scoped) cercava
+     primo positioned ancestor → trovava `<body>` → finiva basso-sx viewport,
+     sovrapposto a sticky TEL/EMAIL.
+
+   Fix: replico il pattern del .sl-team__portrait (homepage) sul wrapper
+   .sl-attorney__portrait. Stesso aspect-ratio 3/4 + gradient + grayscale +
+   position:relative → ora il placeholder absolute si áncora dentro il box.
+
+   No template change → niente regression possibile su Emiliano.
+   ─────────────────────────────────────────────────────────────── */
+.sl-attorney__portrait {
+    display: block;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(135deg, #c8c5be 0%, #6e6c66 100%);
+    margin: 0 0 24px;
+    padding: 0;
+    position: relative;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    width: 100%;
+    max-width: 480px;
+    filter: grayscale(1) contrast(1.05);
+    transition:
+        filter 600ms var(--ease-editorial),
+        background 600ms var(--ease-editorial);
+}
+.sl-attorney__portrait:hover {
+    filter: grayscale(0);
+    background: linear-gradient(135deg, #d4c8b0 0%, #8a7a5e 100%);
+}
+.sl-attorney__portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+/* Placeholder DENTRO il portrait avvocato — riusa la regola .sl-team__placeholder
+   ma riposizionato a fondo (label editoriale "Ritratto · 3:4") con padding più
+   generoso per il contesto hero più grande. La regola homepage resta intatta. */
+.sl-attorney__portrait .sl-team__placeholder {
+    position: absolute;
+    inset: auto auto 16px 16px;
+    bottom: 16px;
+    left: 16px;
+    color: rgba(255, 255, 255, 0.78);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
