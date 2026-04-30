@@ -1192,14 +1192,22 @@
   margin: 0;
   padding: 0;
 }
-.sl-team__specs li {
+.sl-team__specs li,
+.sl-attorney__specs li,
+.sl-tag {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-muted);
   border: 1px solid var(--border);
-  padding: 4px 8px;
+  padding: 4px 12px; /* v0.17.3 — padding-inline 12 (era 8) per respiro intorno al testo */
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.4;
+  white-space: nowrap;
 }
 @media (min-width: 1024px) {
   .sl-team__grid {
@@ -1218,7 +1226,9 @@
   .sl-team__role { margin-bottom: 8px; font-size: 12px; }
   .sl-team__name { font-size: 36px; margin-bottom: 16px; }
   .sl-team__specs { gap: 8px; }
-  .sl-team__specs li { font-size: 11px; padding: 5px 10px; }
+  .sl-team__specs li,
+  .sl-attorney__specs li,
+  .sl-tag { font-size: 11px; padding: 5px 14px; /* v0.17.3 padding-inline 14 desktop */ }
 }
 
 /* Cases — Theme Architect naming */
@@ -2265,8 +2275,6 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 
 .sl-areas__list li,
 .sl-articles li,
-.sl-team__specs li,
-.sl-attorney__specs li,
 .sl-blog__list li,
 .sl-mobile-menu li,
 .sl-header__nav .menu li,
@@ -2276,6 +2284,13 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     list-style: none;
     margin-bottom: 0;
     padding-left: 0;
+}
+/* v0.17.3 — .sl-team__specs li + .sl-attorney__specs li sono pill (non liste meta),
+   hanno padding orizzontale 14px proprio. Esclusi dal reset padding-left:0. */
+.sl-team__specs li,
+.sl-attorney__specs li {
+    list-style: none;
+    margin-bottom: 0;
 }
 
 .sl-areas__list li::before,
