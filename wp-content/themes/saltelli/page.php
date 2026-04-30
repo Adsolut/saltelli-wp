@@ -68,32 +68,30 @@ while (have_posts()) :
         </section>
 
         <?php if (is_page('contatti')) : ?>
-            <section class="sl-page-contatti__map" id="mappa" aria-labelledby="contatti-map-h">
+            <section class="sl-page-contatti__sede" id="sede" aria-labelledby="contatti-sede-h">
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Sede', 'saltelli'); ?></div>
-                    <h2 class="sl-section-title" id="contatti-map-h">
+                    <h2 class="sl-section-title" id="contatti-sede-h">
                         <?php esc_html_e('Dove trovarci', 'saltelli'); ?>
                     </h2>
-                    <p class="sl-page-contatti__map-lede">
+                    <p class="sl-page-contatti__sede-lede">
                         <?php esc_html_e('Studio Legale Saltelli & Partners — Chiaia, Napoli. Si riceve solo su appuntamento, prima consulenza conoscitiva gratuita.', 'saltelli'); ?>
                     </p>
-                    <div class="sl-page-contatti__map-wrap">
-                        <iframe
-                            src="https://www.openstreetmap.org/export/embed.html?bbox=14.232%2C40.829%2C14.240%2C40.835&amp;layer=mapnik&amp;marker=40.832%2C14.235"
-                            width="100%"
-                            height="400"
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            title="<?php esc_attr_e('Mappa Studio Legale Saltelli — Via Vannella Gaetani 27, 80121 Napoli', 'saltelli'); ?>">
-                        </iframe>
-                    </div>
-                    <div class="sl-page-contatti__map-meta">
-                        <a class="sl-mono sl-page-contatti__map-link"
+                    <address class="sl-page-contatti__sede-address">
+                        <span class="sl-page-contatti__sede-street">Via Vannella Gaetani 27</span>
+                        <span class="sl-page-contatti__sede-city">80121 Napoli · Chiaia</span>
+                    </address>
+                    <div class="sl-page-contatti__sede-actions">
+                        <a class="sl-mono sl-page-contatti__sede-link"
+                           href="https://www.google.com/maps/search/?api=1&amp;query=Via+Vannella+Gaetani+27+Napoli"
+                           target="_blank" rel="noopener">
+                            <?php esc_html_e('Apri in Google Maps', 'saltelli'); ?> →
+                        </a>
+                        <a class="sl-mono sl-page-contatti__sede-link"
                            href="https://www.openstreetmap.org/?mlat=40.832&amp;mlon=14.235#map=17/40.832/14.235"
                            target="_blank" rel="noopener">
                             <?php esc_html_e('Apri in OpenStreetMap', 'saltelli'); ?> →
                         </a>
-                        <span class="sl-mono">Via Vannella Gaetani 27 · 80121 Napoli · Chiaia</span>
                     </div>
                 </div>
             </section>

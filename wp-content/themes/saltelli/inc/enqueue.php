@@ -137,8 +137,9 @@ add_action('after_setup_theme', function () {
 /**
  * Favicon — Logo system v1.1 monogramma SVG.
  * Saltelli "S" Playfair italic con cerchio doppio (navy + bronze accent).
- * Override eventuale Site Icon WP fallback.
+ * Disabilita Customizer Site Icon (cropped-icon1-*.jpg legacy 2021/04).
  */
+remove_action('wp_head', 'wp_site_icon', 99);
 add_action('wp_head', function () {
     $brand = SALTELLI_THEME_URI . '/assets/img/brand';
     $ver = SALTELLI_THEME_VERSION;

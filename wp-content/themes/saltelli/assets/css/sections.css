@@ -2527,20 +2527,20 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 }
 
 /* ───────────────────────────────────────────────────────────────
-   C3 — /contatti/ map embed + CTA editoriale
+   C3 — /contatti/ Sede (text-only, no iframe) + CTA editoriale
    Render condizionale via is_page('contatti') in page.php.
    ─────────────────────────────────────────────────────────────── */
-.sl-page-contatti__map {
+.sl-page-contatti__sede {
     margin-top: 80px;
     padding-block: clamp(48px, 6vw, 96px);
     background: var(--surface);
 }
 
-.sl-page-contatti__map .sl-mono {
+.sl-page-contatti__sede .sl-mono {
     margin-bottom: 16px;
 }
 
-.sl-page-contatti__map h2 {
+.sl-page-contatti__sede h2 {
     font-family: var(--font-display);
     font-size: clamp(28px, 3vw, 44px);
     color: var(--primary);
@@ -2550,45 +2550,55 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     max-width: 24ch;
 }
 
-.sl-page-contatti__map-lede {
+.sl-page-contatti__sede-lede {
     font-family: var(--font-display);
     font-size: clamp(16px, 1.4vw, 18px);
     font-style: italic;
     line-height: 1.55;
     color: var(--text);
     max-width: 60ch;
-    margin: 0 0 40px;
+    margin: 0 0 32px;
 }
 
-.sl-page-contatti__map-wrap {
-    border: 1px solid var(--border);
-    overflow: hidden;
-    margin-bottom: 24px;
-    background: var(--background);
+.sl-page-contatti__sede-address {
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0 0 28px;
 }
 
-.sl-page-contatti__map-wrap iframe {
-    display: block;
-    border: 0;
+.sl-page-contatti__sede-street {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2vw, 26px);
+    color: var(--primary);
+    letter-spacing: -0.01em;
 }
 
-.sl-page-contatti__map-meta {
+.sl-page-contatti__sede-city {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.sl-page-contatti__sede-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
     align-items: baseline;
-    justify-content: space-between;
     font-size: 11px;
 }
 
-.sl-page-contatti__map-link {
+.sl-page-contatti__sede-link {
     color: var(--accent);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: border-color 200ms var(--ease-editorial);
 }
 
-.sl-page-contatti__map-link:hover {
+.sl-page-contatti__sede-link:hover {
     border-bottom-color: var(--accent);
 }
 
@@ -2805,7 +2815,7 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 .sl-team--archive .sl-section-head,
 .sl-blog .sl-section-head,
 .sl-blog-archive .sl-section-head,
-.sl-page-contatti__map,
+.sl-page-contatti__sede,
 .sl-post__hero {
     padding-top: var(--space-hero-top);
 }
@@ -2827,7 +2837,7 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 
 /* Section→Section: gap 80px tra sections sequenziali */
 .sl-page > section + section,
-.sl-page-contatti__map + .sl-page-contatti__cta {
+.sl-page-contatti__sede + .sl-page-contatti__cta {
     margin-top: 0;  /* padding-top hero ha già spacing */
 }
 
@@ -2924,7 +2934,7 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     .sl-footer .menu a,
     .sl-attorney__sticky-btn,
     .sl-page__breadcrumb a,
-    .sl-page-contatti__map-link,
+    .sl-page-contatti__sede-link,
     .sl-blog__pagination a,
     .sl-areas__filter {
         min-height: 48px;
