@@ -37,18 +37,26 @@
 /* =========================================================
  * 1. HEADER
  * ========================================================= */
+/* FIX F5 — Header sticky transition snappy
+   v0.8.1 percepito >1s a state-change. Transizione passa da 300ms (--dur-base)
+   a 180ms con curve ease-out (no cubic-bezier editorial) per snap netto.
+   Aggiunto box-shadow micro per definizione visiva quando scrolled. */
 .sl-header {
   position: sticky;
   top: 0;
   z-index: 50;
   background: transparent;
   border-bottom: 1px solid transparent;
-  transition: background var(--dur-base) var(--ease-editorial),
-              border-color var(--dur-base) var(--ease-editorial);
+  transition: background 180ms ease-out,
+              border-color 180ms ease-out,
+              box-shadow 180ms ease-out;
+  will-change: background-color;
 }
-.sl-header.is-scrolled {
+.sl-header.is-scrolled,
+.sl-header[data-scrolled="true"] {
   background: var(--background);
   border-bottom-color: var(--border);
+  box-shadow: 0 1px 0 rgba(27, 43, 75, 0.04);
 }
 .sl-header__inner {
   max-width: var(--container-max);
@@ -834,11 +842,7 @@
  * sulle stesse regole. Da consolidare in una passata di unificazione.
  * ========================================================= */
 
-/* Header — burger / mobile / scrolled state */
-.sl-header[data-scrolled="true"] {
-  background: var(--background);
-  border-bottom-color: var(--border);
-}
+/* Header — burger / mobile / scrolled state — handled by F5 fix sopra */
 .sl-header__brand-name {
   font-family: var(--font-display);
   font-size: 17px;
@@ -1665,14 +1669,34 @@ html:not(.js-reveal-ready) [data-reveal] {
 .sl-competenza__prose h2,
 .sl-page__prose h2,
 .entry-content h2 {
-    font-size: clamp(28px, 3.5vw, 48px);
-    margin-block: 56px 20px;
+    font-size: clamp(28px, 3.5vw, 44px);
+    margin-block: 80px 24px;
+    max-width: 24ch;
+    line-height: 1.15;
 }
 .sl-competenza__prose h3,
 .sl-page__prose h3,
 .entry-content h3 {
     font-size: clamp(22px, 2vw, 32px);
-    margin-block: 40px 16px;
+    margin-block: 56px 16px;
+    max-width: 28ch;
+}
+
+/* FIX F6 — Tier-1 H2 sub-section sovrapposti (post v0.8.1)
+   Issue: in diritto-di-famiglia-lgbtq (5 H2 consecutive senza respiro),
+   margin-block 56px 20px troppo stretto vs font Playfair 48px → letti
+   come paragrafi continui. Up a 80px 24px + adjacent sibling rule per
+   ridurre spazio quando h2 segue immediatamente h2/h3 (no body tra). */
+.sl-competenza__prose h2 + h2,
+.sl-competenza__prose h3 + h2,
+.sl-page__prose h2 + h2,
+.entry-content h2 + h2 {
+    margin-top: 40px;
+}
+.sl-competenza__prose h2:first-child,
+.sl-page__prose h2:first-child,
+.entry-content h2:first-child {
+    margin-top: 0;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1715,25 +1739,32 @@ html:not(.js-reveal-ready) [data-reveal] {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   FIX P0.1 — /costi/ layout asimmetrico editoriale
-   Mobile: stack verticale. Desktop: eyebrow mono a sinistra | body a destra.
-   NB: nessun padding-inline (siamo dentro .sl-container = già padded).
-   ═══════════════════════════════════════════════════════════════ */
+   FIX F4 — /costi/ layout regression recovery (post v0.8.1)
+   ═══════════════════════════════════════════════════════════════
+   Issue v0.8.1: section max-width 1100px + body 1fr ~836px →
+   percezione visiva di body troppo wide, sbilancio rispetto a eyebrow
+   200px sticky. Vuoto enorme tra sezioni causato da margin-block
+   ereditato da .sl-page__prose h2 (56px) sovrapposto a .sl-costi__section h2
+   (16px), creando computed inconsistency.
+   Fix: reset section max-width a 960px (più editoriale), gap 80px desktop,
+   max-width 60ch su body (lettura ottimale), margin-block uniforme.
+   .sl-costi__section h2 wins su .sl-page__prose h2 via cascade order.
+   ─────────────────────────────────────────────────────────────── */
 .sl-costi__intro {
     max-width: 720px;
     margin: 0 auto 96px;
 }
 .sl-costi__capsule {
     font-family: var(--font-display);
-    font-size: clamp(20px, 2vw, 26px);
+    font-size: clamp(20px, 2vw, 28px);
     font-style: italic;
-    line-height: 1.5;
+    line-height: 1.55;
     color: var(--primary);
     margin: 0;
 }
 .sl-costi__section {
     max-width: 720px;
-    margin: 0 auto 64px;
+    margin: 0 auto 80px;
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
@@ -1743,52 +1774,63 @@ html:not(.js-reveal-ready) [data-reveal] {
     font-size: clamp(28px, 3vw, 44px);
     color: var(--primary);
     letter-spacing: -0.02em;
-    margin-block: 16px 24px;
+    margin-block: 8px 24px;
     font-weight: 400;
+    line-height: 1.15;
 }
 .sl-costi__section p {
     font-size: 16px;
     line-height: 1.7;
     color: var(--text);
     margin-block: 16px;
+    max-width: 60ch;
 }
 .sl-costi__section ul {
     padding-left: 24px;
     margin-block: 16px;
+    max-width: 60ch;
 }
 .sl-costi__section li {
     margin-bottom: 8px;
     line-height: 1.7;
     font-size: 16px;
 }
+.sl-costi__section > details,
+.sl-costi__section > .sl-acc {
+    max-width: 60ch;
+}
 
 @media (min-width: 1024px) {
     .sl-costi__section {
-        grid-template-columns: 200px 1fr;
-        gap: 64px;
-        max-width: 1100px;
+        grid-template-columns: 200px minmax(0, 1fr);
+        gap: 80px;
+        max-width: 960px;
+        margin-bottom: 96px;
     }
     .sl-costi__section > .sl-mono {
         grid-column: 1;
         grid-row: 1 / span 99;
         text-align: right;
-        padding-top: 28px;
+        padding-top: 12px;
         align-self: start;
         position: sticky;
         top: 120px;
     }
     .sl-costi__section > h2,
+    .sl-costi__section > h3,
     .sl-costi__section > p,
     .sl-costi__section > ul,
+    .sl-costi__section > ol,
     .sl-costi__section > details,
-    .sl-costi__section > .sl-acc {
+    .sl-costi__section > .sl-acc,
+    .sl-costi__section > .sl-faq {
         grid-column: 2;
     }
 }
 
 .sl-costi__cta {
-    max-width: 1100px;
-    margin: 96px auto 0;
+    max-width: 960px;
+    margin: 120px auto 0;
     padding: 64px clamp(24px, 5vw, 96px);
     background: var(--surface);
     text-align: center;
@@ -1885,55 +1927,53 @@ html:not(.js-reveal-ready) [data-reveal] {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   FIX SINGLE-AVVOCATO PORTRAIT — Layout placeholder allineato a foto reale
+   FIX F3 — Single-avvocato portrait (riscrittura post-walkthrough v0.8.1)
    ═══════════════════════════════════════════════════════════════
-   Issue post Step E v2: `.sl-attorney__portrait` non aveva regole CSS.
-   - Su Emiliano (foto reale): `<img>` rende con dimensioni HTML attr (600x800),
-     rendering "ok" per fortuna, ma senza aspect-ratio garantito.
-   - Su 3/4 lawyer (placeholder): `<span class="sl-team__placeholder">` con
-     `position: absolute; bottom:12px; left:12px` (regola homepage scoped) cercava
-     primo positioned ancestor → trovava `<body>` → finiva basso-sx viewport,
-     sovrapposto a sticky TEL/EMAIL.
+   Issue: il fix v0.8.1 con .sl-attorney__portrait (specificità 0,1,0)
+   è stato bypassato — sul placeholder il box rendeva ~600px+ wide invece
+   dei 480px max-width dichiarati. Sticky TEL/EMAIL si sovrapponeva.
 
-   Fix: replico il pattern del .sl-team__portrait (homepage) sul wrapper
-   .sl-attorney__portrait. Stesso aspect-ratio 3/4 + gradient + grayscale +
-   position:relative → ora il placeholder absolute si áncora dentro il box.
+   Fix definitivo: selettore tag.class `figure.sl-attorney__portrait`
+   (specificità 0,1,1) + !important strategico per battere ogni eventuale
+   regola successiva. Mobile (≤1023): max-width: 100% per stack normale.
 
-   No template change → niente regression possibile su Emiliano.
+   No template change. Foto reale Emiliano (img reale 600x800) rispetta
+   max-width 480 + aspect-ratio 3/4 + object-fit cover.
    ─────────────────────────────────────────────────────────────── */
-.sl-attorney__portrait {
-    display: block;
-    aspect-ratio: 3 / 4;
+figure.sl-attorney__portrait {
+    display: block !important;
+    width: 100% !important;
+    max-width: 480px !important;
+    aspect-ratio: 3 / 4 !important;
+    margin: 0 0 32px 0 !important;
+    padding: 0 !important;
+    position: relative !important;
     background: linear-gradient(135deg, #c8c5be 0%, #6e6c66 100%);
-    margin: 0 0 24px;
-    padding: 0;
-    position: relative;
     border: 1px solid var(--border);
     overflow: hidden;
-    width: 100%;
-    max-width: 480px;
     filter: grayscale(1) contrast(1.05);
     transition:
         filter 600ms var(--ease-editorial),
         background 600ms var(--ease-editorial);
 }
-.sl-attorney__portrait:hover {
+figure.sl-attorney__portrait:hover {
     filter: grayscale(0);
     background: linear-gradient(135deg, #d4c8b0 0%, #8a7a5e 100%);
 }
-.sl-attorney__portrait img {
-    width: 100%;
-    height: 100%;
+
+figure.sl-attorney__portrait img {
+    width: 100% !important;
+    height: 100% !important;
     object-fit: cover;
     object-position: center top;
     display: block;
+    max-width: none;
 }
-/* Placeholder DENTRO il portrait avvocato — riusa la regola .sl-team__placeholder
-   ma riposizionato a fondo (label editoriale "Ritratto · 3:4") con padding più
-   generoso per il contesto hero più grande. La regola homepage resta intatta. */
-.sl-attorney__portrait .sl-team__placeholder {
-    position: absolute;
-    inset: auto auto 16px 16px;
+
+figure.sl-attorney__portrait .sl-team__placeholder,
+figure.sl-attorney__portrait .sl-attorney__placeholder {
+    position: absolute !important;
+    inset: auto auto 16px 16px !important;
     bottom: 16px;
     left: 16px;
     color: rgba(255, 255, 255, 0.78);
@@ -1941,4 +1981,125 @@ html:not(.js-reveal-ready) [data-reveal] {
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+}
+
+@media (max-width: 1023px) {
+    figure.sl-attorney__portrait {
+        max-width: 100% !important;
+        margin: 0 0 24px 0 !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FIX F1 — Archive /competenze/ + /tipo-area/* hero non overflow
+   ═══════════════════════════════════════════════════════════════
+   Issue v0.8.1: .sl-section-head usa grid `auto 1fr` con auto-flow
+   row → 3 figli (mono+h1+p) andavano in righe sbagliate (p sotto mono,
+   h1 senza max-width). Headline italic Playfair "Tre presidiate…" su
+   72px andava out-of-viewport.
+   Fix: grid-template-areas esplicito mobile single col + desktop
+   240px+1fr con eyebrow sticky-style colonna stretta sx, headline+lede
+   in colonna larga dx. max-width 18ch su title forza wrap.
+   ─────────────────────────────────────────────────────────────── */
+.sl-areas--archive .sl-areas__archive-head,
+.sl-areas-archive .sl-areas__archive-head {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "eyebrow"
+        "title"
+        "lede";
+    gap: 16px;
+    margin-bottom: 64px;
+    align-items: start;
+}
+.sl-areas--archive .sl-areas__archive-head > .sl-mono,
+.sl-areas-archive .sl-areas__archive-head > .sl-mono {
+    grid-area: eyebrow;
+}
+.sl-areas--archive .sl-areas__archive-head > .sl-page__breadcrumb {
+    grid-area: eyebrow;
+    margin-bottom: 8px;
+}
+.sl-areas--archive .sl-areas__archive-head > h1,
+.sl-areas-archive .sl-areas__archive-head > h1,
+.sl-areas--archive .sl-areas__archive-head > .sl-section-title,
+.sl-areas-archive .sl-areas__archive-head > .sl-section-title {
+    grid-area: title;
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 84px);
+    line-height: 1.05;
+    color: var(--primary);
+    letter-spacing: -0.02em;
+    margin: 0;
+    max-width: 18ch;
+    font-weight: 400;
+}
+.sl-areas--archive .sl-areas__archive-head > .sl-areas__archive-lede,
+.sl-areas-archive .sl-areas__archive-head > .sl-areas__archive-lede {
+    grid-area: lede;
+    font-family: var(--font-display);
+    font-size: clamp(15px, 1.5vw, 18px);
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 56ch;
+    margin: 8px 0 0;
+}
+
+@media (min-width: 1024px) {
+    .sl-areas--archive .sl-areas__archive-head,
+    .sl-areas-archive .sl-areas__archive-head {
+        grid-template-columns: 240px 1fr;
+        grid-template-areas:
+            "eyebrow title"
+            "eyebrow lede";
+        gap: 16px 64px;
+    }
+    .sl-areas--archive .sl-areas__archive-head > .sl-mono,
+    .sl-areas-archive .sl-areas__archive-head > .sl-mono {
+        align-self: start;
+        padding-top: 16px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FIX F2 — Archive /avvocati/ tutti 4 lawyer visibili
+   ═══════════════════════════════════════════════════════════════
+   Issue v0.8.1: archive-avvocato.php usa lo stesso markup .sl-team__lawyer
+   della homepage. Su desktop (≥1024px) il pattern asimmetrico ereditato
+   distribuisce i 4 lawyer su 2 righe con offset cumulativi 0+96+64+32px →
+   la riga 2 inizia ~700-900px sotto la riga 1 nel viewport, fuori dallo
+   screenshot above-fold.
+   Fix: override scoped a .sl-team--archive (classe applicata SOLO sull'archive,
+   NON sulla homepage) con grid 2x2 simmetrica e margin-top reset.
+   ─────────────────────────────────────────────────────────────── */
+.sl-team--archive .sl-team__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 56px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.sl-team--archive .sl-team__lawyer {
+    margin: 0;
+    grid-column: auto;
+}
+
+@media (min-width: 768px) {
+    .sl-team--archive .sl-team__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 80px 48px;
+    }
+    .sl-team--archive .sl-team__lawyer:nth-child(odd),
+    .sl-team--archive .sl-team__lawyer:nth-child(even) {
+        margin: 0;
+    }
+    .sl-team--archive .sl-team__lawyer:nth-child(1),
+    .sl-team--archive .sl-team__lawyer:nth-child(2),
+    .sl-team--archive .sl-team__lawyer:nth-child(3),
+    .sl-team--archive .sl-team__lawyer:nth-child(4) {
+        grid-column: auto;
+        margin-top: 0;
+    }
 }
