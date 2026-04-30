@@ -89,8 +89,8 @@ $press = saltelli_press_outlets();
             </div>
         </div>
 
-        <aside class="sl-hero__colophon" aria-label="<?php esc_attr_e('Colophon studio', 'saltelli'); ?>">
-            <div class="sl-mono sl-hero__colophon-label"><?php esc_html_e('Colophon', 'saltelli'); ?></div>
+        <aside class="sl-hero__colophon" aria-label="<?php esc_attr_e('Coordinate studio', 'saltelli'); ?>">
+            <div class="sl-mono sl-hero__colophon-label"><?php esc_html_e('Coordinate', 'saltelli'); ?></div>
             <div class="sl-hero__colophon-grid">
                 <div class="sl-hero__colophon-item">
                     <div class="sl-mono"><?php esc_html_e('Indirizzo', 'saltelli'); ?></div>

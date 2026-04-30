@@ -204,10 +204,12 @@
 @media (min-width: 1024px) {
   .sl-hero {
     min-height: 820px;
-    padding: 120px var(--container-pad) 80px;
-    display: grid;
-    grid-template-columns: 8fr 4fr;
-    gap: 64px;
+    /* F06 v0.14 — padding-inline azzerato: .sl-hero__inner ha class .sl-container
+       (front-page.php:65) che già applica padding-inline: var(--container-pad).
+       Doppio padding 72+72=144px → homepage scostata di ~72px vs altre pagine.
+       F01 v0.14 — display:grid rimosso (collide con .sl-hero__inner 8fr/4fr).
+       Layout grid resta ESCLUSIVAMENTE su .sl-hero__inner (riga 957 + 2820). */
+    padding: 120px 0 80px;
   }
   .sl-hero__eyebrow { margin-bottom: 64px; }
   .sl-hero__headline {
@@ -1760,7 +1762,7 @@ html:not(.js-reveal-ready) [data-reveal] {
    ─────────────────────────────────────────────────────────────── */
 .sl-costi__intro {
     max-width: 720px;
-    margin: 0 auto 96px;
+    margin: 0 auto;  /* F03 v0.14 — bottom margin rimosso, gap globale --sl-space-7 (80px) gestisce */
 }
 .sl-costi__capsule {
     font-family: var(--font-display);
@@ -1772,7 +1774,7 @@ html:not(.js-reveal-ready) [data-reveal] {
 }
 .sl-costi__section {
     max-width: 720px;
-    margin: 0 auto 80px;
+    margin: 0 auto;  /* F03 v0.14 — bottom margin rimosso, --sl-space-7 globale (riga 2802) gestisce */
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
@@ -1813,7 +1815,7 @@ html:not(.js-reveal-ready) [data-reveal] {
         grid-template-columns: 200px minmax(0, 1fr);
         gap: 80px;
         max-width: 960px;
-        margin-bottom: 96px;
+        /* F03 v0.14 — margin-bottom 96px rimosso. --sl-space-7 globale (80px) basta. */
     }
     .sl-costi__section > .sl-mono {
         grid-column: 1;
@@ -3138,4 +3140,36 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     display: block;
     font-family: var(--font-mono);
     letter-spacing: 0.04em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   F04 v0.14 — .sl-page__prose body spacing più ariato
+   /chi-siamo/, /casi/, /contatti/ hanno H1 + lede + body troppo
+   stretti. Aumentiamo respiro h2 (80/24 era 32/16), lede sotto h1
+   (32px), spacing globale paragrafi (24px tra p).
+   I valori cooperano con --sl-space-7 (riga 2802) ma incrementano
+   il rhythm interno della prose dove --sl-space-7 non arriva
+   (es. h1 → primo p, p → p, p → ul).
+   ─────────────────────────────────────────────────────────────── */
+.sl-page__prose h1 + p,
+.sl-page__prose > .sl-page__title + p {
+    margin-top: 32px;
+}
+.sl-page__prose p + p {
+    margin-top: 16px;
+}
+.sl-page__prose p + h2,
+.sl-page__prose ul + h2,
+.sl-page__prose ol + h2,
+.sl-page__prose blockquote + h2 {
+    margin-top: 80px;
+}
+.sl-page__prose p + h3,
+.sl-page__prose ul + h3,
+.sl-page__prose ol + h3 {
+    margin-top: 56px;
+}
+.sl-page__prose h2 + p,
+.sl-page__prose h3 + p {
+    margin-top: 24px;
 }
