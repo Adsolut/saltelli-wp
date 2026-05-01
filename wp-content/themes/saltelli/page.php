@@ -487,24 +487,24 @@ while (have_posts()) :
                                 <form class="sl-contatti-w3__form" method="post" action="#" novalidate>
                                     <label class="sl-contatti-w3__field">
                                         <span class="sl-mono"><?php esc_html_e('Nome e cognome *', 'saltelli'); ?></span>
-                                        <input type="text" name="nome" required>
+                                        <input type="text" name="nome" class="sl-input" required>
                                     </label>
 
                                     <div class="sl-contatti-w3__field-row">
                                         <label class="sl-contatti-w3__field">
                                             <span class="sl-mono"><?php esc_html_e('Email *', 'saltelli'); ?></span>
-                                            <input type="email" name="email" required>
+                                            <input type="email" name="email" class="sl-input" required>
                                         </label>
                                         <label class="sl-contatti-w3__field">
                                             <span class="sl-mono"><?php esc_html_e('Telefono', 'saltelli'); ?></span>
-                                            <input type="tel" name="telefono">
+                                            <input type="tel" name="telefono" class="sl-input">
                                         </label>
                                     </div>
 
                                     <div class="sl-contatti-w3__field-row">
                                         <label class="sl-contatti-w3__field">
                                             <span class="sl-mono"><?php esc_html_e('Area di interesse', 'saltelli'); ?></span>
-                                            <select name="area">
+                                            <select name="area" class="sl-input">
                                                 <option value=""><?php esc_html_e('— Seleziona —', 'saltelli'); ?></option>
                                                 <?php foreach ($sl_aree_select as $sl_a) : ?>
                                                     <option value="<?php echo esc_attr($sl_a); ?>"><?php echo esc_html($sl_a); ?></option>
@@ -513,13 +513,13 @@ while (have_posts()) :
                                         </label>
                                         <label class="sl-contatti-w3__field">
                                             <span class="sl-mono"><?php esc_html_e('Data preferita', 'saltelli'); ?></span>
-                                            <input type="date" name="data">
+                                            <input type="date" name="data" class="sl-input">
                                         </label>
                                     </div>
 
                                     <label class="sl-contatti-w3__field">
                                         <span class="sl-mono"><?php esc_html_e('Messaggio *', 'saltelli'); ?></span>
-                                        <textarea name="messaggio" rows="5" required></textarea>
+                                        <textarea name="messaggio" rows="5" class="sl-input" required></textarea>
                                     </label>
 
                                     <label class="sl-contatti-w3__gdpr">

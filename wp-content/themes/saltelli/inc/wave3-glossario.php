@@ -432,14 +432,23 @@ $sl_gloss_chain = function_exists('saltelli_get_breadcrumb_chain') ? saltelli_ge
                 <h2 class="sl-glossario__faq-h" id="glossario-faq-h">
                     <?php esc_html_e('Cinque chiarimenti.', 'saltelli'); ?>
                 </h2>
-                <div class="sl-faq">
-                    <?php foreach ($sl_gloss_faq as $sl_f) : ?>
-                        <details class="sl-faq__item">
-                            <summary class="sl-faq__question"><?php echo esc_html($sl_f['q']); ?></summary>
-                            <div class="sl-faq__answer"><p><?php echo esc_html($sl_f['a']); ?></p></div>
-                        </details>
+                <?php /* === FIX v0.19.1 [F3] BEGIN — accordion JSX-faithful (.sl-acc__*) === */ ?>
+                <div class="sl-acc" data-sl-acc>
+                    <?php foreach ($sl_gloss_faq as $sl_idx => $sl_f) :
+                        $sl_acc_id = 'sl-gloss-acc-' . (int) $sl_idx;
+                        ?>
+                        <div class="sl-acc__item" data-open="false">
+                            <button class="sl-acc__btn" type="button" aria-expanded="false" aria-controls="<?php echo esc_attr($sl_acc_id); ?>">
+                                <span><?php echo esc_html($sl_f['q']); ?></span>
+                                <span class="sl-acc__icon" aria-hidden="true">+</span>
+                            </button>
+                            <div class="sl-acc__panel" id="<?php echo esc_attr($sl_acc_id); ?>" role="region">
+                                <div class="sl-acc__inner"><?php echo esc_html($sl_f['a']); ?></div>
+                            </div>
+                        </div>
                     <?php endforeach; ?>
                 </div>
+                <?php /* === FIX v0.19.1 [F3] END === */ ?>
             </div>
         </div>
     </section>

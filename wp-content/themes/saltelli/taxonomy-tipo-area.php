@@ -83,24 +83,24 @@ if (empty($avvocati_referenti)) {
    Tre scenari editoriali per tipo-area. Sym Playfair italic glyph. */
 $scenari_map = [
     'privati' => [
-        ['sym' => '§', 't' => __('Famiglia', 'saltelli'),     'd' => __("Separazioni, divorzi, affidamenti, unioni civili e tutela LGBTQ+.", 'saltelli')],
-        ['sym' => '¶', 't' => __('Eredità', 'saltelli'),      'd' => __("Successioni testate e legittime, divisioni, pubblicazione testamenti.", 'saltelli')],
-        ['sym' => '†', 't' => __('Risarcimento', 'saltelli'), 'd' => __("Danni da circolazione, malasanità, mobbing e responsabilità civile.", 'saltelli')],
+        ['sym' => '§', 't' => __('Famiglia', 'saltelli'),     'd' => __("Separazioni, divorzi, affidamenti, unioni civili e tutela LGBTQ+.", 'saltelli'),  'slug' => 'diritto-di-famiglia'],
+        ['sym' => '¶', 't' => __('Eredità', 'saltelli'),      'd' => __("Successioni testate e legittime, divisioni, pubblicazione testamenti.", 'saltelli'),  'slug' => 'diritto-delle-successioni'],
+        ['sym' => '†', 't' => __('Risarcimento', 'saltelli'), 'd' => __("Danni da circolazione, malasanità, mobbing e responsabilità civile.", 'saltelli'),  'slug' => 'risarcimento-danni'],
     ],
     'imprese' => [
-        ['sym' => '§', 't' => __('Tributario', 'saltelli'),  'd' => __("Accertamenti, ricorsi tributari, contenzioso con Agenzia delle Entrate.", 'saltelli')],
-        ['sym' => '¶', 't' => __('Crediti', 'saltelli'),     'd' => __("Recupero crediti commerciali, decreti ingiuntivi, esecuzioni mobiliari.", 'saltelli')],
-        ['sym' => '†', 't' => __('Bancario', 'saltelli'),    'd' => __("Anatocismo, usura, contestazione di clausole vessatorie nei contratti bancari.", 'saltelli')],
+        ['sym' => '§', 't' => __('Tributario', 'saltelli'),  'd' => __("Accertamenti, ricorsi tributari, contenzioso con Agenzia delle Entrate.", 'saltelli'),  'slug' => 'diritto-tributario'],
+        ['sym' => '¶', 't' => __('Crediti', 'saltelli'),     'd' => __("Recupero crediti commerciali, decreti ingiuntivi, esecuzioni mobiliari.", 'saltelli'),  'slug' => 'recupero-crediti'],
+        ['sym' => '†', 't' => __('Bancario', 'saltelli'),    'd' => __("Anatocismo, usura, contestazione di clausole vessatorie nei contratti bancari.", 'saltelli'),  'slug' => 'diritto-bancario'],
     ],
     'contenzioso' => [
-        ['sym' => '§', 't' => __('Cartelle', 'saltelli'),       'd' => __("Opposizione a cartelle esattoriali, prescrizioni, vizi di notifica.", 'saltelli')],
-        ['sym' => '¶', 't' => __('Amministrativo', 'saltelli'), 'd' => __("Ricorsi al TAR, annullamento di provvedimenti P.A., edilizia, urbanistica.", 'saltelli')],
-        ['sym' => '†', 't' => __('Condominiale', 'saltelli'),   'd' => __("Impugnazione delibere, parti comuni, decoro architettonico, mediazioni.", 'saltelli')],
+        ['sym' => '§', 't' => __('Cartelle', 'saltelli'),       'd' => __("Opposizione a cartelle esattoriali, prescrizioni, vizi di notifica.", 'saltelli'),  'slug' => 'cartelle-esattoriali-e-multe'],
+        ['sym' => '¶', 't' => __('Amministrativo', 'saltelli'), 'd' => __("Ricorsi al TAR, annullamento di provvedimenti P.A., edilizia, urbanistica.", 'saltelli'),  'slug' => 'diritto-amministrativo'],
+        ['sym' => '†', 't' => __('Condominiale', 'saltelli'),   'd' => __("Impugnazione delibere, parti comuni, decoro architettonico, mediazioni.", 'saltelli'),  'slug' => 'diritto-condominiale'],
     ],
     'altri' => [
-        ['sym' => '§', 't' => __('Domiciliazione', 'saltelli'), 'd' => __("Domiciliazione d'impresa per società extra-Campania con presidio a Napoli.", 'saltelli')],
-        ['sym' => '¶', 't' => __('Online', 'saltelli'),         'd' => __("Consulenze in videocall su tutta Italia, primo orientamento gratuito.", 'saltelli')],
-        ['sym' => '†', 't' => __('Previdenza', 'saltelli'),     'd' => __("Pensioni, invalidità civile, Legge 104, contributi INPS contestati.", 'saltelli')],
+        ['sym' => '§', 't' => __('Domiciliazione', 'saltelli'), 'd' => __("Domiciliazione d'impresa per società extra-Campania con presidio a Napoli.", 'saltelli'),  'slug' => 'domiciliazione-dimpresa'],
+        ['sym' => '¶', 't' => __('Online', 'saltelli'),         'd' => __("Consulenze in videocall su tutta Italia, primo orientamento gratuito.", 'saltelli'),  'slug' => 'consulenze-online'],
+        ['sym' => '†', 't' => __('Previdenza', 'saltelli'),     'd' => __("Pensioni, invalidità civile, Legge 104, contributi INPS contestati.", 'saltelli'),  'slug' => 'diritto-previdenziale'],
     ],
 ];
 $scenari = $scenari_map[$term_slug] ?? $scenari_map['privati'];
@@ -219,12 +219,26 @@ $avatar_html = function ($av_post) {
                 </h2>
             </header>
             <div class="sl-tipoarea__quando-grid">
-                <?php foreach ($scenari as $s) : ?>
-                    <article class="sl-tipoarea__scenario">
-                        <span class="sl-tipoarea__scenario-sym" aria-hidden="true"><?php echo esc_html($s['sym']); ?></span>
-                        <h3 class="sl-tipoarea__scenario-title"><?php echo esc_html($s['t']); ?></h3>
-                        <p class="sl-tipoarea__scenario-desc"><?php echo esc_html($s['d']); ?></p>
-                    </article>
+                <?php foreach ($scenari as $s) :
+                    /* === FIX v0.19.1 [F1] BEGIN — wrap scenario in <a> + add "Leggi →" link (JSX parity) === */
+                    $sl_sc_slug = isset($s['slug']) ? (string) $s['slug'] : '';
+                    $sl_sc_href = $sl_sc_slug !== '' ? home_url('/competenze/' . $sl_sc_slug . '/') : '';
+                    ?>
+                    <?php if ($sl_sc_href !== '') : ?>
+                        <a class="sl-tipoarea__scenario" href="<?php echo esc_url($sl_sc_href); ?>">
+                            <span class="sl-tipoarea__scenario-sym" aria-hidden="true"><?php echo esc_html($s['sym']); ?></span>
+                            <h3 class="sl-tipoarea__scenario-title"><?php echo esc_html($s['t']); ?></h3>
+                            <p class="sl-tipoarea__scenario-desc"><?php echo esc_html($s['d']); ?></p>
+                            <span class="sl-mono sl-tipoarea__scenario-leggi"><?php esc_html_e('Leggi', 'saltelli'); ?> <span class="arrow" aria-hidden="true">→</span></span>
+                        </a>
+                    <?php else : ?>
+                        <article class="sl-tipoarea__scenario">
+                            <span class="sl-tipoarea__scenario-sym" aria-hidden="true"><?php echo esc_html($s['sym']); ?></span>
+                            <h3 class="sl-tipoarea__scenario-title"><?php echo esc_html($s['t']); ?></h3>
+                            <p class="sl-tipoarea__scenario-desc"><?php echo esc_html($s['d']); ?></p>
+                        </article>
+                    <?php endif; ?>
+                    <?php /* === FIX v0.19.1 [F1] END === */ ?>
                 <?php endforeach; ?>
             </div>
         </div>

@@ -323,4 +323,22 @@
 
     preview.dataset.slHoverBound = '1';
   }
+
+  /* === FIX v0.19.1 [F3] BEGIN — accordion .sl-acc toggle (button-based, JSX-faithful) === */
+  // Idempotente: marker dataset evita doppia bind se main.js si re-inizializza.
+  document.querySelectorAll('.sl-acc[data-sl-acc]').forEach((root) => {
+    if (root.dataset.slAccBound === '1') return;
+    root.addEventListener('click', (e) => {
+      const btn = e.target.closest('.sl-acc__btn');
+      if (!btn || !root.contains(btn)) return;
+      const item = btn.closest('.sl-acc__item');
+      if (!item) return;
+      const isOpen = item.getAttribute('data-open') === 'true';
+      const next = !isOpen;
+      item.setAttribute('data-open', next ? 'true' : 'false');
+      btn.setAttribute('aria-expanded', next ? 'true' : 'false');
+    });
+    root.dataset.slAccBound = '1';
+  });
+  /* === FIX v0.19.1 [F3] END === */
 })();
