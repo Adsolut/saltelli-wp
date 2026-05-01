@@ -1,0 +1,34 @@
+v0.19.0 Wave 3 PARALLEL AGENT TASK 7 — /blog/ archive editoriale
+
+COORDINATION
+1. Claim: if [ -f /tmp/saltelli-agents/task-07.lock ]; then echo TAKEN; exit 1; fi
+   echo "agent $$ $(date +%H:%M)" > /tmp/saltelli-agents/task-07.lock
+2. Files OK: home.php OR archive.php (verifica quale WP usa per /blog/), sections.css (markers WAVE3 TASK 7).
+3. NO-TOUCH: tokens.css, functions.php, style.css, page.php, single-*, taxonomy-*, altri lock.
+4. CSS scope: /* === WAVE3 TASK 7 (blog) BEGIN === */ ... /* === WAVE3 TASK 7 (blog) END === */
+5. Source JSX: saltelli-s2-blog-archive.jsx (LAYOUT SACRO)
+
+TASK
+Match JSX:
+- Hero archive: eyebrow "EDITORIALE · Saltelli" + h1 "Editoriale" Playfair gigante + lede italic + counter mono "X articoli · 12 categorie"
+- Category filter tabs (6-7 categorie, mono uppercase, hover bronze underline grow)
+- Featured post hero (1 article primo, layout 2-col 8fr/4fr)
+- Articles list grid 3-col desktop / 2-col tablet / 1-col mobile
+- Card: image 4:3, category mono 11px, titolo Playfair 22px, excerpt 16px, footer card mono
+- Card hover: image scale(1.03) 600ms quart-out + category bronze
+- Pagination editorial minimal "1 — 12 di 326"
+- Sidebar opzionale (verifica nel JSX): "Categorie" + "Autori" + "Newsletter inline"
+
+Schema: Blog + ItemList Article entries.
+
+HARD RULES
+- LAYOUT JSX SACRO
+- Smoke test SOLO http://localhost:8080/blog/
+- Fine: rm lock + segnala "Task 7 DONE"
+
+OUTPUT
+1. Branch feat/wave3-task-07 + push
+2. Report wave3/REPORT-task-07.md
+3. STOP.
+
+PARTI ORA.

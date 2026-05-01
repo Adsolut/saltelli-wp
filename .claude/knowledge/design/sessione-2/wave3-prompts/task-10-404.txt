@@ -1,0 +1,40 @@
+v0.19.0 Wave 3 PARALLEL AGENT TASK 10 — 404 editorial
+
+COORDINATION
+1. Claim: if [ -f /tmp/saltelli-agents/task-10.lock ]; then echo TAKEN; exit 1; fi
+   echo "agent $$ $(date +%H:%M)" > /tmp/saltelli-agents/task-10.lock
+2. Files OK: 404.php, sections.css (markers WAVE3 TASK 10).
+3. NO-TOUCH: tokens.css, functions.php, style.css, page.php, home.php, single-*, taxonomy-*, altri lock.
+4. CSS scope: /* === WAVE3 TASK 10 (404) BEGIN === */ ... /* === WAVE3 TASK 10 (404) END === */
+5. Source JSX: saltelli-s2-404.jsx (LAYOUT SACRO)
+
+TASK
+Match JSX:
+- Hero "errore quietato":
+  - Eyebrow mono "Errore 404 · Pagina non trovata"
+  - H1 grande Playfair "La pagina non esiste."
+  - Sub-headline italic "O forse era qui, e l'abbiamo spostata. Il diritto italiano è in continua evoluzione, anche le pagine."
+  - Drop-cap "L" sulla parola d'apertura
+- 3-section recovery:
+  1. "Cosa puoi fare" 3-card (Home / Search form / Contatti tel+WhatsApp)
+  2. "Forse cercavi una di queste 19 aree?" lista 5-7 più cliccate (riusa pattern .sl-area)
+  3. "Articoli recenti" 3 mini blog post cards
+- CTA finale "Prenota una consulenza gratuita →"
+
+Tone: NON drammatico, NON scherzoso. Editoriale serio caldo (audit CRO §13).
+
+Form search: aggiungi <label htmlFor="search-404"> nascosto a11y class="sr-only".
+
+Schema: WebPage + isPartOf homepage.
+
+HARD RULES
+- LAYOUT JSX SACRO
+- Smoke test: http://localhost:8080/pagina-non-esiste-test-404/ → HTTP 404 + markup .sl-404__*
+- Fine: rm lock + segnala "Task 10 DONE"
+
+OUTPUT
+1. Branch feat/wave3-task-10 + push
+2. Report wave3/REPORT-task-10.md
+3. STOP.
+
+PARTI ORA.
