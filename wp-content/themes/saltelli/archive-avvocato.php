@@ -47,7 +47,8 @@ $layout_team = saltelli_team_grid_layout();
                                     'alt'      => esc_attr(get_the_title($av) . ($ruolo ? ' · ' . $ruolo : '')),
                                 ]);
                             } elseif (is_array($foto) && !empty($foto['url'])) {
-                                echo '<img src="' . esc_url($foto['url']) . '" alt="' . esc_attr($foto['alt'] ?: get_the_title($av)) . '" loading="lazy" decoding="async">';
+                                /* IMPECCABLE v0.21.0 [perf-T2]: width/height esplicite (CLS prevention) */
+                                echo '<img src="' . esc_url($foto['url']) . '" alt="' . esc_attr($foto['alt'] ?: get_the_title($av)) . '" loading="lazy" decoding="async" width="600" height="800">';
                             } else {
                                 echo '<span class="sl-team__placeholder" aria-hidden="true"><span class="sl-mono">' . esc_html__('Ritratto · 3:4', 'saltelli') . '</span></span>';
                                 echo '<!-- TODO: replace with real Saltelli photo -->';

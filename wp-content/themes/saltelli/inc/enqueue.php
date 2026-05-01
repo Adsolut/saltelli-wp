@@ -2,12 +2,13 @@
 /**
  * Asset enqueue — CSS, JS, fonts.
  *
- * Style & Animation agent (SHIP MODE 24H, 2026-04-29):
- *  - CSS chain: tokens → base → components → sections
- *  - GSAP 3.12.5 + ScrollTrigger + SplitText + Lenis 1.1.13 da CDN, defer in footer
+ * v0.21.0 Performance Hardening (2026-05-01):
+ *  - CSS chain: tokens → base → components → logo → sections
+ *  - WOFF2 self-hosted in /assets/fonts/ (Latin subset, ~144KB total)
+ *  - Font preload: Playfair Display variable + DM Sans variable (LCP critical)
+ *  - GSAP 3.12.5 + ScrollTrigger + SplitText + Lenis 1.1.13 da CDN cdnjs
+ *    + SRI sha384 integrity + crossorigin="anonymous" via script_loader_tag filter
  *  - main.js dipende da gsap-core e lenis
- *  - SRI hash: TODO (hardening fase post-demo)
- *  - WOFF2 self-hosted: TODO Duccio (fallback Google Fonts via @import in base.css)
  *
  * @package Saltelli
  */
@@ -107,19 +108,42 @@ function saltelli_enqueue_assets() {
         ['in_footer' => true, 'strategy' => 'defer']
     );
 
-    // ------------------------------------------------------------------
-    // TODO Style & Animation agent: enqueue Playfair Display + DM Sans
-    // come WOFF2 self-hosted in assets/fonts/, con preload sui 2 weight
-    // critici e font-display: swap. Per ora fallback a Google Fonts via
-    // @import dentro base.css.
-    //
-    // Esempio futuro (commentato):
-    // add_action('wp_head', function () {
-    //     echo '<link rel="preload" href="' . SALTELLI_THEME_URI . '/assets/fonts/playfair-display-700.woff2" as="font" type="font/woff2" crossorigin>';
-    //     echo '<link rel="preload" href="' . SALTELLI_THEME_URI . '/assets/fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin>';
-    // }, 2);
-    // ------------------------------------------------------------------
 }
+
+/* === IMPECCABLE v0.21.0 [perf-T1] Font preload — LCP critical paths ===
+   Playfair Display variable (H1 hero italic) + DM Sans variable (body lede).
+   Preload via wp_head priority 2 (after charset/viewport, before CSS chain).
+   crossorigin="anonymous" obbligatorio per WOFF2 same-origin. */
+add_action('wp_head', function () {
+    $base = SALTELLI_THEME_URI . '/assets/fonts';
+    $ver  = SALTELLI_THEME_VERSION;
+    echo '<link rel="preload" href="' . esc_url($base . '/playfair-display-variable.woff2?v=' . $ver) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
+    echo '<link rel="preload" href="' . esc_url($base . '/dm-sans-variable.woff2?v=' . $ver) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
+}, 2);
+
+/* === IMPECCABLE v0.21.0 [perf-T3] SRI sha384 + crossorigin per CDN script ===
+   GSAP/ScrollTrigger/SplitText (cdnjs gsap 3.12.5) + Lenis (cdnjs 1.1.13).
+   Hash generati con: curl -sL <url> | openssl dgst -sha384 -binary | openssl base64 -A
+   Update mandatory se la version dei file cambia (mismatch = browser blocca). */
+add_filter('script_loader_tag', function ($tag, $handle) {
+    $sri = [
+        'saltelli-gsap'                => 'sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt',
+        'saltelli-gsap-scrolltrigger'  => 'sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d',
+        'saltelli-gsap-splittext'      => 'sha384-ZSs6LKr2GoUPDyHrN+rCQgyHL1yUyok5xMniSrgeRG7rUvA6vTmxronM1eZOfjgz',
+        'saltelli-lenis'               => 'sha384-5MXQT3yrGpx6/FO6Z5JlMsn1xsN/OggV+b88W2CfpNqmvPfmv7JW/O8x78GzptfE',
+    ];
+    if (!isset($sri[$handle])) {
+        return $tag;
+    }
+    $integrity = $sri[$handle];
+    // Inietta integrity + crossorigin senza rompere l'attribute order esistente.
+    return preg_replace(
+        '/<script /',
+        '<script integrity="' . esc_attr($integrity) . '" crossorigin="anonymous" referrerpolicy="no-referrer" ',
+        $tag,
+        1
+    );
+}, 10, 2);
 
 /**
  * Editor styles — parità visiva nel Block Editor.

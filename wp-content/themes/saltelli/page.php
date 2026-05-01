@@ -130,7 +130,8 @@ while (have_posts()) :
                                                     'alt'      => esc_attr(get_the_title($av) . ($ruolo_av ? ' · ' . $ruolo_av : '')),
                                                 ]);
                                             } elseif (is_array($foto_av) && !empty($foto_av['url'])) {
-                                                echo '<img src="' . esc_url($foto_av['url']) . '" alt="' . esc_attr($foto_av['alt'] ?: get_the_title($av)) . '" loading="lazy" decoding="async">';
+                                                /* IMPECCABLE v0.21.0 [perf-T2]: width/height esplicite (CLS prevention) */
+                                                echo '<img src="' . esc_url($foto_av['url']) . '" alt="' . esc_attr($foto_av['alt'] ?: get_the_title($av)) . '" loading="lazy" decoding="async" width="600" height="800">';
                                             } else {
                                                 echo '<span class="sl-chi-siamo__team-placeholder" aria-hidden="true"><span class="sl-mono">' . esc_html__('Ritratto · 3:4', 'saltelli') . '</span></span>';
                                             }

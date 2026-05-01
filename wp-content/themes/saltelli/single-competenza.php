@@ -95,7 +95,8 @@ while (have_posts()) :
                                             'alt'      => esc_attr(get_the_title($av)),
                                         ]);
                                     } elseif (is_array($foto) && !empty($foto['url'])) {
-                                        echo '<img src="' . esc_url($foto['url']) . '" alt="' . esc_attr($foto['alt'] ?: get_the_title($av)) . '" loading="lazy" decoding="async">';
+                                        /* IMPECCABLE v0.21.0 [perf-T2]: width/height esplicite (CLS prevention) */
+                                        echo '<img src="' . esc_url($foto['url']) . '" alt="' . esc_attr($foto['alt'] ?: get_the_title($av)) . '" loading="lazy" decoding="async" width="600" height="600">';
                                     } else {
                                         echo '<span class="sl-team__placeholder" aria-hidden="true"></span>';
                                     }
