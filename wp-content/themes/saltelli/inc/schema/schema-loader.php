@@ -38,6 +38,9 @@ function saltelli_emit_schema() {
         }
     } elseif (is_singular('post')) {
         include $dir . '/partial-article.php';
+    } elseif (is_page('contatti')) {
+        // WAVE3 TASK 6 — ContactPage scoped solo a /contatti/.
+        include $dir . '/partial-contactpage.php';
     }
 
     // 3) Breadcrumb — ovunque tranne homepage.
