@@ -3337,3 +3337,524 @@ body.single-post .entry-content > p:first-of-type::first-letter {
         transition: opacity 200ms linear;
     }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   /chi-siamo/ — v0.19.0 Sessione 2
+   Layout asimmetrico editoriale, drop-cap U, plate I, timeline 1999→2026.
+   ═══════════════════════════════════════════════════════════════════ */
+.sl-chi-siamo { background: var(--background); }
+
+.sl-chi-siamo__hero {
+    padding: clamp(80px, 10vw, 120px) 0 clamp(56px, 7vw, 80px);
+}
+.sl-chi-siamo__hero-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 64px;
+    align-items: end;
+}
+.sl-chi-siamo__hero-aside { display: flex; flex-direction: column; gap: 48px; }
+.sl-chi-siamo__hero-meta {
+    line-height: 2;
+    color: var(--text-muted);
+    margin: 0;
+}
+.sl-chi-siamo__h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(56px, 7vw, 104px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin: 0;
+    color: var(--primary);
+}
+.sl-chi-siamo__h1 em {
+    font-style: italic;
+    color: var(--text-muted);
+}
+.sl-chi-siamo__h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(40px, 4.5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+    margin: 0 0 32px;
+}
+.sl-chi-siamo__h2 em { font-style: italic; color: var(--text-muted); }
+
+.sl-chi-siamo__lede {
+    padding: 0 0 clamp(80px, 10vw, 128px);
+}
+.sl-chi-siamo__lede-grid {
+    display: grid;
+    grid-template-columns: 3fr 7fr 2fr;
+    gap: 64px;
+}
+.sl-chi-siamo__prose {
+    font-size: 19px;
+    line-height: 1.75;
+    color: var(--text);
+    max-width: 62ch;
+}
+.sl-chi-siamo__prose p { margin: 0 0 24px; }
+.sl-chi-siamo__prose p:last-child { margin-bottom: 0; }
+.sl-chi-siamo__prose--dropcap p:first-of-type { text-indent: 0; }
+.sl-chi-siamo__dropcap {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 96px;
+    float: left;
+    line-height: 0.85;
+    margin: 10px 18px 0 0;
+    color: var(--primary);
+}
+
+.sl-chi-siamo__plate { padding: 0 0 clamp(80px, 10vw, 128px); }
+.sl-chi-siamo__plate-frame {
+    height: clamp(360px, 50vw, 560px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+.sl-chi-siamo__plate-frame::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg,
+        var(--border) 0%,
+        color-mix(in srgb, var(--text-muted) 75%, transparent) 60%,
+        var(--text-muted) 100%);
+    opacity: 0.55;
+}
+.sl-chi-siamo__plate-tl,
+.sl-chi-siamo__plate-br {
+    position: absolute;
+    color: var(--background);
+}
+.sl-chi-siamo__plate-tl { top: 24px; left: 32px; }
+.sl-chi-siamo__plate-br { bottom: 24px; right: 32px; }
+.sl-chi-siamo__plate-caption {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+.sl-chi-siamo__plate-line1 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(24px, 3vw, 40px);
+    color: var(--background);
+}
+.sl-chi-siamo__plate-line2 { color: rgba(255, 255, 255, 0.85); }
+
+.sl-chi-siamo__founding { padding: 0 0 clamp(80px, 10vw, 128px); }
+.sl-chi-siamo__founding-grid {
+    display: grid;
+    grid-template-columns: 3fr 7fr 2fr;
+    gap: 64px;
+}
+.sl-chi-siamo__founding-mark { display: flex; flex-direction: column; gap: 16px; }
+.sl-chi-siamo__founding-year {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(48px, 6vw, 64px);
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.sl-chi-siamo__team-mini { padding: 0 0 clamp(80px, 10vw, 128px); }
+.sl-chi-siamo__team-head {
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+    gap: 64px;
+    margin-bottom: 64px;
+}
+.sl-chi-siamo__team-grid {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+}
+.sl-chi-siamo__team-card { margin: 0; }
+.sl-chi-siamo__team-card--offset { margin-top: 64px; }
+.sl-chi-siamo__team-link { display: grid; gap: 12px; color: inherit; text-decoration: none; }
+.sl-chi-siamo__team-portrait {
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(135deg,
+        color-mix(in srgb, var(--text-muted) 35%, var(--surface)) 0%,
+        var(--text-muted) 100%);
+    border: 1px solid var(--border);
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+    filter: grayscale(1) contrast(1.05);
+    transition: filter 600ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+.sl-chi-siamo__team-link:hover .sl-chi-siamo__team-portrait { filter: grayscale(0); }
+.sl-chi-siamo__team-portrait img,
+.sl-chi-siamo__team-portrait .sl-chi-siamo__team-placeholder {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+}
+.sl-chi-siamo__team-placeholder {
+    display: grid;
+    place-items: center;
+    color: rgba(255,255,255,0.7);
+}
+.sl-chi-siamo__team-role { font-size: 10px; }
+.sl-chi-siamo__team-name {
+    font-family: var(--font-display);
+    font-size: 26px;
+    line-height: 1.1;
+    color: var(--primary);
+    letter-spacing: -0.02em;
+}
+.sl-chi-siamo__team-spec {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.sl-chi-siamo__principles {
+    background: var(--surface);
+    padding: clamp(80px, 10vw, 128px) 0;
+}
+.sl-chi-siamo__principles-grid {
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+    gap: 64px;
+}
+.sl-chi-siamo__principles-list {
+    list-style: none; margin: 0; padding: 0;
+    display: grid;
+    gap: 0;
+}
+.sl-chi-siamo__principle {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+}
+.sl-chi-siamo__principle-t {
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: var(--primary);
+    margin: 0 0 12px;
+    letter-spacing: -0.015em;
+}
+.sl-chi-siamo__principle-d {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text);
+    max-width: 60ch;
+    margin: 0;
+}
+
+.sl-chi-siamo__timeline { padding: clamp(80px, 10vw, 128px) 0; }
+.sl-chi-siamo__timeline-head {
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+    gap: 64px;
+    margin-bottom: 64px;
+}
+.sl-chi-siamo__timeline-list {
+    list-style: none; margin: 0;
+    padding-left: 25%;
+}
+.sl-chi-siamo__timeline-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 48px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+    opacity: 0.92;
+}
+.sl-chi-siamo__timeline-row.is-current { opacity: 1; }
+.sl-chi-siamo__timeline-year {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 36px;
+    color: var(--primary);
+    line-height: 1;
+    letter-spacing: -0.015em;
+}
+.sl-chi-siamo__timeline-row.is-current .sl-chi-siamo__timeline-year { color: var(--accent); }
+.sl-chi-siamo__timeline-t {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--primary);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+}
+.sl-chi-siamo__timeline-d {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text);
+    max-width: 62ch;
+    margin: 0;
+}
+
+.sl-chi-siamo__cta { padding: clamp(80px, 10vw, 96px) 0 clamp(120px, 14vw, 160px); }
+.sl-chi-siamo__cta-grid {
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+    gap: 64px;
+}
+.sl-chi-siamo__cta-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(56px, 6.5vw, 96px);
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+    margin: 0 0 48px;
+    color: var(--primary);
+}
+.sl-chi-siamo__cta-title em { font-style: italic; color: var(--accent); }
+.sl-chi-siamo__cta-lede {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--text);
+    line-height: 1.5;
+    max-width: 44ch;
+    margin: 0 0 48px;
+}
+
+@media (max-width: 1023px) {
+    .sl-chi-siamo__hero-grid,
+    .sl-chi-siamo__lede-grid,
+    .sl-chi-siamo__founding-grid,
+    .sl-chi-siamo__principles-grid,
+    .sl-chi-siamo__team-head,
+    .sl-chi-siamo__timeline-head,
+    .sl-chi-siamo__cta-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .sl-chi-siamo__lede-grid { grid-template-columns: 1fr; }
+    .sl-chi-siamo__team-grid { grid-template-columns: repeat(2, 1fr); }
+    .sl-chi-siamo__team-card--offset { margin-top: 0; }
+    .sl-chi-siamo__timeline-list { padding-left: 0; }
+    .sl-chi-siamo__principle { grid-template-columns: 60px 1fr; gap: 16px; }
+}
+@media (max-width: 600px) {
+    .sl-chi-siamo__team-grid { grid-template-columns: 1fr; }
+    .sl-chi-siamo__h1 { font-size: clamp(44px, 11vw, 72px); }
+    .sl-chi-siamo__dropcap { font-size: 72px; margin-right: 12px; }
+    .sl-chi-siamo__timeline-row { grid-template-columns: 80px 1fr; gap: 24px; }
+    .sl-chi-siamo__timeline-year { font-size: 28px; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   single-avvocato — v0.19.0 Sessione 2 alignment
+   Casi rappresentativi + drop-cap bio. NO modifica aspect ratio
+   portrait (FIX F3 v0.8.1 mantiene 3:4 con motivazione documentata).
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Drop-cap su bio prose — italic Playfair, prima lettera primo paragrafo. */
+.sl-attorney__bio-prose > p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 96px;
+    float: left;
+    line-height: 0.85;
+    margin: 10px 16px 0 0;
+    color: var(--primary);
+}
+
+/* Casi rappresentativi attorney — match JSX spec (id mono | desc italic | outcome bronze). */
+.sl-attorney__casi {
+    padding: clamp(64px, 8vw, 96px) 0;
+    background: var(--background);
+}
+.sl-attorney__casi-list {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+}
+.sl-attorney__casi-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 160px;
+    gap: 32px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+}
+.sl-attorney__casi-id {
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+.sl-attorney__casi-desc {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--primary);
+    line-height: 1.4;
+    margin: 0;
+    max-width: 56ch;
+}
+.sl-attorney__casi-outcome {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--accent);
+    text-align: right;
+    letter-spacing: -0.01em;
+}
+@media (max-width: 1023px) {
+    .sl-attorney__casi-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    .sl-attorney__casi-outcome { text-align: left; }
+    .sl-attorney__bio-prose > p:first-of-type::first-letter {
+        font-size: 72px;
+        margin-right: 12px;
+    }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   single-competenza tier-1 — v0.19.0 Sessione 2 alignment
+   Answer capsule eyebrow + border accent. Articoli grid 3-col.
+   Casi outcome bronze gigante (3-col) per tier-1.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.sl-competenza__answer-wrap {
+    margin: 32px 0;
+    padding: 32px 0;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    max-width: 60ch;
+}
+@media (min-width: 1024px) {
+    .sl-competenza__answer-wrap { margin-left: 20%; }
+}
+.sl-competenza__answer-eyebrow {
+    margin-bottom: 16px;
+    color: var(--accent);
+}
+.sl-competenza__answer {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--primary);
+    letter-spacing: -0.005em;
+    margin: 0;
+}
+
+/* Casi tier-1: 3-col grid con outcome bronze gigante. */
+.sl-competenza--tier-1 .sl-competenza__casi .sl-cases__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-top: 32px;
+}
+.sl-competenza--tier-1 .sl-competenza__casi .sl-cases__row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 24px 0 0;
+    border-top: 1px solid var(--accent);
+    border-bottom: 0;
+    align-items: start;
+}
+.sl-competenza--tier-1 .sl-competenza__casi .sl-cases__outcome {
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: var(--accent);
+    margin-top: 8px;
+}
+@media (min-width: 1024px) {
+    .sl-competenza--tier-1 .sl-competenza__casi .sl-cases__list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .sl-competenza--tier-1 .sl-competenza__casi .sl-cases__row {
+        grid-template-columns: 1fr;
+    }
+    .sl-competenza--tier-1 .sl-competenza__casi .sl-cases__desc { font-size: 16px; }
+}
+
+/* Articoli correlati: 3-col grid editorial cards. */
+.sl-competenza__articoli .sl-articles {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+.sl-competenza__articoli .sl-articles__item {
+    border-top: 1px solid var(--border);
+    padding: 24px 0 0;
+}
+.sl-competenza__articoli .sl-articles__item a {
+    color: inherit;
+    text-decoration: none;
+    display: grid;
+    gap: 16px;
+}
+.sl-competenza__articoli .sl-articles__title {
+    font-family: var(--font-display);
+    font-size: 26px;
+    color: var(--primary);
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    display: block;
+}
+@media (min-width: 1024px) {
+    .sl-competenza__articoli .sl-articles {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Drop-cap editoriale su tier-1 prose (first letter, first paragraph) */
+.sl-competenza--tier-1 .sl-competenza__prose > p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 96px;
+    float: left;
+    line-height: 0.85;
+    margin: 10px 16px 0 0;
+    color: var(--primary);
+}
+@media (max-width: 1023px) {
+    .sl-competenza--tier-1 .sl-competenza__prose > p:first-of-type::first-letter {
+        font-size: 72px;
+        margin-right: 12px;
+    }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   SESSIONE 2 WAVE 3 — Slots prenotati per 6 agenti paralleli
+   Ogni agente scriverà il suo blocco TRA i marker BEGIN/END.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* === WAVE3 TASK 5 (casi) BEGIN === */
+/* === WAVE3 TASK 5 (casi) END === */
+
+/* === WAVE3 TASK 6 (contatti) BEGIN === */
+/* === WAVE3 TASK 6 (contatti) END === */
+
+/* === WAVE3 TASK 7 (blog) BEGIN === */
+/* === WAVE3 TASK 7 (blog) END === */
+
+/* === WAVE3 TASK 8 (taxonomy) BEGIN === */
+/* === WAVE3 TASK 8 (taxonomy) END === */
+
+/* === WAVE3 TASK 9 (glossario) BEGIN === */
+/* === WAVE3 TASK 9 (glossario) END === */
+
+/* === WAVE3 TASK 10 (404) BEGIN === */
+/* === WAVE3 TASK 10 (404) END === */
+

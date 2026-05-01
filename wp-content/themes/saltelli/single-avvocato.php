@@ -168,6 +168,35 @@ while (have_posts()) :
         <?php endif; ?>
 
         <?php
+        // v0.19.0 — Casi rappresentativi per attorney (Sessione 2 single-avvocato spec)
+        $sl_atty_slug  = get_post_field('post_name', $post_id);
+        $sl_atty_casi  = saltelli_attorney_cases($sl_atty_slug);
+        if (!empty($sl_atty_casi)) :
+            $sl_atty_casi_count = count($sl_atty_casi);
+            $sl_count_label = $sl_atty_casi_count === 3 ? __('Tre casi rappresentativi.', 'saltelli')
+                            : ($sl_atty_casi_count === 2 ? __('Due casi rappresentativi.', 'saltelli')
+                            : __('Un caso rappresentativo.', 'saltelli'));
+            ?>
+            <section class="sl-attorney__casi" aria-labelledby="atty-casi-h">
+                <div class="sl-container">
+                    <div class="sl-mono">§ <?php esc_html_e('Vittorie recenti', 'saltelli'); ?></div>
+                    <h2 class="sl-section-title" id="atty-casi-h"><?php echo esc_html($sl_count_label); ?></h2>
+                    <ol class="sl-attorney__casi-list" role="list">
+                        <?php foreach ($sl_atty_casi as $case) : ?>
+                            <li class="sl-attorney__casi-row">
+                                <span class="sl-mono sl-attorney__casi-id"><?php echo esc_html($case['id']); ?></span>
+                                <p class="sl-attorney__casi-desc"><?php echo esc_html($case['desc']); ?></p>
+                                <span class="sl-attorney__casi-outcome">
+                                    <?php echo esc_html($case['outcome']); ?>
+                                </span>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                </div>
+            </section>
+        <?php endif; ?>
+
+        <?php
         // Articoli del blog correlati: post che hanno una categoria con stesso nome di una delle aree dell'avvocato.
         if (!empty($aree)) :
             $ids = is_array($aree) ? $aree : [$aree];

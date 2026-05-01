@@ -8,8 +8,217 @@ get_header();
 
 while (have_posts()) :
     the_post();
+    $sl_chi_siamo = is_page('chi-siamo');
     ?>
-    <article <?php post_class('sl-page'); ?>>
+    <article <?php post_class('sl-page' . ($sl_chi_siamo ? ' sl-chi-siamo' : '')); ?>>
+
+        <?php if ($sl_chi_siamo) :
+            $sl_lawyers_chi = get_posts([
+                'post_type'   => 'avvocato',
+                'numberposts' => 4,
+                'orderby'     => ['menu_order' => 'ASC', 'date' => 'ASC'],
+            ]);
+            $sl_timeline = [
+                ['y' => '1999', 't' => __('Fondazione', 'saltelli'),         'd' => __('Emiliano Saltelli apre lo studio in Via Vannella Gaetani, focalizzato sul contenzioso tributario.', 'saltelli')],
+                ['y' => '2007', 't' => __('Ingresso di Fabiana', 'saltelli'),'d' => __('Si aggiunge la prima associate — area diritto del lavoro.', 'saltelli')],
+                ['y' => '2014', 't' => __('Apertura LGBTQ+', 'saltelli'),    'd' => __('Antonia Battista inaugura una pratica dedicata, prima a Napoli sud.', 'saltelli')],
+                ['y' => '2019', 't' => __("Vent'anni", 'saltelli'),          'd' => __("Lo studio passa da 2 a 4 professionisti stabili. Atelier a tutti gli effetti.", 'saltelli')],
+                ['y' => '2024', 't' => __('Cassazione + AGE', 'saltelli'),   'd' => __('Annullamento cartella €240k. Conferma in Cassazione su licenziamento illegittimo.', 'saltelli')],
+                ['y' => '2026', 't' => __('Oggi', 'saltelli'),               'd' => __('19 aree presidiate, 4 professionisti, un solo atelier.', 'saltelli')],
+            ];
+            ?>
+
+            <section class="sl-chi-siamo__hero" aria-labelledby="chi-siamo-h1">
+                <div class="sl-container sl-chi-siamo__hero-grid">
+                    <aside class="sl-chi-siamo__hero-aside">
+                        <div class="sl-mono sl-chi-siamo__eyebrow"><?php esc_html_e('§ Lo studio · Chi siamo', 'saltelli'); ?></div>
+                        <p class="sl-mono sl-chi-siamo__hero-meta">
+                            <?php esc_html_e('Un atelier', 'saltelli'); ?><br>
+                            <?php esc_html_e('di quattro avvocati', 'saltelli'); ?><br>
+                            <?php esc_html_e('in Via Vannella Gaetani 27', 'saltelli'); ?><br>
+                            <?php esc_html_e('Chiaia · Napoli', 'saltelli'); ?><br>
+                            <?php esc_html_e('Dal 1999', 'saltelli'); ?>
+                        </p>
+                    </aside>
+                    <h1 class="sl-chi-siamo__h1" id="chi-siamo-h1">
+                        <?php esc_html_e('Un atelier', 'saltelli'); ?><br>
+                        <?php esc_html_e('di quattro', 'saltelli'); ?><br>
+                        <em><?php esc_html_e('professionisti.', 'saltelli'); ?></em>
+                    </h1>
+                </div>
+            </section>
+
+            <section class="sl-chi-siamo__lede" aria-label="<?php esc_attr_e('Lede editoriale', 'saltelli'); ?>">
+                <div class="sl-container sl-chi-siamo__lede-grid">
+                    <div class="sl-mono">§ 01 — <?php esc_html_e('Lede', 'saltelli'); ?></div>
+                    <div class="sl-chi-siamo__prose sl-chi-siamo__prose--dropcap">
+                        <p>
+                            <span class="sl-chi-siamo__dropcap" aria-hidden="true">U</span>n atelier di quattro professionisti che da oltre vent'anni accompagna famiglie e imprese di Napoli attraverso le materie di cui si occupa: il diritto tributario di Emiliano, il diritto del lavoro di Fabiana, la tutela LGBTQ+ in materia di famiglia di Antonia, il condominiale e immobiliare di Stefano.
+                        </p>
+                        <p>
+                            <?php esc_html_e("Crediamo che il diritto sia, prima di tutto, un'arte di ascolto. Le carte vengono dopo. Per questo non offriamo pacchetti né formule: ogni cliente è una storia, e ogni storia merita il tempo di essere capita.", 'saltelli'); ?>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sl-chi-siamo__plate" aria-hidden="true">
+                <div class="sl-container">
+                    <div class="sl-chi-siamo__plate-frame">
+                        <div class="sl-mono sl-chi-siamo__plate-tl"><?php esc_html_e('Plate I · Facciata studio', 'saltelli'); ?></div>
+                        <div class="sl-mono sl-chi-siamo__plate-br"><?php esc_html_e('Foto B/N · 1440 × 560 · placeholder', 'saltelli'); ?></div>
+                        <div class="sl-chi-siamo__plate-caption">
+                            <div class="sl-chi-siamo__plate-line1"><?php esc_html_e('Via Vannella Gaetani, 27', 'saltelli'); ?></div>
+                            <div class="sl-mono sl-chi-siamo__plate-line2"><?php esc_html_e('Palazzo nobiliare · Chiaia · Napoli', 'saltelli'); ?></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sl-chi-siamo__founding" aria-labelledby="chi-siamo-founding-h">
+                <div class="sl-container sl-chi-siamo__founding-grid">
+                    <aside class="sl-chi-siamo__founding-mark">
+                        <div class="sl-mono">§ 02 — 1999</div>
+                        <div class="sl-chi-siamo__founding-year">1999.</div>
+                    </aside>
+                    <div>
+                        <h2 class="sl-section-title sl-chi-siamo__h2" id="chi-siamo-founding-h">
+                            <?php esc_html_e('Un atelier, in senso napoletano.', 'saltelli'); ?>
+                        </h2>
+                        <div class="sl-chi-siamo__prose">
+                            <?php
+                            // Use post_content if Step D editorial migration populated it; otherwise emit hardcoded prose.
+                            if (get_the_content() !== '') {
+                                the_content();
+                            } else {
+                                ?>
+                                <p><?php esc_html_e("Lo Studio Saltelli & Partners nasce per iniziativa di Emiliano Saltelli, giovane tributarista formatosi alla Federico II, che apre una stanza al secondo piano di un palazzo nobiliare a Chiaia.", 'saltelli'); ?></p>
+                                <p><?php esc_html_e('Nel quarto di secolo successivo, lo Studio è cresciuto come si cresce a Napoli — per accumulazione paziente, una pratica alla volta, un avvocato alla volta — fino a diventare oggi un atelier di quattro professionisti.', 'saltelli'); ?></p>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <?php if (!empty($sl_lawyers_chi)) : ?>
+                <section class="sl-chi-siamo__team-mini" aria-labelledby="chi-siamo-team-h">
+                    <div class="sl-container">
+                        <header class="sl-chi-siamo__team-head">
+                            <div class="sl-mono">§ 03 — <?php esc_html_e('I nostri quattro', 'saltelli'); ?></div>
+                            <h2 class="sl-section-title sl-chi-siamo__h2" id="chi-siamo-team-h">
+                                <?php esc_html_e('Quattro avvocati,', 'saltelli'); ?><br>
+                                <em><?php esc_html_e('diciannove aree.', 'saltelli'); ?></em>
+                            </h2>
+                        </header>
+                        <ul class="sl-chi-siamo__team-grid" role="list">
+                            <?php foreach ($sl_lawyers_chi as $idx => $av) :
+                                $ruolo_av = (string) saltelli_field('ruolo_breve', $av->ID, '');
+                                $specs_av = saltelli_get_attorney_specializations($av->ID);
+                                $foto_av  = saltelli_field('foto_ritratto', $av->ID);
+                                ?>
+                                <li class="sl-chi-siamo__team-card<?php echo ($idx % 2 === 1) ? ' sl-chi-siamo__team-card--offset' : ''; ?>">
+                                    <a class="sl-chi-siamo__team-link" href="<?php echo esc_url(get_permalink($av)); ?>">
+                                        <span class="sl-chi-siamo__team-portrait">
+                                            <?php
+                                            if (has_post_thumbnail($av->ID)) {
+                                                echo get_the_post_thumbnail($av->ID, 'saltelli-attorney-square', [
+                                                    'loading'  => 'lazy',
+                                                    'decoding' => 'async',
+                                                    'alt'      => esc_attr(get_the_title($av) . ($ruolo_av ? ' · ' . $ruolo_av : '')),
+                                                ]);
+                                            } elseif (is_array($foto_av) && !empty($foto_av['url'])) {
+                                                echo '<img src="' . esc_url($foto_av['url']) . '" alt="' . esc_attr($foto_av['alt'] ?: get_the_title($av)) . '" loading="lazy" decoding="async">';
+                                            } else {
+                                                echo '<span class="sl-chi-siamo__team-placeholder" aria-hidden="true"><span class="sl-mono">' . esc_html__('Ritratto · 3:4', 'saltelli') . '</span></span>';
+                                            }
+                                            ?>
+                                        </span>
+                                        <?php if ($ruolo_av) : ?>
+                                            <span class="sl-mono sl-chi-siamo__team-role"><?php echo esc_html($ruolo_av); ?></span>
+                                        <?php endif; ?>
+                                        <span class="sl-chi-siamo__team-name"><?php echo esc_html(get_the_title($av)); ?></span>
+                                        <?php if (!empty($specs_av)) : ?>
+                                            <span class="sl-chi-siamo__team-spec"><?php echo esc_html(implode(' · ', array_slice($specs_av, 0, 3))); ?></span>
+                                        <?php endif; ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </section>
+            <?php endif; ?>
+
+            <section class="sl-chi-siamo__principles" aria-labelledby="chi-siamo-princ-h">
+                <div class="sl-container sl-chi-siamo__principles-grid">
+                    <div class="sl-mono">§ 04 — <?php esc_html_e('Come lavoriamo', 'saltelli'); ?></div>
+                    <div>
+                        <h2 class="sl-section-title sl-chi-siamo__h2" id="chi-siamo-princ-h">
+                            <?php esc_html_e('Tre', 'saltelli'); ?> <em><?php esc_html_e('principi.', 'saltelli'); ?></em>
+                        </h2>
+                        <ol class="sl-chi-siamo__principles-list" role="list">
+                            <?php
+                            $sl_principles = [
+                                ['n' => '01', 't' => __('Ascoltiamo prima', 'saltelli'),     'd' => __("Il primo incontro è gratuito e dura il tempo necessario. Capire la storia viene sempre prima delle carte.", 'saltelli')],
+                                ['n' => '02', 't' => __("Lavoriamo in atelier", 'saltelli'), 'd' => __("Ogni pratica è seguita personalmente da uno dei quattro avvocati. Niente call center, niente passaggi.", 'saltelli')],
+                                ['n' => '03', 't' => __('Diciamo la verità', 'saltelli'),    'd' => __("Anche quando significa sconsigliare un'azione legale. La nostra reputazione vale più di un mandato.", 'saltelli')],
+                            ];
+                            foreach ($sl_principles as $p) : ?>
+                                <li class="sl-chi-siamo__principle">
+                                    <span class="sl-mono sl-chi-siamo__principle-n"><?php echo esc_html($p['n']); ?></span>
+                                    <div class="sl-chi-siamo__principle-body">
+                                        <h3 class="sl-chi-siamo__principle-t"><?php echo esc_html($p['t']); ?></h3>
+                                        <p class="sl-chi-siamo__principle-d"><?php echo esc_html($p['d']); ?></p>
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sl-chi-siamo__timeline" aria-labelledby="chi-siamo-time-h">
+                <div class="sl-container">
+                    <header class="sl-chi-siamo__timeline-head">
+                        <div class="sl-mono">§ 05 — <?php esc_html_e('Cronologia', 'saltelli'); ?></div>
+                        <h2 class="sl-section-title sl-chi-siamo__h2" id="chi-siamo-time-h">1999 → 2026.</h2>
+                    </header>
+                    <ol class="sl-chi-siamo__timeline-list" role="list">
+                        <?php $tl_count = count($sl_timeline); foreach ($sl_timeline as $tl_i => $ev) :
+                            $is_last = ($tl_i === $tl_count - 1); ?>
+                            <li class="sl-chi-siamo__timeline-row<?php echo $is_last ? ' is-current' : ''; ?>">
+                                <span class="sl-chi-siamo__timeline-year"><?php echo esc_html($ev['y']); ?></span>
+                                <div class="sl-chi-siamo__timeline-body">
+                                    <h3 class="sl-chi-siamo__timeline-t"><?php echo esc_html($ev['t']); ?></h3>
+                                    <p class="sl-chi-siamo__timeline-d"><?php echo esc_html($ev['d']); ?></p>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="sl-chi-siamo__cta" aria-labelledby="chi-siamo-cta-h">
+                <div class="sl-container sl-chi-siamo__cta-grid">
+                    <div class="sl-mono">§ 06 — <?php esc_html_e('Primo incontro', 'saltelli'); ?></div>
+                    <div>
+                        <h2 class="sl-chi-siamo__cta-title" id="chi-siamo-cta-h">
+                            <?php esc_html_e('Prenota', 'saltelli'); ?><br>
+                            <em><?php esc_html_e('una consulenza', 'saltelli'); ?><br><?php esc_html_e('gratuita.', 'saltelli'); ?></em>
+                        </h2>
+                        <p class="sl-chi-siamo__cta-lede">
+                            <?php esc_html_e('Il primo incontro è gratuito e dura il tempo necessario. Riceviamo solo su appuntamento.', 'saltelli'); ?>
+                        </p>
+                        <a class="sl-btn sl-btn--primary" href="<?php echo esc_url(home_url('/contatti/')); ?>">
+                            <span><?php esc_html_e('Prenota un primo incontro', 'saltelli'); ?></span>
+                            <span class="arrow" aria-hidden="true">→</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        <?php else : ?>
 
         <header class="sl-page__hero">
             <div class="sl-container">
@@ -165,6 +374,8 @@ while (have_posts()) :
                 </div>
             </section>
         <?php endif; endif; ?>
+
+        <?php endif; // sl_chi_siamo ?>
 
     </article>
     <?php

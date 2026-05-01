@@ -423,10 +423,10 @@ function saltelli_attorney_linkedin($slug) {
  */
 function saltelli_header_menu_fallback() {
     $items = [
-        ['Studio',     '/lo-studio/'],
+        ['Studio',     '/chi-siamo/'],
         ['Avvocati',   '/avvocati/'],
         ['Competenze', '/competenze/'],
-        ['Casi',       '/#casi'],
+        ['Casi',       '/casi/'],
         ['Editoriale', '/blog/'],
         ['Contatti',   '/contatti/'],
     ];
@@ -442,9 +442,9 @@ function saltelli_header_menu_fallback() {
  */
 function saltelli_footer_studio_fallback() {
     $items = [
-        ['Lo studio', '/lo-studio/'],
+        ['Lo studio', '/chi-siamo/'],
         ['Avvocati',  '/avvocati/'],
-        ['Casi',      '/#casi'],
+        ['Casi',      '/casi/'],
         ['Editoriale','/blog/'],
         ['Contatti',  '/contatti/'],
     ];
@@ -598,6 +598,58 @@ function saltelli_homepage_cases() {
         ['identifier' => 'Tribunale di Napoli · 2023', 'descrizione' => 'Primo riconoscimento in Campania di trascrizione integrale di nascita di minore con due madri.',                                  'outcome' => 'Riconoscimento'],
         ['identifier' => "Corte d'Appello · 2023",     'descrizione' => "Riforma di sentenza di primo grado in materia di accertamento sintetico, con riduzione dell'80% del dovuto.",                     'outcome' => 'Riforma'],
     ];
+}
+
+/**
+ * Lista estesa casi per pagina /casi/ (10 casi v0.19.0).
+ * Match JSX `saltelli-s2-casi.jsx` data set. Categoria filter:
+ * Privati / Imprese / Contenzioso / Altri.
+ * Featured = primo caso simbolo (€240k AGE Riscossione).
+ *
+ * @return array<int, array{id:string, cat:string, outcome:string, lbl:string, desc:string, featured?:bool}>
+ */
+function saltelli_all_cases() {
+    return [
+        ['id' => 'vs. AGE Riscossione · 2024',     'cat' => 'Imprese',     'outcome' => '€240.000',      'lbl' => 'Annullamento',  'desc' => 'Annullamento integrale di cartella esattoriale a carico di società in liquidazione, eccezione di prescrizione e vizio di notifica.', 'featured' => true],
+        ['id' => 'Cassazione · 2024',              'cat' => 'Privati',     'outcome' => 'Vittoria',      'lbl' => 'Conferma',      'desc' => 'Conferma in Cassazione di sentenza favorevole in materia di licenziamento per giusta causa illegittimo.'],
+        ['id' => 'Tribunale di Napoli · 2023',     'cat' => 'Privati',     'outcome' => 'Riconoscimento','lbl' => 'Storica',       'desc' => 'Primo riconoscimento in Campania di trascrizione integrale di atto di nascita di minore con due madri.'],
+        ['id' => "Corte d'Appello · 2023",         'cat' => 'Imprese',     'outcome' => '−80%',          'lbl' => 'Riforma',       'desc' => 'Riforma di sentenza di primo grado in materia di accertamento sintetico, riduzione dell\'80% del dovuto.'],
+        ['id' => 'CTR Campania · 2022',            'cat' => 'Imprese',     'outcome' => '€87.000',       'lbl' => 'Vittoria',      'desc' => 'Riconoscimento di credito IVA contestato dall\'Agenzia delle Entrate per €87.000.'],
+        ['id' => 'Tribunale di Napoli · 2023',     'cat' => 'Contenzioso', 'outcome' => 'Vittoria',      'lbl' => 'Risarcimento',  'desc' => 'Risarcimento del danno per condotta antisindacale di azienda metalmeccanica.'],
+        ['id' => 'Tribunale Famiglia · 2024',      'cat' => 'Privati',     'outcome' => 'Affido',        'lbl' => 'Condiviso',     'desc' => 'Affidamento condiviso e mantenimento adeguato in separazione complessa con immobili in più province.'],
+        ['id' => 'TAR Campania · 2023',            'cat' => 'Altri',       'outcome' => 'Annullamento',  'lbl' => 'Atto P.A.',     'desc' => 'Annullamento di provvedimento amministrativo in materia di edilizia, per difetto di motivazione.'],
+        ['id' => 'Tribunale di Napoli · 2022',     'cat' => 'Contenzioso', 'outcome' => '€156.000',      'lbl' => 'Recupero',      'desc' => 'Recupero di credito commerciale per società del settore tessile, con esecuzione mobiliare immediata.'],
+        ['id' => 'Cassazione · 2022',              'cat' => 'Imprese',     'outcome' => 'Vittoria',      'lbl' => 'Soc.',          'desc' => 'Conferma di sentenza favorevole in materia di responsabilità solidale di amministratori di S.r.l.'],
+    ];
+}
+
+/**
+ * Casi rappresentativi per singolo avvocato — fallback editoriale per slug.
+ * Ritorna array di max 3 casi: ['id', 'desc', 'outcome', 'lbl'].
+ * Per ora popolato solo per Emiliano (slug `emiliano-saltelli`); altri slug
+ * tornano array vuoto e la sezione viene skippata nel template.
+ *
+ * Source data: practice-tier1.jsx data.casi (sessione-2 design ref).
+ *
+ * @param string $slug
+ * @return array<int, array{id:string, desc:string, outcome:string, lbl:string}>
+ */
+function saltelli_attorney_cases($slug) {
+    $map = [
+        'emiliano-saltelli' => [
+            ['id' => 'vs. AGE Riscossione · 2024', 'lbl' => 'Annullamento', 'outcome' => '€240.000', 'desc' => 'Annullamento integrale di cartella esattoriale a carico di società in liquidazione, eccezione di prescrizione e vizio di notifica.'],
+            ['id' => 'Cassazione · 2023',          'lbl' => 'Riforma',      'outcome' => '−80%',     'desc' => 'Riforma di accertamento sintetico in Corte di Cassazione con riduzione del dovuto.'],
+            ['id' => 'CTR Campania · 2022',        'lbl' => 'Vittoria',     'outcome' => '€87.000',  'desc' => 'Riconoscimento di credito IVA contestato dall\'Agenzia per la società del settore tessile.'],
+        ],
+        'fabiana-saltelli' => [
+            ['id' => 'Cassazione · 2024',          'lbl' => 'Conferma',     'outcome' => 'Vittoria', 'desc' => 'Conferma in Cassazione di sentenza favorevole in materia di licenziamento per giusta causa illegittimo.'],
+            ['id' => 'Tribunale Napoli · 2023',    'lbl' => 'Risarcimento', 'outcome' => 'Antisind.', 'desc' => 'Risarcimento del danno per condotta antisindacale di azienda metalmeccanica con riconoscimento integrale.'],
+        ],
+        'antonia-battista' => [
+            ['id' => 'Tribunale Napoli · 2023',    'lbl' => 'Storica',      'outcome' => 'Riconosc.', 'desc' => 'Primo riconoscimento in Campania di trascrizione integrale di atto di nascita di minore con due madri.'],
+        ],
+    ];
+    return $map[$slug] ?? [];
 }
 
 /**

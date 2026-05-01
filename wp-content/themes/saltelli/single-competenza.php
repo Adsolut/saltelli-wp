@@ -39,7 +39,10 @@ while (have_posts()) :
                 <h1 class="sl-competenza__title"><?php the_title(); ?></h1>
 
                 <?php if ($answer !== '') : ?>
-                    <p class="sl-competenza__answer"><?php echo esc_html($answer); ?></p>
+                    <div class="sl-competenza__answer-wrap">
+                        <div class="sl-mono sl-competenza__answer-eyebrow"><?php esc_html_e('Risposta in 50 parole', 'saltelli'); ?></div>
+                        <p class="sl-competenza__answer"><?php echo esc_html($answer); ?></p>
+                    </div>
                 <?php else : ?>
                     <!-- TODO: answer capsule da Elena (40-60 parole) -->
                 <?php endif; ?>
