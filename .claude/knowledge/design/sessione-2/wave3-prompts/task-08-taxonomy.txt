@@ -1,0 +1,36 @@
+v0.19.0 Wave 3 PARALLEL AGENT TASK 8 — /tipo-area/{slug}/ taxonomy
+
+COORDINATION
+1. Claim: if [ -f /tmp/saltelli-agents/task-08.lock ]; then echo TAKEN; exit 1; fi
+   echo "agent $$ $(date +%H:%M)" > /tmp/saltelli-agents/task-08.lock
+2. Files OK: taxonomy-tipo-area.php, sections.css (markers WAVE3 TASK 8).
+3. NO-TOUCH: tokens.css, functions.php, style.css, page.php, home.php, single-*, altri lock.
+4. CSS scope: /* === WAVE3 TASK 8 (taxonomy) BEGIN === */ ... /* === WAVE3 TASK 8 (taxonomy) END === */
+5. Source JSX: saltelli-s2-taxonomy-tipo-area.jsx (LAYOUT SACRO)
+
+TASK
+Variabili term: privati / imprese / contenzioso / altri.
+
+Match JSX:
+- Hero asimmetrico 8fr/4fr:
+  - Sx: breadcrumb mono + h1 Playfair gigante + lede italic + counter "9 aree"
+  - Dx: 1-2 mini-card avvocati specialisti (foto 80x80 + nome + ruolo)
+- Sezione "Quando rivolgersi" 3-col scenari tipici per cluster
+- Sezione lista aree (pattern .sl-area homepage, NO grid card, lista tipografica)
+- Sezione "Casi rappresentativi cluster" (filter dinamico tier)
+- CTA finale "Prenota gratuita"
+
+Schema: CollectionPage + ItemList LegalService entries.
+
+HARD RULES
+- LAYOUT JSX SACRO
+- Smoke test su tutti i 4 termini:
+  /tipo-area/privati/, /tipo-area/imprese/, /tipo-area/contenzioso/, /tipo-area/altri/
+- Fine: rm lock + segnala "Task 8 DONE"
+
+OUTPUT
+1. Branch feat/wave3-task-08 + push
+2. Report wave3/REPORT-task-08.md
+3. STOP.
+
+PARTI ORA.

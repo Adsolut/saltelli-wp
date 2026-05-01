@@ -1,21 +1,33 @@
 <?php
 /**
  * Template: Taxonomy archive — tipo-area.
- * Lista le competenze taggate con un termine di tipo-area
- * (privati / imprese / contenzioso / altri). Pattern visuale
- * coerente con archive-competenza.php: stessa lista .sl-areas
- * con tier-1 first ordering, drop-cap accent, mobile fix M1.
+ *
+ * Sessione 2 · Wave 3 · Task 8.
+ * Match LAYOUT SACRO `saltelli-s2-taxonomy-tipo-area.jsx`:
+ *   1. Hero asimmetrico 8/4: sx h1 gigante + lede italic + counter aree;
+ *      dx 1-2 mini-card avvocati specialisti (80x80 + nome + ruolo).
+ *   2. "Quando rivolgersi" — 3 scenari tipici cluster (mono symbols).
+ *   3. Lista aree (.sl-area pattern, tier-1 first ordering).
+ *   4. Casi rappresentativi cluster (filter su `saltelli_all_cases()` per cat).
+ *   5. CTA finale editoriale "Prenota gratuita".
+ *
+ * Schema JSON-LD: ItemList LegalService.
+ *  Yoast emette già CollectionPage + Breadcrumb su questo template
+ *  (verificato 2026-05-01 via /wp-json/wp/v2/tipo-area), quindi per
+ *  rispettare la regola "no duplicati" emettiamo solo l'ItemList
+ *  delle competenze figlie — additivo non duplicativo.
  *
  * @package Saltelli
  */
 get_header();
 
 $term       = get_queried_object();
+$term_slug  = $term && !empty($term->slug) ? $term->slug : '';
 $term_name  = $term && !empty($term->name) ? $term->name : '';
 $term_desc  = $term && !empty($term->description) ? $term->description : '';
 
 // Riusa la query archive-competenza ordering: tier-1 first.
-$competenze = get_posts([
+$competenze = $term ? get_posts([
     'post_type'   => 'competenza',
     'numberposts' => -1,
     'meta_key'    => 'is_tier_1_focus',
@@ -27,85 +39,338 @@ $competenze = get_posts([
     'tax_query'   => [[
         'taxonomy' => 'tipo-area',
         'field'    => 'term_id',
-        'terms'    => [$term ? (int) $term->term_id : 0],
+        'terms'    => [(int) $term->term_id],
     ]],
-]);
+]) : [];
+
+$total = count($competenze);
+
+/* ─── Avvocati di riferimento (top 2 dynamic) ────────────────────────
+   Aggrega lead_attorneys delle competenze del cluster → frequenza →
+   prendi i primi 2. Fallback editoriale per cluster se nessuna match. */
+$attorney_freq = [];
+foreach ($competenze as $cp) {
+    foreach (saltelli_get_attorneys_for_competenza($cp->ID) as $av) {
+        $aid = (int) $av->ID;
+        if (!isset($attorney_freq[$aid])) {
+            $attorney_freq[$aid] = ['post' => $av, 'count' => 0];
+        }
+        $attorney_freq[$aid]['count']++;
+    }
+}
+uasort($attorney_freq, function ($a, $b) {
+    return $b['count'] <=> $a['count'];
+});
+$avvocati_referenti = array_slice(array_values($attorney_freq), 0, 2);
+
+if (empty($avvocati_referenti)) {
+    $fallback_slugs = [
+        'privati'     => ['antonia-battista', 'fabiana-saltelli'],
+        'imprese'     => ['emiliano-saltelli', 'fabiana-saltelli'],
+        'contenzioso' => ['emiliano-saltelli', 'stefano-gaetano-tedesco'],
+        'altri'       => ['emiliano-saltelli'],
+    ];
+    $slugs = $fallback_slugs[$term_slug] ?? ['emiliano-saltelli'];
+    foreach ($slugs as $sl) {
+        $av = get_page_by_path($sl, OBJECT, 'avvocato');
+        if ($av) {
+            $avvocati_referenti[] = ['post' => $av, 'count' => 0];
+        }
+    }
+}
+
+/* ─── Scenari tipici per cluster (sezione "Quando rivolgersi") ───────
+   Tre scenari editoriali per tipo-area. Sym Playfair italic glyph. */
+$scenari_map = [
+    'privati' => [
+        ['sym' => '§', 't' => __('Famiglia', 'saltelli'),     'd' => __("Separazioni, divorzi, affidamenti, unioni civili e tutela LGBTQ+.", 'saltelli')],
+        ['sym' => '¶', 't' => __('Eredità', 'saltelli'),      'd' => __("Successioni testate e legittime, divisioni, pubblicazione testamenti.", 'saltelli')],
+        ['sym' => '†', 't' => __('Risarcimento', 'saltelli'), 'd' => __("Danni da circolazione, malasanità, mobbing e responsabilità civile.", 'saltelli')],
+    ],
+    'imprese' => [
+        ['sym' => '§', 't' => __('Tributario', 'saltelli'),  'd' => __("Accertamenti, ricorsi tributari, contenzioso con Agenzia delle Entrate.", 'saltelli')],
+        ['sym' => '¶', 't' => __('Crediti', 'saltelli'),     'd' => __("Recupero crediti commerciali, decreti ingiuntivi, esecuzioni mobiliari.", 'saltelli')],
+        ['sym' => '†', 't' => __('Bancario', 'saltelli'),    'd' => __("Anatocismo, usura, contestazione di clausole vessatorie nei contratti bancari.", 'saltelli')],
+    ],
+    'contenzioso' => [
+        ['sym' => '§', 't' => __('Cartelle', 'saltelli'),       'd' => __("Opposizione a cartelle esattoriali, prescrizioni, vizi di notifica.", 'saltelli')],
+        ['sym' => '¶', 't' => __('Amministrativo', 'saltelli'), 'd' => __("Ricorsi al TAR, annullamento di provvedimenti P.A., edilizia, urbanistica.", 'saltelli')],
+        ['sym' => '†', 't' => __('Condominiale', 'saltelli'),   'd' => __("Impugnazione delibere, parti comuni, decoro architettonico, mediazioni.", 'saltelli')],
+    ],
+    'altri' => [
+        ['sym' => '§', 't' => __('Domiciliazione', 'saltelli'), 'd' => __("Domiciliazione d'impresa per società extra-Campania con presidio a Napoli.", 'saltelli')],
+        ['sym' => '¶', 't' => __('Online', 'saltelli'),         'd' => __("Consulenze in videocall su tutta Italia, primo orientamento gratuito.", 'saltelli')],
+        ['sym' => '†', 't' => __('Previdenza', 'saltelli'),     'd' => __("Pensioni, invalidità civile, Legge 104, contributi INPS contestati.", 'saltelli')],
+    ],
+];
+$scenari = $scenari_map[$term_slug] ?? $scenari_map['privati'];
+
+/* ─── Casi cluster — filter saltelli_all_cases() ────────────────────
+   La cat in saltelli_all_cases() usa label capitalized: Privati / Imprese /
+   Contenzioso / Altri. Match case-insensitive su term slug. */
+$cat_map = [
+    'privati'     => 'Privati',
+    'imprese'     => 'Imprese',
+    'contenzioso' => 'Contenzioso',
+    'altri'       => 'Altri',
+];
+$cat_label = $cat_map[$term_slug] ?? '';
+$casi_cluster = [];
+if ($cat_label && function_exists('saltelli_all_cases')) {
+    foreach (saltelli_all_cases() as $c) {
+        if (isset($c['cat']) && $c['cat'] === $cat_label) {
+            $casi_cluster[] = $c;
+        }
+    }
+}
+
+/* ─── Helper inline: avatar circle (foto + fallback gradient) ───────── */
+$avatar_html = function ($av_post) {
+    $thumb_id = (int) get_post_thumbnail_id($av_post);
+    if ($thumb_id) {
+        $img = wp_get_attachment_image($thumb_id, [120, 120], false, [
+            'class' => 'sl-tipoarea__attorney-photo',
+            'alt'   => esc_attr(get_the_title($av_post)),
+            'loading' => 'lazy',
+        ]);
+        if ($img) return $img;
+    }
+    return '<span class="sl-tipoarea__attorney-photo sl-tipoarea__attorney-photo--fallback" aria-hidden="true"></span>';
+};
+
+/* ─── H1 italic em chunk: "Per i Privati." → split su last word ─── */
 ?>
 
-<section class="sl-areas sl-areas--archive sl-areas-archive">
-    <div class="sl-container">
+<div class="sl-tipoarea sl-tipoarea--<?php echo esc_attr($term_slug); ?>">
 
-        <header class="sl-section-head sl-areas__archive-head">
-            <?php saltelli_render_breadcrumb(); ?>
+    <!-- HERO 8/4 -->
+    <section class="sl-tipoarea__hero">
+        <div class="sl-container">
+            <div class="sl-tipoarea__hero-grid">
 
-            <h1 class="sl-section-title">
-                <?php echo esc_html($term_name); ?><br>
-                <em><?php
-                    printf(
-                        /* translators: %d numero competenze */
-                        esc_html(_n('%d area', '%d aree', count($competenze), 'saltelli')),
-                        (int) count($competenze)
-                    );
-                ?></em>
-            </h1>
+                <div class="sl-tipoarea__hero-main">
+                    <?php saltelli_render_breadcrumb(); ?>
 
-            <?php if ($term_desc) : ?>
-                <p class="sl-areas__archive-lede"><?php echo esc_html($term_desc); ?></p>
-            <?php else : ?>
-                <p class="sl-areas__archive-lede">
-                    <?php
-                    $auto_lede = sprintf(
-                        /* translators: %s nome categoria es. "Privati" */
-                        esc_html__('Le aree di competenza dello studio dedicate alla categoria %s. Tier-1 sono le tre aree presidiate in profondità.', 'saltelli'),
-                        '<strong>' . esc_html(strtolower($term_name)) . '</strong>'
-                    );
-                    echo wp_kses($auto_lede, ['strong' => []]);
-                    ?>
-                </p>
-            <?php endif; ?>
-        </header>
+                    <h1 class="sl-tipoarea__h1">
+                        <?php echo esc_html($term_name); ?>.
+                    </h1>
 
-        <?php if (!empty($competenze)) : ?>
-            <div class="sl-areas__list">
-                <?php
-                $i     = 0;
-                $total = count($competenze);
-                foreach ($competenze as $p) :
-                    $i++;
-                    $num       = str_pad((string) $i, 2, '0', STR_PAD_LEFT);
-                    $cat_label = saltelli_competenza_category_label($p->ID);
-                    $is_tier_1 = (bool) saltelli_field('is_tier_1_focus', $p->ID, false);
-                    $lead      = (string) saltelli_field('lead_breve', $p->ID, '');
-                    if ($lead === '') {
-                        $lead = (string) saltelli_field('answer_capsule', $p->ID, '');
-                        if ($lead !== '') $lead = wp_trim_words($lead, 18, '…');
-                    }
-                    ?>
-                    <a class="sl-area<?php echo $is_tier_1 ? ' sl-area--tier1' : ''; ?>"
-                       href="<?php echo esc_url(get_permalink($p)); ?>"
-                       data-area-num="<?php echo esc_attr($num); ?>">
-                        <span class="sl-area__num sl-mono"><?php echo esc_html($num); ?> / <?php echo esc_html(str_pad((string) $total, 2, '0', STR_PAD_LEFT)); ?></span>
-                        <span class="sl-area__title"><?php echo esc_html(get_the_title($p)); ?></span>
-                        <span class="sl-area__meta sl-mono">
-                            <?php echo esc_html($is_tier_1 ? __('Tier 1 · approfondimento', 'saltelli') : ($cat_label ?: __('Approfondisci', 'saltelli'))); ?>
-                            <span class="arrow" aria-hidden="true">→</span>
-                        </span>
-                    </a>
+                    <?php if ($term_desc) : ?>
+                        <p class="sl-tipoarea__lede"><?php echo esc_html($term_desc); ?></p>
+                    <?php else : ?>
+                        <p class="sl-tipoarea__lede">
+                            <?php echo esc_html(sprintf(
+                                /* translators: %s nome categoria es. "Per i Privati" */
+                                __('Le aree presidiate dallo studio nel cluster %s. Tier-1 sono le aree di profondità.', 'saltelli'),
+                                $term_name
+                            )); ?>
+                        </p>
+                    <?php endif; ?>
+
+                    <div class="sl-mono sl-tipoarea__count">
+                        <?php
+                        printf(
+                            /* translators: %d numero competenze */
+                            esc_html(_n('%d area di pratica', '%d aree di pratica', $total, 'saltelli')),
+                            (int) $total
+                        );
+                        ?>
+                    </div>
+                </div>
+
+                <?php if (!empty($avvocati_referenti)) : ?>
+                <aside class="sl-tipoarea__hero-aside" aria-label="<?php esc_attr_e('Avvocati di riferimento', 'saltelli'); ?>">
+                    <div class="sl-mono sl-tipoarea__aside-eyebrow">
+                        <?php esc_html_e('Avvocati di riferimento', 'saltelli'); ?>
+                    </div>
+                    <div class="sl-tipoarea__attorneys">
+                        <?php foreach ($avvocati_referenti as $entry) :
+                            $av    = $entry['post'];
+                            $ruolo = (string) saltelli_field('ruolo_breve', $av->ID, '');
+                            ?>
+                            <a class="sl-tipoarea__attorney" href="<?php echo esc_url(get_permalink($av)); ?>">
+                                <?php echo $avatar_html($av); // already escaped ?>
+                                <span class="sl-tipoarea__attorney-text">
+                                    <span class="sl-tipoarea__attorney-name"><?php echo esc_html(get_the_title($av)); ?></span>
+                                    <?php if ($ruolo) : ?>
+                                        <span class="sl-mono sl-tipoarea__attorney-role">
+                                            <?php echo esc_html($ruolo); ?> <span class="arrow" aria-hidden="true">→</span>
+                                        </span>
+                                    <?php endif; ?>
+                                </span>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </aside>
+                <?php endif; ?>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- QUANDO RIVOLGERSI -->
+    <section class="sl-tipoarea__quando">
+        <div class="sl-container">
+            <header class="sl-tipoarea__section-head">
+                <div class="sl-mono sl-tipoarea__section-eyebrow">§ 01 — <?php esc_html_e('Quando rivolgersi', 'saltelli'); ?></div>
+                <h2 class="sl-tipoarea__section-title">
+                    <?php esc_html_e('Tre scenari', 'saltelli'); ?><br>
+                    <em><?php esc_html_e('tipici.', 'saltelli'); ?></em>
+                </h2>
+            </header>
+            <div class="sl-tipoarea__quando-grid">
+                <?php foreach ($scenari as $s) : ?>
+                    <article class="sl-tipoarea__scenario">
+                        <span class="sl-tipoarea__scenario-sym" aria-hidden="true"><?php echo esc_html($s['sym']); ?></span>
+                        <h3 class="sl-tipoarea__scenario-title"><?php echo esc_html($s['t']); ?></h3>
+                        <p class="sl-tipoarea__scenario-desc"><?php echo esc_html($s['d']); ?></p>
+                    </article>
                 <?php endforeach; ?>
             </div>
-        <?php else : ?>
-            <p class="sl-mono sl-areas__empty"><?php esc_html_e('Nessuna competenza in questa categoria.', 'saltelli'); ?></p>
-        <?php endif; ?>
-
-        <div class="sl-areas__more">
-            <a class="sl-btn" href="<?php echo esc_url(get_post_type_archive_link('competenza')); ?>">
-                <span><?php esc_html_e('Tutte le 19 aree', 'saltelli'); ?></span>
-                <span class="arrow" aria-hidden="true">→</span>
-            </a>
         </div>
+    </section>
 
-    </div>
-</section>
+    <!-- LISTA AREE -->
+    <section class="sl-tipoarea__lista">
+        <div class="sl-container">
+            <header class="sl-tipoarea__section-head">
+                <div class="sl-mono sl-tipoarea__section-eyebrow">§ 02 — <?php esc_html_e('Aree di pratica', 'saltelli'); ?></div>
+                <h2 class="sl-tipoarea__section-title">
+                    <?php
+                    printf(
+                        /* translators: %d numero competenze */
+                        esc_html(_n('%d area.', '%d aree.', $total, 'saltelli')),
+                        (int) $total
+                    );
+                    ?>
+                </h2>
+            </header>
+
+            <?php if (!empty($competenze)) : ?>
+                <div class="sl-areas__list sl-tipoarea__areas-list">
+                    <?php
+                    $i = 0;
+                    foreach ($competenze as $p) :
+                        $i++;
+                        $num       = str_pad((string) $i, 2, '0', STR_PAD_LEFT);
+                        $cat       = saltelli_competenza_category_label($p->ID);
+                        $is_tier_1 = (bool) saltelli_field('is_tier_1_focus', $p->ID, false);
+                        ?>
+                        <a class="sl-area<?php echo $is_tier_1 ? ' sl-area--tier1' : ''; ?>"
+                           href="<?php echo esc_url(get_permalink($p)); ?>"
+                           data-area-num="<?php echo esc_attr($num); ?>">
+                            <span class="sl-area__num sl-mono"><?php echo esc_html($num); ?> / <?php echo esc_html(str_pad((string) $total, 2, '0', STR_PAD_LEFT)); ?></span>
+                            <span class="sl-area__title"><?php echo esc_html(get_the_title($p)); ?></span>
+                            <span class="sl-area__meta sl-mono">
+                                <?php echo esc_html($is_tier_1 ? __('Tier 1 · approfondimento', 'saltelli') : ($cat ?: __('Approfondisci', 'saltelli'))); ?>
+                                <span class="arrow" aria-hidden="true">→</span>
+                            </span>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            <?php else : ?>
+                <p class="sl-mono sl-tipoarea__empty"><?php esc_html_e('Nessuna competenza in questa categoria.', 'saltelli'); ?></p>
+            <?php endif; ?>
+        </div>
+    </section>
+
+    <!-- CASI RAPPRESENTATIVI CLUSTER -->
+    <?php if (!empty($casi_cluster)) : ?>
+    <section class="sl-tipoarea__casi">
+        <div class="sl-container">
+            <header class="sl-tipoarea__section-head">
+                <div class="sl-mono sl-tipoarea__section-eyebrow">§ 03 — <?php esc_html_e('Casi rappresentativi', 'saltelli'); ?></div>
+                <h2 class="sl-tipoarea__section-title">
+                    <?php
+                    $count = count($casi_cluster);
+                    printf(
+                        /* translators: %1$d numero casi, %2$s nome cluster lowercase */
+                        esc_html(_n('%1$d vittoria per %2$s.', '%1$d vittorie per %2$s.', $count, 'saltelli')),
+                        (int) $count,
+                        esc_html(strtolower($term_name))
+                    );
+                    ?>
+                </h2>
+            </header>
+            <ul class="sl-tipoarea__casi-list" role="list">
+                <?php foreach ($casi_cluster as $c) : ?>
+                    <li class="sl-tipoarea__caso">
+                        <span class="sl-mono sl-tipoarea__caso-id"><?php echo esc_html($c['id']); ?></span>
+                        <p class="sl-tipoarea__caso-desc"><?php echo esc_html($c['desc']); ?></p>
+                        <span class="sl-tipoarea__caso-outcome"><?php echo esc_html($c['outcome']); ?></span>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- CTA FINALE -->
+    <section class="sl-tipoarea__cta">
+        <div class="sl-container">
+            <div class="sl-tipoarea__cta-grid">
+                <div class="sl-mono sl-tipoarea__section-eyebrow">§ 04 — <?php esc_html_e('Primo incontro', 'saltelli'); ?></div>
+                <div class="sl-tipoarea__cta-body">
+                    <h2 class="sl-tipoarea__cta-title">
+                        <?php esc_html_e('Hai una pratica', 'saltelli'); ?><br>
+                        <em><?php esc_html_e('simile?', 'saltelli'); ?></em>
+                    </h2>
+                    <p class="sl-tipoarea__cta-lede">
+                        <?php esc_html_e('Il primo incontro è gratuito. Riceviamo solo su appuntamento. Risposta entro 24 ore.', 'saltelli'); ?>
+                    </p>
+                    <a class="sl-btn sl-btn--primary sl-tipoarea__cta-btn" href="<?php echo esc_url(home_url('/contatti/')); ?>">
+                        <span><?php esc_html_e('Prenota gratuita', 'saltelli'); ?></span>
+                        <span class="arrow" aria-hidden="true">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div><!-- /.sl-tipoarea -->
 
 <?php
+/* ─── Schema JSON-LD: ItemList LegalService ───────────────────────────
+   Yoast emette già CollectionPage + Breadcrumb su term archive (Yoast SEO
+   v27.4 verificato 2026-05-01). Non duplichiamo. Emettiamo solo l'ItemList
+   delle competenze figlie come complemento additivo: questo è ciò che
+   Yoast NON copre e che invece serve a Google/AI per capire la lista
+   strutturata dei servizi sotto al cluster. */
+if (!empty($competenze) && function_exists('saltelli_emit_jsonld')) {
+    $items = [];
+    $pos   = 0;
+    foreach ($competenze as $p) {
+        $pos++;
+        $items[] = [
+            '@type'    => 'ListItem',
+            'position' => $pos,
+            'item'     => [
+                '@type'      => 'LegalService',
+                '@id'        => get_permalink($p) . '#legalservice',
+                'name'       => get_the_title($p),
+                'url'        => get_permalink($p),
+                'provider'   => [
+                    '@type' => 'Organization',
+                    '@id'   => home_url('/#organization'),
+                    'name'  => 'Studio Legale Emiliano Saltelli & Partners',
+                ],
+                'areaServed' => [
+                    '@type' => 'Place',
+                    'name'  => 'Italia',
+                ],
+            ],
+        ];
+    }
+
+    saltelli_emit_jsonld([
+        '@context'        => 'https://schema.org',
+        '@type'           => 'ItemList',
+        '@id'             => get_term_link($term) . '#itemlist',
+        'name'            => sprintf(__('Aree di pratica — %s', 'saltelli'), $term_name),
+        'numberOfItems'   => count($items),
+        'itemListOrder'   => 'https://schema.org/ItemListOrderAscending',
+        'itemListElement' => $items,
+    ]);
+}
+
 get_footer();
