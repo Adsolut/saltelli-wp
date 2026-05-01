@@ -5986,3 +5986,181 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 /* === WAVE3 TASK 10 (404) END === */
 
+/* === IMPECCABLE v0.20.0 [interaction-design — form states + GDPR] BEGIN ===
+   Error/valid border-bottom · focus-visible bronze ring · GDPR custom checkbox
+   editorial · search form template (.sl-search-form was unstyled).
+   Color error: muted burgundy #9B3D2E (NO aggressive red — DM constraint). */
+
+/* Form input error/valid states (sl-input + sl-form__input + CF7) */
+.sl-input[aria-invalid="true"],
+.sl-form__input[aria-invalid="true"],
+.wpcf7-not-valid {
+    border-bottom-color: #9B3D2E;
+    border-bottom-width: 2px;
+}
+.sl-input:focus-visible,
+.sl-form__input:focus-visible,
+.wpcf7-form input:focus-visible,
+.wpcf7-form select:focus-visible,
+.wpcf7-form textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    outline-style: solid;
+}
+.wpcf7-not-valid-tip,
+.sl-input-error {
+    display: block;
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #9B3D2E;
+    letter-spacing: 0.04em;
+    text-transform: none;
+}
+
+/* GDPR checkbox custom-style (editorial, no default browser) */
+.sl-contatti-w3__gdpr input[type="checkbox"],
+.wpcf7-form input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--border);
+    border-radius: 0;
+    background: var(--background);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-color var(--dur-fast) var(--ease-editorial), background var(--dur-fast) var(--ease-editorial);
+    position: relative;
+    margin: 0;
+}
+.sl-contatti-w3__gdpr input[type="checkbox"]:hover,
+.wpcf7-form input[type="checkbox"]:hover {
+    border-color: var(--accent);
+}
+.sl-contatti-w3__gdpr input[type="checkbox"]:checked,
+.wpcf7-form input[type="checkbox"]:checked {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+.sl-contatti-w3__gdpr input[type="checkbox"]:checked::after,
+.wpcf7-form input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 4px;
+    height: 8px;
+    border: solid var(--background);
+    border-width: 0 1.5px 1.5px 0;
+    transform: rotate(45deg);
+}
+.sl-contatti-w3__gdpr input[type="checkbox"]:focus-visible,
+.wpcf7-form input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    outline-style: solid;
+}
+
+/* Search form template (.sl-search-form) — was unstyled */
+.sl-search-form {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    transition: border-bottom-color var(--dur-fast) var(--ease-editorial);
+}
+.sl-search-form:focus-within {
+    border-bottom-color: var(--accent);
+}
+.sl-search-form__input {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    padding: 12px 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--primary);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.sl-search-form__input::placeholder { color: var(--text-muted); }
+.sl-search-form__input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    outline-style: solid;
+}
+.sl-search-form__submit {
+    background: none;
+    border: 0;
+    padding: 8px 0;
+    cursor: pointer;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color var(--dur-fast) var(--ease-editorial);
+}
+.sl-search-form__submit:hover,
+.sl-search-form__submit:focus-visible { color: var(--accent); }
+.sl-search-form__submit:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    outline-style: solid;
+}
+.sl-search-form__submit .arrow { transition: transform var(--dur-fast) var(--ease-editorial); }
+.sl-search-form__submit:hover .arrow,
+.sl-search-form__submit:focus-visible .arrow { transform: translateX(4px); }
+
+/* === IMPECCABLE v0.20.0 [interaction-design — form states + GDPR + search] END === */
+
+/* === IMPECCABLE v0.20.0 [delight — WhatsApp pulse + a11y] BEGIN ===
+   Pulse 1× every 6s (Duccio constraint: minimal, no heavy animation).
+   prefers-reduced-motion safety + 48×48 touch target mobile. */
+.sl-whatsapp-sticky {
+    position: relative;
+}
+.sl-whatsapp-sticky::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 2px solid currentColor;
+    opacity: 0;
+    pointer-events: none;
+    animation: sl-wa-pulse 6s ease-out infinite;
+}
+@keyframes sl-wa-pulse {
+    0%   { opacity: 0; transform: scale(1); }
+    8%   { opacity: 0.35; }
+    50%  { opacity: 0; transform: scale(1.18); }
+    100% { opacity: 0; transform: scale(1.18); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .sl-whatsapp-sticky::after { animation: none; opacity: 0; }
+}
+@media (max-width: 768px) {
+    .sl-whatsapp-sticky { min-width: 48px; min-height: 48px; }
+}
+/* === IMPECCABLE v0.20.0 [delight — WhatsApp pulse] END === */
+
+/* === IMPECCABLE v0.20.0 [interaction-design — header tel hover] BEGIN === */
+.sl-header__phone {
+    transition: color var(--dur-fast) var(--ease-editorial);
+}
+.sl-header__phone:hover,
+.sl-header__phone:focus-visible {
+    color: var(--accent);
+}
+.sl-header__phone:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    outline-style: solid;
+}
+/* === IMPECCABLE v0.20.0 [interaction-design — header tel] END === */
+

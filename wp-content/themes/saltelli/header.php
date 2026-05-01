@@ -92,8 +92,33 @@ $saltelli_phone_e164  = saltelli_studio_phone_e164();
 })();
 </script>
 
+<?php
+/* === IMPECCABLE v0.20.0 [persuasion + harden] BEGIN — WhatsApp context-aware prefill ===
+   Page-aware messaggio per ridurre friction e dare contesto allo studio. */
+$sl_wa_context = '';
+if (is_front_page()) {
+    $sl_wa_context = '';
+} elseif (is_singular('competenza')) {
+    $sl_wa_context = sprintf(__('sto guardando la pagina "%s"', 'saltelli'), get_the_title());
+} elseif (is_singular('avvocato')) {
+    $sl_wa_context = sprintf(__('sto guardando il profilo di %s', 'saltelli'), get_the_title());
+} elseif (is_tax('tipo-area')) {
+    $sl_wa_term = get_queried_object();
+    if ($sl_wa_term && isset($sl_wa_term->name)) {
+        $sl_wa_context = sprintf(__('sto guardando l\'area "%s"', 'saltelli'), $sl_wa_term->name);
+    }
+} elseif (is_page()) {
+    $sl_wa_context = sprintf(__('sto guardando la pagina "%s"', 'saltelli'), get_the_title());
+} elseif (is_singular()) {
+    $sl_wa_context = sprintf(__('sto leggendo "%s"', 'saltelli'), get_the_title());
+}
+$sl_wa_message = $sl_wa_context !== ''
+    ? sprintf(__('Ciao, %s sul vostro sito. Vorrei una consulenza.', 'saltelli'), $sl_wa_context)
+    : __('Ciao, vorrei una consulenza presso lo Studio Legale Saltelli & Partners.', 'saltelli');
+/* === IMPECCABLE v0.20.0 [persuasion + harden] END === */
+?>
 <a class="sl-whatsapp-sticky"
-   href="https://wa.me/<?php echo esc_attr(ltrim($saltelli_phone_e164, '+')); ?>?text=<?php echo rawurlencode('Ciao, vorrei una consulenza presso lo Studio Legale Saltelli & Partners.'); ?>"
+   href="https://wa.me/<?php echo esc_attr(ltrim($saltelli_phone_e164, '+')); ?>?text=<?php echo rawurlencode($sl_wa_message); ?>"
    target="_blank"
    rel="noopener"
    aria-label="<?php esc_attr_e('Contatta lo studio su WhatsApp', 'saltelli'); ?>">

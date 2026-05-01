@@ -89,6 +89,60 @@
   border-bottom-color: var(--accent);
 }
 
+/* === IMPECCABLE v0.20.0 [interaction-design + harden + delight] BEGIN ===
+   8 stati cross-element: base, hover, focus-visible, active, disabled, loading,
+   busy, prefers-reduced-motion. Coerenza editoriale (no fill, no aggressive red). */
+.sl-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  outline-style: solid;
+}
+.sl-btn:active {
+  transform: translateY(1px);
+}
+.sl-btn[disabled],
+.sl-btn[aria-disabled="true"],
+.sl-btn[data-loading="true"],
+input.sl-btn[data-loading="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.sl-btn[data-loading="true"] > span:first-child::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  border: 1.5px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: sl-spin 700ms linear infinite;
+  vertical-align: -1px;
+}
+@keyframes sl-spin {
+  to { transform: rotate(360deg); }
+}
+.sl-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  outline-style: solid;
+  border-radius: 1px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sl-btn,
+  .sl-btn::after,
+  .sl-btn .arrow,
+  .sl-link {
+    transition: none;
+  }
+  .sl-btn:active { transform: none; }
+  .sl-btn[data-loading="true"] > span:first-child::before {
+    animation: none;
+  }
+}
+/* === IMPECCABLE v0.20.0 [interaction-design + harden + delight] END === */
+
 /* List item — area di pratica */
 .sl-area {
   display: grid;

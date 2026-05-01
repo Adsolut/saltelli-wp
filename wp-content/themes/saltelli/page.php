@@ -536,8 +536,9 @@ while (have_posts()) :
                                     </label>
 
                                     <div class="sl-contatti-w3__submit-row">
+                                        <?php /* IMPECCABLE v0.20.0 [ux-writing]: form submit context-specific = "Prenota un incontro" */ ?>
                                         <button type="submit" class="sl-btn sl-btn--primary">
-                                            <span><?php esc_html_e('Prenota gratuita', 'saltelli'); ?></span>
+                                            <span><?php esc_html_e('Prenota un incontro', 'saltelli'); ?></span>
                                             <span class="arrow" aria-hidden="true">→</span>
                                         </button>
                                     </div>

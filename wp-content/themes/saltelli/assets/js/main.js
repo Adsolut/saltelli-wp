@@ -324,6 +324,36 @@
     preview.dataset.slHoverBound = '1';
   }
 
+  /* === IMPECCABLE v0.20.0 [delight + harden] BEGIN — submit loading + double-click prevention ===
+     Idempotente (data-sl-submit-bound). CF7 wpcf7invalid/wpcf7mailsent clear loading.
+     Safety net 12s in caso di network failure. */
+  document.querySelectorAll('form.sl-contatti-w3__form, form.wpcf7-form').forEach((form) => {
+    if (form.dataset.slSubmitBound === '1') return;
+    const setLoading = (state) => {
+      const btn = form.querySelector('button[type="submit"], input[type="submit"]');
+      if (!btn) return;
+      if (state) {
+        btn.dataset.loading = 'true';
+        btn.setAttribute('aria-busy', 'true');
+      } else {
+        btn.dataset.loading = 'false';
+        btn.removeAttribute('aria-busy');
+      }
+    };
+    form.addEventListener('submit', () => {
+      setLoading(true);
+      // safety: re-enable after 12s (network failure / unhandled CF7 case)
+      setTimeout(() => setLoading(false), 12000);
+    });
+    // CF7-specific events to clear loading state
+    form.addEventListener('wpcf7invalid', () => setLoading(false));
+    form.addEventListener('wpcf7mailsent', () => setLoading(false));
+    form.addEventListener('wpcf7mailfailed', () => setLoading(false));
+    form.addEventListener('wpcf7spam', () => setLoading(false));
+    form.dataset.slSubmitBound = '1';
+  });
+  /* === IMPECCABLE v0.20.0 [delight + harden] END === */
+
   /* === FIX v0.19.1 [F3] BEGIN — accordion .sl-acc toggle (button-based, JSX-faithful) === */
   // Idempotente: marker dataset evita doppia bind se main.js si re-inizializza.
   document.querySelectorAll('.sl-acc[data-sl-acc]').forEach((root) => {
