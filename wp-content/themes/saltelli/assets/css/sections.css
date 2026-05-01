@@ -5366,6 +5366,277 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 /* === WAVE3 TASK 8 (taxonomy) END === */
 
 /* === WAVE3 TASK 9 (glossario) BEGIN === */
+
+/* HERO */
+.sl-glossario__hero {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 120px var(--container-pad) 64px;
+}
+.sl-glossario__hero-grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+  align-items: end;
+}
+.sl-glossario__eyebrow { margin-bottom: 48px; }
+.sl-glossario__h1 {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 8vw, 124px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  font-weight: 400;
+  color: var(--primary);
+  margin: 0;
+}
+.sl-glossario__h1 em {
+  font-style: italic;
+  color: var(--text-muted);
+}
+.sl-glossario__hero-meta { padding-bottom: 24px; }
+.sl-glossario__lede {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--text);
+  max-width: 44ch;
+  margin: 0 0 24px;
+}
+.sl-glossario__counter { font-size: 13px; }
+
+/* STICKY NAV (search + a-z) */
+.sl-glossario__nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--background);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 20px var(--container-pad);
+}
+.sl-glossario__nav-grid {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+.sl-glossario__search {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--primary);
+  outline: none;
+}
+.sl-glossario__search:focus { border-bottom-color: var(--primary); }
+.sl-glossario__az {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+.sl-glossario__az a,
+.sl-glossario__az span {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-decoration: none;
+  padding: 0 4px;
+  letter-spacing: 0.04em;
+}
+.sl-glossario__az a {
+  color: var(--primary);
+  transition: color 200ms var(--ease-editorial);
+}
+.sl-glossario__az a:hover { color: var(--accent); }
+.sl-glossario__az span {
+  color: var(--border);
+  pointer-events: none;
+}
+
+/* TERM LIST */
+.sl-glossario__list {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 96px var(--container-pad) 128px;
+}
+.sl-glossario__group {
+  margin-bottom: 80px;
+  scroll-margin-top: 140px;
+}
+.sl-glossario__letter {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 96px;
+  color: var(--accent);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin: 0 0 32px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 24px;
+  font-weight: 400;
+}
+.sl-glossario__dl { margin: 0; }
+
+/* SINGLE ENTRY */
+.sl-glossario__entry {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 48px;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--border);
+  transition: transform 200ms var(--ease-editorial);
+  scroll-margin-top: 140px;
+}
+.sl-glossario__entry:hover { transform: translateX(4px); }
+.sl-glossario__dt {
+  padding-right: 24px;
+  margin: 0;
+}
+.sl-glossario__cat {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.sl-glossario__term {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--primary);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  font-weight: 400;
+  transition: color 200ms var(--ease-editorial);
+}
+.sl-glossario__entry:hover .sl-glossario__term { color: var(--accent); }
+.sl-glossario__dd { margin: 0; }
+.sl-glossario__def {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 0 0 16px;
+}
+.sl-glossario__example {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0 0 16px;
+}
+.sl-glossario__example strong {
+  font-weight: 500;
+  font-style: normal;
+  color: var(--primary);
+}
+.sl-glossario__related {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.sl-glossario__related-label { font-size: 13px; }
+.sl-glossario__related a { font-size: 14px; }
+
+/* SEARCH NO-RESULT STATE */
+.sl-glossario__empty {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 24px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 96px 0;
+  display: none;
+}
+.sl-glossario__list[data-empty="true"] .sl-glossario__empty { display: block; }
+
+/* FAQ */
+.sl-glossario__faq {
+  background: var(--surface);
+  padding: 128px var(--container-pad);
+}
+.sl-glossario__faq-grid {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  gap: 64px;
+}
+.sl-glossario__faq-h {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 4.5vw, 64px);
+  letter-spacing: -0.02em;
+  margin: 0 0 48px;
+  font-weight: 400;
+  color: var(--primary);
+}
+
+/* CTA */
+.sl-glossario__cta {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 128px var(--container-pad) 160px;
+}
+.sl-glossario__cta-grid {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  gap: 64px;
+}
+.sl-glossario__cta-h {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 5.5vw, 80px);
+  letter-spacing: -0.025em;
+  line-height: 0.98;
+  margin: 0 0 32px;
+  font-weight: 400;
+  color: var(--primary);
+}
+.sl-glossario__cta-h em {
+  font-style: italic;
+  color: var(--accent);
+}
+.sl-glossario__cta-lede {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--text);
+  line-height: 1.5;
+  max-width: 44ch;
+  margin: 0 0 48px;
+}
+
+/* MOBILE */
+@media (max-width: 1023px) {
+  .sl-glossario__hero { padding: 80px 24px 48px; }
+  .sl-glossario__hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .sl-glossario__eyebrow { margin-bottom: 24px; }
+  .sl-glossario__hero-meta { padding-bottom: 0; }
+  .sl-glossario__nav { padding: 16px 24px; }
+  .sl-glossario__nav-grid { grid-template-columns: 1fr; gap: 16px; }
+  .sl-glossario__list { padding: 64px 24px 96px; }
+  .sl-glossario__letter { font-size: 64px; padding-bottom: 16px; margin-bottom: 24px; }
+  .sl-glossario__entry {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 24px 0;
+  }
+  .sl-glossario__entry:hover { transform: none; }
+  .sl-glossario__dt { padding-right: 0; }
+  .sl-glossario__faq { padding: 80px 24px; }
+  .sl-glossario__faq-grid { grid-template-columns: 1fr; gap: 24px; }
+  .sl-glossario__cta { padding: 80px 24px 96px; }
+  .sl-glossario__cta-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
 /* === WAVE3 TASK 9 (glossario) END === */
 
 /* === WAVE3 TASK 10 (404) BEGIN === */

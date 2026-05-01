@@ -632,6 +632,12 @@ while (have_posts()) :
 
             </div>
 
+        <?php elseif (is_page('glossario-legale')) :
+            // === WAVE3 TASK 9 (glossario) — render delegato a inc/wave3-glossario.php
+            // (60 termini · DefinedTermSet + FAQPage schema · search+a-z sticky)
+            include SALTELLI_THEME_DIR . '/inc/wave3-glossario.php';
+            ?>
+
         <?php else : ?>
 
         <header class="sl-page__hero">
@@ -663,7 +669,7 @@ while (have_posts()) :
             </div>
         </section>
 
-        <?php endif; // sl_chi_siamo / sl_casi / contatti / default ?>
+        <?php endif; // sl_chi_siamo / sl_casi / contatti / glossario / default ?>
 
     </article>
     <?php
