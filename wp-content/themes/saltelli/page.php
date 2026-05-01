@@ -9,8 +9,9 @@ get_header();
 while (have_posts()) :
     the_post();
     $sl_chi_siamo = is_page('chi-siamo');
+    $sl_casi      = is_page('casi');
     ?>
-    <article <?php post_class('sl-page' . ($sl_chi_siamo ? ' sl-chi-siamo' : '')); ?>>
+    <article <?php post_class('sl-page' . ($sl_chi_siamo ? ' sl-chi-siamo' : '') . ($sl_casi ? ' sl-casi-page' : '')); ?>>
 
         <?php if ($sl_chi_siamo) :
             $sl_lawyers_chi = get_posts([
@@ -218,6 +219,195 @@ while (have_posts()) :
                 </div>
             </section>
 
+        <?php elseif ($sl_casi) :
+            // === WAVE3 TASK 5 (casi) — JSX-faithful editorial layout ===
+            $sl_casi_all      = function_exists('saltelli_cases_full')
+                                    ? saltelli_cases_full()
+                                    : (function_exists('saltelli_homepage_cases') ? saltelli_homepage_cases() : []);
+            $sl_casi_count    = is_array($sl_casi_all) ? count($sl_casi_all) : 0;
+            $sl_casi_filters  = ['Tutti', 'Privati', 'Imprese', 'Contenzioso', 'Altri'];
+            $sl_casi_counts   = ['Tutti' => $sl_casi_count, 'Privati' => 0, 'Imprese' => 0, 'Contenzioso' => 0, 'Altri' => 0];
+            $sl_casi_featured = null;
+            $sl_casi_known    = ['Privati', 'Imprese', 'Contenzioso', 'Altri'];
+            foreach ($sl_casi_all as &$sl_c) {
+                $sl_cat_c = isset($sl_c['cat']) ? (string) $sl_c['cat'] : 'Altri';
+                if (!in_array($sl_cat_c, $sl_casi_known, true)) {
+                    $sl_cat_c = 'Altri';
+                }
+                $sl_c['cat'] = $sl_cat_c;
+                $sl_casi_counts[$sl_cat_c]++;
+                if (!$sl_casi_featured && !empty($sl_c['featured'])) {
+                    $sl_casi_featured = $sl_c;
+                }
+            }
+            unset($sl_c);
+            $sl_casi_chain = saltelli_get_breadcrumb_chain();
+            ?>
+
+            <section class="sl-casi__hero" aria-labelledby="casi-h1">
+                <div class="sl-casi__hero-grid">
+                    <div class="sl-casi__hero-left">
+                        <?php if (!empty($sl_casi_chain) && count($sl_casi_chain) > 1) : ?>
+                            <nav class="sl-mono sl-page__breadcrumb sl-casi__breadcrumb" aria-label="<?php esc_attr_e('Breadcrumb', 'saltelli'); ?>">
+                                <?php foreach ($sl_casi_chain as $sl_idx => $sl_node) :
+                                    if ($sl_idx > 0) echo ' / ';
+                                    if (!empty($sl_node['url'])) : ?>
+                                        <a href="<?php echo esc_url($sl_node['url']); ?>"><?php echo esc_html($sl_node['name']); ?></a>
+                                    <?php else : ?>
+                                        <span><?php echo esc_html($sl_node['name']); ?></span>
+                                    <?php endif;
+                                endforeach; ?>
+                            </nav>
+                        <?php endif; ?>
+                        <div class="sl-mono sl-casi__eyebrow"><?php esc_html_e('§ Risultati · Casi rappresentativi', 'saltelli'); ?></div>
+                        <h1 class="sl-casi__h1" id="casi-h1">
+                            <?php esc_html_e('Casi', 'saltelli'); ?><br>
+                            <em><?php esc_html_e('rappresentativi.', 'saltelli'); ?></em>
+                        </h1>
+                    </div>
+                    <div class="sl-casi__hero-right">
+                        <p class="sl-casi__hero-lede">
+                            <?php esc_html_e('Una selezione di vittorie. Identificativi anonimizzati per riservatezza, documentati e verificabili in studio.', 'saltelli'); ?>
+                        </p>
+                        <div class="sl-mono sl-casi__hero-meta">
+                            <?php
+                            printf(
+                                /* translators: 1=numero casi, 2=range anni, 3=mese aggiornamento */
+                                esc_html__('%1$d casi · %2$s · aggiornato %3$s', 'saltelli'),
+                                (int) $sl_casi_count,
+                                esc_html__('2022 → 2024', 'saltelli'),
+                                esc_html__('Apr 2026', 'saltelli')
+                            );
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <?php if ($sl_casi_featured) : ?>
+            <section class="sl-casi__pull" aria-labelledby="casi-pull-h">
+                <div class="sl-casi__pull-frame">
+                    <div class="sl-casi__pull-meta">
+                        <div class="sl-mono sl-casi__pull-eyebrow"><?php esc_html_e('Caso simbolo · 2024', 'saltelli'); ?></div>
+                        <div class="sl-casi__pull-figure" id="casi-pull-h"><?php echo esc_html($sl_casi_featured['outcome']); ?></div>
+                        <div class="sl-mono sl-casi__pull-label"><?php echo esc_html($sl_casi_featured['lbl']); ?></div>
+                    </div>
+                    <blockquote class="sl-casi__pull-quote">
+                        <p>&ldquo;<?php echo esc_html($sl_casi_featured['desc']); ?>&rdquo;</p>
+                        <footer class="sl-mono sl-casi__pull-cite"><?php echo esc_html($sl_casi_featured['id']); ?></footer>
+                    </blockquote>
+                </div>
+            </section>
+            <?php endif; ?>
+
+            <section class="sl-casi__filter" aria-label="<?php esc_attr_e('Filtra casi per categoria', 'saltelli'); ?>">
+                <div class="sl-casi__filter-bar" role="tablist">
+                    <?php foreach ($sl_casi_filters as $sl_f) :
+                        $sl_count_f = isset($sl_casi_counts[$sl_f]) ? (int) $sl_casi_counts[$sl_f] : 0;
+                        $sl_filter_value = $sl_f === 'Tutti' ? '*' : $sl_f;
+                        $sl_is_active = $sl_f === 'Tutti';
+                        ?>
+                        <button class="sl-casi__filter-btn sl-mono<?php echo $sl_is_active ? ' is-active' : ''; ?>"
+                                type="button"
+                                role="tab"
+                                aria-pressed="<?php echo $sl_is_active ? 'true' : 'false'; ?>"
+                                data-filter="<?php echo esc_attr($sl_filter_value); ?>">
+                            <span><?php echo esc_html($sl_f); ?></span>
+                            <span class="sl-casi__filter-count">(<?php echo (int) $sl_count_f; ?>)</span>
+                        </button>
+                    <?php endforeach; ?>
+                </div>
+            </section>
+
+            <section class="sl-casi__list-wrap" aria-labelledby="casi-list-h">
+                <h2 class="sl-casi__sr screen-reader-text" id="casi-list-h"><?php esc_html_e('Elenco casi', 'saltelli'); ?></h2>
+                <div class="sl-casi__list">
+                    <?php foreach ($sl_casi_all as $sl_c) : ?>
+                        <a class="sl-casi__row"
+                           href="<?php echo esc_url(home_url('/contatti/')); ?>"
+                           data-cat="<?php echo esc_attr($sl_c['cat']); ?>">
+                            <div class="sl-casi__row-id">
+                                <div class="sl-mono sl-casi__row-court"><?php echo esc_html($sl_c['id']); ?></div>
+                                <div class="sl-mono sl-casi__row-cat"><?php echo esc_html($sl_c['cat']); ?> <span class="arrow" aria-hidden="true">→</span></div>
+                            </div>
+                            <p class="sl-casi__row-desc"><?php echo esc_html($sl_c['desc']); ?></p>
+                            <div class="sl-casi__row-outcome">
+                                <div class="sl-casi__row-figure"><?php echo esc_html($sl_c['outcome']); ?></div>
+                                <div class="sl-mono sl-casi__row-label"><?php echo esc_html($sl_c['lbl']); ?></div>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="sl-casi__pagination">
+                    <div class="sl-mono sl-casi__pagination-status">
+                        <span data-casi-status>
+                            <?php
+                            printf(
+                                /* translators: %d numero casi visibili */
+                                esc_html__('Pagina 1 / 1 · %d casi visibili', 'saltelli'),
+                                (int) $sl_casi_count
+                            );
+                            ?>
+                        </span>
+                    </div>
+                    <button class="sl-btn sl-casi__pagination-btn" type="button" disabled aria-disabled="true">
+                        <span><?php esc_html_e('Carica altri casi', 'saltelli'); ?></span>
+                        <span class="arrow" aria-hidden="true">→</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="sl-casi__cta" aria-labelledby="casi-cta-h">
+                <div class="sl-casi__cta-grid">
+                    <div class="sl-mono sl-casi__cta-tag"><?php esc_html_e('§ Prossimo caso', 'saltelli'); ?></div>
+                    <div class="sl-casi__cta-body">
+                        <h2 class="sl-casi__cta-title" id="casi-cta-h">
+                            <?php esc_html_e('Vorresti vincere', 'saltelli'); ?><br>
+                            <em><?php esc_html_e('il tuo?', 'saltelli'); ?></em>
+                        </h2>
+                        <p class="sl-casi__cta-lede">
+                            <?php esc_html_e("Il primo incontro è gratuito. Diciamo la verità anche quando significa sconsigliare un'azione legale.", 'saltelli'); ?>
+                        </p>
+                        <a class="sl-btn sl-btn--primary" href="<?php echo esc_url(home_url('/contatti/')); ?>">
+                            <span><?php esc_html_e('Prenota gratuita', 'saltelli'); ?></span>
+                            <span class="arrow" aria-hidden="true">→</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <script>
+            (function () {
+                var root = document.querySelector('.sl-casi-page');
+                if (!root) { return; }
+                var bar    = root.querySelector('.sl-casi__filter-bar');
+                var rows   = root.querySelectorAll('.sl-casi__row');
+                var status = root.querySelector('[data-casi-status]');
+                if (!bar) { return; }
+                bar.addEventListener('click', function (e) {
+                    var btn = e.target.closest('.sl-casi__filter-btn');
+                    if (!btn) { return; }
+                    var filter = btn.getAttribute('data-filter');
+                    bar.querySelectorAll('.sl-casi__filter-btn').forEach(function (b) {
+                        var on = b === btn;
+                        b.classList.toggle('is-active', on);
+                        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+                    });
+                    var visible = 0;
+                    rows.forEach(function (row) {
+                        var cat = row.getAttribute('data-cat');
+                        var match = filter === '*' || cat === filter;
+                        row.classList.toggle('is-hidden', !match);
+                        if (match) visible++;
+                    });
+                    if (status) {
+                        status.textContent = 'Pagina 1 / 1 · ' + visible + ' casi visibili';
+                    }
+                });
+            })();
+            </script>
+
         <?php else : ?>
 
         <header class="sl-page__hero">
@@ -330,52 +520,7 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
-        <?php if (is_page('casi') && function_exists('saltelli_homepage_cases')) :
-            $cases = saltelli_homepage_cases();
-            if (!empty($cases)) : ?>
-            <section class="sl-cases sl-cases--archive" aria-labelledby="casi-archive-h">
-                <div class="sl-container">
-                    <header class="sl-section-head">
-                        <div class="sl-mono">§ <?php esc_html_e('Casi rappresentativi', 'saltelli'); ?></div>
-                        <h2 class="sl-section-title" id="casi-archive-h">
-                            <?php esc_html_e('Vittorie selezionate', 'saltelli'); ?>
-                        </h2>
-                        <p class="sl-cases__lede">
-                            <?php esc_html_e('Identificativi anonimizzati per riservatezza, documentazione integrale visionabile in studio su richiesta.', 'saltelli'); ?>
-                        </p>
-                    </header>
-                    <ol class="sl-cases__list">
-                        <?php foreach ($cases as $case) : ?>
-                            <li class="sl-cases__row">
-                                <div class="sl-mono sl-cases__id"><?php echo esc_html($case['identifier']); ?></div>
-                                <p class="sl-cases__desc"><?php echo esc_html($case['descrizione']); ?></p>
-                                <div class="sl-mono sl-cases__outcome"><?php echo esc_html($case['outcome']); ?></div>
-                            </li>
-                        <?php endforeach; ?>
-                    </ol>
-                </div>
-            </section>
-
-            <section class="sl-cases__cta" aria-labelledby="casi-cta-h">
-                <div class="sl-container">
-                    <div class="sl-mono sl-contact__eyebrow">
-                        <?php esc_html_e('Prima consulenza conoscitiva gratuita · Risposta entro 24 ore', 'saltelli'); ?>
-                    </div>
-                    <h2 class="sl-section-title" id="casi-cta-h">
-                        <?php esc_html_e('Hai un caso simile?', 'saltelli'); ?>
-                    </h2>
-                    <p class="sl-cases__cta-lede">
-                        <?php esc_html_e('Raccontaci la tua pratica. Trenta minuti di consulenza conoscitiva, gratuita e senza impegno.', 'saltelli'); ?>
-                    </p>
-                    <a class="sl-btn sl-btn--primary" href="<?php echo esc_url(home_url('/contatti/')); ?>">
-                        <span><?php esc_html_e('Prenota una consulenza', 'saltelli'); ?></span>
-                        <span class="arrow" aria-hidden="true">→</span>
-                    </a>
-                </div>
-            </section>
-        <?php endif; endif; ?>
-
-        <?php endif; // sl_chi_siamo ?>
+        <?php endif; // sl_chi_siamo / sl_casi / default ?>
 
     </article>
     <?php

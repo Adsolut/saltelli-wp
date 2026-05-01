@@ -624,6 +624,127 @@ function saltelli_all_cases() {
 }
 
 /**
+ * Lista completa casi per pagina /casi/ (Wave 3 · Task 5).
+ *
+ * Compone:
+ *  1. saltelli_homepage_cases() — 4 casi base (ACF repeater oppure fallback editoriale).
+ *     Vengono normalizzati allo schema esteso ['id', 'cat', 'outcome', 'lbl', 'desc', 'featured'].
+ *  2. Estensione 4-6 casi sourcing dai blog post tag/cat 'sentenze' o 'sentenza' (se esistono).
+ *     Mappa post → caso usando excerpt + ACF/meta `_caso_outcome`/`_caso_categoria`.
+ *  3. Fallback editoriale: i restanti casi della baseline JSX (saltelli_all_cases),
+ *     per garantire un volume di 8-10 casi anche senza blog content.
+ *
+ * Dedupe per `id`, normalizza shape, restituisce max 12 casi.
+ *
+ * @return array<int, array{id:string, cat:string, outcome:string, lbl:string, desc:string, featured?:bool}>
+ */
+function saltelli_cases_full() {
+    $out  = [];
+    $seen = [];
+
+    $push = function ($case) use (&$out, &$seen) {
+        if (empty($case['id']) || empty($case['desc']) || empty($case['outcome'])) {
+            return;
+        }
+        $key = strtolower(trim((string) $case['id']));
+        if (isset($seen[$key])) {
+            // Upgrade pre-esistente con metadati nuovi (cat/lbl/featured/outcome) se più ricchi.
+            $idx = $seen[$key];
+            if (!$out[$idx]['featured'] && !empty($case['featured'])) {
+                $out[$idx]['featured'] = true;
+                // Featured ⇒ adotta outcome+lbl JSX-fidelity (es. "€240.000" + "Annullamento").
+                if (!empty($case['outcome'])) {
+                    $out[$idx]['outcome'] = (string) $case['outcome'];
+                }
+                if (!empty($case['lbl'])) {
+                    $out[$idx]['lbl'] = (string) $case['lbl'];
+                }
+            }
+            if ($out[$idx]['lbl'] === '' && !empty($case['lbl'])) {
+                $out[$idx]['lbl'] = (string) $case['lbl'];
+            }
+            if ($out[$idx]['cat'] === 'Altri' && !empty($case['cat'])) {
+                $out[$idx]['cat'] = (string) $case['cat'];
+            }
+            return;
+        }
+        $out[] = [
+            'id'       => (string) $case['id'],
+            'cat'      => isset($case['cat']) ? (string) $case['cat'] : 'Altri',
+            'outcome'  => (string) $case['outcome'],
+            'lbl'      => isset($case['lbl']) ? (string) $case['lbl'] : '',
+            'desc'     => (string) $case['desc'],
+            'featured' => !empty($case['featured']),
+        ];
+        $seen[$key] = count($out) - 1;
+    };
+
+    // 1. Casi homepage (ACF o fallback). Normalizziamo lo shape.
+    $homepage = function_exists('saltelli_homepage_cases') ? saltelli_homepage_cases() : [];
+    foreach ($homepage as $h) {
+        $push([
+            'id'       => isset($h['identifier']) ? $h['identifier'] : (isset($h['id']) ? $h['id'] : ''),
+            'desc'     => isset($h['descrizione']) ? $h['descrizione'] : (isset($h['desc']) ? $h['desc'] : ''),
+            'outcome'  => isset($h['outcome']) ? $h['outcome'] : '',
+            'cat'      => isset($h['cat']) ? $h['cat'] : 'Privati',
+            'lbl'      => isset($h['lbl']) ? $h['lbl'] : '',
+            'featured' => !empty($h['featured']),
+        ]);
+    }
+
+    // 2. Estensione da blog post tag/category 'sentenze'.
+    $sentenze_posts = get_posts([
+        'post_type'      => 'post',
+        'posts_per_page' => 6,
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'tax_query'      => [
+            'relation' => 'OR',
+            ['taxonomy' => 'category', 'field' => 'slug', 'terms' => ['sentenze', 'sentenza', 'casi'], 'operator' => 'IN'],
+            ['taxonomy' => 'post_tag', 'field' => 'slug', 'terms' => ['sentenze', 'sentenza', 'casi'], 'operator' => 'IN'],
+        ],
+        'suppress_filters' => false,
+    ]);
+    foreach ($sentenze_posts as $sp) {
+        $sp_id      = is_object($sp) ? (int) $sp->ID : 0;
+        $sp_outcome = (string) saltelli_field('_caso_outcome', $sp_id, '');
+        $sp_cat     = (string) saltelli_field('_caso_categoria', $sp_id, '');
+        $sp_label   = (string) saltelli_field('_caso_label', $sp_id, 'Sentenza');
+        $sp_desc    = wp_strip_all_tags(get_the_excerpt($sp));
+        if ($sp_desc === '') {
+            $sp_desc = wp_trim_words(wp_strip_all_tags(get_post_field('post_content', $sp)), 28, '…');
+        }
+        if ($sp_cat === '') {
+            $sp_cats = get_the_category($sp_id);
+            $sp_cat  = !empty($sp_cats) ? $sp_cats[0]->name : 'Altri';
+        }
+        if ($sp_outcome === '') {
+            $sp_outcome = __('Vittoria', 'saltelli');
+        }
+        $push([
+            'id'      => is_object($sp) ? get_the_title($sp) : '',
+            'desc'    => $sp_desc,
+            'outcome' => $sp_outcome,
+            'cat'     => $sp_cat,
+            'lbl'     => $sp_label,
+        ]);
+    }
+
+    // 3. Fallback editoriale (saltelli_all_cases) per portare il volume a 8-10.
+    if (count($out) < 8 && function_exists('saltelli_all_cases')) {
+        foreach (saltelli_all_cases() as $ec) {
+            $push($ec);
+            if (count($out) >= 10) {
+                break;
+            }
+        }
+    }
+
+    return array_slice($out, 0, 12);
+}
+
+/**
  * Casi rappresentativi per singolo avvocato — fallback editoriale per slug.
  * Ritorna array di max 3 casi: ['id', 'desc', 'outcome', 'lbl'].
  * Per ora popolato solo per Emiliano (slug `emiliano-saltelli`); altri slug
