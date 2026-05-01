@@ -218,6 +218,230 @@ while (have_posts()) :
                 </div>
             </section>
 
+        <?php elseif (is_page('contatti')) :
+            // === WAVE3 TASK 6 (contatti) — rebuild da JSX sessione-2 ===
+            // Layout: hero asimmetrico (5fr/7fr) + 2-col 8fr/4fr (form|aside) +
+            // come arrivare 3fr/9fr + trust signal full-width.
+            // CF7 shortcode preserva backend logic (form ID/slug saltelli-contatti).
+            $sl_studio        = saltelli_studio_data();
+            $sl_phone_label   = '+39 081 1813 1119';
+            $sl_phone_href    = 'tel:' . $sl_studio['phone'];
+            $sl_email_pub     = (string) saltelli_option('contact_email_pubblica', $sl_studio['email']);
+            if ($sl_email_pub === '') { $sl_email_pub = $sl_studio['email']; }
+            $sl_wa_digits     = preg_replace('/[^0-9]/', '', (string) $sl_studio['whatsapp']);
+            $sl_wa_href       = 'https://wa.me/' . $sl_wa_digits;
+            $sl_chain_contact = saltelli_get_breadcrumb_chain();
+            $sl_aree_select   = [
+                'Diritto tributario', 'Diritto del lavoro', 'Famiglia LGBTQ+',
+                'Diritto di famiglia', 'Condominiale', 'Immobiliare',
+                'Societario', 'Contenzioso civile', "Penale dell'economia",
+                'Penale', 'Bancario', 'Successioni',
+                'Amministrativo', 'Recupero crediti', 'Risarcimento danni',
+                'Privacy & GDPR', 'Domiciliazioni', 'Volontaria giurisdizione', 'Esecuzione',
+            ];
+            ?>
+
+            <div class="sl-contatti-w3">
+
+                <section class="sl-contatti-w3__hero" aria-labelledby="contatti-h1">
+                    <div class="sl-contatti-w3__hero-grid">
+                        <div class="sl-contatti-w3__hero-left">
+                            <?php if (!empty($sl_chain_contact) && count($sl_chain_contact) > 1) : ?>
+                                <nav class="sl-mono sl-page__breadcrumb sl-contatti-w3__breadcrumb" aria-label="<?php esc_attr_e('Breadcrumb', 'saltelli'); ?>">
+                                    <?php foreach ($sl_chain_contact as $sl_idx => $sl_node) :
+                                        if ($sl_idx > 0) echo ' / ';
+                                        if (!empty($sl_node['url'])) : ?>
+                                            <a href="<?php echo esc_url($sl_node['url']); ?>"><?php echo esc_html($sl_node['name']); ?></a>
+                                        <?php else : ?>
+                                            <span><?php echo esc_html($sl_node['name']); ?></span>
+                                        <?php endif;
+                                    endforeach; ?>
+                                </nav>
+                            <?php endif; ?>
+                            <div class="sl-mono sl-contatti-w3__eyebrow">
+                                <?php esc_html_e('§ Contatti · Primo incontro gratuito', 'saltelli'); ?>
+                            </div>
+                            <h1 class="sl-contatti-w3__h1" id="contatti-h1"><?php esc_html_e('Contatti.', 'saltelli'); ?></h1>
+                        </div>
+                        <div class="sl-contatti-w3__hero-right">
+                            <p class="sl-contatti-w3__hero-lede">
+                                <?php esc_html_e('Chiedi qualsiasi cosa.', 'saltelli'); ?><br>
+                                <span class="sl-contatti-w3__hero-lede-accent"><?php esc_html_e('In qualsiasi momento.', 'saltelli'); ?></span>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="sl-contatti-w3__main" aria-labelledby="contatti-form-h">
+                    <div class="sl-contatti-w3__main-grid">
+
+                        <div class="sl-contatti-w3__form-col">
+                            <div class="sl-mono"><?php esc_html_e('§ 01 — Modulo', 'saltelli'); ?></div>
+                            <h2 class="sl-contatti-w3__form-h" id="contatti-form-h">
+                                <?php esc_html_e('Prenota un primo', 'saltelli'); ?><br>
+                                <em><?php esc_html_e('incontro gratuito.', 'saltelli'); ?></em>
+                            </h2>
+
+                            <?php
+                            if (shortcode_exists('contact-form-7')) {
+                                // Form locale slug saltelli-contatti — handler CF7 preservato.
+                                $form_post = get_page_by_path('saltelli-contatti', OBJECT, 'wpcf7_contact_form');
+                                if ($form_post) {
+                                    echo do_shortcode('[contact-form-7 id="' . (int) $form_post->ID . '" title="Saltelli Contatti"]');
+                                } else {
+                                    echo '<p class="sl-mono">' . esc_html__('Modulo non disponibile. Scrivici a info@studiolegalesaltelli.it.', 'saltelli') . '</p>';
+                                }
+                            } else {
+                                // Fallback editorial — display only (CF7 non attivo, es. ambiente locale senza plugin).
+                                ?>
+                                <form class="sl-contatti-w3__form" method="post" action="#" novalidate>
+                                    <label class="sl-contatti-w3__field">
+                                        <span class="sl-mono"><?php esc_html_e('Nome e cognome *', 'saltelli'); ?></span>
+                                        <input type="text" name="nome" required>
+                                    </label>
+
+                                    <div class="sl-contatti-w3__field-row">
+                                        <label class="sl-contatti-w3__field">
+                                            <span class="sl-mono"><?php esc_html_e('Email *', 'saltelli'); ?></span>
+                                            <input type="email" name="email" required>
+                                        </label>
+                                        <label class="sl-contatti-w3__field">
+                                            <span class="sl-mono"><?php esc_html_e('Telefono', 'saltelli'); ?></span>
+                                            <input type="tel" name="telefono">
+                                        </label>
+                                    </div>
+
+                                    <div class="sl-contatti-w3__field-row">
+                                        <label class="sl-contatti-w3__field">
+                                            <span class="sl-mono"><?php esc_html_e('Area di interesse', 'saltelli'); ?></span>
+                                            <select name="area">
+                                                <option value=""><?php esc_html_e('— Seleziona —', 'saltelli'); ?></option>
+                                                <?php foreach ($sl_aree_select as $sl_a) : ?>
+                                                    <option value="<?php echo esc_attr($sl_a); ?>"><?php echo esc_html($sl_a); ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </label>
+                                        <label class="sl-contatti-w3__field">
+                                            <span class="sl-mono"><?php esc_html_e('Data preferita', 'saltelli'); ?></span>
+                                            <input type="date" name="data">
+                                        </label>
+                                    </div>
+
+                                    <label class="sl-contatti-w3__field">
+                                        <span class="sl-mono"><?php esc_html_e('Messaggio *', 'saltelli'); ?></span>
+                                        <textarea name="messaggio" rows="5" required></textarea>
+                                    </label>
+
+                                    <label class="sl-contatti-w3__gdpr">
+                                        <input type="checkbox" name="gdpr" required>
+                                        <span>
+                                            <?php
+                                            printf(
+                                                /* translators: %s wraps the privacy policy link */
+                                                esc_html__('Consento il trattamento dei dati personali ai sensi del Reg. UE 2016/679 (GDPR), per le finalità descritte nell\'%s. *', 'saltelli'),
+                                                '<a href="' . esc_url(home_url('/privacy/')) . '" class="sl-link">' . esc_html__('informativa privacy', 'saltelli') . '</a>'
+                                            );
+                                            ?>
+                                        </span>
+                                    </label>
+
+                                    <div class="sl-contatti-w3__submit-row">
+                                        <button type="submit" class="sl-btn sl-btn--primary">
+                                            <span><?php esc_html_e('Prenota gratuita', 'saltelli'); ?></span>
+                                            <span class="arrow" aria-hidden="true">→</span>
+                                        </button>
+                                    </div>
+                                </form>
+                                <?php
+                            }
+                            ?>
+                        </div>
+
+                        <aside class="sl-contatti-w3__aside" aria-labelledby="contatti-aside-h">
+                            <div class="sl-mono" id="contatti-aside-h"><?php esc_html_e('§ 02 — Studio', 'saltelli'); ?></div>
+
+                            <div class="sl-contatti-w3__nap">
+                                <div class="sl-mono"><?php esc_html_e('Indirizzo', 'saltelli'); ?></div>
+                                <address class="sl-contatti-w3__address">
+                                    <?php esc_html_e('Via Vannella', 'saltelli'); ?><br>
+                                    <?php esc_html_e('Gaetani, 27', 'saltelli'); ?><br>
+                                    <?php esc_html_e('80121 Napoli — Chiaia', 'saltelli'); ?>
+                                </address>
+                            </div>
+
+                            <div class="sl-contatti-w3__map" aria-label="<?php esc_attr_e('Mappa studio Saltelli — Chiaia, Napoli', 'saltelli'); ?>">
+                                <iframe
+                                    title="<?php esc_attr_e('Studio Saltelli — Via Vannella Gaetani 27', 'saltelli'); ?>"
+                                    width="100%" height="100%" frameborder="0" scrolling="no"
+                                    loading="lazy"
+                                    src="https://www.openstreetmap.org/export/embed.html?bbox=14.235%2C40.829%2C14.245%2C40.834&amp;layer=mapnik&amp;marker=40.8316%2C14.2400"></iframe>
+                                <div class="sl-mono sl-contatti-w3__map-tag"><?php esc_html_e('Chiaia · Napoli', 'saltelli'); ?></div>
+                            </div>
+
+                            <div class="sl-contatti-w3__cta-list" role="list">
+                                <a class="sl-contatti-w3__cta-row" role="listitem" href="<?php echo esc_attr($sl_phone_href); ?>">
+                                    <span class="sl-mono"><?php esc_html_e('Telefono', 'saltelli'); ?></span>
+                                    <span class="sl-contatti-w3__cta-val"><?php echo esc_html($sl_phone_label); ?> <span class="arrow" aria-hidden="true">→</span></span>
+                                </a>
+                                <a class="sl-contatti-w3__cta-row" role="listitem" href="mailto:<?php echo esc_attr($sl_email_pub); ?>">
+                                    <span class="sl-mono"><?php esc_html_e('Email', 'saltelli'); ?></span>
+                                    <span class="sl-contatti-w3__cta-val"><?php echo esc_html($sl_email_pub); ?> <span class="arrow" aria-hidden="true">→</span></span>
+                                </a>
+                                <a class="sl-contatti-w3__cta-row" role="listitem" href="<?php echo esc_url($sl_wa_href); ?>" target="_blank" rel="noopener">
+                                    <span class="sl-mono"><?php esc_html_e('WhatsApp', 'saltelli'); ?></span>
+                                    <span class="sl-contatti-w3__cta-val"><?php esc_html_e('Scrivi su WhatsApp', 'saltelli'); ?> <span class="arrow" aria-hidden="true">→</span></span>
+                                </a>
+                            </div>
+
+                            <div class="sl-contatti-w3__hours">
+                                <div class="sl-mono"><?php esc_html_e('Orari', 'saltelli'); ?></div>
+                                <div class="sl-contatti-w3__hours-body">
+                                    <?php esc_html_e('Lun – Ven · 10:00 – 19:00', 'saltelli'); ?><br>
+                                    <?php esc_html_e('Sabato su appuntamento', 'saltelli'); ?>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+
+                <section class="sl-contatti-w3__come" aria-labelledby="contatti-come-h">
+                    <div class="sl-contatti-w3__come-grid">
+                        <div class="sl-mono sl-contatti-w3__come-mark"><?php esc_html_e('§ 03 — Come arrivare', 'saltelli'); ?></div>
+                        <div class="sl-contatti-w3__come-body">
+                            <h2 class="sl-contatti-w3__come-h" id="contatti-come-h"><?php esc_html_e('Come arrivare.', 'saltelli'); ?></h2>
+                            <ul class="sl-contatti-w3__come-list" role="list">
+                                <li class="sl-contatti-w3__come-item">
+                                    <div class="sl-mono"><?php esc_html_e('Metro', 'saltelli'); ?></div>
+                                    <h3 class="sl-contatti-w3__come-t"><?php esc_html_e('Linea 6 · Mergellina', 'saltelli'); ?></h3>
+                                    <p class="sl-contatti-w3__come-d"><?php esc_html_e('8 minuti a piedi lungo la Riviera di Chiaia.', 'saltelli'); ?></p>
+                                </li>
+                                <li class="sl-contatti-w3__come-item">
+                                    <div class="sl-mono"><?php esc_html_e('Auto', 'saltelli'); ?></div>
+                                    <h3 class="sl-contatti-w3__come-t"><?php esc_html_e('Parcheggio Mergellina', 'saltelli'); ?></h3>
+                                    <p class="sl-contatti-w3__come-d"><?php esc_html_e('Sosta a pagamento, 5 minuti a piedi.', 'saltelli'); ?></p>
+                                </li>
+                                <li class="sl-contatti-w3__come-item">
+                                    <div class="sl-mono"><?php esc_html_e('Treno', 'saltelli'); ?></div>
+                                    <h3 class="sl-contatti-w3__come-t"><?php esc_html_e('Napoli Mergellina', 'saltelli'); ?></h3>
+                                    <p class="sl-contatti-w3__come-d"><?php esc_html_e('Stazione FS, 10 minuti a piedi.', 'saltelli'); ?></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="sl-contatti-w3__trust" aria-label="<?php esc_attr_e('Promessa di servizio', 'saltelli'); ?>">
+                    <div class="sl-contatti-w3__trust-inner">
+                        <div class="sl-mono sl-contatti-w3__trust-eyebrow"><?php esc_html_e('Promessa di servizio', 'saltelli'); ?></div>
+                        <p class="sl-contatti-w3__trust-quote">
+                            <?php esc_html_e('Riceviamo solo', 'saltelli'); ?><br><?php esc_html_e('su appuntamento.', 'saltelli'); ?><br>
+                            <span class="sl-contatti-w3__trust-tail"><?php esc_html_e('Risposta entro 24 ore.', 'saltelli'); ?></span>
+                        </p>
+                    </div>
+                </section>
+
+            </div>
+
         <?php else : ?>
 
         <header class="sl-page__hero">
@@ -243,92 +467,11 @@ while (have_posts()) :
             </div>
         </header>
 
-        <?php if (is_page('contatti')) : ?>
-            <section class="sl-page-contatti__form" aria-labelledby="contatti-form-h">
-                <div class="sl-container">
-                    <div class="sl-mono">§ <?php esc_html_e('Scrivici', 'saltelli'); ?></div>
-                    <h2 class="sl-section-title" id="contatti-form-h">
-                        <?php esc_html_e('Raccontaci il tuo problema', 'saltelli'); ?>
-                    </h2>
-                    <p class="sl-page-contatti__form-lede">
-                        <?php esc_html_e('Compila i campi qui sotto. La prima consulenza conoscitiva è gratuita e dura circa 30 minuti. Risponderemo entro 24 ore.', 'saltelli'); ?>
-                    </p>
-                    <?php
-                    if (shortcode_exists('contact-form-7')) {
-                        // Form ID locale 2703 (droplet) — shortcode tag-aware via slug fallback
-                        $form_post = get_page_by_path('saltelli-contatti', OBJECT, 'wpcf7_contact_form');
-                        if ($form_post) {
-                            echo do_shortcode('[contact-form-7 id="' . (int) $form_post->ID . '" title="Saltelli Contatti"]');
-                        } else {
-                            echo '<p class="sl-mono">' . esc_html__('Modulo non disponibile. Scrivici a info@studiolegalesaltelli.it.', 'saltelli') . '</p>';
-                        }
-                    } else {
-                        echo '<p class="sl-mono">' . esc_html__('Plugin form non attivo. Scrivici a info@studiolegalesaltelli.it.', 'saltelli') . '</p>';
-                    }
-                    ?>
-                </div>
-            </section>
-        <?php endif; ?>
-
         <section class="sl-page__content">
             <div class="sl-container">
                 <div class="sl-page__prose"><?php the_content(); ?></div>
             </div>
         </section>
-
-        <?php if (is_page('contatti')) : ?>
-            <section class="sl-page-contatti__sede" id="sede" aria-labelledby="contatti-sede-h">
-                <div class="sl-container">
-                    <div class="sl-mono">§ <?php esc_html_e('Sede', 'saltelli'); ?></div>
-                    <h2 class="sl-section-title" id="contatti-sede-h">
-                        <?php esc_html_e('Dove trovarci', 'saltelli'); ?>
-                    </h2>
-                    <p class="sl-page-contatti__sede-lede">
-                        <?php esc_html_e('Studio Legale Saltelli & Partners — Chiaia, Napoli. Si riceve solo su appuntamento, prima consulenza conoscitiva gratuita.', 'saltelli'); ?>
-                    </p>
-                    <address class="sl-page-contatti__sede-address">
-                        <span class="sl-page-contatti__sede-street">Via Vannella Gaetani 27</span>
-                        <span class="sl-page-contatti__sede-city">80121 Napoli · Chiaia</span>
-                    </address>
-                    <div class="sl-page-contatti__sede-actions">
-                        <a class="sl-mono sl-page-contatti__sede-link"
-                           href="https://www.google.com/maps/search/?api=1&amp;query=Via+Vannella+Gaetani+27+Napoli"
-                           target="_blank" rel="noopener">
-                            <?php esc_html_e('Apri in Google Maps', 'saltelli'); ?> →
-                        </a>
-                        <a class="sl-mono sl-page-contatti__sede-link"
-                           href="https://www.openstreetmap.org/?mlat=40.832&amp;mlon=14.235#map=17/40.832/14.235"
-                           target="_blank" rel="noopener">
-                            <?php esc_html_e('Apri in OpenStreetMap', 'saltelli'); ?> →
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <section class="sl-page-contatti__cta" aria-labelledby="contatti-cta-h">
-                <div class="sl-container">
-                    <div class="sl-mono sl-contact__eyebrow">
-                        <?php esc_html_e('Prima consulenza conoscitiva gratuita · Risposta entro 24 ore', 'saltelli'); ?>
-                    </div>
-                    <h2 class="sl-section-title" id="contatti-cta-h">
-                        <?php esc_html_e('Scrivici, ti rispondiamo entro 24 ore', 'saltelli'); ?>
-                    </h2>
-                    <p class="sl-page-contatti__cta-lede">
-                        <?php esc_html_e('Ogni mail viene letta direttamente dall\'avvocato di riferimento. Per richieste urgenti, chiama lo studio negli orari di apertura.', 'saltelli'); ?>
-                    </p>
-                    <div class="sl-page-contatti__cta-actions">
-                        <a class="sl-btn sl-btn--primary" href="mailto:info@studiolegalesaltelli.it">
-                            <span><?php esc_html_e('Scrivi una mail', 'saltelli'); ?></span>
-                            <span class="arrow" aria-hidden="true">→</span>
-                        </a>
-                        <a class="sl-btn" href="tel:+390811813119">
-                            <span><?php esc_html_e('Chiama lo studio', 'saltelli'); ?></span>
-                            <span class="arrow" aria-hidden="true">→</span>
-                        </a>
-                    </div>
-                </div>
-            </section>
-        <?php endif; ?>
 
         <?php if (is_page('casi') && function_exists('saltelli_homepage_cases')) :
             $cases = saltelli_homepage_cases();
@@ -375,7 +518,7 @@ while (have_posts()) :
             </section>
         <?php endif; endif; ?>
 
-        <?php endif; // sl_chi_siamo ?>
+        <?php endif; // sl_chi_siamo / contatti / default ?>
 
     </article>
     <?php

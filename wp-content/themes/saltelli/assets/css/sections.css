@@ -3844,6 +3844,498 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 /* === WAVE3 TASK 5 (casi) END === */
 
 /* === WAVE3 TASK 6 (contatti) BEGIN === */
+/* /contatti/ — rebuild da JSX sessione-2 (saltelli-s2-contatti.jsx)
+   Markup namespace: .sl-contatti-w3  (NO collisione con .sl-page-contatti__*)
+   Layout sacro: hero asimmetrico 5fr/7fr · main 8fr/4fr · come arrivare 3fr/9fr
+   · trust signal full-width.
+   Form CF7 backend preservato (handler intatto), solo restyle frontend
+   underline-only editorial. ------------------------------------------------ */
+
+.sl-contatti-w3 {
+    background: var(--background);
+    color: var(--text);
+}
+
+.sl-contatti-w3 .sl-mono {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* HERO ------------------------------------------------------------------- */
+.sl-contatti-w3__hero {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 120px clamp(24px, 5vw, 96px) 80px;
+}
+
+.sl-contatti-w3__hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: end;
+}
+
+.sl-contatti-w3__breadcrumb {
+    margin-bottom: 32px;
+    color: var(--text-muted);
+}
+
+.sl-contatti-w3__eyebrow {
+    margin-bottom: 32px;
+    color: var(--text-muted);
+}
+
+.sl-contatti-w3__h1 {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 9vw, 140px);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    font-weight: 400;
+    color: var(--primary);
+    margin: 0;
+}
+
+.sl-contatti-w3__hero-right {
+    padding-bottom: 8px;
+}
+
+.sl-contatti-w3__hero-lede {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(20px, 2.4vw, 28px);
+    line-height: 1.4;
+    color: var(--text);
+    max-width: 32ch;
+    margin: 0;
+    font-weight: 400;
+}
+
+.sl-contatti-w3__hero-lede-accent {
+    color: var(--accent);
+}
+
+@media (min-width: 1024px) {
+    .sl-contatti-w3__hero-grid {
+        grid-template-columns: 5fr 7fr;
+        gap: 64px;
+    }
+    .sl-contatti-w3__hero-right {
+        padding-bottom: 24px;
+    }
+    .sl-contatti-w3__eyebrow {
+        margin-bottom: 48px;
+    }
+}
+
+/* MAIN: form + aside ----------------------------------------------------- */
+.sl-contatti-w3__main {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 64px clamp(24px, 5vw, 96px) 96px;
+}
+
+.sl-contatti-w3__main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 64px;
+    align-items: start;
+}
+
+.sl-contatti-w3__form-col > .sl-mono {
+    margin-bottom: 24px;
+}
+
+.sl-contatti-w3__form-h {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 56px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--primary);
+    margin: 0 0 48px;
+    font-weight: 400;
+}
+
+.sl-contatti-w3__form-h em {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+@media (min-width: 1024px) {
+    .sl-contatti-w3__main {
+        padding-block: 64px 128px;
+    }
+    .sl-contatti-w3__main-grid {
+        grid-template-columns: 8fr 4fr;
+        gap: 96px;
+    }
+}
+
+/* FORM editorial — fallback markup (nessun CF7 attivo) ------------------- */
+.sl-contatti-w3__form {
+    display: grid;
+    gap: 40px;
+}
+
+.sl-contatti-w3__field {
+    display: block;
+}
+
+.sl-contatti-w3__field > .sl-mono {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.sl-contatti-w3__field input[type="text"],
+.sl-contatti-w3__field input[type="email"],
+.sl-contatti-w3__field input[type="tel"],
+.sl-contatti-w3__field input[type="date"],
+.sl-contatti-w3__field select,
+.sl-contatti-w3__field textarea {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    padding: 12px 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--primary);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    transition: border-color var(--dur-fast) var(--ease-editorial);
+}
+
+.sl-contatti-w3__field input:focus,
+.sl-contatti-w3__field select:focus,
+.sl-contatti-w3__field textarea:focus {
+    border-bottom-color: var(--accent);
+}
+
+.sl-contatti-w3__field select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B6B6B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    padding-right: 32px;
+}
+
+.sl-contatti-w3__field textarea {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.6;
+}
+
+.sl-contatti-w3__field-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+@media (min-width: 768px) {
+    .sl-contatti-w3__field-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.sl-contatti-w3__gdpr {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    cursor: pointer;
+    padding-top: 8px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 60ch;
+}
+
+.sl-contatti-w3__gdpr input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 4px;
+    flex-shrink: 0;
+    accent-color: var(--accent);
+}
+
+.sl-contatti-w3__submit-row {
+    padding-top: 16px;
+}
+
+/* CF7 form scoped — applica editorial styling ai field generati dal plugin
+   (preserva backend logic, restyle frontend). Override del blocco generico
+   v0.13.6 (.wpcf7-form) limitato a /contatti/ wave 3. */
+.sl-contatti-w3 .wpcf7-form {
+    max-width: 100%;
+    display: grid;
+    gap: 32px;
+}
+.sl-contatti-w3 .wpcf7-form > p {
+    margin: 0;
+}
+.sl-contatti-w3 .wpcf7-form label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+.sl-contatti-w3 .wpcf7-form input[type="text"],
+.sl-contatti-w3 .wpcf7-form input[type="email"],
+.sl-contatti-w3 .wpcf7-form input[type="tel"],
+.sl-contatti-w3 .wpcf7-form input[type="date"],
+.sl-contatti-w3 .wpcf7-form select,
+.sl-contatti-w3 .wpcf7-form textarea {
+    font-size: 17px;
+    color: var(--primary);
+}
+
+/* ASIDE — NAP + map + CTA + orari --------------------------------------- */
+.sl-contatti-w3__aside {
+    display: grid;
+    gap: 32px;
+}
+
+.sl-contatti-w3__nap > .sl-mono {
+    margin-bottom: 12px;
+}
+
+.sl-contatti-w3__address {
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--primary);
+    font-style: normal;
+    margin: 0;
+}
+
+.sl-contatti-w3__map {
+    position: relative;
+    height: 320px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    overflow: hidden;
+}
+
+.sl-contatti-w3__map iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    filter: grayscale(0.85) contrast(1.05);
+}
+
+.sl-contatti-w3__map-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--background);
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+}
+
+.sl-contatti-w3__cta-list {
+    display: grid;
+    gap: 0;
+}
+
+.sl-contatti-w3__cta-row {
+    display: block;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+    color: var(--primary);
+    text-decoration: none;
+    transition: padding var(--dur-fast) var(--ease-editorial),
+                color var(--dur-fast) var(--ease-editorial);
+}
+
+.sl-contatti-w3__cta-row:last-child {
+    border-bottom: 1px solid var(--border);
+}
+
+.sl-contatti-w3__cta-row:hover,
+.sl-contatti-w3__cta-row:focus-visible {
+    padding-left: 8px;
+    color: var(--accent);
+    outline: none;
+}
+
+.sl-contatti-w3__cta-row > .sl-mono {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.sl-contatti-w3__cta-val {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-style: italic;
+    letter-spacing: -0.005em;
+    line-height: 1.3;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    word-break: break-word;
+}
+
+.sl-contatti-w3__cta-val .arrow {
+    font-style: normal;
+    transition: transform var(--dur-fast) var(--ease-editorial);
+}
+
+.sl-contatti-w3__cta-row:hover .arrow,
+.sl-contatti-w3__cta-row:focus-visible .arrow {
+    transform: translateX(4px);
+}
+
+.sl-contatti-w3__hours {
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.sl-contatti-w3__hours > .sl-mono {
+    margin-bottom: 12px;
+}
+
+.sl-contatti-w3__hours-body {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--text);
+}
+
+/* COME ARRIVARE ---------------------------------------------------------- */
+.sl-contatti-w3__come {
+    background: var(--surface);
+    padding: 96px clamp(24px, 5vw, 96px);
+}
+
+.sl-contatti-w3__come-grid {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+
+.sl-contatti-w3__come-h {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 56px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--primary);
+    margin: 0 0 48px;
+    font-weight: 400;
+}
+
+.sl-contatti-w3__come-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+
+.sl-contatti-w3__come-item {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+}
+
+.sl-contatti-w3__come-item > .sl-mono {
+    margin-bottom: 16px;
+}
+
+.sl-contatti-w3__come-t {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--primary);
+    margin: 0 0 8px;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.sl-contatti-w3__come-d {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+@media (min-width: 1024px) {
+    .sl-contatti-w3__come-grid {
+        grid-template-columns: 3fr 9fr;
+        gap: 64px;
+    }
+    .sl-contatti-w3__come-list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 48px;
+    }
+}
+
+/* TRUST SIGNAL ----------------------------------------------------------- */
+.sl-contatti-w3__trust {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 96px clamp(24px, 5vw, 96px) 160px;
+}
+
+.sl-contatti-w3__trust-inner {
+    padding-block: 64px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+.sl-contatti-w3__trust-eyebrow {
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: block;
+}
+
+.sl-contatti-w3__trust-quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(28px, 3.5vw, 48px);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--primary);
+    max-width: 32ch;
+    margin: 0 auto;
+    font-weight: 400;
+}
+
+.sl-contatti-w3__trust-tail {
+    color: var(--text-muted);
+}
+
+/* TOUCH TARGETS mobile (audit CRO §12.3) -------------------------------- */
+@media (max-width: 1023px) {
+    .sl-contatti-w3__cta-row {
+        min-height: 64px;
+    }
+    .sl-contatti-w3__hero {
+        padding-top: 96px;
+        padding-bottom: 56px;
+    }
+    .sl-contatti-w3__main {
+        padding-bottom: 64px;
+    }
+    .sl-contatti-w3__come {
+        padding-block: 64px;
+    }
+    .sl-contatti-w3__trust {
+        padding-block: 64px 96px;
+    }
+}
+
 /* === WAVE3 TASK 6 (contatti) END === */
 
 /* === WAVE3 TASK 7 (blog) BEGIN === */
