@@ -6149,6 +6149,138 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 /* === IMPECCABLE v0.20.0 [delight — WhatsApp pulse] END === */
 
+/* === IMPECCABLE v0.20.1 [T2] BEGIN — Newsletter footer (Brevo legacy fallback) === */
+.sl-footer__newsletter {
+    padding-block: 64px;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+}
+.sl-footer__newsletter-grid {
+    display: grid;
+    gap: 32px;
+}
+@media (min-width: 1024px) {
+    .sl-footer__newsletter-grid {
+        grid-template-columns: 5fr 7fr;
+        align-items: end;
+        gap: 64px;
+    }
+}
+.sl-footer__newsletter-h {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(28px, 3vw, 32px);
+    color: var(--background);
+    margin: 0 0 8px;
+    letter-spacing: -0.015em;
+}
+.sl-footer__newsletter-p {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+.sl-footer__newsletter-p em {
+    color: var(--accent);
+    font-style: italic;
+}
+.sl-footer__newsletter-form {
+    display: grid;
+    gap: 16px;
+}
+.campi-newsletter {
+    display: grid;
+    gap: 12px;
+}
+@media (min-width: 768px) {
+    .campi-newsletter { grid-template-columns: 1fr 2fr; }
+}
+.sl-footer__newsletter-input {
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.30);
+    background: transparent;
+    color: var(--background);
+    padding: 12px 0;
+    font-family: var(--font-body);
+    font-size: 14px;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    transition: border-color var(--dur-fast) var(--ease-editorial);
+}
+.sl-footer__newsletter-input:focus {
+    outline: 0;
+    border-bottom-color: var(--accent);
+}
+.sl-footer__newsletter-input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+.sl-footer__newsletter-input::placeholder {
+    color: rgba(255, 255, 255, 0.50);
+}
+.sl-footer__newsletter-gdpr {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.60);
+    cursor: pointer;
+}
+.sl-footer__newsletter-gdpr input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.40);
+    background: transparent;
+    cursor: pointer;
+    margin-top: 2px;
+    border-radius: 0;
+    position: relative;
+    transition: background var(--dur-fast) var(--ease-editorial), border-color var(--dur-fast) var(--ease-editorial);
+}
+.sl-footer__newsletter-gdpr input[type="checkbox"]:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+.sl-footer__newsletter-gdpr input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    width: 4px;
+    height: 8px;
+    border: solid #1B2B4B;
+    border-width: 0 1.5px 1.5px 0;
+    transform: rotate(45deg);
+}
+.sl-footer__newsletter-gdpr input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+.sl-footer__newsletter-gdpr a {
+    color: rgba(255, 255, 255, 0.85);
+    border-bottom-color: rgba(255, 255, 255, 0.40);
+}
+.sl-footer__newsletter-gdpr a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+.sl-footer__newsletter-submit {
+    justify-self: start;
+    color: var(--background);
+}
+.sl-footer__newsletter-submit::after {
+    background: var(--background);
+}
+.sl-footer__newsletter-submit:hover::after {
+    background: var(--accent);
+}
+/* === IMPECCABLE v0.20.1 [T2] END === */
+
 /* === IMPECCABLE v0.20.0 [interaction-design — header tel hover] BEGIN === */
 .sl-header__phone {
     transition: color var(--dur-fast) var(--ease-editorial);

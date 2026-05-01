@@ -421,14 +421,7 @@ while (have_posts()) :
             $sl_wa_digits     = preg_replace('/[^0-9]/', '', (string) $sl_studio['whatsapp']);
             $sl_wa_href       = 'https://wa.me/' . $sl_wa_digits;
             $sl_chain_contact = saltelli_get_breadcrumb_chain();
-            $sl_aree_select   = [
-                'Diritto tributario', 'Diritto del lavoro', 'Famiglia LGBTQ+',
-                'Diritto di famiglia', 'Condominiale', 'Immobiliare',
-                'Societario', 'Contenzioso civile', "Penale dell'economia",
-                'Penale', 'Bancario', 'Successioni',
-                'Amministrativo', 'Recupero crediti', 'Risarcimento danni',
-                'Privacy & GDPR', 'Domiciliazioni', 'Volontaria giurisdizione', 'Esecuzione',
-            ];
+            /* IMPECCABLE v0.20.1 [T1]: $sl_aree_select rimosso — field "area di interesse" droppato dal form */
             ?>
 
             <div class="sl-contatti-w3">
@@ -501,25 +494,10 @@ while (have_posts()) :
                                         </label>
                                     </div>
 
-                                    <div class="sl-contatti-w3__field-row">
-                                        <label class="sl-contatti-w3__field">
-                                            <span class="sl-mono"><?php esc_html_e('Area di interesse', 'saltelli'); ?></span>
-                                            <select name="area" class="sl-input">
-                                                <option value=""><?php esc_html_e('— Seleziona —', 'saltelli'); ?></option>
-                                                <?php foreach ($sl_aree_select as $sl_a) : ?>
-                                                    <option value="<?php echo esc_attr($sl_a); ?>"><?php echo esc_html($sl_a); ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </label>
-                                        <label class="sl-contatti-w3__field">
-                                            <span class="sl-mono"><?php esc_html_e('Data preferita', 'saltelli'); ?></span>
-                                            <input type="date" name="data" class="sl-input">
-                                        </label>
-                                    </div>
-
+                                    <?php /* IMPECCABLE v0.20.1 [T1]: drop "Area di interesse" + "Data preferita" → 6 fields totali (allineato a CF7 live) */ ?>
                                     <label class="sl-contatti-w3__field">
                                         <span class="sl-mono"><?php esc_html_e('Messaggio *', 'saltelli'); ?></span>
-                                        <textarea name="messaggio" rows="5" class="sl-input" required></textarea>
+                                        <textarea name="messaggio" rows="6" class="sl-input" required></textarea>
                                     </label>
 
                                     <label class="sl-contatti-w3__gdpr">

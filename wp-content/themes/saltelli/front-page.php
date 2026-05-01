@@ -326,7 +326,7 @@ $press = saltelli_press_outlets();
                     <?php esc_html_e('Prima consulenza conoscitiva gratuita · Risposta entro 24 ore', 'saltelli'); ?>
                 </div>
                 <h2 class="sl-section-title sl-contact__title" id="contact-h">
-                    <?php esc_html_e('Prenoti', 'saltelli'); ?><br>
+                    <?php esc_html_e('Prenota', 'saltelli'); ?><br>
                     <?php esc_html_e('un primo', 'saltelli'); ?><br>
                     <em><?php esc_html_e('incontro.', 'saltelli'); ?></em>
                 </h2>

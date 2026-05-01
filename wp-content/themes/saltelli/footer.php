@@ -16,6 +16,66 @@ $ftr_tel_e164  = saltelli_studio_phone_e164();
 </main><!-- /main#site-main -->
 
 <footer class="sl-footer" role="contentinfo">
+
+    <?php /* === IMPECCABLE v0.20.1 [T2] BEGIN — Newsletter footer (Brevo legacy fallback HTML statico) ===
+       Action URL = endpoint Brevo legacy "link.studiolegalesaltelli.it".
+       SE fallisce sul nuovo dominio → upgrade a plugin mailin (Brevo) +
+       shortcode [sibwp_form id=1]. Plugin attualmente NON installato. */ ?>
+    <section class="sl-footer__newsletter" aria-labelledby="newsletter-h">
+        <div class="sl-container">
+            <div class="sl-footer__newsletter-grid">
+                <div class="sl-footer__newsletter-intro">
+                    <h3 class="sl-footer__newsletter-h" id="newsletter-h"><?php esc_html_e('Resta aggiornato', 'saltelli'); ?></h3>
+                    <p class="sl-footer__newsletter-p">
+                        <?php esc_html_e('Newsletter editoriale: novità giurisprudenziali, casi e guide.', 'saltelli'); ?>
+                        <em><?php esc_html_e('Una al mese.', 'saltelli'); ?></em>
+                        <?php esc_html_e('No spam.', 'saltelli'); ?>
+                    </p>
+                </div>
+                <form class="sl-footer__newsletter-form form-newsletter"
+                      action="https://link.studiolegalesaltelli.it/api/v3/contacts"
+                      method="POST"
+                      novalidate>
+                    <div class="campi-newsletter">
+                        <label class="screen-reader-text" for="sl-newsletter-firstname"><?php esc_html_e('Nome', 'saltelli'); ?></label>
+                        <input id="sl-newsletter-firstname"
+                               type="text"
+                               name="FIRSTNAME"
+                               placeholder="<?php esc_attr_e('Nome*', 'saltelli'); ?>"
+                               class="sl-footer__newsletter-input"
+                               autocomplete="given-name"
+                               required>
+                        <label class="screen-reader-text" for="sl-newsletter-email"><?php esc_html_e('Email', 'saltelli'); ?></label>
+                        <input id="sl-newsletter-email"
+                               type="email"
+                               name="email"
+                               placeholder="<?php esc_attr_e('Email*', 'saltelli'); ?>"
+                               class="sl-footer__newsletter-input"
+                               autocomplete="email"
+                               required>
+                    </div>
+                    <label class="sl-footer__newsletter-gdpr">
+                        <input type="checkbox" name="terms" required>
+                        <span>
+                            <?php
+                            printf(
+                                /* translators: %s = Privacy Policy link */
+                                esc_html__('Ho letto la %s e acconsento al trattamento dei miei dati per ricevere la newsletter.', 'saltelli'),
+                                '<a href="' . esc_url(home_url('/privacy/')) . '" class="sl-link">' . esc_html__('Privacy Policy', 'saltelli') . '</a>'
+                            );
+                            ?>
+                        </span>
+                    </label>
+                    <button type="submit" class="sl-btn sl-btn--primary sl-footer__newsletter-submit">
+                        <span><?php esc_html_e('Iscriviti', 'saltelli'); ?></span>
+                        <span class="arrow" aria-hidden="true">→</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <?php /* === IMPECCABLE v0.20.1 [T2] END === */ ?>
+
     <div class="sl-container sl-footer__inner">
 
         <div class="sl-footer__cols">
