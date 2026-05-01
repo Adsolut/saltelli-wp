@@ -60,8 +60,13 @@ function saltelli_enqueue_assets() {
     );
 
     // ------------------------------------------------------------------
-    // JS — GSAP stack + Lenis (CDN, defer, footer)
-    // SRI hash: TODO hardening post-demo.
+    // JS — GSAP core + ScrollTrigger (CDN cdnjs, defer, footer, SRI hash).
+    //
+    // v0.21.2: SplitText (paid GSAP plugin, NOT su cdnjs free) + Lenis
+    // (URL cdnjs inesistente, libreria disabilitata in main.js da Polish
+    // Agent) RIMOSSI. Erano 2 404 silent + 2 MIME-refused warning su
+    // ogni page load (Lighthouse "Browser errors logged to the console").
+    // main.js ha fallback logic: typeof window.SplitText/Lenis !== 'undefined'.
     // ------------------------------------------------------------------
 
     wp_enqueue_script(
@@ -80,30 +85,14 @@ function saltelli_enqueue_assets() {
         ['in_footer' => true, 'strategy' => 'defer']
     );
 
-    wp_enqueue_script(
-        'saltelli-gsap-splittext',
-        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js',
-        ['saltelli-gsap'],
-        null,
-        ['in_footer' => true, 'strategy' => 'defer']
-    );
-
-    wp_enqueue_script(
-        'saltelli-lenis',
-        'https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.13/lenis.min.js',
-        [],
-        null,
-        ['in_footer' => true, 'strategy' => 'defer']
-    );
-
     // ------------------------------------------------------------------
-    // JS — entrypoint Saltelli (dipende da gsap-core e lenis)
+    // JS — entrypoint Saltelli (dipende solo da gsap-core + scrolltrigger)
     // ------------------------------------------------------------------
 
     wp_enqueue_script(
         'saltelli-main',
         SALTELLI_THEME_URI . '/assets/js/main.js',
-        ['saltelli-gsap', 'saltelli-gsap-scrolltrigger', 'saltelli-gsap-splittext', 'saltelli-lenis'],
+        ['saltelli-gsap', 'saltelli-gsap-scrolltrigger'],
         $ver,
         ['in_footer' => true, 'strategy' => 'defer']
     );
@@ -129,8 +118,7 @@ add_filter('script_loader_tag', function ($tag, $handle) {
     $sri = [
         'saltelli-gsap'                => 'sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt',
         'saltelli-gsap-scrolltrigger'  => 'sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d',
-        'saltelli-gsap-splittext'      => 'sha384-ZSs6LKr2GoUPDyHrN+rCQgyHL1yUyok5xMniSrgeRG7rUvA6vTmxronM1eZOfjgz',
-        'saltelli-lenis'               => 'sha384-5MXQT3yrGpx6/FO6Z5JlMsn1xsN/OggV+b88W2CfpNqmvPfmv7JW/O8x78GzptfE',
+        // SplitText + Lenis rimossi v0.21.2 (404 cdnjs, vedi commento sopra).
     ];
     if (!isset($sri[$handle])) {
         return $tag;

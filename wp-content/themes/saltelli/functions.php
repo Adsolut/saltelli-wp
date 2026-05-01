@@ -8,12 +8,13 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '0.21.1-beta-performance-closing');
+define('SALTELLI_THEME_VERSION', '0.21.2-beta-perf-final');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
 require_once SALTELLI_THEME_DIR . '/inc/setup.php';
 require_once SALTELLI_THEME_DIR . '/inc/enqueue.php';
+require_once SALTELLI_THEME_DIR . '/inc/critical-css.php';
 require_once SALTELLI_THEME_DIR . '/inc/helpers.php';
 require_once SALTELLI_THEME_DIR . '/inc/cpt-avvocato.php';
 require_once SALTELLI_THEME_DIR . '/inc/cpt-competenza.php';

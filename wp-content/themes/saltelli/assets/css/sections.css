@@ -6723,3 +6723,47 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 /* === IMPECCABLE v0.20.0 [interaction-design — header tel] END === */
 
+/* === IMPECCABLE v0.21.2 [perf-T4] BEGIN — A11y touch target + contrast ===
+   Lighthouse mobile flagged: touch targets <48×48 + insufficient contrast.
+   Fix mirato senza modificare tokens (palette locked). */
+
+/* Touch target ≥48×48 mobile per footer link + bottom legal links.
+   Padding-block 8px + min-height 48 + flex-align garantisce hit area. */
+@media (max-width: 1023px) {
+    .sl-foot-link,
+    .sl-foot-bottom__legal a,
+    .sl-foot-newsletter__gdpr a,
+    .sl-foot-tier1__row,
+    .sl-foot-tier2 a,
+    .sl-foot-nav-list a {
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        padding-block: 8px;
+    }
+    .sl-foot-tier1__row {
+        align-items: baseline;
+    }
+}
+
+/* Contrast fix — testi mono/muted su cream surface possono cadere sotto
+   AA 4.5:1. Bump leggero del muted (#6B6B6B → #5A5A5A) limita drift dal
+   tokens ma alza il contrast ratio.
+   IMPORTANTE: NO modifica a tokens.css (locked). Override scoped solo
+   agli elementi a rischio. */
+.sl-foot-newsletter__p,
+.sl-foot-newsletter__trust,
+.sl-foot-info-block,
+.sl-foot-ai-list,
+.sl-foot-bottom {
+    /* footer ha bg --primary navy → white-tint già OK; nessun override necessario */
+}
+.sl-prefooter-cta__trust,
+.sl-foot-precta__trust,
+.sl-area__meta {
+    /* cream background → muted #6B6B6B = ratio 4.45:1 (pass AA per text 18px+).
+       Per body text small mono <16px applichiamo darker scope. */
+    color: #5A5A5A;
+}
+/* === IMPECCABLE v0.21.2 [perf-T4] END === */
+
