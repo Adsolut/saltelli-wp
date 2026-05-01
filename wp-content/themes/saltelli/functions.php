@@ -8,7 +8,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '0.20.1-beta-cf7-newsletter-cleanup');
+define('SALTELLI_THEME_VERSION', '0.20.2-beta-footer-v2-newsletter');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
