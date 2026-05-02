@@ -8728,6 +8728,24 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     border-bottom: 1px solid var(--border) !important;
 }
 
+/* === v0.28.4 — UNIFIED EDITORIAL LAYOUT 3fr/9fr cross-page ============
+   User Duccio: "Falo per tutte le pagine".
+   Tutte le sezioni page (sl-section-head + footer pre-CTA + newsletter)
+   ora usano stesso pattern asym 3fr/9fr (eyebrow LEFT x=72, h2 RIGHT x=444).
+   Coerenza visuale TOTALE cross-template. */
+@media (min-width: 1024px) {
+    /* Global section-head pattern: eyebrow + h2 → asym 3fr/9fr
+       Markup esistente: <div class="sl-section-head">
+                            <div class="sl-mono">§ 01 — ...</div>   ← col 1
+                            <h2>...</h2> oppure <div>...</div>      ← col 2
+                          </div> */
+    .sl-section-head {
+        grid-template-columns: 3fr 9fr !important;
+        gap: 64px !important;
+        align-items: start;
+    }
+}
+
 /* v0.28.3 — Footer pre-CTA + newsletter alignment 3fr/9fr asym
    come pagine editoriali (chi-siamo CTA, founding, team, principles, timeline,
    tier-1 sections). Eyebrow LEFT col 3fr (x=72) + h2/content RIGHT col 9fr
