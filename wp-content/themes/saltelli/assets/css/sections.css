@@ -8546,6 +8546,24 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     margin: 0 0 24px !important;
 }
 
+/* === v0.27.9 — Footer v2 padding reset cross-page allineamento ============
+   Issue Duccio: tutti gli eyebrow DENTRO <footer> (newsletter, main, bottom)
+   apparivano a x=92 mentre eyebrow OUTSIDE footer (pre-CTA) era a x=72 →
+   shift orizzontale 20px visibile come "altra riga di impaginazione".
+
+   Cause: .sl-footer { padding: 48px 20px 24px } legacy v1 (line 754) viene
+   ereditato anche da .sl-footer--v2. Le sezioni interne hanno propria
+   padding-inline 72px (clamp 24,5vw,96) → 20+72=92 vs 72 pre-CTA.
+
+   Fix: override padding-inline 0 su .sl-footer--v2 (mantiene padding-block).
+   Tutti i wrapper interni (.sl-foot-{newsletter,main,bottom}-wrap) ora
+   partono da x=0 con propria padding-inline 72 → eyebrow x=72 ✓ allineato
+   a pre-CTA + page sections.
+   ─────────────────────────────────────────────────────────────────────── */
+.sl-footer.sl-footer--v2 {
+    padding-inline: 0 !important;
+}
+
 /* CHI-SIAMO CTA finale: classe REALE è .sl-chi-siamo__cta-title (NON __h2)
    "Prenoti / una consulenza / gratuita." H2 huge JSX clamp(56,6.5vw,96) mb 48 */
 .sl-chi-siamo__cta h2.sl-chi-siamo__cta-title {
