@@ -7246,3 +7246,479 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 }
 /* === IMPECCABLE v0.22.2 END === */
 
+/* === v0.23.0 TASK A — Tier-1 deep cluster pixel-perfect ===
+   Scope additivo a .sl-competenza--tier-1 (no replace, classes coexist).
+   Source JSX: .claude/knowledge/design/sessione-2/saltelli-s2-practice-tier1.jsx */
+
+.sl-tier1__hero {
+    padding-block: clamp(64px, 8vw, 120px) clamp(32px, 4vw, 48px);
+}
+.sl-tier1__eyebrow {
+    margin-bottom: 24px;
+    color: var(--accent);
+}
+.sl-tier1__h1 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 132px);
+    line-height: 0.98;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    color: var(--primary);
+    margin-block: 0 24px;
+}
+.sl-tier1__sub {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(20px, 1.6vw, 28px);
+    line-height: 1.4;
+    color: var(--text-muted);
+    max-width: 56ch;
+    margin: 0 0 56px 0;
+    font-weight: 400;
+}
+.sl-tier1__capsule {
+    padding-block: 32px;
+    border-block: 1px solid var(--accent);
+    margin-block: 48px;
+    max-width: 60ch;
+    margin-inline: auto;
+}
+.sl-tier1__capsule-text {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(22px, 2vw, 28px);
+    line-height: 1.5;
+    color: var(--primary);
+    max-width: 60ch;
+    margin: 0;
+    letter-spacing: -0.005em;
+}
+.sl-tier1__body {
+    padding-block: 64px;
+}
+.sl-tier1__body .sl-competenza__prose,
+.sl-tier1__body .sl-container > .sl-competenza__prose {
+    max-width: 720px;
+    margin-inline: auto;
+}
+.sl-tier1__body h2,
+.sl-tier1__cluster-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 44px);
+    line-height: 1.15;
+    font-weight: 400;
+    margin-block: 80px 32px;
+    color: var(--primary);
+    max-width: 24ch;
+    letter-spacing: -0.01em;
+}
+.sl-tier1__cases,
+.sl-tier1__faq,
+.sl-tier1__related,
+.sl-tier1__cta-final {
+    padding-block: clamp(64px, 8vw, 128px);
+}
+.sl-tier1__faq .sl-acc {
+    max-width: 720px;
+    margin-inline: auto;
+    margin-top: 32px;
+}
+.sl-tier1__cta-final {
+    text-align: center;
+}
+.sl-tier1__cta-final .sl-mono {
+    margin-bottom: 24px;
+    color: var(--text-muted);
+}
+@media (max-width: 767px) {
+    .sl-tier1__h1 { font-size: clamp(40px, 9vw, 64px); }
+    .sl-tier1__sub { font-size: 18px; margin-bottom: 32px; }
+    .sl-tier1__cluster-title,
+    .sl-tier1__body h2 { margin-block: 56px 24px; font-size: clamp(24px, 5vw, 32px); }
+}
+
+/* === v0.23.0 TASK B — /costi/ Sessione 2 pixel-perfect ===
+   Scope namespace .sl-costi-w4__* (NO collision con legacy .sl-costi__*).
+   Source JSX: .claude/knowledge/design/sessione-2/saltelli-s2-costi.jsx */
+
+.sl-costi-w4 {
+    background: var(--background);
+}
+.sl-costi-w4 .sl-container {
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: clamp(24px, 5vw, 96px);
+}
+
+/* 1. HERO 8fr/4fr */
+.sl-costi-w4__hero {
+    padding-block: clamp(64px, 10vw, 120px) clamp(48px, 6vw, 96px);
+}
+.sl-costi-w4__hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 64px;
+    align-items: start;
+}
+@media (min-width: 1024px) {
+    .sl-costi-w4__hero-grid {
+        grid-template-columns: 8fr 4fr;
+        gap: 80px;
+    }
+}
+.sl-costi-w4__hero-eyebrow {
+    margin: 24px 0 24px 0;
+    color: var(--text-muted);
+}
+.sl-costi-w4__h1 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--primary);
+    margin: 0 0 40px 0;
+    max-width: 14ch;
+}
+.sl-costi-w4__lede {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 56ch;
+    margin: 0;
+    font-weight: 400;
+}
+.sl-costi-w4__hero-trust {
+    border: 1px solid var(--primary);
+    padding: 32px 28px;
+    background: var(--background);
+}
+@media (min-width: 1024px) {
+    .sl-costi-w4__hero-trust {
+        position: sticky;
+        top: 96px;
+    }
+}
+.sl-costi-w4__hero-trust-eyebrow {
+    margin-bottom: 24px;
+    color: var(--primary);
+}
+.sl-costi-w4__hero-trust-headline {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    line-height: 1.8;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+}
+.sl-costi-w4__hero-trust-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px 0;
+}
+.sl-costi-w4__hero-trust-list li {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    padding: 8px 0;
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+}
+.sl-costi-w4__hero-trust-list li > span {
+    color: var(--accent);
+    font-family: var(--font-display);
+    flex-shrink: 0;
+}
+
+/* 2. § 01 · Come funziona — 3 col scenari */
+.sl-costi-w4__come {
+    padding-block: clamp(64px, 8vw, 96px);
+    border-top: 1px solid var(--border);
+}
+.sl-costi-w4__section-head {
+    margin-bottom: 64px;
+}
+.sl-costi-w4__section-head .sl-mono {
+    margin-bottom: 24px;
+    color: var(--text-muted);
+}
+.sl-costi-w4__h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(36px, 4.5vw, 64px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+    margin: 0;
+    max-width: 22ch;
+}
+.sl-costi-w4__h2--italic {
+    font-style: italic;
+}
+.sl-costi-w4__come-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+}
+@media (min-width: 768px) {
+    .sl-costi-w4__come-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+    .sl-costi-w4__come-grid { grid-template-columns: repeat(3, 1fr); gap: 64px; }
+}
+.sl-costi-w4__scenario-card {
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+}
+.sl-costi-w4__scenario-card > .sl-mono:first-child {
+    margin-bottom: 24px;
+    color: var(--text-muted);
+}
+.sl-costi-w4__scenario-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.2;
+    color: var(--primary);
+    margin: 0 0 20px 0;
+    letter-spacing: -0.01em;
+}
+.sl-costi-w4__scenario-card p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+    margin: 0 0 32px 0;
+    max-width: 32ch;
+}
+.sl-costi-w4__scenario-trust {
+    color: var(--accent);
+}
+
+/* 3. § 02 · Cosa succede dopo i 30 minuti — 4fr/8fr */
+.sl-costi-w4__scenari {
+    padding-block: clamp(64px, 8vw, 96px);
+    background: var(--surface);
+}
+.sl-costi-w4__scenari-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: start;
+}
+@media (min-width: 1024px) {
+    .sl-costi-w4__scenari-grid {
+        grid-template-columns: 4fr 8fr;
+        gap: 80px;
+    }
+    .sl-costi-w4__scenari-head {
+        position: sticky;
+        top: 96px;
+    }
+}
+.sl-costi-w4__scenari-head .sl-mono {
+    margin-bottom: 24px;
+    color: var(--text-muted);
+}
+.sl-costi-w4__scenari-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sl-costi-w4__scenari-item {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 32px;
+    padding-block: 48px;
+    border-bottom: 1px solid var(--border);
+}
+.sl-costi-w4__scenari-item:first-child { padding-top: 0; }
+.sl-costi-w4__scenari-item:last-child { border-bottom: 0; padding-bottom: 0; }
+.sl-costi-w4__scenari-num {
+    color: var(--accent);
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    padding-top: 4px;
+}
+.sl-costi-w4__scenari-label {
+    margin-bottom: 16px;
+    color: var(--primary);
+}
+.sl-costi-w4__scenari-item p {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text);
+    margin: 0 0 16px 0;
+    max-width: 60ch;
+}
+.sl-costi-w4__scenari-trust {
+    color: var(--text-muted);
+}
+
+/* 4. § 03 · Come calcoliamo — 6fr/6fr drop-cap T */
+.sl-costi-w4__calc {
+    padding-block: clamp(64px, 8vw, 96px);
+}
+.sl-costi-w4__calc-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: start;
+}
+@media (min-width: 1024px) {
+    .sl-costi-w4__calc-grid {
+        grid-template-columns: 6fr 6fr;
+        gap: 80px;
+    }
+}
+.sl-costi-w4__calc-prose {
+    max-width: 62ch;
+}
+.sl-costi-w4__calc-prose p {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--text);
+    margin: 0 0 32px 0;
+}
+.sl-costi-w4__calc-prose > p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-size: 84px;
+    line-height: 0.85;
+    float: left;
+    margin: 8px 16px 0 0;
+    color: var(--primary);
+    font-weight: 400;
+}
+.sl-costi-w4__calc-cards {
+    display: grid;
+    gap: 0;
+}
+.sl-costi-w4__calc-card {
+    padding-block: 32px;
+    border-top: 1px solid var(--border);
+}
+.sl-costi-w4__calc-card:last-child { border-bottom: 1px solid var(--border); }
+.sl-costi-w4__calc-card > .sl-mono:first-child {
+    margin-bottom: 12px;
+    color: var(--accent);
+}
+.sl-costi-w4__calc-h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.2;
+    color: var(--primary);
+    margin: 0 0 12px 0;
+    letter-spacing: -0.01em;
+}
+.sl-costi-w4__calc-card p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 44ch;
+}
+
+/* 5. § 04 · FAQ accordion */
+.sl-costi-w4__faq {
+    padding-block: clamp(64px, 8vw, 96px);
+    background: var(--surface);
+}
+.sl-costi-w4__faq-list {
+    margin-top: 32px;
+    max-width: 960px;
+}
+
+/* 6. § 05 · Trust signals 4-col grid */
+.sl-costi-w4__trust-grid {
+    padding-block: clamp(64px, 8vw, 96px);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+.sl-costi-w4__trust-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+@media (min-width: 768px) {
+    .sl-costi-w4__trust-list { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+}
+@media (min-width: 1024px) {
+    .sl-costi-w4__trust-list { grid-template-columns: repeat(4, 1fr); gap: 32px; }
+}
+.sl-costi-w4__trust-plate {
+    padding: 32px 24px;
+    border: 1px solid var(--border);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* 7. CTA finale editoriale */
+.sl-costi-w4__cta-final {
+    padding-block: clamp(80px, 10vw, 120px);
+    text-align: center;
+}
+.sl-costi-w4__cta-final > .sl-container > .sl-mono {
+    margin-bottom: 32px;
+    color: var(--text-muted);
+}
+.sl-costi-w4__cta-h2 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(36px, 4.5vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+    margin: 0 auto 32px;
+    max-width: 20ch;
+}
+.sl-costi-w4__cta-sub {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--text);
+    margin: 0 auto 48px;
+    max-width: 48ch;
+}
+.sl-costi-w4__cta-trust {
+    margin-top: 48px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+}
+
+/* === v0.23.0 TASK C — .sl-input + .sl-link refinements ===
+   Esistono già ma carry-over Duccio: editorial underline-only spec verificato. */
+.sl-input[aria-invalid="true"] {
+    border-bottom-color: #9B3D2E; /* burgundy non-aggressive */
+}
+.sl-link--clean {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+.sl-link--clean:hover,
+.sl-link--clean:focus-visible {
+    color: var(--accent);
+    border-bottom: 0;
+}
+
+/* === v0.23.0 END === */
+

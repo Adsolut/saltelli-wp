@@ -795,6 +795,22 @@ function saltelli_press_outlets() {
 }
 
 /**
+ * v0.23.0 — Determina se una competenza è tier-1 deep cluster.
+ * Source: ACF flag is_tier_1_focus + fallback whitelist 3 slug.
+ *
+ * @param int $post_id
+ * @return bool
+ */
+function saltelli_is_tier1_competenza($post_id) {
+    if ((bool) saltelli_field('is_tier_1_focus', $post_id, false)) {
+        return true;
+    }
+    $tier1_slugs = ['diritto-tributario', 'diritto-del-lavoro', 'diritto-di-famiglia-lgbtq'];
+    $slug = get_post_field('post_name', $post_id);
+    return in_array($slug, $tier1_slugs, true);
+}
+
+/**
  * v0.22.0 — Wrappa ogni parola di un titolo h1 in <span class="sl-word">.
  * Preserva i tag inline whitelisted (em, br) per stylized headlines come
  * "Casi <em>rappresentativi.</em>". Output safe-escaped via wp_kses.

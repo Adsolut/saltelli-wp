@@ -8,7 +8,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '0.22.2-beta-animation-final-completion');
+define('SALTELLI_THEME_VERSION', '0.23.0-beta-tier1-costi-pixel-perfect');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 

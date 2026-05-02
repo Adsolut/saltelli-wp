@@ -20,11 +20,13 @@ while (have_posts()) :
     $lead_atts  = saltelli_get_attorneys_for_competenza($post_id);
     $articoli   = saltelli_field('articoli_correlati', $post_id, []);
     $cat_label  = saltelli_competenza_category_label($post_id);
-    $tier_label = $is_tier_1 ? __('Tier 1 · approfondimento', 'saltelli') : __('Area di pratica', 'saltelli');
+    $tier_label    = $is_tier_1 ? __('Tier 1 · approfondimento', 'saltelli') : __('Area di pratica', 'saltelli');
+    $tier1_subtitle = (string) saltelli_field('subtitle', $post_id, '');
+    $tier1_class   = $is_tier_1 ? 'sl-tier1 ' : '';
     ?>
-    <article <?php post_class('sl-competenza sl-competenza--' . ($is_tier_1 ? 'tier-1' : 'tier-2')); ?>>
+    <article <?php post_class($tier1_class . 'sl-competenza sl-competenza--' . ($is_tier_1 ? 'tier-1' : 'tier-2')); ?>>
 
-        <header class="sl-competenza__hero">
+        <header class="sl-competenza__hero <?php echo $is_tier_1 ? 'sl-tier1__hero' : ''; ?>">
             <div class="sl-container">
                 <?php saltelli_render_breadcrumb(); ?>
 
@@ -32,16 +34,20 @@ while (have_posts()) :
                     ← <?php esc_html_e('Tutte le aree', 'saltelli'); ?>
                 </a>
 
-                <div class="sl-mono sl-competenza__eyebrow">
+                <div class="sl-mono sl-competenza__eyebrow <?php echo $is_tier_1 ? 'sl-tier1__eyebrow' : ''; ?>">
                     <?php echo esc_html($tier_label); ?><?php echo $cat_label ? ' · ' . esc_html($cat_label) : ''; ?>
                 </div>
 
-                <h1 class="sl-competenza__title" data-split-reveal><?php echo wp_kses(saltelli_split_h1_words(get_the_title()), ['span' => ['class' => true, 'data-i' => true]]); ?></h1>
+                <h1 class="sl-competenza__title <?php echo $is_tier_1 ? 'sl-tier1__h1' : ''; ?>" data-split-reveal><?php echo wp_kses(saltelli_split_h1_words(get_the_title()), ['span' => ['class' => true, 'data-i' => true]]); ?></h1>
+
+                <?php if ($is_tier_1 && $tier1_subtitle !== '') : ?>
+                    <p class="sl-tier1__sub"><?php echo esc_html($tier1_subtitle); ?></p>
+                <?php endif; ?>
 
                 <?php if ($answer !== '') : ?>
-                    <div class="sl-competenza__answer-wrap">
+                    <div class="sl-competenza__answer-wrap <?php echo $is_tier_1 ? 'sl-tier1__capsule' : ''; ?>">
                         <div class="sl-mono sl-competenza__answer-eyebrow"><?php esc_html_e('Risposta in 50 parole', 'saltelli'); ?></div>
-                        <p class="sl-competenza__answer"><?php echo esc_html($answer); ?></p>
+                        <p class="sl-competenza__answer <?php echo $is_tier_1 ? 'sl-tier1__capsule-text' : ''; ?>"><?php echo esc_html($answer); ?></p>
                     </div>
                 <?php else : ?>
                     <!-- TODO: answer capsule da Elena (40-60 parole) -->
@@ -57,7 +63,7 @@ while (have_posts()) :
         </header>
 
         <?php if (get_the_content()) : ?>
-            <section class="sl-competenza__intro">
+            <section class="sl-competenza__intro <?php echo $is_tier_1 ? 'sl-tier1__body' : ''; ?>">
                 <div class="sl-container">
                     <div class="sl-competenza__prose"><?php the_content(); ?></div>
                 </div>
@@ -65,7 +71,7 @@ while (have_posts()) :
         <?php endif; ?>
 
         <?php if ($is_tier_1 && $body_ext !== '') : ?>
-            <section class="sl-competenza__body">
+            <section class="sl-competenza__body sl-tier1__body">
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Approfondimento', 'saltelli'); ?></div>
                     <div class="sl-competenza__prose sl-competenza__prose--extended" data-toc-source>
@@ -116,10 +122,10 @@ while (have_posts()) :
         <?php endif; ?>
 
         <?php if ($is_tier_1 && is_array($casi) && !empty($casi)) : ?>
-            <section class="sl-competenza__casi" aria-labelledby="comp-casi-h">
+            <section class="sl-competenza__casi sl-tier1__cases" aria-labelledby="comp-casi-h">
                 <div class="sl-container">
-                    <div class="sl-mono">§ <?php esc_html_e('Casi rappresentativi', 'saltelli'); ?></div>
-                    <h2 class="sl-section-title" id="comp-casi-h"><?php esc_html_e('Casi rappresentativi', 'saltelli'); ?></h2>
+                    <div class="sl-mono">§ <?php esc_html_e('Tre vittorie recenti', 'saltelli'); ?></div>
+                    <h2 class="sl-section-title" id="comp-casi-h"><?php esc_html_e('Tre vittorie recenti.', 'saltelli'); ?></h2>
                     <ol class="sl-cases__list" role="list">
                         <?php foreach ($casi as $caso) :
                             if (empty($caso['titolo']) || empty($caso['descrizione_anonimizzata'])) continue;
@@ -142,16 +148,23 @@ while (have_posts()) :
                 return !empty($r['domanda']) && !empty($r['risposta']);
             });
             if (!empty($valid_faq)) : ?>
-                <section class="sl-competenza__faq" aria-labelledby="comp-faq-h">
+                <section class="sl-competenza__faq <?php echo $is_tier_1 ? 'sl-tier1__faq' : ''; ?>" aria-labelledby="comp-faq-h">
                     <div class="sl-container">
                         <div class="sl-mono">§ <?php esc_html_e('Domande frequenti', 'saltelli'); ?></div>
-                        <h2 class="sl-section-title" id="comp-faq-h"><?php esc_html_e('Domande frequenti', 'saltelli'); ?></h2>
-                        <div class="sl-faq">
-                            <?php foreach ($valid_faq as $row) : ?>
-                                <details class="sl-faq__item">
-                                    <summary class="sl-faq__question"><?php echo esc_html($row['domanda']); ?></summary>
-                                    <div class="sl-faq__answer"><?php echo wp_kses_post(wpautop($row['risposta'])); ?></div>
-                                </details>
+                        <h2 class="sl-section-title" id="comp-faq-h"><?php esc_html_e('Cinque domande frequenti.', 'saltelli'); ?></h2>
+                        <div class="sl-acc" data-sl-acc>
+                            <?php foreach ($valid_faq as $i => $row) : ?>
+                                <div class="sl-acc__item" data-open="<?php echo $i === 0 ? 'true' : 'false'; ?>">
+                                    <button class="sl-acc__btn" type="button" aria-expanded="<?php echo $i === 0 ? 'true' : 'false'; ?>" aria-controls="comp-faq-panel-<?php echo (int) $i; ?>">
+                                        <span><?php echo esc_html($row['domanda']); ?></span>
+                                        <span class="sl-acc__icon" aria-hidden="true">+</span>
+                                    </button>
+                                    <div class="sl-acc__panel" id="comp-faq-panel-<?php echo (int) $i; ?>">
+                                        <div class="sl-acc__inner">
+                                            <?php echo wp_kses_post(wpautop($row['risposta'])); ?>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -160,7 +173,7 @@ while (have_posts()) :
         endif; ?>
 
         <?php if (!empty($articoli)) : ?>
-            <section class="sl-competenza__articoli" aria-labelledby="comp-art-h">
+            <section class="sl-competenza__articoli <?php echo $is_tier_1 ? 'sl-tier1__related' : ''; ?>" aria-labelledby="comp-art-h">
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Editoriale', 'saltelli'); ?></div>
                     <h2 class="sl-section-title" id="comp-art-h"><?php esc_html_e('Approfondimenti correlati', 'saltelli'); ?></h2>
@@ -183,8 +196,9 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
-        <section class="sl-competenza__cta">
+        <section class="sl-competenza__cta <?php echo $is_tier_1 ? 'sl-tier1__cta-final' : ''; ?>">
             <div class="sl-container">
+                <div class="sl-mono">§ <?php esc_html_e('Pronto?', 'saltelli'); ?></div>
                 <h2 class="sl-section-title">
                     <?php esc_html_e('Hai una pratica simile?', 'saltelli'); ?>
                 </h2>

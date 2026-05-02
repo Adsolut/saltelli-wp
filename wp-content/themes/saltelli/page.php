@@ -633,6 +633,258 @@ while (have_posts()) :
             include SALTELLI_THEME_DIR . '/inc/wave3-glossario.php';
             ?>
 
+        <?php elseif (is_page('costi')) :
+            // === v0.23.0 TASK B — /costi/ Sessione 2 pixel-perfect ===
+            // JSX source: .claude/knowledge/design/sessione-2/saltelli-s2-costi.jsx
+            // Bypassa post_content WP page id 2695 (legacy) — content hardcoded da JSX.
+            // Schema FAQPage emesso solo se Yoast NOT attivo (vedi inc/schema/).
+            $sl_costi_phone_label = '+39 081 1813 1119';
+            $sl_costi_phone_href  = 'tel:+390818131119';
+            ?>
+
+            <article class="sl-costi-w4">
+
+                <?php /* 1. HERO 8fr/4fr — h1 + lede SX, trust sticky DX */ ?>
+                <header class="sl-costi-w4__hero">
+                    <div class="sl-container sl-costi-w4__hero-grid">
+                        <div class="sl-costi-w4__hero-text">
+                            <?php saltelli_render_breadcrumb(); ?>
+                            <div class="sl-mono sl-costi-w4__hero-eyebrow">
+                                <?php esc_html_e('§ Trasparenza · Costi e tariffe', 'saltelli'); ?>
+                            </div>
+                            <h1 class="sl-costi-w4__h1" data-split-reveal>
+                                <?php
+                                echo wp_kses(
+                                    saltelli_split_h1_words(__('Costi e prima consulenza.', 'saltelli'), 'sl-costi-w4__h1-word'),
+                                    ['span' => ['class' => true, 'data-i' => true]]
+                                );
+                                ?>
+                            </h1>
+                            <p class="sl-costi-w4__lede">
+                                <?php esc_html_e('Trenta minuti gratuiti per ascoltarci, valutare insieme, decidere se procedere. Solo dopo, un preventivo personalizzato basato su complessità, tempi e probabilità di esito.', 'saltelli'); ?>
+                            </p>
+                        </div>
+                        <aside class="sl-costi-w4__hero-trust">
+                            <div class="sl-mono sl-costi-w4__hero-trust-eyebrow">
+                                <?php esc_html_e('§ Prima consulenza', 'saltelli'); ?>
+                            </div>
+                            <div class="sl-costi-w4__hero-trust-headline">
+                                <?php esc_html_e('GRATUITA · 30 MINUTI', 'saltelli'); ?><br>
+                                <?php esc_html_e('IN STUDIO O ONLINE', 'saltelli'); ?>
+                            </div>
+                            <ul class="sl-costi-w4__hero-trust-list" role="list">
+                                <li><span aria-hidden="true">✓</span> <?php esc_html_e('Nessun obbligo', 'saltelli'); ?></li>
+                                <li><span aria-hidden="true">✓</span> <?php esc_html_e('Nessun costo nascosto', 'saltelli'); ?></li>
+                                <li><span aria-hidden="true">✓</span> <?php esc_html_e('Riservatezza assoluta', 'saltelli'); ?></li>
+                            </ul>
+                            <a class="sl-btn sl-btn--primary" href="<?php echo esc_url(home_url('/contatti/')); ?>">
+                                <span><?php esc_html_e('Prenota un incontro', 'saltelli'); ?></span>
+                                <span class="arrow" aria-hidden="true">→</span>
+                            </a>
+                        </aside>
+                    </div>
+                </header>
+
+                <?php /* 2. § 01 · Come funziona — 3 col scenari */ ?>
+                <section class="sl-costi-w4__come" aria-labelledby="costi-w4-come-h">
+                    <div class="sl-container">
+                        <header class="sl-costi-w4__section-head">
+                            <div class="sl-mono"><?php esc_html_e('§ 01 · Come funziona', 'saltelli'); ?></div>
+                            <h2 class="sl-costi-w4__h2" id="costi-w4-come-h">
+                                <?php esc_html_e('La prima consulenza, tre modalità.', 'saltelli'); ?>
+                            </h2>
+                        </header>
+                        <div class="sl-costi-w4__come-grid">
+                            <article class="sl-costi-w4__scenario-card">
+                                <div class="sl-mono"><?php esc_html_e('01 / Modalità classica', 'saltelli'); ?></div>
+                                <h3 class="sl-costi-w4__scenario-title"><?php esc_html_e('Vieni a Chiaia', 'saltelli'); ?></h3>
+                                <p><?php esc_html_e('Via Vannella Gaetani 27, sala riunioni del nostro studio. Lunedì-venerdì 09:30-18:30, su appuntamento.', 'saltelli'); ?></p>
+                                <div class="sl-mono sl-costi-w4__scenario-trust"><?php esc_html_e('Caffè incluso', 'saltelli'); ?></div>
+                            </article>
+                            <article class="sl-costi-w4__scenario-card">
+                                <div class="sl-mono"><?php esc_html_e('02 / Modalità remota', 'saltelli'); ?></div>
+                                <h3 class="sl-costi-w4__scenario-title"><?php esc_html_e('Videocall riservata', 'saltelli'); ?></h3>
+                                <p><?php esc_html_e('Google Meet, Zoom o piattaforma a tua scelta. Ideale se vivi fuori Napoli o per pratiche urgenti.', 'saltelli'); ?></p>
+                                <div class="sl-mono sl-costi-w4__scenario-trust"><?php esc_html_e('Stesso valore, zero spostamento', 'saltelli'); ?></div>
+                            </article>
+                            <article class="sl-costi-w4__scenario-card">
+                                <div class="sl-mono"><?php esc_html_e('03 / Modalità rapida', 'saltelli'); ?></div>
+                                <h3 class="sl-costi-w4__scenario-title"><?php esc_html_e('Per casi semplici', 'saltelli'); ?></h3>
+                                <p><?php esc_html_e('Per situazioni che richiedono solo un primo orientamento o verifica di percorribilità.', 'saltelli'); ?></p>
+                                <div class="sl-mono sl-costi-w4__scenario-trust"><?php esc_html_e('Massimo 30 minuti', 'saltelli'); ?></div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <?php /* 3. § 02 · Cosa succede dopo i 30 minuti — 4fr/8fr */ ?>
+                <section class="sl-costi-w4__scenari" aria-labelledby="costi-w4-dopo-h">
+                    <div class="sl-container sl-costi-w4__scenari-grid">
+                        <header class="sl-costi-w4__scenari-head">
+                            <div class="sl-mono"><?php esc_html_e('§ 02 · Dopo i 30 minuti', 'saltelli'); ?></div>
+                            <h2 class="sl-costi-w4__h2 sl-costi-w4__h2--italic" id="costi-w4-dopo-h">
+                                <?php esc_html_e('Tre scenari possibili.', 'saltelli'); ?>
+                            </h2>
+                        </header>
+                        <ol class="sl-costi-w4__scenari-list" role="list">
+                            <li class="sl-costi-w4__scenari-item">
+                                <span class="sl-mono sl-costi-w4__scenari-num">01</span>
+                                <div>
+                                    <div class="sl-mono sl-costi-w4__scenari-label"><?php esc_html_e('NON PROCEDIAMO', 'saltelli'); ?></div>
+                                    <p><?php esc_html_e('Se la pratica non ha solidi presupposti, te lo diciamo subito. Ti suggeriamo un percorso alternativo o ti rimandiamo a un professionista più indicato.', 'saltelli'); ?></p>
+                                    <div class="sl-mono sl-costi-w4__scenari-trust"><?php esc_html_e('Risparmio: 100% costi inutili', 'saltelli'); ?></div>
+                                </div>
+                            </li>
+                            <li class="sl-costi-w4__scenari-item">
+                                <span class="sl-mono sl-costi-w4__scenari-num">02</span>
+                                <div>
+                                    <div class="sl-mono sl-costi-w4__scenari-label"><?php esc_html_e('PRATICA SEMPLICE — TARIFFA FORFETTARIA', 'saltelli'); ?></div>
+                                    <p><?php esc_html_e('Se la complessità è prevedibile, ti proponiamo un preventivo a forfait. Tutto incluso, nessuna sorpresa successiva.', 'saltelli'); ?></p>
+                                    <div class="sl-mono sl-costi-w4__scenari-trust"><?php esc_html_e('Trasparenza: tariffa fissa concordata', 'saltelli'); ?></div>
+                                </div>
+                            </li>
+                            <li class="sl-costi-w4__scenari-item">
+                                <span class="sl-mono sl-costi-w4__scenari-num">03</span>
+                                <div>
+                                    <div class="sl-mono sl-costi-w4__scenari-label"><?php esc_html_e('PRATICA COMPLESSA — TARIFFA ORARIA', 'saltelli'); ?></div>
+                                    <p><?php esc_html_e('Se richiede analisi approfondita o iter giudiziale lungo, formuliamo preventivo orario con stima totale + check-in ogni 10 ore lavorate.', 'saltelli'); ?></p>
+                                    <div class="sl-mono sl-costi-w4__scenari-trust"><?php esc_html_e('Controllo: budget capped + reportistica', 'saltelli'); ?></div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+
+                <?php /* 4. § 03 · Come calcoliamo — 6fr/6fr drop-cap T */ ?>
+                <section class="sl-costi-w4__calc" aria-labelledby="costi-w4-calc-h">
+                    <div class="sl-container">
+                        <header class="sl-costi-w4__section-head">
+                            <div class="sl-mono"><?php esc_html_e('§ 03 · Metodologia', 'saltelli'); ?></div>
+                            <h2 class="sl-costi-w4__h2" id="costi-w4-calc-h">
+                                <?php esc_html_e('Come calcoliamo i preventivi.', 'saltelli'); ?>
+                            </h2>
+                        </header>
+                        <div class="sl-costi-w4__calc-grid">
+                            <div class="sl-costi-w4__calc-prose">
+                                <p>
+                                    <?php esc_html_e("Trasparenza è la nostra prima regola. I nostri preventivi considerano tre fattori: complessità della pratica (analisi atti, ricerca giurisprudenza, perizie tecniche), tempo stimato (ore di lavoro su atti, udienze, comunicazioni), probabilità di esito favorevole (incide sulla strategia consigliata).", 'saltelli'); ?>
+                                </p>
+                                <p>
+                                    <?php
+                                    echo wp_kses(
+                                        __("Quando possibile, lavoriamo a tariffa forfettaria: ti diamo un numero finale al primo incontro e quello rimane. Quando la complessità non lo permette, lavoriamo a tariffa oraria con budget cap concordato in anticipo. <em>Niente fatturazione a sorpresa, mai.</em>", 'saltelli'),
+                                        ['em' => []]
+                                    );
+                                    ?>
+                                </p>
+                            </div>
+                            <div class="sl-costi-w4__calc-cards">
+                                <article class="sl-costi-w4__calc-card">
+                                    <div class="sl-mono"><?php esc_html_e('Fattore 1', 'saltelli'); ?></div>
+                                    <h4 class="sl-costi-w4__calc-h4"><?php esc_html_e('Analisi della pratica', 'saltelli'); ?></h4>
+                                    <p><?php esc_html_e('Tipologia atti, normativa applicabile, giurisprudenza di riferimento e perizie tecniche eventuali.', 'saltelli'); ?></p>
+                                </article>
+                                <article class="sl-costi-w4__calc-card">
+                                    <div class="sl-mono"><?php esc_html_e('Fattore 2', 'saltelli'); ?></div>
+                                    <h4 class="sl-costi-w4__calc-h4"><?php esc_html_e('Ore stimate', 'saltelli'); ?></h4>
+                                    <p><?php esc_html_e('Redazione atti, partecipazione a udienze, comunicazioni con controparte, contraddittorio.', 'saltelli'); ?></p>
+                                </article>
+                                <article class="sl-costi-w4__calc-card">
+                                    <div class="sl-mono"><?php esc_html_e('Fattore 3', 'saltelli'); ?></div>
+                                    <h4 class="sl-costi-w4__calc-h4"><?php esc_html_e('Probabilità', 'saltelli'); ?></h4>
+                                    <p><?php esc_html_e('Incide sulla strategia consigliata e sul timing. Influenza la scelta forfait vs orario.', 'saltelli'); ?></p>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <?php /* 5. § 04 · FAQ accordion 5Q */ ?>
+                <section class="sl-costi-w4__faq" aria-labelledby="costi-w4-faq-h">
+                    <div class="sl-container">
+                        <header class="sl-costi-w4__section-head">
+                            <div class="sl-mono"><?php esc_html_e('§ 04 · Sui costi, in chiaro', 'saltelli'); ?></div>
+                            <h2 class="sl-costi-w4__h2" id="costi-w4-faq-h">
+                                <?php esc_html_e('Domande frequenti sui costi.', 'saltelli'); ?>
+                            </h2>
+                        </header>
+                        <div class="sl-acc sl-costi-w4__faq-list" data-sl-acc>
+                            <?php
+                            $sl_costi_faq = [
+                                [
+                                    'q' => __('Quanto costa una pratica di diritto tributario?', 'saltelli'),
+                                    'a' => '<p>' . __('Range orientativo <strong>800–3500€</strong> a seconda di tipologia atto (cartella semplice → ricorso CTP/CGT), importo contestato e necessità di periti tecnici.', 'saltelli') . '</p><p><em>' . esc_html__('Esempio reale', 'saltelli') . '</em>: ' . esc_html__('opposizione cartella esattoriale 5.000€ → forfait 1.200€ + 200€ contributo unificato.', 'saltelli') . '</p>',
+                                ],
+                                [
+                                    'q' => __('Pagamento dilazionato è possibile?', 'saltelli'),
+                                    'a' => '<p>' . esc_html__('Sì per pratiche oltre 1.500€. Concordiamo rate trimestrali in funzione del flusso atti. Trasparenza totale: nessun interesse, solo dilazione fisica.', 'saltelli') . '</p>',
+                                ],
+                                [
+                                    'q' => __('Se non vinco, devo comunque pagare?', 'saltelli'),
+                                    'a' => '<p>' . esc_html__("Sì. Le tariffe forensi prevedono onorari per il lavoro svolto, indipendentemente dall'esito (è regola del Codice deontologico). Quello che possiamo fare: valutare seriamente in prima consulenza se la causa è effettivamente percorribile.", 'saltelli') . '</p>',
+                                ],
+                                [
+                                    'q' => __('Il primo incontro è davvero gratuito?', 'saltelli'),
+                                    'a' => '<p>' . esc_html__('Sì, sempre. Trenta minuti senza costi né obblighi. Se decidi di non procedere, abbiamo solo investito tempo. Il nostro tempo costa solo se decidiamo insieme di procedere.', 'saltelli') . '</p>',
+                                ],
+                                [
+                                    'q' => __('Recupero crediti: solo se vinciamo?', 'saltelli'),
+                                    'a' => '<p>' . esc_html__('Per pratiche specifiche di recupero crediti < 5.000€ proponiamo success fee (X% sul recuperato + spese vive). Da concordare in prima consulenza in base alla concretezza del credito.', 'saltelli') . '</p>',
+                                ],
+                            ];
+                            foreach ($sl_costi_faq as $i => $row) :
+                                $is_open = ($i === 3); // Q4 default open per CRO emphasis
+                                ?>
+                                <div class="sl-acc__item" data-open="<?php echo $is_open ? 'true' : 'false'; ?>">
+                                    <button class="sl-acc__btn" type="button" aria-expanded="<?php echo $is_open ? 'true' : 'false'; ?>" aria-controls="costi-faq-panel-<?php echo (int) $i; ?>">
+                                        <span><?php echo esc_html($row['q']); ?></span>
+                                        <span class="sl-acc__icon" aria-hidden="true">+</span>
+                                    </button>
+                                    <div class="sl-acc__panel" id="costi-faq-panel-<?php echo (int) $i; ?>">
+                                        <div class="sl-acc__inner">
+                                            <?php echo wp_kses_post($row['a']); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </section>
+
+                <?php /* 6. § 05 · Trust signals 4-col grid */ ?>
+                <section class="sl-costi-w4__trust-grid" aria-label="<?php esc_attr_e('Garanzie e trust signals', 'saltelli'); ?>">
+                    <div class="sl-container">
+                        <ul class="sl-costi-w4__trust-list" role="list">
+                            <li class="sl-costi-w4__trust-plate sl-mono"><?php esc_html_e('Iscritti Ordine Avvocati Napoli', 'saltelli'); ?></li>
+                            <li class="sl-costi-w4__trust-plate sl-mono"><?php esc_html_e('P.IVA 06685101211', 'saltelli'); ?></li>
+                            <li class="sl-costi-w4__trust-plate sl-mono"><?php esc_html_e('Codice deontologico forense', 'saltelli'); ?></li>
+                            <li class="sl-costi-w4__trust-plate sl-mono"><?php esc_html_e('Riservatezza assoluta', 'saltelli'); ?></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <?php /* 7. CTA finale editoriale */ ?>
+                <section class="sl-costi-w4__cta-final">
+                    <div class="sl-container">
+                        <div class="sl-mono"><?php esc_html_e('§ Pronto?', 'saltelli'); ?></div>
+                        <h2 class="sl-costi-w4__cta-h2">
+                            <?php esc_html_e('La prima consulenza è gratuita. Sempre.', 'saltelli'); ?>
+                        </h2>
+                        <p class="sl-costi-w4__cta-sub">
+                            <?php esc_html_e('Trenta minuti per ascoltarci, valutare insieme, capire se possiamo esserti utili. Senza obblighi e senza costi nascosti.', 'saltelli'); ?>
+                        </p>
+                        <a class="sl-btn sl-btn--primary" href="<?php echo esc_url(home_url('/contatti/')); ?>">
+                            <span><?php esc_html_e('Prenota un incontro', 'saltelli'); ?></span>
+                            <span class="arrow" aria-hidden="true">→</span>
+                        </a>
+                        <div class="sl-mono sl-costi-w4__cta-trust">
+                            <?php esc_html_e('Risposta entro 24 ore · Riservatezza assoluta', 'saltelli'); ?>
+                        </div>
+                    </div>
+                </section>
+
+            </article>
+
         <?php else : ?>
 
         <header class="sl-page__hero">
