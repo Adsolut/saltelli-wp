@@ -8410,6 +8410,110 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     margin-bottom: 0;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   v0.27.6 — H2 SPACING + SIZING CROSS-TEMPLATE (JSX-faithful)
+   ───────────────────────────────────────────────────────────────
+   Audit Playwright cross-page ha rilevato che `.sl-section-title
+   { margin: 0 }` (line 1031) sovrascrive sistematicamente i margin
+   locali su tutti i template. Risultato: H2 incollati al contenuto
+   sottostante. Inoltre attorney section H2 = 72px vs JSX 44px max.
+
+   Fix: selettori high-specificity scoped per ogni template,
+   restituendo i valori JSX exact (font-size + margin-bottom).
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ATTORNEY — sezioni body: clamp(32,3.5vw,44) JSX
+   Source: saltelli-s2-attorney-single.jsx line 169, 186, 210 */
+.sl-attorney__competenze h2.sl-attorney__competenze-h2,
+.sl-attorney__competenze h2.sl-section-title,
+.sl-attorney__aree h2.sl-section-title,
+.sl-attorney__timeline h2.sl-section-title,
+.sl-attorney__casi h2.sl-section-title,
+.sl-attorney__articles h2.sl-section-title {
+    font-size: clamp(32px, 3.5vw, 44px) !important;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin: 0 0 32px !important;
+}
+/* Formazione + Casi vogliono mb=48 (JSX line 186, 210) */
+.sl-attorney__timeline h2.sl-section-title,
+.sl-attorney__casi h2.sl-section-title {
+    margin-bottom: 48px !important;
+}
+
+/* ATTORNEY — CTA finale: clamp(40,5vw,64) JSX line 234 */
+.sl-attorney__cta h2.sl-section-title {
+    font-size: clamp(40px, 5vw, 64px) !important;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0 0 32px !important;
+}
+
+/* CHI-SIAMO — team / principles / timeline header H2 mb 64 (JSX line 144,184,217) */
+.sl-chi-siamo__team-mini h2.sl-chi-siamo__h2,
+.sl-chi-siamo__principles h2.sl-chi-siamo__h2,
+.sl-chi-siamo__timeline h2.sl-chi-siamo__h2 {
+    margin: 0 0 32px !important;  /* container head ha mb-bottom 64 totale già inserito; h2 stesso 32 sufficienti */
+}
+/* CHI-SIAMO principles H2 specifico mb 56 (JSX line 187) */
+.sl-chi-siamo__principles h2.sl-chi-siamo__h2 {
+    margin-bottom: 56px !important;
+}
+/* CHI-SIAMO CTA finale "Prenoti una consulenza gratuita" mb 48 (JSX line 252) */
+.sl-chi-siamo__cta h2.sl-chi-siamo__h2,
+.sl-chi-siamo__cta h2.sl-section-title {
+    margin: 0 0 48px !important;
+}
+
+/* TIER-1 — section H2 mb 48 (JSX line 240, 270 saltelli-s2-practice-tier1) */
+.sl-tier1__cases h2.sl-section-title,
+.sl-tier1__faq h2.sl-section-title,
+.sl-competenza__casi h2.sl-section-title,
+.sl-competenza__faq h2.sl-section-title,
+.sl-competenza__avvocati h2.sl-section-title,
+.sl-competenza__articoli h2.sl-section-title {
+    font-size: clamp(40px, 4.5vw, 64px) !important;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 48px !important;
+}
+/* TIER-1 CTA finale "Hai una pratica simile?" clamp(56,6.5vw,96) mb 32 (JSX line 290) */
+.sl-tier1__cta-final h2.sl-section-title,
+.sl-competenza__cta h2.sl-section-title {
+    font-size: clamp(40px, 5vw, 64px) !important;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    margin: 0 0 32px !important;
+}
+
+/* COSTI — section H2 mb 32 (JSX clamp 40,5vw,72 line 1.1) */
+.sl-costi-w4__come h2.sl-costi-w4__h2,
+.sl-costi-w4__scenari h2.sl-costi-w4__h2,
+.sl-costi-w4__calc h2.sl-costi-w4__h2,
+.sl-costi-w4__faq h2.sl-costi-w4__h2 {
+    margin-bottom: 32px !important;
+}
+.sl-costi-w4__cta-final h2.sl-costi-w4__cta-h2 {
+    margin: 0 0 24px !important;
+}
+
+/* CONTATTI — form h2 + come h2 mb 48 (JSX line 142, 274) */
+.sl-contatti-w3__form-col h2.sl-contatti-w3__form-h,
+.sl-contatti-w3__come h2.sl-contatti-w3__come-h {
+    margin: 0 0 48px !important;
+}
+
+/* CASI — section H2 mb 32 */
+.sl-casi-page h2.sl-section-title,
+.sl-casi-page__cta h2.sl-section-title {
+    margin: 0 0 32px !important;
+}
+
+/* PRE-CTA UNIVERSALE "Vorresti raccontarci la tua pratica?" mb 24 */
+.sl-foot-precta h2.sl-foot-precta__h2 {
+    margin: 0 0 24px !important;
+}
+
 /* === REVERTED v0.27.3 — H1 size to JSX exact (era 144 troppo grande) ===
    JSX clamp(56,7vw,104) · max-width nessuno · line-height 0.98 (NON 0.92). */
 .sl-chi-siamo__h1 {
