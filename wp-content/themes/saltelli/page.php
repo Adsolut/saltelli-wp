@@ -508,7 +508,7 @@ while (have_posts()) :
                                             printf(
                                                 /* translators: %s wraps the privacy policy link */
                                                 esc_html__('Consento il trattamento dei dati personali ai sensi del Reg. UE 2016/679 (GDPR), per le finalità descritte nell\'%s. *', 'saltelli'),
-                                                '<a href="' . esc_url(home_url('/privacy/')) . '" class="sl-link">' . esc_html__('informativa privacy', 'saltelli') . '</a>'
+                                                '<a href="' . esc_url(home_url('/privacy-policy/')) . '" class="sl-link">' . esc_html__('informativa privacy', 'saltelli') . '</a>'
                                             );
                                             ?>
                                         </span>

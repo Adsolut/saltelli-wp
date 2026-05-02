@@ -103,7 +103,8 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
 
                 <?php /* COL 2 — AREE DI PRATICA (v0.21.3 [F1]: solo tier-1 + CTA, no più tier-2) */ ?>
                 <div class="sl-foot-col sl-foot-col--aree">
-                    <div class="sl-mono sl-foot-col__label"><?php esc_html_e('Diciannove aree', 'saltelli'); ?></div>
+                    <?php /* v0.21.4 [T3]: "Diciannove aree" → "Aree di pratica" (label coerente dopo drop tier-2) */ ?>
+                    <div class="sl-mono sl-foot-col__label"><?php esc_html_e('Aree di pratica', 'saltelli'); ?></div>
 
                     <nav class="sl-foot-tier1" aria-label="<?php esc_attr_e('Aree principali', 'saltelli'); ?>">
                         <?php foreach ($ftr_tier1 as $t1) : ?>
@@ -265,7 +266,7 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                                 printf(
                                     /* translators: %s = privacy policy link */
                                     esc_html__('Accetto la %s e voglio ricevere l\'editoriale.', 'saltelli'),
-                                    '<a href="' . esc_url(home_url('/privacy/')) . '" class="sl-foot-link sl-foot-newsletter__gdpr-link">' . esc_html__('privacy policy', 'saltelli') . '</a>'
+                                    '<a href="' . esc_url(home_url('/privacy-policy/')) . '" class="sl-foot-link sl-foot-newsletter__gdpr-link">' . esc_html__('privacy policy', 'saltelli') . '</a>'
                                 );
                                 ?>
                             </span>
@@ -290,8 +291,9 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                     © <?php echo esc_html(date('Y')); ?> <?php esc_html_e('Studio Legale Saltelli', 'saltelli'); ?>
                 </div>
                 <nav class="sl-foot-bottom__legal" aria-label="<?php esc_attr_e('Legale', 'saltelli'); ?>">
-                    <a class="sl-foot-link" href="<?php echo esc_url(home_url('/privacy/')); ?>"><?php esc_html_e('Privacy', 'saltelli'); ?></a>
-                    <a class="sl-foot-link" href="<?php echo esc_url(home_url('/cookie/')); ?>"><?php esc_html_e('Cookie', 'saltelli'); ?></a>
+                    <?php /* v0.21.4 [T2]: link allineati a slug pagine reali (privacy-policy / cookie-policy) */ ?>
+                    <a class="sl-foot-link" href="<?php echo esc_url(home_url('/privacy-policy/')); ?>"><?php esc_html_e('Privacy', 'saltelli'); ?></a>
+                    <a class="sl-foot-link" href="<?php echo esc_url(home_url('/cookie-policy/')); ?>"><?php esc_html_e('Cookie', 'saltelli'); ?></a>
                     <a class="sl-foot-link" href="<?php echo esc_url(home_url('/note-legali/')); ?>"><?php esc_html_e('Note legali', 'saltelli'); ?></a>
                 </nav>
                 <div class="sl-foot-bottom__credit">
