@@ -4257,11 +4257,7 @@ textarea.sl-input {
 }
 
 .sl-contatti-w3__hero-lede-accent {
-    /* v0.21.19: display: block + margin-top per spazio tra "Chiedi qualsiasi cosa."
-       e "In qualsiasi momento." (Duccio review). Bottom edge del lede invariato. */
     color: var(--accent);
-    display: block;
-    margin-top: 24px;
 }
 
 @media (min-width: 1024px) {
@@ -6281,7 +6277,10 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: var(--primary);
-    margin: 0 0 24px;
+    /* v0.21.20: margin-bottom 24 → 48 per più aria tra "Vorresti raccontarci la tua pratica?"
+       e "Trenta minuti..." (Duccio review). Bottom edge p invariato grazie a
+       grid align-items: end → resta allineato con CTA "Prenota un incontro" right col. */
+    margin: 0 0 48px;
 }
 .sl-foot-precta__p {
     font-size: 18px;
