@@ -8,7 +8,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '0.25.0-beta-content-deepening');
+define('SALTELLI_THEME_VERSION', '0.26.0-beta-schema-dignity');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
@@ -23,3 +23,4 @@ require_once SALTELLI_THEME_DIR . '/inc/schema/schema-loader.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/meta-tags.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/ai-files.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/legacy-redirects.php';
+require_once SALTELLI_THEME_DIR . '/inc/seo/yoast-schema-extensions.php';

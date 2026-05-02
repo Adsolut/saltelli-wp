@@ -385,7 +385,8 @@ function saltelli_studio_data() {
         'opens'         => '10:00',
         'closes'        => '19:00',
         'days'          => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        'price_range'   => '€€',
+        // v0.26.0 T3 — range specifico GEO/AI Overview (en dash U+2013).
+        'price_range'   => '€800–€3500',
         // Studio attuale fondato gennaio 2019. Lineage: studio precedente
         // (studiolegaleavvass.it) dal 2008 con ex socio, abilitazione piena 2013.
         'founding_date' => '2019-01',
