@@ -4604,15 +4604,18 @@ textarea.sl-input {
 .sl-contatti-w3__trust {
     max-width: 1440px;
     margin: 0 auto;
-    /* v0.21.10: padding outer 96/160 → clamp(48,6vw,80) bilanciato top/bottom (Duccio review).
-       Era top 96 / bottom 160 unbalanced + bianco eccessivo. */
-    padding-block: clamp(48px, 6vw, 80px);
+    /* v0.21.11: padding outer ASIMMETRICO per bilanciare bianco visuale top/bottom.
+       Sopra: .sl-contatti-w3__come ha padding-bottom 96. Sotto: .sl-foot-precta
+       ha padding-top clamp(64,9vw,128). Per equalizzare il bianco percepito:
+       trust top = 32 (96+32 = 128 = pre-cta top), trust bottom = 0 (somma=128).
+       Riduzione verticale +160px (era 80+80=160 outer → 32+0=32). */
+    padding-block: clamp(24px, 3vw, 32px) 0;
     padding-inline: clamp(24px, 5vw, 96px);
 }
 
 .sl-contatti-w3__trust-inner {
-    /* v0.21.10: inner padding 64 → 48 (riduce altezza verticale, mantiene leggibilità) */
-    padding-block: 48px;
+    /* v0.21.11: inner padding 48 → 32 (height ridotta -32px, leggibilità ok) */
+    padding-block: 32px;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     text-align: center;
