@@ -8384,6 +8384,32 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     align-items: start !important;
 }
 
+/* === v0.27.5 — Founding § 02 h2 size + margin-bottom JSX-faithful ===
+   Issue Duccio: "Un atelier, in senso napoletano." è incollato al
+   paragrafo sottostante (margin-bottom: 0). Inoltre 64px è troppo grande
+   vs JSX clamp(32,3.5vw,48). La classe .sl-section-title con margin: 0
+   sovrascrive .sl-chi-siamo__h2 margin: 0 0 32px (cascade order ambiguo).
+   Fix: selettore high-specificity scoped al founding section.
+   Source: saltelli-s2-chi-siamo.jsx line 123-125. */
+.sl-chi-siamo__founding .sl-section-title.sl-chi-siamo__h2,
+.sl-chi-siamo__founding h2.sl-chi-siamo__h2 {
+    font-size: clamp(32px, 3.5vw, 48px) !important;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin: 0 0 32px !important;
+}
+/* Founding prose font-size 18px (JSX line 126) NON 19px del default lede */
+.sl-chi-siamo__founding .sl-chi-siamo__prose {
+    font-size: 18px;
+    line-height: 1.75;
+}
+.sl-chi-siamo__founding .sl-chi-siamo__prose p {
+    margin: 0 0 20px;
+}
+.sl-chi-siamo__founding .sl-chi-siamo__prose p:last-child {
+    margin-bottom: 0;
+}
+
 /* === REVERTED v0.27.3 — H1 size to JSX exact (era 144 troppo grande) ===
    JSX clamp(56,7vw,104) · max-width nessuno · line-height 0.98 (NON 0.92). */
 .sl-chi-siamo__h1 {
