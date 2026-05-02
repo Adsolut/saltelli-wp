@@ -8015,7 +8015,9 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
    Target: hero 1fr/1fr + body sticky sidebar 240/1fr + casi 3-col
    ═══════════════════════════════════════════════════════════════ */
 
-/* === ARTICLE-LEVEL GRID — sticky sidebar layout (desktop only) === */
+/* === ARTICLE-LEVEL GRID — sticky sidebar layout (desktop only) ===
+   FIX v0.27.1 — grid-row esplicito su tutti i figli per evitare auto-flow
+   collision (aside grid-row: 2/-1 era ambiguo con altri figli auto-placed). */
 @media (min-width: 1024px) {
     .sl-attorney {
         display: grid;
@@ -8027,18 +8029,19 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
         padding-inline: clamp(24px, 5vw, 96px);
         align-items: start;
     }
-    /* Hero spans full width */
+    /* Row 1: hero full-width */
     .sl-attorney > header,
     .sl-attorney > .sl-attorney__hero {
         grid-column: 1 / -1;
+        grid-row: 1;
         margin-inline: calc(-1 * clamp(24px, 5vw, 96px));
     }
-    /* Sticky aside col 1, spans all body rows */
+    /* Row 2/end: sticky in col 1, spans many rows so sticky has scroll context */
     .sl-attorney > .sl-attorney__sticky {
         grid-column: 1;
-        grid-row: 2 / -1;
+        grid-row: 2 / span 100;
     }
-    /* All body sections in col 2 (auto-flow row) */
+    /* All body sections in col 2 (auto-flow row from row 2) */
     .sl-attorney > .sl-attorney__bio,
     .sl-attorney > .sl-attorney__competenze,
     .sl-attorney > .sl-attorney__aree,
@@ -8047,6 +8050,11 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     .sl-attorney > .sl-attorney__articles,
     .sl-attorney > .sl-attorney__cta {
         grid-column: 2;
+    }
+    /* Portrait fill column (override max-width:480 from FIX F3 line 1994) */
+    .sl-attorney__hero-grid figure.sl-attorney__portrait {
+        max-width: none !important;
+        width: 100% !important;
     }
 }
 
