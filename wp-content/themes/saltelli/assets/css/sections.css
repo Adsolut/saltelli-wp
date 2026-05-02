@@ -4604,11 +4604,15 @@ textarea.sl-input {
 .sl-contatti-w3__trust {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 96px clamp(24px, 5vw, 96px) 160px;
+    /* v0.21.10: padding outer 96/160 → clamp(48,6vw,80) bilanciato top/bottom (Duccio review).
+       Era top 96 / bottom 160 unbalanced + bianco eccessivo. */
+    padding-block: clamp(48px, 6vw, 80px);
+    padding-inline: clamp(24px, 5vw, 96px);
 }
 
 .sl-contatti-w3__trust-inner {
-    padding-block: 64px;
+    /* v0.21.10: inner padding 64 → 48 (riduce altezza verticale, mantiene leggibilità) */
+    padding-block: 48px;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     text-align: center;
@@ -4652,7 +4656,8 @@ textarea.sl-input {
         padding-block: 64px;
     }
     .sl-contatti-w3__trust {
-        padding-block: 64px 96px;
+        /* v0.21.10: mobile bilanciato (era 64 top / 96 bottom unbalanced) */
+        padding-block: 48px;
     }
 }
 

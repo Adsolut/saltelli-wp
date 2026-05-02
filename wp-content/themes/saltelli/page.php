@@ -600,9 +600,10 @@ while (have_posts()) :
                     </div>
                 </section>
 
-                <section class="sl-contatti-w3__trust" aria-label="<?php esc_attr_e('Promessa di servizio', 'saltelli'); ?>">
+                <?php /* v0.21.10: "Promessa di servizio" → "La nostra professionalità" (Duccio review) */ ?>
+                <section class="sl-contatti-w3__trust" aria-label="<?php esc_attr_e('La nostra professionalità', 'saltelli'); ?>">
                     <div class="sl-contatti-w3__trust-inner">
-                        <div class="sl-mono sl-contatti-w3__trust-eyebrow"><?php esc_html_e('Promessa di servizio', 'saltelli'); ?></div>
+                        <div class="sl-mono sl-contatti-w3__trust-eyebrow"><?php esc_html_e('La nostra professionalità', 'saltelli'); ?></div>
                         <p class="sl-contatti-w3__trust-quote">
                             <?php esc_html_e('Riceviamo solo', 'saltelli'); ?><br><?php esc_html_e('su appuntamento.', 'saltelli'); ?><br>
                             <span class="sl-contatti-w3__trust-tail"><?php esc_html_e('Risposta entro 24 ore.', 'saltelli'); ?></span>
