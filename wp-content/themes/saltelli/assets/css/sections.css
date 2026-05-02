@@ -4257,7 +4257,11 @@ textarea.sl-input {
 }
 
 .sl-contatti-w3__hero-lede-accent {
+    /* v0.21.19: display: block + margin-top per spazio tra "Chiedi qualsiasi cosa."
+       e "In qualsiasi momento." (Duccio review). Bottom edge del lede invariato. */
     color: var(--accent);
+    display: block;
+    margin-top: 24px;
 }
 
 @media (min-width: 1024px) {
