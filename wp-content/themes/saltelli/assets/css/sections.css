@@ -6831,3 +6831,75 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 /* === IMPECCABLE v0.21.2 [perf-T4] END === */
 
+/* === v0.21.7 [Duccio review] BEGIN — Footer harmony ===
+   1. Newsletter section: navy → cream bg (continuità con precta sopra)
+   2. Hairline separator cream→navy tra newsletter e main 4-col
+   3. Bottom legal credit "Realizzato da": rimosso italic
+   4. Vertical rhythm armonizzato cross-fasce */
+
+/* — 1. Newsletter cream bg + color flips (override v0.20.2) — */
+.sl-foot-newsletter-wrap {
+    background: var(--background);
+    color: var(--text);
+    border-top: 0;
+    /* — 4. Vertical rhythm armonizzato — */
+    padding-block: clamp(64px, 8vw, 96px);
+}
+.sl-foot-newsletter__eyebrow { color: var(--accent); }
+.sl-foot-newsletter__h { color: var(--primary); }
+.sl-foot-newsletter__p { color: var(--text); }
+.sl-foot-newsletter__trust { color: var(--text-muted); }
+.sl-foot-newsletter__field-label { color: var(--text-muted); }
+
+/* Form inputs su cream bg: border-bottom border-token + text primary */
+.sl-foot-newsletter-wrap .sl-newsletter__input {
+    border-bottom-color: var(--border);
+    color: var(--primary);
+}
+.sl-foot-newsletter-wrap .sl-newsletter__input::placeholder {
+    color: var(--text-muted);
+}
+.sl-foot-newsletter-wrap .sl-newsletter__input:focus {
+    border-bottom-color: var(--accent);
+}
+
+/* GDPR checkbox + label su cream bg */
+.sl-foot-newsletter__gdpr { color: var(--text-muted); }
+.sl-foot-newsletter__gdpr-link { color: var(--primary); }
+.sl-foot-newsletter-wrap .sl-newsletter__check {
+    border-color: var(--border);
+}
+.sl-foot-newsletter-wrap .sl-newsletter__check:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+/* Submit button .sl-btn--primary mantiene color primary, underline navy */
+.sl-foot-newsletter__submit { color: var(--primary); }
+.sl-foot-newsletter__submit::after { background: var(--primary); }
+.sl-foot-newsletter__submit:hover::after { background: var(--accent); }
+
+/* Success state in-page (post-submit) */
+.sl-foot-newsletter__success-h { color: var(--primary); }
+.sl-foot-newsletter__success-p { color: var(--text-muted); }
+
+/* — 2. Hairline separator cream→navy tra newsletter e main —
+   Border-bottom 1px solid border-token sul lato cream (newsletter) →
+   visibile come linea editoriale prima della transizione bg navy. */
+.sl-foot-newsletter-wrap {
+    border-bottom: 1px solid var(--border);
+}
+
+/* — 2b. Precta→newsletter ora cream→cream: ammorbidisci border navy */
+.sl-foot-precta {
+    border-bottom-color: var(--border);
+}
+
+/* — 3. Bottom legal: "Realizzato da" NO italic — */
+.sl-foot-bottom__credit,
+.sl-foot-bottom__credit .sl-foot-link {
+    font-style: normal;
+}
+
+/* === v0.21.7 [Duccio review] END === */
+
