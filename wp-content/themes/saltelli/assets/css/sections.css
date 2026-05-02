@@ -8708,6 +8708,32 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
    Mantenuto per altri footer wrapper (main, bottom).
    ─────────────────────────────────────────────────────────────── */
 
+/* === v0.28.1 — Pre-CTA + Newsletter v3 padding reduction + footer top reset ===
+   Issue Duccio: tra pre-CTA (cream) e newsletter v3 (cream) c'era 96px
+   strip navy (footer padding-top inherited). Inoltre vertical size combined
+   troppo ampio (128+96+128 = 352px).
+
+   Fix:
+   1. Footer v2 padding-top 0 (era 96px navy intrusion tra le due cream)
+   2. Pre-CTA padding-block ridotto clamp(64,9vw,128) → clamp(48,6vw,80)
+   3. Newsletter v3 padding-block ridotto stesso valore
+   4. Hairline accent 1px tra precta e newsletter come separator editoriale
+      (era border-bottom 1px primary su precta — preserved come divider).
+   ─────────────────────────────────────────────────────────────── */
+.sl-footer.sl-footer--v2 {
+    padding-top: 0 !important;
+}
+.sl-foot-precta {
+    padding-block: clamp(48px, 6vw, 80px) !important;
+}
+.sl-foot-newsletter-wrap.sl-foot-newsletter-wrap--v3 {
+    padding-block: clamp(48px, 6vw, 80px) !important;
+}
+/* Pre-CTA border-bottom diventa hairline editoriale tra le due fascia cream */
+.sl-foot-precta {
+    border-bottom: 1px solid var(--border) !important;  /* era primary, ora border light */
+}
+
 /* === v0.27.9 — Footer v2 padding reset cross-page allineamento ============
    Issue Duccio: tutti gli eyebrow DENTRO <footer> (newsletter, main, bottom)
    apparivano a x=92 mentre eyebrow OUTSIDE footer (pre-CTA) era a x=72 →
