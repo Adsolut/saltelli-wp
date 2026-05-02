@@ -6709,12 +6709,13 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 .sl-foot-bottom__legal .sl-foot-link {
     color: rgba(255, 255, 255, 0.55);
 }
+/* v0.21.8: credit "Realizzato da Adsolut Web Agency" allineato a stile
+   .sl-foot-bottom__legal .sl-foot-link (mono uppercase, NO italic, color 0.55). */
 .sl-foot-bottom__credit {
-    font-style: italic;
+    color: rgba(255, 255, 255, 0.55);
 }
 .sl-foot-bottom__credit .sl-foot-link {
-    color: rgba(255, 255, 255, 0.40);
-    font-style: italic;
+    color: rgba(255, 255, 255, 0.55);
 }
 
 /* === v0.21.6 [T1] BEGIN — Bottom legal grid align col 4 "Studio legale" ===
