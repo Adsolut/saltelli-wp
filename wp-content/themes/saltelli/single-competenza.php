@@ -59,6 +59,62 @@ while (have_posts()) :
                         <span class="arrow" aria-hidden="true">→</span>
                     </a>
                 </div>
+
+                <?php
+                // === v0.24.0 TASK 4 — Tier-1 "Avvocato di riferimento" card ===
+                // Mapping fisso: tributario→Emiliano, lavoro→Fabiana, lgbtq→Antonia.
+                // Source: saltelli-s2-practice-tier1.jsx (referente block).
+                if ($is_tier_1) :
+                    $sl_t1_slug = get_post_field('post_name', $post_id);
+                    $sl_t1_lawyer_map = [
+                        'diritto-tributario'         => 'emiliano-saltelli',
+                        'diritto-del-lavoro'         => 'fabiana-saltelli',
+                        'diritto-di-famiglia-lgbtq'  => 'antonia-battista',
+                    ];
+                    $sl_t1_lawyer_slug = $sl_t1_lawyer_map[$sl_t1_slug] ?? null;
+                    if ($sl_t1_lawyer_slug) :
+                        $sl_t1_lawyer = get_page_by_path($sl_t1_lawyer_slug, OBJECT, 'avvocato');
+                        if ($sl_t1_lawyer) :
+                            $sl_t1_lawyer_id    = (int) $sl_t1_lawyer->ID;
+                            $sl_t1_lawyer_title = get_the_title($sl_t1_lawyer_id);
+                            $sl_t1_lawyer_role  = (string) saltelli_field('ruolo_breve', $sl_t1_lawyer_id, '');
+                            $sl_t1_lawyer_photo = get_the_post_thumbnail_url($sl_t1_lawyer_id, 'saltelli-attorney-square');
+                            if (!$sl_t1_lawyer_photo) {
+                                $sl_t1_foto = saltelli_field('foto_ritratto', $sl_t1_lawyer_id);
+                                if (is_array($sl_t1_foto) && !empty($sl_t1_foto['url'])) {
+                                    $sl_t1_lawyer_photo = $sl_t1_foto['url'];
+                                }
+                            }
+                ?>
+                <aside class="sl-tier1__lawyer" aria-label="<?php esc_attr_e('Avvocato di riferimento', 'saltelli'); ?>" data-reveal>
+                    <div class="sl-mono sl-tier1__lawyer-eyebrow"><?php esc_html_e('§ Avvocato di riferimento', 'saltelli'); ?></div>
+                    <a href="<?php echo esc_url(get_permalink($sl_t1_lawyer_id)); ?>" class="sl-tier1__lawyer-card">
+                        <?php if ($sl_t1_lawyer_photo) : ?>
+                            <img
+                                src="<?php echo esc_url($sl_t1_lawyer_photo); ?>"
+                                alt="<?php echo esc_attr($sl_t1_lawyer_title); ?>"
+                                class="sl-tier1__lawyer-photo"
+                                width="80" height="80"
+                                loading="lazy" decoding="async">
+                        <?php else : ?>
+                            <span class="sl-tier1__lawyer-placeholder" aria-hidden="true">
+                                <?php echo esc_html(mb_strtoupper(mb_substr($sl_t1_lawyer_title, 0, 1))); ?>
+                            </span>
+                        <?php endif; ?>
+                        <div class="sl-tier1__lawyer-info">
+                            <h3 class="sl-tier1__lawyer-name"><?php echo esc_html($sl_t1_lawyer_title); ?></h3>
+                            <?php if ($sl_t1_lawyer_role !== '') : ?>
+                                <p class="sl-tier1__lawyer-role sl-mono"><?php echo esc_html($sl_t1_lawyer_role); ?></p>
+                            <?php endif; ?>
+                            <span class="sl-tier1__lawyer-link"><?php esc_html_e('Vai alla scheda →', 'saltelli'); ?></span>
+                        </div>
+                    </a>
+                </aside>
+                <?php
+                        endif;
+                    endif;
+                endif;
+                ?>
             </div>
         </header>
 

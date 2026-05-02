@@ -7722,3 +7722,198 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 
 /* === v0.23.0 END === */
 
+/* === v0.24.0 TASK 2 — Avvocato "Sei aree di competenza" =================
+   JSX-faithful: lista numerata 6 item · num mono · title display · meta tier+cluster.
+   Source: saltelli-s2-attorney-single.jsx
+   ========================================================================== */
+.sl-attorney__competenze {
+    padding-block: clamp(64px, 8vw, 120px);
+    border-top: 1px solid var(--border);
+}
+.sl-attorney__competenze-head {
+    margin-bottom: 56px;
+}
+.sl-attorney__competenze-head .sl-mono {
+    margin-bottom: 16px;
+}
+.sl-attorney__competenze-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1.1;
+    font-weight: 400;
+    color: var(--primary);
+    margin: 0;
+    max-width: 24ch;
+}
+.sl-attorney__competenze .sl-attorney__areas-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0;
+}
+.sl-attorney__competenze .sl-attorney__areas-list .sl-area {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 24px;
+    align-items: baseline;
+    padding-block: 32px;
+    border-bottom: 1px solid var(--border);
+    background: transparent;
+    box-shadow: none;
+    transition: transform var(--dur-base, 400ms) var(--ease-quart-out, cubic-bezier(0.25, 1, 0.5, 1));
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .sl-attorney__competenze .sl-attorney__areas-list .sl-area:hover {
+        transform: translateX(8px);
+    }
+    .sl-attorney__competenze .sl-attorney__areas-list .sl-area:hover .sl-area__num {
+        color: var(--accent);
+    }
+}
+.sl-attorney__competenze .sl-area__num {
+    color: var(--text-muted);
+    font-size: 13px;
+    transition: color var(--dur-fast, 200ms) var(--ease-quart-out, cubic-bezier(0.25, 1, 0.5, 1));
+}
+.sl-attorney__competenze .sl-area__title {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2vw, 28px);
+    line-height: 1.2;
+    font-weight: 400;
+    margin: 0;
+    color: var(--primary);
+}
+.sl-attorney__competenze .sl-area__title a {
+    color: inherit;
+    text-decoration: none;
+}
+.sl-attorney__competenze .sl-area__title a:hover,
+.sl-attorney__competenze .sl-area__title a:focus-visible {
+    color: var(--accent);
+}
+.sl-attorney__competenze .sl-area__meta {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: right;
+    white-space: nowrap;
+    margin: 0;
+}
+@media (max-width: 767px) {
+    .sl-attorney__competenze .sl-attorney__areas-list .sl-area {
+        grid-template-columns: 48px 1fr;
+        gap: 16px;
+        padding-block: 24px;
+    }
+    .sl-attorney__competenze .sl-area__meta {
+        grid-column: 1 / -1;
+        text-align: left;
+        margin-top: 4px;
+        white-space: normal;
+    }
+}
+
+/* === v0.24.0 TASK 4 — Tier-1 "Avvocato di riferimento" card ==============
+   Mapping fisso: tributario→Emiliano, lavoro→Fabiana, lgbtq→Antonia.
+   Source: saltelli-s2-practice-tier1.jsx (referente block).
+   ========================================================================== */
+.sl-tier1__lawyer {
+    padding-block: 48px;
+    border-block: 1px solid var(--border);
+    margin-block: 56px;
+}
+.sl-tier1__lawyer-eyebrow {
+    margin-bottom: 24px;
+}
+.sl-tier1__lawyer-card {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform var(--dur-base, 400ms) var(--ease-quart-out, cubic-bezier(0.25, 1, 0.5, 1));
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .sl-tier1__lawyer-card:hover {
+        transform: translateX(8px);
+    }
+    .sl-tier1__lawyer-card:hover .sl-tier1__lawyer-name {
+        color: var(--accent);
+    }
+}
+.sl-tier1__lawyer-photo,
+.sl-tier1__lawyer-placeholder {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 0;
+    display: block;
+}
+.sl-tier1__lawyer-placeholder {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: var(--primary);
+}
+.sl-tier1__lawyer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.sl-tier1__lawyer-name {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2vw, 24px);
+    line-height: 1.2;
+    font-weight: 400;
+    margin: 0;
+    color: var(--primary);
+    transition: color var(--dur-fast, 200ms) var(--ease-quart-out, cubic-bezier(0.25, 1, 0.5, 1));
+}
+.sl-tier1__lawyer-role {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin: 0;
+}
+.sl-tier1__lawyer-link {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--accent);
+    margin-top: 4px;
+}
+
+/* === v0.24.0 TASK 6 — /contatti/ form success state ======================
+   Pattern: hidden by default · revealed via wpcf7mailsent JS handler.
+   Source: saltelli-s2-contatti.jsx (success state mancante).
+   ========================================================================== */
+.sl-contatti-w3__success {
+    padding: clamp(32px, 5vw, 64px);
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    text-align: left;
+    margin-top: 24px;
+}
+.sl-contatti-w3__success-eyebrow {
+    margin-bottom: 16px;
+}
+.sl-contatti-w3__success-h3 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 36px);
+    line-height: 1.2;
+    font-weight: 400;
+    color: var(--primary);
+    margin: 0 0 16px;
+}
+.sl-contatti-w3__success-text {
+    color: var(--text);
+    line-height: 1.6;
+    max-width: 56ch;
+    margin: 0;
+}
+
+/* === v0.24.0 END === */
+

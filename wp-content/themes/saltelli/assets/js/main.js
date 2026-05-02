@@ -367,6 +367,20 @@
     form.addEventListener('wpcf7mailsent', () => setLoading(false));
     form.addEventListener('wpcf7mailfailed', () => setLoading(false));
     form.addEventListener('wpcf7spam', () => setLoading(false));
+
+    /* === v0.24.0 TASK 6 — CF7 success state reveal ===
+       On wpcf7mailsent: hide form, show .sl-contatti-w3__success, scroll into view.
+       Source: saltelli-s2-contatti.jsx (success state). */
+    form.addEventListener('wpcf7mailsent', () => {
+      const wrapper = form.closest('.sl-contatti-w3__form-col') || form.parentElement;
+      if (!wrapper) return;
+      const success = wrapper.querySelector('.sl-contatti-w3__success');
+      if (!success) return;
+      form.style.display = 'none';
+      success.removeAttribute('hidden');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      success.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    });
     form.dataset.slSubmitBound = '1';
   });
   /* === IMPECCABLE v0.20.0 [delight + harden] END === */

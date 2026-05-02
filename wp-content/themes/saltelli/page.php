@@ -538,6 +538,17 @@ while (have_posts()) :
                                 <?php
                             }
                             ?>
+
+                            <?php /* === v0.24.0 TASK 6 — CF7 success state ===
+                                  Hidden by default · revealed via wpcf7mailsent JS handler in main.js.
+                                  Source: saltelli-s2-contatti.jsx (success state mancante). */ ?>
+                            <div class="sl-contatti-w3__success" hidden role="status" aria-live="polite">
+                                <div class="sl-mono sl-contatti-w3__success-eyebrow"><?php esc_html_e('§ Inviato', 'saltelli'); ?></div>
+                                <h3 class="sl-contatti-w3__success-h3"><?php esc_html_e('Grazie. Ci sentiamo entro 24 ore.', 'saltelli'); ?></h3>
+                                <p class="sl-contatti-w3__success-text">
+                                    <?php esc_html_e('La tua richiesta è stata inviata correttamente. Riceverai una conferma via email e ti ricontatteremo entro 24 ore lavorative.', 'saltelli'); ?>
+                                </p>
+                            </div>
                         </div>
 
                         <aside class="sl-contatti-w3__aside" aria-labelledby="contatti-aside-h">

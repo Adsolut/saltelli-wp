@@ -80,3 +80,37 @@ add_action('init', function () {
         exit;
     }
 }, 1);
+
+/**
+ * v0.24.0 TASK 6 — Inject .sl-input class on CF7 form fields (input/textarea/select).
+ *
+ * CF7 outputs <input class="wpcf7-form-control wpcf7-text"> (and similar). We piggy-back
+ * .sl-input so our editorial underline-only spec applies without overriding CF7 markup.
+ * Idempotent: skips elements already carrying sl-input.
+ */
+add_filter('wpcf7_form_elements', function ($html) {
+    if (strpos($html, 'wpcf7-form-control') === false) {
+        return $html;
+    }
+    $html = preg_replace_callback(
+        '#<(input|textarea|select)([^>]*?)class="([^"]*?wpcf7-form-control[^"]*?)"#i',
+        function ($m) {
+            $tag     = $m[1];
+            $rest    = $m[2];
+            $classes = $m[3];
+            if (strpos($classes, 'sl-input') !== false) {
+                return $m[0];
+            }
+            $skip = ['wpcf7-submit', 'wpcf7-acceptance', 'wpcf7-checkbox', 'wpcf7-radio'];
+            foreach ($skip as $needle) {
+                if (strpos($classes, $needle) !== false) {
+                    return $m[0];
+                }
+            }
+            $new = trim($classes . ' sl-input');
+            return '<' . $tag . $rest . 'class="' . $new . '"';
+        },
+        $html
+    );
+    return $html;
+}, 10, 1);

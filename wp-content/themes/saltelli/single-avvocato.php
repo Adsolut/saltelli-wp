@@ -115,32 +115,54 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
-        <?php if (!empty($aree)) : ?>
-            <section class="sl-attorney__aree" aria-labelledby="aree-h">
+        <?php
+        // === v0.24.0 TASK 2 — "Sei aree di competenza" sezione JSX-faithful ===
+        // Pattern: lista numerata (01-06) + h3 titolo + meta (tier · cluster).
+        // Source: saltelli-s2-attorney-single.jsx
+        if (!empty($aree)) :
+            $sl_aree_ids = is_array($aree) ? $aree : [$aree];
+            $sl_aree_ids = array_values(array_filter(array_map(static function ($x) {
+                return is_object($x) ? (int) $x->ID : (int) $x;
+            }, $sl_aree_ids)));
+            if (!empty($sl_aree_ids)) :
+                $sl_aree_count = count($sl_aree_ids);
+                $sl_aree_h2 = $sl_aree_count === 6 ? __('Sei aree di competenza.', 'saltelli')
+                            : sprintf(_n('%s area di competenza.', '%s aree di competenza.', $sl_aree_count, 'saltelli'),
+                                      number_format_i18n($sl_aree_count));
+            ?>
+            <section class="sl-attorney__competenze sl-attorney__aree" aria-labelledby="aree-h" data-reveal>
                 <div class="sl-container">
-                    <div class="sl-mono">§ <?php esc_html_e('Si occupa di', 'saltelli'); ?></div>
-                    <h2 class="sl-section-title" id="aree-h"><?php esc_html_e('Aree di competenza', 'saltelli'); ?></h2>
-                    <ul class="sl-areas__list">
-                        <?php
-                        $ids = is_array($aree) ? $aree : [$aree];
-                        foreach ($ids as $aid) :
-                            $aid = is_object($aid) ? (int) $aid->ID : (int) $aid;
-                            if (!$aid) continue;
-                            $is_tier_1 = (bool) saltelli_field('is_tier_1_focus', $aid, false);
-                            $cat       = saltelli_competenza_category_label($aid);
-                            ?>
-                            <a class="sl-area<?php echo $is_tier_1 ? ' sl-area--tier1' : ''; ?>" href="<?php echo esc_url(get_permalink($aid)); ?>">
-                                <span class="sl-area__title"><?php echo esc_html(get_the_title($aid)); ?></span>
-                                <span class="sl-area__meta sl-mono">
-                                    <?php echo esc_html($is_tier_1 ? __('Tier 1 · approfondimento', 'saltelli') : ($cat ?: __('Tier 2', 'saltelli'))); ?>
-                                    <span class="arrow" aria-hidden="true">→</span>
-                                </span>
-                            </a>
+                    <header class="sl-attorney__competenze-head">
+                        <div class="sl-mono">§ <?php esc_html_e('Competenze', 'saltelli'); ?></div>
+                        <h2 class="sl-attorney__competenze-h2 sl-section-title" id="aree-h"><?php echo esc_html($sl_aree_h2); ?></h2>
+                    </header>
+                    <ol class="sl-attorney__areas-list" role="list">
+                        <?php foreach ($sl_aree_ids as $sl_idx => $aid) :
+                            $is_tier_1 = function_exists('saltelli_is_tier1_competenza')
+                                ? saltelli_is_tier1_competenza($aid)
+                                : (bool) saltelli_field('is_tier_1_focus', $aid, false);
+                            $tier_label = $is_tier_1
+                                ? __('Tier 1 · approfondimento', 'saltelli')
+                                : __('Tier 2', 'saltelli');
+                            $cluster = saltelli_competenza_category_label($aid);
+                            $num     = str_pad((string) ($sl_idx + 1), 2, '0', STR_PAD_LEFT);
+                        ?>
+                            <li class="sl-area<?php echo $is_tier_1 ? ' sl-area--tier1' : ''; ?>">
+                                <span class="sl-area__num sl-mono"><?php echo esc_html($num); ?></span>
+                                <h3 class="sl-area__title">
+                                    <a href="<?php echo esc_url(get_permalink($aid)); ?>" class="sl-link sl-link--clean">
+                                        <?php echo esc_html(get_the_title($aid)); ?>
+                                    </a>
+                                </h3>
+                                <p class="sl-area__meta sl-mono">
+                                    <?php echo esc_html($tier_label); ?><?php if ($cluster) : ?> · <?php echo esc_html($cluster); ?><?php endif; ?>
+                                </p>
+                            </li>
                         <?php endforeach; ?>
-                    </ul>
+                    </ol>
                 </div>
             </section>
-        <?php endif; ?>
+        <?php endif; endif; ?>
 
         <?php if (!empty($formazione) && is_array($formazione)) : ?>
             <section class="sl-attorney__timeline" aria-labelledby="formazione-h">
