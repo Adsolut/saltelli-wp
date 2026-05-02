@@ -251,10 +251,13 @@ $avatar_html = function ($av_post) {
                 <div class="sl-mono sl-tipoarea__section-eyebrow">§ 02 — <?php esc_html_e('Aree di pratica', 'saltelli'); ?></div>
                 <h2 class="sl-tipoarea__section-title">
                     <?php
+                    /* v0.30.0 — usa parola italiana invece di digit (JSX-faithful "Nove aree.") */
+                    $sl_num_words_ar = ['', 'Una', 'Due', 'Tre', 'Quattro', 'Cinque', 'Sei', 'Sette', 'Otto', 'Nove', 'Dieci'];
+                    $sl_total_label = isset($sl_num_words_ar[$total]) ? $sl_num_words_ar[$total] : (string) $total;
                     printf(
-                        /* translators: %d numero competenze */
-                        esc_html(_n('%d area.', '%d aree.', $total, 'saltelli')),
-                        (int) $total
+                        /* translators: %s numero competenze in parola */
+                        esc_html(_n('%s area.', '%s aree.', $total, 'saltelli')),
+                        esc_html($sl_total_label)
                     );
                     ?>
                 </h2>
@@ -296,12 +299,23 @@ $avatar_html = function ($av_post) {
                 <div class="sl-mono sl-tipoarea__section-eyebrow">§ 03 — <?php esc_html_e('Casi rappresentativi', 'saltelli'); ?></div>
                 <h2 class="sl-tipoarea__section-title">
                     <?php
+                    /* v0.30.0 — fix typo "per per i privati":
+                       term_name = "Per i Privati" → preserva senza prefisso duplicato.
+                       Strip leading "Per " (case-insensitive) per evitare doppia "per".
+                       Usa parola italiana invece di digit (JSX "Tre vittorie..."). */
                     $count = count($casi_cluster);
+                    $sl_num_words_casi = ['', 'Una', 'Due', 'Tre', 'Quattro', 'Cinque', 'Sei', 'Sette', 'Otto', 'Nove', 'Dieci'];
+                    $sl_count_label = isset($sl_num_words_casi[$count]) ? $sl_num_words_casi[$count] : (string) $count;
+                    $sl_term_label = strtolower($term_name);
+                    /* Strip "per " iniziale (es. "per i privati", "per le imprese") */
+                    if (stripos($sl_term_label, 'per ') === 0) {
+                        $sl_term_label = substr($sl_term_label, 4);
+                    }
                     printf(
-                        /* translators: %1$d numero casi, %2$s nome cluster lowercase */
-                        esc_html(_n('%1$d vittoria per %2$s.', '%1$d vittorie per %2$s.', $count, 'saltelli')),
-                        (int) $count,
-                        esc_html(strtolower($term_name))
+                        /* translators: %1$s numero casi (parola), %2$s nome cluster lowercase */
+                        esc_html(_n('%1$s vittoria per %2$s.', '%1$s vittorie per %2$s.', $count, 'saltelli')),
+                        esc_html($sl_count_label),
+                        esc_html($sl_term_label)
                     );
                     ?>
                 </h2>
