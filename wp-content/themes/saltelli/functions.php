@@ -8,7 +8,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '0.21.24-beta-h2-spacing-final');
+define('SALTELLI_THEME_VERSION', '0.22.0-beta-impeccable-animations');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 

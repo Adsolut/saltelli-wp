@@ -793,3 +793,36 @@ function saltelli_press_outlets() {
     }
     return ['Il Mattino', 'La Repubblica · Napoli', 'Il Sole 24 Ore', 'Diritto.it', 'Altalex', 'Camera Avvocati Napoli'];
 }
+
+/**
+ * v0.22.0 — Wrappa ogni parola di un titolo h1 in <span class="sl-word">.
+ * Preserva i tag inline whitelisted (em, br) per stylized headlines come
+ * "Casi <em>rappresentativi.</em>". Output safe-escaped via wp_kses.
+ *
+ * @param string $title Stringa testo o markup inline minimal.
+ * @return string HTML con span.sl-word per ogni parola.
+ */
+function saltelli_split_h1_words($title) {
+    $title = (string) $title;
+    if ($title === '') {
+        return '';
+    }
+    // Tokenizer: separa per tag inline e parole. Mantiene <em>, </em>, <br>.
+    $parts = preg_split('/(<\/?(?:em|br)\s*\/?>|\s+)/i', $title, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+    if (!is_array($parts)) {
+        return esc_html($title);
+    }
+    $out  = '';
+    $idx  = 0;
+    foreach ($parts as $token) {
+        if (preg_match('/^\s+$/', $token)) {
+            $out .= ' ';
+        } elseif (preg_match('/^<\/?(?:em|br)\s*\/?>$/i', $token)) {
+            $out .= $token;
+        } else {
+            $out .= '<span class="sl-word" data-i="' . (int) $idx . '">' . esc_html($token) . '</span>';
+            $idx++;
+        }
+    }
+    return $out;
+}

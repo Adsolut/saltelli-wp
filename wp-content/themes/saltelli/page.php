@@ -41,10 +41,17 @@ while (have_posts()) :
                             <?php esc_html_e('Dal 1999', 'saltelli'); ?>
                         </p>
                     </aside>
-                    <h1 class="sl-chi-siamo__h1" id="chi-siamo-h1">
-                        <?php esc_html_e('Un atelier', 'saltelli'); ?><br>
-                        <?php esc_html_e('di quattro', 'saltelli'); ?><br>
-                        <em><?php esc_html_e('professionisti.', 'saltelli'); ?></em>
+                    <h1 class="sl-chi-siamo__h1" id="chi-siamo-h1" data-split-reveal>
+                        <?php
+                        $sl_chi_title = esc_html__('Un atelier', 'saltelli') . '<br>'
+                            . esc_html__('di quattro', 'saltelli') . '<br>'
+                            . '<em>' . esc_html__('professionisti.', 'saltelli') . '</em>';
+                        echo wp_kses(saltelli_split_h1_words($sl_chi_title), [
+                            'span' => ['class' => true, 'data-i' => true],
+                            'em'   => [],
+                            'br'   => [],
+                        ]);
+                        ?>
                     </h1>
                 </div>
             </section>
@@ -261,9 +268,15 @@ while (have_posts()) :
                             </nav>
                         <?php endif; ?>
                         <div class="sl-mono sl-casi__eyebrow"><?php esc_html_e('§ Risultati · Casi rappresentativi', 'saltelli'); ?></div>
-                        <h1 class="sl-casi__h1" id="casi-h1">
-                            <?php esc_html_e('Casi', 'saltelli'); ?><br>
-                            <em><?php esc_html_e('rappresentativi.', 'saltelli'); ?></em>
+                        <h1 class="sl-casi__h1" id="casi-h1" data-split-reveal>
+                            <?php
+                            $sl_casi_title = esc_html__('Casi', 'saltelli') . '<br><em>' . esc_html__('rappresentativi.', 'saltelli') . '</em>';
+                            echo wp_kses(saltelli_split_h1_words($sl_casi_title), [
+                                'span' => ['class' => true, 'data-i' => true],
+                                'em'   => [],
+                                'br'   => [],
+                            ]);
+                            ?>
                         </h1>
                     </div>
                     <div class="sl-casi__hero-right">
@@ -445,7 +458,7 @@ while (have_posts()) :
                             <div class="sl-mono sl-contatti-w3__eyebrow">
                                 <?php esc_html_e('§ Contatti · Primo incontro gratuito', 'saltelli'); ?>
                             </div>
-                            <h1 class="sl-contatti-w3__h1" id="contatti-h1"><?php esc_html_e('Contatti.', 'saltelli'); ?></h1>
+                            <h1 class="sl-contatti-w3__h1" id="contatti-h1" data-split-reveal><?php echo wp_kses(saltelli_split_h1_words(__('Contatti.', 'saltelli')), ['span' => ['class' => true, 'data-i' => true]]); ?></h1>
                         </div>
                         <div class="sl-contatti-w3__hero-right">
                             <p class="sl-contatti-w3__hero-lede">
@@ -641,7 +654,7 @@ while (have_posts()) :
                     </nav>
                 <?php endif; ?>
 
-                <h1 class="sl-page__title"><?php the_title(); ?></h1>
+                <h1 class="sl-page__title" data-split-reveal><?php echo wp_kses(saltelli_split_h1_words(get_the_title()), ['span' => ['class' => true, 'data-i' => true]]); ?></h1>
             </div>
         </header>
 

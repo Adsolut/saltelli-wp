@@ -7023,3 +7023,129 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 /* === v0.21.23 END === */
 
+/* === v0.22.0 IMPECCABLE ANIMATIONS BEGIN ===
+   Cross-template animation/microinteraction consistency.
+   Easing signature: cubic-bezier(0.25, 1, 0.5, 1) "quart-out" editorial.
+   Design tokens (--dur-fast/base/slow, --ease-editorial) riusati ovunque.
+   prefers-reduced-motion enforced UNIVERSALLY. */
+
+/* L1 — Universal prefers-reduced-motion safety net */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* L2 — Cross-h1 .sl-word stagger entrance (page-load orchestration)
+   Esteso da .sl-hero__headline a tutti gli h1 con [data-split-reveal]:
+   .sl-page__title, .sl-attorney__name, .sl-competenza__title, .sl-post__title,
+   .sl-casi__h1, .sl-contatti-w3__h1, .sl-chi-siamo__h1.
+   Stato iniziale invisibile; JS GSAP rivela; fallback no-JS visibile. */
+.sl-page__title .sl-word,
+.sl-attorney__name .sl-word,
+.sl-competenza__title .sl-word,
+.sl-post__title .sl-word,
+.sl-casi__h1 .sl-word,
+.sl-contatti-w3__h1 .sl-word,
+.sl-chi-siamo__h1 .sl-word {
+    display: inline-block;
+    margin-right: 0.25em;
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity var(--dur-slow) cubic-bezier(0.25, 1, 0.5, 1),
+        transform var(--dur-slow) cubic-bezier(0.25, 1, 0.5, 1);
+}
+.sl-page__title .sl-word.is-revealed,
+.sl-attorney__name .sl-word.is-revealed,
+.sl-competenza__title .sl-word.is-revealed,
+.sl-post__title .sl-word.is-revealed,
+.sl-casi__h1 .sl-word.is-revealed,
+.sl-contatti-w3__h1 .sl-word.is-revealed,
+.sl-chi-siamo__h1 .sl-word.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Fallback no-JS per cross-h1 (oltre a quello già a riga 1497) */
+html:not(.js-reveal-ready) .sl-page__title .sl-word,
+html:not(.js-reveal-ready) .sl-attorney__name .sl-word,
+html:not(.js-reveal-ready) .sl-competenza__title .sl-word,
+html:not(.js-reveal-ready) .sl-post__title .sl-word,
+html:not(.js-reveal-ready) .sl-casi__h1 .sl-word,
+html:not(.js-reveal-ready) .sl-contatti-w3__h1 .sl-word,
+html:not(.js-reveal-ready) .sl-chi-siamo__h1 .sl-word {
+    opacity: 1;
+    transform: none;
+}
+
+/* L3 — data-reveal stagger delay tiers (additivo a is-revealed) */
+[data-reveal-delay="1"].is-revealed { transition-delay: 80ms; }
+[data-reveal-delay="2"].is-revealed { transition-delay: 160ms; }
+[data-reveal-delay="3"].is-revealed { transition-delay: 240ms; }
+[data-reveal-delay="4"].is-revealed { transition-delay: 320ms; }
+
+/* L4 — Card hover unified (cross-template). @media (hover: hover) only — no
+   touch device hover (= mobile bottoming out su tap senza release). */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .sl-blog2__card,
+    .sl-attorney__card,
+    .sl-cases__row {
+        transition: transform var(--dur-base) cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .sl-blog2__card:hover,
+    .sl-attorney__card:hover {
+        transform: translateY(-4px);
+    }
+    .sl-cases__row:hover {
+        transform: translateX(8px);
+    }
+}
+
+/* L5 — Drop-cap reveal animation per .sl-page__prose / .sl-competenza__prose
+   (esistenti rules statiche a riga 2189, 3743, 3901; questo aggiunge entrance).
+   GSAP/IntersectionObserver applica .is-revealed sul parent <p>. */
+.sl-page__prose > p:first-of-type::first-letter,
+.sl-competenza__prose > p:first-of-type::first-letter {
+    transition:
+        opacity var(--dur-slow) cubic-bezier(0.25, 1, 0.5, 1) 200ms,
+        transform var(--dur-slow) cubic-bezier(0.25, 1, 0.5, 1) 200ms;
+}
+html.js-reveal-ready .sl-page__prose > p:first-of-type:not(.is-revealed)::first-letter,
+html.js-reveal-ready .sl-competenza__prose > p:first-of-type:not(.is-revealed)::first-letter {
+    opacity: 0;
+    transform: scale(0.92);
+}
+
+/* L6 — Universal hero CTA hover scale (subtle premium feel)
+   Solo .sl-btn--primary cross-template, no aggressive. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .sl-btn--primary {
+        transition:
+            color var(--dur-fast) var(--ease-editorial),
+            transform var(--dur-fast) cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .sl-btn--primary:hover {
+        transform: translateY(-1px);
+    }
+}
+
+/* L7 — Section-head children stagger (eyebrow + h1 + lede) via CSS animation
+   delay sequenziale. Triggerato da js-reveal-ready o data-reveal su parent. */
+html.js-reveal-ready .sl-section-head > * {
+    animation: sl-fade-up var(--dur-slow) cubic-bezier(0.25, 1, 0.5, 1) backwards;
+}
+html.js-reveal-ready .sl-section-head > *:nth-child(1) { animation-delay: 0ms; }
+html.js-reveal-ready .sl-section-head > *:nth-child(2) { animation-delay: 80ms; }
+html.js-reveal-ready .sl-section-head > *:nth-child(3) { animation-delay: 160ms; }
+@keyframes sl-fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === v0.22.0 IMPECCABLE ANIMATIONS END === */
+

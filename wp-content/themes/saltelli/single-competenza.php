@@ -36,7 +36,7 @@ while (have_posts()) :
                     <?php echo esc_html($tier_label); ?><?php echo $cat_label ? ' · ' . esc_html($cat_label) : ''; ?>
                 </div>
 
-                <h1 class="sl-competenza__title"><?php the_title(); ?></h1>
+                <h1 class="sl-competenza__title" data-split-reveal><?php echo wp_kses(saltelli_split_h1_words(get_the_title()), ['span' => ['class' => true, 'data-i' => true]]); ?></h1>
 
                 <?php if ($answer !== '') : ?>
                     <div class="sl-competenza__answer-wrap">

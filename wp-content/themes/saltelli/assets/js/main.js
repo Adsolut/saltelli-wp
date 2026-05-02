@@ -99,18 +99,20 @@
 
     // Reduced motion: lascia il CSS gestire la headline (fallback class) e bail-out
     if (reduced) {
-      document.querySelectorAll('.sl-hero__headline .sl-word, .sl-hero__headline .sl-hero__word').forEach((w) => w.classList.add('is-revealed'));
-      document.querySelectorAll('.sl-revealable').forEach((el) => el.classList.add('is-revealed'));
+      document.querySelectorAll('[data-split-reveal] .sl-word, .sl-hero__headline .sl-hero__word').forEach((w) => w.classList.add('is-revealed'));
+      document.querySelectorAll('.sl-revealable, [data-reveal]').forEach((el) => el.classList.add('is-revealed'));
       bindAreaHover();
       return;
     }
 
-    // 4. Hero headline reveal — stagger 80ms su .sl-hero__word
-    const heroHeadline = document.querySelector('.sl-hero__headline, [data-split-reveal]');
-    if (heroHeadline) {
+    // 4. Headline word stagger — v0.22.0: scope esteso a tutti gli h1 [data-split-reveal]
+    //    (.sl-page__title, .sl-attorney__name, .sl-competenza__title, .sl-post__title,
+    //    .sl-casi__h1, .sl-contatti-w3__h1, .sl-chi-siamo__h1, .sl-hero__headline)
+    const splitReveals = document.querySelectorAll('[data-split-reveal]');
+    splitReveals.forEach((heroHeadline) => {
       const wordEls = heroHeadline.querySelectorAll('.sl-word, .sl-hero__word');
       if (!isMobile && hasGsap && wordEls.length) {
-        window.gsap.set(wordEls, { opacity: 0, y: 40 });
+        window.gsap.set(wordEls, { opacity: 0, y: 32 });
         window.gsap.to(wordEls, {
           opacity: 1,
           y: 0,
@@ -122,7 +124,7 @@
         });
       } else if (!isMobile && hasGsap && hasSplitText && !wordEls.length) {
         const split = new window.SplitText(heroHeadline, { type: 'words' });
-        window.gsap.set(split.words, { opacity: 0, y: 40 });
+        window.gsap.set(split.words, { opacity: 0, y: 32 });
         window.gsap.to(split.words, {
           opacity: 1,
           y: 0,
@@ -132,8 +134,23 @@
           delay: 0.08,
         });
       } else {
+        // No GSAP / mobile: rivela istantaneo via class
         wordEls.forEach((w) => w.classList.add('is-revealed'));
       }
+    });
+
+    // 4.b — IntersectionObserver fallback per [data-reveal] quando GSAP/ScrollTrigger
+    //       non disponibili. Native API, no perf overhead. Usa .is-revealed CSS class.
+    if (!hasGsap && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+      document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
     }
 
     // 5. Reveal generico — sezioni hero-down + altri .sl-revealable / [data-reveal]

@@ -59,7 +59,7 @@ while (have_posts()) :
                             <div class="sl-mono sl-attorney__role"><?php echo esc_html($ruolo); ?></div>
                         <?php endif; ?>
 
-                        <h1 class="sl-attorney__name"><?php the_title(); ?></h1>
+                        <h1 class="sl-attorney__name" data-split-reveal><?php echo wp_kses(saltelli_split_h1_words(get_the_title()), ['span' => ['class' => true, 'data-i' => true]]); ?></h1>
 
                         <?php if ($bio_breve) : ?>
                             <p class="sl-attorney__lede"><?php echo esc_html($bio_breve); ?></p>
