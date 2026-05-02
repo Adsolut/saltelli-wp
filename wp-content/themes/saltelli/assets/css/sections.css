@@ -148,8 +148,8 @@
  * ========================================================= */
 .sl-hero {
   position: relative;
-  /* v0.17.2 — min-height rimosso (auto = content-driven). Padding-block compatto. */
-  padding-block: clamp(32px, 5vh, 56px);
+  /* v0.29.0 — padding-block ripristinato JSX spec (era clamp 32-56 v0.17.2 troppo compatto) */
+  padding-block: clamp(96px, 10vw, 120px) clamp(64px, 8vw, 96px);
   margin: 0 auto;
   overflow: visible;
 }
@@ -203,12 +203,9 @@
 
 @media (min-width: 1024px) {
   .sl-hero {
-    min-height: auto; /* v0.17.2 era 640 → auto (content-driven, no white-space forzato) */
-    /* F06 v0.14 — padding-inline azzerato: .sl-hero__inner ha class .sl-container
-       (front-page.php:65) che già applica padding-inline: var(--container-pad).
-       F01 v0.14 — display:grid rimosso (collide con .sl-hero__inner 8fr/4fr).
-       v0.17.2 — padding 64 0 32 (era 80 0 32) per rhythm armonioso section spacing */
-    padding: 64px 0 32px;
+    min-height: auto;
+    /* v0.29.0 — JSX spec 120px top, 80px bottom (era 64 0 32 v0.17.2 troppo compatto) */
+    padding: 120px 0 80px;
   }
   .sl-hero__eyebrow { margin-bottom: 64px; }
   .sl-hero__headline {
@@ -3425,7 +3422,8 @@ textarea.sl-input {
 .sl-chi-siamo { background: var(--background); }
 
 .sl-chi-siamo__hero {
-    padding: clamp(80px, 10vw, 120px) 0 clamp(56px, 7vw, 80px);
+    /* v0.29.0 — JSX spec aria editoriale 192px max (saltelli-s2-chi-siamo.jsx) */
+    padding: clamp(96px, 12vw, 192px) 0 clamp(64px, 8vw, 96px);
 }
 .sl-chi-siamo__hero-grid {
     display: grid;
@@ -5138,7 +5136,8 @@ textarea.sl-input {
 
 /* HERO ───────────────────────────────────────────────────────────── */
 .sl-tipoarea__hero {
-    padding-block: clamp(48px, 8vw, 96px) clamp(48px, 7vw, 80px);
+    /* v0.29.0 — uniformato a hero cross-template (era 48-96 top troppo basso) */
+    padding-block: clamp(96px, 10vw, 120px) clamp(64px, 8vw, 80px);
 }
 .sl-tipoarea__hero-grid {
     display: grid;
