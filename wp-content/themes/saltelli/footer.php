@@ -90,15 +90,8 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                         <?php esc_html_e("Vent'anni di pratica accanto a famiglie e imprese.", 'saltelli'); ?>
                     </p>
 
-                    <div class="sl-foot-social">
-                        <?php if (!empty($studio['social']['instagram'])) : ?>
-                            <a class="sl-foot-link sl-mono" href="<?php echo esc_url($studio['social']['instagram']); ?>" rel="noopener" target="_blank">Instagram</a>
-                        <?php endif; ?>
-                        <?php if ($em_li) : ?>
-                            <a class="sl-foot-link sl-mono" href="<?php echo esc_url($em_li); ?>" rel="noopener" target="_blank">LinkedIn</a>
-                        <?php endif; ?>
-                        <a class="sl-foot-link sl-mono" href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', (string) $studio['whatsapp'])); ?>" rel="noopener" target="_blank">WhatsApp</a>
-                    </div>
+                    <?php /* v0.21.5 [R3]: blocco social SPOSTATO in col 4 sotto "Studio professionale".
+                          Col 1 ora più ariosa (logo + statement only). */ ?>
                 </div>
 
                 <?php /* COL 2 — AREE DI PRATICA (v0.21.3 [F1]: solo tier-1 + CTA, no più tier-2) */ ?>
@@ -183,10 +176,8 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                             <a class="sl-foot-link sl-foot-contact-block__value" href="mailto:<?php echo esc_attr($ftr_email); ?>"><?php echo esc_html($ftr_email); ?></a>
                         </div>
 
-                        <div class="sl-foot-contact-block__group">
-                            <div class="sl-mono sl-foot-contact-block__caption"><?php esc_html_e('PEC', 'saltelli'); ?></div>
-                            <a class="sl-foot-link sl-foot-contact-block__value sl-foot-contact-block__pec" href="mailto:<?php echo esc_attr($ftr_pec); ?>"><?php echo esc_html($ftr_pec); ?></a>
-                        </div>
+                        <?php /* v0.21.5 [R2]: PEC Emiliano rimossa da footer (era ridondante — già visibile su /avvocati/emiliano-saltelli/).
+                              $ftr_pec ancora hydrato in cima per back-compat se servisse riusato da altri partial. */ ?>
                     </div>
 
                     <hr class="sl-foot-hairline" aria-hidden="true">
@@ -195,6 +186,18 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                     <div class="sl-mono sl-foot-info-block">
                         <span><?php esc_html_e('Iscritto Ordine Avvocati Napoli', 'saltelli'); ?></span>
                         <span><?php esc_html_e('P.IVA', 'saltelli'); ?> <?php echo esc_html($ftr_piva); ?></span>
+                    </div>
+
+                    <?php /* v0.21.5 [R3]: social row spostata da col 1 a col 4 (orfana dopo move contatti v0.21.3) */ ?>
+                    <hr class="sl-foot-hairline" aria-hidden="true">
+                    <div class="sl-foot-social">
+                        <?php if (!empty($studio['social']['instagram'])) : ?>
+                            <a class="sl-foot-link sl-mono" href="<?php echo esc_url($studio['social']['instagram']); ?>" rel="noopener" target="_blank">Instagram</a>
+                        <?php endif; ?>
+                        <?php if ($em_li) : ?>
+                            <a class="sl-foot-link sl-mono" href="<?php echo esc_url($em_li); ?>" rel="noopener" target="_blank">LinkedIn</a>
+                        <?php endif; ?>
+                        <a class="sl-foot-link sl-mono" href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', (string) $studio['whatsapp'])); ?>" rel="noopener" target="_blank">WhatsApp</a>
                     </div>
 
                     <?php /* DEPRECATED v0.21.3 [F3]: AI-friendly endpoint list + "Citazione consentita" + badge "Verificabile in studio".

@@ -6273,7 +6273,10 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 @media (min-width: 1024px) {
     .sl-foot-main {
-        grid-template-columns: 3fr 4fr 3fr 3fr;
+        /* v0.21.5 [R1]: rebalance 3/4/3/3 → 3/3/3/4 — col 4 "Studio legale" più larga
+           per ospitare contatti completi + Iscritto Ordine + social row spostata da col 1.
+           Col 2 "Aree di pratica" da 4fr → 3fr (post drop tier-2 in v0.21.3 sufficiente). */
+        grid-template-columns: 3fr 3fr 3fr 4fr;
         gap: 64px;
     }
 }
