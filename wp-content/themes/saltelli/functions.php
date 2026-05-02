@@ -8,7 +8,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '0.28.1-beta-precta-newsletter-tight-cream');
+define('SALTELLI_THEME_VERSION', '0.28.2-beta-precta-singlecol-tight');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
