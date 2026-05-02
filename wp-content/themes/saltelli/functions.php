@@ -8,7 +8,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '0.27.3-beta-chi-siamo-jsx-align');
+define('SALTELLI_THEME_VERSION', '0.27.4-beta-chi-siamo-hero-top-align');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 

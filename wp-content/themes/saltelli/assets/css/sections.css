@@ -8375,6 +8375,15 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
    Source: saltelli-s2-chi-siamo.jsx
    ═══════════════════════════════════════════════════════════════ */
 
+/* === v0.27.4 — Hero alignment LEFT eyebrow+meta TOP-aligned con H1 ===
+   JSX source-code ha alignItems: "end" ma il visual-design intent (Duccio
+   review) è LEFT block ancorato al TOP del row, NON al bottom. Override su
+   align-items: start per allineare eyebrow "§ Lo studio · Chi siamo" alla
+   prima riga del H1 "Un atelier", senza floating-bottom. */
+.sl-chi-siamo__hero-grid {
+    align-items: start !important;
+}
+
 /* === REVERTED v0.27.3 — H1 size to JSX exact (era 144 troppo grande) ===
    JSX clamp(56,7vw,104) · max-width nessuno · line-height 0.98 (NON 0.92). */
 .sl-chi-siamo__h1 {
