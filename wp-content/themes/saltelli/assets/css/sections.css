@@ -1009,11 +1009,18 @@
    Era grid `auto 1fr` desktop → eyebrow + title affiancati ("§ 01 — AREE DI PRATICA"
    a sinistra del titolo). Cambiato a single column con gap 16-24px tra
    eyebrow e title. */
+/* v0.21.23: section-head editorial breathing — gap eyebrow→h1→lede
+   da 16/24 → 24/40px; margin-bottom da 32/48 → 64/80px. Audit Impeccable
+   typeset.md: optimal 24-32 (eyebrow→h1) + 40-56 (h1→lede). */
 .sl-section-head {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
-  margin-bottom: 32px;
+  gap: 24px;
+  margin-bottom: 64px;
+}
+.sl-section-head h1,
+.sl-section-head h2 {
+  margin-top: 0;
 }
 .sl-section-title {
   font-size: 36px;
@@ -1027,8 +1034,8 @@
 @media (min-width: 768px) {
   .sl-section-head {
     grid-template-columns: 1fr;
-    gap: 24px;
-    margin-bottom: 48px;
+    gap: 40px;
+    margin-bottom: 80px;
   }
   .sl-section-title { font-size: clamp(40px, 5vw, 72px); }
 }
@@ -6900,4 +6907,103 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     color: #5A5A5A;
 }
 /* === IMPECCABLE v0.21.2 [perf-T4] END === */
+
+/* === v0.21.23 — Typography breathing cross-template ===
+   Audit Duccio post-v0.21.22: distanza visiva tra heading e prose body
+   troppo stretta (24/16px) per editorial reading. Spec Impeccable typeset:
+   h2→p optimal 32-48px, h3→p optimal 24-32px. Estende scope a
+   .sl-post__body + .sl-attorney__bio-prose. */
+
+/* TASK 1 — /contatti/ form CF7 trust line spacing
+   Submit→trust line attaccati (~4-8px default) → 32px aria editoriale.
+   Scope multipli per coprire CF7 markup variants (con/senza .sl-form__note). */
+.sl-contatti-w3__form .wpcf7-submit,
+.sl-contatti-w3__form input[type="submit"].sl-btn,
+.sl-contatti-w3 input.wpcf7-submit {
+    margin-bottom: 32px;
+}
+.sl-contatti-w3__form-trust,
+.sl-contatti-w3 .wpcf7-form > p:last-of-type,
+.sl-contatti-w3__form > p:last-of-type {
+    margin-top: 32px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+@media (max-width: 767px) {
+    .sl-contatti-w3__form .wpcf7-submit { margin-bottom: 24px; }
+    .sl-contatti-w3__form > p:last-of-type,
+    .sl-contatti-w3 .wpcf7-form > p:last-of-type { margin-top: 24px; }
+}
+
+/* TASK 2 — H2/H3 cross-template prose body spacing
+   h2 margin-bottom 24 → 40px; h3 margin-bottom 16 → 32px.
+   Scope esteso a .sl-post__body + .sl-attorney__bio-prose.
+   Posizionato dopo le regole originali (riga ~1700) per source-order win. */
+.sl-page__prose h2,
+.sl-page__prose h3,
+.entry-content h2,
+.entry-content h3,
+.sl-competenza__prose h2,
+.sl-competenza__prose h3,
+.sl-post__body h2,
+.sl-post__body h3,
+.sl-attorney__bio-prose h2,
+.sl-attorney__bio-prose h3 {
+    margin-block: 80px 40px;
+}
+.sl-page__prose h3,
+.entry-content h3,
+.sl-competenza__prose h3,
+.sl-post__body h3,
+.sl-attorney__bio-prose h3 {
+    margin-block: 56px 32px;
+}
+/* Adiacenti h2+h2 / h2+h3 / h3+h3: stretto, no aria doppia. */
+.sl-page__prose h2 + h2,
+.sl-page__prose h2 + h3,
+.sl-page__prose h3 + h3,
+.entry-content h2 + h2,
+.entry-content h2 + h3,
+.entry-content h3 + h3,
+.sl-competenza__prose h2 + h3,
+.sl-competenza__prose h3 + h3,
+.sl-post__body h2 + h2,
+.sl-post__body h2 + h3,
+.sl-post__body h3 + h3 {
+    margin-top: 32px;
+}
+/* :first-child no top margin (no gap iniziale). */
+.sl-page__prose > h2:first-child,
+.sl-page__prose > h3:first-child,
+.entry-content > h2:first-child,
+.entry-content > h3:first-child,
+.sl-competenza__prose > h2:first-child,
+.sl-competenza__prose > h3:first-child,
+.sl-post__body > h2:first-child,
+.sl-post__body > h3:first-child,
+.sl-attorney__bio-prose > h2:first-child,
+.sl-attorney__bio-prose > h3:first-child {
+    margin-top: 0;
+}
+/* Mobile compress — no aria infinita su small screen. */
+@media (max-width: 767px) {
+    .sl-page__prose h2,
+    .entry-content h2,
+    .sl-competenza__prose h2,
+    .sl-post__body h2,
+    .sl-attorney__bio-prose h2 {
+        margin-block: 56px 28px;
+    }
+    .sl-page__prose h3,
+    .entry-content h3,
+    .sl-competenza__prose h3,
+    .sl-post__body h3,
+    .sl-attorney__bio-prose h3 {
+        margin-block: 40px 20px;
+    }
+}
+/* === v0.21.23 END === */
 
