@@ -1,0 +1,161 @@
+[
+  {
+    "url": "/avvocati/emiliano-saltelli/",
+    "label": "ATTORNEY · Emiliano",
+    "pct": 100,
+    "found": 7,
+    "total": 7,
+    "missing": []
+  },
+  {
+    "url": "/avvocati/fabiana-saltelli/",
+    "label": "ATTORNEY · Fabiana",
+    "pct": 71,
+    "found": 5,
+    "total": 7,
+    "missing": [
+      "Formazione (NEW v0.25)",
+      "Casi (NEW v0.25)"
+    ]
+  },
+  {
+    "url": "/avvocati/antonia-battista/",
+    "label": "ATTORNEY · Antonia",
+    "pct": 71,
+    "found": 5,
+    "total": 7,
+    "missing": [
+      "Formazione",
+      "Casi"
+    ]
+  },
+  {
+    "url": "/competenze/diritto-tributario/",
+    "label": "TIER-1 · Tributario",
+    "pct": 70,
+    "found": 7,
+    "total": 10,
+    "missing": [
+      "Body editoriale",
+      "Cluster Accertamenti (NEW v0.25)",
+      "Casi rappresentativi"
+    ]
+  },
+  {
+    "url": "/competenze/diritto-del-lavoro/",
+    "label": "TIER-1 · Lavoro",
+    "pct": 88,
+    "found": 8,
+    "total": 9,
+    "missing": [
+      "Cluster INPS"
+    ]
+  },
+  {
+    "url": "/competenze/diritto-di-famiglia-lgbtq/",
+    "label": "TIER-1 · LGBTQ+",
+    "pct": 66,
+    "found": 6,
+    "total": 9,
+    "missing": [
+      "Cluster Unioni civili",
+      "Cluster Trascrizione/PMA",
+      "Cluster Stepchild/Identità"
+    ]
+  },
+  {
+    "url": "/chi-siamo/",
+    "label": "CHI SIAMO",
+    "pct": 57,
+    "found": 4,
+    "total": 7,
+    "missing": [
+      "Lede + drop-cap",
+      "Team grid 4 lawyer (NEW v0.25)",
+      "Principi 3 (NEW v0.25)"
+    ]
+  },
+  {
+    "url": "/casi/",
+    "label": "CASI",
+    "pct": 75,
+    "found": 3,
+    "total": 4,
+    "missing": [
+      "Lista casi (id+desc+outcome)"
+    ]
+  },
+  {
+    "url": "/contatti/",
+    "label": "CONTATTI",
+    "pct": 50,
+    "found": 3,
+    "total": 6,
+    "missing": [
+      "Privacy GDPR",
+      "Click-to-action (Tel + WA)",
+      "Trust signals"
+    ]
+  },
+  {
+    "url": "/blog/",
+    "label": "BLOG ARCHIVE",
+    "pct": 25,
+    "found": 1,
+    "total": 4,
+    "missing": [
+      "Featured post",
+      "Articles grid",
+      "Pagination"
+    ]
+  },
+  {
+    "url": "/tipo-area/privati/",
+    "label": "TAXONOMY · Privati",
+    "pct": 16,
+    "found": 1,
+    "total": 6,
+    "missing": [
+      "Hero asimmetrico",
+      "Lawyer ref",
+      "Quando rivolgersi 3-col",
+      "Lista aree",
+      "Casi cluster"
+    ]
+  },
+  {
+    "url": "/glossario-legale/",
+    "label": "GLOSSARIO",
+    "pct": 60,
+    "found": 3,
+    "total": 5,
+    "missing": [
+      "A-Z navigation",
+      "Search"
+    ]
+  },
+  {
+    "url": "/costi/",
+    "label": "COSTI",
+    "pct": 71,
+    "found": 5,
+    "total": 7,
+    "missing": [
+      "Hero asimmetrico + trust",
+      "Come funziona 3-col"
+    ]
+  },
+  {
+    "url": "/",
+    "label": "HOMEPAGE",
+    "pct": 33,
+    "found": 2,
+    "total": 6,
+    "missing": [
+      "Lo studio drop-cap",
+      "Avvocati card",
+      "Casi rappresentativi",
+      "Footer 4 fasce"
+    ]
+  }
+]

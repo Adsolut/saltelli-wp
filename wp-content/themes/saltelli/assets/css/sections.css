@@ -8009,3 +8009,383 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 
 /* === v0.25.0 END === */
 
+/* ═══════════════════════════════════════════════════════════════
+   v0.27.0 TASK 1 — ATTORNEY pixel-perfect visual refactor
+   Source: saltelli-s2-attorney-single.jsx
+   Target: hero 1fr/1fr + body sticky sidebar 240/1fr + casi 3-col
+   ═══════════════════════════════════════════════════════════════ */
+
+/* === ARTICLE-LEVEL GRID — sticky sidebar layout (desktop only) === */
+@media (min-width: 1024px) {
+    .sl-attorney {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        column-gap: 96px;
+        row-gap: 0;
+        max-width: 1440px;
+        margin-inline: auto;
+        padding-inline: clamp(24px, 5vw, 96px);
+        align-items: start;
+    }
+    /* Hero spans full width */
+    .sl-attorney > header,
+    .sl-attorney > .sl-attorney__hero {
+        grid-column: 1 / -1;
+        margin-inline: calc(-1 * clamp(24px, 5vw, 96px));
+    }
+    /* Sticky aside col 1, spans all body rows */
+    .sl-attorney > .sl-attorney__sticky {
+        grid-column: 1;
+        grid-row: 2 / -1;
+    }
+    /* All body sections in col 2 (auto-flow row) */
+    .sl-attorney > .sl-attorney__bio,
+    .sl-attorney > .sl-attorney__competenze,
+    .sl-attorney > .sl-attorney__aree,
+    .sl-attorney > .sl-attorney__timeline,
+    .sl-attorney > .sl-attorney__casi,
+    .sl-attorney > .sl-attorney__articles,
+    .sl-attorney > .sl-attorney__cta {
+        grid-column: 2;
+    }
+}
+
+/* === HERO 2-col grid (1fr/1fr equal) === */
+.sl-attorney__hero {
+    padding-block: 80px 64px;
+}
+.sl-attorney__hero-inner {
+    max-width: 1440px;
+    margin-inline: auto;
+}
+.sl-attorney__hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;       /* JSX exact */
+    gap: 64px;
+    align-items: stretch;
+}
+@media (max-width: 1023px) {
+    .sl-attorney__hero {
+        padding-block: 56px 48px;
+    }
+    .sl-attorney__hero-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+}
+
+/* === Hero LEFT: portrait 1:1 (override aspect 3/4 → 1/1 desktop) === */
+@media (min-width: 1024px) {
+    figure.sl-attorney__portrait {
+        aspect-ratio: 1 / 1 !important;
+    }
+}
+
+/* === Hero RIGHT: name + role + tags === */
+.sl-attorney__hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+}
+.sl-attorney__hero-text .sl-attorney__role {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+.sl-attorney__name {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 6vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    font-weight: 400;
+    margin: 0 0 32px;
+    color: var(--primary);
+}
+.sl-attorney__name em {
+    font-style: italic;
+    color: var(--text-muted);
+}
+.sl-attorney__lede {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2vw, 22px);
+    font-style: italic;
+    color: var(--text);
+    margin: 0 0 32px;
+    line-height: 1.5;
+    max-width: 36ch;
+}
+.sl-attorney__hero-text .sl-attorney__specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 32px 0 0;
+    list-style: none;
+    padding: 0;
+}
+
+/* === STICKY OVERRIDE — fixed toolbar → grid sidebar === */
+@media (min-width: 1024px) {
+    .sl-attorney__sticky {
+        position: sticky !important;
+        top: 120px !important;
+        left: auto !important;
+        transform: none !important;
+        align-self: start;
+        height: fit-content;
+        display: grid !important;
+        gap: 8px;
+        flex-direction: unset;
+        padding-block: 64px 32px;
+        z-index: 1;
+    }
+    .sl-attorney__sticky-btn {
+        width: 100%;
+        justify-content: flex-start;
+        text-align: left;
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border);
+        background: transparent;
+        font-size: 11px;
+    }
+    .sl-attorney__sticky-btn:hover,
+    .sl-attorney__sticky-btn:focus-visible {
+        background: transparent;
+        border-bottom-color: var(--accent);
+        color: var(--accent);
+        transform: none;
+    }
+}
+
+/* === BIO PROSE: drop-cap già presente. Solo padding-block consistency === */
+.sl-attorney__bio {
+    padding-block: clamp(64px, 8vw, 96px);
+}
+.sl-attorney__bio .sl-container {
+    padding-inline: 0;  /* parent grid già gestisce padding */
+}
+@media (max-width: 1023px) {
+    .sl-attorney__bio .sl-container {
+        padding-inline: clamp(24px, 5vw, 64px);
+    }
+}
+
+/* === FORMAZIONE/TIMELINE rows 100px / 1fr === */
+.sl-timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.sl-attorney__timeline .sl-timeline__row {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 32px;
+    padding-block: 24px;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+}
+.sl-attorney__timeline .sl-timeline__row:last-child {
+    border-bottom: 0;
+}
+.sl-attorney__timeline .sl-timeline__year {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+}
+.sl-attorney__timeline .sl-timeline__title {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.3;
+    color: var(--primary);
+}
+.sl-attorney__timeline .sl-timeline__inst {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 767px) {
+    .sl-attorney__timeline .sl-timeline__row {
+        grid-template-columns: 64px 1fr;
+        gap: 16px;
+    }
+    .sl-attorney__timeline .sl-timeline__inst {
+        grid-column: 1 / -1;
+        text-align: left;
+        white-space: normal;
+        margin-top: 4px;
+    }
+}
+
+/* === CASI rows 200px / 1fr / 160px (refine existing rule line 3763) === */
+.sl-attorney__casi .sl-attorney__casi-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+@media (min-width: 1024px) {
+    .sl-attorney__casi-row {
+        grid-template-columns: 200px 1fr 160px !important;
+        gap: 32px;
+        padding: 28px 0;
+        align-items: baseline;
+    }
+}
+.sl-attorney__casi-id {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+.sl-attorney__casi-desc {
+    font-family: var(--font-display);
+    font-size: clamp(16px, 1.6vw, 18px);
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--text);
+    margin: 0;
+}
+.sl-attorney__casi-outcome {
+    text-align: right;
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--accent);
+    font-weight: 400;
+}
+@media (max-width: 1023px) {
+    .sl-attorney__casi-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    .sl-attorney__casi-outcome {
+        text-align: left;
+    }
+}
+
+/* === CTA section padding consistency === */
+.sl-attorney__cta {
+    padding-block: clamp(80px, 10vw, 128px);
+    border-top: 1px solid var(--border);
+    margin-top: 64px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   v0.27.0 TASK 2 — TIER-1 visual refinement
+   Source: saltelli-s2-practice-tier1.jsx
+   ═══════════════════════════════════════════════════════════════ */
+
+/* === Hero asym 8fr/4fr desktop === */
+@media (min-width: 1024px) {
+    .sl-tier1__hero .sl-container {
+        display: grid;
+        grid-template-columns: 8fr 4fr;
+        gap: 64px;
+        align-items: end;
+    }
+    .sl-tier1__hero .sl-container > .sl-page__breadcrumb,
+    .sl-tier1__hero .sl-container > .sl-competenza__back,
+    .sl-tier1__hero .sl-container > .sl-competenza__eyebrow,
+    .sl-tier1__hero .sl-container > .sl-competenza__title,
+    .sl-tier1__hero .sl-container > .sl-tier1__sub {
+        grid-column: 1;
+    }
+    .sl-tier1__hero .sl-container > .sl-competenza__answer-wrap,
+    .sl-tier1__hero .sl-container > .sl-tier1__capsule {
+        grid-column: 2;
+        grid-row: 1 / span 6;
+        align-self: end;
+    }
+    .sl-tier1__hero .sl-container > .sl-competenza__hero-cta,
+    .sl-tier1__hero .sl-container > .sl-tier1__lawyer {
+        grid-column: 1 / -1;
+    }
+}
+
+/* === Capsule italic editorial === */
+.sl-tier1__capsule {
+    padding: 32px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+.sl-tier1__capsule-text {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2vw, 26px);
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--primary);
+    max-width: 36ch;
+    margin: 0;
+}
+
+/* === Cluster H2 (v0.25.0 deep cluster) — refinement spacing === */
+.sl-tier1__cluster-h2 {
+    margin-block-start: 80px;
+}
+.sl-tier1__clusters .sl-tier1__cluster:first-of-type .sl-tier1__cluster-h2 {
+    margin-block-start: 0;
+}
+
+/* === Cases 3-col grid (override stacked default for tier-1 only) === */
+@media (min-width: 1024px) {
+    .sl-tier1__cases .sl-cases__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+    }
+    .sl-tier1__cases .sl-cases__row {
+        border-top: 1px solid var(--accent);
+        padding-top: 24px;
+        padding-block: 24px 32px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   v0.27.0 TASK 3 — CHI-SIAMO visual refinement
+   Source: saltelli-s2-chi-siamo.jsx
+   ═══════════════════════════════════════════════════════════════ */
+
+/* === Hero h1 144px scale up === */
+.sl-chi-siamo__h1 {
+    font-size: clamp(56px, 9vw, 144px) !important;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    max-width: 12ch;
+}
+.sl-chi-siamo__h1 em {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+/* === Founding § 02 — 3fr/9fr asym (era 3fr/9fr già OK, solo refine) === */
+@media (min-width: 1024px) {
+    .sl-chi-siamo__founding .sl-container.sl-chi-siamo__founding-grid {
+        grid-template-columns: 3fr 9fr;
+    }
+}
+
+/* === Team 4-col grid (già OK), photo aspect 4/5 italian editorial === */
+@media (min-width: 1024px) {
+    .sl-chi-siamo__team-portrait {
+        aspect-ratio: 4 / 5 !important;
+    }
+}
+
+/* === Principles surface bg + 3-col already in v0.25.0 — refine border-top accent === */
+@media (min-width: 1024px) {
+    .sl-chi-siamo__principle {
+        border-top: 1px solid var(--accent) !important;
+        border-bottom: 0 !important;
+        padding-top: 32px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   v0.27.0 END
+   ═══════════════════════════════════════════════════════════════ */
+
+
