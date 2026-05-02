@@ -178,6 +178,18 @@ Animation libs:        GSAP 3.12.5 + ScrollTrigger from CDN (deferred)
 - `inc/cpt-*.php` — CPT registration
 - `inc/acf-json/` — field group definitions (works with or without ACF Pro)
 
+## Design → Code handoff rule (golden)
+
+**JSX inline styles handoff:** quando Claude Design genera JSX con `style={{...}}` inline:
+
+1. **Code DEVE mappare ogni inline style a una className BEM** (`.sl-{template}__{element}`)
+2. **Code DEVE generare CSS rule corrispondente in `sections.css`** con scope marker `/* === v0.X.0 TEMPLATE === */`
+3. **Code NON deve assumere che className mancanti = optional** — tutti gli inline style del JSX devono diventare CSS rule con className
+4. **Test pixel-perfect:** 1 inline style = 1 CSS rule + 1 className
+5. **Verifica computed styles via Playwright** post-deploy: ogni `gridTemplateColumns`, `gap`, `fontSize`, `padding` JSX → match in `getComputedStyle(el)`
+
+Lezione v0.19→v0.30: l'agent Code aveva tradotto solo 20% dei JSX inline (quelli con className), saltando l'80% inline-only. v0.27.x recovery ha mappato sistematicamente i gap. **Pattern obbligatorio per future sessioni.**
+
 ## Working rules for agents
 
 1. **Read this file first.** Then read your assigned prompt + project-context.json. Then read ONLY the files relevant to your scope.
