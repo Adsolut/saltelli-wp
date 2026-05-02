@@ -3135,6 +3135,22 @@ textarea.sl-input {
 .wpcf7-form .wpcf7-acceptance .wpcf7-list-item {
     margin: 0;
 }
+/* v0.21.17 [checkbox align]: CF7 inserisce <br/> come primo child del <p>
+   che con display: flex + gap: 12 occupava un flex slot e pushava la
+   checkbox 12px+ a destra rispetto agli input fields sopra.
+   Hide del <br/> + gap 0 → checkbox left edge identico agli input. */
+.sl-form__row--privacy > br {
+    display: none;
+}
+.sl-form__row--privacy {
+    gap: 0;
+}
+/* v0.21.17 [checkbox vcenter]: align-items center sul label (era flex-start)
+   per centrare verticalmente la checkbox con la prima linea di testo. */
+.sl-form__row--privacy label,
+.wpcf7-form .wpcf7-acceptance label {
+    align-items: center;
+}
 .sl-form__row--privacy label,
 .wpcf7-form .wpcf7-acceptance label {
     font-family: var(--font-body);
@@ -4408,9 +4424,10 @@ textarea.sl-input {
 }
 /* v0.21.15 [T1]: override scoped per il note "Risposta entro 24 ore..." sotto submit.
    La regola generica > p { margin: 0 } stava overriding il margin-top di .sl-form__note.
-   Specificity 0,3,1 batte 0,2,1 → margin-top: 64px applicato. */
+   Specificity 0,3,1 batte 0,2,1 → margin-top: 96px applicato.
+   v0.21.17: bumped 64 → 96 (Duccio "deve andare dove ho segnato seconda linea sotto pulsante"). */
 .sl-contatti-w3 .wpcf7-form > p.sl-form__note {
-    margin-top: 64px;
+    margin-top: 96px;
 }
 .sl-contatti-w3 .wpcf7-form label {
     display: block;
