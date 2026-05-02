@@ -143,6 +143,39 @@ input.sl-btn[data-loading="true"] {
 }
 /* === IMPECCABLE v0.20.0 [interaction-design + harden + delight] END === */
 
+/* === IMPECCABLE v0.22.1 — .sl-btn base transition + state polish BEGIN ===
+   v0.20.0 ha 8 stati ma manca transition base sulla shorthand .sl-btn.
+   Hover di base era solo via ::after color/transform (line 53-69); aggiungo
+   color/transform sulla button stessa per micro-feedback fluido cross-state.
+   Convive con regole esistenti (additive, no replace). */
+.sl-btn {
+    transition:
+        color var(--dur-fast) cubic-bezier(0.25, 1, 0.5, 1),
+        transform var(--dur-fast) cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .sl-btn:hover {
+        color: var(--accent);
+        transform: translateY(-1px);
+    }
+}
+/* :active ridefinito v0.22.1: scale invece di translateY(1) per micro-press
+   feel più premium. transition-duration più rapido per feedback istantaneo. */
+.sl-btn:active {
+    transform: translateY(0) scale(0.98);
+    transition-duration: 100ms;
+}
+.sl-btn[aria-busy="true"] {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: progress;
+}
+@media (prefers-reduced-motion: reduce) {
+    .sl-btn:hover { transform: none; }
+}
+/* === IMPECCABLE v0.22.1 END === */
+
 /* List item — area di pratica */
 .sl-area {
   display: grid;

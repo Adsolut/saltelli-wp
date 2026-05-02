@@ -19,9 +19,15 @@ $layout_team = saltelli_team_grid_layout();
     <div class="sl-container">
         <header class="sl-section-head">
             <?php saltelli_render_breadcrumb(); ?>
-            <h1 class="sl-section-title">
-                <?php esc_html_e('Quattro', 'saltelli'); ?><br>
-                <em><?php esc_html_e('professionisti.', 'saltelli'); ?></em>
+            <h1 class="sl-section-title" data-split-reveal>
+                <?php
+                $sl_arch_av_title = esc_html__('Quattro', 'saltelli') . '<br><em>' . esc_html__('professionisti.', 'saltelli') . '</em>';
+                echo wp_kses(saltelli_split_h1_words($sl_arch_av_title), [
+                    'span' => ['class' => true, 'data-i' => true],
+                    'em'   => [],
+                    'br'   => [],
+                ]);
+                ?>
             </h1>
             <p class="sl-team__archive-lede">
                 <?php esc_html_e('Un atelier di quattro avvocati a Chiaia. Ogni cliente è una storia, e ogni storia merita il tempo di essere capita.', 'saltelli'); ?>

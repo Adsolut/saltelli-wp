@@ -336,9 +336,15 @@ $sl_gloss_chain = function_exists('saltelli_get_breadcrumb_chain') ? saltelli_ge
                 <div class="sl-mono sl-glossario__eyebrow">
                     <?php esc_html_e('§ Riferimenti · Glossario', 'saltelli'); ?>
                 </div>
-                <h1 class="sl-glossario__h1" id="glossario-h1">
-                    <?php esc_html_e('Glossario', 'saltelli'); ?><br>
-                    <em><?php esc_html_e('legale.', 'saltelli'); ?></em>
+                <h1 class="sl-glossario__h1" id="glossario-h1" data-split-reveal>
+                    <?php
+                    $sl_gloss_title = esc_html__('Glossario', 'saltelli') . '<br><em>' . esc_html__('legale.', 'saltelli') . '</em>';
+                    echo wp_kses(saltelli_split_h1_words($sl_gloss_title), [
+                        'span' => ['class' => true, 'data-i' => true],
+                        'em'   => [],
+                        'br'   => [],
+                    ]);
+                    ?>
                 </h1>
             </div>
             <div class="sl-glossario__hero-meta">

@@ -56,7 +56,7 @@ $last_mod_human = $last_mod ? wp_date('j F Y', strtotime($last_mod)) : '';
     <header class="sl-blog2__hero sl-container">
         <div class="sl-blog2__hero-left">
             <div class="sl-mono sl-blog2__eyebrow">§ Editoriale &middot; Saltelli</div>
-            <h1 class="sl-blog2__h1">Editoriale.</h1>
+            <h1 class="sl-blog2__h1" data-split-reveal><?php echo wp_kses(saltelli_split_h1_words('Editoriale.'), ['span' => ['class' => true, 'data-i' => true]]); ?></h1>
         </div>
         <div class="sl-blog2__hero-right">
             <p class="sl-blog2__lede">

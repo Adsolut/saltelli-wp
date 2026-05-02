@@ -7149,3 +7149,66 @@ html.js-reveal-ready .sl-section-head > *:nth-child(3) { animation-delay: 160ms;
 
 /* === v0.22.0 IMPECCABLE ANIMATIONS END === */
 
+/* === IMPECCABLE v0.22.1 — Animation final BEGIN === */
+/* A.6 — sl-word stagger scope esteso a archive/taxonomy/glossario/home.
+   Mancanti dal v0.22.0: .sl-section-title (archive-avvocato),
+   .sl-blog2__h1 (home), .sl-tipoarea__h1 (taxonomy), .sl-glossario__h1 (glossario). */
+.sl-section-title .sl-word,
+.sl-blog2__h1 .sl-word,
+.sl-tipoarea__h1 .sl-word,
+.sl-glossario__h1 .sl-word {
+    display: inline-block;
+    margin-right: 0.25em;
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity var(--dur-slow) cubic-bezier(0.25, 1, 0.5, 1),
+        transform var(--dur-slow) cubic-bezier(0.25, 1, 0.5, 1);
+}
+.sl-section-title .sl-word.is-revealed,
+.sl-blog2__h1 .sl-word.is-revealed,
+.sl-tipoarea__h1 .sl-word.is-revealed,
+.sl-glossario__h1 .sl-word.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+html:not(.js-reveal-ready) .sl-section-title .sl-word,
+html:not(.js-reveal-ready) .sl-blog2__h1 .sl-word,
+html:not(.js-reveal-ready) .sl-tipoarea__h1 .sl-word,
+html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
+    opacity: 1;
+    transform: none;
+}
+
+/* CSS-only stagger fallback via [data-i] (compatibile con homepage GSAP).
+   Si applica solo dopo .is-revealed → no race condition con GSAP stagger. */
+.sl-word[data-i="0"] { transition-delay: 0ms; }
+.sl-word[data-i="1"] { transition-delay: 80ms; }
+.sl-word[data-i="2"] { transition-delay: 160ms; }
+.sl-word[data-i="3"] { transition-delay: 240ms; }
+.sl-word[data-i="4"] { transition-delay: 320ms; }
+.sl-word[data-i="5"] { transition-delay: 400ms; }
+.sl-word[data-i="6"] { transition-delay: 480ms; }
+.sl-word[data-i="7"] { transition-delay: 560ms; }
+
+/* C.1 — Drop-cap consistency esteso oltre tier-1 a tutte le competenze.
+   La regola tier-1 a riga 3901 (italic 96px) ha specificity 0,3,2 → vince
+   per tier-1. Questa regola (0,2,2) si applica a tier-2 con stile più sobrio. */
+.sl-competenza__prose > p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 84px;
+    line-height: 0.85;
+    float: left;
+    margin: 8px 16px 0 0;
+    color: var(--primary);
+}
+@media (max-width: 767px) {
+    .sl-competenza__prose > p:first-of-type::first-letter {
+        font-size: 60px;
+        margin: 4px 12px 0 0;
+    }
+}
+
+/* === IMPECCABLE v0.22.1 END === */
+

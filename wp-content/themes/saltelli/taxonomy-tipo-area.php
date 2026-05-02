@@ -151,8 +151,8 @@ $avatar_html = function ($av_post) {
                 <div class="sl-tipoarea__hero-main">
                     <?php saltelli_render_breadcrumb(); ?>
 
-                    <h1 class="sl-tipoarea__h1">
-                        <?php echo esc_html($term_name); ?>.
+                    <h1 class="sl-tipoarea__h1" data-split-reveal>
+                        <?php echo wp_kses(saltelli_split_h1_words($term_name . '.'), ['span' => ['class' => true, 'data-i' => true]]); ?>
                     </h1>
 
                     <?php if ($term_desc) : ?>
