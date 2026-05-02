@@ -6490,7 +6490,19 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     .sl-foot-newsletter {
         grid-template-columns: 5fr 7fr;
         gap: 96px;
-        align-items: start;
+        /* v0.21.9: stretch (was start) per equal-height col → permette
+           push del trust line al bottom in lede col, alignato verticalmente
+           con submit "Iscriviti all'editoriale" della form col. */
+        align-items: stretch;
+    }
+    /* v0.21.9 [trust align]: lede flex column con trust pushed to bottom */
+    .sl-foot-newsletter__lede {
+        display: flex;
+        flex-direction: column;
+    }
+    .sl-foot-newsletter__trust {
+        margin-top: auto;
+        padding-top: 32px;
     }
 }
 .sl-foot-newsletter__eyebrow {
