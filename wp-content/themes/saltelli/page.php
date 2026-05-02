@@ -544,8 +544,8 @@ while (have_posts()) :
                                     title="<?php esc_attr_e('Studio Saltelli — Via Vannella Gaetani 27', 'saltelli'); ?>"
                                     width="100%" height="100%" frameborder="0" scrolling="no"
                                     loading="lazy"
-                                    <?php /* v0.21.14 [T4]: coordinate aggiornate (project-context.json: 40.830267, 14.237217 confermate 2026-04-28) */ ?>
-                                    src="https://www.openstreetmap.org/export/embed.html?bbox=14.232%2C40.827%2C14.243%2C40.834&amp;layer=mapnik&amp;marker=40.830267%2C14.237217"></iframe>
+                                    <?php /* v0.21.15 [T4 redo]: coordinate ufficiali Duccio 40.8327987, 14.2421105 (precedenti 40.830267, 14.237217 erano approssimative) */ ?>
+                                    src="https://www.openstreetmap.org/export/embed.html?bbox=14.237%2C40.829%2C14.247%2C40.836&amp;layer=mapnik&amp;marker=40.8327987%2C14.2421105"></iframe>
                                 <div class="sl-mono sl-contatti-w3__map-tag"><?php esc_html_e('Chiaia · Napoli', 'saltelli'); ?></div>
                             </div>
 

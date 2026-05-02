@@ -4406,6 +4406,12 @@ textarea.sl-input {
 .sl-contatti-w3 .wpcf7-form > p {
     margin: 0;
 }
+/* v0.21.15 [T1]: override scoped per il note "Risposta entro 24 ore..." sotto submit.
+   La regola generica > p { margin: 0 } stava overriding il margin-top di .sl-form__note.
+   Specificity 0,3,1 batte 0,2,1 → margin-top: 64px applicato. */
+.sl-contatti-w3 .wpcf7-form > p.sl-form__note {
+    margin-top: 64px;
+}
 .sl-contatti-w3 .wpcf7-form label {
     display: block;
     font-family: var(--font-mono);
