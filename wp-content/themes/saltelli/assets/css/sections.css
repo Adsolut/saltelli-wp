@@ -6281,11 +6281,43 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     display: grid;
     gap: 32px;
 }
+/* === v0.27.8 — Pre-CTA layout 3fr/9fr per allineamento cross-page ===
+   Issue Duccio: pre-CTA "§ Ultima chiamata" usava 8fr/4fr (eyebrow + h2 + p
+   tutti in left col) → h2 a x=72 mentre h2 sezioni page (chi-siamo CTA,
+   founding, team, principles, timeline) sono a x=~430 (col 2 di 3fr/9fr).
+   Visivamente il footer h2 saltava a sinistra rispetto al rhythm delle pagine.
+
+   Fix: restructure CSS-only via display:contents su .sl-foot-precta__lede.
+   Eyebrow → col 1 (3fr) · h2 + p + action → col 2 (9fr).
+   Button rimane bottom-right tramite grid-row + place-self end.
+   ─────────────────────────────────────────────────────────────── */
 @media (min-width: 1024px) {
     .sl-foot-cta {
-        grid-template-columns: 8fr 4fr;
-        gap: 96px;
-        align-items: end;
+        grid-template-columns: 3fr 9fr;
+        gap: 64px;
+        align-items: start;
+    }
+    /* Lede wrapper trasparente: figli partecipano direttamente al grid */
+    .sl-foot-precta__lede {
+        display: contents;
+    }
+    .sl-foot-precta__eyebrow {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .sl-foot-precta__h2 {
+        grid-column: 2;
+        grid-row: 1;
+    }
+    .sl-foot-precta__p {
+        grid-column: 2;
+        grid-row: 2;
+        margin-top: 0;
+    }
+    .sl-foot-precta__action {
+        grid-column: 2;
+        grid-row: 3;
+        margin-top: 32px;
     }
 }
 .sl-foot-precta__eyebrow {
