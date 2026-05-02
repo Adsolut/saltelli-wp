@@ -3145,12 +3145,6 @@ textarea.sl-input {
 .sl-form__row--privacy {
     gap: 0;
 }
-/* v0.21.17 [checkbox vcenter]: align-items center sul label (era flex-start)
-   per centrare verticalmente la checkbox con la prima linea di testo. */
-.sl-form__row--privacy label,
-.wpcf7-form .wpcf7-acceptance label {
-    align-items: center;
-}
 .sl-form__row--privacy label,
 .wpcf7-form .wpcf7-acceptance label {
     font-family: var(--font-body);
@@ -3161,14 +3155,18 @@ textarea.sl-input {
     line-height: 1.5;
     margin-bottom: 0;
     display: flex;
-    align-items: flex-start;
+    /* v0.21.17 [checkbox vcenter]: flex-start → center per allineare verticalmente
+       la checkbox con la prima linea di testo. */
+    align-items: center;
     gap: 12px;
     cursor: pointer;
 }
 .wpcf7-form .wpcf7-acceptance input[type="checkbox"] {
     width: 18px;
     height: 18px;
-    margin: 2px 0 0;
+    /* v0.21.17: margin top 2 → 0 (con align-items center il nudge non serve, era
+       compensazione per flex-start che ora non esiste più). */
+    margin: 0;
     flex-shrink: 0;
     accent-color: var(--accent);
 }
