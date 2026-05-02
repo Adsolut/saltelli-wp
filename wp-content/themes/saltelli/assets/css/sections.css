@@ -7917,3 +7917,95 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 
 /* === v0.24.0 END === */
 
+/* === v0.25.0 T2 — Tier-1 deep cluster (3 cluster × 3 tier-1) ============
+   H2 + 1-2 paragrafi GEO-rich post the_content() solo per tier-1.
+   Source: helper saltelli_tier1_clusters() in inc/helpers.php.
+   ========================================================================== */
+.sl-tier1__clusters {
+    padding-block: clamp(40px, 6vw, 80px);
+}
+.sl-tier1__cluster {
+    max-width: 72ch;
+    margin-block: clamp(40px, 6vw, 80px);
+    padding-block: clamp(24px, 3vw, 40px);
+    border-top: 1px solid var(--border);
+}
+.sl-tier1__cluster:first-of-type {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+.sl-tier1__cluster-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.2vw, 44px);
+    line-height: 1.15;
+    font-weight: 400;
+    color: var(--primary);
+    margin: 0 0 24px;
+    max-width: 24ch;
+    letter-spacing: -0.01em;
+}
+.sl-tier1__cluster-p {
+    font-family: var(--font-body);
+    font-size: clamp(16px, 1.4vw, 18px);
+    line-height: 1.7;
+    color: var(--text);
+    margin: 0 0 20px;
+    max-width: 64ch;
+}
+.sl-tier1__cluster-p:last-child {
+    margin-bottom: 0;
+}
+@media (max-width: 767px) {
+    .sl-tier1__cluster-h2 { font-size: 26px; }
+    .sl-tier1__cluster-p  { font-size: 16px; }
+}
+
+/* === v0.25.0 T3 — Chi-siamo principles 3-col desktop ====================
+   Esistente .sl-chi-siamo__principles-list (column rows): override su ≥1024
+   per layout 3-col side-by-side (per spec). Mobile resta stacked (nessun
+   override su <1024px → eredita default).
+   ========================================================================== */
+@media (min-width: 1024px) {
+    .sl-chi-siamo__principles-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .sl-chi-siamo__principles-list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+    }
+    .sl-chi-siamo__principle {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        gap: 16px;
+        padding: 32px;
+        border-bottom: 0;
+        border: 1px solid var(--border);
+        background: var(--background);
+        align-items: start;
+    }
+    .sl-chi-siamo__principle-n {
+        font-size: 14px;
+        color: var(--accent);
+    }
+    .sl-chi-siamo__principle-t {
+        font-size: 26px;
+        margin: 0 0 8px;
+    }
+    .sl-chi-siamo__principle-d {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+}
+
+/* Bio breve modifier (14-word truncated) — leggermente più aperto del .sl-team-spec */
+.sl-chi-siamo__team-bio {
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.55;
+    font-size: 14px;
+}
+
+/* === v0.25.0 END === */
+

@@ -126,6 +126,36 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
+        <?php
+        // === v0.25.0 T2 — Tier-1 deep cluster H2 (3 cluster × tier-1) ===
+        // Source: helper saltelli_tier1_clusters() · paragraphs GEO-rich 200-300 parole.
+        // Inserito DOPO the_content() per arricchimento topical authority.
+        if ($is_tier_1) :
+            $sl_t1_slug_cluster = get_post_field('post_name', $post_id);
+            $sl_t1_clusters = saltelli_tier1_clusters($sl_t1_slug_cluster);
+            if (!empty($sl_t1_clusters)) :
+        ?>
+            <section class="sl-tier1__clusters sl-tier1__body" aria-label="<?php esc_attr_e('Approfondimenti tematici', 'saltelli'); ?>">
+                <div class="sl-container">
+                    <?php foreach ($sl_t1_clusters as $sl_idx_c => $sl_cluster) :
+                        $sl_cluster_id = 'tier1-cluster-' . (int) $sl_idx_c;
+                    ?>
+                        <article class="sl-tier1__cluster" data-reveal aria-labelledby="<?php echo esc_attr($sl_cluster_id); ?>">
+                            <h2 class="sl-tier1__cluster-h2" id="<?php echo esc_attr($sl_cluster_id); ?>">
+                                <?php echo esc_html($sl_cluster['h2']); ?>
+                            </h2>
+                            <?php foreach ($sl_cluster['paragraphs'] as $sl_par) : ?>
+                                <p class="sl-tier1__cluster-p"><?php echo esc_html($sl_par); ?></p>
+                            <?php endforeach; ?>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            </section>
+        <?php
+            endif;
+        endif;
+        ?>
+
         <?php if ($is_tier_1 && $body_ext !== '') : ?>
             <section class="sl-competenza__body sl-tier1__body">
                 <div class="sl-container">

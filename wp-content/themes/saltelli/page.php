@@ -125,6 +125,14 @@ while (have_posts()) :
                                 $ruolo_av = (string) saltelli_field('ruolo_breve', $av->ID, '');
                                 $specs_av = saltelli_get_attorney_specializations($av->ID);
                                 $foto_av  = saltelli_field('foto_ritratto', $av->ID);
+                                /* === v0.25.0 T3 — bio breve 14 word truncated === */
+                                $bio_breve_av = (string) saltelli_field('bio_breve', $av->ID, '');
+                                if ($bio_breve_av !== '') {
+                                    $bio_words_av = preg_split('/\s+/u', trim(wp_strip_all_tags($bio_breve_av)));
+                                    if (is_array($bio_words_av) && count($bio_words_av) > 14) {
+                                        $bio_breve_av = implode(' ', array_slice($bio_words_av, 0, 14)) . '…';
+                                    }
+                                }
                                 ?>
                                 <li class="sl-chi-siamo__team-card<?php echo ($idx % 2 === 1) ? ' sl-chi-siamo__team-card--offset' : ''; ?>">
                                     <a class="sl-chi-siamo__team-link" href="<?php echo esc_url(get_permalink($av)); ?>">
@@ -148,7 +156,9 @@ while (have_posts()) :
                                             <span class="sl-mono sl-chi-siamo__team-role"><?php echo esc_html($ruolo_av); ?></span>
                                         <?php endif; ?>
                                         <span class="sl-chi-siamo__team-name"><?php echo esc_html(get_the_title($av)); ?></span>
-                                        <?php if (!empty($specs_av)) : ?>
+                                        <?php if ($bio_breve_av !== '') : ?>
+                                            <span class="sl-chi-siamo__team-spec sl-chi-siamo__team-bio"><?php echo esc_html($bio_breve_av); ?></span>
+                                        <?php elseif (!empty($specs_av)) : ?>
                                             <span class="sl-chi-siamo__team-spec"><?php echo esc_html(implode(' · ', array_slice($specs_av, 0, 3))); ?></span>
                                         <?php endif; ?>
                                     </a>

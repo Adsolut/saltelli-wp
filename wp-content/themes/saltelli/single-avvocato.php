@@ -164,13 +164,29 @@ while (have_posts()) :
             </section>
         <?php endif; endif; ?>
 
-        <?php if (!empty($formazione) && is_array($formazione)) : ?>
-            <section class="sl-attorney__timeline" aria-labelledby="formazione-h">
+        <?php
+        // === v0.25.0 T1 — Formazione cross-lawyer (4 page) ===
+        // Fallback hardcoded helper se ACF empty/sparse (< 3 entry valide).
+        // Pattern: timeline anno · titolo · istituzione (markup esistente intatto).
+        $sl_form_rows = is_array($formazione) ? $formazione : [];
+        $sl_form_valid = array_filter($sl_form_rows, static function ($r) {
+            return !empty($r['titolo']);
+        });
+        if (count($sl_form_valid) < 3) {
+            $sl_atty_form_slug = get_post_field('post_name', $post_id);
+            $sl_form_fallback = saltelli_attorney_formazione($sl_atty_form_slug);
+            if (!empty($sl_form_fallback)) {
+                $sl_form_valid = $sl_form_fallback;
+            }
+        }
+        if (!empty($sl_form_valid)) :
+        ?>
+            <section class="sl-attorney__timeline" aria-labelledby="formazione-h" data-reveal>
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Formazione', 'saltelli'); ?></div>
                     <h2 class="sl-section-title" id="formazione-h"><?php esc_html_e('Formazione', 'saltelli'); ?></h2>
                     <ol class="sl-timeline" role="list">
-                        <?php foreach ($formazione as $row) :
+                        <?php foreach ($sl_form_valid as $row) :
                             $anno = !empty($row['anno']) ? (string) $row['anno'] : '';
                             $tit  = !empty($row['titolo']) ? (string) $row['titolo'] : '';
                             $ist  = !empty($row['istituzione']) ? (string) $row['istituzione'] : '';

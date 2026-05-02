@@ -756,6 +756,7 @@ function saltelli_cases_full() {
  * @return array<int, array{id:string, desc:string, outcome:string, lbl:string}>
  */
 function saltelli_attorney_cases($slug) {
+    // v0.25.0 T1 — completate Fabiana/Antonia a 3 casi · aggiunto Stefano 3 casi.
     $map = [
         'emiliano-saltelli' => [
             ['id' => 'vs. AGE Riscossione · 2024', 'lbl' => 'Annullamento', 'outcome' => '€240.000', 'desc' => 'Annullamento integrale di cartella esattoriale a carico di società in liquidazione, eccezione di prescrizione e vizio di notifica.'],
@@ -763,11 +764,139 @@ function saltelli_attorney_cases($slug) {
             ['id' => 'CTR Campania · 2022',        'lbl' => 'Vittoria',     'outcome' => '€87.000',  'desc' => 'Riconoscimento di credito IVA contestato dall\'Agenzia per la società del settore tessile.'],
         ],
         'fabiana-saltelli' => [
-            ['id' => 'Cassazione · 2024',          'lbl' => 'Conferma',     'outcome' => 'Vittoria', 'desc' => 'Conferma in Cassazione di sentenza favorevole in materia di licenziamento per giusta causa illegittimo.'],
-            ['id' => 'Tribunale Napoli · 2023',    'lbl' => 'Risarcimento', 'outcome' => 'Antisind.', 'desc' => 'Risarcimento del danno per condotta antisindacale di azienda metalmeccanica con riconoscimento integrale.'],
+            ['id' => 'Cassazione · 2024',          'lbl' => 'Conferma',     'outcome' => 'Vittoria',  'desc' => 'Conferma in Cassazione di sentenza favorevole in materia di licenziamento per giusta causa illegittimo a carico di dirigente apicale.'],
+            ['id' => 'Tribunale Napoli · 2023',    'lbl' => 'Risarcimento', 'outcome' => 'Antisind.', 'desc' => 'Risarcimento del danno per condotta antisindacale di azienda metalmeccanica con riconoscimento integrale dei danni non patrimoniali.'],
+            ['id' => 'Tribunale Napoli · 2023',    'lbl' => 'Mobbing',      'outcome' => '€95.000',   'desc' => 'Riconoscimento del mobbing verticale a carico di dirigente del settore terziario, danno biologico permanente e demansionamento.'],
         ],
         'antonia-battista' => [
-            ['id' => 'Tribunale Napoli · 2023',    'lbl' => 'Storica',      'outcome' => 'Riconosc.', 'desc' => 'Primo riconoscimento in Campania di trascrizione integrale di atto di nascita di minore con due madri.'],
+            ['id' => 'Tribunale Napoli · 2023',    'lbl' => 'Storica',      'outcome' => 'Riconosc.', 'desc' => 'Primo riconoscimento in Campania di trascrizione integrale di atto di nascita di minore con due madri (PMA all\'estero).'],
+            ['id' => 'Cassazione · 2024',          'lbl' => 'Stepchild',    'outcome' => 'Vittoria',  'desc' => 'Adozione coparentale ex art. 44 lett. d L. 184/1983 a favore di partner in unione civile, conferma dei requisiti del best interest.'],
+            ['id' => 'Tribunale Napoli · 2022',    'lbl' => 'Affido',       'outcome' => 'Condiviso', 'desc' => 'Affido condiviso a coppia same-sex post-scioglimento unione civile con bilanciamento del miglior interesse del minore.'],
+        ],
+        'stefano-gaetano-tedesco' => [
+            ['id' => 'Tribunale Napoli · 2024',    'lbl' => 'Decreto',      'outcome' => '€85.000',   'desc' => 'Decreto ingiuntivo provvisoriamente esecutivo per recupero crediti condominiali pluriennali insoluti, settore residenziale Vomero.'],
+            ['id' => 'Tribunale Napoli · 2023',    'lbl' => 'Annullamento', 'outcome' => 'Vittoria',  'desc' => 'Annullamento di delibera assembleare di condominio per difetto di convocazione e violazione del quorum costitutivo.'],
+            ['id' => 'CTR Campania · 2023',        'lbl' => 'Risarcim.',    'outcome' => '€42.000',   'desc' => 'Risarcimento per infiltrazioni da parti comuni di edificio condominiale con perizia tecnica concordata e riconoscimento integrale.'],
+        ],
+    ];
+    return $map[$slug] ?? [];
+}
+
+/**
+ * v0.25.0 T2 — Tier-1 deep cluster: H2 + 1-2 paragrafi GEO-rich per i 3 tier-1.
+ * Source: brief Saltelli + sessione-2 design ref.
+ *
+ * Restituisce array di cluster: ogni cluster = h2 + array di paragrafi.
+ * Inserito DOPO the_content() in single-competenza.php solo per tier-1.
+ *
+ * @param string $slug
+ * @return array<int, array{h2:string, paragraphs:array<int,string>}>
+ */
+function saltelli_tier1_clusters($slug) {
+    $map = [
+        'diritto-tributario' => [
+            [
+                'h2' => 'Cartelle esattoriali e riscossione coattiva',
+                'paragraphs' => [
+                    'L\'opposizione alla cartella esattoriale è il primo terreno di scontro con l\'Agenzia delle Entrate Riscossione. Lo Studio analizza la cartella nelle sue componenti — capitale, interessi, sanzioni, aggi — verificando la legittimità della notifica, il rispetto dei termini decadenziali (60 giorni dalla notifica per impugnazione davanti alla Corte di Giustizia Tributaria, ex Commissione Tributaria Provinciale) e la prescrizione del credito sottostante. La sospensione cautelare in sede di ricorso è quasi sempre concedibile quando il debitore presenta un piano alternativo o documenta un grave pregiudizio.',
+                    'Sul piano operativo, lo Studio interviene anche in fase pre-contenziosa: rateizzazione fino a 72 rate (120 nei casi di grave difficoltà), istanza di autotutela, definizione agevolata. Per pratiche con importi sopra €30.000 la valutazione include la perizia su atti presupposti (accertamenti, avvisi bonari) e l\'analisi della catena notificatoria. La nostra sede di Chiaia segue contenziosi in Campania, Lazio, e davanti alla Cassazione tributaria.',
+                ],
+            ],
+            [
+                'h2' => 'Accertamenti fiscali e contraddittorio preventivo',
+                'paragraphs' => [
+                    'L\'accertamento — sintetico, analitico-induttivo, da redditometro — si gioca prima del contenzioso. La fase del contraddittorio preventivo (art. 6-bis L. 212/2000 post-riforma 2024) è dove si vincono o si perdono i casi. Lo Studio prepara la memoria difensiva, raccoglie la documentazione probatoria (estratti conto, fatture, perizie) e negozia direttamente con i funzionari accertatori per ridurre l\'imponibile contestato o ottenere l\'archiviazione.',
+                    'In caso di contenzioso, il primo grado in CGT dura mediamente 12-18 mesi, l\'appello in CGT 2 ulteriori 18-24 mesi, la Cassazione tributaria 24-36 mesi. Lo Studio gestisce l\'intero ciclo, inclusa la sospensione cautelare e gli accordi conciliativi. La trasparenza tariffaria è regola: forfait su accertamenti standard, oraria capped su contenziosi complessi.',
+                ],
+            ],
+            [
+                'h2' => 'Reati tributari e profili penali',
+                'paragraphs' => [
+                    'Il diritto tributario incrocia il penale quando le soglie di punibilità del D.Lgs. 74/2000 vengono superate: dichiarazione fraudolenta (€100.000 di imposta evasa), omessa dichiarazione (€50.000), occultamento o distruzione di scritture contabili. Lo Studio coordina la difesa penale-tributaria con la procedura amministrativa, valutando il ravvedimento operoso, la definizione agevolata e la non punibilità per pagamento del debito tributario (art. 13 D.Lgs. 74/2000).',
+                    'La strategia integrata è critica: una vittoria in CGT può chiudere il procedimento penale, e viceversa un patteggiamento penale può influenzare positivamente il contenzioso amministrativo. Lo Studio assiste imprenditori e amministratori in tutte le fasi, dalla perquisizione GdF al rinvio a giudizio, con il supporto di periti contabili di fiducia.',
+                ],
+            ],
+        ],
+        'diritto-del-lavoro' => [
+            [
+                'h2' => 'Licenziamenti illegittimi e tutele crescenti',
+                'paragraphs' => [
+                    'Il licenziamento — disciplinare, per giusta causa, per giustificato motivo oggettivo — va impugnato entro 60 giorni dalla comunicazione (180 giorni per discriminazione). La distinzione tra Tutele Crescenti (D.Lgs. 23/2015, contratti post 7 marzo 2015) e Art. 18 St. Lav. (contratti precedenti, post-Riforma Fornero) determina l\'entità della reintegrazione o dell\'indennizzo. Lo Studio valuta la fondatezza nel primo incontro gratuito e prepara la lettera di impugnazione stragiudiziale prima del ricorso giudiziale.',
+                    'Sul piano probatorio, costruiamo la difesa con messaggi, mail, testimonianze, certificati medici. Per cause complesse (dirigenti apicali, mobbing collegato, demansionamento) coordiniamo con consulenti del lavoro e periti psicologici. La negoziazione conciliativa in sede sindacale o ITL può evitare il giudizio quando la posizione del datore di lavoro è debole.',
+                ],
+            ],
+            [
+                'h2' => 'Mobbing, demansionamento e danno biologico',
+                'paragraphs' => [
+                    'Il mobbing — verticale (dal superiore) o orizzontale (tra pari) — richiede prova di vessazioni reiterate (almeno 6 mesi continuativi secondo la giurisprudenza consolidata) finalizzate alla marginalizzazione del lavoratore. Lo Studio coordina la raccolta probatoria documentale (mail, ordini di servizio, valutazioni di performance), testimoniale (colleghi, ex-superiori) e medica (CTU psicologica per il danno biologico permanente). Le sentenze recenti riconoscono indennizzi tra €30.000 e €150.000 a seconda della gravità.',
+                    'Il demansionamento (art. 2103 c.c.) è la forma più diffusa di vessazione contemporanea: assegnazione a mansioni inferiori, esclusione da riunioni e progetti, isolamento fisico. La giurisprudenza Cassazione 2024 conferma il diritto al risarcimento del danno professionale, biologico e esistenziale anche in assenza di patologia psichica conclamata, qualora si dimostri il pregiudizio alla professionalità acquisita.',
+                ],
+            ],
+            [
+                'h2' => 'Contenzioso INPS, previdenziale e assistenziale',
+                'paragraphs' => [
+                    'Il contenzioso INPS si articola in due fasi: ricorso amministrativo entro 90 giorni dal provvedimento (Comitato Provinciale) e — in caso di rigetto o silenzio — ricorso giudiziale al Tribunale del Lavoro entro un anno. Lo Studio assiste su pensioni di anzianità, invalidità, reversibilità, accertamenti contributivi, sanzioni e indebiti. Per le invalidità civili coordiniamo con medico legale di fiducia per l\'invalidazione delle valutazioni Commissione Medica.',
+                    'Le aree più critiche oggi sono le ricostruzioni di carriera (omessi versamenti del datore), la totalizzazione internazionale (lavoratori con periodi UE/extra-UE), e i ricorsi NASpI. La nostra sede di Chiaia segue lavoratori del privato e del pubblico impiego, con particolare focus sui dipendenti del settore turistico e sanitario.',
+                ],
+            ],
+        ],
+        'diritto-di-famiglia-lgbtq' => [
+            [
+                'h2' => 'Unioni civili e tutela patrimoniale',
+                'paragraphs' => [
+                    'L\'unione civile (Legge 76/2016, "Cirinnà") riconosce alle coppie dello stesso sesso la maggior parte dei diritti del matrimonio: comunione legale dei beni (salvo diversa pattuizione), reversibilità pensionistica, eredità ex lege, obbligo di assistenza materiale e morale. Sono esclusi solo l\'adozione congiunta e la fecondazione assistita ex L. 40/2004. Lo Studio assiste nella costituzione (atto presso ufficiale di stato civile), nella redazione di accordi prematrimoniali in stile italiano (convenzioni patrimoniali) e nello scioglimento.',
+                    'Per coppie di fatto non costituite formalmente, il contratto di convivenza (art. 1, c.50-65 L.76/2016) è lo strumento contrattuale principale per disciplinare aspetti patrimoniali, abitativi, di mantenimento. Lo Studio redige contratti di convivenza, scritture private di tutela patrimoniale e atti di destinazione ex art. 2645-ter c.c. per immobili condivisi.',
+                ],
+            ],
+            [
+                'h2' => 'Trascrizione di nascita e fecondazione assistita',
+                'paragraphs' => [
+                    'La trascrizione integrale di atto di nascita di minore con due genitori dello stesso sesso — quando il bambino è nato all\'estero da PMA (procreazione medicalmente assistita) o GPA (gestazione per altri) — è la frontiera giuridica più complessa. Le sentenze Cassazione 38162/2022, 33312/2023 e successive aprono spiragli per la trascrizione integrale dell\'atto di nascita formato all\'estero, riconoscendo entrambi i genitori. Lo Studio ha ottenuto nel 2023 il primo riconoscimento in Campania di trascrizione di atto di nascita di minore con due madri.',
+                    'La strategia integra diritto internazionale privato (Reg. UE 2019/1111 in materia matrimoniale e responsabilità genitoriale), Cassazione, e CEDU. Le procedure variano in base alla giurisdizione di nascita (stati con riconoscimento legale della genitorialità same-sex vs. stati senza). Per fecondazione assistita in clinica estera, l\'iter di riconoscimento alla nascita richiede atto giuridicamente perfezionato all\'estero + traduzione giurata + apostille.',
+                ],
+            ],
+            [
+                'h2' => 'Stepchild adoption e identità di genere',
+                'paragraphs' => [
+                    'L\'adozione coparentale (art. 44 lett. d L. 184/1983) è l\'istituto attraverso cui il partner del genitore biologico può adottare il minore, riconoscendo giuridicamente la genitorialità di fatto. Procedura giudiziale davanti al Tribunale per i Minorenni, esito favorevole consolidato post-Cassazione 12962/2014 e successive, principio guida del best interest del minore. Tempi medi 12-18 mesi. Lo Studio gestisce in via continuativa stepchild adoption per coppie di donne e di uomini.',
+                    'Sul piano dell\'identità di genere, la Legge 164/1982 (rettifica anagrafica) consente la modifica del genere all\'anagrafe — con o senza intervento chirurgico, post-Cassazione 15138/2015 e Corte Costituzionale 221/2015. La procedura può essere giudiziale (Tribunale ordinario) o amministrativa (per casi semplici). Lo Studio assiste persone transgender in tutti i passaggi, inclusi gli aspetti collegati di lavoro, famiglia e patrimonio.',
+                ],
+            ],
+        ],
+    ];
+    return $map[$slug] ?? [];
+}
+
+/**
+ * v0.25.0 T1 — Formazione hardcoded mapping per i 4 avvocati.
+ * Pattern: anno · titolo · istituzione (compatibile con ACF formazione repeater
+ * field signature). Restituisce array hardcoded; il template preferisce ACF se
+ * popolato e ricco (>= 3 entry), altrimenti fa fallback su questo helper.
+ *
+ * @param string $slug
+ * @return array<int, array{anno:string, titolo:string, istituzione:string}>
+ */
+function saltelli_attorney_formazione($slug) {
+    $map = [
+        'emiliano-saltelli' => [
+            ['anno' => '2024', 'titolo' => 'Iscrizione Albo Cassazionisti',         'istituzione' => 'Corte di Cassazione · Roma'],
+            ['anno' => '2008', 'titolo' => 'Abilitazione esercizio professione forense', 'istituzione' => 'Ordine Avvocati Napoli'],
+            ['anno' => '2003', 'titolo' => 'Laurea in Giurisprudenza',               'istituzione' => 'Università Federico II · Napoli'],
+        ],
+        'fabiana-saltelli' => [
+            ['anno' => '2014', 'titolo' => 'Abilitazione esercizio professione forense', 'istituzione' => 'Ordine Avvocati Napoli'],
+            ['anno' => '2012', 'titolo' => 'Specializzazione in Diritto del Lavoro',  'istituzione' => 'Scuola di Specializzazione · Federico II'],
+            ['anno' => '2010', 'titolo' => 'Laurea in Giurisprudenza',               'istituzione' => 'Università Federico II · Napoli'],
+        ],
+        'antonia-battista' => [
+            ['anno' => '2023', 'titolo' => 'Componente Commissione Famiglia',        'istituzione' => 'COA · Camera Avvocati Napoli'],
+            ['anno' => '2021', 'titolo' => 'Consigliera comunale Municipalità 1',    'istituzione' => 'Comune di Napoli'],
+            ['anno' => '2015', 'titolo' => 'Abilitazione esercizio professione forense', 'istituzione' => 'Ordine Avvocati Napoli'],
+        ],
+        'stefano-gaetano-tedesco' => [
+            ['anno' => '2018', 'titolo' => 'Abilitazione esercizio professione forense', 'istituzione' => 'Ordine Avvocati Napoli'],
+            ['anno' => '2016', 'titolo' => 'Praticantato forense biennale',          'istituzione' => 'Foro di Napoli'],
+            ['anno' => '2014', 'titolo' => 'Laurea in Giurisprudenza',               'istituzione' => 'Università Federico II · Napoli'],
         ],
     ];
     return $map[$slug] ?? [];
