@@ -3129,6 +3129,12 @@ textarea.sl-input {
     align-items: flex-start;
     gap: 12px;
 }
+/* v0.21.14 [T3]: CF7 default .wpcf7-list-item margin-left: 1em pushava la
+   checkbox a destra rispetto al campo testo sopra. Reset margin-left 0
+   per allineamento con input fields. */
+.wpcf7-form .wpcf7-acceptance .wpcf7-list-item {
+    margin: 0;
+}
 .sl-form__row--privacy label,
 .wpcf7-form .wpcf7-acceptance label {
     font-family: var(--font-body);
@@ -3198,7 +3204,9 @@ textarea.sl-input {
 
 /* Footer note + CF7 response messages */
 .sl-form__note {
-    margin-top: 28px;
+    /* v0.21.14 [T1]: margin-top 28 → 56 (testo "Risposta entro 24 ore..." era
+       troppo attaccato al pulsante CTA "Prenota un incontro"). */
+    margin-top: 56px;
     margin-bottom: 16px;
     color: var(--text-muted);
     font-size: 11px;
@@ -4516,8 +4524,9 @@ textarea.sl-input {
 }
 
 .sl-contatti-w3__hours {
+    /* v0.21.14 [T2]: border-top RIMOSSO — era duplicato della .sl-contatti-w3__cta-row:last-child
+       border-bottom (creava 2 linee tra WhatsApp e Orari). Padding-top mantenuto per spacing. */
     padding-top: 16px;
-    border-top: 1px solid var(--border);
 }
 
 .sl-contatti-w3__hours > .sl-mono {
