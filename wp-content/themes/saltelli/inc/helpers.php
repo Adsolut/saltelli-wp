@@ -799,14 +799,19 @@ function saltelli_press_outlets() {
  * Preserva i tag inline whitelisted (em, br) per stylized headlines come
  * "Casi <em>rappresentativi.</em>". Output safe-escaped via wp_kses.
  *
- * @param string $title Stringa testo o markup inline minimal.
+ * v0.22.2 — Optional $extra_class param per modifier classes (es.
+ * 'sl-section-title__word--em' per parole dentro <em>).
+ *
+ * @param string $title       Stringa testo o markup inline minimal.
+ * @param string $extra_class Classe(i) addizionale(i) sullo span (default '').
  * @return string HTML con span.sl-word per ogni parola.
  */
-function saltelli_split_h1_words($title) {
+function saltelli_split_h1_words($title, $extra_class = '') {
     $title = (string) $title;
     if ($title === '') {
         return '';
     }
+    $cls = 'sl-word' . ($extra_class !== '' ? ' ' . $extra_class : '');
     // Tokenizer: separa per tag inline e parole. Mantiene <em>, </em>, <br>.
     $parts = preg_split('/(<\/?(?:em|br)\s*\/?>|\s+)/i', $title, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
     if (!is_array($parts)) {
@@ -820,7 +825,7 @@ function saltelli_split_h1_words($title) {
         } elseif (preg_match('/^<\/?(?:em|br)\s*\/?>$/i', $token)) {
             $out .= $token;
         } else {
-            $out .= '<span class="sl-word" data-i="' . (int) $idx . '">' . esc_html($token) . '</span>';
+            $out .= '<span class="' . esc_attr($cls) . '" data-i="' . (int) $idx . '">' . esc_html($token) . '</span>';
             $idx++;
         }
     }

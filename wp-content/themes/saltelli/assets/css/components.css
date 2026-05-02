@@ -176,6 +176,28 @@ input.sl-btn[data-loading="true"] {
 }
 /* === IMPECCABLE v0.22.1 END === */
 
+/* === IMPECCABLE v0.22.2 — .sl-btn--primary bronze fill hover (Duccio carry-over) ===
+   v0.22.1 aveva omesso il fill bronze su :hover per philosophy "no fill"
+   editorial v0.20.0. Duccio ha re-confermato la scelta esplicita: primary
+   variant DEVE avere transition background + bronze fill su hover (CTA emphasis).
+   Scoped solo a --primary, le button standard restano text-only. */
+.sl-btn--primary {
+    transition:
+        color var(--dur-fast) cubic-bezier(0.25, 1, 0.5, 1),
+        background var(--dur-fast) cubic-bezier(0.25, 1, 0.5, 1),
+        transform var(--dur-fast) cubic-bezier(0.25, 1, 0.5, 1),
+        border-color var(--dur-fast) cubic-bezier(0.25, 1, 0.5, 1);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .sl-btn--primary:hover {
+        background: var(--accent);
+        color: var(--background);
+        transform: translateY(-1px);
+        padding: 4px 12px;
+    }
+}
+/* === IMPECCABLE v0.22.2 END === */
+
 /* List item — area di pratica */
 .sl-area {
   display: grid;

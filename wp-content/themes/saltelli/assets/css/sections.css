@@ -7212,3 +7212,37 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 
 /* === IMPECCABLE v0.22.1 END === */
 
+/* === IMPECCABLE v0.22.2 — Drop-cap consistency carry-over (Duccio audit) ===
+   v0.22.1 aveva applicato solo .sl-competenza__prose tier-2. Carry-over:
+   - .sl-attorney__bio (parent section, edge case se p è figlio diretto)
+   - .sl-chi-siamo-w3 .sl-page__prose / .sl-chi-siamo-w3__story (forward-compat
+     per future template w3 chi-siamo, oggi inesistenti)
+   - .sl-competenza-w3__body / .sl-practice-tier1 .sl-page__prose (forward-compat
+     v0.23.0 tier-1 deep cluster, oggi inesistenti)
+   - mobile compress unificato per i nuovi scope.
+   .sl-attorney__bio-prose già copre via rule esistente (line 3743). */
+.sl-attorney__bio > p:first-of-type::first-letter,
+.sl-chi-siamo-w3 .sl-page__prose > p:first-of-type::first-letter,
+.sl-chi-siamo-w3__story > p:first-of-type::first-letter,
+.sl-competenza-w3__body > p:first-of-type::first-letter,
+.sl-practice-tier1 .sl-page__prose > p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 84px;
+    line-height: 0.85;
+    float: left;
+    margin: 8px 16px 0 0;
+    color: var(--primary);
+}
+@media (max-width: 767px) {
+    .sl-attorney__bio > p:first-of-type::first-letter,
+    .sl-chi-siamo-w3 .sl-page__prose > p:first-of-type::first-letter,
+    .sl-chi-siamo-w3__story > p:first-of-type::first-letter,
+    .sl-competenza-w3__body > p:first-of-type::first-letter,
+    .sl-practice-tier1 .sl-page__prose > p:first-of-type::first-letter {
+        font-size: 60px;
+        margin: 4px 12px 0 0;
+    }
+}
+/* === IMPECCABLE v0.22.2 END === */
+
