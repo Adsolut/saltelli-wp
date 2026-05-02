@@ -360,7 +360,7 @@ function saltelli_emit_jsonld($schema, $extra_flags = 0) {
  * TODO: spostare in ACF Options Page quando ACF Pro disponibile.
  *
  * Dati confermati dal cliente il 2026-04-28 (sessione Ludovica):
- *  - GPS precisi via Google Maps (40.830267, 14.237217)
+ *  - GPS precisi via Google Business 2026-05-02: (40.8332541, 14.2414699)
  *  - Anno fondazione studio attuale: gennaio 2019
  *  - Social: Facebook share-URL, Instagram, LinkedIn (personale di Emiliano usato come profilo studio)
  */
@@ -379,9 +379,9 @@ function saltelli_studio_data() {
         'pec'           => 'emilianosaltelli@avvocatinapoli.legalmail.it',
         'vat'           => 'IT06685101211',
         'tax_id'        => '06685101211',
-        // GPS confermati 2026-04-28 (cliente — Google Maps).
-        'lat'           => 40.830267,
-        'lng'           => 14.237217,
+        // GPS ufficiali Google Business 2026-05-02 (override delle stime precedenti 40.830267/14.237217).
+        'lat'           => 40.8332541,
+        'lng'           => 14.2414699,
         'opens'         => '10:00',
         'closes'        => '19:00',
         'days'          => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
