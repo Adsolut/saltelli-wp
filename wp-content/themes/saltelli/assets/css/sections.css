@@ -8172,10 +8172,28 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-attorney__bio {
     padding-block: clamp(64px, 8vw, 96px);
 }
-.sl-attorney__bio .sl-container {
-    padding-inline: 0;  /* parent grid già gestisce padding */
+
+/* === FIX v0.27.2 — ALL body sections inside article-grid: reset .sl-container ===
+   Cause misalignment: article-grid già applica padding-inline alle col,
+   ma ogni .sl-container interno aggiunge clamp(24,5vw,96)=72px padding al
+   1440px viewport. Bio era stato override in v0.27.0, gli altri NO →
+   shift orizzontale 72px ("tab indent" visibile sotto bio).
+   JSX architecture: tutti body content in un singolo div col 2 (no nested
+   container). Equivalent CSS: zero padding/max-width sui container interni. */
+@media (min-width: 1024px) {
+    .sl-attorney > .sl-attorney__bio .sl-container,
+    .sl-attorney > .sl-attorney__competenze .sl-container,
+    .sl-attorney > .sl-attorney__aree .sl-container,
+    .sl-attorney > .sl-attorney__timeline .sl-container,
+    .sl-attorney > .sl-attorney__casi .sl-container,
+    .sl-attorney > .sl-attorney__articles .sl-container,
+    .sl-attorney > .sl-attorney__cta .sl-container {
+        padding-inline: 0 !important;
+        max-width: none !important;
+    }
 }
 @media (max-width: 1023px) {
+    /* Mobile: bio container ha padding-inline ridotto (era v0.27.0 override) */
     .sl-attorney__bio .sl-container {
         padding-inline: clamp(24px, 5vw, 64px);
     }
