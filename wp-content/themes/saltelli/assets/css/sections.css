@@ -8546,6 +8546,168 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     margin: 0 0 24px !important;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   v0.28.0 — Footer Newsletter v3 (blog-style editoriale)
+   ───────────────────────────────────────────────────────────────
+   Refactor visuale ispirato a sl-blog2__newsletter (home blog):
+   surface cream bg · italic h2 "Un articolo al mese." · italic lede ·
+   underline-only field · button mono.
+
+   Brevo form (ID, endpoint, field names) PRESERVATO. Cambia solo CSS.
+   ═══════════════════════════════════════════════════════════════ */
+.sl-foot-newsletter-wrap.sl-foot-newsletter-wrap--v3 {
+    background: var(--surface) !important;
+    color: var(--text) !important;
+    padding-block: clamp(64px, 9vw, 128px) !important;
+    padding-inline: clamp(24px, 5vw, 96px) !important;
+}
+.sl-foot-newsletter-wrap--v3 .sl-foot-newsletter-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-inline: 0;
+}
+.sl-foot-newsletter--v3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: center;
+}
+@media (min-width: 1024px) {
+    .sl-foot-newsletter--v3 {
+        grid-template-columns: 5fr 7fr;
+        gap: 64px;
+    }
+}
+
+/* LEFT: eyebrow + h2 italic */
+.sl-foot-newsletter--v3 .sl-foot-newsletter__eyebrow {
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(40px, 5vw, 72px);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--primary);
+    margin: 0;
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__h2 em {
+    font-style: italic;
+    color: var(--accent);
+}
+
+/* RIGHT: italic lede + form */
+.sl-foot-newsletter--v3 .sl-foot-newsletter__lede {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.55;
+    color: var(--text);
+    margin: 0 0 32px;
+    max-width: 50ch;
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__form {
+    display: grid;
+    gap: 24px;
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__fields {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+@media (min-width: 640px) {
+    .sl-foot-newsletter--v3 .sl-foot-newsletter__fields {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__field {
+    display: block;
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__field-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--primary);
+    background: transparent;
+    padding: 8px 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--primary);
+    outline: none;
+    transition: border-bottom-color var(--dur-fast, 200ms) var(--ease-editorial, cubic-bezier(0.25, 1, 0.5, 1));
+    border-radius: 0;
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__input:focus {
+    border-bottom-color: var(--accent);
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__gdpr {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 12px;
+    align-items: start;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--text-muted);
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__check {
+    margin-top: 4px;
+    accent-color: var(--accent);
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__gdpr-link {
+    color: var(--primary);
+    border-bottom: 1px solid var(--accent);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-editorial);
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__gdpr-link:hover {
+    color: var(--accent);
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__submit {
+    justify-self: start;
+    background: transparent;
+    color: var(--primary);
+    border: 0;
+    border-bottom: 1px solid var(--primary);
+    padding: 12px 0;
+    font-family: var(--font-body);
+    font-size: 15px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: color var(--dur-fast) var(--ease-editorial), border-bottom-color var(--dur-fast) var(--ease-editorial);
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__submit:hover,
+.sl-foot-newsletter--v3 .sl-foot-newsletter__submit:focus-visible {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__submit .arrow {
+    transition: transform var(--dur-fast) var(--ease-editorial);
+}
+.sl-foot-newsletter--v3 .sl-foot-newsletter__submit:hover .arrow {
+    transform: translateX(4px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   v0.27.9 — Footer v2 padding reset cross-page allineamento (legacy)
+   Mantenuto per altri footer wrapper (main, bottom).
+   ─────────────────────────────────────────────────────────────── */
+
 /* === v0.27.9 — Footer v2 padding reset cross-page allineamento ============
    Issue Duccio: tutti gli eyebrow DENTRO <footer> (newsletter, main, bottom)
    apparivano a x=92 mentre eyebrow OUTSIDE footer (pre-CTA) era a x=72 →

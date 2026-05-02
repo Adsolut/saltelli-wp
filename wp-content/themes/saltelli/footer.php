@@ -70,41 +70,40 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
 
 <footer class="sl-footer sl-footer--v2" role="contentinfo">
 
-    <?php /* ═══ FASCIA 2 · NEWSLETTER (v0.21.6: spostata sopra main) EDITORIALE — Brevo legacy form ═══ */ ?>
-    <section class="sl-foot-newsletter-wrap" aria-labelledby="newsletter-h">
-        <div class="sl-foot-newsletter-inner">
-            <div class="sl-foot-newsletter">
+    <?php /* ═══ FASCIA 2 · NEWSLETTER editoriale "Un articolo al mese" (v0.28.0)
+            Visual design ispirato a sl-blog2__newsletter (home blog).
+            Cream surface bg · italic h2 + italic lede · underline-only field.
+            Brevo form ID + endpoint + field names + GDPR PRESERVATI per backend. */ ?>
+    <section class="sl-foot-newsletter-wrap sl-foot-newsletter-wrap--v3" aria-labelledby="newsletter-h">
+        <div class="sl-foot-newsletter-inner sl-container">
+            <div class="sl-foot-newsletter sl-foot-newsletter--v3">
 
-                <div class="sl-foot-newsletter__lede">
-                    <?php /* v0.21.6 [T7]: "Dal 2026" → "Dal 2018" (data effettiva inizio newsletter) */ ?>
-                    <div class="sl-mono sl-foot-newsletter__eyebrow"><?php esc_html_e('§ Newsletter · Dal 2018', 'saltelli'); ?></div>
-                    <h3 class="sl-foot-newsletter__h" id="newsletter-h">
-                        <?php esc_html_e("L'editoriale del giovedì.", 'saltelli'); ?>
-                    </h3>
-                    <p class="sl-foot-newsletter__p">
-                        <?php /* v0.21.6 [T5]: <br> dopo "dello Studio." per portare "Mai" su nuova riga */ ?>
-                        <?php esc_html_e('Una mail al mese. Sentenze recenti, novità giurisprudenziali, case study reali dello Studio.', 'saltelli'); ?><br>
-                        <?php esc_html_e('Mai promozioni, mai spam.', 'saltelli'); ?>
-                    </p>
-                    <p class="sl-mono sl-foot-newsletter__trust">
-                        <?php esc_html_e('Una al mese · No spam · Cancellazione 1 click', 'saltelli'); ?>
-                    </p>
+                <div class="sl-foot-newsletter__left">
+                    <div class="sl-mono sl-foot-newsletter__eyebrow"><?php esc_html_e('§ Newsletter', 'saltelli'); ?></div>
+                    <h2 class="sl-foot-newsletter__h2" id="newsletter-h">
+                        <?php esc_html_e('Un articolo', 'saltelli'); ?><br>
+                        <em><?php esc_html_e('al mese.', 'saltelli'); ?></em>
+                    </h2>
                 </div>
 
-                <div class="sl-foot-newsletter__form-wrap">
+                <div class="sl-foot-newsletter__right">
+                    <p class="sl-foot-newsletter__lede">
+                        <?php esc_html_e('Una sola mail al mese. Solo casi vinti, novità giurisprudenziali, e qualche nota personale. Niente promozione.', 'saltelli'); ?>
+                    </p>
+
                     <form class="sl-foot-newsletter__form form-newsletter"
                           id="sib_signup_form_1"
                           action="https://link.studiolegalesaltelli.it/api/v3/contacts"
                           method="POST"
                           data-sl-newsletter
                           novalidate>
-                        <div class="sl-foot-fields">
+                        <div class="sl-foot-newsletter__fields">
                             <label class="sl-foot-newsletter__field" for="newsletter-firstname">
                                 <span class="sl-mono sl-foot-newsletter__field-label"><?php esc_html_e('Nome', 'saltelli'); ?></span>
                                 <input id="newsletter-firstname"
                                        type="text"
                                        name="FIRSTNAME"
-                                       class="sl-newsletter__input"
+                                       class="sl-foot-newsletter__input"
                                        placeholder="<?php esc_attr_e('Il tuo nome', 'saltelli'); ?>"
                                        autocomplete="given-name"
                                        required>
@@ -114,8 +113,8 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                                 <input id="newsletter-email"
                                        type="email"
                                        name="email"
-                                       class="sl-newsletter__input"
-                                       placeholder="<?php esc_attr_e('indirizzo@email.it', 'saltelli'); ?>"
+                                       class="sl-foot-newsletter__input"
+                                       placeholder="<?php esc_attr_e('lei@esempio.it', 'saltelli'); ?>"
                                        autocomplete="email"
                                        required>
                             </label>
@@ -125,21 +124,21 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                             <input id="newsletter-terms"
                                    type="checkbox"
                                    name="terms"
-                                   class="sl-newsletter__check"
+                                   class="sl-foot-newsletter__check"
                                    required>
                             <span>
                                 <?php
                                 printf(
                                     /* translators: %s = privacy policy link */
                                     esc_html__('Accetto la %s e voglio ricevere l\'editoriale.', 'saltelli'),
-                                    '<a href="' . esc_url(home_url('/privacy-policy/')) . '" class="sl-foot-link sl-foot-newsletter__gdpr-link">' . esc_html__('privacy policy', 'saltelli') . '</a>'
+                                    '<a href="' . esc_url(home_url('/privacy-policy/')) . '" class="sl-link sl-foot-newsletter__gdpr-link">' . esc_html__('privacy policy', 'saltelli') . '</a>'
                                 );
                                 ?>
                             </span>
                         </label>
 
-                        <button type="submit" class="sl-btn sl-btn--primary sl-foot-newsletter__submit">
-                            <span class="sl-foot-newsletter__submit-label"><?php esc_html_e("Iscriviti all'editoriale", 'saltelli'); ?></span>
+                        <button type="submit" class="sl-btn sl-foot-newsletter__submit">
+                            <span class="sl-foot-newsletter__submit-label"><?php esc_html_e('Iscriviti', 'saltelli'); ?></span>
                             <span class="arrow" aria-hidden="true">→</span>
                         </button>
                     </form>
