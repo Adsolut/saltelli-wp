@@ -8514,6 +8514,49 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     margin: 0 0 24px !important;
 }
 
+/* CHI-SIAMO CTA finale: classe REALE è .sl-chi-siamo__cta-title (NON __h2)
+   "Prenoti / una consulenza / gratuita." H2 huge JSX clamp(56,6.5vw,96) mb 48 */
+.sl-chi-siamo__cta h2.sl-chi-siamo__cta-title {
+    font-size: clamp(56px, 6.5vw, 96px) !important;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    margin: 0 0 48px !important;
+}
+
+/* CHI-SIAMO post_content prose h2 (es. "I nostri quattro", "Come lavoriamo"
+   manually added in WP admin). Stesso treatment di .sl-page__prose h2. */
+.sl-chi-siamo__prose h2,
+.sl-chi-siamo__prose h3 {
+    margin-block: 80px 24px;
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--primary);
+    letter-spacing: -0.015em;
+}
+.sl-chi-siamo__prose h2 {
+    font-size: clamp(28px, 3vw, 36px);
+    line-height: 1.15;
+}
+.sl-chi-siamo__prose h3 {
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.2;
+}
+.sl-chi-siamo__prose > h2:first-child,
+.sl-chi-siamo__prose > h3:first-child {
+    margin-top: 0;
+}
+
+/* CASI — CTA title "Vorresti vincere il tuo?" mb 32 */
+.sl-casi__cta h2.sl-casi__cta-title,
+h2.sl-casi__cta-title {
+    margin: 0 0 32px !important;
+}
+
+/* AVVOCATI ARCHIVE — sl-team__name h2 mb 12 (matches existing rule, force) */
+.sl-team__lawyer h2.sl-team__name {
+    margin: 0 0 12px !important;
+}
+
 /* === REVERTED v0.27.3 — H1 size to JSX exact (era 144 troppo grande) ===
    JSX clamp(56,7vw,104) · max-width nessuno · line-height 0.98 (NON 0.92). */
 .sl-chi-siamo__h1 {
