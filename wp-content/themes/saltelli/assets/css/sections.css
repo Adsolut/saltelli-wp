@@ -6714,6 +6714,48 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-style: italic;
 }
 
+/* === v0.21.6 [T1] BEGIN — Bottom legal grid align col 4 "Studio legale" ===
+   Override flex space-between (≥768) con grid 3/3/3/4 matching .sl-foot-main
+   per allineare "Realizzato da Adsolut Web Agency" all'edge sinistro di col 4. */
+@media (min-width: 1024px) {
+    .sl-foot-bottom {
+        display: grid;
+        grid-template-columns: 3fr 3fr 3fr 4fr;
+        gap: 64px;
+        align-items: center;
+    }
+    .sl-foot-bottom__copy {
+        grid-column: 1 / span 1;
+        justify-self: start;
+    }
+    .sl-foot-bottom__legal {
+        grid-column: 2 / span 2;
+        justify-self: center;
+    }
+    .sl-foot-bottom__credit {
+        grid-column: 4 / span 1;
+        justify-self: start;
+        text-align: left;
+    }
+}
+/* === v0.21.6 [T1] END === */
+
+/* === v0.21.6 [T3+T4] BEGIN — Newsletter trust line: bottom-align with submit button ===
+   Lede col diventa flex column con trust pushed to bottom via margin-top: auto.
+   Risolve: trust troppo attaccato al copy + non allineato visualmente al submit. */
+@media (min-width: 1024px) {
+    .sl-foot-newsletter__lede {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    .sl-foot-newsletter__trust {
+        margin-top: auto;
+        padding-top: 32px;
+    }
+}
+/* === v0.21.6 [T3+T4] END === */
+
 /* ─── A11y — prefers-reduced-motion safety (Task 3.2) ─── */
 @media (prefers-reduced-motion: reduce) {
     .sl-foot-link,
