@@ -6526,7 +6526,10 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     color: var(--background);
     /* v0.21.7: border-top RIMOSSO (era "isolata" sopra newsletter post-swap v0.21.6).
        Hairline separatore SPOSTATA su .sl-foot-main-wrap border-top. */
-    padding-block: clamp(48px, 6vw, 80px);
+    /* v0.21.22: padding-block ridotto clamp(48,6vw,80) → clamp(32,4vw,56) per
+       compattare verticalmente la sezione newsletter mantenendo il balance
+       top/bottom simmetrico (Duccio review). Content + impaginato invariati. */
+    padding-block: clamp(32px, 4vw, 56px);
     padding-inline: clamp(24px, 5vw, 96px);
 }
 .sl-foot-newsletter-inner {
