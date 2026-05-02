@@ -4614,7 +4614,13 @@ textarea.sl-input {
 }
 
 .sl-contatti-w3__trust-inner {
-    /* v0.21.11: inner padding 48 → 32 (height ridotta -32px, leggibilità ok) */
+    /* v0.21.13: flex column + gap → centratura verticale TRUE (no margin asym).
+       padding-block 32 = top/bottom edges identici. gap 24 spacing eyebrow→quote
+       (sostituisce eyebrow margin-bottom 24, garantisce no extra spacing top). */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
     padding-block: 32px;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
@@ -4623,8 +4629,10 @@ textarea.sl-input {
 
 .sl-contatti-w3__trust-eyebrow {
     /* v0.21.12: text-align center esplicito (no inheritance ambiguity) */
+    /* v0.21.13: margin-bottom 24 RIMOSSO — ora flex gap su parent.
+       margin: 0 garantisce no extra space top/bottom oltre padding parent. */
     color: var(--accent);
-    margin-bottom: 24px;
+    margin: 0;
     display: block;
     text-align: center;
 }
