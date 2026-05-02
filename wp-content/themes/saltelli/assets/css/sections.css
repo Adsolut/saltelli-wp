@@ -8728,33 +8728,45 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     border-bottom: 1px solid var(--border) !important;
 }
 
-/* v0.28.2 — Pre-CTA grid revert a 8fr/4fr (eyebrow + h2 + p insieme col 1
-   come HOME § 06 — CONTATTI pattern). Override v0.27.8 3fr/9fr.
-   Source allineamento: home sl-section-head pattern (eyebrow + h2 stacked
-   single col x=72). */
+/* v0.28.3 — Footer pre-CTA + newsletter alignment 3fr/9fr asym
+   come pagine editoriali (chi-siamo CTA, founding, team, principles, timeline,
+   tier-1 sections). Eyebrow LEFT col 3fr (x=72) + h2/content RIGHT col 9fr
+   (x=444). Allineamento "linea di impaginazione" delle sezioni pagina.
+   ─────────────────────────────────────────────────────────────── */
 @media (min-width: 1024px) {
+    /* Pre-CTA: 3fr/9fr · eyebrow LEFT · h2+p+action RIGHT (display:contents trick) */
     .sl-foot-cta {
-        grid-template-columns: 8fr 4fr !important;
+        grid-template-columns: 3fr 9fr !important;
         gap: 64px !important;
-        align-items: end !important;
+        align-items: start !important;
     }
-    /* Ripristina lede wrapper come block (NON più display:contents) */
     .sl-foot-precta__lede {
-        display: block !important;
+        display: contents !important;
     }
-    /* Eyebrow + h2 + p TUTTI in col 1 stacked (x=72) */
-    .sl-foot-precta__eyebrow,
-    .sl-foot-precta__h2,
+    .sl-foot-precta__eyebrow {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+    }
+    .sl-foot-precta__h2 {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+    }
     .sl-foot-precta__p {
-        grid-column: auto !important;
-        grid-row: auto !important;
+        grid-column: 2 !important;
+        grid-row: 2 !important;
     }
-    /* Action col 2 (right) align bottom */
     .sl-foot-precta__action {
-        grid-column: auto !important;
-        grid-row: auto !important;
-        margin-top: 0 !important;
-        align-self: end;
+        grid-column: 2 !important;
+        grid-row: 3 !important;
+        margin-top: 32px !important;
+        align-self: start;
+    }
+}
+
+/* v0.28.3 — Newsletter v3 grid 5fr/7fr → 3fr/9fr per coerenza con pre-CTA */
+@media (min-width: 1024px) {
+    .sl-foot-newsletter--v3 {
+        grid-template-columns: 3fr 9fr !important;
     }
 }
 
