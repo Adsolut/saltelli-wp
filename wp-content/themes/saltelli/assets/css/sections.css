@@ -8375,35 +8375,86 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
    Source: saltelli-s2-chi-siamo.jsx
    ═══════════════════════════════════════════════════════════════ */
 
-/* === Hero h1 144px scale up === */
+/* === REVERTED v0.27.3 — H1 size to JSX exact (era 144 troppo grande) ===
+   JSX clamp(56,7vw,104) · max-width nessuno · line-height 0.98 (NON 0.92). */
 .sl-chi-siamo__h1 {
-    font-size: clamp(56px, 9vw, 144px) !important;
-    line-height: 0.92;
+    font-size: clamp(56px, 7vw, 104px) !important;
+    line-height: 0.98;
     letter-spacing: -0.03em;
-    max-width: 12ch;
+    max-width: none;
 }
 .sl-chi-siamo__h1 em {
     font-style: italic;
     color: var(--text-muted);
 }
 
-/* === Founding § 02 — 3fr/9fr asym (era 3fr/9fr già OK, solo refine) === */
+/* === REVERTED v0.27.3 — Founding § 02 grid 3fr/7fr/2fr come JSX ===
+   La regola base.css line 3535 era già 3fr/7fr/2fr — l'override v0.27.0 a
+   3fr/9fr era SBAGLIATO. Restituisco valore JSX. */
 @media (min-width: 1024px) {
     .sl-chi-siamo__founding .sl-container.sl-chi-siamo__founding-grid {
-        grid-template-columns: 3fr 9fr;
+        grid-template-columns: 3fr 7fr 2fr;
     }
 }
 
-/* === Team 4-col grid (già OK), photo aspect 4/5 italian editorial === */
+/* === REVERTED v0.27.3 — Team portrait aspect 3/4 come JSX ===
+   v0.27.0 aveva 4/5 ma JSX line 156 usa "3 / 4". Restituisco. */
 @media (min-width: 1024px) {
     .sl-chi-siamo__team-portrait {
-        aspect-ratio: 4 / 5 !important;
+        aspect-ratio: 3 / 4 !important;
     }
 }
 
-/* === Principles surface bg + 3-col already in v0.25.0 — refine border-top accent === */
+/* === REVERTED v0.27.3 — Principles STACKED rows 80px/1fr come JSX ===
+   v0.25.0 + v0.27.0 avevano 3-col grid. JSX line 196-208 usa STACKED rows
+   con grid-template-columns 80px/1fr per principle. Restoro layout JSX. */
 @media (min-width: 1024px) {
+    .sl-chi-siamo__principles-grid {
+        grid-template-columns: 3fr 9fr !important;  /* eyebrow LEFT + content RIGHT */
+        gap: 64px !important;
+    }
+    .sl-chi-siamo__principles-list {
+        grid-template-columns: 1fr !important;  /* STACKED rows, NON 3-col */
+        gap: 0 !important;
+    }
     .sl-chi-siamo__principle {
+        grid-template-columns: 80px 1fr !important;  /* num + body inline */
+        grid-template-rows: auto !important;
+        gap: 32px !important;
+        padding: 40px 0 !important;
+        border-top: 0 !important;
+        border-bottom: 1px solid var(--border) !important;
+        background: transparent !important;
+        align-items: baseline !important;
+    }
+    .sl-chi-siamo__principle:last-child {
+        border-bottom: 0 !important;
+    }
+    .sl-chi-siamo__principle-n {
+        font-family: var(--font-mono) !important;
+        font-size: 11px !important;
+        letter-spacing: 0.06em !important;
+        text-transform: uppercase !important;
+        color: var(--text-muted) !important;
+    }
+    .sl-chi-siamo__principle-t {
+        font-family: var(--font-display) !important;
+        font-size: 32px !important;
+        line-height: 1.1 !important;
+        font-weight: 400 !important;
+        margin: 0 0 12px !important;
+        letter-spacing: -0.015em !important;
+    }
+    .sl-chi-siamo__principle-d {
+        font-size: 17px !important;
+        line-height: 1.65 !important;
+        max-width: 60ch !important;
+    }
+}
+
+/* === Stub residuo per cross-rule consistency (no-op se sopra applicato) === */
+@media (min-width: 1024px) {
+    .sl-chi-siamo__principle--legacy {
         border-top: 1px solid var(--accent) !important;
         border-bottom: 0 !important;
         padding-top: 32px;
