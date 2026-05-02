@@ -1706,7 +1706,8 @@ html:not(.js-reveal-ready) [data-reveal] {
 .sl-page__prose h2,
 .entry-content h2 {
     font-size: clamp(28px, 3.5vw, 44px);
-    margin-block: 80px 24px;
+    /* v0.21.24: 80px 24px → 80px 40px (editorial breathing — bottom amplificato). */
+    margin-block: 80px 40px;
     max-width: 24ch;
     line-height: 1.15;
 }
@@ -1714,7 +1715,8 @@ html:not(.js-reveal-ready) [data-reveal] {
 .sl-page__prose h3,
 .entry-content h3 {
     font-size: clamp(22px, 2vw, 32px);
-    margin-block: 56px 16px;
+    /* v0.21.24: 56px 16px → 56px 32px. */
+    margin-block: 56px 32px;
     max-width: 28ch;
 }
 
@@ -1810,7 +1812,9 @@ html:not(.js-reveal-ready) [data-reveal] {
     font-size: clamp(28px, 3vw, 44px);
     color: var(--primary);
     letter-spacing: -0.02em;
-    margin-block: 8px 24px;
+    /* v0.21.24: 8px 24px → 8px 40px. /costi/ display: grid + gap 16 non
+       beneficia di margin-collapse, ma margin contribuisce alla track height. */
+    margin-block: 8px 40px;
     font-weight: 400;
     line-height: 1.15;
 }
@@ -3288,8 +3292,20 @@ textarea.sl-input {
     margin-top: 56px;
 }
 .sl-page__prose h2 + p,
-.sl-page__prose h3 + p {
-    margin-top: 24px;
+.sl-page__prose h3 + p,
+.entry-content h2 + p,
+.entry-content h3 + p,
+.sl-competenza__prose h2 + p,
+.sl-competenza__prose h3 + p {
+    /* v0.21.24: belt-and-suspenders — sibling selector specificity 0,1,2
+       evita margin-collapse failures (es. .sl-costi__section grid display).
+       h2+p 24 → 40, h3+p 24 → 32. */
+    margin-top: 40px;
+}
+.sl-page__prose h3 + p,
+.entry-content h3 + p,
+.sl-competenza__prose h3 + p {
+    margin-top: 32px;
 }
 
 /* ═══════════════════════════════════════════════════════════════
