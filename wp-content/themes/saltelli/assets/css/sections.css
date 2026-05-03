@@ -8415,6 +8415,92 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     align-items: start !important;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   v0.32.0 TASK 1 — Drop-cap CSS expansion cross-template
+   ───────────────────────────────────────────────────────────────
+   6 nuovi scope (oltre attorney + studio + competenza già esistenti):
+   .sl-page__prose, .sl-tier1__body, .sl-costi-w4__calc-text,
+   .sl-casi-w4__hero-lede + .sl-attorney__bio-prose, .sl-competenza__prose
+   già coperti. Standardizzo tutti su font-size 84px (era 96/84 misti).
+   ═══════════════════════════════════════════════════════════════ */
+.sl-attorney__bio-prose > p:first-of-type::first-letter,
+.sl-page__prose > p:first-of-type::first-letter,
+.sl-competenza__prose > p:first-of-type::first-letter,
+.sl-tier1__body > p:first-of-type::first-letter,
+.sl-tier1__body > .sl-competenza__prose > p:first-of-type::first-letter,
+.sl-costi-w4__calc-text > p:first-of-type::first-letter,
+.sl-casi-w4__hero-lede > p:first-of-type::first-letter,
+.sl-chi-siamo__lede-text > p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-size: 84px;
+    line-height: 0.85;
+    float: left;
+    margin: 8px 16px 0 0;
+    color: var(--primary);
+    font-weight: 400;
+}
+
+@media (max-width: 767px) {
+    .sl-attorney__bio-prose > p:first-of-type::first-letter,
+    .sl-page__prose > p:first-of-type::first-letter,
+    .sl-competenza__prose > p:first-of-type::first-letter,
+    .sl-tier1__body > p:first-of-type::first-letter,
+    .sl-tier1__body > .sl-competenza__prose > p:first-of-type::first-letter,
+    .sl-costi-w4__calc-text > p:first-of-type::first-letter,
+    .sl-casi-w4__hero-lede > p:first-of-type::first-letter,
+    .sl-chi-siamo__lede-text > p:first-of-type::first-letter {
+        font-size: 60px;
+        margin: 4px 12px 0 0;
+    }
+}
+
+/* Reveal animation pattern (riusa ease-quart-out) — opacity 0→1 + scale 0.8→1 */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .sl-attorney__bio-prose > p:first-of-type::first-letter,
+    .sl-page__prose > p:first-of-type::first-letter,
+    .sl-competenza__prose > p:first-of-type::first-letter,
+    .sl-tier1__body > p:first-of-type::first-letter,
+    .sl-costi-w4__calc-text > p:first-of-type::first-letter {
+        transition:
+            opacity 600ms cubic-bezier(0.25, 1, 0.5, 1),
+            transform 600ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   v0.32.0 TASK 2 — FAQ accordion visual identity strengthening
+   ───────────────────────────────────────────────────────────────
+   Audit Duccio: "FAQ sembrano non avere template".
+   Override .sl-acc__btn (components.css:299) con padding maggiore +
+   border-bottom accent + hover bronze underline più evidente.
+   ═══════════════════════════════════════════════════════════════ */
+.sl-acc__btn {
+    padding-block: 32px !important;  /* era 24 */
+    border-bottom: 1px solid transparent;
+    transition: color var(--dur-fast, 200ms) var(--ease-editorial, cubic-bezier(0.25, 1, 0.5, 1)),
+                border-bottom-color var(--dur-fast, 200ms) var(--ease-editorial, cubic-bezier(0.25, 1, 0.5, 1));
+}
+.sl-acc__item {
+    border-bottom: 1px solid var(--accent) !important;  /* era var(--border) — più evidente */
+}
+@media (hover: hover) {
+    .sl-acc__btn:hover,
+    .sl-acc__btn:focus-visible {
+        color: var(--accent) !important;
+    }
+    .sl-acc__btn:hover .sl-acc__icon,
+    .sl-acc__btn:focus-visible .sl-acc__icon {
+        color: var(--accent) !important;
+        transform: translateX(4px);
+    }
+}
+.sl-acc__item[data-open="true"] .sl-acc__btn {
+    color: var(--accent) !important;
+}
+.sl-acc__item[data-open="true"] {
+    background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--accent) 4%, transparent) 100%);
+}
+
 /* === v0.27.5 — Founding § 02 h2 size + margin-bottom JSX-faithful ===
    Issue Duccio: "Un atelier, in senso napoletano." è incollato al
    paragrafo sottostante (margin-bottom: 0). Inoltre 64px è troppo grande
