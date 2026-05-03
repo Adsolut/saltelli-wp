@@ -650,9 +650,145 @@ while (have_posts()) :
 
         <?php elseif (is_page('glossario-legale')) :
             // === WAVE3 TASK 9 (glossario) — render delegato a inc/wave3-glossario.php
-            // (60 termini · DefinedTermSet + FAQPage schema · search+a-z sticky)
             include SALTELLI_THEME_DIR . '/inc/wave3-glossario.php';
             ?>
+
+        <?php elseif (is_page(['guide-gratuite', 'come-lavoriamo', 'prima-consulenza', 'lavora-con-noi'])) :
+            // === v0.33.0 — Info Page shared template (4 page informative) ===
+            // Hero asym 8/4 + drop-cap 84px + body editorial + CTA dark navy.
+            // Uses .sl-info-page__* shared CSS scope.
+            $sl_info_data = [
+                'guide-gratuite' => [
+                    'eyebrow' => __('§ Risorse · Guide gratuite', 'saltelli'),
+                    'h1'      => __('Schede sintetiche.', 'saltelli'),
+                    'h1_em'   => null,
+                    'lede'    => __('Scarica le nostre guide gratuite: dispense pratiche su materie ricorrenti, scritte dai nostri avvocati per privati e imprese.', 'saltelli'),
+                    'trust_eyebrow'  => __('§ Disponibili', 'saltelli'),
+                    'trust_headline' => __('12 schede in PDF · gratuite · no email obbligatoria', 'saltelli'),
+                    'trust_list' => [__('✓ Senza registrazione', 'saltelli'), __('✓ Aggiornamento periodico', 'saltelli'), __('✓ Lettura ~10 minuti', 'saltelli')],
+                    'cta_h2'      => __('Hai bisogno di un caso specifico?', 'saltelli'),
+                    'cta_h2_em'   => null,
+                    'cta_p'       => __('Le schede generali non sostituiscono una consulenza personalizzata. Trenta minuti gratuiti per valutare la tua pratica.', 'saltelli'),
+                    'cta_btn'     => __('Prenota un primo incontro', 'saltelli'),
+                ],
+                'come-lavoriamo' => [
+                    'eyebrow' => __('§ Lo studio · Come lavoriamo', 'saltelli'),
+                    'h1'      => __('Ascolto prima,', 'saltelli'),
+                    'h1_em'   => __('carte dopo.', 'saltelli'),
+                    'lede'    => __('Crediamo che il diritto sia, prima di tutto, un\'arte di ascolto. Le carte vengono dopo. Per questo non offriamo pacchetti né formule.', 'saltelli'),
+                    'trust_eyebrow'  => __('§ Tre principi', 'saltelli'),
+                    'trust_headline' => __('Ascoltiamo · Lavoriamo in atelier · Diciamo la verità', 'saltelli'),
+                    'trust_list' => [__('✓ Primo incontro gratuito', 'saltelli'), __('✓ Una pratica, un avvocato', 'saltelli'), __('✓ Onesta valutazione percorribilità', 'saltelli')],
+                    'cta_h2'      => __('Vuoi raccontarci', 'saltelli'),
+                    'cta_h2_em'   => __('la tua pratica?', 'saltelli'),
+                    'cta_p'       => __('Trenta minuti di prima consulenza gratuita. In studio o online. Risposta entro 24 ore.', 'saltelli'),
+                    'cta_btn'     => __('Prenota un incontro', 'saltelli'),
+                ],
+                'prima-consulenza' => [
+                    'eyebrow' => __('§ Servizio · Prima consulenza', 'saltelli'),
+                    'h1'      => __('Trenta minuti', 'saltelli'),
+                    'h1_em'   => __('gratuiti.', 'saltelli'),
+                    'lede'    => __('Trenta minuti di prima consulenza conoscitiva, gratuita. In studio a Chiaia o in videocall. Senza obblighi, senza costi nascosti.', 'saltelli'),
+                    'trust_eyebrow'  => __('§ Modalità', 'saltelli'),
+                    'trust_headline' => __('GRATUITA · 30 MIN · IN STUDIO O ONLINE', 'saltelli'),
+                    'trust_list' => [__('✓ Nessun obbligo', 'saltelli'), __('✓ Nessun costo nascosto', 'saltelli'), __('✓ Riservatezza assoluta', 'saltelli')],
+                    'cta_h2'      => __('Pronto?', 'saltelli'),
+                    'cta_h2_em'   => __('Iniziamo.', 'saltelli'),
+                    'cta_p'       => __('Risposta entro 24 ore. Riservatezza assoluta. Cancellazione 1 click.', 'saltelli'),
+                    'cta_btn'     => __('Prenota un incontro', 'saltelli'),
+                ],
+                'lavora-con-noi' => [
+                    'eyebrow' => __('§ Studio · Carriera', 'saltelli'),
+                    'h1'      => __('Cerchiamo', 'saltelli'),
+                    'h1_em'   => __('praticanti.', 'saltelli'),
+                    'lede'    => __('Cerchiamo praticanti motivati e curiosi, disponibili a un percorso strutturato in tutte le materie dello studio. Nessuna formula stage-mascherato.', 'saltelli'),
+                    'trust_eyebrow'  => __('§ Cosa offriamo', 'saltelli'),
+                    'trust_headline' => __('Mentorship · 18 mesi · Compenso adeguato', 'saltelli'),
+                    'trust_list' => [__('✓ Mentorship 1-1 con i quattro avvocati', 'saltelli'), __('✓ Rotazione su tutte le materie', 'saltelli'), __('✓ Compenso conforme al CCNL', 'saltelli')],
+                    'cta_h2'      => __('Inviaci il tuo', 'saltelli'),
+                    'cta_h2_em'   => __('curriculum.', 'saltelli'),
+                    'cta_p'       => __('Solo CV reali, no autocandidature standardizzate. Risposta entro 7 giorni lavorativi.', 'saltelli'),
+                    'cta_btn'     => __('Scrivici', 'saltelli'),
+                ],
+            ];
+            $sl_info_slug = get_post_field('post_name', get_the_ID());
+            $sl_info = $sl_info_data[$sl_info_slug] ?? null;
+            if ($sl_info) :
+            ?>
+            <article class="sl-info-page sl-info-page--<?php echo esc_attr($sl_info_slug); ?>">
+
+                <header class="sl-info-page__hero">
+                    <div class="sl-info-page__hero-text">
+                        <?php saltelli_render_breadcrumb(); ?>
+                        <div class="sl-mono sl-info-page__hero-eyebrow"><?php echo esc_html($sl_info['eyebrow']); ?></div>
+                        <h1 class="sl-info-page__h1" data-split-reveal>
+                            <?php echo esc_html($sl_info['h1']); ?>
+                            <?php if (!empty($sl_info['h1_em'])) : ?><br><em><?php echo esc_html($sl_info['h1_em']); ?></em><?php endif; ?>
+                        </h1>
+                        <p class="sl-info-page__lede"><?php echo esc_html($sl_info['lede']); ?></p>
+                    </div>
+                    <aside class="sl-info-page__trust">
+                        <div class="sl-mono sl-info-page__trust-eyebrow"><?php echo esc_html($sl_info['trust_eyebrow']); ?></div>
+                        <p class="sl-info-page__trust-headline"><?php echo esc_html($sl_info['trust_headline']); ?></p>
+                        <ul class="sl-info-page__trust-list" role="list">
+                            <?php foreach ($sl_info['trust_list'] as $sl_li) : ?>
+                                <li><?php echo esc_html($sl_li); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </aside>
+                </header>
+
+                <section class="sl-info-page__body">
+                    <div class="sl-mono sl-info-page__body-eyebrow"><?php esc_html_e('§ 01 — Approfondimento', 'saltelli'); ?></div>
+                    <div class="sl-info-page__prose">
+                        <?php
+                        if (get_the_content() !== '') {
+                            the_content();
+                        } else {
+                            // Fallback editorial content per ogni page
+                            switch ($sl_info_slug) {
+                                case 'guide-gratuite':
+                                    echo '<p>' . esc_html__('Schede sintetiche e gratuite, scritte dai nostri avvocati per privati e imprese. Ogni guida copre una materia ricorrente con linguaggio chiaro, esempi reali, e indicazioni pratiche su come muoversi nei primi 7 giorni.', 'saltelli') . '</p>';
+                                    echo '<p>' . esc_html__('Sono pensate per chi vuole una prima orientazione prima di decidere se rivolgersi a un avvocato. Le aggiorniamo periodicamente quando cambia la giurisprudenza o la normativa.', 'saltelli') . '</p>';
+                                    break;
+                                case 'come-lavoriamo':
+                                    echo '<p>' . esc_html__('Ascoltiamo prima delle carte. Il primo incontro dura il tempo necessario, è gratuito e dedicato esclusivamente a capire la tua storia. Le scartoffie le firmiamo solo quando abbiamo capito cosa serve davvero.', 'saltelli') . '</p>';
+                                    echo '<p>' . esc_html__('Lavoriamo in atelier: ogni pratica è seguita personalmente da uno dei quattro avvocati, dall\'inizio alla fine. Niente call center, niente passaggi di mano, niente "il collega le richiamerà".', 'saltelli') . '</p>';
+                                    echo '<p>' . esc_html__('Diciamo la verità anche quando significa sconsigliare un\'azione legale. La nostra reputazione vale più di un mandato. Se la causa non è percorribile, te lo diciamo subito.', 'saltelli') . '</p>';
+                                    break;
+                                case 'prima-consulenza':
+                                    echo '<p>' . esc_html__('Trenta minuti gratuiti, in studio a Chiaia o in videocall. Sufficienti per ascoltare la pratica, valutare la percorribilità e decidere insieme se procedere. Senza obblighi, senza costi nascosti.', 'saltelli') . '</p>';
+                                    echo '<p>' . esc_html__('Solo dopo il primo incontro formuliamo un preventivo personalizzato basato su complessità, tempi e probabilità di esito. Il preventivo è scritto, fisso o a percentuale del beneficio. Lo concordiamo prima del mandato.', 'saltelli') . '</p>';
+                                    break;
+                                case 'lavora-con-noi':
+                                    echo '<p>' . esc_html__('Cerchiamo praticanti motivati e curiosi, con voglia di studiare in profondità. Offriamo un percorso strutturato di 18 mesi su tutte le materie dello studio: tributario, lavoro, famiglia LGBTQ+, immobiliare, condominiale, contenzioso.', 'saltelli') . '</p>';
+                                    echo '<p>' . esc_html__('Niente formula stage-mascherato. Compenso conforme al CCNL forense, mentorship 1-1 con i quattro avvocati, casi reali fin dalla prima settimana. Cerchiamo persone che vogliano fare l\'avvocato in maniera seria.', 'saltelli') . '</p>';
+                                    break;
+                            }
+                        }
+                        ?>
+                    </div>
+                </section>
+
+                <section class="sl-info-page__cta">
+                    <div class="sl-info-page__cta-inner">
+                        <div class="sl-mono sl-info-page__cta-eyebrow"><?php esc_html_e('§ Pronto?', 'saltelli'); ?></div>
+                        <div>
+                            <h2 class="sl-info-page__cta-h2">
+                                <?php echo esc_html($sl_info['cta_h2']); ?>
+                                <?php if (!empty($sl_info['cta_h2_em'])) : ?><br><em><?php echo esc_html($sl_info['cta_h2_em']); ?></em><?php endif; ?>
+                            </h2>
+                            <p class="sl-info-page__cta-p"><?php echo esc_html($sl_info['cta_p']); ?></p>
+                            <a class="sl-info-page__cta-btn" href="<?php echo esc_url(home_url('/contatti/')); ?>">
+                                <span><?php echo esc_html($sl_info['cta_btn']); ?></span>
+                                <span class="arrow" aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+            </article>
+            <?php endif; ?>
 
         <?php elseif (is_page('costi')) :
             // === v0.23.0 TASK B — /costi/ Sessione 2 pixel-perfect ===

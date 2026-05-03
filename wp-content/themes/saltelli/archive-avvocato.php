@@ -1,7 +1,9 @@
 <?php
 /**
- * Template: Archive CPT avvocato.
- * 4 lawyers asimmetrici (riusa pattern .sl-team della homepage).
+ * Template: Archive CPT avvocato — Sessione 2 enriched (v0.33.0).
+ *
+ * Hero asym 8/4 + lede drop-cap + trust aside + 4 lawyer card grid +
+ * § Come lavoriamo (3 principi) + CTA finale dark navy.
  *
  * @package Saltelli
  */
@@ -15,14 +17,18 @@ $avvocati = get_posts([
 $layout_team = saltelli_team_grid_layout();
 ?>
 
-<section class="sl-team sl-team--archive">
-    <div class="sl-container">
-        <header class="sl-section-head">
+<article class="sl-team sl-team--archive sl-team--archive-w2">
+
+    <header class="sl-team__archive-hero">
+        <div>
             <?php saltelli_render_breadcrumb(); ?>
-            <h1 class="sl-section-title" data-split-reveal>
+            <div class="sl-mono sl-team__archive-eyebrow" style="margin-bottom: 32px;">
+                <?php esc_html_e('§ Studio · Avvocati', 'saltelli'); ?>
+            </div>
+            <h1 class="sl-team__archive-h1" data-split-reveal>
                 <?php
-                $sl_arch_av_title = esc_html__('Quattro', 'saltelli') . '<br><em>' . esc_html__('professionisti.', 'saltelli') . '</em>';
-                echo wp_kses(saltelli_split_h1_words($sl_arch_av_title), [
+                $sl_arch_h1 = esc_html__('Quattro', 'saltelli') . '<br><em>' . esc_html__('professionisti.', 'saltelli') . '</em>';
+                echo wp_kses(saltelli_split_h1_words($sl_arch_h1), [
                     'span' => ['class' => true, 'data-i' => true],
                     'em'   => [],
                     'br'   => [],
@@ -32,9 +38,23 @@ $layout_team = saltelli_team_grid_layout();
             <p class="sl-team__archive-lede">
                 <?php esc_html_e('Un atelier di quattro avvocati a Chiaia. Ogni cliente è una storia, e ogni storia merita il tempo di essere capita.', 'saltelli'); ?>
             </p>
-        </header>
+        </div>
+        <aside class="sl-team__archive-trust">
+            <div class="sl-mono sl-team__archive-trust-eyebrow">
+                <?php esc_html_e('§ Dal 1999', 'saltelli'); ?>
+            </div>
+            <p class="sl-team__archive-trust-headline">
+                <?php esc_html_e('Vannella Gaetani, 27.', 'saltelli'); ?><br>
+                <em><?php esc_html_e('Chiaia · Napoli.', 'saltelli'); ?></em>
+            </p>
+            <p class="sl-team__archive-trust-text">
+                <?php esc_html_e('Quattro avvocati, una pratica alla volta. Riceviamo solo su appuntamento, in studio o in videocall.', 'saltelli'); ?>
+            </p>
+        </aside>
+    </header>
 
-        <?php if (!empty($avvocati)) : ?>
+    <?php if (!empty($avvocati)) : ?>
+        <section class="sl-container">
             <div class="sl-team__grid">
                 <?php foreach ($avvocati as $i => $av) :
                     $layout = $layout_team[$i] ?? ['col' => 1, 'span' => 12, 'offset' => 0];
@@ -53,11 +73,9 @@ $layout_team = saltelli_team_grid_layout();
                                     'alt'      => esc_attr(get_the_title($av) . ($ruolo ? ' · ' . $ruolo : '')),
                                 ]);
                             } elseif (is_array($foto) && !empty($foto['url'])) {
-                                /* IMPECCABLE v0.21.0 [perf-T2]: width/height esplicite (CLS prevention) */
                                 echo '<img src="' . esc_url($foto['url']) . '" alt="' . esc_attr($foto['alt'] ?: get_the_title($av)) . '" loading="lazy" decoding="async" width="600" height="800">';
                             } else {
                                 echo '<span class="sl-team__placeholder" aria-hidden="true"><span class="sl-mono">' . esc_html__('Ritratto · 3:4', 'saltelli') . '</span></span>';
-                                echo '<!-- TODO: replace with real Saltelli photo -->';
                             }
                             ?>
                         </a>
@@ -77,11 +95,64 @@ $layout_team = saltelli_team_grid_layout();
                     </article>
                 <?php endforeach; ?>
             </div>
-        <?php else : ?>
-            <p class="sl-mono"><?php esc_html_e('Nessun avvocato pubblicato.', 'saltelli'); ?></p>
-        <?php endif; ?>
-    </div>
-</section>
+        </section>
+    <?php else : ?>
+        <p class="sl-mono"><?php esc_html_e('Nessun avvocato pubblicato.', 'saltelli'); ?></p>
+    <?php endif; ?>
+
+    <?php /* § Come lavoriamo — 3 principi (riusa pattern chi-siamo) */ ?>
+    <section class="sl-team__archive-principles">
+        <div class="sl-team__archive-principles-inner">
+            <div class="sl-mono"><?php esc_html_e('§ Come lavoriamo', 'saltelli'); ?></div>
+            <div>
+                <ol class="sl-team__archive-principles-list" role="list">
+                    <li class="sl-team__archive-principle">
+                        <span class="sl-team__archive-principle-num">01</span>
+                        <div>
+                            <h3 class="sl-team__archive-principle-t"><?php esc_html_e('Ascoltiamo prima.', 'saltelli'); ?></h3>
+                            <p class="sl-team__archive-principle-d"><?php esc_html_e('Il primo incontro è gratuito e dura il tempo necessario. Capire la storia viene sempre prima delle carte.', 'saltelli'); ?></p>
+                        </div>
+                    </li>
+                    <li class="sl-team__archive-principle">
+                        <span class="sl-team__archive-principle-num">02</span>
+                        <div>
+                            <h3 class="sl-team__archive-principle-t"><?php esc_html_e('Lavoriamo in atelier.', 'saltelli'); ?></h3>
+                            <p class="sl-team__archive-principle-d"><?php esc_html_e('Ogni pratica è seguita personalmente da uno dei quattro avvocati. Niente call center, niente passaggi.', 'saltelli'); ?></p>
+                        </div>
+                    </li>
+                    <li class="sl-team__archive-principle">
+                        <span class="sl-team__archive-principle-num">03</span>
+                        <div>
+                            <h3 class="sl-team__archive-principle-t"><?php esc_html_e('Diciamo la verità.', 'saltelli'); ?></h3>
+                            <p class="sl-team__archive-principle-d"><?php esc_html_e('Anche quando significa sconsigliare un\'azione legale. La nostra reputazione vale più di un mandato.', 'saltelli'); ?></p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <?php /* CTA finale dark navy */ ?>
+    <section class="sl-info-page__cta">
+        <div class="sl-info-page__cta-inner">
+            <div class="sl-mono sl-info-page__cta-eyebrow"><?php esc_html_e('§ Pronto?', 'saltelli'); ?></div>
+            <div>
+                <h2 class="sl-info-page__cta-h2">
+                    <?php esc_html_e('Vuoi raccontarci', 'saltelli'); ?><br>
+                    <em><?php esc_html_e('la tua pratica?', 'saltelli'); ?></em>
+                </h2>
+                <p class="sl-info-page__cta-p">
+                    <?php esc_html_e('Trenta minuti di prima consulenza gratuita. In studio o online. Risposta entro 24 ore.', 'saltelli'); ?>
+                </p>
+                <a class="sl-info-page__cta-btn" href="<?php echo esc_url(home_url('/contatti/')); ?>">
+                    <span><?php esc_html_e('Prenota un incontro', 'saltelli'); ?></span>
+                    <span class="arrow" aria-hidden="true">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+</article>
 
 <?php
 get_footer();
