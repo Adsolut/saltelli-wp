@@ -9414,4 +9414,202 @@ h2.sl-casi__cta-title {
    v0.33.0 END
    ═══════════════════════════════════════════════════════════════ */
 
+/* ═══════════════════════════════════════════════════════════════
+   v0.34.0 — DROP-CAP UNIFIED MASTER (cleanup 75 first-letter rules)
+   ───────────────────────────────────────────────────────────────
+   PROBLEM: 75+ first-letter rules nel file → specificity battle,
+   double drop-cap rendering, animation flash on cross-page.
+   FIX: 1 master rule unified, MAX specificity + !important,
+   STATIC (no animation) per evitare flash/disappear.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* MASTER UNIFIED first-letter rule — desktop + mobile */
+.sl-studio__prose[data-drop-cap] > p:first-of-type::first-letter,
+.sl-studio.drop-cap-revealed .sl-studio__prose[data-drop-cap] > p:first-of-type::first-letter,
+.sl-attorney__bio-prose > p:first-of-type::first-letter,
+.sl-attorney__bio > p:first-of-type::first-letter,
+.sl-page__prose > p:first-of-type::first-letter,
+.sl-competenza__prose > p:first-of-type::first-letter,
+.sl-competenza--tier-1 .sl-competenza__prose > p:first-of-type::first-letter,
+.sl-competenza-w3__body > p:first-of-type::first-letter,
+.sl-tier1__body > p:first-of-type::first-letter,
+.sl-tier1__body > .sl-competenza__prose > p:first-of-type::first-letter,
+.sl-practice-tier1 .sl-page__prose > p:first-of-type::first-letter,
+.sl-chi-siamo-w3 .sl-page__prose > p:first-of-type::first-letter,
+.sl-chi-siamo-w3__story > p:first-of-type::first-letter,
+.sl-chi-siamo__lede-text > p:first-of-type::first-letter,
+.sl-chi-siamo__prose--dropcap > p:first-of-type::first-letter,
+.sl-chi-siamo__prose > p:first-of-type::first-letter,
+.sl-info-page__prose > p:first-of-type::first-letter,
+.sl-costi-w4__calc-text > p:first-of-type::first-letter,
+.sl-costi-w4__calc-prose > p:first-of-type::first-letter,
+.sl-casi-w4__hero-lede > p:first-of-type::first-letter,
+.sl-team__archive-lede > p:first-of-type::first-letter,
+.sl-faq-aggregator__topic-prose > p:first-of-type::first-letter,
+body.single-post .sl-post__body > p:first-of-type::first-letter,
+body.single-post .entry-content > p:first-of-type::first-letter {
+    font-family: var(--font-display) !important;
+    font-size: 84px !important;
+    line-height: 0.85 !important;
+    float: left !important;
+    margin: 8px 16px 0 0 !important;
+    padding: 0 !important;
+    color: var(--primary) !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    /* ANTI-FLASH: opacity 1 + transform none statici, NO transition */
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    background: transparent !important;
+}
+
+@media (max-width: 767px) {
+    .sl-studio__prose[data-drop-cap] > p:first-of-type::first-letter,
+    .sl-attorney__bio-prose > p:first-of-type::first-letter,
+    .sl-attorney__bio > p:first-of-type::first-letter,
+    .sl-page__prose > p:first-of-type::first-letter,
+    .sl-competenza__prose > p:first-of-type::first-letter,
+    .sl-tier1__body > p:first-of-type::first-letter,
+    .sl-chi-siamo__lede-text > p:first-of-type::first-letter,
+    .sl-chi-siamo__prose > p:first-of-type::first-letter,
+    .sl-info-page__prose > p:first-of-type::first-letter,
+    .sl-costi-w4__calc-text > p:first-of-type::first-letter,
+    .sl-costi-w4__calc-prose > p:first-of-type::first-letter {
+        font-size: 60px !important;
+        margin: 4px 12px 0 0 !important;
+    }
+}
+
+/* Neutralize legacy .sl-chi-siamo__dropcap span (deprecated v0.34.0) */
+.sl-chi-siamo__dropcap {
+    display: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   v0.34.0 — FAQ AGGREGATOR PAGE /faq/
+   ───────────────────────────────────────────────────────────────
+   Hero asym + 6 topic sections con accordion + TOC sticky + CTA.
+   Schema FAQPage CUMULATIVO (audit GEO §4.3 critical).
+   ═══════════════════════════════════════════════════════════════ */
+.sl-faq-aggregator {
+    background: var(--background);
+}
+
+.sl-faq-aggregator__hero {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-block: clamp(96px, 10vw, 120px) clamp(48px, 6vw, 80px);
+    padding-inline: clamp(24px, 5vw, 96px);
+}
+@media (min-width: 1024px) {
+    .sl-faq-aggregator__hero {
+        display: grid;
+        grid-template-columns: 8fr 4fr;
+        gap: 96px;
+        align-items: end;
+    }
+}
+.sl-faq-aggregator__h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(56px, 7vw, 104px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    color: var(--primary);
+    margin: 0 0 32px;
+}
+.sl-faq-aggregator__h1 em {
+    font-style: italic;
+    color: var(--text-muted);
+}
+.sl-faq-aggregator__lede {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.5;
+    color: var(--text);
+    max-width: 48ch;
+    margin: 0;
+}
+
+/* TOC sticky sidebar */
+.sl-faq-aggregator__body {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-block: clamp(48px, 6vw, 96px);
+    padding-inline: clamp(24px, 5vw, 96px);
+}
+@media (min-width: 1024px) {
+    .sl-faq-aggregator__body {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 96px;
+        align-items: start;
+    }
+    .sl-faq-aggregator__toc {
+        position: sticky;
+        top: 120px;
+        align-self: start;
+        height: fit-content;
+    }
+}
+.sl-faq-aggregator__toc {
+    padding-block: 24px;
+}
+.sl-faq-aggregator__toc-label {
+    margin-bottom: 16px;
+    color: var(--text-muted);
+}
+.sl-faq-aggregator__toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+}
+.sl-faq-aggregator__toc-link {
+    display: block;
+    padding-block: 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color var(--dur-fast, 200ms) var(--ease-editorial, cubic-bezier(0.25, 1, 0.5, 1)),
+                border-bottom-color var(--dur-fast, 200ms);
+}
+.sl-faq-aggregator__toc-link:hover,
+.sl-faq-aggregator__toc-link:focus-visible {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+/* Topic sections */
+.sl-faq-aggregator__topics {
+    display: grid;
+    gap: 80px;
+}
+.sl-faq-aggregator__topic {
+    scroll-margin-top: 120px;
+}
+.sl-faq-aggregator__topic-eyebrow {
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+.sl-faq-aggregator__topic-h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(32px, 3.5vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--primary);
+    margin: 0 0 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--accent);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   v0.34.0 END
+   ═══════════════════════════════════════════════════════════════ */
+
 

@@ -61,7 +61,7 @@ while (have_posts()) :
                     <div class="sl-mono">§ 01 — <?php esc_html_e('Lede', 'saltelli'); ?></div>
                     <div class="sl-chi-siamo__prose sl-chi-siamo__prose--dropcap">
                         <p>
-                            <span class="sl-chi-siamo__dropcap" aria-hidden="true">U</span>n atelier di quattro professionisti che da oltre vent'anni accompagna famiglie e imprese di Napoli attraverso le materie di cui si occupa: il diritto tributario di Emiliano, il diritto del lavoro di Fabiana, la tutela LGBTQ+ in materia di famiglia di Antonia, il condominiale e immobiliare di Stefano.
+                            Un atelier di quattro professionisti che da oltre vent'anni accompagna famiglie e imprese di Napoli attraverso le materie di cui si occupa: il diritto tributario di Emiliano, il diritto del lavoro di Fabiana, la tutela LGBTQ+ in materia di famiglia di Antonia, il condominiale e immobiliare di Stefano.
                         </p>
                         <p>
                             <?php esc_html_e("Crediamo che il diritto sia, prima di tutto, un'arte di ascolto. Le carte vengono dopo. Per questo non offriamo pacchetti né formule: ogni cliente è una storia, e ogni storia merita il tempo di essere capita.", 'saltelli'); ?>
@@ -652,6 +652,184 @@ while (have_posts()) :
             // === WAVE3 TASK 9 (glossario) — render delegato a inc/wave3-glossario.php
             include SALTELLI_THEME_DIR . '/inc/wave3-glossario.php';
             ?>
+
+        <?php elseif (is_page('faq')) :
+            // === v0.34.0 — FAQ aggregator (audit GEO §4.3 critical) ===
+            // 6 topic sections + 28 FAQ aggregate + TOC sticky + Schema FAQPage cumulativo.
+            $sl_faq_topics = [
+                'tributario' => [
+                    'eyebrow' => __('§ 01 — Diritto tributario', 'saltelli'),
+                    'h2'      => __('Cartelle, accertamenti, contenzioso.', 'saltelli'),
+                    'faqs'    => [
+                        ['Quando conviene impugnare una cartella esattoriale?', 'Le cartelle vanno impugnate entro 60 giorni dalla notifica davanti alla Corte di Giustizia Tributaria competente. Lo Studio valuta gratuitamente la fondatezza dell\'impugnazione nel primo incontro.'],
+                        ['Cosa fare se l\'Agenzia delle Entrate avvia un accertamento sintetico?', 'Prima dell\'accertamento si apre un contraddittorio preventivo: è la fase più delicata. Documentare correttamente la propria posizione in questa sede può evitare il contenzioso.'],
+                        ['Quali sono i tempi medi di un contenzioso tributario?', 'Primo grado in CGT: 12-18 mesi. Appello in CGT 2: ulteriori 18-24 mesi. Cassazione: 24-36 mesi. La sospensione cautelare è quasi sempre concedibile.'],
+                        ['Si possono rateizzare le somme dovute?', 'Sì, fino a 72 rate mensili (120 in casi di grave difficoltà). Lo Studio assiste anche nella negoziazione dei piani di rateizzazione.'],
+                        ['Quanto costa un contenzioso tributario?', 'Il primo incontro è gratuito. Il preventivo è scritto, fisso o a percentuale del beneficio. Le parcelle seguono i parametri ministeriali, sempre concordate prima del mandato.'],
+                    ],
+                ],
+                'lavoro' => [
+                    'eyebrow' => __('§ 02 — Diritto del lavoro', 'saltelli'),
+                    'h2'      => __('Licenziamenti, mobbing, INPS.', 'saltelli'),
+                    'faqs'    => [
+                        ['Il licenziamento è impugnabile? Entro quando?', 'Sì, entro 60 giorni dalla comunicazione (180 giorni per discriminazione). Lo Studio valuta gratuitamente la fondatezza nel primo incontro.'],
+                        ['Cos\'è il mobbing e come si dimostra?', 'Il mobbing richiede prova documentale di vessazioni reiterate. Servono messaggi, testimoni, note mediche. Lo Studio coordina la raccolta probatoria.'],
+                        ['Cosa cambia tra contestazione disciplinare e licenziamento?', 'La contestazione è il primo step: difesa scritta entro 5 giorni è critica per evitare il provvedimento.'],
+                        ['Sono lavoratore autonomo: che tutele ho?', 'Anche il lavoro autonomo gode di tutele crescenti (legge 81/2017): equo compenso, recesso illegittimo, dipendenza economica.'],
+                        ['INPS contestato: cosa fare?', 'Ricorso amministrativo entro 90 giorni, poi giudiziale entro un anno. Lo Studio assiste in entrambe le sedi.'],
+                    ],
+                ],
+                'lgbtq' => [
+                    'eyebrow' => __('§ 03 — Famiglia LGBTQ+', 'saltelli'),
+                    'h2'      => __('Unioni civili, PMA, stepchild.', 'saltelli'),
+                    'faqs'    => [
+                        ['L\'unione civile dà gli stessi diritti del matrimonio?', 'L\'unione civile (legge 76/2016) dà la maggior parte dei diritti del matrimonio salvo adozione e fecondazione assistita. Trascrizione, eredità, pensione di reversibilità: sì.'],
+                        ['Trascrizione di nascita all\'estero (PMA o GPA): è possibile?', 'Dipende dalla giurisdizione di nascita. Cassazione 38162/2022 e successive aprono spiragli per trascrizione integrale. Lo Studio ha ottenuto il primo riconoscimento in Campania nel 2023.'],
+                        ['Stepchild adoption: in quali casi è possibile?', 'Adozione coparentale (art. 44 lett. d L.184/1983) su minore già genitore biologico del partner. Procedura giudiziale, esito favorevole consolidato post-Cassazione 2014.'],
+                        ['Cosa succede in caso di separazione tra coppie LGBTQ+?', 'Per unioni civili: scioglimento giudiziale come divorzio. Per coppie di fatto: contratti di convivenza. Affido figli: principio del miglior interesse del minore.'],
+                        ['L\'identità di genere è riconosciuta legalmente?', 'Sì, legge 164/1982. Procedura giudiziale o amministrativa post-Cassazione 15138/2015. Lo Studio assiste in tutti i passaggi.'],
+                    ],
+                ],
+                'costi' => [
+                    'eyebrow' => __('§ 04 — Costi e tariffe', 'saltelli'),
+                    'h2'      => __('Trasparenza, dilazione, success fee.', 'saltelli'),
+                    'faqs'    => [
+                        ['Quanto costa una pratica di diritto tributario?', 'Range orientativo €800-€3500 a seconda di tipologia atto, importo contestato, necessità di periti. Esempio: opposizione cartella €5000 → forfait €1200.'],
+                        ['Pagamento dilazionato è possibile?', 'Sì per pratiche oltre €1500. Concordiamo rate trimestrali in funzione del flusso atti. Trasparenza totale: nessun interesse, solo dilazione fisica.'],
+                        ['Se non vinco, devo comunque pagare?', 'Sì. Le tariffe forensi prevedono onorari per il lavoro svolto, indipendentemente dall\'esito (Codice deontologico). Possiamo valutare in prima consulenza la percorribilità della causa.'],
+                        ['Recupero crediti: solo se vinciamo?', 'Per pratiche specifiche di recupero crediti < €5000 proponiamo success fee (X% sul recuperato + spese vive). Da concordare in prima consulenza.'],
+                    ],
+                ],
+                'metodo' => [
+                    'eyebrow' => __('§ 05 — Come lavoriamo', 'saltelli'),
+                    'h2'      => __('Atelier, ascolto, verità.', 'saltelli'),
+                    'faqs'    => [
+                        ['Chi seguirà la mia pratica?', 'Uno dei quattro avvocati personalmente, dall\'inizio alla fine. Niente call center, niente passaggi. Lavoriamo in atelier.'],
+                        ['Posso scegliere l\'avvocato?', 'Sì. Nel primo incontro valutiamo insieme chi è più indicato per la tua materia. Ti presentiamo l\'avvocato di riferimento prima del mandato.'],
+                        ['Quanto è davvero gratuito il primo incontro?', '30 minuti, in studio o videocall, senza obblighi. Se decidi di non procedere, abbiamo solo investito tempo. Costa solo se decidiamo insieme di procedere.'],
+                        ['Cosa succede se la mia causa non è percorribile?', 'Te lo diciamo subito. Ti suggeriamo un percorso alternativo o ti rimandiamo a un professionista più indicato. La nostra reputazione vale più di un mandato.'],
+                    ],
+                ],
+                'prima-consulenza' => [
+                    'eyebrow' => __('§ 06 — Prima consulenza', 'saltelli'),
+                    'h2'      => __('Trenta minuti, gratuiti, senza obbligo.', 'saltelli'),
+                    'faqs'    => [
+                        ['Devo portare documenti al primo incontro?', 'Se hai documenti relativi alla pratica (contratti, cartelle, lettere), portali. Altrimenti basta una sintesi orale della situazione.'],
+                        ['Posso fare videocall invece di venire in studio?', 'Sì. Google Meet, Zoom o piattaforma a tua scelta. Stessa efficacia, zero spostamento.'],
+                        ['Quanto preavviso serve per fissare l\'appuntamento?', 'Riceviamo solo su appuntamento. Tipicamente entro 3-5 giorni lavorativi. Per urgenze contattaci telefonicamente.'],
+                        ['Posso portare un familiare o un consulente?', 'Sì, se ritieni utile. Lo Studio si adatta alle tue esigenze comunicative.'],
+                        ['Il primo incontro è in italiano?', 'Sì. Disponibilità anche in inglese su richiesta (Emiliano e Antonia parlano inglese fluente).'],
+                    ],
+                ],
+            ];
+            ?>
+            <article class="sl-faq-aggregator">
+
+                <header class="sl-faq-aggregator__hero">
+                    <div>
+                        <?php saltelli_render_breadcrumb(); ?>
+                        <div class="sl-mono" style="margin-bottom: 32px;"><?php esc_html_e('§ Risorse · Domande frequenti', 'saltelli'); ?></div>
+                        <h1 class="sl-faq-aggregator__h1" data-split-reveal>
+                            <?php esc_html_e('Domande', 'saltelli'); ?><br>
+                            <em><?php esc_html_e('frequenti.', 'saltelli'); ?></em>
+                        </h1>
+                        <p class="sl-faq-aggregator__lede">
+                            <?php esc_html_e('Le domande più ricorrenti che ci pongono privati e imprese. Sei aree tematiche, oltre 28 risposte, raccolte in un\'unica pagina.', 'saltelli'); ?>
+                        </p>
+                    </div>
+                </header>
+
+                <section class="sl-faq-aggregator__body">
+                    <?php /* TOC sticky sidebar */ ?>
+                    <aside class="sl-faq-aggregator__toc" aria-label="<?php esc_attr_e('Indice domande', 'saltelli'); ?>">
+                        <div class="sl-mono sl-faq-aggregator__toc-label"><?php esc_html_e('Indice', 'saltelli'); ?></div>
+                        <ul class="sl-faq-aggregator__toc-list" role="list">
+                            <?php foreach ($sl_faq_topics as $sl_topic_id => $sl_topic) : ?>
+                                <li>
+                                    <a class="sl-faq-aggregator__toc-link" href="#faq-<?php echo esc_attr($sl_topic_id); ?>">
+                                        <?php echo esc_html($sl_topic['eyebrow']); ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </aside>
+
+                    <div class="sl-faq-aggregator__topics">
+                        <?php $sl_topic_idx = 0; foreach ($sl_faq_topics as $sl_topic_id => $sl_topic) : $sl_topic_idx++; ?>
+                            <section class="sl-faq-aggregator__topic" id="faq-<?php echo esc_attr($sl_topic_id); ?>">
+                                <div class="sl-mono sl-faq-aggregator__topic-eyebrow"><?php echo esc_html($sl_topic['eyebrow']); ?></div>
+                                <h2 class="sl-faq-aggregator__topic-h2"><?php echo esc_html($sl_topic['h2']); ?></h2>
+                                <div class="sl-acc" data-sl-acc>
+                                    <?php foreach ($sl_topic['faqs'] as $sl_qa_idx => $sl_qa) :
+                                        $sl_acc_id = 'faq-' . $sl_topic_id . '-' . $sl_qa_idx;
+                                    ?>
+                                        <div class="sl-acc__item" data-open="false">
+                                            <button class="sl-acc__btn" type="button"
+                                                    aria-expanded="false"
+                                                    aria-controls="<?php echo esc_attr($sl_acc_id); ?>">
+                                                <span><?php echo esc_html($sl_qa[0]); ?></span>
+                                                <span class="sl-acc__icon" aria-hidden="true">+</span>
+                                            </button>
+                                            <div class="sl-acc__panel" id="<?php echo esc_attr($sl_acc_id); ?>">
+                                                <div class="sl-acc__inner">
+                                                    <?php echo esc_html($sl_qa[1]); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </section>
+                        <?php endforeach; ?>
+                    </div>
+                </section>
+
+                <?php /* CTA finale dark navy (riusa .sl-info-page__cta) */ ?>
+                <section class="sl-info-page__cta">
+                    <div class="sl-info-page__cta-inner">
+                        <div class="sl-mono sl-info-page__cta-eyebrow"><?php esc_html_e('§ Domanda specifica?', 'saltelli'); ?></div>
+                        <div>
+                            <h2 class="sl-info-page__cta-h2">
+                                <?php esc_html_e('La tua domanda', 'saltelli'); ?><br>
+                                <em><?php esc_html_e('non è qui?', 'saltelli'); ?></em>
+                            </h2>
+                            <p class="sl-info-page__cta-p">
+                                <?php esc_html_e('Trenta minuti di prima consulenza gratuita per la tua pratica specifica. In studio o online. Risposta entro 24 ore.', 'saltelli'); ?>
+                            </p>
+                            <a class="sl-info-page__cta-btn" href="<?php echo esc_url(home_url('/contatti/')); ?>">
+                                <span><?php esc_html_e('Prenota un incontro', 'saltelli'); ?></span>
+                                <span class="arrow" aria-hidden="true">→</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <?php /* Schema FAQPage cumulativo (audit GEO §4.3 critical) */ ?>
+                <?php
+                $sl_faq_schema_entities = [];
+                foreach ($sl_faq_topics as $sl_topic_id => $sl_topic) {
+                    foreach ($sl_topic['faqs'] as $sl_qa) {
+                        $sl_faq_schema_entities[] = [
+                            '@type' => 'Question',
+                            'name'  => $sl_qa[0],
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text'  => $sl_qa[1],
+                            ],
+                        ];
+                    }
+                }
+                if (!empty($sl_faq_schema_entities) && function_exists('saltelli_emit_jsonld')) {
+                    saltelli_emit_jsonld([
+                        '@context'   => 'https://schema.org',
+                        '@type'      => 'FAQPage',
+                        '@id'        => get_permalink() . '#faq-aggregator',
+                        'mainEntity' => $sl_faq_schema_entities,
+                        'inLanguage' => 'it-IT',
+                    ]);
+                }
+                ?>
+
+            </article>
 
         <?php elseif (is_page(['guide-gratuite', 'come-lavoriamo', 'prima-consulenza', 'lavora-con-noi'])) :
             // === v0.33.0 — Info Page shared template (4 page informative) ===

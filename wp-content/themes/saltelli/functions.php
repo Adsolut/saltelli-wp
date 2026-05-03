@@ -8,7 +8,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '0.33.0-beta-info-pages-archive-dropcap-strong');
+define('SALTELLI_THEME_VERSION', '0.34.0-beta-dropcap-unified-faq-aggregator');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
