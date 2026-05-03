@@ -29,9 +29,10 @@ while (have_posts()) :
             ];
             ?>
 
-            <section class="sl-chi-siamo__hero" aria-labelledby="chi-siamo-h1">
+            <section class="sl-chi-siamo__hero sl-page-hero sl-page-hero--extended" aria-labelledby="chi-siamo-h1">
                 <div class="sl-container sl-chi-siamo__hero-grid">
                     <aside class="sl-chi-siamo__hero-aside">
+                        <?php saltelli_render_breadcrumb(); ?>
                         <div class="sl-mono sl-chi-siamo__eyebrow"><?php esc_html_e('§ Lo studio · Chi siamo', 'saltelli'); ?></div>
                         <p class="sl-mono sl-chi-siamo__hero-meta">
                             <?php esc_html_e('Un atelier', 'saltelli'); ?><br>
@@ -450,7 +451,7 @@ while (have_posts()) :
 
             <div class="sl-contatti-w3">
 
-                <section class="sl-contatti-w3__hero" aria-labelledby="contatti-h1">
+                <section class="sl-contatti-w3__hero sl-page-hero" aria-labelledby="contatti-h1">
                     <div class="sl-contatti-w3__hero-grid">
                         <div class="sl-contatti-w3__hero-left">
                             <?php if (!empty($sl_chain_contact) && count($sl_chain_contact) > 1) : ?>
@@ -725,7 +726,7 @@ while (have_posts()) :
             ?>
             <article class="sl-faq-aggregator">
 
-                <header class="sl-faq-aggregator__hero">
+                <header class="sl-faq-aggregator__hero sl-page-hero">
                     <div>
                         <?php saltelli_render_breadcrumb(); ?>
                         <div class="sl-mono" style="margin-bottom: 32px;"><?php esc_html_e('§ Risorse · Domande frequenti', 'saltelli'); ?></div>
@@ -895,7 +896,7 @@ while (have_posts()) :
             ?>
             <article class="sl-info-page sl-info-page--<?php echo esc_attr($sl_info_slug); ?>">
 
-                <header class="sl-info-page__hero">
+                <header class="sl-info-page__hero sl-page-hero sl-page-hero--compact">
                     <div class="sl-info-page__hero-text">
                         <?php saltelli_render_breadcrumb(); ?>
                         <div class="sl-mono sl-info-page__hero-eyebrow"><?php echo esc_html($sl_info['eyebrow']); ?></div>
@@ -980,7 +981,7 @@ while (have_posts()) :
             <article class="sl-costi-w4">
 
                 <?php /* 1. HERO 8fr/4fr — h1 + lede SX, trust sticky DX */ ?>
-                <header class="sl-costi-w4__hero">
+                <header class="sl-costi-w4__hero sl-page-hero">
                     <div class="sl-container sl-costi-w4__hero-grid">
                         <div class="sl-costi-w4__hero-text">
                             <?php saltelli_render_breadcrumb(); ?>

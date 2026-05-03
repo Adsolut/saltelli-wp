@@ -144,7 +144,7 @@ $avatar_html = function ($av_post) {
 <div class="sl-tipoarea sl-tipoarea--<?php echo esc_attr($term_slug); ?>">
 
     <!-- HERO 8/4 -->
-    <section class="sl-tipoarea__hero">
+    <section class="sl-tipoarea__hero sl-page-hero">
         <div class="sl-container">
             <div class="sl-tipoarea__hero-grid">
 

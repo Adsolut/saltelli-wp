@@ -19,7 +19,7 @@ $layout_team = saltelli_team_grid_layout();
 
 <article class="sl-team sl-team--archive sl-team--archive-w2">
 
-    <header class="sl-team__archive-hero">
+    <header class="sl-team__archive-hero sl-page-hero sl-page-hero--compact">
         <div>
             <?php saltelli_render_breadcrumb(); ?>
             <div class="sl-mono sl-team__archive-eyebrow" style="margin-bottom: 32px;">

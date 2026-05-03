@@ -17,6 +17,134 @@
  *   9. .sl-footer              — tema scuro --primary, 3 colonne desktop
  */
 
+/* ═══════════════════════════════════════════════════════════════════
+   v0.35.0 FOUNDATION LAYER — Single Source of Truth
+
+   Pattern: TUTTI i template page ereditano questi pattern base.
+   Customizzazioni: SOLO se design intent richiede deviazione esplicita.
+
+   Refactor strutturale: prima volta in 35 versioni si stabilisce
+   foundation invece di scope-per-template indipendenti.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Foundation: Page Shell ─── */
+.sl-page-shell {
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: clamp(24px, 5vw, 96px);
+}
+
+/* ─── Foundation: Page Hero (Y-distance unificata) ─── */
+.sl-page-hero {
+    padding-block: clamp(96px, 10vw, 120px) clamp(64px, 8vw, 96px);
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: clamp(24px, 5vw, 96px);
+}
+/* Hero ridotto per page secondarie (info pages, archive) */
+.sl-page-hero--compact {
+    padding-block: clamp(64px, 8vw, 96px) clamp(48px, 6vw, 80px);
+}
+/* Hero esteso per page editorial primary (chi-siamo) */
+.sl-page-hero--extended {
+    padding-block: clamp(96px, 12vw, 144px) clamp(64px, 8vw, 96px);
+}
+
+/* ─── Foundation: Breadcrumb (UNICO cross-template) ─── */
+.sl-page-breadcrumb,
+.sl-page__breadcrumb {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+.sl-page-breadcrumb a,
+.sl-page__breadcrumb a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--dur-fast, 200ms) var(--ease-editorial, cubic-bezier(0.25, 1, 0.5, 1));
+}
+.sl-page-breadcrumb a:hover,
+.sl-page-breadcrumb a:focus-visible,
+.sl-page__breadcrumb a:hover,
+.sl-page__breadcrumb a:focus-visible {
+    color: var(--accent);
+}
+.sl-page-breadcrumb-sep,
+.sl-page-breadcrumb-separator,
+.sl-page__breadcrumb-sep {
+    color: var(--text-muted);
+    opacity: 0.4;
+    user-select: none;
+}
+/* Current page — primary navy/blue UNIFORME */
+.sl-page-breadcrumb [aria-current="page"],
+.sl-page__breadcrumb [aria-current="page"],
+.sl-page-breadcrumb-current {
+    color: var(--primary);
+    font-weight: 500;
+    cursor: default;
+}
+
+/* ─── Foundation: CTA Final (dark navy) ─── */
+.sl-page-cta-final {
+    background: var(--primary);
+    color: var(--background);
+    text-align: center;
+    padding: clamp(64px, 8vw, 128px) clamp(24px, 5vw, 96px);
+    margin: 0 calc(-1 * clamp(24px, 5vw, 96px));
+}
+.sl-page-cta-final-eyebrow {
+    color: var(--accent);
+    margin-bottom: 24px;
+}
+.sl-page-cta-final h2 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    color: var(--background);
+    margin: 0 auto 24px;
+    max-width: 18ch;
+}
+.sl-page-cta-final h2 em {
+    font-style: italic;
+    color: var(--accent);
+}
+.sl-page-cta-final p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(250, 250, 248, 0.85);
+    margin: 0 auto 40px;
+    max-width: 50ch;
+}
+.sl-page-cta-final .sl-btn--primary {
+    background: var(--accent);
+    color: var(--primary);
+    border-color: var(--accent);
+}
+@media (hover: hover) {
+    .sl-page-cta-final .sl-btn--primary:hover {
+        background: var(--background);
+        color: var(--primary);
+    }
+}
+.sl-page-cta-final-trust {
+    margin-top: 24px;
+    color: rgba(250, 250, 248, 0.55);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   END v0.35.0 FOUNDATION LAYER
+   ═══════════════════════════════════════════════════════════════════ */
+
 /* =========================================================
  * 0. Wrapper + reveal scaffolding
  * ========================================================= */
@@ -2183,16 +2311,7 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
 
 /* Drop-cap solo su single blog post (non su CPT, non su page).
    `+ p` permette di trattare il SECONDO p come dropcap se primo è lede. */
-body.single-post .sl-post__body > p:first-of-type::first-letter,
-body.single-post .entry-content > p:first-of-type::first-letter {
-    font-family: var(--font-display);
-    float: left;
-    font-size: 4.2em;
-    line-height: 0.85;
-    margin: 8px 14px 0 0;
-    color: var(--primary);
-    font-weight: 400;
-}
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
 
 /* ───────────────────────────────────────────────────────────────
    A3 — Lists editoriali con em-dash accent (no bullet std)
@@ -3730,7 +3849,6 @@ textarea.sl-input {
     .sl-chi-siamo__timeline-year { font-size: 28px; }
 }
 
-
 /* ═══════════════════════════════════════════════════════════════════
    single-avvocato — v0.19.0 Sessione 2 alignment
    Casi rappresentativi + drop-cap bio. NO modifica aspect ratio
@@ -3738,15 +3856,7 @@ textarea.sl-input {
    ═══════════════════════════════════════════════════════════════════ */
 
 /* Drop-cap su bio prose — italic Playfair, prima lettera primo paragrafo. */
-.sl-attorney__bio-prose > p:first-of-type::first-letter {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 96px;
-    float: left;
-    line-height: 0.85;
-    margin: 10px 16px 0 0;
-    color: var(--primary);
-}
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
 
 /* Casi rappresentativi attorney — match JSX spec (id mono | desc italic | outcome bronze). */
 .sl-attorney__casi {
@@ -3792,12 +3902,9 @@ textarea.sl-input {
         gap: 8px;
     }
     .sl-attorney__casi-outcome { text-align: left; }
-    .sl-attorney__bio-prose > p:first-of-type::first-letter {
-        font-size: 72px;
-        margin-right: 12px;
-    }
-}
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
 
+}
 
 /* ═══════════════════════════════════════════════════════════════════
    single-competenza tier-1 — v0.19.0 Sessione 2 alignment
@@ -3896,22 +4003,11 @@ textarea.sl-input {
 }
 
 /* Drop-cap editoriale su tier-1 prose (first letter, first paragraph) */
-.sl-competenza--tier-1 .sl-competenza__prose > p:first-of-type::first-letter {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 96px;
-    float: left;
-    line-height: 0.85;
-    margin: 10px 16px 0 0;
-    color: var(--primary);
-}
-@media (max-width: 1023px) {
-    .sl-competenza--tier-1 .sl-competenza__prose > p:first-of-type::first-letter {
-        font-size: 72px;
-        margin-right: 12px;
-    }
-}
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
 
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
+
+}
 
 /* ═══════════════════════════════════════════════════════════════════
    SESSIONE 2 WAVE 3 — Slots prenotati per 6 agenti paralleli
@@ -6221,7 +6317,6 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 /* === IMPECCABLE v0.20.0 [delight — WhatsApp pulse] END === */
 
-
 /* === IMPECCABLE v0.20.2 [T1+T2+T3] BEGIN — Footer System v2 (4 fasce JSX-faithful) ===
    Replicato da .claude/knowledge/design/sessione-2/saltelli-s2-footer.jsx (530 line).
    Fascia 1: pre-footer CTA (cream surface)
@@ -6895,7 +6990,6 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 /* === IMPECCABLE v0.20.2 [T1+T2+T3] END — Footer System v2 === */
 
-
 /* === IMPECCABLE v0.20.0 [interaction-design — header tel hover] BEGIN === */
 .sl-header__phone {
     transition: color var(--dur-fast) var(--ease-editorial);
@@ -7140,17 +7234,9 @@ html:not(.js-reveal-ready) .sl-chi-siamo__h1 .sl-word {
 /* L5 — Drop-cap reveal animation per .sl-page__prose / .sl-competenza__prose
    (esistenti rules statiche a riga 2189, 3743, 3901; questo aggiunge entrance).
    GSAP/IntersectionObserver applica .is-revealed sul parent <p>. */
-.sl-page__prose > p:first-of-type::first-letter,
-.sl-competenza__prose > p:first-of-type::first-letter {
-    transition:
-        opacity var(--dur-slow) cubic-bezier(0.25, 1, 0.5, 1) 200ms,
-        transform var(--dur-slow) cubic-bezier(0.25, 1, 0.5, 1) 200ms;
-}
-html.js-reveal-ready .sl-page__prose > p:first-of-type:not(.is-revealed)::first-letter,
-html.js-reveal-ready .sl-competenza__prose > p:first-of-type:not(.is-revealed)::first-letter {
-    opacity: 0;
-    transform: scale(0.92);
-}
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
+
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
 
 /* L6 — Universal hero CTA hover scale (subtle premium feel)
    Solo .sl-btn--primary cross-template, no aggressive. */
@@ -7225,20 +7311,10 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 /* C.1 — Drop-cap consistency esteso oltre tier-1 a tutte le competenze.
    La regola tier-1 a riga 3901 (italic 96px) ha specificity 0,3,2 → vince
    per tier-1. Questa regola (0,2,2) si applica a tier-2 con stile più sobrio. */
-.sl-competenza__prose > p:first-of-type::first-letter {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: 84px;
-    line-height: 0.85;
-    float: left;
-    margin: 8px 16px 0 0;
-    color: var(--primary);
-}
-@media (max-width: 767px) {
-    .sl-competenza__prose > p:first-of-type::first-letter {
-        font-size: 60px;
-        margin: 4px 12px 0 0;
-    }
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
+
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
+
 }
 
 /* === IMPECCABLE v0.22.1 END === */
@@ -7252,28 +7328,10 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
      v0.23.0 tier-1 deep cluster, oggi inesistenti)
    - mobile compress unificato per i nuovi scope.
    .sl-attorney__bio-prose già copre via rule esistente (line 3743). */
-.sl-attorney__bio > p:first-of-type::first-letter,
-.sl-chi-siamo-w3 .sl-page__prose > p:first-of-type::first-letter,
-.sl-chi-siamo-w3__story > p:first-of-type::first-letter,
-.sl-competenza-w3__body > p:first-of-type::first-letter,
-.sl-practice-tier1 .sl-page__prose > p:first-of-type::first-letter {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: 84px;
-    line-height: 0.85;
-    float: left;
-    margin: 8px 16px 0 0;
-    color: var(--primary);
-}
-@media (max-width: 767px) {
-    .sl-attorney__bio > p:first-of-type::first-letter,
-    .sl-chi-siamo-w3 .sl-page__prose > p:first-of-type::first-letter,
-    .sl-chi-siamo-w3__story > p:first-of-type::first-letter,
-    .sl-competenza-w3__body > p:first-of-type::first-letter,
-    .sl-practice-tier1 .sl-page__prose > p:first-of-type::first-letter {
-        font-size: 60px;
-        margin: 4px 12px 0 0;
-    }
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
+
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
+
 }
 /* === IMPECCABLE v0.22.2 END === */
 
@@ -7621,15 +7679,8 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     color: var(--text);
     margin: 0 0 32px 0;
 }
-.sl-costi-w4__calc-prose > p:first-of-type::first-letter {
-    font-family: var(--font-display);
-    font-size: 84px;
-    line-height: 0.85;
-    float: left;
-    margin: 8px 16px 0 0;
-    color: var(--primary);
-    font-weight: 400;
-}
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
+
 .sl-costi-w4__calc-cards {
     display: grid;
     gap: 0;
@@ -8423,48 +8474,15 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
    .sl-casi-w4__hero-lede + .sl-attorney__bio-prose, .sl-competenza__prose
    già coperti. Standardizzo tutti su font-size 84px (era 96/84 misti).
    ═══════════════════════════════════════════════════════════════ */
-.sl-attorney__bio-prose > p:first-of-type::first-letter,
-.sl-page__prose > p:first-of-type::first-letter,
-.sl-competenza__prose > p:first-of-type::first-letter,
-.sl-tier1__body > p:first-of-type::first-letter,
-.sl-tier1__body > .sl-competenza__prose > p:first-of-type::first-letter,
-.sl-costi-w4__calc-text > p:first-of-type::first-letter,
-.sl-casi-w4__hero-lede > p:first-of-type::first-letter,
-.sl-chi-siamo__lede-text > p:first-of-type::first-letter {
-    font-family: var(--font-display);
-    font-size: 84px;
-    line-height: 0.85;
-    float: left;
-    margin: 8px 16px 0 0;
-    color: var(--primary);
-    font-weight: 400;
-}
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
 
-@media (max-width: 767px) {
-    .sl-attorney__bio-prose > p:first-of-type::first-letter,
-    .sl-page__prose > p:first-of-type::first-letter,
-    .sl-competenza__prose > p:first-of-type::first-letter,
-    .sl-tier1__body > p:first-of-type::first-letter,
-    .sl-tier1__body > .sl-competenza__prose > p:first-of-type::first-letter,
-    .sl-costi-w4__calc-text > p:first-of-type::first-letter,
-    .sl-casi-w4__hero-lede > p:first-of-type::first-letter,
-    .sl-chi-siamo__lede-text > p:first-of-type::first-letter {
-        font-size: 60px;
-        margin: 4px 12px 0 0;
-    }
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
+
 }
 
 /* Reveal animation pattern (riusa ease-quart-out) — opacity 0→1 + scale 0.8→1 */
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-    .sl-attorney__bio-prose > p:first-of-type::first-letter,
-    .sl-page__prose > p:first-of-type::first-letter,
-    .sl-competenza__prose > p:first-of-type::first-letter,
-    .sl-tier1__body > p:first-of-type::first-letter,
-    .sl-costi-w4__calc-text > p:first-of-type::first-letter {
-        transition:
-            opacity 600ms cubic-bezier(0.25, 1, 0.5, 1),
-            transform 600ms cubic-bezier(0.25, 1, 0.5, 1);
-    }
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
+
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -9136,21 +9154,10 @@ h2.sl-casi__cta-title {
     margin-bottom: 0;
 }
 /* Drop-cap 84px !important strong override */
-.sl-info-page__prose > p:first-of-type::first-letter {
-    font-family: var(--font-display) !important;
-    font-size: 84px !important;
-    line-height: 0.85 !important;
-    float: left !important;
-    margin: 8px 16px 0 0 !important;
-    color: var(--primary) !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-}
-@media (max-width: 767px) {
-    .sl-info-page__prose > p:first-of-type::first-letter {
-        font-size: 60px !important;
-        margin: 4px 12px 0 0 !important;
-    }
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
+
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
+
 }
 
 /* H2 con border-top accent */
@@ -9246,42 +9253,10 @@ h2.sl-casi__cta-title {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   v0.33.0 — DROP-CAP STRONG !important override su 14 scope
-   Per evitare suppression da global p::first-letter o body-prose generic.
-   ═══════════════════════════════════════════════════════════════ */
-.sl-attorney__bio-prose > p:first-of-type::first-letter,
-.sl-page__prose > p:first-of-type::first-letter,
-.sl-competenza__prose > p:first-of-type::first-letter,
-.sl-tier1__body > p:first-of-type::first-letter,
-.sl-tier1__body > .sl-competenza__prose > p:first-of-type::first-letter,
-.sl-costi-w4__calc-text > p:first-of-type::first-letter,
-.sl-casi-w4__hero-lede > p:first-of-type::first-letter,
-.sl-chi-siamo__lede-text > p:first-of-type::first-letter,
-.sl-chi-siamo__prose > p:first-of-type::first-letter,
-.sl-info-page__prose > p:first-of-type::first-letter,
-.sl-team__archive-lede > p:first-of-type::first-letter,
-.sl-team__archive-lede::first-letter,
-.sl-attorney__bio-prose::first-letter,
-.sl-post__body > p:first-of-type::first-letter,
-.entry-content > p:first-of-type::first-letter {
-    font-family: var(--font-display) !important;
-    font-size: 84px !important;
-    line-height: 0.85 !important;
-    float: left !important;
-    margin: 8px 16px 0 0 !important;
-    color: var(--primary) !important;
-    font-weight: 400 !important;
-}
-@media (max-width: 767px) {
-    .sl-attorney__bio-prose > p:first-of-type::first-letter,
-    .sl-page__prose > p:first-of-type::first-letter,
-    .sl-competenza__prose > p:first-of-type::first-letter,
-    .sl-tier1__body > p:first-of-type::first-letter,
-    .sl-costi-w4__calc-text > p:first-of-type::first-letter,
-    .sl-info-page__prose > p:first-of-type::first-letter {
-        font-size: 60px !important;
-        margin: 4px 12px 0 0 !important;
-    }
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
+
+/* DEPRECATED v0.35.0: superseded by FOUNDATION + UNIFIED MASTER */
+
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -9611,5 +9586,3 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 /* ═══════════════════════════════════════════════════════════════
    v0.34.0 END
    ═══════════════════════════════════════════════════════════════ */
-
-

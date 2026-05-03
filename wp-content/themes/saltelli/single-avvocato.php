@@ -28,7 +28,7 @@ while (have_posts()) :
     ?>
     <article <?php post_class('sl-attorney'); ?>>
 
-        <header class="sl-attorney__hero">
+        <header class="sl-attorney__hero sl-page-hero sl-page-hero--compact">
             <div class="sl-container sl-attorney__hero-inner">
                 <?php saltelli_render_breadcrumb(); ?>
 

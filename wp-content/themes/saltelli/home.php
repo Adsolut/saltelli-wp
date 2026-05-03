@@ -53,8 +53,9 @@ $last_mod_human = $last_mod ? wp_date('j F Y', strtotime($last_mod)) : '';
 <section class="sl-blog2">
 
     <!-- HERO ARCHIVE -->
-    <header class="sl-blog2__hero sl-container">
+    <header class="sl-blog2__hero sl-page-hero sl-container">
         <div class="sl-blog2__hero-left">
+            <?php if (function_exists('saltelli_render_breadcrumb')) saltelli_render_breadcrumb(); ?>
             <div class="sl-mono sl-blog2__eyebrow">§ Editoriale &middot; Saltelli</div>
             <h1 class="sl-blog2__h1" data-split-reveal><?php echo wp_kses(saltelli_split_h1_words('Editoriale.'), ['span' => ['class' => true, 'data-i' => true]]); ?></h1>
         </div>
