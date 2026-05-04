@@ -1,0 +1,175 @@
+{
+  "key": "group_info_shared_v1",
+  "title": "Info Shared — Layout standard",
+  "fields": [
+    {
+      "key": "field_info_hero_eyebrow",
+      "label": "Hero · Eyebrow",
+      "name": "hero_eyebrow",
+      "type": "text",
+      "instructions": "Riga mono sopra l'H1.",
+      "maxlength": 120
+    },
+    {
+      "key": "field_info_hero_h1_pre",
+      "label": "Hero · H1 prefix",
+      "name": "hero_h1_pre",
+      "type": "text",
+      "instructions": "Prima parte H1 (regular)."
+    },
+    {
+      "key": "field_info_hero_h1_em",
+      "label": "Hero · H1 italic",
+      "name": "hero_h1_em",
+      "type": "text",
+      "instructions": "Seconda parte H1 (italic)."
+    },
+    {
+      "key": "field_info_hero_lede",
+      "label": "Hero · Lede italic",
+      "name": "hero_lede",
+      "type": "textarea",
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_info_aside_eyebrow",
+      "label": "Aside · Eyebrow",
+      "name": "aside_eyebrow",
+      "type": "text",
+      "maxlength": 120
+    },
+    {
+      "key": "field_info_aside_h3",
+      "label": "Aside · H3",
+      "name": "aside_h3",
+      "type": "text",
+      "maxlength": 200
+    },
+    {
+      "key": "field_info_aside_p",
+      "label": "Aside · Paragrafo",
+      "name": "aside_p",
+      "type": "textarea",
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_info_aside_cta_label",
+      "label": "Aside · CTA label",
+      "name": "aside_cta_label",
+      "type": "text",
+      "maxlength": 80
+    },
+    {
+      "key": "field_info_aside_cta_url",
+      "label": "Aside · CTA URL",
+      "name": "aside_cta_url",
+      "type": "url"
+    },
+    {
+      "key": "field_info_body_content",
+      "label": "Body · Editorial content",
+      "name": "body_content",
+      "type": "wysiwyg",
+      "instructions": "Body editoriale completo (drop-cap target sul primo paragrafo). TinyMCE full.",
+      "tabs": "all",
+      "toolbar": "full",
+      "media_upload": 0,
+      "delay": 1
+    },
+    {
+      "key": "field_info_cta_eyebrow",
+      "label": "CTA finale · Eyebrow",
+      "name": "cta_final_eyebrow",
+      "type": "text",
+      "default_value": "§ Pronto?",
+      "maxlength": 120
+    },
+    {
+      "key": "field_info_cta_h2",
+      "label": "CTA finale · H2",
+      "name": "cta_final_h2",
+      "type": "text",
+      "maxlength": 200
+    },
+    {
+      "key": "field_info_cta_p",
+      "label": "CTA finale · Paragrafo",
+      "name": "cta_final_p",
+      "type": "textarea",
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_info_cta_label",
+      "label": "CTA finale · Bottone label",
+      "name": "cta_final_cta_label",
+      "type": "text",
+      "default_value": "Prenota un incontro →",
+      "maxlength": 80
+    },
+    {
+      "key": "field_info_cta_url",
+      "label": "CTA finale · Bottone URL",
+      "name": "cta_final_cta_url",
+      "type": "url",
+      "default_value": "/contatti/"
+    },
+    {
+      "key": "field_info_cta_trust",
+      "label": "CTA finale · Trust line",
+      "name": "cta_final_trust",
+      "type": "text",
+      "default_value": "Risposta entro 24 ore · Riservatezza assoluta",
+      "maxlength": 200
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page",
+        "operator": "==",
+        "value": "2706"
+      }
+    ],
+    [
+      {
+        "param": "page",
+        "operator": "==",
+        "value": "2709"
+      }
+    ],
+    [
+      {
+        "param": "page",
+        "operator": "==",
+        "value": "2708"
+      }
+    ],
+    [
+      {
+        "param": "page",
+        "operator": "==",
+        "value": "372"
+      }
+    ],
+    [
+      {
+        "param": "page",
+        "operator": "==",
+        "value": "2710"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 v1 — Field Group condiviso layout info-page+ standard. Targets: /guide-gratuite/ (2706), /come-lavoriamo/ (2709), /prima-consulenza/ (2708), /lavora-con-noi/ (372), /richiedi-preventivo/ (2710). Multi-location OR clauses.",
+  "show_in_rest": 0,
+  "modified": 1777948804
+}
