@@ -1,0 +1,102 @@
+{
+  "key": "group_faq_v1",
+  "title": "FAQ Aggregator — Sezioni",
+  "fields": [
+    {
+      "key": "field_faq_hero_eyebrow",
+      "label": "Hero · Eyebrow",
+      "name": "hero_eyebrow",
+      "type": "text",
+      "default_value": "§ Risorse · Domande frequenti",
+      "maxlength": 120
+    },
+    {
+      "key": "field_faq_hero_h1_pre",
+      "label": "Hero · H1 prefix",
+      "name": "hero_h1_pre",
+      "type": "text",
+      "default_value": "Domande"
+    },
+    {
+      "key": "field_faq_hero_h1_em",
+      "label": "Hero · H1 italic",
+      "name": "hero_h1_em",
+      "type": "text",
+      "default_value": "frequenti."
+    },
+    {
+      "key": "field_faq_hero_lede",
+      "label": "Hero · Lede italic",
+      "name": "hero_lede",
+      "type": "textarea",
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_faq_toc_title",
+      "label": "TOC · Titolo",
+      "name": "toc_title",
+      "type": "text",
+      "instructions": "Titolo della tavola dei topic (a sinistra).",
+      "default_value": "§ Indice",
+      "maxlength": 80
+    },
+    {
+      "key": "field_faq_cta_eyebrow",
+      "label": "CTA · Eyebrow",
+      "name": "cta_eyebrow",
+      "type": "text",
+      "default_value": "§ Non hai trovato la tua domanda?",
+      "maxlength": 160
+    },
+    {
+      "key": "field_faq_cta_h2",
+      "label": "CTA · H2",
+      "name": "cta_h2",
+      "type": "text",
+      "maxlength": 200
+    },
+    {
+      "key": "field_faq_cta_p",
+      "label": "CTA · Paragrafo",
+      "name": "cta_p",
+      "type": "textarea",
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_faq_cta_label",
+      "label": "CTA · Bottone label",
+      "name": "cta_label",
+      "type": "text",
+      "default_value": "Prenota un incontro →",
+      "maxlength": 80
+    },
+    {
+      "key": "field_faq_cta_url",
+      "label": "CTA · Bottone URL",
+      "name": "cta_url",
+      "type": "url",
+      "default_value": "/contatti/"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page",
+        "operator": "==",
+        "value": "2705"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 v1 — page /faq/ aggregator, sezioni hero+TOC+CTA. Le 28+ FAQ items usano CPT saltelli_faq con taxonomy faq_topic (Agent B done).",
+  "show_in_rest": 0,
+  "modified": 1777948803
+}
