@@ -1,0 +1,140 @@
+{
+  "key": "group_avvocato_v1",
+  "title": "Avvocato — Profilo completo (v1)",
+  "fields": [
+    {
+      "key": "field_av_hero_role",
+      "label": "Hero · Ruolo",
+      "name": "hero_role",
+      "type": "text",
+      "instructions": "Es. \"Founding Partner · Tributarista\". Mostrato sotto il nome nell'hero del single-avvocato.",
+      "required": 0,
+      "maxlength": 100
+    },
+    {
+      "key": "field_av_specializzazioni",
+      "label": "Specializzazioni (max 5)",
+      "name": "specializzazioni",
+      "type": "textarea",
+      "instructions": "Una specializzazione per riga (es. Diritto tributario\\nCassazione\\nCartelle). Splittate a runtime su \\n. Popola knowsAbout nello schema.",
+      "required": 0,
+      "rows": 5,
+      "new_lines": ""
+    },
+    {
+      "key": "field_av_bio_breve",
+      "label": "Bio breve (1 riga lede)",
+      "name": "bio_breve",
+      "type": "text",
+      "instructions": "Max 300 caratteri. Usata in archive avvocati e nello schema description.",
+      "maxlength": 300
+    },
+    {
+      "key": "field_av_bio_estesa",
+      "label": "Bio estesa",
+      "name": "bio_estesa",
+      "type": "wysiwyg",
+      "instructions": "Bio professionale completa, mostrata su single-avvocato.php.",
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 1
+    },
+    {
+      "key": "field_av_foto_ritratto",
+      "label": "Foto ritratto (3:4)",
+      "name": "foto_ritratto",
+      "type": "image",
+      "instructions": "Foto professionale verticale (min 600x800). Verrà ridimensionata in saltelli-attorney-portrait.",
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all",
+      "min_width": 600,
+      "min_height": 800
+    },
+    {
+      "key": "field_av_email_pubblica",
+      "label": "Email pubblica",
+      "name": "email_pubblica",
+      "type": "email",
+      "instructions": "Email mostrata pubblicamente."
+    },
+    {
+      "key": "field_av_telefono_pubblico",
+      "label": "Telefono diretto",
+      "name": "telefono_pubblico",
+      "type": "text",
+      "instructions": "Numero in formato E.164 quando possibile (es. +390811813119)."
+    },
+    {
+      "key": "field_av_whatsapp",
+      "label": "WhatsApp (E.164)",
+      "name": "whatsapp",
+      "type": "text",
+      "instructions": "Numero WhatsApp E.164 (es. +393517138006)."
+    },
+    {
+      "key": "field_av_same_as_linkedin",
+      "label": "LinkedIn URL",
+      "name": "same_as_linkedin",
+      "type": "url",
+      "instructions": "Profilo LinkedIn personale (popola sameAs nello schema JSON-LD)."
+    },
+    {
+      "key": "field_av_aree_competenza_correlate",
+      "label": "Aree di competenza correlate",
+      "name": "aree_competenza_correlate",
+      "type": "post_object",
+      "instructions": "Aree di pratica di cui questo avvocato si occupa.",
+      "post_type": ["competenza"],
+      "taxonomy": "",
+      "allow_null": 1,
+      "multiple": 1,
+      "return_format": "id",
+      "ui": 1
+    },
+    {
+      "key": "field_av_formazione",
+      "label": "Formazione & Titoli",
+      "name": "formazione",
+      "type": "post_object",
+      "instructions": "Crea le voci in 'Avvocati > Formazione & Titoli', poi seleziona qui in ordine cronologico.",
+      "post_type": ["saltelli_formazione"],
+      "allow_null": 1,
+      "multiple": 1,
+      "return_format": "id",
+      "ui": 1
+    },
+    {
+      "key": "field_av_casi_rappresentativi",
+      "label": "Casi rappresentativi",
+      "name": "casi_rappresentativi",
+      "type": "post_object",
+      "instructions": "Casi anonimizzati. Crea le voci in 'Casi rappresentativi', poi seleziona qui.",
+      "post_type": ["saltelli_caso"],
+      "allow_null": 1,
+      "multiple": 1,
+      "return_format": "id",
+      "ui": 1
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "avvocato"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 v1 — profilo avvocato ACF Free compatible (no repeater). Sostituisce group_saltelli_avvocato (legacy con repeater).",
+  "show_in_rest": 0,
+  "modified": 1777902600
+}

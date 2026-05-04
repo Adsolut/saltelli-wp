@@ -1,0 +1,59 @@
+{
+  "key": "group_scenario_item_v1",
+  "title": "Scenario costi — Item",
+  "fields": [
+    {
+      "key": "field_scen_num_label",
+      "label": "Num · Label",
+      "name": "num_label",
+      "type": "text",
+      "instructions": "Es. \"01 / Non procediamo\".",
+      "required": 1,
+      "maxlength": 80
+    },
+    {
+      "key": "field_scen_title",
+      "label": "Titolo",
+      "name": "title",
+      "type": "text",
+      "required": 1,
+      "maxlength": 120
+    },
+    {
+      "key": "field_scen_body",
+      "label": "Body",
+      "name": "body",
+      "type": "textarea",
+      "instructions": "Descrizione dello scenario post 30 minuti.",
+      "required": 1,
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_scen_trust_mini",
+      "label": "Trust mini",
+      "name": "trust_mini",
+      "type": "text",
+      "maxlength": 160
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "saltelli_scenario"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 — Scenario per /costi/ § 02 (esiti possibili dopo prima consulenza).",
+  "show_in_rest": 0,
+  "modified": 1777902600
+}

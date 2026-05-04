@@ -1,0 +1,53 @@
+{
+  "key": "group_principio_item_v1",
+  "title": "Principio studio — Item",
+  "fields": [
+    {
+      "key": "field_prin_num",
+      "label": "Numero",
+      "name": "num",
+      "type": "text",
+      "instructions": "Es. \"01\", \"02\", \"03\".",
+      "required": 1,
+      "maxlength": 6
+    },
+    {
+      "key": "field_prin_title",
+      "label": "Titolo",
+      "name": "title",
+      "type": "text",
+      "instructions": "Es. \"Ascoltiamo prima\".",
+      "required": 1,
+      "maxlength": 120
+    },
+    {
+      "key": "field_prin_desc",
+      "label": "Descrizione",
+      "name": "desc",
+      "type": "textarea",
+      "instructions": "60-120 parole.",
+      "required": 1,
+      "rows": 4,
+      "new_lines": ""
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "saltelli_principio"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 — Principio studio per /chi-siamo/, /avvocati/, /come-lavoriamo/.",
+  "show_in_rest": 0,
+  "modified": 1777902600
+}

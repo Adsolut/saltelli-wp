@@ -1,0 +1,48 @@
+{
+  "key": "group_faq_item_v1",
+  "title": "FAQ — Item",
+  "fields": [
+    {
+      "key": "field_faq_risposta",
+      "label": "Risposta",
+      "name": "risposta",
+      "type": "wysiwyg",
+      "instructions": "La domanda è il titolo del post. Qui inserisci la risposta (40-80 parole, diretta).",
+      "required": 1,
+      "tabs": "all",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "delay": 1
+    },
+    {
+      "key": "field_faq_priorita",
+      "label": "Priorità ordinamento",
+      "name": "priorita",
+      "type": "number",
+      "instructions": "Numero per ordinare (più basso = più alto). Default 100.",
+      "default_value": 100,
+      "min": 0,
+      "max": 999,
+      "step": 1
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "saltelli_faq"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 — FAQ item per CPT saltelli_faq. Title del post = domanda. Topic via tassonomia faq_topic.",
+  "show_in_rest": 0,
+  "modified": 1777902600
+}

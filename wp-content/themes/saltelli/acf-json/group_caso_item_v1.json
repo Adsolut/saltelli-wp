@@ -1,0 +1,53 @@
+{
+  "key": "group_caso_item_v1",
+  "title": "Caso rappresentativo — Item",
+  "fields": [
+    {
+      "key": "field_caso_id_label",
+      "label": "ID label",
+      "name": "id_label",
+      "type": "text",
+      "instructions": "Es. \"Cassazione · 2024\" oppure \"Tribunale Napoli · 2023\".",
+      "required": 1,
+      "maxlength": 80
+    },
+    {
+      "key": "field_caso_descrizione",
+      "label": "Descrizione anonimizzata",
+      "name": "descrizione",
+      "type": "textarea",
+      "instructions": "Descrizione editorial italic (max 200 caratteri). NIENTE nomi, dati identificativi.",
+      "required": 1,
+      "maxlength": 400,
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_caso_outcome_label",
+      "label": "Outcome label",
+      "name": "outcome_label",
+      "type": "text",
+      "instructions": "Esito sintetico (es. \"Annullamento integrale\", \"Sentenza favorevole\", \"Transazione\").",
+      "maxlength": 120
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "saltelli_caso"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 — Caso rappresentativo per CPT saltelli_caso. Categoria via tassonomia caso_categoria.",
+  "show_in_rest": 0,
+  "modified": 1777902600
+}

@@ -1,0 +1,51 @@
+{
+  "key": "group_formazione_item_v1",
+  "title": "Formazione & Titoli — Item",
+  "fields": [
+    {
+      "key": "field_form_anno",
+      "label": "Anno",
+      "name": "anno",
+      "type": "text",
+      "instructions": "Es. \"2024\" oppure \"in corso\".",
+      "required": 1,
+      "maxlength": 12
+    },
+    {
+      "key": "field_form_titolo",
+      "label": "Titolo / Qualifica",
+      "name": "titolo",
+      "type": "text",
+      "instructions": "Es. \"Cassazionista\", \"Master in Diritto Tributario\".",
+      "required": 1,
+      "maxlength": 200
+    },
+    {
+      "key": "field_form_ente",
+      "label": "Ente / Istituzione",
+      "name": "ente",
+      "type": "text",
+      "instructions": "Es. \"Iscritto albo speciale Cassazione\", \"Università Federico II\".",
+      "maxlength": 200
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "saltelli_formazione"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 — Formazione/Titolo singolo per single-avvocato.",
+  "show_in_rest": 0,
+  "modified": 1777902600
+}

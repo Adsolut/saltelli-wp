@@ -1,0 +1,63 @@
+{
+  "key": "group_guida_item_v1",
+  "title": "Guida gratuita — Item",
+  "fields": [
+    {
+      "key": "field_guida_intro",
+      "label": "Intro / Abstract",
+      "name": "intro",
+      "type": "textarea",
+      "instructions": "Abstract editorial della guida (40-80 parole).",
+      "required": 1,
+      "maxlength": 600,
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_guida_pdf_file",
+      "label": "PDF file",
+      "name": "pdf_file",
+      "type": "file",
+      "instructions": "Upload del PDF della guida.",
+      "return_format": "array",
+      "library": "all",
+      "mime_types": "pdf"
+    },
+    {
+      "key": "field_guida_formato",
+      "label": "Formato",
+      "name": "formato",
+      "type": "text",
+      "instructions": "Es. \"PDF · 12 pagine\" — mostrato come metadato accanto al titolo.",
+      "default_value": "PDF",
+      "maxlength": 80
+    },
+    {
+      "key": "field_guida_categoria",
+      "label": "Categoria",
+      "name": "categoria",
+      "type": "text",
+      "instructions": "Es. \"Tributario\", \"Lavoro\", \"Famiglia\". Per ora text libero — Wave 2 può promuoverlo a tassonomia se necessario.",
+      "maxlength": 80
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "saltelli_guida"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 — Guida gratuita per /guide-gratuite/. Title + featured image dal core; intro + PDF + formato + categoria da ACF.",
+  "show_in_rest": 0,
+  "modified": 1777902600
+}

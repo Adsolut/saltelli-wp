@@ -1,0 +1,43 @@
+{
+  "key": "group_trust_item_v1",
+  "title": "Trust signal — Item",
+  "fields": [
+    {
+      "key": "field_trust_label",
+      "label": "Label",
+      "name": "label",
+      "type": "text",
+      "instructions": "Es. \"Iscritti\", \"Esperienza\", \"Lingue\".",
+      "required": 1,
+      "maxlength": 80
+    },
+    {
+      "key": "field_trust_valore",
+      "label": "Valore",
+      "name": "valore",
+      "type": "text",
+      "instructions": "Es. \"Ordine Avvocati Napoli\", \"20+ anni\", \"IT · EN · FR\".",
+      "required": 1,
+      "maxlength": 160
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "saltelli_trust"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 — Trust signal plate per /costi/ § 05.",
+  "show_in_rest": 0,
+  "modified": 1777902600
+}

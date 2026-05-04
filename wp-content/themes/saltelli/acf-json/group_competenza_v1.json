@@ -1,0 +1,136 @@
+{
+  "key": "group_competenza_v1",
+  "title": "Competenza — Area di pratica (v1)",
+  "fields": [
+    {
+      "key": "field_comp_is_tier_1",
+      "label": "Tier-1 deep cluster",
+      "name": "is_tier_1",
+      "type": "true_false",
+      "instructions": "Attivare SOLO per le 3 aree tier-1 confermate (tributario, lavoro, famiglia LGBTQ+). Branch del template per profondità contenuto.",
+      "default_value": 0,
+      "ui": 1,
+      "ui_on_text": "Tier-1",
+      "ui_off_text": "Tier-2"
+    },
+    {
+      "key": "field_comp_tier_label",
+      "label": "Tier label",
+      "name": "tier_label",
+      "type": "text",
+      "instructions": "Es. \"Tier 1 · Approfondimento · Per le imprese\". Mostrato come eyebrow nell'hero del single-competenza.",
+      "maxlength": 120
+    },
+    {
+      "key": "field_comp_subtitle",
+      "label": "Sottotitolo H1",
+      "name": "subtitle",
+      "type": "text",
+      "instructions": "Sottotitolo editorial sotto l'H1.",
+      "maxlength": 160
+    },
+    {
+      "key": "field_comp_answer_capsule",
+      "label": "Answer capsule (GEO)",
+      "name": "answer_capsule",
+      "type": "textarea",
+      "instructions": "Paragrafo 50-60 parole, risposta diretta alla query target. Letto direttamente dai motori AI come citation.",
+      "required": 1,
+      "maxlength": 600,
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_comp_body_extended",
+      "label": "Body editorial completo",
+      "name": "body_extended",
+      "type": "wysiwyg",
+      "instructions": "Per tier-1: 1500-2500 parole strutturate H2/H3. Per tier-2: testo breve o vuoto (usa editor principale).",
+      "tabs": "all",
+      "toolbar": "full",
+      "media_upload": 1,
+      "delay": 1
+    },
+    {
+      "key": "field_comp_lead_attorneys",
+      "label": "Avvocati referenti",
+      "name": "lead_attorneys",
+      "type": "post_object",
+      "instructions": "Chi presidia l'area. Visualizzato in fondo alla pagina.",
+      "post_type": ["avvocato"],
+      "allow_null": 1,
+      "multiple": 1,
+      "return_format": "id",
+      "ui": 1
+    },
+    {
+      "key": "field_comp_casi_rappresentativi",
+      "label": "Casi rappresentativi",
+      "name": "casi_rappresentativi",
+      "type": "post_object",
+      "instructions": "Casi anonimizzati. Crea le voci in 'Casi rappresentativi', poi seleziona qui.",
+      "post_type": ["saltelli_caso"],
+      "allow_null": 1,
+      "multiple": 1,
+      "return_format": "id",
+      "ui": 1
+    },
+    {
+      "key": "field_comp_faq",
+      "label": "Domande frequenti",
+      "name": "faq",
+      "type": "post_object",
+      "instructions": "3-5 FAQ. Seleziona dal CPT 'Domande frequenti'. Schema FAQPage iniettato automaticamente se >= 1 voce.",
+      "post_type": ["saltelli_faq"],
+      "allow_null": 1,
+      "multiple": 1,
+      "return_format": "id",
+      "ui": 1
+    },
+    {
+      "key": "field_comp_articoli_correlati",
+      "label": "Articoli correlati",
+      "name": "articoli_correlati",
+      "type": "post_object",
+      "instructions": "Articoli del blog clusterizzati su questa area (rafforza topical authority).",
+      "post_type": ["post"],
+      "allow_null": 1,
+      "multiple": 1,
+      "return_format": "id",
+      "ui": 1
+    },
+    {
+      "key": "field_comp_cta_label",
+      "label": "Testo CTA",
+      "name": "cta_label",
+      "type": "text",
+      "default_value": "Parlane con i nostri avvocati"
+    },
+    {
+      "key": "field_comp_cta_url",
+      "label": "URL CTA",
+      "name": "cta_url",
+      "type": "url",
+      "default_value": "/contatti/"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "competenza"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 v1 — area di pratica ACF Free compatible (no repeater). Sostituisce group_saltelli_competenza.",
+  "show_in_rest": 0,
+  "modified": 1777902600
+}

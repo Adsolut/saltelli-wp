@@ -1,0 +1,61 @@
+{
+  "key": "group_modalita_item_v1",
+  "title": "Modalità consulenza — Item",
+  "fields": [
+    {
+      "key": "field_mod_num_label",
+      "label": "Num · Label",
+      "name": "num_label",
+      "type": "text",
+      "instructions": "Es. \"01 / Modalità classica\" — usato come eyebrow numerato.",
+      "required": 1,
+      "maxlength": 80
+    },
+    {
+      "key": "field_mod_title",
+      "label": "Titolo",
+      "name": "title",
+      "type": "text",
+      "instructions": "Es. \"Vieni a Chiaia\".",
+      "required": 1,
+      "maxlength": 120
+    },
+    {
+      "key": "field_mod_body",
+      "label": "Body",
+      "name": "body",
+      "type": "textarea",
+      "instructions": "Paragrafo descrittivo della modalità (60-120 parole).",
+      "required": 1,
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_mod_trust_mini",
+      "label": "Trust mini",
+      "name": "trust_mini",
+      "type": "text",
+      "instructions": "Riga di trust signal sotto il body (es. \"Disponibilità entro 48h\").",
+      "maxlength": 160
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "saltelli_modalita"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 — Modalità consulenza per /costi/ § 01 (Studio / Online / Telefonica).",
+  "show_in_rest": 0,
+  "modified": 1777902600
+}
