@@ -1,0 +1,105 @@
+{
+  "key": "group_casi_v1",
+  "title": "Casi — Sezioni",
+  "fields": [
+    {
+      "key": "field_casi_hero_eyebrow",
+      "label": "Hero · Eyebrow",
+      "name": "hero_eyebrow",
+      "type": "text",
+      "instructions": "Riga mono sopra l'H1.",
+      "default_value": "§ Risorse · Casi rappresentativi",
+      "maxlength": 120
+    },
+    {
+      "key": "field_casi_hero_h1_pre",
+      "label": "Hero · H1 prefix",
+      "name": "hero_h1_pre",
+      "type": "text",
+      "default_value": "Casi"
+    },
+    {
+      "key": "field_casi_hero_h1_em",
+      "label": "Hero · H1 italic",
+      "name": "hero_h1_em",
+      "type": "text",
+      "default_value": "rappresentativi."
+    },
+    {
+      "key": "field_casi_hero_lede",
+      "label": "Hero · Lede italic",
+      "name": "hero_lede",
+      "type": "textarea",
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_casi_intro_body",
+      "label": "Intro · Body editoriale",
+      "name": "intro_body",
+      "type": "wysiwyg",
+      "instructions": "Lede editoriale prima della lista casi. Il primo paragrafo viene reso con drop-cap dal CSS.",
+      "tabs": "all",
+      "toolbar": "full",
+      "media_upload": 0,
+      "delay": 1
+    },
+    {
+      "key": "field_casi_cta_eyebrow",
+      "label": "CTA · Eyebrow",
+      "name": "cta_eyebrow",
+      "type": "text",
+      "default_value": "§ Vuoi raccontarci la tua pratica?",
+      "maxlength": 160
+    },
+    {
+      "key": "field_casi_cta_h2",
+      "label": "CTA · H2",
+      "name": "cta_h2",
+      "type": "text",
+      "maxlength": 200
+    },
+    {
+      "key": "field_casi_cta_p",
+      "label": "CTA · Paragrafo",
+      "name": "cta_p",
+      "type": "textarea",
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_casi_cta_label",
+      "label": "CTA · Bottone label",
+      "name": "cta_label",
+      "type": "text",
+      "default_value": "Prenota un incontro →",
+      "maxlength": 80
+    },
+    {
+      "key": "field_casi_cta_url",
+      "label": "CTA · Bottone URL",
+      "name": "cta_url",
+      "type": "url",
+      "default_value": "/contatti/"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page",
+        "operator": "==",
+        "value": "2699"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 v1 — page /casi/ sezioni hero+intro body+CTA finale. Casi list usa CPT saltelli_caso (Agent B done).",
+  "show_in_rest": 0,
+  "modified": 1777948801
+}
