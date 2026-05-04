@@ -1,0 +1,106 @@
+{
+  "key": "group_contatti_v1",
+  "title": "Contatti — Sezioni",
+  "fields": [
+    {
+      "key": "field_contatti_hero_eyebrow",
+      "label": "Hero · Eyebrow",
+      "name": "hero_eyebrow",
+      "type": "text",
+      "default_value": "§ Servizio · Contatti",
+      "maxlength": 120
+    },
+    {
+      "key": "field_contatti_hero_h1_pre",
+      "label": "Hero · H1 prefix",
+      "name": "hero_h1_pre",
+      "type": "text",
+      "default_value": "Contatti"
+    },
+    {
+      "key": "field_contatti_hero_h1_em",
+      "label": "Hero · H1 italic",
+      "name": "hero_h1_em",
+      "type": "text",
+      "default_value": "& appuntamenti."
+    },
+    {
+      "key": "field_contatti_hero_lede",
+      "label": "Hero · Lede italic",
+      "name": "hero_lede",
+      "type": "textarea",
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_contatti_map_iframe",
+      "label": "Map · Embed iframe",
+      "name": "map_iframe",
+      "type": "textarea",
+      "instructions": "Embed code OpenStreetMap o Google Maps. Vuoto = no map (text-only fallback come da v0.17.3).",
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_contatti_map_caption",
+      "label": "Map · Caption sotto",
+      "name": "map_caption",
+      "type": "text",
+      "maxlength": 200
+    },
+    {
+      "key": "field_contatti_come_title",
+      "label": "Come arrivare · Titolo",
+      "name": "come_arrivare_title",
+      "type": "text",
+      "default_value": "Come arrivare",
+      "maxlength": 80
+    },
+    {
+      "key": "field_contatti_come_metro",
+      "label": "Come arrivare · Metro/bus",
+      "name": "come_arrivare_metro",
+      "type": "textarea",
+      "instructions": "Indicazioni metro / bus / autobus.",
+      "rows": 2,
+      "new_lines": "br"
+    },
+    {
+      "key": "field_contatti_come_parking",
+      "label": "Come arrivare · Parcheggi",
+      "name": "come_arrivare_parking",
+      "type": "textarea",
+      "instructions": "Indicazioni parcheggi area Chiaia.",
+      "rows": 2,
+      "new_lines": "br"
+    },
+    {
+      "key": "field_contatti_trust_signal",
+      "label": "Trust signal",
+      "name": "trust_signal",
+      "type": "text",
+      "instructions": "Riga reassurance sotto il form (privacy / orari risposta).",
+      "default_value": "Riceviamo solo su appuntamento. Risposta entro 24 ore.",
+      "maxlength": 200
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page",
+        "operator": "==",
+        "value": "23"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 v1 — page /contatti/ sezioni hero+map+come arrivare+trust. Form CF7 gestito da plugin (no ACF). Sede classica testuale, NAP da Theme Options.",
+  "show_in_rest": 0,
+  "modified": 1777948802
+}
