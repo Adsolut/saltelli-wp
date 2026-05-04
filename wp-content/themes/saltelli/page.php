@@ -263,7 +263,7 @@ while (have_posts()) :
             $sl_casi_chain = saltelli_get_breadcrumb_chain();
             ?>
 
-            <section class="sl-casi__hero" aria-labelledby="casi-h1">
+            <section class="sl-casi__hero sl-page-hero" aria-labelledby="casi-h1">
                 <div class="sl-casi__hero-grid">
                     <div class="sl-casi__hero-left">
                         <?php if (!empty($sl_casi_chain) && count($sl_casi_chain) > 1) : ?>
@@ -832,7 +832,7 @@ while (have_posts()) :
 
             </article>
 
-        <?php elseif (is_page(['guide-gratuite', 'come-lavoriamo', 'prima-consulenza', 'lavora-con-noi'])) :
+        <?php elseif (is_page(['guide-gratuite', 'come-lavoriamo', 'prima-consulenza', 'lavora-con-noi', 'richiedi-preventivo'])) :
             // === v0.33.0 — Info Page shared template (4 page informative) ===
             // Hero asym 8/4 + drop-cap 84px + body editorial + CTA dark navy.
             // Uses .sl-info-page__* shared CSS scope.
@@ -888,6 +888,19 @@ while (have_posts()) :
                     'cta_h2_em'   => __('curriculum.', 'saltelli'),
                     'cta_p'       => __('Solo CV reali, no autocandidature standardizzate. Risposta entro 7 giorni lavorativi.', 'saltelli'),
                     'cta_btn'     => __('Scrivici', 'saltelli'),
+                ],
+                'richiedi-preventivo' => [
+                    'eyebrow' => __('§ Servizio · Richiedi un preventivo', 'saltelli'),
+                    'h1'      => __('Richiedi un', 'saltelli'),
+                    'h1_em'   => __('preventivo.', 'saltelli'),
+                    'lede'    => __('Compila un breve modulo per ricevere un preventivo personalizzato. Trasparente, vincolato alla complessità reale della pratica.', 'saltelli'),
+                    'trust_eyebrow'  => __('§ Come funziona', 'saltelli'),
+                    'trust_headline' => __('Preventivo scritto in 48h', 'saltelli'),
+                    'trust_list' => [__('✓ Risposta entro 24h', 'saltelli'), __('✓ Preventivo dettagliato scritto', 'saltelli'), __('✓ Onorario, contributo unificato, spese vive separati', 'saltelli')],
+                    'cta_h2'      => __('Pronto a richiedere', 'saltelli'),
+                    'cta_h2_em'   => __('un preventivo?', 'saltelli'),
+                    'cta_p'       => __('Trenta minuti di prima consulenza gratuita prima del preventivo. Niente sorprese, niente costi nascosti.', 'saltelli'),
+                    'cta_btn'     => __('Apri modulo', 'saltelli'),
                 ],
             ];
             $sl_info_slug = get_post_field('post_name', get_the_ID());

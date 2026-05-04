@@ -26,7 +26,7 @@ while (have_posts()) :
     ?>
     <article <?php post_class($tier1_class . 'sl-competenza sl-competenza--' . ($is_tier_1 ? 'tier-1' : 'tier-2')); ?>>
 
-        <header class="sl-competenza__hero <?php echo $is_tier_1 ? 'sl-tier1__hero' : ''; ?>">
+        <header class="sl-competenza__hero sl-page-hero <?php echo $is_tier_1 ? 'sl-tier1__hero' : ''; ?>">
             <div class="sl-container">
                 <?php saltelli_render_breadcrumb(); ?>
 

@@ -61,7 +61,7 @@ $cases = saltelli_homepage_cases();
 $press = saltelli_press_outlets();
 ?>
 
-<section class="sl-hero" id="hero">
+<section class="sl-hero sl-page-hero sl-page-hero--homepage" id="hero">
     <div class="sl-hero__inner sl-container">
         <div class="sl-hero__main">
             <div class="sl-mono sl-hero__eyebrow"><?php echo esc_html($hero_eyebrow); ?></div>

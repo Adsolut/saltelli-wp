@@ -318,7 +318,7 @@ $sl_gloss_chain = function_exists('saltelli_get_breadcrumb_chain') ? saltelli_ge
 
 <div class="sl-glossario">
 
-    <section class="sl-glossario__hero" aria-labelledby="glossario-h1">
+    <section class="sl-glossario__hero sl-page-hero" aria-labelledby="glossario-h1">
         <div class="sl-glossario__hero-grid">
             <div>
                 <?php if (!empty($sl_gloss_chain) && count($sl_gloss_chain) > 1) : ?>
