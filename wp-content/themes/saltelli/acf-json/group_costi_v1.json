@@ -1,0 +1,153 @@
+{
+  "key": "group_costi_v1",
+  "title": "Costi — Sezioni",
+  "fields": [
+    {
+      "key": "field_costi_hero_eyebrow",
+      "label": "Hero · Eyebrow",
+      "name": "hero_eyebrow",
+      "type": "text",
+      "instructions": "Riga mono sopra l'H1 (es. \"§ Servizio · Costi\").",
+      "default_value": "§ Servizio · Costi",
+      "maxlength": 120
+    },
+    {
+      "key": "field_costi_hero_h1_pre",
+      "label": "Hero · H1 prefix",
+      "name": "hero_h1_pre",
+      "type": "text",
+      "instructions": "Prima parte H1 (regular).",
+      "default_value": "Costi e prima"
+    },
+    {
+      "key": "field_costi_hero_h1_em",
+      "label": "Hero · H1 italic",
+      "name": "hero_h1_em",
+      "type": "text",
+      "instructions": "Seconda parte H1 (italic).",
+      "default_value": "consulenza."
+    },
+    {
+      "key": "field_costi_hero_lede",
+      "label": "Hero · Lede italic",
+      "name": "hero_lede",
+      "type": "textarea",
+      "instructions": "Sottotitolo serif italic 22px sotto l'H1.",
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_costi_aside_eyebrow",
+      "label": "Aside · Eyebrow",
+      "name": "aside_eyebrow",
+      "type": "text",
+      "instructions": "Eyebrow del trust box laterale.",
+      "maxlength": 120
+    },
+    {
+      "key": "field_costi_aside_h3",
+      "label": "Aside · H3",
+      "name": "aside_h3",
+      "type": "text",
+      "maxlength": 200
+    },
+    {
+      "key": "field_costi_aside_p",
+      "label": "Aside · Paragrafo",
+      "name": "aside_p",
+      "type": "textarea",
+      "rows": 4,
+      "new_lines": ""
+    },
+    {
+      "key": "field_costi_aside_cta_label",
+      "label": "Aside · CTA label",
+      "name": "aside_cta_label",
+      "type": "text",
+      "maxlength": 80
+    },
+    {
+      "key": "field_costi_aside_cta_url",
+      "label": "Aside · CTA URL",
+      "name": "aside_cta_url",
+      "type": "url"
+    },
+    {
+      "key": "field_costi_calc_body",
+      "label": "§ 03 · Body editorial",
+      "name": "calc_body",
+      "type": "wysiwyg",
+      "instructions": "Body editoriale completo per la sezione \"Come calcoliamo\". TinyMCE full.",
+      "tabs": "all",
+      "toolbar": "full",
+      "media_upload": 0,
+      "delay": 1
+    },
+    {
+      "key": "field_costi_cta_eyebrow",
+      "label": "CTA · Eyebrow",
+      "name": "cta_eyebrow",
+      "type": "text",
+      "default_value": "§ Pronto?",
+      "maxlength": 120
+    },
+    {
+      "key": "field_costi_cta_h2",
+      "label": "CTA · H2",
+      "name": "cta_h2",
+      "type": "text",
+      "default_value": "La prima consulenza è gratuita. Sempre.",
+      "maxlength": 200
+    },
+    {
+      "key": "field_costi_cta_p",
+      "label": "CTA · Paragrafo",
+      "name": "cta_p",
+      "type": "textarea",
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_costi_cta_label",
+      "label": "CTA · Bottone label",
+      "name": "cta_label",
+      "type": "text",
+      "default_value": "Prenota un incontro →",
+      "maxlength": 80
+    },
+    {
+      "key": "field_costi_cta_url",
+      "label": "CTA · Bottone URL",
+      "name": "cta_url",
+      "type": "url",
+      "default_value": "/contatti/"
+    },
+    {
+      "key": "field_costi_cta_trust",
+      "label": "CTA · Trust line",
+      "name": "cta_trust",
+      "type": "text",
+      "default_value": "Risposta entro 24 ore · Riservatezza assoluta",
+      "maxlength": 160
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page",
+        "operator": "==",
+        "value": "2695"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 1 v1 — page /costi/ sezioni hero+aside+§03 body+CTA finale. Modalità (×3), Scenari (×3), FAQ (×5), Trust plates (×4) sono CPT separati gestiti da Agent B.",
+  "show_in_rest": 0,
+  "modified": 1777948800
+}
