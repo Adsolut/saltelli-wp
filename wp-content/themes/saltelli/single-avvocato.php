@@ -9,7 +9,11 @@ get_header();
 while (have_posts()) :
     the_post();
     $post_id    = get_the_ID();
-    $ruolo      = (string) saltelli_field('ruolo_breve', $post_id, '');
+    // Wave 3: prefer hero_role (Wave 1 schema) → fallback ruolo_breve (legacy Wave 0).
+    $ruolo      = (string) saltelli_field('hero_role', $post_id, '');
+    if ($ruolo === '') {
+        $ruolo = (string) saltelli_field('ruolo_breve', $post_id, '');
+    }
     $bio_breve  = (string) saltelli_field('bio_breve', $post_id, '');
     $bio_est    = (string) saltelli_field('bio_estesa', $post_id, '');
     $email      = (string) saltelli_field('email_pubblica', $post_id, '');

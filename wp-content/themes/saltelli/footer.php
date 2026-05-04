@@ -19,11 +19,29 @@
  * @since 0.20.2
  */
 $studio        = saltelli_studio_data();
-$ftr_indirizzo = saltelli_option('colophon_indirizzo', "Via Vannella Gaetani, 27\n80121 Napoli — Chiaia");
-$ftr_tel       = saltelli_option('contact_telefono_pubblico', '+39 081 1813 1119');
-$ftr_email     = saltelli_option('contact_email_pubblica', $studio['email']);
-$ftr_pec       = saltelli_option('contact_pec', $studio['pec']);
-$ftr_piva      = saltelli_option('contact_piva', '06685101211');
+
+/* Wave 3: legge prima dal Wave 1 schema (studio_*) → fallback legacy Wave 0 (contact_*) → fallback hardcoded. */
+$ftr_via       = saltelli_option('studio_indirizzo_via', '');
+$ftr_cap_citta = saltelli_option('studio_cap_citta', '');
+$ftr_quartiere = saltelli_option('studio_quartiere', '');
+if ($ftr_via !== '' && $ftr_cap_citta !== '') {
+    $ftr_indirizzo = $ftr_via . "\n" . $ftr_cap_citta . ($ftr_quartiere !== '' ? ' — ' . $ftr_quartiere : '');
+} else {
+    $ftr_indirizzo = saltelli_option('colophon_indirizzo', "Via Vannella Gaetani, 27\n80121 Napoli — Chiaia");
+}
+
+$ftr_tel = saltelli_option('studio_telefono_pubblico', '');
+if ($ftr_tel === '') $ftr_tel = saltelli_option('contact_telefono_pubblico', '+39 081 1813 1119');
+
+$ftr_email = saltelli_option('studio_email', '');
+if ($ftr_email === '') $ftr_email = saltelli_option('contact_email_pubblica', $studio['email']);
+
+$ftr_pec = saltelli_option('studio_pec', '');
+if ($ftr_pec === '') $ftr_pec = saltelli_option('contact_pec', $studio['pec']);
+
+$ftr_piva = saltelli_option('studio_piva', '');
+if ($ftr_piva === '') $ftr_piva = saltelli_option('contact_piva', '06685101211');
+
 $ftr_tel_e164  = saltelli_studio_phone_e164();
 
 $em_li = function_exists('saltelli_attorney_linkedin') ? saltelli_attorney_linkedin('emiliano-saltelli') : '';
