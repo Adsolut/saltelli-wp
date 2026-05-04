@@ -12,7 +12,7 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 
 ## Current state — v0.17.4-beta-consolidation
 
-**Last updated:** 2026-04-30 (post-demo iteration)
+**Last updated:** 2026-05-04 (post-demo iteration)
 **Branch:** `main`
 **Demo:** ✅ presentata al cliente · in fase di feedback iteration
 **Live staging:** https://staging.studiolegalesaltelli.it allineato a v0.17.4 (Fasi 3+4 deploy completate de facto via rsync ad-hoc, runbook G non eseguito formalmente)
@@ -28,6 +28,12 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 - Secrets locali: `.saltelli-staging-secrets` (gitignored) · droplet: `/home/deploy/.saltelli-secrets`
 - Runbook deploy: `PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` (Fasi 0-2, 5-6 originarie completate; 3-4 fatte ad-hoc fuori runbook; 7-8 ancora aperte)
 - Pending: reboot droplet per kernel 6.8.0-110
+
+**WP admin access (locale + staging, password allineate 2026-05-04):**
+- UID 1 `Emiliano Saltelli` (info@studiolegalesaltelli.it) → `WP_EMILIANO_PWD` in `.saltelli-staging-secrets`
+- UID 8 `Adsolut Staff` (tech@adsolut.it) → `WP_ADSOLUT_PWD` in `.saltelli-staging-secrets`
+- Reset via `wp_set_password()` locale e `wp user update` su droplet (phpass nativo, no MD5 fallback)
+- Stesso password locale↔staging per comodità — ruotare se serve isolamento env
 
 ### What's done
 

@@ -1,0 +1,51 @@
+v1.0.0 Wave 1 PARALLEL AGENT B — Field Groups CPT
+
+CONTEXT
+Wave 0 completata: 8 CPT registrati. Sei Agent B.
+Agent A + C in parallelo su file DIVERSI.
+
+COORDINATION
+1. Claim: /tmp/saltelli-agents-w1/agent-b.lock
+2. Files OK:
+   wp-content/themes/saltelli/acf-json/group_avvocato*.json
+   wp-content/themes/saltelli/acf-json/group_competenza*.json
+   wp-content/themes/saltelli/acf-json/group_faq_item*.json (saltelli_faq)
+   wp-content/themes/saltelli/acf-json/group_caso_item*.json (saltelli_caso)
+   wp-content/themes/saltelli/acf-json/group_modalita_item*.json
+   wp-content/themes/saltelli/acf-json/group_scenario_item*.json
+   wp-content/themes/saltelli/acf-json/group_principio_item*.json
+   wp-content/themes/saltelli/acf-json/group_trust_item*.json
+   wp-content/themes/saltelli/acf-json/group_formazione_item*.json
+   wp-content/themes/saltelli/acf-json/group_guida_item*.json
+
+TASK
+Riferimento completo: PROMPT_AGENT_v1.0_WAVE1_FIELD_GROUPS.md sezione AGENT B.
+
+10 Field Groups:
+  T1 — avvocato (4 lawyer): bio_breve, bio_estesa, foto_ritratto,
+       hero_role, specializzazioni, contatti diretti, aree_competenza_correlate,
+       formazione (post_object multiple), casi_rappresentativi (post_object)
+  T2 — competenza (19 aree): is_tier_1, tier_label, subtitle, answer_capsule,
+       body_extended, lead_attorneys, casi_rappresentativi, faq, articoli_correlati
+  T3 — saltelli_faq: domanda (= title), risposta + faq_topic taxonomy
+  T4 — saltelli_caso: id_label, descrizione, outcome_label
+  T5 — saltelli_modalita: num_label, title, body, trust_mini
+  T6 — saltelli_scenario: num_label, title, body, trust_mini
+  T7 — saltelli_principio: num, title, desc
+  T8 — saltelli_trust: label, valore
+  T9 — saltelli_formazione: anno, titolo, ente
+  T10 — saltelli_guida: intro, pdf_file, formato, categoria
+
+Pattern WP-CLI eval per ogni Field Group.
+
+DELIVERABLE
+1. 10 Field Groups creati
+2. ACF JSON files in acf-json/
+3. Branch git: feat/wave1-agent-b-cpt-fields
+4. Push origin
+5. Cleanup lock
+6. Segnala "Agent B done. 10 Field Groups CPT."
+
+HARD RULES same as Agent A.
+
+PARTI ORA. Riferimento completo nel file PROMPT_AGENT_v1.0_WAVE1_FIELD_GROUPS.md sezione AGENT B.

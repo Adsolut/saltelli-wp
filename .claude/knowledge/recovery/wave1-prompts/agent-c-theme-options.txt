@@ -1,0 +1,61 @@
+v1.0.0 Wave 1 PARALLEL AGENT C — Theme Options
+
+CONTEXT
+Wave 0 completata: acf_add_options_page registrata in inc/acf-fields.php.
+Sei Agent C. Lavori su Field Group "Saltelli Settings" globale.
+Agent A + B in parallelo.
+
+COORDINATION
+1. Claim: /tmp/saltelli-agents-w1/agent-c.lock
+2. File OK to create:
+   wp-content/themes/saltelli/acf-json/group_theme_options*.json
+
+TASK
+Riferimento completo: PROMPT_AGENT_v1.0_WAVE1_FIELD_GROUPS.md sezione AGENT C.
+
+1 Field Group "Saltelli — Settings globali" con 6 TABS:
+
+TAB 1 — Studio Info:
+  studio_indirizzo_via, studio_cap_citta, studio_quartiere
+  studio_orari_settimana, studio_orari_sabato
+  studio_telefono_pubblico, studio_email, studio_pec
+  studio_piva, studio_ordine_avvocati
+
+TAB 2 — Mappa:
+  studio_coordinate_lat, studio_coordinate_lng
+
+TAB 3 — Brand:
+  brand_payoff (default "Diritto, con misura")
+  brand_statement_short (textarea, default brand statement)
+
+TAB 4 — Footer:
+  footer_credit_text (default "Realizzato da Adsolut Web Agency")
+  footer_credit_url (default https://adsolut.it)
+  footer_newsletter_enabled (true_false)
+  footer_newsletter_provider (select: brevo/static/none)
+
+TAB 5 — Social:
+  social_instagram, social_linkedin, social_twitter, social_facebook (url fields)
+
+TAB 6 — CTA Defaults:
+  cta_default_label (default "Prenota un incontro →")
+  cta_default_url (default "/contatti/")
+  cta_trust_signal (default "Risposta entro 24 ore · Riservatezza assoluta")
+  cta_subline_italic (default "Prima consulenza conoscitiva gratuita")
+
+Location: options_page = saltelli-settings
+
+Pattern WP-CLI eval acf_add_local_field_group().
+
+DELIVERABLE
+1. 1 Field Group con ~30 fields organizzati in 6 tabs
+2. ACF JSON file in acf-json/
+3. Branch git: feat/wave1-agent-c-theme-options
+4. Push origin
+5. Cleanup lock
+6. Verify WP-Admin: menu "Saltelli — Settings" mostra 6 tab editabili
+7. Segnala "Agent C done. Theme Options Field Group."
+
+HARD RULES same as Agent A+B.
+
+PARTI ORA.

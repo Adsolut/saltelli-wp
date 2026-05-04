@@ -1,0 +1,72 @@
+v1.0.0 Wave 1 PARALLEL AGENT A — Field Groups page WP custom
+
+CONTEXT
+Wave 0 completata: ACF Free 6.8.0 attivo + 8 CPT fake repeater registrati.
+Sei Agent A. Lavori su Field Groups per page WP custom.
+Agent B + C lavorano in parallelo su file DIVERSI in acf-json/.
+
+COORDINATION
+1. Claim: 
+   if [ -f /tmp/saltelli-agents-w1/agent-a.lock ]; then echo TAKEN; exit 1; fi
+   echo "agent-a $$ $(date +%H:%M)" > /tmp/saltelli-agents-w1/agent-a.lock
+
+2. Files OK to create:
+   wp-content/themes/saltelli/acf-json/group_costi*.json
+   wp-content/themes/saltelli/acf-json/group_casi*.json
+   wp-content/themes/saltelli/acf-json/group_contatti*.json
+   wp-content/themes/saltelli/acf-json/group_faq*.json
+   wp-content/themes/saltelli/acf-json/group_info_shared*.json
+
+3. Tools: WP-CLI eval per acf_add_local_field_group()
+   ACF auto-saves JSON in acf-json/ dopo creazione.
+
+4. Path droplet (per future deploy): /var/www/saltelli/ (NO /htdocs).
+
+TASK
+Riferimento completo: PROMPT_AGENT_v1.0_WAVE1_FIELD_GROUPS.md sezione AGENT A.
+
+Crea 5 Field Groups per:
+  T1 — costi (page id 2695): hero + aside + body + CTA finale
+  T2 — casi (page id 2699): hero + intro + CTA
+  T3 — contatti: hero + map + come arrivare + trust signal
+  T4 — faq: hero + TOC config + CTA
+  T5 — info-shared (location OR per 5 page: guide-gratuite, come-lavoriamo, prima-consulenza, lavora-con-noi, richiedi-preventivo)
+
+NB: sezioni con multiple items (Modalità × 3, Scenari × 3, FAQ × 5+, Trust × 4)
+NON sono in questi Field Groups: usano CPT separati gestiti da Agent B.
+
+Pattern WP-CLI eval esempio costi:
+  docker compose run --rm wpcli eval '
+    acf_add_local_field_group([
+      "key" => "group_costi_v1",
+      "title" => "Costi — Sezioni",
+      "fields" => [...],
+      "location" => [[["param"=>"page", "operator"=>"==", "value"=>get_page_by_path("costi")->ID]]],
+      "active" => true,
+    ]);
+    echo "OK";
+  '
+
+Verify creation:
+  ls -la wp-content/themes/saltelli/acf-json/group_costi*.json
+  docker compose run --rm wpcli eval "var_dump(acf_get_field_group('group_costi_v1'));"
+
+Output: 5 file JSON in acf-json/ + commit + push origin.
+
+DELIVERABLE
+1. 5 Field Groups creati
+2. ACF JSON files in acf-json/ (auto-export)
+3. Branch git: feat/wave1-agent-a-page-fields
+4. Push origin (orchestrator merge in Wave 1 final)
+5. Cleanup: rm /tmp/saltelli-agents-w1/agent-a.lock
+6. Segnala "Agent A done. 5 Field Groups page WP."
+
+HARD RULES
+- NO modifiche frontend (template PHP / CSS)
+- NO content migration (solo schema)
+- NO modifiche tokens.css
+- Field naming: snake_case (no spazi, no maiuscole)
+- Field keys unique: prefix field_<group>_<name>
+- Smoke test: ACF Field Group registrato in WP-Admin
+
+PARTI ORA. Riferimento completo: PROMPT_AGENT_v1.0_WAVE1_FIELD_GROUPS.md
