@@ -1,0 +1,48 @@
+═ ACF rendering audit on droplet — 2026-05-05 ═
+
+Theme Options completeness (26 fields):
+  options_brand_payoff             19 chars  ✓
+  options_brand_statement_short    105 chars ✓
+  options_cta_default_label        21 chars  ✓
+  options_cta_default_url          10 chars  ✓
+  options_cta_subline_italic       37 chars  ✓
+  options_cta_trust_signal         45 chars  ✓
+  options_footer_credit_text       32 chars  ✓
+  options_footer_credit_url        18 chars  ✓
+  options_footer_newsletter_enabled 1 char   ✓
+  options_footer_newsletter_provider 5 chars ✓
+  options_social_facebook          42 chars  ✓
+  options_social_instagram         47 chars  ✓
+  options_social_linkedin          0 chars   (intentional vuoto — no Company Page)
+  options_social_twitter           0 chars   (intentional vuoto — TBD)
+  options_studio_cap_citta         12 chars  ✓
+  options_studio_coordinate_lat    10 chars  ✓
+  options_studio_coordinate_lng    10 chars  ✓
+  options_studio_email             28 chars  ✓
+  options_studio_indirizzo_via     24 chars  ✓
+  options_studio_orari_sabato      22 chars  ✓
+  options_studio_orari_settimana   25 chars  ✓
+  options_studio_ordine_avvocati   31 chars  ✓
+  options_studio_pec               44 chars  ✓
+  options_studio_piva              11 chars  ✓
+  options_studio_quartiere         6 chars   ✓
+  options_studio_telefono_pubblico 17 chars  ✓
+SUMMARY: 24/26 popolati (2 intentional vuoti) ✓
+
+Lawyer fields:
+  Emiliano Saltelli (2660) — role:Founding Partner · Tributarista | bio_breve:135 | bio_estesa:0 | post_content:968
+  Fabiana Saltelli (2661)  — role:Partner · Giuslavorista          | bio_breve:112 | bio_estesa:0 | post_content:831
+  Antonia Battista (2662)  — role:Of Counsel · Famiglia LGBTQ+     | bio_breve:121 | bio_estesa:1075 | post_content:1052
+  Stefano Tedesco (2663)   — role:Associate · Condominiale         | bio_breve:139 | bio_estesa:0 | post_content:596
+
+Note: 3/4 lawyer hanno bio_estesa VUOTA (Antonia OK from Step D protected). Il template fallback su post_content.
+
+Tier-1 competenze:
+  #2664 Diritto tributario          | is_tier_1:YES | capsule:292 chars | body_ext:2941 chars  ✓
+  #2665 Diritto del lavoro          | is_tier_1:YES | capsule:335 chars | body_ext:2859 chars  ✓
+  #2666 Diritto di famiglia LGBTQ+  | is_tier_1:YES | capsule:396 chars | body_ext:3110 chars  ✓
+
+ACF page-id mismatch (P0 bug-04):
+  /faq/, /guide-gratuite/, /come-lavoriamo/, /prima-consulenza/, /richiedi-preventivo/
+  Wave 2 migration usò ID locali → droplet IDs sbagliati → data su pagine WRONG.
+  Vedi bug-04 ticket per dettagli + fix plan.
