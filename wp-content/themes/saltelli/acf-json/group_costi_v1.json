@@ -134,9 +134,9 @@
   "location": [
     [
       {
-        "param": "page",
+        "param": "page_slug",
         "operator": "==",
-        "value": "2695"
+        "value": "costi"
       }
     ]
   ],

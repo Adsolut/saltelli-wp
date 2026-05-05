@@ -86,9 +86,9 @@
   "location": [
     [
       {
-        "param": "page",
+        "param": "page_slug",
         "operator": "==",
-        "value": "2699"
+        "value": "casi"
       }
     ]
   ],

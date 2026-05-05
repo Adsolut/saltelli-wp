@@ -87,9 +87,9 @@
   "location": [
     [
       {
-        "param": "page",
+        "param": "page_slug",
         "operator": "==",
-        "value": "23"
+        "value": "contatti"
       }
     ]
   ],

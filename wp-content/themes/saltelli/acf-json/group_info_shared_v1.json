@@ -128,37 +128,37 @@
   "location": [
     [
       {
-        "param": "page",
+        "param": "page_slug",
         "operator": "==",
-        "value": "2706"
+        "value": "guide-gratuite"
       }
     ],
     [
       {
-        "param": "page",
+        "param": "page_slug",
         "operator": "==",
-        "value": "2709"
+        "value": "come-lavoriamo"
       }
     ],
     [
       {
-        "param": "page",
+        "param": "page_slug",
         "operator": "==",
-        "value": "2708"
+        "value": "prima-consulenza"
       }
     ],
     [
       {
-        "param": "page",
+        "param": "page_slug",
         "operator": "==",
-        "value": "372"
+        "value": "lavora-con-noi"
       }
     ],
     [
       {
-        "param": "page",
+        "param": "page_slug",
         "operator": "==",
-        "value": "2710"
+        "value": "richiedi-preventivo"
       }
     ]
   ],
