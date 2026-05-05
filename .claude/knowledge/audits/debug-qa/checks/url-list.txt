@@ -1,0 +1,39 @@
+# Debug & QA URL list — 32+ URL per Phase 2 visual audit
+# Format: URL · category · expected_final_code
+# Method: curl -L (follow redirects)
+
+# === 21 base smoke URLs ===
+/                                           homepage              200
+/lo-studio/                                 page-redirect         200 (via 301 → /chi-siamo/)
+/avvocati/                                  archive-avvocato      200
+/avvocati/emiliano-saltelli/                single-avvocato       200
+/avvocati/fabiana-saltelli/                 single-avvocato       200
+/avvocati/antonia-battista/                 single-avvocato       200
+/avvocati/stefano-gaetano-tedesco/          single-avvocato       200
+/casi/                                      page-casi             200
+/costi/                                     page-costi            200
+/contatti/                                  page-contatti         200
+/faq/                                       page-faq              200
+/come-lavoriamo/                            info-shared           200
+/prima-consulenza/                          info-shared           200
+/lavora-con-noi/                            info-shared           200
+/richiedi-preventivo/                       info-shared           200
+/guide-gratuite/                            info-shared           200
+/competenze/diritto-tributario/             single-competenza tier-1   200
+/competenze/diritto-del-lavoro/             single-competenza tier-1   200
+/competenze/diritto-di-famiglia-lgbtq/      single-competenza tier-1   200
+/tipo-area/privati/                         tassonomia            200
+/glossario-legale/                          page-glossario        200
+
+# === 11 estensioni Phase 2 ===
+/competenze/cartelle-esattoriali-e-multe/   single-competenza tier-2   200
+/competenze/diritto-bancario/               single-competenza tier-2   200
+/competenze/diritto-condominiale/           single-competenza tier-2   200
+/competenze/diritto-penale/                 single-competenza tier-2   200
+/competenze/recupero-crediti/               single-competenza tier-2   200
+/competenze/                                archive-competenza    200
+/blog/                                      blog                  200
+/?s=cartella                                search-results        200
+/wp-sitemap.xml                             sitemap               200
+/llms.txt                                   ai-file               200
+/robots.txt                                 robots                200
