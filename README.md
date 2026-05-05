@@ -1,7 +1,7 @@
 # Studio Legale Saltelli — WordPress Custom Theme
 
 > Sito WordPress custom AI-ready per **Studio Legale Emiliano Saltelli & Partners** (Napoli, Chiaia).
-> Costruito da [Adsolut SRLS](https://adsolut.it) come parte del programma GEO (Generative Engine Optimization).
+> Costruito da [Adsolut Web Agency](https://adsolut.it) come parte del programma GEO (Generative Engine Optimization).
 > Tema **boutique editoriale** "Legal Luxury Minimal" — navy/cream/bronze, Playfair Display + DM Sans, schema JSON-LD inline, llms.txt.
 
 ---

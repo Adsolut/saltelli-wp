@@ -3,7 +3,10 @@
  * Saltelli Theme — bootstrap.
  * Tutta la logica vive in inc/. Questo file solo orchestra.
  *
- * @package Saltelli
+ * @package   Saltelli
+ * @author    Adsolut Web Agency <https://adsolut.it>
+ * @copyright © 2026 Adsolut Web Agency
+ * @license   Proprietary
  */
 
 defined('ABSPATH') || exit;
