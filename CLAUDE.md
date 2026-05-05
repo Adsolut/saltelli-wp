@@ -1,8 +1,14 @@
 # CLAUDE.md — Studio Legale Saltelli WordPress Theme
 
 > **Single source of truth for Claude Code agents working on this project.**
-> Read this FIRST. Then read only the prompt assigned to you (`PROMPT_AGENT_*.md`).
+> Read this FIRST. Then read only the prompt assigned to you (in `prompts/`).
 > Project context machine-readable: [`.claude/knowledge/project-context.json`](./.claude/knowledge/project-context.json).
+>
+> **Repo layout** (post housekeeping 2026-05-05):
+> - `/docs/` — documentazione operativa viva (BRIEF, PRODUCT, DESIGN, ARCHITECTURE, DEPLOY, EDITOR-HANDOFF)
+> - `/prompts/` — prompt ATTIVI per Claude Code (uno alla volta)
+> - `/_archive/prompts-completed/` — prompt completati (storia, 5 sub-cartelle cronologiche)
+> - `/.claude/knowledge/` — working knowledge (recovery, audits, reference, _history)
 
 ## Identity
 
@@ -12,12 +18,12 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 
 ## Current state — v1.0.0-recovery-wave3-debug
 
-**Last updated:** 2026-05-05 (Debug & QA chiuso · merge no-ff `fd1f6fc` · Wave 4 ready)
-**Branch:** `main` (`fd1f6fc`) · feature `feat/debug-qa` mergeata (7 commit Code Phase 1-6 + 3 fix)
+**Last updated:** 2026-05-05 (repo housekeeping post Debug & QA · Wave 4 ready)
+**Branch:** `main` · feature `feat/debug-qa` mergeata (`fd1f6fc`)
 **Demo:** ✅ presentata al cliente · feedback iteration assorbita
-**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.0.0-recovery-wave3-debug` · 21/21 PASS · 32/32 estesa (3 redirect 301 attesi) · ACF popolato + re-migrato via slug
-**Active phase:** Acceptance test editoriale (Elena/Ludovica) + Wave 4 ready to launch
-**Next:** **Wave 4 / Step F (Production Readiness)** — prompt pronto in repo (1072 righe, 5 phases) · lanciabile in parallelo agli acceptance test
+**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.0.0-recovery-wave3-debug` · 21/21 PASS
+**Active phase:** Acceptance test editoriale (Elena/Ludovica) + Wave 4 ready to launch + repo housekeeping done
+**Next:** **Wave 4 / Step F (Production Readiness)** — prompt in `prompts/` (1072 righe, 5 phases) · lanciabile in parallelo agli acceptance test
 
 **Infra staging (consolidata 2026-04-30):**
 - Droplet DO `saltelli-staging-ams3-01` · IPv4 `178.62.207.50` · ams3 · s-1vcpu-2gb · Ubuntu 24.04 LTS
@@ -88,37 +94,50 @@ Per evitare future collisioni quando più agent committano in parallelo:
 
 **Source of truth files (always read first):**
 - `CLAUDE.md` (this file)
-- `BRIEF_Saltelli_WordPress.md` — original brief
+- `docs/BRIEF.md` — original brief
+- `docs/PRODUCT.md` — brand voice + anti-references
+- `docs/DESIGN.md` — design tokens
+- `docs/ARCHITECTURE.md` — theme + ACF schema mapping (chiave per WYSIWYG gaps)
 - `.claude/knowledge/project-context.json` — machine-readable context
-- `.claude/knowledge/design/sessione-1/tokens.css` — design tokens locked
-- `.claude/knowledge/design/sessione-1/homepage-desktop.jsx` — JSX reference for Frame 1
+- `.claude/knowledge/_history/design/sessione-1/tokens.css` — design tokens locked (storia, ma file vivo come reference)
+- `.claude/knowledge/_history/design/sessione-1/homepage-desktop.jsx` — JSX reference for Frame 1 (storia)
 
-**Agent prompts:**
-- `PROMPT_AGENT_v1.0_WAVE0_FOUNDATION.md` — ✅ done
-- `PROMPT_AGENT_v1.0_WAVE1_FIELD_GROUPS.md` + `_RECOVERY.md` — ✅ done (Agent A+B+C consolidato)
-- `PROMPT_AGENT_v1.0_WAVE2_CONTENT_MIGRATION.md` — ✅ done
-- `PROMPT_AGENT_v1.0_WAVE3_TEMPLATE_REFACTOR.md` — ✅ done
-- `PROMPT_AGENT_v1.0_DEBUG_QA.md` — ✅ done (4 bugs found, 3 closed + 1 deferred, P0 architectural fix `page_slug ==`)
-- `PROMPT_AGENT_v1.0_WAVE4_PRODUCTION_READINESS.md` — ⏸ ready to launch (5 phases, branch dedicato `feat/wave4-production-readiness`)
-- `PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` — runbook deploy (Fase 0+infra completata, deploy Wave 1+2+3+debug-qa fatto via rsync ad-hoc, Fasi 7-8 ancora aperte)
-- `_archive/prompts-completed/` — past prompts (informational, do NOT execute)
+**Agent prompts** (in `prompts/` se attivo, in `_archive/prompts-completed/{categoria}/` se completato):
+- `recovery-v1.0/PROMPT_AGENT_v1.0_WAVE0_FOUNDATION.md` — ✅ done
+- `recovery-v1.0/PROMPT_AGENT_v1.0_WAVE1_FIELD_GROUPS.md` + `_RECOVERY.md` — ✅ done (Agent A+B+C consolidato)
+- `recovery-v1.0/PROMPT_AGENT_v1.0_WAVE2_CONTENT_MIGRATION.md` — ✅ done
+- `recovery-v1.0/PROMPT_AGENT_v1.0_WAVE3_TEMPLATE_REFACTOR.md` — ✅ done
+- `recovery-v1.0/PROMPT_AGENT_v1.0_DEBUG_QA.md` — ✅ done (4 bugs found, 3 closed + 1 deferred, P0 architectural fix `page_slug ==`)
+- **`prompts/PROMPT_AGENT_v1.0_WAVE4_PRODUCTION_READINESS.md`** — ⏸ ready to launch (5 phases, branch dedicato `feat/wave4-production-readiness`)
+- `deploy/PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` — runbook deploy archiviato (Fase 0+infra completata, deploy delta via rsync ad-hoc, Fasi 7-8 ancora aperte; sostituito de facto da `docs/DEPLOY.md`)
+- `_archive/prompts-completed/orchestration-original/` — prompt iniziali sessione 1
+- `_archive/prompts-completed/pre-recovery-v0.x/` — 17 prompt iterazioni v0.* (sessione 1+2 design)
+- `_archive/prompts-completed/recovery-v0.9/` — recovery preliminare
 
-**Editor-facing docs:**
-- `docs/EDITOR-HANDOFF.md` v1.1 — manuale editoriale italiano per Elena/Ludovica/esterni (esteso: workflow comuni, debug phase, nota bio_estesa, esempi reali, glossario AI/SEO)
+**Operational docs** (`/docs/`):
+- `docs/BRIEF.md` — brief originale del progetto (cliente, team, 19 aree, AI-readiness)
+- `docs/PRODUCT.md` — brand identity, voice, anti-references, principi strategici
+- `docs/DESIGN.md` — design tokens (colori, typography, spacing)
+- `docs/ARCHITECTURE.md` — mappa theme + ACF schema + WP-Admin↔frontend coupling + WYSIWYG gaps
+- `docs/DEPLOY.md` — runbook deploy droplet + lessons learned
+- `docs/EDITOR-HANDOFF.md` v1.1 — manuale editoriale italiano per Elena/Ludovica/esterni
 
-**Audit & QA reports:**
-- `.claude/knowledge/audits/debug-qa/reports/REPORT.md` — report consolidato Debug & QA
-- `.claude/knowledge/audits/debug-qa/bugs/01..04` — ticket bug (3 closed + 1 deferred)
-- `.claude/knowledge/audits/debug-qa/checks/` — audit raw (smoke, html-audit, link-check, schema-soft, acf-rendering)
-- `scripts/debug-qa-fix-page-id-mismatch.php` — re-migrazione ACF data via slug (idempotente env-safe)
+**Working knowledge** (`.claude/knowledge/`):
+- `recovery/` — release notes wave (5 file, vivi)
+- `audits/debug-qa/` — 4 bug ticket + 1 report + audit raw (vivi)
+- `reference/{security,wordpress,database}/` — reference docs (10 file, dormi-vita)
+- `_history/design/` — storia 2 sessioni design pre-recovery (62 file, informativo non operativo — vedi `_history/README.md` per essenza)
 
-**Reports** (in `.claude/knowledge/design/sessione-1/reports/`):
+**Reports** (in `.claude/knowledge/_history/design/sessione-1/reports/` — storia, NON operativi):
 - `audit-alignment/REPORT.md` — Step Audit Alignment (sitemap + /costi/)
 - `content-migration/REPORT.md` — Step D content migration
 - `impeccable/REPORT.md` — Step C Impeccable refinement
-- `pain-points-refinement/REPORT.md` — Step Pain Points (most recent)
-- `visual-walkthrough/CHECKLIST.md` — 12-point checklist (reusable)
-- `visual-walkthrough/REPORT-v0.7.0.md` — last walkthrough result (10 PASS · 1 WARN · 1 FAIL)
+- `template-polish/REPORT.md` — Step E Template Polish
+- `pain-points-refinement/REPORT.md` — Step Pain Points Refinement
+- `recovery-v0.9.0/REPORT.md` — Recovery v0.9 preliminare
+- `editorial-refinement-v0.10.0/REPORT.md`, `final-polish-v0.11.0/REPORT.md`, `layout-harmonization-v0.12.0/REPORT.md`, `ia-unification-v0.13.0/REPORT.md` — v0.x iterations
+- `single-avvocato-placeholder-fix/REPORT.md` — Avvocato placeholder fix
+- `visual-walkthrough/*.md` — Visual walkthrough deep audits (CHECKLIST + REPORT-v0.7.0..v0.12.0)
 
 ## Hard constraints (non-negotiable)
 
@@ -250,5 +269,5 @@ Re-read this file. If still in doubt, ask Duccio. Don't guess on:
 - Anything that would appear in schema markup as fact
 
 ---
-*Last updated: 2026-05-05 · v1.0.0-recovery-wave3-debug · Debug & QA chiuso (merge `fd1f6fc`) · Wave 4 ready to launch*
+*Last updated: 2026-05-05 · v1.0.0-recovery-wave3-debug · Debug & QA chiuso (`fd1f6fc`) · repo housekeeping done · Wave 4 ready to launch*
 *Maintained by orchestrator (Claude in chat) after each milestone.*

@@ -6,7 +6,7 @@ Sei il LEAD AGENT del progetto Studio Legale Saltelli — WordPress Custom Theme
 
 ## CONTESTO PROGETTO
 
-Client: Studio Legale Emiliano Saltelli & Partners, Napoli (quartiere Chiaia) Fornitore: Adsolut SRLS — AI Agency Contratto: €14.000 / 7 mesi — Programma GEO completo Fase attuale: Fase 1 — GEO Audit + Nuovo sito WordPress AI-ready Brief completo: `BRIEF_Saltelli_WordPress.md` (nella root del progetto)
+Client: Studio Legale Emiliano Saltelli & Partners, Napoli (quartiere Chiaia) Fornitore: Adsolut SRLS — AI Agency Contratto: €14.000 / 7 mesi — Programma GEO completo Fase attuale: Fase 1 — GEO Audit + Nuovo sito WordPress AI-ready Brief completo: `docs/BRIEF.md` (nella root del progetto)
 
 ## REGOLE SICUREZZA CREDENZIALI (NON NEGOZIABILI)
 
