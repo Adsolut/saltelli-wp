@@ -99,7 +99,6 @@ Per evitare future collisioni quando più agent committano in parallelo:
 - `docs/DESIGN.md` — design tokens
 - `docs/ARCHITECTURE.md` — theme + ACF schema mapping (chiave per WYSIWYG gaps)
 - `.claude/knowledge/project-context.json` — machine-readable context
-- `.claude/knowledge/_history/design/sessione-1/tokens.css` — design tokens locked (storia, ma file vivo come reference)
 - `.claude/knowledge/_history/design/sessione-1/homepage-desktop.jsx` — JSX reference for Frame 1 (storia)
 
 **Agent prompts** (in `prompts/` se attivo, in `_archive/prompts-completed/{categoria}/` se completato):
@@ -126,18 +125,7 @@ Per evitare future collisioni quando più agent committano in parallelo:
 - `recovery/` — release notes wave (5 file, vivi)
 - `audits/debug-qa/` — 4 bug ticket + 1 report + audit raw (vivi)
 - `reference/{security,wordpress,database}/` — reference docs (10 file, dormi-vita)
-- `_history/design/` — storia 2 sessioni design pre-recovery (62 file, informativo non operativo — vedi `_history/README.md` per essenza)
-
-**Reports** (in `.claude/knowledge/_history/design/sessione-1/reports/` — storia, NON operativi):
-- `audit-alignment/REPORT.md` — Step Audit Alignment (sitemap + /costi/)
-- `content-migration/REPORT.md` — Step D content migration
-- `impeccable/REPORT.md` — Step C Impeccable refinement
-- `template-polish/REPORT.md` — Step E Template Polish
-- `pain-points-refinement/REPORT.md` — Step Pain Points Refinement
-- `recovery-v0.9.0/REPORT.md` — Recovery v0.9 preliminare
-- `editorial-refinement-v0.10.0/REPORT.md`, `final-polish-v0.11.0/REPORT.md`, `layout-harmonization-v0.12.0/REPORT.md`, `ia-unification-v0.13.0/REPORT.md` — v0.x iterations
-- `single-avvocato-placeholder-fix/REPORT.md` — Avvocato placeholder fix
-- `visual-walkthrough/*.md` — Visual walkthrough deep audits (CHECKLIST + REPORT-v0.7.0..v0.12.0)
+- `_history/design/` — storia 2 sessioni design pre-recovery (26 file post-cleanup `0ee9789`, informativo non operativo — vedi `_history/README.md`. I 90 report v0.x dettagliati rimossi sono consultabili in git history)
 
 ## Hard constraints (non-negotiable)
 
@@ -269,5 +257,5 @@ Re-read this file. If still in doubt, ask Duccio. Don't guess on:
 - Anything that would appear in schema markup as fact
 
 ---
-*Last updated: 2026-05-05 · v1.0.0-recovery-wave3-debug · Debug & QA chiuso (`fd1f6fc`) · repo housekeeping done · Wave 4 ready to launch*
+*Last updated: 2026-05-05 · v1.0.0-recovery-wave3-debug · Debug & QA chiuso (`fd1f6fc`) · repo housekeeping + history distillation done (`0ee9789`) · Wave 4 ready to launch*
 *Maintained by orchestrator (Claude in chat) after each milestone.*
