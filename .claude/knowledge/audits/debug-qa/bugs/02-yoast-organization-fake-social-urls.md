@@ -87,11 +87,38 @@ richiede config update post-deploy.
 
 - [x] Reproduced
 - [x] Root cause identified
-- [ ] Fix applied (Phase 5 — opzione A se delega autonomia tech, else delega Elena)
-- [ ] Re-tested
-- [ ] Closed
+- [x] Fix applied (Opzione A: filter wpseo_schema_graph)
+- [x] Re-tested (Organization sameAs ora 2 URL confermati invece di 6 fake)
+- [x] Closed
 
-## Files coinvolti
+## Fix applied
 
-- `wp-content/themes/saltelli/inc/seo/yoast-schema-extensions.php` (Phase 5 patch)
-- WP-Admin → SEO → Settings → Site features → Knowledge graph (Elena alternative)
+Aggiunto `add_filter('wpseo_schema_graph', ..., 13, 2)` in
+`wp-content/themes/saltelli/inc/seo/yoast-schema-extensions.php`:
+
+```php
+foreach ($graph as &$piece) {
+    if (in_array($type, ['Organization','LegalService','LocalBusiness','ProfessionalService'], true)) {
+        $piece['sameAs'] = $authoritative_sameas; // da ACF Theme Options
+    }
+}
+```
+
+`$authoritative_sameas` letto da:
+1. ACF Theme Options (Wave 1+2): social_facebook, social_instagram, social_linkedin, social_twitter
+2. Fallback: saltelli_studio_data() helpers.php (Facebook share URL + Instagram)
+
+Verify post-fix su staging:
+```
+@type=Organization
+sameAs:
+  - https://www.facebook.com/share/1D1jCY7BnW/   (confermato)
+  - https://www.instagram.com/studiolegalesaltelli/ (confermato)
+```
+
+LinkedIn personale Emiliano resta su Person.sameAs (partial-attorney.php),
+NON Organization. Twitter/X TBD vuoto.
+
+Files modified:
+- `wp-content/themes/saltelli/inc/seo/yoast-schema-extensions.php` (+30 righe)
+- Deploy droplet: rsync + systemctl reload php8.2-fpm + cache flush.

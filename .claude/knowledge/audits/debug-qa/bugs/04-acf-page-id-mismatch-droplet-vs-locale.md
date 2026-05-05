@@ -134,10 +134,44 @@ Re-run smoke + ACF audit per confermare:
 
 - [x] Reproduced
 - [x] Root cause identified
-- [ ] Fix A applied (ACF custom location rule)
-- [ ] Fix B applied (data re-migration su droplet)
-- [ ] Fix C verified (smoke + audit)
-- [ ] Closed
+- [x] Fix A applied (ACF custom location rule `page_slug ==`, env-portable)
+- [x] Fix B applied (data re-migration su droplet via slug lookup)
+- [x] Fix C verified — smoke 21/21 PASS, ACF data ora su pagine corrette
+- [x] Closed (commit 8dc269b)
+
+## Fix applied
+
+**Sub-fix A**: `inc/acf-fields.php` aggiunge custom location rule `page_slug == <slug>`:
+```php
+add_filter('acf/location/rule_match/page_slug', function ($match, $rule, $screen) {
+    $page = get_post($screen['post_id']);
+    if (!$page || $page->post_type !== 'page') return false;
+    return $page->post_name === $rule['value'];
+}, 10, 3);
+```
+
+**Sub-fix B**: 5 Field Group JSON aggiornati a slug-based:
+- group_costi_v1.json: page_slug == "costi"
+- group_casi_v1.json: page_slug == "casi"
+- group_contatti_v1.json: page_slug == "contatti"
+- group_faq_v1.json: page_slug == "faq"
+- group_info_shared_v1.json: 5 OR clauses (guide-gratuite, come-lavoriamo, prima-consulenza, lavora-con-noi, richiedi-preventivo)
+
+**Sub-fix C**: `scripts/debug-qa-fix-page-id-mismatch.php` ha:
+- Repopolato 6 page WP via slug lookup (69/90 fields update applied; 21 no-change perché valori identici)
+- Cleaned up 42 fields orphan da diritto-societario/contrattualistica/glossario-legale
+- Idempotente + env-safe (no-op locale grazie a check has_orphan)
+
+Verify droplet:
+- /faq/ id 2708 → eyebrow="§ Risorse · Domande frequenti" ✓
+- /come-lavoriamo/ id 2712 → eyebrow="§ Lo studio · Come lavoriamo" ✓
+- /prima-consulenza/ id 2711 → eyebrow="§ Servizio · Prima consulenza" ✓
+- /richiedi-preventivo/ id 2713 → eyebrow="§ Servizio · Richiedi un preventivo" ✓
+- diritto-societario id 2705 → eyebrow="" (cleaned) ✓
+- contrattualistica id 2706 → eyebrow="" (cleaned) ✓
+- glossario-legale id 2710 → eyebrow="" (cleaned) ✓
+
+Smoke 21/21 PASS post-fix.
 
 ## Files coinvolti (Phase 5)
 

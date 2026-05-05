@@ -26,6 +26,24 @@ function saltelli_seo_plugin_active() {
     return false;
 }
 
+/**
+ * Debug-QA bug-01 fix: canonical SEMPRE emesso (anche con Yoast attivo).
+ * Yoast 27.5 in alcune config non emette `<link rel=canonical>` nonostante
+ * disable-canonical=not-set; emettiamo dal theme come safety net.
+ *
+ * Eventuali duplicati con Yoast canonical sono OK per browser/crawlers
+ * (ultima vince per HTML, ma in pratica Google li dedupa).
+ *
+ * @since 1.0.0 Debug-QA
+ */
+add_action('wp_head', 'saltelli_emit_canonical', 3);
+function saltelli_emit_canonical() {
+    $url = saltelli_canonical_url();
+    if ($url !== '') {
+        printf('<link rel="canonical" href="%s">' . "\n", esc_url($url));
+    }
+}
+
 add_action('wp_head', 'saltelli_emit_meta_tags', 4);
 function saltelli_emit_meta_tags() {
 
@@ -73,7 +91,7 @@ function saltelli_emit_meta_tags() {
     if ($desc !== '') {
         printf('<meta name="description" content="%s">' . "\n", esc_attr($desc));
     }
-    printf('<link rel="canonical" href="%s">' . "\n", esc_url($url));
+    // canonical now emitted by saltelli_emit_canonical (always, regardless of SEO plugin)
 
     // Open Graph.
     printf('<meta property="og:locale" content="%s">' . "\n", esc_attr($locale));

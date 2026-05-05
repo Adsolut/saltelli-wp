@@ -136,3 +136,49 @@ add_filter('wpseo_schema_graph', function ($graph, $context) {
 
     return $graph;
 }, 12, 2);
+
+/**
+ * Debug-QA bug-02 fix — sovrascrivi Yoast Organization.sameAs con i social
+ * confermati dal cliente (ACF Theme Options Wave 1).
+ *
+ * Yoast 27.5 emette un Organization piece con sameAs=[6 fake URLs] (Facebook
+ * /studiolegalesaltelli, X/legalesaltelli, TikTok, YouTube, ecc.) impostato
+ * via Yoast → Settings legacy. Il cliente NON gestisce quei profili.
+ *
+ * Source of truth (Wave 1+2):
+ *  - ACF Theme Options: social_facebook, social_instagram, social_linkedin, social_twitter
+ *  - Fallback: saltelli_studio_data() helpers.php (Facebook share URL + Instagram).
+ *
+ * Note: LinkedIn personale Emiliano va su Person.sameAs in partial-attorney.php,
+ * NON Organization (vedi memory project_linkedin_studio).
+ *
+ * @since 1.0.0 Debug-QA
+ */
+add_filter('wpseo_schema_graph', function ($graph, $context) {
+    if (!is_array($graph)) return $graph;
+
+    // Build authoritative sameAs from ACF Theme Options + fallback.
+    $studio_fallback = function_exists('saltelli_studio_data') ? saltelli_studio_data() : [];
+    $authoritative_sameas = [];
+    foreach (['facebook', 'instagram', 'linkedin', 'twitter'] as $net) {
+        $url = function_exists('saltelli_option') ? (string) saltelli_option('social_' . $net, '') : '';
+        if ($url === '' && !empty($studio_fallback['social'][$net])) {
+            $url = (string) $studio_fallback['social'][$net];
+        }
+        if ($url !== '') {
+            $authoritative_sameas[] = $url;
+        }
+    }
+
+    if (empty($authoritative_sameas)) return $graph;
+
+    foreach ($graph as &$piece) {
+        if (empty($piece['@type'])) continue;
+        $type = is_array($piece['@type']) ? $piece['@type'][0] : $piece['@type'];
+        // Apply only to Organization-type pieces (not Person).
+        if (!in_array($type, ['Organization', 'LegalService', 'LocalBusiness', 'ProfessionalService'], true)) continue;
+        $piece['sameAs'] = $authoritative_sameas;
+    }
+    unset($piece);
+    return $graph;
+}, 13, 2);

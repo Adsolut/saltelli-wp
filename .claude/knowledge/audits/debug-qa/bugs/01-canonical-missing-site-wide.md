@@ -73,10 +73,28 @@ Helper `saltelli_canonical_url()` già esiste in `inc/helpers.php:312`.
 
 - [x] Reproduced (29/29 HTML URL test)
 - [x] Root cause identified
-- [ ] Fix applied (Phase 5)
-- [ ] Re-tested
-- [ ] Closed
+- [x] Fix applied (commit 8fe8c2e... pending)
+- [x] Re-tested (canonical visibile su 7/7 URL test)
+- [x] Closed
 
-## Files da modificare (Phase 5)
+## Fix applied
 
-`wp-content/themes/saltelli/inc/seo/meta-tags.php`
+Split `saltelli_emit_meta_tags` in `wp-content/themes/saltelli/inc/seo/meta-tags.php`:
+- Nuovo `saltelli_emit_canonical` su `wp_head` priority 3 → emette SEMPRE
+- Vecchio `saltelli_emit_meta_tags` priority 4 → invariato (description+OG+Twitter solo se no SEO plugin)
+
+Eventuali duplicati con Yoast (se Yoast inizia ad emettere) sono OK
+per crawlers (HTML last canonical wins; Google dedupa).
+
+Deploy droplet: rsync + systemctl reload php8.2-fpm + cache flush.
+
+Verify post-fix:
+- /                            → canonical=https://staging.studiolegalesaltelli.it/
+- /lo-studio/                  → canonical=https://staging.studiolegalesaltelli.it/chi-siamo/ (after redirect)
+- /avvocati/emiliano-saltelli/ → canonical=https://staging.studiolegalesaltelli.it/avvocati/emiliano-saltelli/
+- /competenze/diritto-tributario/ → canonical=...
+- /faq/                        → canonical=...
+- /contatti/                   → canonical=...
+- /costi/                      → canonical=...
+
+Smoke 21/21 PASS post-fix.
