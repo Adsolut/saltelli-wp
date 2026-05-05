@@ -10,14 +10,14 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 
 **Strategy:** "Legal Luxury Minimal" — boutique editoriale italiano, tipografia dominante, palette navy/crema/bronzo. Tier-1 deep clusters: Tributario · Lavoro · Famiglia LGBTQ+. The other 16 practice areas get tier-2 lighter pages.
 
-## Current state — v1.0.0-recovery-wave3
+## Current state — v1.0.0-recovery-wave3-debug
 
-**Last updated:** 2026-05-05 (audit post-Wave 3 · Debug & QA phase active)
-**Branch:** `main` (`310b994`) · feature `feat/wave1-agent-b-cpt-fields` (20 commits cumulative pushed)
+**Last updated:** 2026-05-05 (Debug & QA chiuso · merge no-ff `fd1f6fc` · Wave 4 ready)
+**Branch:** `main` (`fd1f6fc`) · feature `feat/debug-qa` mergeata (7 commit Code Phase 1-6 + 3 fix)
 **Demo:** ✅ presentata al cliente · feedback iteration assorbita
-**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.0.0-recovery-wave3` · 21/21 PASS · ACF popolato (273 fields + 63 CPT items) · cliente CMS-autonomous unlocked
-**Active phase:** 🔍 **Debug & QA** — stress test pre-production. Sito in test attivo, NON in launch. EDITOR-HANDOFF v1.1 distribuito a Elena/Ludovica anche come strumento di QA editoriale.
-**Next:** **Wave 4 / Step F (Production Readiness)** — SOLO dopo chiusura debug · prompt già pronto in repo (1072 righe, 5 phases) · esecuzione rinviata
+**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.0.0-recovery-wave3-debug` · 21/21 PASS · 32/32 estesa (3 redirect 301 attesi) · ACF popolato + re-migrato via slug
+**Active phase:** Acceptance test editoriale (Elena/Ludovica) + Wave 4 ready to launch
+**Next:** **Wave 4 / Step F (Production Readiness)** — prompt pronto in repo (1072 righe, 5 phases) · lanciabile in parallelo agli acceptance test
 
 **Infra staging (consolidata 2026-04-30):**
 - Droplet DO `saltelli-staging-ams3-01` · IPv4 `178.62.207.50` · ams3 · s-1vcpu-2gb · Ubuntu 24.04 LTS
@@ -52,8 +52,9 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 | **Wave 3 — Template Refactor (page.php 1274→79 + 6 template-parts + ACF reads)** | **1.0.0-recovery-wave3** | **✅** |
 | EDITOR-HANDOFF v1.0 (manuale editoriale Elena/Ludovica/esterni) | docs · `60cea61` | ✅ |
 | EDITOR-HANDOFF v1.1 (workflow estesi + nota bio_estesa + fase debug) | docs | ✅ |
-| **Debug & QA — stress test pre-production** | **1.0.0-recovery-wave3-debug** | **🔍 ACTIVE** |
-| Wave 4 / Step F — Production Readiness (WOFF2, SRI, Critical CSS, Lighthouse ≥92) | 1.0.0-rc1 | ⏸ dopo debug |
+| **Debug & QA — stress test pre-production (4 bugs, 1 P0 architectural fix)** | **1.0.0-recovery-wave3-debug** | **✅** |
+| Acceptance test editoriale (Elena/Ludovica console+CF7+cross-browser+copy) | parallel | 🔍 ACTIVE |
+| **Wave 4 / Step F — Production Readiness (WOFF2, SRI, Critical CSS, Lighthouse ≥92)** | **1.0.0-rc1** | **⏸ ready to launch** |
 | Cut produzione (DNS switch staging→prod) | 1.0.0 | ⏸ |
 
 ### 0.17.x — consolidation log (4 collisioni di numbering risolte)
@@ -97,13 +98,19 @@ Per evitare future collisioni quando più agent committano in parallelo:
 - `PROMPT_AGENT_v1.0_WAVE1_FIELD_GROUPS.md` + `_RECOVERY.md` — ✅ done (Agent A+B+C consolidato)
 - `PROMPT_AGENT_v1.0_WAVE2_CONTENT_MIGRATION.md` — ✅ done
 - `PROMPT_AGENT_v1.0_WAVE3_TEMPLATE_REFACTOR.md` — ✅ done
-- `PROMPT_AGENT_v1.0_DEBUG_QA.md` — 🔍 active (stress test pre-production, branch dedicato `feat/debug-qa`)
-- `PROMPT_AGENT_v1.0_WAVE4_PRODUCTION_READINESS.md` — ⏸ ready, esegui DOPO debug
-- `PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` — runbook deploy (Fase 0+infra completata, deploy Wave 1+2+3 fatto via rsync ad-hoc 2026-05-04, Fasi 7-8 ancora aperte)
+- `PROMPT_AGENT_v1.0_DEBUG_QA.md` — ✅ done (4 bugs found, 3 closed + 1 deferred, P0 architectural fix `page_slug ==`)
+- `PROMPT_AGENT_v1.0_WAVE4_PRODUCTION_READINESS.md` — ⏸ ready to launch (5 phases, branch dedicato `feat/wave4-production-readiness`)
+- `PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` — runbook deploy (Fase 0+infra completata, deploy Wave 1+2+3+debug-qa fatto via rsync ad-hoc, Fasi 7-8 ancora aperte)
 - `_archive/prompts-completed/` — past prompts (informational, do NOT execute)
 
 **Editor-facing docs:**
 - `docs/EDITOR-HANDOFF.md` v1.1 — manuale editoriale italiano per Elena/Ludovica/esterni (esteso: workflow comuni, debug phase, nota bio_estesa, esempi reali, glossario AI/SEO)
+
+**Audit & QA reports:**
+- `.claude/knowledge/audits/debug-qa/reports/REPORT.md` — report consolidato Debug & QA
+- `.claude/knowledge/audits/debug-qa/bugs/01..04` — ticket bug (3 closed + 1 deferred)
+- `.claude/knowledge/audits/debug-qa/checks/` — audit raw (smoke, html-audit, link-check, schema-soft, acf-rendering)
+- `scripts/debug-qa-fix-page-id-mismatch.php` — re-migrazione ACF data via slug (idempotente env-safe)
 
 **Reports** (in `.claude/knowledge/design/sessione-1/reports/`):
 - `audit-alignment/REPORT.md` — Step Audit Alignment (sitemap + /costi/)
@@ -243,5 +250,5 @@ Re-read this file. If still in doubt, ask Duccio. Don't guess on:
 - Anything that would appear in schema markup as fact
 
 ---
-*Last updated: 2026-05-05 · v1.0.0-recovery-wave3 · Debug & QA phase active · Wave 4 deferred*
+*Last updated: 2026-05-05 · v1.0.0-recovery-wave3-debug · Debug & QA chiuso (merge `fd1f6fc`) · Wave 4 ready to launch*
 *Maintained by orchestrator (Claude in chat) after each milestone.*
