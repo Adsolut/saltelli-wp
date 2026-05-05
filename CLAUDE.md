@@ -142,6 +142,52 @@ Per evitare future collisioni quando più agent committano in parallelo:
 | **Design tokens locked** in `tokens.css` — never modify them | The whole system depends on stability |
 | **Yoast coabitation respected** — never emit Organization/Article/Breadcrumb if Yoast active | No schema duplicates |
 | **Foto Emiliano `_thumbnail_id=2683`** + **bio_estesa avvocati** preserved across all runs | Step D content + Step C.5 photo integration |
+| **One-writer-at-a-time** — una sola sessione (chat orchestratore O Claude Code) committa su `main` o branch attivi alla volta | Vedi pattern dettagliato in "Workflow rules" sotto |
+
+## Workflow rules (orchestratore ↔ Claude Code)
+
+### Pattern di lavoro consolidato
+
+Il progetto Saltelli usa un pattern a due ruoli con responsabilità disgiunte:
+
+```
+┌─ Orchestratore (Claude in chat, su Claude.ai)
+│   └─ ruolo: pianifica, scrive prompt, audita, mergea
+│   └─ commits: docs/*, prompts/*, .claude/knowledge/*, CLAUDE.md, README.md
+│
+└─ Claude Code (sessione dedicata su terminale)
+    └─ ruolo: esegue prompt assegnato, lavora in branch dedicato
+    └─ commits: wp-content/themes/saltelli/*, scripts/*, .claude/knowledge/audits/{nome}/*
+```
+
+### One-writer-at-a-time (HARD RULE)
+
+**Solo una delle due sessioni è attiva sui commit alla volta.**
+
+- Quando l'orchestratore lancia un task per Claude Code (es. Wave 4), l'orchestratore **NON committa nulla** sulla repo finché Claude Code non ha pushato il branch dedicato e l'audit è stato completato.
+- Quando l'orchestratore sta lavorando su qualcosa (es. test plan, manuale, refactor doc), Claude Code **è fermo**.
+- **Niente committi paralleli sulla stessa repo.**
+
+### Cosa fare se vedi qualcosa di urgente durante l'attesa
+
+Se come orchestratore vedi un fix necessario mentre Claude Code sta lavorando: **annotalo, non committarlo**. Lo discutiamo in chat dopo l'audit del branch di Claude Code. La probabilità che Claude Code abbia già fixato la stessa cosa è alta (è successo già: vedi commit `0ee9789` + `b6bfbf9` del 2026-05-05).
+
+### Mitigazione collisioni se accadono comunque
+
+- File disgiunti modificati da entrambe le sessioni: `git pull --rebase` risolve da solo, push.
+- Stesso file modificato da entrambe le sessioni: la sessione che pusha per seconda fa `git pull --rebase`, riconcilia a mano, ripusha. **Non riscrivere mai la storia git pubblica.**
+- Stessa modifica fatta da entrambe (improbabile ma capitato): la sessione che pusha per seconda nota il duplicato e abbandona il proprio commit (`git reset --soft HEAD~`).
+
+### Branch policy
+
+- **`main`** — niente commit diretti per cambi al codice tema. Solo merge no-ff da branch dedicati.
+- **`feat/{nome}`** — ogni wave/task in branch separato (es. `feat/debug-qa`, `feat/wave4-production-readiness`).
+- **`chore/{nome}`** — housekeeping, refactor doc, cleanup (es. `chore/repo-housekeeping`).
+- **Documentazione minore** (typo CLAUDE.md, fix link rotto in README) — ammesso commit diretto su `main`, ma sempre quando l'altra sessione è ferma.
+
+### Identità git
+
+Dal 2026-05-05 entrambe le sessioni committano sotto `AdsolutAdv <aldo.santoro@adsolut.it>` (config locale repo). La storia precedente firmata `Codencore <git@adhost.it>` resta immutabile.
 
 ## Design system (locked)
 
@@ -257,5 +303,5 @@ Re-read this file. If still in doubt, ask Duccio. Don't guess on:
 - Anything that would appear in schema markup as fact
 
 ---
-*Last updated: 2026-05-05 · v1.0.0-recovery-wave3-debug · Debug & QA chiuso (`fd1f6fc`) · repo housekeeping + history distillation done (`0ee9789`) · Wave 4 ready to launch*
+*Last updated: 2026-05-05 · v1.0.0-recovery-wave3-debug · Debug & QA chiuso (`fd1f6fc`) · repo housekeeping + history distillation done (`0ee9789`) · workflow rules formalizzate · Wave 4 ready to launch*
 *Maintained by orchestrator (Claude in chat) after each milestone.*
