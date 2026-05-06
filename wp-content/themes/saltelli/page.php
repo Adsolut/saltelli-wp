@@ -18,13 +18,30 @@ get_header();
 
 while (have_posts()) :
     the_post();
-    $sl_chi_siamo = is_page('chi-siamo');
+    // Wave 5: durante Phase 4 il page hub usa slug temporaneo 'chi-siamo-hub'.
+    // Phase 5 ribilancia: 'chi-siamo' → 'lo-studio' (Lo Studio), 'chi-siamo-hub' → 'chi-siamo' (HUB).
+    // Il routing qui sotto copre lo stato transitorio (Phase 4) e finale (post-Phase 5).
+    $sl_lo_studio = is_page('lo-studio') || (is_page('chi-siamo') && !is_page('chi-siamo-hub'));
+    $sl_chi_siamo_hub = is_page('chi-siamo-hub');
     $sl_casi      = is_page('casi');
+    $sl_hub_any   = $sl_chi_siamo_hub
+        || is_page('aree-di-pratica')
+        || is_page('risorse')
+        || is_page('costi-e-consulenze');
     ?>
-    <article <?php post_class('sl-page' . ($sl_chi_siamo ? ' sl-chi-siamo' : '') . ($sl_casi ? ' sl-casi-page' : '')); ?>>
+    <article <?php post_class('sl-page' . ($sl_lo_studio ? ' sl-chi-siamo' : '') . ($sl_casi ? ' sl-casi-page' : '') . ($sl_hub_any ? ' sl-page--hub' : '')); ?>>
 
         <?php
-        if ($sl_chi_siamo) {
+        // Wave 5 — 4 nuove hub pages (precedenza prima dei legacy is_page case).
+        if ($sl_chi_siamo_hub) {
+            get_template_part('template-parts/page', 'chi-siamo-hub');
+        } elseif (is_page('aree-di-pratica')) {
+            get_template_part('template-parts/page', 'aree-di-pratica-hub');
+        } elseif (is_page('risorse')) {
+            get_template_part('template-parts/page', 'risorse-hub');
+        } elseif (is_page('costi-e-consulenze')) {
+            get_template_part('template-parts/page', 'costi-e-consulenze-hub');
+        } elseif ($sl_lo_studio) {
             get_template_part('template-parts/page', 'chi-siamo');
         } elseif ($sl_casi) {
             get_template_part('template-parts/page', 'casi');
@@ -33,7 +50,7 @@ while (have_posts()) :
         } elseif (is_page('glossario-legale')) {
             // Render delegato a inc/wave3-glossario.php (legacy specialized).
             include SALTELLI_THEME_DIR . '/inc/wave3-glossario.php';
-        } elseif (is_page('faq')) {
+        } elseif (is_page(['faq', 'domande-frequenti'])) {
             get_template_part('template-parts/page', 'faq');
         } elseif (is_page(['guide-gratuite', 'come-lavoriamo', 'prima-consulenza', 'lavora-con-noi', 'richiedi-preventivo'])) {
             get_template_part('template-parts/page', 'info-shared');

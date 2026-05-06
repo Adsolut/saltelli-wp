@@ -57,7 +57,9 @@ function saltelli_register_cpt_competenza() {
             'feeds'      => false,
         ],
         'capability_type'    => 'post',
-        'has_archive'        => 'aree-di-pratica',
+        // Wave 5: has_archive disabilitato. /aree-di-pratica/ è una page WP (hub).
+        // /aree-di-pratica/{cluster}/ usa il taxonomy archive di tipo-area (taxonomy-tipo-area.php).
+        'has_archive'        => false,
         'hierarchical'       => false,
         'menu_position'      => 6,
         'menu_icon'          => 'dashicons-portfolio',
