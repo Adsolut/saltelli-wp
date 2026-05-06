@@ -1,0 +1,23 @@
+# Edge cases verification post-FIX A
+# Branch: fix/wave5-blog-rewrites
+# Date: 2026-05-06
+
+=== Page hub /risorse/blog/ (page WP ID 1413) ===
+Status: 200 — atteso 200 → OK
+
+=== Sub-archive category (real terms) ===
+/risorse/blog/category/contratti/ → 200 → OK
+/risorse/blog/category/diritto-del-lavoro/ → 200 → OK
+/risorse/blog/category/diritto-di-famiglia-ed-ereditario/ → 200 → OK
+
+=== Sub-archive category (fake) ===
+/risorse/blog/category/categoria-inesistente/ → 404 → atteso 404 → OK
+
+=== Slug post inesistente (deve 404) ===
+/risorse/blog/questo-slug-non-esiste-xyz/ → 404 → atteso 404 → OK
+
+=== Top-level slug (permalink struct globale invariato) ===
+/dividere-la-casa-familiare-priorita-al-benessere-dei-figli/ → 200 → atteso 200 → OK
+
+=== /risorse/ parent page ===
+/risorse/ → 200 → atteso 200 → OK
