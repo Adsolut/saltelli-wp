@@ -41,6 +41,7 @@ add_action('init', function () {
         'show_in_rest'       => true,
     ]);
 
+    // Wave 5: saltelli_caso passa public (URL /chi-siamo/risultati/{slug}/, B5.4 cliente)
     register_post_type('saltelli_caso', [
         'label' => __('Caso rappresentativo', 'saltelli'),
         'labels' => [
@@ -50,16 +51,20 @@ add_action('init', function () {
             'edit_item'     => __('Modifica caso', 'saltelli'),
             'all_items'     => __('Tutti i casi', 'saltelli'),
         ],
-        'public'             => false,
-        'publicly_queryable' => false,
+        'public'             => true,
+        'publicly_queryable' => true,
         'show_ui'            => true,
         'show_in_menu'       => true,
         'menu_position'      => 26,
         'menu_icon'          => 'dashicons-awards',
         'capability_type'    => 'post',
-        'has_archive'        => false,
-        'rewrite'            => false,
-        'supports'           => ['title', 'page-attributes'],
+        'has_archive'        => 'chi-siamo/risultati',
+        'rewrite'            => [
+            'slug'       => 'chi-siamo/risultati',
+            'with_front' => false,
+            'feeds'      => false,
+        ],
+        'supports'           => ['title', 'editor', 'thumbnail', 'custom-fields', 'page-attributes'],
         'show_in_rest'       => true,
     ]);
 
