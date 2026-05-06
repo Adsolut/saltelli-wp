@@ -1,0 +1,22 @@
+numero,competenza_titolo,slug_proposto,cluster_tipo_area,tier,owner_avvocato,note,wp_action_wave5
+01,Tributario,tributario,privati,tier1-deep,emiliano-saltelli,"Tier-1 deep cluster — answer capsule + FAQ generalizzata + statistic-with-source (cassa contenziosi tributari)",KEEP_assign_term_privati
+02,Cartelle esattoriali,cartelle-esattoriali,privati,tier2,(condivisa),Tier-2 lighter,KEEP_assign_term_privati
+03,Recupero crediti,recupero-crediti,imprese,tier2,(condivisa),Tier-2 — solo cluster imprese (decisione cliente),KEEP_assign_term_imprese
+04,Diritto del lavoro,diritto-del-lavoro,privati,tier1-deep,fabiana-saltelli,Tier-1 deep — Avv. Fabiana giuslavorista,KEEP_assign_term_privati
+05,Diritto di famiglia LGBTQ+,diritto-di-famiglia-lgbtq,privati,tier1-deep,antonia-battista,Tier-1 deep — Antonia asset principale (COA Famiglia + Municipalità 1),KEEP_assign_term_privati
+06,Responsabilità medica,responsabilita-medica,privati,tier2,(condivisa),"Tier-2 — autonoma, NO MERGE in Risarcimento Danni (decisione cliente vs proposta audit)",KEEP_assign_term_privati
+07,Bancario,bancario,privati,tier2,(condivisa),Tier-2 — solo cluster privati (decisione cliente vs proposta dual),KEEP_assign_term_privati
+08,Condominiale e immobiliare,condominiale-immobiliare,privati,tier2,stefano-gaetano-tedesco,Tier-2 — Avv. Tedesco titolare,KEEP_assign_term_privati
+09,Immigrazione,immigrazione,privati,tier2,(condivisa),Tier-2 — multilingua impatto (solo IT presente per il go-live),KEEP_assign_term_privati
+10,Penale,penale,privati,tier2,(condivisa),Tier-2,KEEP_assign_term_privati
+11,Previdenziale (= Invalidità Civile),previdenziale,privati,tier2,(condivisa),Tier-2 — = Invalidità Civile (BRIEF dicitura),KEEP_assign_term_privati
+12,Successioni,successioni,privati,tier2,(condivisa),Tier-2,KEEP_assign_term_privati
+13,Risarcimento Danni,risarcimento-danni,privati,tier2,(condivisa),"Tier-2 — autonomo, NO MERGE con malasanità + infortunistica come voleva audit",KEEP_assign_term_privati
+14,Domiciliazione impresa,domiciliazione-impresa,imprese,tier2,(condivisa),Tier-2 — solo cluster imprese,KEEP_assign_term_imprese
+15,Diritto amministrativo,diritto-amministrativo,contenzioso-amministrativo,tier2,(condivisa),"Tier-2 — UNICA area cluster contenzioso-amministrativo (NUOVO term Wave 5)",KEEP_assign_term_contenzioso-amministrativo
+16,Infortunistica stradale,infortunistica-stradale,privati,tier2,(condivisa),"NUOVA area Wave 5 — autonoma, NO MERGE in Risarcimento Danni",CREATE_new_post_assign_term_privati
+17,Aste immobiliari,aste-immobiliari,privati,tier2,(condivisa),"NUOVA area Wave 5 — mai nominata in BRIEF/audit, decisione cliente",CREATE_new_post_assign_term_privati
+DEL01,Assicurazioni,assicurazioni,DELETE_410,—,—,Eliminata da Wave 5 — non in audit firmato (decisione cliente),DELETE_post_redirect_301_to_archive_aree-di-pratica
+DEL02,Responsabilità civile,responsabilita-civile,DELETE_410,—,—,Eliminata da Wave 5 — non in audit firmato (decisione cliente),DELETE_post_redirect_301_to_archive_aree-di-pratica
+DEL03,Consulenze online,consulenze-online,DELETE_410,—,—,"Eliminata da Wave 5 — è una modalità (saltelli_modalita CPT esistente), non pratica autonoma",DELETE_post_redirect_301_to_archive_aree-di-pratica
+DEL04,Diritto commerciale,diritto-commerciale,DELETE_410,—,—,Eliminata da Wave 5 — non in audit firmato (decisione cliente),DELETE_post_redirect_301_to_archive_aree-di-pratica
