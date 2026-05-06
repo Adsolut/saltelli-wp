@@ -18,11 +18,14 @@ get_header();
 
 while (have_posts()) :
     the_post();
-    // Wave 5: durante Phase 4 il page hub usa slug temporaneo 'chi-siamo-hub'.
-    // Phase 5 ribilancia: 'chi-siamo' → 'lo-studio' (Lo Studio), 'chi-siamo-hub' → 'chi-siamo' (HUB).
-    // Il routing qui sotto copre lo stato transitorio (Phase 4) e finale (post-Phase 5).
-    $sl_lo_studio = is_page('lo-studio') || (is_page('chi-siamo') && !is_page('chi-siamo-hub'));
-    $sl_chi_siamo_hub = is_page('chi-siamo-hub');
+    // Wave 5 routing post-rename:
+    //   /chi-siamo/        → HUB Chi Siamo (page-chi-siamo-hub.php)
+    //   /chi-siamo/lo-studio/ → page Lo Studio (page-lo-studio.php)
+    //   /aree-di-pratica/  → HUB Aree (page-aree-di-pratica-hub.php)
+    //   /risorse/          → HUB Risorse (page-risorse-hub.php)
+    //   /costi-e-consulenze/ → HUB Costi (page-costi-e-consulenze-hub.php)
+    $sl_lo_studio = is_page('lo-studio');
+    $sl_chi_siamo_hub = is_page('chi-siamo');
     $sl_casi      = is_page('casi');
     $sl_hub_any   = $sl_chi_siamo_hub
         || is_page('aree-di-pratica')
@@ -32,7 +35,7 @@ while (have_posts()) :
     <article <?php post_class('sl-page' . ($sl_lo_studio ? ' sl-chi-siamo' : '') . ($sl_casi ? ' sl-casi-page' : '') . ($sl_hub_any ? ' sl-page--hub' : '')); ?>>
 
         <?php
-        // Wave 5 — 4 nuove hub pages (precedenza prima dei legacy is_page case).
+        // Wave 5 — hub pages (precedenza prima dei legacy is_page case).
         if ($sl_chi_siamo_hub) {
             get_template_part('template-parts/page', 'chi-siamo-hub');
         } elseif (is_page('aree-di-pratica')) {
@@ -42,7 +45,7 @@ while (have_posts()) :
         } elseif (is_page('costi-e-consulenze')) {
             get_template_part('template-parts/page', 'costi-e-consulenze-hub');
         } elseif ($sl_lo_studio) {
-            get_template_part('template-parts/page', 'chi-siamo');
+            get_template_part('template-parts/page', 'lo-studio');
         } elseif ($sl_casi) {
             get_template_part('template-parts/page', 'casi');
         } elseif (is_page('contatti')) {

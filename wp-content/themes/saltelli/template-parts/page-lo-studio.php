@@ -1,10 +1,13 @@
 <?php
 /**
- * Template part: page-chi-siamo.php
+ * Template part: page-lo-studio.php
  *
- * Render della page /chi-siamo/. Estratto da page.php pre-Wave3 blocco
- * `if ($sl_chi_siamo)`. NO Field Group ACF dedicato — content hardcoded
- * resta inalterato (Wave 3.1 potrà aggiungere group_chi_siamo se servirà).
+ * Render della page /chi-siamo/lo-studio/ — la pagina "Lo Studio" sotto l'hub Chi Siamo.
+ * Wave 5 IA refactor: rinominato da page-chi-siamo.php (slug 'chi-siamo' è ora la pagina HUB).
+ * NO Field Group ACF dedicato — content hardcoded resta inalterato.
+ *
+ * Le CSS classes `.sl-chi-siamo__*` mantengono il prefix legacy per non rompere
+ * sections.css existing rules — sono semantiche del template, non della page slug.
  *
  * Sezioni:
  *  § 01 — Lede + drop-cap
@@ -15,7 +18,8 @@
  *  § 06 — CTA finale
  *
  * @package Saltelli
- * @since 1.0.0 Wave 3
+ * @since 1.0.0 Wave 3 (orig. page-chi-siamo.php)
+ * @since 1.1.0 Wave 5 (renamed page-lo-studio.php + CAL-05)
  */
 defined('ABSPATH') || exit;
 
