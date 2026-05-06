@@ -335,6 +335,72 @@
             "placeholder": ""
         },
         {
+            "key": "field_brand_trust_signal_1_label",
+            "label": "Trust signal 1 — Label (Wave 6)",
+            "name": "trust_signal_1_label",
+            "type": "text",
+            "instructions": "Trust bar globale (4 segnali credibilità). Label = numero/titolo grande Playfair.",
+            "default_value": "20+ ANNI",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_1_caption",
+            "label": "Trust signal 1 — Caption (Wave 6)",
+            "name": "trust_signal_1_caption",
+            "type": "text",
+            "instructions": "Caption mono uppercase sotto il numero.",
+            "default_value": "ESPERIENZA",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_2_label",
+            "label": "Trust signal 2 — Label (Wave 6)",
+            "name": "trust_signal_2_label",
+            "type": "text",
+            "default_value": "4 AVVOCATI",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_2_caption",
+            "label": "Trust signal 2 — Caption (Wave 6)",
+            "name": "trust_signal_2_caption",
+            "type": "text",
+            "default_value": "TEAM SPECIALIZZATO",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_3_label",
+            "label": "Trust signal 3 — Label (Wave 6)",
+            "name": "trust_signal_3_label",
+            "type": "text",
+            "default_value": "17 AREE",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_3_caption",
+            "label": "Trust signal 3 — Caption (Wave 6)",
+            "name": "trust_signal_3_caption",
+            "type": "text",
+            "default_value": "DI PRATICA",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_4_label",
+            "label": "Trust signal 4 — Label (Wave 6)",
+            "name": "trust_signal_4_label",
+            "type": "text",
+            "default_value": "COA FAMIGLIA",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_4_caption",
+            "label": "Trust signal 4 — Caption (Wave 6)",
+            "name": "trust_signal_4_caption",
+            "type": "text",
+            "default_value": "MUNICIPALITÀ 1",
+            "maxlength": 40
+        },
+        {
             "key": "field_tab_footer",
             "label": "Footer",
             "name": "",
@@ -641,5 +707,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1777902787
+    "modified": 1778084518
 }
