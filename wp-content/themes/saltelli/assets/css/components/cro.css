@@ -1,0 +1,453 @@
+/**
+ * Wave 6 — GEO/CRO Patterns Bundle
+ *
+ * 10 pattern adattati da componenti DS esistenti (DEC-019).
+ * Riferimento spec: prompts/pattern-adaptation-map.md
+ *
+ * Hard rules rispettate:
+ *   - solo var(--*) tokens (NO hardcoded color/font/space)
+ *   - prefers-reduced-motion: reduce → opt-out per ogni transition
+ *   - responsive 768/480px (mobile-first dove rilevante)
+ *   - aria-label gestiti nei template-part PHP
+ */
+
+/* ─────────────────────────────────────────────────────────
+   Pattern 1 — Answer capsule (40-60 parole, GEO citation)
+   Usa lede italic Playfair (.sl-competenza__answer) esistente
+   + bordo bottom hairline + max-width 60ch.
+   ───────────────────────────────────────────────────────── */
+.sl-answer-capsule {
+  margin: var(--s-5) 0 var(--s-6) 0;
+  padding-bottom: var(--s-5);
+  border-bottom: 1px solid var(--border);
+  max-width: 60ch;
+}
+.sl-answer-capsule .sl-mono {
+  margin-bottom: var(--s-3);
+}
+
+/* CTA progressive top (ghost) sotto answer-capsule, prima della hero CTA primary */
+.sl-competenza__cta-top {
+  margin: var(--s-4) 0 var(--s-5) 0;
+}
+
+/* CTA progressive middle (primary) — section dedicata prima della FAQ */
+.sl-competenza__cta-middle {
+  padding: var(--s-7) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+.sl-competenza__cta-middle .sl-mono {
+  margin-bottom: var(--s-3);
+  color: var(--text-muted);
+}
+
+/* ─────────────────────────────────────────────────────────
+   Pattern 2 + Pattern 7 — Trust bar globale (4 segnali credibilità)
+   Grid 4-col desktop, 2x2 tablet, 1-col mobile.
+   ───────────────────────────────────────────────────────── */
+.sl-trust-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-5);
+  padding: var(--s-6) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.sl-trust-bar__item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.sl-trust-bar__label {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--primary);
+  letter-spacing: var(--ls-display);
+}
+.sl-trust-bar__caption {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+/* Pattern 7 — micro-source legend (riserva opzionale per future estensioni) */
+.sl-trust-bar__source {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: var(--s-2);
+  opacity: 0.7;
+}
+.sl-trust-bar__source a {
+  border-bottom: 1px solid var(--border);
+  transition: border-color var(--dur-base) var(--ease-editorial),
+              color var(--dur-base) var(--ease-editorial);
+}
+.sl-trust-bar__source a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sl-trust-bar__source a { transition: none; }
+}
+@media (max-width: 768px) {
+  .sl-trust-bar {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+    padding: var(--s-5) 0;
+  }
+}
+@media (max-width: 480px) {
+  .sl-trust-bar { grid-template-columns: 1fr; gap: var(--s-3); }
+}
+
+/* Homepage section wrappers per testimonials + trust-bar */
+.sl-front-trust {
+  padding: var(--s-7) 0 var(--s-6) 0;
+}
+.sl-front-testimonials {
+  padding: var(--s-7) 0 var(--s-6) 0;
+}
+
+/* ─────────────────────────────────────────────────────────
+   Pattern 3 — Mobile sticky bottom bar (3 azioni)
+   Hidden by default. Visible only on mobile, exclusion via PHP
+   (NO CSS :not() chains — vedi CAL-W6-06).
+   ───────────────────────────────────────────────────────── */
+.sl-mobile-bar {
+  display: none;
+}
+@media (max-width: 768px) {
+  .sl-mobile-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--background);
+    border-top: 1px solid var(--border);
+    z-index: 50;
+    box-shadow: 0 -4px 12px rgba(27, 43, 75, 0.06);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+.sl-mobile-bar__action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-3) var(--s-2);
+  text-decoration: none;
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  border-right: 1px solid var(--border);
+  transition: background var(--dur-fast) var(--ease-editorial);
+  min-height: 56px;
+}
+.sl-mobile-bar__action:last-child { border-right: none; }
+.sl-mobile-bar__action:active,
+.sl-mobile-bar__action:hover {
+  background: var(--surface);
+  color: var(--accent);
+}
+.sl-mobile-bar__icon {
+  font-size: 18px;
+  line-height: 1;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+}
+.sl-mobile-bar__label {
+  display: block;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sl-mobile-bar__action { transition: none; }
+}
+
+/* Riserva spazio in fondo alle pagine quando la sticky bar è visibile,
+ * altrimenti la barra copre l'ultimo contenuto.
+ * NB: WP body class single-avvocato e page-template-page-contatti escludono
+ * la sticky bar lato PHP, ma non hanno bisogno di padding extra. */
+@media (max-width: 768px) {
+  body:not(.single-avvocato):not(.page-contatti):not(.error404) {
+    padding-bottom: 64px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   Pattern 4 — Inline mini-form contestuale
+   Surface bg + input fields editorial.
+   ───────────────────────────────────────────────────────── */
+.sl-mini-form {
+  margin: var(--s-7) auto;
+  padding: var(--s-6);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  max-width: 720px;
+}
+.sl-mini-form .sl-mono {
+  margin-bottom: var(--s-3);
+  color: var(--text-muted);
+}
+.sl-mini-form__title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 400;
+  line-height: var(--lh-heading);
+  color: var(--primary);
+  margin-bottom: var(--s-2);
+}
+.sl-mini-form__lede {
+  font-family: var(--font-display);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: var(--s-5);
+  max-width: 50ch;
+}
+.sl-mini-form__lede em {
+  font-style: italic;
+  color: var(--primary);
+}
+.sl-mini-form input[type="text"],
+.sl-mini-form input[type="email"],
+.sl-mini-form input[type="tel"],
+.sl-mini-form select,
+.sl-mini-form textarea {
+  width: 100%;
+  padding: var(--s-3);
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: var(--s-3);
+  transition: border-color var(--dur-fast) var(--ease-editorial);
+}
+.sl-mini-form input:focus,
+.sl-mini-form select:focus,
+.sl-mini-form textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-color: var(--primary);
+}
+.sl-mini-form__cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  align-items: flex-start;
+}
+.sl-mini-form__hint {
+  margin-top: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sl-mini-form input,
+  .sl-mini-form select,
+  .sl-mini-form textarea { transition: none; }
+}
+@media (max-width: 768px) {
+  .sl-mini-form { padding: var(--s-5); }
+  .sl-mini-form__title { font-size: 24px; }
+  .sl-mini-form__lede { font-size: 16px; }
+}
+
+/* Section wrapper container per mini-form embed */
+.sl-competenza__mini-form-wrap,
+.sl-costi-w4__mini-form-wrap {
+  padding: var(--s-6) 0;
+}
+
+/* ─────────────────────────────────────────────────────────
+   Pattern 6 — Testimonials block
+   Grid 3-col desktop, 1-col mobile. NO carousel JS.
+   ───────────────────────────────────────────────────────── */
+.sl-testimonials-section {
+  padding: var(--s-6) 0;
+}
+.sl-testimonials-section .sl-mono {
+  margin-bottom: var(--s-3);
+}
+.sl-testimonials__h {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 400;
+  line-height: var(--lh-heading);
+  color: var(--primary);
+  margin-bottom: var(--s-6);
+  letter-spacing: var(--ls-display);
+}
+.sl-testimonials {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-6);
+}
+.sl-testimonial {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.sl-testimonial__topic {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.sl-testimonial__quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.5;
+  color: var(--primary);
+  padding-left: var(--s-3);
+  border-left: 2px solid var(--accent);
+  margin: 0;
+}
+.sl-testimonial__attribution {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.sl-testimonial__attribution::before {
+  content: "— ";
+  color: var(--accent);
+}
+@media (max-width: 768px) {
+  .sl-testimonials { grid-template-columns: 1fr; gap: var(--s-5); }
+}
+
+/* ─────────────────────────────────────────────────────────
+   Pattern 9 — Author byline ricca (single blog)
+   Sotto la lede, prima del featured image.
+   ───────────────────────────────────────────────────────── */
+.sl-author-byline {
+  margin: var(--s-5) 0 var(--s-3) 0;
+  padding-bottom: var(--s-5);
+  border-bottom: 1px solid var(--border);
+  max-width: 60ch;
+}
+.sl-author-byline__bio {
+  font-family: var(--font-display);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--primary);
+  margin-bottom: var(--s-3);
+  max-width: 60ch;
+}
+.sl-author-byline__bio em {
+  font-style: italic;
+}
+.sl-author-expertise {
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sl-author-expertise li { margin: 0; }
+.sl-author-expertise .sl-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: var(--s-1) var(--s-3);
+  border: 1px solid var(--border);
+  background: transparent;
+  transition: border-color var(--dur-fast) var(--ease-editorial),
+              color var(--dur-fast) var(--ease-editorial);
+}
+.sl-author-expertise .sl-tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sl-author-expertise .sl-tag { transition: none; }
+}
+
+/* ─────────────────────────────────────────────────────────
+   Pattern 10 — Related services (Aree correlate)
+   Riusa .sl-area row pattern esistente con modifier --related.
+   ───────────────────────────────────────────────────────── */
+.sl-related-services {
+  padding: var(--s-7) 0;
+}
+.sl-related-services .sl-mono {
+  margin-bottom: var(--s-3);
+  color: var(--text-muted);
+}
+.sl-related-services .sl-section-title {
+  margin-bottom: var(--s-5);
+}
+.sl-related-services .sl-area-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.sl-area--related {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-4) 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  transition: transform var(--dur-base) var(--ease-editorial),
+              border-color var(--dur-base) var(--ease-editorial),
+              color var(--dur-base) var(--ease-editorial);
+}
+.sl-area--related:first-child {
+  border-top: 1px solid var(--border);
+}
+.sl-area--related:hover {
+  transform: translateX(8px);
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
+.sl-area--related .sl-area__num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.sl-area--related .sl-area__title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: var(--ls-display);
+}
+.sl-area--related .sl-area__meta {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--text-muted);
+}
+.sl-area--related:hover .sl-area__meta {
+  color: var(--accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sl-area--related { transition: none; }
+  .sl-area--related:hover { transform: none; }
+}
+@media (max-width: 768px) {
+  .sl-area--related {
+    grid-template-columns: 48px 1fr auto;
+    padding: var(--s-3) 0;
+  }
+  .sl-area--related .sl-area__title { font-size: 18px; }
+}
