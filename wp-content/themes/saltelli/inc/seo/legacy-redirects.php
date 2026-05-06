@@ -101,6 +101,11 @@ function saltelli_mvp_to_audit_redirect_map() {
         '/competenze/responsabilita-civile/'      => '/aree-di-pratica/',
         '/competenze/consulenze-online/'          => '/aree-di-pratica/',
         '/competenze/diritto-commerciale/'        => '/aree-di-pratica/',
+
+        // DISCOVERY-01 consolidamento (Wave 5 mini-fix BLOCKER B, 2026-05-06):
+        // Post 2669 `diritto-di-famiglia` (NO LGBTQ+) eliminato per consolidamento
+        // con sibling 2666 `diritto-di-famiglia-lgbtq` (DEC-021 cliente-firmato).
+        '/aree-di-pratica/privati/diritto-di-famiglia/' => '/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/',
     ];
 }
 endif;

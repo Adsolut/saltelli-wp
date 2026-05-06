@@ -1,0 +1,36 @@
+=== Smoke consolidamento BLOCKER B (post fix) ===
+Branch: fix/wave5-blog-rewrites
+Date: 2026-05-06
+
+=== Test 1 — Nuovo redirect /aree-di-pratica/privati/diritto-di-famiglia/ ===
+Status: 301
+Redirect: http://localhost:8080/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/
+Atteso: 301 → http://localhost:8080/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/
+Result: PASS
+
+=== Test 2 — Target LGBTQ+ ancora 200 ===
+/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/ → 200
+Result: PASS
+
+=== Test 3 — Smoke audit-aligned (no regression) ===
+/ → 200 → PASS
+/aree-di-pratica/ → 200 → PASS
+/aree-di-pratica/privati/ → 200 → PASS
+/chi-siamo/team/antonia-battista/ → 200 → PASS
+/risorse/blog/ → 200 → PASS
+
+=== Test 4 — Redirect legacy campione (no regression) ===
+/lo-studio/ → 301 → PASS
+/avvocati/ → 301 → PASS
+/casi/ → 301 → PASS
+
+=== Test 5 — Chain /avvocato-divorzista/ (mappa A → mappa B, 2 hops) ===
+/avvocato-divorzista/ → final=200 hops=2 → http://localhost:8080/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/ → PASS
+/avvocato-divorzista-italia/ → final=200 hops=2 → http://localhost:8080/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/ → PASS
+
+=== Test 6 — /competenze/diritto-di-famiglia/ (hardcoded slug taxonomy-tipo-area.php:86) ===
+/competenze/diritto-di-famiglia/ → final=200 hops=1 → http://localhost:8080/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/ → PASS
+(WP redirect_guess_404_permalink() fuzzy-matches sibling slug "diritto-di-famiglia-lgbtq" e redirige a get_permalink(2666). Risolve automaticamente il caso hardcoded — niente intervento template necessario.)
+
+=== Test 7 — Altri hardcoded refs (verifica risoluzione automatica) ===
+/competenze/diritto-di-famiglia/ → 301 → http://localhost:8080/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/
