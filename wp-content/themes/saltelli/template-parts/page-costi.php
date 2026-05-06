@@ -308,6 +308,19 @@ $sl_costi_phone_href  = 'tel:+390818131119';
         </div>
     </section>
 
+    <?php /* Wave 6 Pattern 4 — Mini-form contestuale costi (intercetta dubbi pre-conversione) */ ?>
+    <section class="sl-costi-w4__mini-form-wrap">
+        <div class="sl-container">
+            <?php
+            get_template_part('template-parts/mini-form', null, [
+                'topic_default' => 'costi',
+                'title'         => __('Domande sui costi?', 'saltelli'),
+                'lede'          => __('Risposta entro 24 ore. Trasparenza in chiaro, sempre.', 'saltelli'),
+            ]);
+            ?>
+        </div>
+    </section>
+
     <?php /* 7. CTA finale editoriale */ ?>
     <section class="sl-costi-w4__cta-final">
         <div class="sl-container">

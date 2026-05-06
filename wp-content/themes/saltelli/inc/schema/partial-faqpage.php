@@ -23,15 +23,34 @@ if (!is_array($faq_raw) || empty($faq_raw)) {
 
 $main_entity = [];
 foreach ($faq_raw as $row) {
-    if (empty($row['domanda']) || empty($row['risposta'])) {
+    /* Wave 6 — supporta sia il pattern legacy fake-repeater (row['domanda'/'risposta'])
+     * sia il pattern Wave 1+ post_object (relationship verso saltelli_faq CPT,
+     * dove title = domanda e ACF field 'risposta' = risposta WYSIWYG). */
+    $domanda = '';
+    $risposta = '';
+    if (is_array($row)) {
+        $domanda  = isset($row['domanda'])  ? (string) $row['domanda']  : '';
+        $risposta = isset($row['risposta']) ? (string) $row['risposta'] : '';
+    } elseif (is_object($row) && isset($row->ID)) {
+        $faq_id   = (int) $row->ID;
+        $domanda  = get_the_title($faq_id);
+        $risposta = (string) saltelli_field('risposta', $faq_id, '');
+    } elseif (is_numeric($row) && (int) $row > 0) {
+        $faq_id   = (int) $row;
+        $domanda  = get_the_title($faq_id);
+        $risposta = (string) saltelli_field('risposta', $faq_id, '');
+    }
+    $domanda  = trim(wp_strip_all_tags($domanda));
+    $risposta = trim(wp_strip_all_tags($risposta));
+    if ($domanda === '' || $risposta === '') {
         continue;
     }
     $main_entity[] = [
         '@type' => 'Question',
-        'name'  => trim((string) $row['domanda']),
+        'name'  => $domanda,
         'acceptedAnswer' => [
             '@type' => 'Answer',
-            'text'  => trim((string) $row['risposta']),
+            'text'  => $risposta,
         ],
     ];
 }

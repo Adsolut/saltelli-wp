@@ -335,6 +335,9 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
     </section>
 </footer>
 
+<?php /* Wave 6 Pattern 3 — Mobile sticky bottom bar (3 azioni). PHP-level exclusion in template-part. */ ?>
+<?php get_template_part('template-parts/mobile-sticky-bar'); ?>
+
 <?php wp_footer(); ?>
 </body>
 </html>

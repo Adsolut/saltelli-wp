@@ -299,9 +299,21 @@ function saltelli_count_faq($post_id) {
     }
     $valid = 0;
     foreach ($faq as $row) {
-        if (!empty($row['domanda']) && !empty($row['risposta'])) {
-            $valid++;
+        // Wave 6 — supporta legacy fake-repeater rows + Wave 1+ post_object IDs/objects.
+        if (is_array($row)) {
+            if (!empty($row['domanda']) && !empty($row['risposta'])) $valid++;
+            continue;
         }
+        if (is_object($row) && isset($row->ID)) {
+            $fid = (int) $row->ID;
+        } elseif (is_numeric($row) && (int) $row > 0) {
+            $fid = (int) $row;
+        } else {
+            continue;
+        }
+        $title = get_the_title($fid);
+        $risposta = (string) saltelli_field('risposta', $fid, '');
+        if ($title !== '' && $risposta !== '') $valid++;
     }
     return $valid;
 }
