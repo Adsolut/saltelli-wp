@@ -3,22 +3,179 @@
   "title": "Trust signal — Item",
   "fields": [
     {
+      "key": "field_trust_type",
+      "label": "Tipo (Wave 6)",
+      "name": "testimonial_type",
+      "type": "radio",
+      "instructions": "Numero = trust signal classico (Label + Valore). Testimonianza = quote testuale con autore + città + topic.",
+      "choices": {
+        "numero": "Numero / Statistica",
+        "testimonianza": "Testimonianza"
+      },
+      "default_value": "numero",
+      "layout": "horizontal",
+      "return_format": "value"
+    },
+    {
       "key": "field_trust_label",
       "label": "Label",
       "name": "label",
       "type": "text",
-      "instructions": "Es. \"Iscritti\", \"Esperienza\", \"Lingue\".",
-      "required": 1,
-      "maxlength": 80
+      "instructions": "Es. \"Iscritti\", \"Esperienza\", \"Lingue\". Richiesto solo per tipo \"Numero\".",
+      "required": 0,
+      "maxlength": 80,
+      "conditional_logic": [
+        [
+          {
+            "field": "field_trust_type",
+            "operator": "==",
+            "value": "numero"
+          }
+        ]
+      ]
     },
     {
       "key": "field_trust_valore",
       "label": "Valore",
       "name": "valore",
       "type": "text",
-      "instructions": "Es. \"Ordine Avvocati Napoli\", \"20+ anni\", \"IT · EN · FR\".",
-      "required": 1,
-      "maxlength": 160
+      "instructions": "Es. \"Ordine Avvocati Napoli\", \"20+ anni\", \"IT · EN · FR\". Richiesto solo per tipo \"Numero\".",
+      "required": 0,
+      "maxlength": 160,
+      "conditional_logic": [
+        [
+          {
+            "field": "field_trust_type",
+            "operator": "==",
+            "value": "numero"
+          }
+        ]
+      ]
+    },
+    {
+      "key": "field_trust_testimonial_text",
+      "label": "Testo testimonianza (Wave 6)",
+      "name": "testimonial_text",
+      "type": "textarea",
+      "instructions": "Quote del cliente, max 280 caratteri. NO foto. NO rating star.",
+      "required": 0,
+      "maxlength": 280,
+      "rows": 4,
+      "new_lines": "",
+      "conditional_logic": [
+        [
+          {
+            "field": "field_trust_type",
+            "operator": "==",
+            "value": "testimonianza"
+          }
+        ]
+      ]
+    },
+    {
+      "key": "field_trust_testimonial_author",
+      "label": "Autore (Wave 6)",
+      "name": "testimonial_author",
+      "type": "text",
+      "instructions": "Iniziale + cognome o pseudonimo coerente con privacy (es. \"M.R.\", \"Famiglia D.\").",
+      "required": 0,
+      "maxlength": 80,
+      "conditional_logic": [
+        [
+          {
+            "field": "field_trust_type",
+            "operator": "==",
+            "value": "testimonianza"
+          }
+        ]
+      ]
+    },
+    {
+      "key": "field_trust_testimonial_city",
+      "label": "Città (Wave 6)",
+      "name": "testimonial_city",
+      "type": "text",
+      "instructions": "Default Napoli.",
+      "default_value": "Napoli",
+      "maxlength": 60,
+      "conditional_logic": [
+        [
+          {
+            "field": "field_trust_type",
+            "operator": "==",
+            "value": "testimonianza"
+          }
+        ]
+      ]
+    },
+    {
+      "key": "field_trust_testimonial_topic",
+      "label": "Topic (Wave 6)",
+      "name": "testimonial_topic",
+      "type": "text",
+      "instructions": "Area di pratica della testimonianza, es. \"Diritto del lavoro\", \"Famiglia LGBTQ+\". Mostrato come eyebrow mono.",
+      "maxlength": 80,
+      "conditional_logic": [
+        [
+          {
+            "field": "field_trust_type",
+            "operator": "==",
+            "value": "testimonianza"
+          }
+        ]
+      ]
+    },
+    {
+      "key": "field_trust_source_label",
+      "label": "Source — label (Wave 6)",
+      "name": "source_label",
+      "type": "text",
+      "instructions": "Etichetta della fonte (es. \"Fonte\", \"Dati\"). Opzionale, solo per Numero.",
+      "default_value": "Fonte",
+      "maxlength": 40,
+      "conditional_logic": [
+        [
+          {
+            "field": "field_trust_type",
+            "operator": "==",
+            "value": "numero"
+          }
+        ]
+      ]
+    },
+    {
+      "key": "field_trust_source_text",
+      "label": "Source — testo (Wave 6)",
+      "name": "source_text",
+      "type": "text",
+      "instructions": "Es. \"Cassa Forense, 2024\", \"Audit GEO Adsolut, Apr 2026\".",
+      "maxlength": 160,
+      "conditional_logic": [
+        [
+          {
+            "field": "field_trust_type",
+            "operator": "==",
+            "value": "numero"
+          }
+        ]
+      ]
+    },
+    {
+      "key": "field_trust_source_url",
+      "label": "Source — URL (Wave 6)",
+      "name": "source_url",
+      "type": "url",
+      "instructions": "URL alla fonte. Opzionale.",
+      "default_value": "",
+      "conditional_logic": [
+        [
+          {
+            "field": "field_trust_type",
+            "operator": "==",
+            "value": "numero"
+          }
+        ]
+      ]
     }
   ],
   "location": [
@@ -37,7 +194,7 @@
   "instruction_placement": "label",
   "hide_on_screen": "",
   "active": true,
-  "description": "Wave 1 — Trust signal plate per /costi/ § 05.",
+  "description": "Wave 1 — Trust signal plate per /costi/ § 05. Wave 6 esteso con testimonial_type (numero/testimonianza), testimonial_*, source_*.",
   "show_in_rest": 0,
-  "modified": 1777902600
+  "modified": 1778084518
 }

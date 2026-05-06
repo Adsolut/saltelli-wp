@@ -101,17 +101,63 @@
     },
     {
       "key": "field_comp_cta_label",
-      "label": "Testo CTA",
+      "label": "Testo CTA (middle/bottom default)",
       "name": "cta_label",
       "type": "text",
       "default_value": "Parlane con i nostri avvocati"
     },
     {
       "key": "field_comp_cta_url",
-      "label": "URL CTA",
+      "label": "URL CTA (middle/bottom default)",
       "name": "cta_url",
       "type": "url",
       "default_value": "/contatti/"
+    },
+    {
+      "key": "field_comp_cta_top_label",
+      "label": "CTA top — label (Wave 6)",
+      "name": "cta_top_label",
+      "type": "text",
+      "instructions": "CTA ghost subito sotto answer-capsule. Es. \"Leggi i casi rappresentativi\". Lascia vuoto per non mostrare la CTA top.",
+      "default_value": "",
+      "maxlength": 80
+    },
+    {
+      "key": "field_comp_cta_top_url",
+      "label": "CTA top — URL (Wave 6)",
+      "name": "cta_top_url",
+      "type": "url",
+      "instructions": "URL della CTA top. Es. ancora #casi o /casi/. Renderizzata solo se label e URL entrambi popolati.",
+      "default_value": ""
+    },
+    {
+      "key": "field_comp_cta_middle_label",
+      "label": "CTA middle — label (Wave 6)",
+      "name": "cta_middle_label",
+      "type": "text",
+      "instructions": "CTA primary nel mezzo della pagina (prima della FAQ). Lascia vuoto per usare il default da \"Testo CTA\" sopra.",
+      "default_value": "",
+      "maxlength": 80
+    },
+    {
+      "key": "field_comp_cta_middle_url",
+      "label": "CTA middle — URL (Wave 6)",
+      "name": "cta_middle_url",
+      "type": "url",
+      "instructions": "URL della CTA middle. Lascia vuoto per usare il default da \"URL CTA\" sopra.",
+      "default_value": ""
+    },
+    {
+      "key": "field_comp_related_competenze",
+      "label": "Aree correlate (Wave 6)",
+      "name": "related_competenze",
+      "type": "post_object",
+      "instructions": "Aree di pratica correlate (max 3). Se vuoto, fallback runtime a 3 random dello stesso cluster (tassonomia tipo-area).",
+      "post_type": ["competenza"],
+      "allow_null": 1,
+      "multiple": 1,
+      "return_format": "id",
+      "ui": 1
     }
   ],
   "location": [
@@ -132,5 +178,5 @@
   "active": true,
   "description": "Wave 1 v1 — area di pratica ACF Free compatible (no repeater). Sostituisce group_saltelli_competenza.",
   "show_in_rest": 0,
-  "modified": 1777902600
+  "modified": 1778084518
 }

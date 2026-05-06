@@ -73,6 +73,31 @@ while (have_posts()) :
                     ?>
                     <p class="sl-post__lede"><?php echo esc_html($excerpt); ?></p>
                 <?php endif; ?>
+
+                <?php
+                /* Wave 6 Pattern 9 — Author byline ricca (bio_extended + expertise tags). Render solo se l'autore è linkato a un CPT avvocato. */
+                if ($linked_avv_id) :
+                    $sl_byline_ext  = (string) saltelli_field('byline_extended', $linked_avv_id, '');
+                    $sl_expertise   = saltelli_field('expertise_topics', $linked_avv_id, []);
+                    if (!is_array($sl_expertise)) $sl_expertise = [];
+                    if ($sl_byline_ext !== '' || !empty($sl_expertise)) : ?>
+                        <div class="sl-author-byline">
+                            <?php if ($sl_byline_ext !== '') : ?>
+                                <p class="sl-author-byline__bio"><em><?php echo esc_html($sl_byline_ext); ?></em></p>
+                            <?php endif; ?>
+                            <?php if (!empty($sl_expertise)) : ?>
+                                <ul class="sl-author-expertise">
+                                    <?php foreach ($sl_expertise as $sl_exp) :
+                                        $sl_exp_id = is_object($sl_exp) ? (int) $sl_exp->ID : (int) $sl_exp;
+                                        if (!$sl_exp_id) continue;
+                                    ?>
+                                        <li><a href="<?php echo esc_url(get_permalink($sl_exp_id)); ?>" class="sl-tag"><?php echo esc_html(get_the_title($sl_exp_id)); ?></a></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif;
+                endif; ?>
             </div>
         </header>
 

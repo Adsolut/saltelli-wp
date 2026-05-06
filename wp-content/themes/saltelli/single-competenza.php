@@ -20,6 +20,13 @@ while (have_posts()) :
     $casi       = saltelli_field('casi_rappresentativi', $post_id, []);
     $cta_label  = (string) saltelli_field('cta_label', $post_id, __('Parlane con i nostri avvocati', 'saltelli'));
     $cta_url    = (string) saltelli_field('cta_url', $post_id, '/contatti/');
+    // Wave 6 — CTA progressive (ghost top + primary middle, default fallback al cta_label/url generico)
+    $cta_top_label    = (string) saltelli_field('cta_top_label', $post_id, '');
+    $cta_top_url      = (string) saltelli_field('cta_top_url', $post_id, '');
+    $cta_middle_label = (string) saltelli_field('cta_middle_label', $post_id, '');
+    $cta_middle_url   = (string) saltelli_field('cta_middle_url', $post_id, '');
+    if ($cta_middle_label === '') $cta_middle_label = $cta_label;
+    if ($cta_middle_url === '')   $cta_middle_url   = $cta_url;
     $lead_atts  = saltelli_get_attorneys_for_competenza($post_id);
     $articoli   = saltelli_field('articoli_correlati', $post_id, []);
     $cat_label  = saltelli_competenza_category_label($post_id);
@@ -54,6 +61,16 @@ while (have_posts()) :
                     </div>
                 <?php else : ?>
                     <!-- TODO: answer capsule da Elena (40-60 parole) -->
+                <?php endif; ?>
+
+                <?php /* Wave 6 — CTA progressive top (ghost) sotto answer capsule */ ?>
+                <?php if ($cta_top_label !== '' && $cta_top_url !== '') : ?>
+                    <div class="sl-competenza__cta-top">
+                        <a class="sl-btn sl-btn--ghost" href="<?php echo esc_url($cta_top_url); ?>">
+                            <span><?php echo esc_html($cta_top_label); ?></span>
+                            <span class="arrow" aria-hidden="true">→</span>
+                        </a>
+                    </div>
                 <?php endif; ?>
 
                 <div class="sl-competenza__hero-cta">
@@ -232,11 +249,44 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
-        <?php if (is_array($faq) && !empty($faq)) :
-            $valid_faq = array_filter($faq, static function ($r) {
-                return !empty($r['domanda']) && !empty($r['risposta']);
-            });
-            if (!empty($valid_faq)) : ?>
+        <?php /* Wave 6 — CTA progressive middle (primary), prima della FAQ */ ?>
+        <?php if ($cta_middle_label !== '' && $cta_middle_url !== '') : ?>
+            <section class="sl-competenza__cta-middle" aria-label="<?php esc_attr_e('Parla con noi', 'saltelli'); ?>">
+                <div class="sl-container">
+                    <div class="sl-mono">§ <?php esc_html_e('Pronto a iniziare?', 'saltelli'); ?></div>
+                    <a class="sl-btn sl-btn--primary" href="<?php echo esc_url($cta_middle_url); ?>">
+                        <span><?php echo esc_html($cta_middle_label); ?></span>
+                        <span class="arrow" aria-hidden="true">→</span>
+                    </a>
+                </div>
+            </section>
+        <?php endif; ?>
+
+        <?php
+        // Wave 6 — Normalizza FAQ: supporta legacy rows fake-repeater + Wave 1+ post_object (saltelli_faq CPT)
+        $valid_faq = [];
+        if (is_array($faq) && !empty($faq)) {
+            foreach ($faq as $sl_faq_row) {
+                if (is_array($sl_faq_row)) {
+                    if (!empty($sl_faq_row['domanda']) && !empty($sl_faq_row['risposta'])) {
+                        $valid_faq[] = [
+                            'domanda'  => (string) $sl_faq_row['domanda'],
+                            'risposta' => (string) $sl_faq_row['risposta'],
+                        ];
+                    }
+                    continue;
+                }
+                $sl_faq_id = is_object($sl_faq_row) && isset($sl_faq_row->ID) ? (int) $sl_faq_row->ID
+                           : (is_numeric($sl_faq_row) ? (int) $sl_faq_row : 0);
+                if (!$sl_faq_id) continue;
+                $sl_faq_q = get_the_title($sl_faq_id);
+                $sl_faq_a = (string) saltelli_field('risposta', $sl_faq_id, '');
+                if ($sl_faq_q !== '' && $sl_faq_a !== '') {
+                    $valid_faq[] = ['domanda' => $sl_faq_q, 'risposta' => $sl_faq_a];
+                }
+            }
+        }
+        if (!empty($valid_faq)) : ?>
                 <section class="sl-competenza__faq <?php echo $is_tier_1 ? 'sl-tier1__faq' : ''; ?>" aria-labelledby="comp-faq-h">
                     <div class="sl-container">
                         <div class="sl-mono">§ <?php esc_html_e('Domande frequenti', 'saltelli'); ?></div>
@@ -258,8 +308,68 @@ while (have_posts()) :
                         </div>
                     </div>
                 </section>
-            <?php endif;
-        endif; ?>
+            <?php endif; ?>
+
+        <?php
+        // === Wave 6 Pattern 10 — Related services (Aree correlate) ===
+        // Manual: ACF related_competenze. Auto-fallback: 3 random stesso cluster (tassonomia tipo-area).
+        $sl_related_ids = saltelli_field('related_competenze', $post_id, []);
+        if (!is_array($sl_related_ids)) {
+            $sl_related_ids = [];
+        }
+        // Normalize: object → ID
+        $sl_related_ids = array_map(function ($r) {
+            if (is_object($r) && isset($r->ID)) return (int) $r->ID;
+            return (int) $r;
+        }, $sl_related_ids);
+        $sl_related_ids = array_values(array_filter($sl_related_ids, 'intval'));
+
+        if (empty($sl_related_ids)) {
+            // Auto-fallback su tassonomia tipo-area
+            $sl_current_terms = wp_get_object_terms($post_id, 'tipo-area', ['fields' => 'ids']);
+            if (!is_wp_error($sl_current_terms) && !empty($sl_current_terms)) {
+                $sl_rel_q = new WP_Query([
+                    'post_type'      => 'competenza',
+                    'posts_per_page' => 3,
+                    'post__not_in'   => [$post_id],
+                    'no_found_rows'  => true,
+                    'fields'         => 'ids',
+                    'orderby'        => 'rand',
+                    'tax_query'      => [[
+                        'taxonomy' => 'tipo-area',
+                        'field'    => 'term_id',
+                        'terms'    => $sl_current_terms,
+                    ]],
+                ]);
+                $sl_related_ids = $sl_rel_q->posts;
+            }
+        }
+        $sl_related_ids = array_slice($sl_related_ids, 0, 3);
+        if (!empty($sl_related_ids)) :
+        ?>
+            <section class="sl-related-services" aria-labelledby="comp-rel-h">
+                <div class="sl-container">
+                    <div class="sl-mono">§ <?php esc_html_e('Aree correlate', 'saltelli'); ?></div>
+                    <h2 class="sl-section-title" id="comp-rel-h"><?php esc_html_e('Approfondisci.', 'saltelli'); ?></h2>
+                    <div class="sl-area-list">
+                        <?php
+                        $sl_rel_total = count($sl_related_ids);
+                        foreach ($sl_related_ids as $sl_rel_idx => $sl_rel_id) :
+                            $sl_rel_id = (int) $sl_rel_id;
+                            if (!$sl_rel_id) continue;
+                            $sl_rel_url   = get_permalink($sl_rel_id);
+                            $sl_rel_title = get_the_title($sl_rel_id);
+                        ?>
+                            <a class="sl-area sl-area--related" href="<?php echo esc_url($sl_rel_url); ?>">
+                                <span class="sl-area__num"><?php echo esc_html(sprintf('%02d', $sl_rel_idx + 1)); ?></span>
+                                <span class="sl-area__title"><?php echo esc_html($sl_rel_title); ?></span>
+                                <span class="sl-area__meta" aria-hidden="true">→</span>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </section>
+        <?php endif; ?>
 
         <?php if (!empty($articoli)) : ?>
             <section class="sl-competenza__articoli <?php echo $is_tier_1 ? 'sl-tier1__related' : ''; ?>" aria-labelledby="comp-art-h">
@@ -284,6 +394,24 @@ while (have_posts()) :
                 </div>
             </section>
         <?php endif; ?>
+
+        <?php /* Wave 6 Pattern 4 — Mini-form contestuale, prima della CTA finale */ ?>
+        <section class="sl-competenza__mini-form-wrap">
+            <div class="sl-container">
+                <?php
+                $sl_mini_topic = get_post_field('post_name', $post_id);
+                $sl_mini_title = sprintf(
+                    /* translators: %s = titolo competenza */
+                    __('Hai una domanda su %s?', 'saltelli'),
+                    get_the_title($post_id)
+                );
+                get_template_part('template-parts/mini-form', null, [
+                    'topic_default' => $sl_mini_topic,
+                    'title'         => $sl_mini_title,
+                ]);
+                ?>
+            </div>
+        </section>
 
         <section class="sl-competenza__cta <?php echo $is_tier_1 ? 'sl-tier1__cta-final' : ''; ?>">
             <div class="sl-container">

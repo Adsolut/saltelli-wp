@@ -59,6 +59,14 @@ function saltelli_enqueue_assets() {
         $ver
     );
 
+    /* === Wave 6 [GEO/CRO blocks] — cro.css bundle (10 pattern adapted) === */
+    wp_enqueue_style(
+        'saltelli-cro',
+        SALTELLI_THEME_URI . '/assets/css/components/cro.css',
+        ['saltelli-components'],
+        $ver
+    );
+
     // ------------------------------------------------------------------
     // JS — GSAP core + ScrollTrigger (CDN cdnjs, defer, footer, SRI hash).
     //
@@ -143,6 +151,7 @@ add_action('after_setup_theme', function () {
         'assets/css/components.css',
         'assets/css/logo.css',
         'assets/css/sections.css',
+        'assets/css/components/cro.css',
     ]);
 });
 

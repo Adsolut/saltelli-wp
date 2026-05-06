@@ -304,6 +304,13 @@ $press = saltelli_press_outlets();
     </div>
 </section>
 
+<?php /* Wave 6 Pattern 6 — Testimonials block (renderizza solo se ci sono trust items con type=testimonianza). */ ?>
+<section class="sl-front-testimonials">
+    <div class="sl-container">
+        <?php get_template_part('template-parts/testimonials-block'); ?>
+    </div>
+</section>
+
 <section class="sl-press" aria-labelledby="press-h">
     <div class="sl-container">
         <div class="sl-press__inner">
@@ -314,6 +321,13 @@ $press = saltelli_press_outlets();
                 <?php endforeach; ?>
             </ul>
         </div>
+    </div>
+</section>
+
+<?php /* Wave 6 Pattern 2 — Trust bar globale, prima della §06 contact (max pressure conversione). */ ?>
+<section class="sl-front-trust">
+    <div class="sl-container">
+        <?php get_template_part('template-parts/trust-bar'); ?>
     </div>
 </section>
 

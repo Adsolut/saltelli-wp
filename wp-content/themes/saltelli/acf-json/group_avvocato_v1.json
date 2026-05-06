@@ -116,6 +116,28 @@
       "multiple": 1,
       "return_format": "id",
       "ui": 1
+    },
+    {
+      "key": "field_av_byline_extended",
+      "label": "Byline ricca (Wave 6)",
+      "name": "byline_extended",
+      "type": "textarea",
+      "instructions": "1 frase bio per author byline su single blog (~200 caratteri). Es. \"Founding partner, tributarista. 20+ anni accanto a famiglie e PMI campane\".",
+      "maxlength": 200,
+      "rows": 2,
+      "new_lines": ""
+    },
+    {
+      "key": "field_av_expertise_topics",
+      "label": "Topic competenze byline (Wave 6, max 3)",
+      "name": "expertise_topics",
+      "type": "post_object",
+      "instructions": "Max 3 aree per cross-link nella byline blog (visualizzate come .sl-tag). Subset prioritario di \"Aree di competenza correlate\".",
+      "post_type": ["competenza"],
+      "allow_null": 1,
+      "multiple": 1,
+      "return_format": "id",
+      "ui": 1
     }
   ],
   "location": [
@@ -136,5 +158,5 @@
   "active": true,
   "description": "Wave 1 v1 — profilo avvocato ACF Free compatible (no repeater). Sostituisce group_saltelli_avvocato (legacy con repeater).",
   "show_in_rest": 0,
-  "modified": 1777902600
+  "modified": 1778084518
 }
