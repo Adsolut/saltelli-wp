@@ -85,7 +85,7 @@
       {
         "param": "page_slug",
         "operator": "==",
-        "value": "faq"
+        "value": "domande-frequenti"
       }
     ]
   ],
