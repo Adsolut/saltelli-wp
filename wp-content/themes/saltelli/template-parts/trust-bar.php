@@ -17,10 +17,20 @@
 
 defined('ABSPATH') || exit;
 
+/* Hardcoded editorial fallback (allineato ai default ACF group_theme_options_v1).
+ * Garantisce render out-of-the-box anche prima che Elena/Ludovica salvino l'ACF
+ * Options page la prima volta. Se la Options page è popolata → ACF vince. */
+$defaults = [
+    1 => ['label' => '20+ ANNI',     'caption' => 'ESPERIENZA'],
+    2 => ['label' => '4 AVVOCATI',   'caption' => 'TEAM SPECIALIZZATO'],
+    3 => ['label' => '17 AREE',      'caption' => 'DI PRATICA'],
+    4 => ['label' => 'COA FAMIGLIA', 'caption' => 'MUNICIPALITÀ 1'],
+];
+
 $signals = [];
 for ($i = 1; $i <= 4; $i++) {
-    $label   = saltelli_option("trust_signal_{$i}_label", '');
-    $caption = saltelli_option("trust_signal_{$i}_caption", '');
+    $label   = saltelli_option("trust_signal_{$i}_label", $defaults[$i]['label']);
+    $caption = saltelli_option("trust_signal_{$i}_caption", $defaults[$i]['caption']);
     if (!empty($label) || !empty($caption)) {
         $signals[] = [
             'label'   => $label,

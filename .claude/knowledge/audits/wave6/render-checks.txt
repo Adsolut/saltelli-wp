@@ -1,0 +1,39 @@
+=== HOMEPAGE markup checks ===
+--- Trust bar:
+0
+--- Testimonials block:
+0
+--- Mobile sticky bar:
+10
+(should be > 0)
+--- cro.css enqueued:
+1
+
+=== Single competenza Tier-1 (tributario) ===
+1
+(related-services ≥ 1)
+5
+(mini-form ≥ 1)
+10
+(mobile-bar ≥ 1)
+1
+(cta-middle ≥ 1)
+1
+(FAQPage schema; should be 1)
+
+=== Single competenza Tier-2 (cartelle) ===
+1
+5
+1
+
+=== /contatti/ — sticky bar deve essere ASSENTE ===
+0
+
+=== single-avvocato — sticky bar deve essere ASSENTE ===
+0
+=== cro.css HTTP status ===
+200 http://localhost:8080/wp-content/themes/saltelli/assets/css/components/cro.css
+
+=== Trust bar default render check (manual) ===
+Trust bar fallisce a renderizzare se ACF Options page Brand non ancora salvata.
+Default values popolano solo dopo primo save in ACF UI. Documentato nel report.
