@@ -18,14 +18,34 @@ get_header();
 
 while (have_posts()) :
     the_post();
-    $sl_chi_siamo = is_page('chi-siamo');
+    // Wave 5 routing post-rename:
+    //   /chi-siamo/        → HUB Chi Siamo (page-chi-siamo-hub.php)
+    //   /chi-siamo/lo-studio/ → page Lo Studio (page-lo-studio.php)
+    //   /aree-di-pratica/  → HUB Aree (page-aree-di-pratica-hub.php)
+    //   /risorse/          → HUB Risorse (page-risorse-hub.php)
+    //   /costi-e-consulenze/ → HUB Costi (page-costi-e-consulenze-hub.php)
+    $sl_lo_studio = is_page('lo-studio');
+    $sl_chi_siamo_hub = is_page('chi-siamo');
     $sl_casi      = is_page('casi');
+    $sl_hub_any   = $sl_chi_siamo_hub
+        || is_page('aree-di-pratica')
+        || is_page('risorse')
+        || is_page('costi-e-consulenze');
     ?>
-    <article <?php post_class('sl-page' . ($sl_chi_siamo ? ' sl-chi-siamo' : '') . ($sl_casi ? ' sl-casi-page' : '')); ?>>
+    <article <?php post_class('sl-page' . ($sl_lo_studio ? ' sl-chi-siamo' : '') . ($sl_casi ? ' sl-casi-page' : '') . ($sl_hub_any ? ' sl-page--hub' : '')); ?>>
 
         <?php
-        if ($sl_chi_siamo) {
-            get_template_part('template-parts/page', 'chi-siamo');
+        // Wave 5 — hub pages (precedenza prima dei legacy is_page case).
+        if ($sl_chi_siamo_hub) {
+            get_template_part('template-parts/page', 'chi-siamo-hub');
+        } elseif (is_page('aree-di-pratica')) {
+            get_template_part('template-parts/page', 'aree-di-pratica-hub');
+        } elseif (is_page('risorse')) {
+            get_template_part('template-parts/page', 'risorse-hub');
+        } elseif (is_page('costi-e-consulenze')) {
+            get_template_part('template-parts/page', 'costi-e-consulenze-hub');
+        } elseif ($sl_lo_studio) {
+            get_template_part('template-parts/page', 'lo-studio');
         } elseif ($sl_casi) {
             get_template_part('template-parts/page', 'casi');
         } elseif (is_page('contatti')) {
@@ -33,7 +53,7 @@ while (have_posts()) :
         } elseif (is_page('glossario-legale')) {
             // Render delegato a inc/wave3-glossario.php (legacy specialized).
             include SALTELLI_THEME_DIR . '/inc/wave3-glossario.php';
-        } elseif (is_page('faq')) {
+        } elseif (is_page(['faq', 'domande-frequenti'])) {
             get_template_part('template-parts/page', 'faq');
         } elseif (is_page(['guide-gratuite', 'come-lavoriamo', 'prima-consulenza', 'lavora-con-noi', 'richiedi-preventivo'])) {
             get_template_part('template-parts/page', 'info-shared');

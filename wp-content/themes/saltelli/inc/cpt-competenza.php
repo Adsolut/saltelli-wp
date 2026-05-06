@@ -1,14 +1,14 @@
 <?php
 /**
  * Custom Post Type: competenza
- * Tassonomia:      tipo-area (gerarchica, slug /tipo/)
+ * Tassonomia:      tipo-area (gerarchica, 3 termini: privati / imprese / contenzioso-amministrativo)
  *
- * Slug pubblico: /competenze/{slug}/
- * Archive:       /competenze/
+ * Slug pubblico: /aree-di-pratica/{cluster}/{slug}/   (Wave 5 IA refactor — DEC-021/022)
+ * Archive:       /aree-di-pratica/                     (Wave 5 IA refactor)
  *
- * Termini consigliati per tipo-area (NON creati qui — solo documentati):
- *   civile, penale, tributario, lavoro, famiglia, amministrativo,
- *   commerciale, immobiliare.
+ * Il segmento {cluster} è risolto dinamicamente dal filter post_type_link
+ * più sotto leggendo il primo termine `tipo-area` assegnato al post.
+ * Fallback se untagged: cluster='privati'.
  *
  * @package Saltelli
  */
@@ -52,12 +52,14 @@ function saltelli_register_cpt_competenza() {
         'show_in_rest'       => true,
         'query_var'          => true,
         'rewrite'            => [
-            'slug'       => 'competenze',
+            'slug'       => 'aree-di-pratica/%tipo-area%',
             'with_front' => false,
             'feeds'      => false,
         ],
         'capability_type'    => 'post',
-        'has_archive'        => 'competenze',
+        // Wave 5: has_archive disabilitato. /aree-di-pratica/ è una page WP (hub).
+        // /aree-di-pratica/{cluster}/ usa il taxonomy archive di tipo-area (taxonomy-tipo-area.php).
+        'has_archive'        => false,
         'hierarchical'       => false,
         'menu_position'      => 6,
         'menu_icon'          => 'dashicons-portfolio',
@@ -97,9 +99,41 @@ function saltelli_register_cpt_competenza() {
         'show_in_rest'      => true,
         'query_var'         => true,
         'rewrite'           => [
-            'slug'         => 'tipo-area',
+            'slug'         => 'aree-di-pratica',
             'with_front'   => false,
             'hierarchical' => true,
         ],
     ]);
+}
+
+/**
+ * Wave 5 — Risolve il placeholder %tipo-area% nel permalink delle competenze.
+ *
+ * Senza questo filter WordPress lascia il placeholder letterale nell'URL.
+ * Lookup: primo termine `tipo-area` assegnato al post. Fallback `privati`
+ * se nessun termine è stato assegnato (es. competenze nuove o draft).
+ *
+ * Cache statica per request: il filter viene chiamato N volte (menu, archive,
+ * single, related) — calcoliamo il cluster una volta sola per post_id.
+ */
+add_filter('post_type_link', 'saltelli_competenza_permalink', 10, 2);
+function saltelli_competenza_permalink($link, $post) {
+    if (empty($post) || $post->post_type !== 'competenza') {
+        return $link;
+    }
+    if (strpos($link, '%tipo-area%') === false) {
+        return $link;
+    }
+
+    static $cache = [];
+    if (!isset($cache[$post->ID])) {
+        $terms = get_the_terms($post->ID, 'tipo-area');
+        if (!empty($terms) && !is_wp_error($terms)) {
+            $cache[$post->ID] = $terms[0]->slug;
+        } else {
+            $cache[$post->ID] = 'privati';
+        }
+    }
+
+    return str_replace('%tipo-area%', $cache[$post->ID], $link);
 }

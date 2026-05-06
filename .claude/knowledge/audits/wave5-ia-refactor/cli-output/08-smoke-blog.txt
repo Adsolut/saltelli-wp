@@ -1,0 +1,35 @@
+FAIL 301/404 /blog/il-femminicidio-diventa-reato-autonomo-cosa-cambia-per-il-diritto-di-famiglia/
+FAIL 301/404 /blog/sposato-con-uno-straniero-irreperibile-come-separarsi-o-divorziare-anche-se-non-sai-dove-si-trovi/
+FAIL 301/404 /blog/spese-per-i-figli-dopo-la-separazione-il-punto-della-cassazione-su-spese-ordinarie-e-straordinarie/
+FAIL 301/404 /blog/case-vacanza-e-genitori-separati-come-si-gestisce-lestate-in-una-seconda-casa/
+FAIL 301/404 /blog/vacanze-e-genitori-separati-come-organizzarle-senza-conflitti-e-senza-ferire-i-figli/
+FAIL 301/404 /blog/due-mamme-dalla-nascita-la-corte-costituzionale-difende-i-diritti-dei-figli-delle-coppie-lesbiche/
+FAIL 301/404 /blog/17-maggio-giornata-internazionale-contro-lomofobia-la-bifobia-e-la-transfobia/
+FAIL 301/404 /blog/unione-civile-e-convivenza-per-le-coppie-dello-stesso-sesso-in-italia-diritti-tutele-e-differenze/
+FAIL 301/404 /blog/due-case-per-i-figli-di-separati-bigenitorialita-o-doppia-fragilita/
+FAIL 301/404 /blog/sentenza-turetta-ergastolo-senza-crudelta-una-riflessione-legale-e-umana-nel-nome-di-giulia/
+FAIL 301/404 /blog/il-trasferimento-del-lavoratore-in-caso-di-mobbing-o-straining/
+FAIL 301/404 /blog/adozione-internazionale-ora-anche-per-le-persone-singole-la-corte-costituzionale-apre-a-una-genitorialita-piu-inclusiva/
+FAIL 301/404 /blog/compravendita-quando-va-pagata-lagenzia-immobiliare/
+FAIL 301/404 /blog/le-imposte-di-successione-agli-eredi-e-la-dichiarazione-di-successione/
+FAIL 301/404 /blog/accettazione-eredita-pura-e-semplice-cassazione-2024-presupposti/
+FAIL 301/404 /blog/diritti-delle-persone-trans-una-sentenza-europea-di-dignita-e-inclusione/
+FAIL 301/404 /blog/dividere-la-casa-familiare-priorita-al-benessere-dei-figli/
+FAIL 301/404 /blog/falsita-del-testamento-olografo-come-difendersi/
+FAIL 301/404 /blog/la-maternita-surrogata-come-reato-universale-cosa-significa-e-quali-sono-gli-aspetti-critici/
+FAIL 301/404 /blog/cassazione-validi-gli-accordi-via-email-tra-coniugi/
+FAIL 301/404 /blog/debiti-che-i-figli-non-possono-ereditare/
+FAIL 301/404 /blog/attenzione-alle-truffe-online/
+FAIL 301/404 /blog/buoni-fruttiferi-postali-ottieni-il-rimborso/
+FAIL 301/404 /blog/monopattini-riforma-multe-salate/
+FAIL 301/404 /blog/esenzione-imu-per-immobile-occupato-in-modo-abusivo/
+FAIL 301/404 /blog/smart-working-come-sta-evolvendo-la-normativa-dopo-lemergenza-covid/
+FAIL 301/404 /blog/il-diritto-al-pagamento-delle-differenze-retributive-cosa-deve-sapere-un-lavoratore/
+FAIL 301/404 /blog/mutuo-cointestato-e-separazione-chi-ha-sempre-pagato-le-rate-ha-diritto-al-rimborso/
+FAIL 301/404 /blog/la-manutenzione-del-terreno-non-basta-per-usucapire-come-difendere-i-propri-diritti/
+FAIL 301/404 /blog/agenzia-entrate-riscossione-stop-alle-notifiche-automatiche-ai-coobbligati-cosa-sapere-per-difendersi/
+FAIL 301/404 /blog/licenziamento-per-scarso-rendimento-le-ultime-novita/
+FAIL 301/404 /blog/diritti-del-lavoratore-in-smart-working-cosa-ce-da-sapere/
+FAIL 301/404 /blog/locazione-commerciale-e-termine-di-grazia-un-tema-di-dibattito-giurisprudenziale/
+
+BLOG-REDIRECTS-CHAIN: 0 / 33

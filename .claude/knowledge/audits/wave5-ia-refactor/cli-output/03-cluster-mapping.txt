@@ -1,0 +1,90 @@
+=== Phase 3.6.a — KEEP+assign 15 KEEP + 1 EXTRA (slug reali) ===
+
+--- privati (12 KEEP + 1 EXTRA = 13 total) ---
+OK diritto-tributario -> privati (post_id=2664)
+OK cartelle-esattoriali-e-multe -> privati (post_id=2667)
+OK diritto-del-lavoro -> privati (post_id=2665)
+OK diritto-di-famiglia-lgbtq -> privati (post_id=2666)
+OK responsabilita-medica -> privati (post_id=2670)
+OK diritto-bancario -> privati (post_id=2671)
+OK diritto-condominiale -> privati (post_id=2672)
+OK diritto-dellimmigrazione -> privati (post_id=2673)
+OK diritto-penale -> privati (post_id=2674)
+OK diritto-previdenziale -> privati (post_id=2675)
+OK diritto-delle-successioni -> privati (post_id=2677)
+OK risarcimento-danni -> privati (post_id=2678)
+OK diritto-di-famiglia -> privati (post_id=2669)
+
+--- imprese (2 KEEP) ---
+OK recupero-crediti -> imprese (post_id=2668)
+OK domiciliazione-dimpresa -> imprese (post_id=2680)
+
+--- contenzioso-amministrativo (1 KEEP) ---
+OK diritto-amministrativo -> contenzioso-amministrativo (post_id=2682)
+
+=== Phase 3.6.b — DELETE 4 PENDING (idempotent CAL-02) ===
+
+DELETE diritto-delle-assicurazioni -> deleted (was post_id=2676)
+DELETE responsabilita-civile -> deleted (was post_id=2679)
+DELETE consulenze-online -> deleted (was post_id=2681)
+SKIP diritto-commerciale -> not in CPT MVP (atteso CAL-02 per diritto-commerciale)
+
+=== Phase 3.6.c — CREATE 2 NEW ===
+
+CREATE infortunistica-stradale -> privati (post_id=2798)
+CREATE aste-immobiliari -> privati (post_id=2799)
+
+=== Phase 3.6.d — Verifica finale ===
+
+--- 18 competenze publish con cluster ---
+aste-immobiliari -> cluster: privati (post_id=2799)
+
+--- count summary ---
+Total publish competenze: 18
+term_id	term_taxonomy_id	name	slug	description	parent	count
+995	995	Altri servizi	altri	Domiciliazione d'impresa, consulenze online, infortunistica, previdenza	0	0
+994	994	Contenzioso Amministrativo	contenzioso-amministrativo	Cartelle esattoriali, ricorsi, condominiale, amministrativo	0	1
+992	992	Per i Privati	privati	Diritto di famiglia, eredità, lavoro, risarcimento danni, immigrazione, penale	0	15
+993	993	Per le Imprese	imprese	Societario, recupero crediti, contrattualistica, bancario, tributario	0	2
+
+--- DEPRECATE term 'altri' (count=0) ---
+ Container saltelli-wp-wpcli-run-3c00e1e66a5f Created 
+Warning: tipo-area altri doesn't exist.
+Success: Term already deleted.
+
+--- final term list ---
+term_id	term_taxonomy_id	name	slug	description	parent	count
+995	995	Altri servizi	altri	Domiciliazione d'impresa, consulenze online, infortunistica, previdenza	0	0
+994	994	Contenzioso Amministrativo	contenzioso-amministrativo	Cartelle esattoriali, ricorsi, condominiale, amministrativo	0	1
+992	992	Per i Privati	privati	Diritto di famiglia, eredità, lavoro, risarcimento danni, immigrazione, penale	0	15
+993	993	Per le Imprese	imprese	Societario, recupero crediti, contrattualistica, bancario, tributario	0	2
+
+--- final 18 competenze + cluster (verifica robusta) ---
+  aste-immobiliari -> privati (id=2799)
+  infortunistica-stradale -> privati (id=2798)
+  diritto-amministrativo -> contenzioso-amministrativo (id=2682)
+  domiciliazione-dimpresa -> imprese (id=2680)
+  risarcimento-danni -> privati (id=2678)
+  diritto-delle-successioni -> privati (id=2677)
+  diritto-previdenziale -> privati (id=2675)
+  diritto-penale -> privati (id=2674)
+  diritto-dellimmigrazione -> privati (id=2673)
+  diritto-condominiale -> privati (id=2672)
+  diritto-bancario -> privati (id=2671)
+  responsabilita-medica -> privati (id=2670)
+  diritto-di-famiglia -> privati (id=2669)
+  recupero-crediti -> imprese (id=2668)
+  cartelle-esattoriali-e-multe -> privati (id=2667)
+  diritto-di-famiglia-lgbtq -> privati (id=2666)
+  diritto-del-lavoro -> privati (id=2665)
+  diritto-tributario -> privati (id=2664)
+
+--- DEPRECATE term 'altri' (term_id=995) — second attempt with by=slug ---
+ Container saltelli-wp-wpcli-run-c593c6cbf9a9 Created 
+Deleted tipo-area 995.
+Success: Deleted 1 of 1 terms.
+--- final term list (deve essere 3 termini) ---
+term_id	term_taxonomy_id	name	slug	description	parent	count
+994	994	Contenzioso Amministrativo	contenzioso-amministrativo	Cartelle esattoriali, ricorsi, condominiale, amministrativo	0	1
+992	992	Per i Privati	privati	Diritto di famiglia, eredità, lavoro, risarcimento danni, immigrazione, penale	0	15
+993	993	Per le Imprese	imprese	Societario, recupero crediti, contrattualistica, bancario, tributario	0	2

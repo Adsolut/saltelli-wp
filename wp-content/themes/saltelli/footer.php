@@ -49,9 +49,9 @@ $em_li = function_exists('saltelli_attorney_linkedin') ? saltelli_attorney_linke
 /* === IMPECCABLE v0.20.2 [T1] aree tier-1 hardcoded da JSX (3 in footer; 19 totali nel sito) === */
 /* v0.21.3 [F1]: $ftr_tier2 array RIMOSSO — non più visualizzato in footer (CTA "Tutte le aree" sostituisce). */
 $ftr_tier1 = [
-    ['n' => '01', 't' => __('Diritto tributario', 'saltelli'),         'href' => '/competenze/diritto-tributario/'],
-    ['n' => '02', 't' => __('Diritto del lavoro', 'saltelli'),         'href' => '/competenze/diritto-del-lavoro/'],
-    ['n' => '03', 't' => __('Diritto di famiglia LGBTQ+', 'saltelli'), 'href' => '/competenze/diritto-di-famiglia-lgbtq/'],
+    ['n' => '01', 't' => __('Diritto tributario', 'saltelli'),         'href' => '/aree-di-pratica/privati/diritto-tributario/'],
+    ['n' => '02', 't' => __('Diritto del lavoro', 'saltelli'),         'href' => '/aree-di-pratica/privati/diritto-del-lavoro/'],
+    ['n' => '03', 't' => __('Diritto di famiglia LGBTQ+', 'saltelli'), 'href' => '/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/'],
 ];
 
 /* v0.21.3 [F3]: indirizzo split in 2 line per col Info "Studio legale" */
@@ -208,7 +208,7 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
 
                     <hr class="sl-foot-hairline" aria-hidden="true">
 
-                    <a class="sl-foot-link sl-mono sl-foot-allareas" href="<?php echo esc_url(home_url('/competenze/')); ?>">
+                    <a class="sl-foot-link sl-mono sl-foot-allareas" href="<?php echo esc_url(home_url('/aree-di-pratica/')); ?>">
                         <?php esc_html_e('Tutte le aree', 'saltelli'); ?> <span class="arrow" aria-hidden="true">→</span>
                     </a>
                 </div>
@@ -217,24 +217,24 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                 <div class="sl-foot-col sl-foot-col--studio">
                     <div class="sl-mono sl-foot-col__label"><?php esc_html_e('Studio', 'saltelli'); ?></div>
                     <nav class="sl-foot-nav-list" aria-label="<?php esc_attr_e('Studio', 'saltelli'); ?>">
-                        <a class="sl-foot-link" href="<?php echo esc_url(home_url('/chi-siamo/')); ?>"><?php esc_html_e('Lo studio', 'saltelli'); ?></a>
-                        <a class="sl-foot-link" href="<?php echo esc_url(home_url('/avvocati/')); ?>"><?php esc_html_e('Avvocati', 'saltelli'); ?></a>
-                        <a class="sl-foot-link" href="<?php echo esc_url(home_url('/casi/')); ?>"><?php esc_html_e('Casi rappresentativi', 'saltelli'); ?></a>
+                        <a class="sl-foot-link" href="<?php echo esc_url(home_url('/chi-siamo/lo-studio/')); ?>"><?php esc_html_e('Lo studio', 'saltelli'); ?></a>
+                        <a class="sl-foot-link" href="<?php echo esc_url(home_url('/chi-siamo/team/')); ?>"><?php esc_html_e('Avvocati', 'saltelli'); ?></a>
+                        <a class="sl-foot-link" href="<?php echo esc_url(home_url('/chi-siamo/risultati/')); ?>"><?php esc_html_e('Casi rappresentativi', 'saltelli'); ?></a>
                     </nav>
 
                     <hr class="sl-foot-hairline" aria-hidden="true">
 
                     <div class="sl-mono sl-foot-col__sublabel"><?php esc_html_e('Risorse', 'saltelli'); ?></div>
                     <nav class="sl-foot-nav-list" aria-label="<?php esc_attr_e('Risorse', 'saltelli'); ?>">
-                        <a class="sl-foot-link" href="<?php echo esc_url(home_url('/blog/')); ?>"><?php esc_html_e('Editoriale / Blog', 'saltelli'); ?></a>
-                        <a class="sl-foot-link" href="<?php echo esc_url(home_url('/glossario-legale/')); ?>"><?php esc_html_e('Glossario legale', 'saltelli'); ?></a>
+                        <a class="sl-foot-link" href="<?php echo esc_url(home_url('/risorse/blog/')); ?>"><?php esc_html_e('Editoriale / Blog', 'saltelli'); ?></a>
+                        <a class="sl-foot-link" href="<?php echo esc_url(home_url('/risorse/glossario-legale/')); ?>"><?php esc_html_e('Glossario legale', 'saltelli'); ?></a>
                     </nav>
 
                     <hr class="sl-foot-hairline" aria-hidden="true">
 
                     <div class="sl-mono sl-foot-col__sublabel"><?php esc_html_e('Servizio', 'saltelli'); ?></div>
                     <nav class="sl-foot-nav-list" aria-label="<?php esc_attr_e('Servizio', 'saltelli'); ?>">
-                        <a class="sl-foot-link" href="<?php echo esc_url(home_url('/costi/')); ?>"><?php esc_html_e('Costi e prima consulenza', 'saltelli'); ?></a>
+                        <a class="sl-foot-link" href="<?php echo esc_url(home_url('/costi-e-consulenze/')); ?>"><?php esc_html_e('Costi e prima consulenza', 'saltelli'); ?></a>
                         <a class="sl-foot-link" href="<?php echo esc_url(home_url('/contatti/')); ?>"><?php esc_html_e('Contatti', 'saltelli'); ?></a>
                     </nav>
                 </div>

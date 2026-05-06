@@ -1,59 +1,123 @@
 <?php
 /**
- * Saltelli — Legacy URL Redirect 301 (v0.13.0 IA Unification)
+ * Saltelli — Legacy URL Redirect 301 (Wave 5 IA Refactor extension)
  *
- * Mapping URL del vecchio sito (pre-2026, page WP Elementor-based)
- * verso i nuovi CPT competenza / page editoriali. Preserva SEO + backlink
- * esterni storici. Esegue su `init` priority 1 per intercettare prima del
- * canonical redirect WP (analogo a /lo-studio/ → /chi-siamo/ in setup.php).
+ * Mappa unificata di redirect 301 con 3 stati URL:
+ *
+ *   Stato A — URL legacy Elementor (sito production pre-2026)
+ *   Stato B — URL MVP recovery (Wave 0-3, /competenze/, /avvocati/, /faq/, /casi/, ecc.)
+ *   Stato C — URL audit-aligned (Wave 5 target, /aree-di-pratica/{cluster}/, /chi-siamo/team/, ecc.)
+ *
+ * Funzioni:
+ *   - saltelli_legacy_redirect_map()      → A → C  (legacy Elementor → audit-aligned)
+ *   - saltelli_mvp_to_audit_redirect_map() → B → C  (MVP corrente → audit-aligned, CAL-03/04)
+ *   - saltelli_legacy_redirect()          → applica entrambe le mappe + pattern dinamici
+ *
+ * Hook: init priority 1 (CAL-04 — esteso, NON aggiunto secondo hook su template_redirect).
  *
  * @package Saltelli
+ * @since 0.13.0 IA Unification (legacy → MVP)
+ * @since 1.1.0  Wave 5 IA Refactor (legacy → audit, MVP → audit, dynamic regex)
  */
 
 defined('ABSPATH') || exit;
 
 if (!function_exists('saltelli_legacy_redirect_map')) :
+/**
+ * Mappa A → C: legacy Elementor URL (pre-2026) → audit-aligned URL (Wave 5).
+ *
+ * Aggiornata Wave 5 con schema `/aree-di-pratica/{cluster}/{slug}/`.
+ * Cluster source: cluster-mapping-17-areas.csv (DEC-021 cliente-firmato).
+ */
 function saltelli_legacy_redirect_map() {
     return [
-        // CPT competenza — slug verificati su DB CPT publish
-        '/recupero-crediti/'                        => '/competenze/recupero-crediti/',
-        '/cartelle-esattoriali-e-multe/'            => '/competenze/cartelle-esattoriali-e-multe/',
-        '/diritto-bancario/'                        => '/competenze/diritto-bancario/',
-        '/avvocato-divorzista/'                     => '/competenze/diritto-di-famiglia/',
-        '/avvocato-divorzista-italia/'              => '/competenze/diritto-di-famiglia/',
-        '/lavoro/'                                  => '/competenze/diritto-del-lavoro/',
-        '/eredita-e-successioni/'                   => '/competenze/diritto-delle-successioni/',
-        '/condominio-e-locazioni/'                  => '/competenze/diritto-condominiale/',
-        '/responsabilita-medica/'                   => '/competenze/responsabilita-medica/',
-        '/immigrazione/'                            => '/competenze/diritto-dellimmigrazione/',
-        '/infortunistica-stradale/'                 => '/competenze/risarcimento-danni/',
-        '/infortunistica-stradale-italia/'          => '/competenze/risarcimento-danni/',
-        '/risarcimento-del-danno/'                  => '/competenze/risarcimento-danni/',
-        '/diritto-tributario/'                      => '/competenze/diritto-tributario/',
-        '/ricorsi-napoli-obiettivo-valore/'         => '/competenze/cartelle-esattoriali-e-multe/',
-        '/invalidita-civile-diritto-previdenziale/' => '/competenze/diritto-previdenziale/',
-        '/diritto-amministrativo/'                  => '/competenze/diritto-amministrativo/',
-        '/diritto-penale/'                          => '/competenze/diritto-penale/',
+        // CPT competenza — slug verificati su DB CPT publish post-Wave5
+        '/recupero-crediti/'                        => '/aree-di-pratica/imprese/recupero-crediti/',
+        '/cartelle-esattoriali-e-multe/'            => '/aree-di-pratica/privati/cartelle-esattoriali-e-multe/',
+        '/diritto-bancario/'                        => '/aree-di-pratica/privati/diritto-bancario/',
+        '/avvocato-divorzista/'                     => '/aree-di-pratica/privati/diritto-di-famiglia/',
+        '/avvocato-divorzista-italia/'              => '/aree-di-pratica/privati/diritto-di-famiglia/',
+        '/lavoro/'                                  => '/aree-di-pratica/privati/diritto-del-lavoro/',
+        '/eredita-e-successioni/'                   => '/aree-di-pratica/privati/diritto-delle-successioni/',
+        '/condominio-e-locazioni/'                  => '/aree-di-pratica/privati/diritto-condominiale/',
+        '/responsabilita-medica/'                   => '/aree-di-pratica/privati/responsabilita-medica/',
+        '/immigrazione/'                            => '/aree-di-pratica/privati/diritto-dellimmigrazione/',
+        '/infortunistica-stradale/'                 => '/aree-di-pratica/privati/infortunistica-stradale/', // CAL-03 — nuova competenza autonoma
+        '/infortunistica-stradale-italia/'          => '/aree-di-pratica/privati/infortunistica-stradale/', // CAL-03
+        '/risarcimento-del-danno/'                  => '/aree-di-pratica/privati/risarcimento-danni/',
+        '/diritto-tributario/'                      => '/aree-di-pratica/privati/diritto-tributario/',
+        '/ricorsi-napoli-obiettivo-valore/'         => '/aree-di-pratica/privati/cartelle-esattoriali-e-multe/',
+        '/invalidita-civile-diritto-previdenziale/' => '/aree-di-pratica/privati/diritto-previdenziale/',
+        '/diritto-amministrativo/'                  => '/aree-di-pratica/contenzioso-amministrativo/diritto-amministrativo/',
+        '/diritto-penale/'                          => '/aree-di-pratica/privati/diritto-penale/',
         // NB: slug CPT è "domiciliazione-dimpresa" (con d apostrofata, no spazio)
-        '/domicilia-la-tua-azienda/'                => '/competenze/domiciliazione-dimpresa/',
+        '/domicilia-la-tua-azienda/'                => '/aree-di-pratica/imprese/domiciliazione-dimpresa/',
 
-        // Pages orfane senza CPT corrispondente → archive competenze
-        '/diritto-societario/'                      => '/competenze/',
-        '/contrattualistica/'                       => '/competenze/',
-        '/aste-immobiliari/'                        => '/competenze/',
-        '/servizi-legali/'                          => '/competenze/',
+        // Pages legacy senza CPT corrispondente → archive aree-di-pratica
+        '/diritto-societario/'                      => '/aree-di-pratica/',
+        '/contrattualistica/'                       => '/aree-di-pratica/',
+        '/aste-immobiliari/'                        => '/aree-di-pratica/privati/aste-immobiliari/', // CAL-03 — nuova competenza autonoma
+        '/servizi-legali/'                          => '/aree-di-pratica/',
 
-        // Funnel utility legacy → contatti (se page draft o non rilevante)
+        // Funnel utility legacy → contatti
         '/prenota-un-appuntamento/'                 => '/contatti/',
 
-        // Legacy menu /lo-studio/ → /chi-siamo/ (ridondante con setup.php hook,
-        // mantenuto qui per centralizzazione mapping in unico file)
-        '/lo-studio/'                               => '/chi-siamo/',
+        // Legacy menu /lo-studio/ → /chi-siamo/lo-studio/ (Wave 5: pagina annidata sotto hub)
+        '/lo-studio/'                               => '/chi-siamo/lo-studio/',
+    ];
+}
+endif;
+
+if (!function_exists('saltelli_mvp_to_audit_redirect_map')) :
+/**
+ * Mappa B → C: URL MVP corrente (Wave 0-3) → audit-aligned URL (Wave 5).
+ *
+ * NUOVA Wave 5. Copertura URL del MVP recovery che non esistono nel pre-2026
+ * Elementor ma sono stati introdotti durante Wave 0-3 e ora vanno migrati.
+ */
+function saltelli_mvp_to_audit_redirect_map() {
+    return [
+        // Sezioni hub rinomina (statici)
+        '/avvocati/'                              => '/chi-siamo/team/',
+        '/competenze/'                            => '/aree-di-pratica/',
+        '/casi/'                                  => '/chi-siamo/risultati/',
+        '/blog/'                                  => '/risorse/blog/',
+        '/faq/'                                   => '/risorse/domande-frequenti/',
+        '/glossario-legale/'                      => '/risorse/glossario-legale/',
+        '/guide-gratuite/'                        => '/risorse/guide-gratuite/',
+        '/come-lavoriamo/'                        => '/costi-e-consulenze/come-lavoriamo/',
+        '/prima-consulenza/'                      => '/costi-e-consulenze/prima-consulenza/',
+        '/richiedi-preventivo/'                   => '/costi-e-consulenze/richiedi-preventivo/',
+        '/lavora-con-noi/'                        => '/contatti/lavora-con-noi/',
+        '/costi/'                                 => '/costi-e-consulenze/',
+        '/tipo-area/privati/'                     => '/aree-di-pratica/privati/',
+        '/tipo-area/imprese/'                     => '/aree-di-pratica/imprese/',
+        '/tipo-area/contenzioso-amministrativo/'  => '/aree-di-pratica/contenzioso-amministrativo/',
+        '/tipo-area/contenzioso/'                 => '/aree-di-pratica/contenzioso-amministrativo/', // pre-Phase 2 slug
+
+        // 4 PENDING DELETE (DEC-021) — backlink esterni storici → archive
+        '/competenze/assicurazioni/'              => '/aree-di-pratica/',
+        '/competenze/diritto-delle-assicurazioni/' => '/aree-di-pratica/', // slug REALE che esisteva nel DB MVP
+        '/competenze/responsabilita-civile/'      => '/aree-di-pratica/',
+        '/competenze/consulenze-online/'          => '/aree-di-pratica/',
+        '/competenze/diritto-commerciale/'        => '/aree-di-pratica/',
+
+        // DISCOVERY-01 consolidamento (Wave 5 mini-fix BLOCKER B, 2026-05-06):
+        // Post 2669 `diritto-di-famiglia` (NO LGBTQ+) eliminato per consolidamento
+        // con sibling 2666 `diritto-di-famiglia-lgbtq` (DEC-021 cliente-firmato).
+        '/aree-di-pratica/privati/diritto-di-famiglia/' => '/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/',
     ];
 }
 endif;
 
 if (!function_exists('saltelli_legacy_redirect')) :
+/**
+ * Esegue redirect 301 in 4 step:
+ *   Step 1 — legacy Elementor → audit-aligned (mappa A → C)
+ *   Step 2 — MVP corrente → audit-aligned (mappa B → C)
+ *   Step 3 — pattern dynamic /competenze/{slug}/ → permalink CPT (post Phase 3 rewrite)
+ *   Step 4 — pattern dynamic /avvocati/{slug}/, /blog/{...}, /category|tag|author/{...}
+ */
 function saltelli_legacy_redirect() {
     if (is_admin() || (defined('DOING_AJAX') && DOING_AJAX)) return;
     if (defined('WP_CLI') && WP_CLI) return;
@@ -61,20 +125,54 @@ function saltelli_legacy_redirect() {
     $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
     $path = (string) parse_url($request_uri, PHP_URL_PATH);
 
-    // Normalizza: garantisce trailing slash
     if ($path === '' || $path === '/') return;
     if (substr($path, -1) !== '/') {
         $path .= '/';
     }
 
-    $map = saltelli_legacy_redirect_map();
-    if (isset($map[$path])) {
-        wp_safe_redirect(home_url($map[$path]), 301);
+    // Step 1 — Legacy Elementor → audit-aligned
+    $legacy_map = saltelli_legacy_redirect_map();
+    if (isset($legacy_map[$path])) {
+        wp_safe_redirect(home_url($legacy_map[$path]), 301);
+        exit;
+    }
+
+    // Step 2 — MVP corrente → audit-aligned (CAL-03/04)
+    $mvp_map = saltelli_mvp_to_audit_redirect_map();
+    if (isset($mvp_map[$path])) {
+        wp_safe_redirect(home_url($mvp_map[$path]), 301);
+        exit;
+    }
+
+    // Step 3 — Pattern dynamic per /competenze/{slug}/ — risolve permalink CPT corrente
+    if (preg_match('#^/competenze/([^/]+)/?$#', $path, $matches)) {
+        $slug = $matches[1];
+        $post = get_page_by_path($slug, OBJECT, 'competenza');
+        if ($post) {
+            wp_safe_redirect(get_permalink($post->ID), 301);
+            exit;
+        }
+    }
+
+    // Step 4 — Pattern dynamic post-IA Refactor
+    // /avvocati/{slug}/ → /chi-siamo/team/{slug}/
+    if (preg_match('#^/avvocati/([^/]+)/?$#', $path, $matches)) {
+        wp_safe_redirect(home_url("/chi-siamo/team/{$matches[1]}/"), 301);
+        exit;
+    }
+    // /blog/{slug-or-path}/ → /risorse/blog/{slug-or-path}/
+    if (preg_match('#^/blog/(.+)$#', $path, $matches)) {
+        wp_safe_redirect(home_url("/risorse/blog/{$matches[1]}"), 301);
+        exit;
+    }
+    // /category|tag|author/{path}/ → /risorse/blog/category|tag|author/{path}/
+    if (preg_match('#^/(category|tag|author)/(.+)$#', $path, $matches)) {
+        wp_safe_redirect(home_url("/risorse/blog/{$matches[1]}/{$matches[2]}"), 301);
         exit;
     }
 }
 endif;
 
 // Hook su `init` priority 1 — early intercept prima di canonical redirect WP.
-// Pattern verified su /lo-studio/ → /chi-siamo/ in setup.php.
+// CAL-04: NON aggiungere secondo hook su template_redirect.
 add_action('init', 'saltelli_legacy_redirect', 1);

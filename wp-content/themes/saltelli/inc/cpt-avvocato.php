@@ -2,8 +2,8 @@
 /**
  * Custom Post Type: avvocato
  *
- * Slug pubblico: /avvocati/{slug}/
- * Archive:       /avvocati/
+ * Slug pubblico: /chi-siamo/team/{slug}/   (Wave 5 IA refactor)
+ * Archive:       /chi-siamo/team/          (Wave 5 IA refactor)
  *
  * @package Saltelli
  */
@@ -46,12 +46,12 @@ function saltelli_register_cpt_avvocato() {
         'show_in_rest'       => true,
         'query_var'          => true,
         'rewrite'            => [
-            'slug'       => 'avvocati',
+            'slug'       => 'chi-siamo/team',
             'with_front' => false,
             'feeds'      => false,
         ],
         'capability_type'    => 'post',
-        'has_archive'        => 'avvocati',
+        'has_archive'        => 'chi-siamo/team',
         'hierarchical'       => false,
         'menu_position'      => 5,
         'menu_icon'          => 'dashicons-businessperson',
