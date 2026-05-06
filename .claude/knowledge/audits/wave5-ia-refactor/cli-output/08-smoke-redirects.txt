@@ -1,0 +1,20 @@
+OK 301 /lo-studio/ -> http://localhost:8080/chi-siamo/lo-studio/
+OK 301 /avvocati/ -> http://localhost:8080/chi-siamo/team/
+OK 301 /avvocati/emiliano-saltelli/ -> http://localhost:8080/chi-siamo/team/emiliano-saltelli/
+OK 301 /competenze/ -> http://localhost:8080/aree-di-pratica/
+OK 301 /competenze/diritto-tributario/ -> http://localhost:8080/?p=2664
+OK 301 /casi/ -> http://localhost:8080/chi-siamo/risultati/
+OK 301 /blog/ -> http://localhost:8080/risorse/blog/
+OK 301 /faq/ -> http://localhost:8080/risorse/domande-frequenti/
+OK 301 /glossario-legale/ -> http://localhost:8080/risorse/glossario-legale/
+OK 301 /come-lavoriamo/ -> http://localhost:8080/costi-e-consulenze/come-lavoriamo/
+OK 301 /prima-consulenza/ -> http://localhost:8080/costi-e-consulenze/prima-consulenza/
+OK 301 /competenze/responsabilita-civile/ -> http://localhost:8080/aree-di-pratica/
+OK 301 /competenze/consulenze-online/ -> http://localhost:8080/aree-di-pratica/
+OK 301 /competenze/diritto-commerciale/ -> http://localhost:8080/aree-di-pratica/
+OK 301 /aste-immobiliari/ -> http://localhost:8080/aree-di-pratica/privati/aste-immobiliari/
+OK 301 /diritto-tributario/ -> http://localhost:8080/aree-di-pratica/privati/diritto-tributario/
+OK 301 /tipo-area/contenzioso/ -> http://localhost:8080/aree-di-pratica/contenzioso-amministrativo/
+OK 301 /tipo-area/privati/ -> http://localhost:8080/aree-di-pratica/privati/
+
+LEGACY-REDIRECTS: 18 / 18

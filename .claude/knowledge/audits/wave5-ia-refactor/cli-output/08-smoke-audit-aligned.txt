@@ -1,0 +1,34 @@
+OK 200 /
+OK 200 /chi-siamo/
+OK 200 /chi-siamo/lo-studio/
+OK 200 /chi-siamo/team/
+OK 200 /chi-siamo/team/emiliano-saltelli/
+OK 200 /chi-siamo/team/fabiana-saltelli/
+OK 200 /chi-siamo/team/antonia-battista/
+OK 200 /chi-siamo/team/stefano-gaetano-tedesco/
+OK 200 /chi-siamo/risultati/
+OK 200 /aree-di-pratica/
+OK 200 /aree-di-pratica/privati/
+OK 200 /aree-di-pratica/privati/diritto-tributario/
+OK 200 /aree-di-pratica/privati/diritto-del-lavoro/
+OK 200 /aree-di-pratica/privati/diritto-di-famiglia-lgbtq/
+OK 200 /aree-di-pratica/imprese/
+OK 200 /aree-di-pratica/imprese/recupero-crediti/
+OK 200 /aree-di-pratica/contenzioso-amministrativo/
+OK 200 /aree-di-pratica/privati/aste-immobiliari/
+OK 200 /aree-di-pratica/privati/infortunistica-stradale/
+OK 200 /risorse/
+OK 200 /risorse/blog/
+OK 200 /risorse/domande-frequenti/
+OK 200 /risorse/glossario-legale/
+OK 200 /risorse/guide-gratuite/
+OK 200 /costi-e-consulenze/
+OK 200 /costi-e-consulenze/costi/
+OK 200 /costi-e-consulenze/prima-consulenza/
+OK 200 /costi-e-consulenze/come-lavoriamo/
+OK 200 /costi-e-consulenze/richiedi-preventivo/
+OK 200 /contatti/
+OK 200 /contatti/lavora-con-noi/
+OK 200 /llms.txt
+
+AUDIT-ALIGNED: 32 / 32

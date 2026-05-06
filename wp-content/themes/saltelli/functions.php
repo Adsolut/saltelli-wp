@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.0.0-recovery-wave3-debug');
+define('SALTELLI_THEME_VERSION', '1.1.0-wave5-ia-refactor');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
@@ -27,4 +27,5 @@ require_once SALTELLI_THEME_DIR . '/inc/schema/schema-loader.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/meta-tags.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/ai-files.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/legacy-redirects.php';
+require_once SALTELLI_THEME_DIR . '/inc/seo/wave5-blog-rewrites.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/yoast-schema-extensions.php';
