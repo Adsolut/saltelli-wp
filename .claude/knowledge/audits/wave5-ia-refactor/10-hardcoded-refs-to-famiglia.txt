@@ -1,0 +1,58 @@
+=== Hardcoded /diritto-di-famiglia/ in template files (escluso LGBTQ+) ===
+/Users/aldosantoro/Desktop/DEV/saltelli-wp/wp-content/themes/saltelli/inc/seo/legacy-redirects.php:38:        '/avvocato-divorzista/'                     => '/aree-di-pratica/privati/diritto-di-famiglia/',
+/Users/aldosantoro/Desktop/DEV/saltelli-wp/wp-content/themes/saltelli/inc/seo/legacy-redirects.php:39:        '/avvocato-divorzista-italia/'              => '/aree-di-pratica/privati/diritto-di-famiglia/',
+
+=== Hardcoded mention 'diritto-di-famiglia' (exact slug, escluso LGBTQ+) ===
+/Users/aldosantoro/Desktop/DEV/saltelli-wp/wp-content/themes/saltelli/taxonomy-tipo-area.php:86:        ['sym' => '§', 't' => __('Famiglia', 'saltelli'),     'd' => __("Separazioni, divorzi, affidamenti, unioni civili e tutela LGBTQ+.", 'saltelli'),  'slug' => 'diritto-di-famiglia'],
+/Users/aldosantoro/Desktop/DEV/saltelli-wp/wp-content/themes/saltelli/inc/wave3-glossario.php:21:        'Diritto di famiglia'       => 'diritto-di-famiglia',
+/Users/aldosantoro/Desktop/DEV/saltelli-wp/wp-content/themes/saltelli/inc/schema/partial-organization.php:22:    ['name' => 'Diritto di famiglia e divorzi',        'slug' => 'diritto-di-famiglia'],
+/Users/aldosantoro/Desktop/DEV/saltelli-wp/wp-content/themes/saltelli/inc/seo/legacy-redirects.php:38:        '/avvocato-divorzista/'                     => '/aree-di-pratica/privati/diritto-di-famiglia/',
+/Users/aldosantoro/Desktop/DEV/saltelli-wp/wp-content/themes/saltelli/inc/seo/legacy-redirects.php:39:        '/avvocato-divorzista-italia/'              => '/aree-di-pratica/privati/diritto-di-famiglia/',
+
+=== Annotazione findings (per audit orchestratore) ===
+
+Trovate 5 menzioni hardcoded del slug `diritto-di-famiglia` in 4 file:
+
+1. [legacy-redirects.php:38-39] mappa A → C punta a `/aree-di-pratica/privati/diritto-di-famiglia/`
+   Effetto post-fix: redirect chain `/avvocato-divorzista/` → 301 → `/aree-di-pratica/privati/diritto-di-famiglia/` → 301 → `/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/`. HTTP funzionante (200 finale) ma 2 hop SEO-suboptimal.
+   Decisione Claude Code: NON modificato — prompt esplicito ("NON modificare quelli, sono coerenti, puntano già a diritto-di-famiglia-lgbtq via mappa A").
+   Suggerimento orchestratore: valutare update mappa A direttamente per ridurre a 1 hop.
+
+2. [taxonomy-tipo-area.php:86] $scenari_map['privati']['Famiglia'] usa slug='diritto-di-famiglia'.
+   Costruisce link `/competenze/diritto-di-famiglia/`. Dopo DELETE 2669:
+     - Step 3 dynamic regex `^/competenze/(...)/?$` lookup CPT → null (post eliminato)
+     - fall-through → 404 → WP `redirect_guess_404_permalink()` (canonical.php) fuzzy-matches
+       slug `diritto-di-famiglia%` → trova post 2666 LGBTQ+ → 301 → permalink 2666 ✅
+   Decisione Claude Code: NON modificato — out of scope mini-fix.
+   Verifica live: `/competenze/diritto-di-famiglia/` → 301 (1 hop) → /aree-di-pratica/privati/diritto-di-famiglia-lgbtq/ → 200.
+
+3. [inc/wave3-glossario.php:21] glossario term "Diritto di famiglia" → slug `diritto-di-famiglia`.
+   Stessa dinamica del punto 2 — risolve via WP fuzzy 404 guess. ✅
+   Decisione Claude Code: NON modificato — out of scope.
+
+4. [inc/schema/partial-organization.php:22] schema.org Organization.serviceType label "Diritto di famiglia e divorzi" con slug `diritto-di-famiglia`.
+   Stessa dinamica — risolve via WP fuzzy 404 guess (se mai un crawler segue il link). ✅
+   Decisione Claude Code: NON modificato — out of scope.
+
+=== Sommario impact post-fix B (post-verifica live) ===
+
+URL FUNZIONANTI tutti — nessun 404:
+- /aree-di-pratica/privati/diritto-di-famiglia/  → 301 (mappa B nuova) → LGBTQ+ ✅
+- /competenze/diritto-di-famiglia/               → 301 (WP fuzzy 404 guess) → LGBTQ+ ✅
+
+URL CHAIN (301 → 301 → 200, 2 hops, SEO-suboptimal ma funzionante):
+- /avvocato-divorzista/        → /aree-di-pratica/privati/diritto-di-famiglia/ → LGBTQ+
+- /avvocato-divorzista-italia/ → /aree-di-pratica/privati/diritto-di-famiglia/ → LGBTQ+
+
+Discovery aggiuntivo: WP `redirect_guess_404_permalink()` in canonical.php cattura
+auto-magicamente i link `/competenze/diritto-di-famiglia/` perché 2666 ha slug
+`diritto-di-famiglia-lgbtq` che starts-with il request slug. Niente azione
+necessaria sui template hardcoded (#2, #3, #4) — funzionano già.
+
+Raccomandazione orchestratore (opzionale, non urgent):
+- Patch follow-up minore: aggiornare `slug` literal nei 3 file template da
+  'diritto-di-famiglia' a 'diritto-di-famiglia-lgbtq' per evitare la dipendenza
+  fragile dal fuzzy 404 guess (se in futuro qualcuno aggiunge un altro post con
+  slug `diritto-di-famiglia-XYZ`, WP non sa più quale guessare).
+- Aggiornare mappa A diretto: `/avvocato-divorzista/` e `/avvocato-divorzista-italia/`
+  → punta direttamente a `/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/` (1 hop).

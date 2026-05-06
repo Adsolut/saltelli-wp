@@ -1,0 +1,50 @@
+# Pre-fix smoke (before FIX A application)
+# Branch: fix/wave5-blog-rewrites (da feat/wave5-ia-refactor @ dcf65c8)
+# Date: 2026-05-06
+# Note: bug auto-risolto dopo wp rewrite flush --hard durante questo step.
+#       Il rewrite rule registered in wave5-blog-rewrites.php funziona,
+#       ma in Phase 8 il flush evidentemente non era stato persistito.
+#       FIX A va applicato comunque per:
+#         (1) defense-in-depth contro regression future
+#         (2) handling esplicito query_vars (filter request priority 5)
+#         (3) compliance con specifica orchestratore.
+#
+# Smoke su 33 slug presi dall'artifact originale 08-smoke-blog.txt
+# (gli stessi 33 che la Phase 8 aveva diagnosticato 0/33 FAIL).
+
+OK legacy=301 target=200 (il-femminicidio-diventa-reato-autonomo-cosa-cambia-per-il-diritto-di-famiglia)
+OK legacy=301 target=200 (sposato-con-uno-straniero-irreperibile-come-separarsi-o-divorziare-anche-se-non-sai-dove-si-trovi)
+OK legacy=301 target=200 (spese-per-i-figli-dopo-la-separazione-il-punto-della-cassazione-su-spese-ordinarie-e-straordinarie)
+OK legacy=301 target=200 (case-vacanza-e-genitori-separati-come-si-gestisce-lestate-in-una-seconda-casa)
+OK legacy=301 target=200 (vacanze-e-genitori-separati-come-organizzarle-senza-conflitti-e-senza-ferire-i-figli)
+OK legacy=301 target=200 (due-mamme-dalla-nascita-la-corte-costituzionale-difende-i-diritti-dei-figli-delle-coppie-lesbiche)
+OK legacy=301 target=200 (17-maggio-giornata-internazionale-contro-lomofobia-la-bifobia-e-la-transfobia)
+OK legacy=301 target=200 (unione-civile-e-convivenza-per-le-coppie-dello-stesso-sesso-in-italia-diritti-tutele-e-differenze)
+OK legacy=301 target=200 (due-case-per-i-figli-di-separati-bigenitorialita-o-doppia-fragilita)
+OK legacy=301 target=200 (sentenza-turetta-ergastolo-senza-crudelta-una-riflessione-legale-e-umana-nel-nome-di-giulia)
+OK legacy=301 target=200 (il-trasferimento-del-lavoratore-in-caso-di-mobbing-o-straining)
+OK legacy=301 target=200 (adozione-internazionale-ora-anche-per-le-persone-singole-la-corte-costituzionale-apre-a-una-genitorialita-piu-inclusiva)
+OK legacy=301 target=200 (compravendita-quando-va-pagata-lagenzia-immobiliare)
+OK legacy=301 target=200 (le-imposte-di-successione-agli-eredi-e-la-dichiarazione-di-successione)
+OK legacy=301 target=200 (accettazione-eredita-pura-e-semplice-cassazione-2024-presupposti)
+OK legacy=301 target=200 (diritti-delle-persone-trans-una-sentenza-europea-di-dignita-e-inclusione)
+OK legacy=301 target=200 (dividere-la-casa-familiare-priorita-al-benessere-dei-figli)
+OK legacy=301 target=200 (falsita-del-testamento-olografo-come-difendersi)
+OK legacy=301 target=200 (la-maternita-surrogata-come-reato-universale-cosa-significa-e-quali-sono-gli-aspetti-critici)
+OK legacy=301 target=200 (cassazione-validi-gli-accordi-via-email-tra-coniugi)
+OK legacy=301 target=200 (debiti-che-i-figli-non-possono-ereditare)
+OK legacy=301 target=200 (attenzione-alle-truffe-online)
+OK legacy=301 target=200 (buoni-fruttiferi-postali-ottieni-il-rimborso)
+OK legacy=301 target=200 (monopattini-riforma-multe-salate)
+OK legacy=301 target=200 (esenzione-imu-per-immobile-occupato-in-modo-abusivo)
+OK legacy=301 target=200 (smart-working-come-sta-evolvendo-la-normativa-dopo-lemergenza-covid)
+OK legacy=301 target=200 (il-diritto-al-pagamento-delle-differenze-retributive-cosa-deve-sapere-un-lavoratore)
+OK legacy=301 target=200 (mutuo-cointestato-e-separazione-chi-ha-sempre-pagato-le-rate-ha-diritto-al-rimborso)
+OK legacy=301 target=200 (la-manutenzione-del-terreno-non-basta-per-usucapire-come-difendere-i-propri-diritti)
+OK legacy=301 target=200 (agenzia-entrate-riscossione-stop-alle-notifiche-automatiche-ai-coobbligati-cosa-sapere-per-difendersi)
+OK legacy=301 target=200 (licenziamento-per-scarso-rendimento-le-ultime-novita)
+OK legacy=301 target=200 (diritti-del-lavoratore-in-smart-working-cosa-ce-da-sapere)
+OK legacy=301 target=200 (locazione-commerciale-e-termine-di-grazia-un-tema-di-dibattito-giurisprudenziale)
+
+PASS: 33 / 33
+FAIL: 0 / 33

@@ -1,0 +1,27 @@
+=== ACF / postmeta references containing 2669 (excluding _-prefixed) — pre-fix ===
+post_id	meta_key	meta_value
+2662	aree_competenza_correlate	a:3:{i:0;s:4:"2666";i:1;s:4:"2669";i:2;s:4:"2677";}
+
+=== Tutti i postmeta con meta_value = 2669 esatto (qualunque key) ===
+(0 rows)
+
+=== Decisione (autonoma da Claude Code, in linea con prompt stop condition) ===
+Post 2662 = avvocato "Antonia Battista" (post_type=avvocato, status=publish).
+Campo ACF `aree_competenza_correlate` contiene 3 IDs: [2666, 2669, 2677].
+Poiché 2666 (`diritto-di-famiglia-lgbtq`) è GIÀ presente nell'array,
+"sostituire 2669 con 2666" significherebbe duplicato → semplicemente
+RIMOSSO 2669. End state ACF: [2666, 2677].
+
+Verifica post-update:
+docker compose run --rm wpcli post meta get 2662 aree_competenza_correlate --format=json
+→ ["2666","2677"]
+
+Verifica raw (postmeta serialized):
+SELECT meta_value FROM wp_postmeta WHERE post_id=2662 AND meta_key='aree_competenza_correlate';
+→ a:2:{i:0;s:4:"2666";i:1;s:4:"2677";}
+
+=== Side-effect ===
+Avvocato Antonia Battista ora mostra 2 aree-competenza-correlate invece di 3
+(LGBTQ+ + successioni). La voce "Diritto di famiglia generale" (ID 2669)
+era duplicato funzionale del LGBTQ+ — la rimozione è coerente con la
+decisione cliente di consolidare.
