@@ -1,0 +1,113 @@
+=== 1. Tutte saltelli_option() chiamate ===
+      33 /tmp/option_calls.txt
+cases_titolo
+casi_rappresentativi_home
+colophon_email
+colophon_indirizzo
+colophon_orari
+colophon_telefono
+contact_email_pubblica
+contact_pec
+contact_piva
+contact_telefono_pubblico
+cta_default_label
+hero_cta_label
+hero_cta_url
+hero_eyebrow
+hero_headline
+hero_subheadline
+press_outlets
+social_
+studio_body
+studio_cap_citta
+studio_email
+studio_foto_facciata
+studio_indirizzo_via
+studio_orari_sabato
+studio_orari_settimana
+studio_pec
+studio_piva
+studio_quartiere
+studio_telefono_pubblico
+studio_titolo_sezione
+team_titolo
+trust_signal_{$i}_caption
+trust_signal_{$i}_label
+
+=== 2. Field ACF Theme Options esistenti ===
+      34 /tmp/option_fields.txt
+brand_payoff
+brand_statement_short
+cta_default_label
+cta_default_url
+cta_subline_italic
+cta_trust_signal
+footer_credit_text
+footer_credit_url
+footer_newsletter_enabled
+footer_newsletter_provider
+social_facebook
+social_instagram
+social_linkedin
+social_twitter
+studio_cap_citta
+studio_coordinate_lat
+studio_coordinate_lng
+studio_email
+studio_indirizzo_via
+studio_orari_sabato
+studio_orari_settimana
+studio_ordine_avvocati
+studio_pec
+studio_piva
+studio_quartiere
+studio_telefono_pubblico
+trust_signal_1_caption
+trust_signal_1_label
+trust_signal_2_caption
+trust_signal_2_label
+trust_signal_3_caption
+trust_signal_3_label
+trust_signal_4_caption
+trust_signal_4_label
+
+=== 3. ❌ GAP: chiamate ma field NON esistente ===
+Field chiamati ma NON esistenti: 20
+  ❌ cases_titolo
+  ❌ casi_rappresentativi_home
+  ❌ colophon_email
+  ❌ colophon_indirizzo
+  ❌ colophon_orari
+  ❌ colophon_telefono
+  ❌ contact_email_pubblica
+  ❌ contact_pec
+  ❌ contact_piva
+  ❌ contact_telefono_pubblico
+  ❌ hero_cta_label
+  ❌ hero_cta_url
+  ❌ hero_eyebrow
+  ❌ hero_headline
+  ❌ hero_subheadline
+  ❌ press_outlets
+  ❌ studio_body
+  ❌ studio_foto_facciata
+  ❌ studio_titolo_sezione
+  ❌ team_titolo
+
+=== 4. 🟡 DEAD: field esistenti ma codice NON chiama ===
+Field DEAD: 15
+  🟡 brand_payoff
+  🟡 brand_statement_short
+  🟡 cta_default_url
+  🟡 cta_subline_italic
+  🟡 footer_credit_text
+  🟡 footer_credit_url
+  🟡 footer_newsletter_enabled
+  🟡 footer_newsletter_provider
+  🟡 social_facebook
+  🟡 social_instagram
+  🟡 social_linkedin
+  🟡 social_twitter
+  🟡 studio_coordinate_lat
+  🟡 studio_coordinate_lng
+  🟡 studio_ordine_avvocati
