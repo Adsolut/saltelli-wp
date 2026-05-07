@@ -1,0 +1,20 @@
+OK 301->200 /lo-studio/
+OK 301->200 /avvocati/
+OK 301->200 /avvocati/emiliano-saltelli/
+OK 301->200 /competenze/
+OK 301->200 /casi/
+OK 301->200 /blog/
+OK 301->200 /faq/
+OK 301->200 /glossario-legale/
+OK 301->200 /come-lavoriamo/
+OK 301->200 /prima-consulenza/
+OK 301->200 /competenze/responsabilita-civile/
+OK 301->200 /competenze/consulenze-online/
+OK 301->200 /competenze/diritto-commerciale/
+FAIL 301->404 /aste-immobiliari/
+OK 301->200 /diritto-tributario/
+FAIL 301->404 /tipo-area/contenzioso/
+OK 301->200 /tipo-area/privati/
+OK 301->200 /competenze/diritto-tributario/
+
+LEGACY-REDIRECTS: 16 / 18 (fail 2)
