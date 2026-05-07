@@ -1,0 +1,4 @@
+critical-css inline (home): 1 (expect ≥1)
+webp/image-set on blog: 31
+OK critical-css present
+OK webp/image-set present

@@ -1,0 +1,7 @@
+OK X-Content-Type-Options: nosniff
+OK X-Frame-Options: SAMEORIGIN
+OK Referrer-Policy: strict-origin-when-cross-origin
+OK Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), accelerometer=(), gyroscope=(), magnetometer=(), usb=()
+FAIL missing: strict-transport-security:
+
+SECURITY-HEADERS: 4 / 5
