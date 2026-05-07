@@ -1,0 +1,102 @@
+=== Q1: Page draft confliggenti (atteso: 11 publish-status=draft + page 19) ===
+ID	post_status	post_name	post_title	post_modified
+2251	draft	diritto-penale	Diritto Penale	2026-04-30 12:32:22
+2246	draft	diritto-amministrativo	Diritto Amministrativo	2026-04-30 12:32:20
+297	draft	diritto-bancario	Diritto bancario	2026-04-30 12:31:42
+288	draft	eredita-e-successioni	Eredità e successioni	2026-04-30 12:31:52
+279	draft	responsabilita-medica	Responsabilità medica	2026-04-30 12:31:56
+260	draft	aste-immobiliari	Aste immobiliari	2026-04-30 12:32:01
+232	draft	infortunistica-stradale	Infortunistica stradale	2026-04-30 12:32:06
+223	draft	risarcimento-del-danno	Risarcimento del danno	2026-04-30 12:32:11
+208	draft	cartelle-esattoriali-e-multe	Cartelle esattoriali e multe	2026-04-30 12:31:37
+202	draft	diritto-tributario	Diritto Tributario	2026-04-30 12:32:13
+170	draft	recupero-crediti	Recupero Crediti	2026-04-30 12:31:35
+19	publish	lo-studio	Lo studio	2026-05-06 20:14:07
+
+=== Q2: Content size detail (decisione migration vs trash) ===
+ID 202 [draft] diritto-tributario — content_len=3842 excerpt_len=0 acf_field_count=9
+ID 208 [draft] cartelle-esattoriali-e-multe — content_len=2873 excerpt_len=0 acf_field_count=9
+ID 170 [draft] recupero-crediti — content_len=4221 excerpt_len=0 acf_field_count=9
+ID 223 [draft] risarcimento-del-danno — content_len=2968 excerpt_len=0 acf_field_count=9
+ID 232 [draft] infortunistica-stradale — content_len=2531 excerpt_len=0 acf_field_count=9
+ID 260 [draft] aste-immobiliari — content_len=1731 excerpt_len=0 acf_field_count=9
+ID 279 [draft] responsabilita-medica — content_len=2100 excerpt_len=0 acf_field_count=9
+ID 288 [draft] eredita-e-successioni — content_len=1807 excerpt_len=0 acf_field_count=9
+ID 297 [draft] diritto-bancario — content_len=1952 excerpt_len=0 acf_field_count=9
+ID 2246 [draft] diritto-amministrativo — content_len=3889 excerpt_len=0 acf_field_count=9
+ID 2251 [draft] diritto-penale — content_len=6556 excerpt_len=0 acf_field_count=9
+ID 19 [publish] lo-studio — content_len=2856 excerpt_len=118 acf_field_count=9
+
+=== Q3: Term tipo-area state (atteso: contenzioso slug) ===
+term_id	name	slug	count
+995	Altri servizi	altri	2
+994	Contenzioso Amministrativo	contenzioso	4
+992	Per i Privati	privati	9
+993	Per le Imprese	imprese	4
+
+=== Q3: Term tipo-area state ===
+term_id	name	slug	count
+995	Altri servizi	altri	2
+994	Contenzioso Amministrativo	contenzioso	4
+992	Per i Privati	privati	9
+993	Per le Imprese	imprese	4
+
+=== Q5: File template visual P2 polish ===
+  EXISTS wp-content/themes/saltelli/template-parts/page-contatti.php
+  MISSING wp-content/themes/saltelli/template-parts/page-risorse.php
+  EXISTS wp-content/themes/saltelli/template-parts/page-aree-di-pratica-hub.php
+  EXISTS wp-content/themes/saltelli/single-competenza.php
+  MISSING wp-content/themes/saltelli/template-parts/archive-blog.php
+  MISSING wp-content/themes/saltelli/template-parts/page-glossario.php
+  MISSING wp-content/themes/saltelli/page-templates/page-contatti.php
+  MISSING wp-content/themes/saltelli/page-templates/page-risorse.php
+  MISSING wp-content/themes/saltelli/page-templates/page-glossario.php
+wp-content/themes/saltelli/acf-json/group_contatti_v1.json
+wp-content/themes/saltelli/inc/wave3-glossario.php
+wp-content/themes/saltelli/template-parts/page-aree-di-pratica-hub.php
+wp-content/themes/saltelli/template-parts/page-contatti.php
+wp-content/themes/saltelli/template-parts/page-risorse-hub.php
+
+=== Q6: Localizza visual P2 copy issues ===
+--- 'Te qualsiasi' (MED-04):
+
+--- 'PRIMA INCONTRO' / 'prima incontro' (MED-05):
+
+--- '0 GUIDE' counter (MED-06):
+
+--- lowercase 'napoli' (MED-09):
+wp-content/themes/saltelli/taxonomy-tipo-area.php:97:        ['sym' => '¶', 't' => __('Amministrativo', 'saltelli'), 'd' => __("Ricorsi al TAR, annullamento di provvedimenti P.A., edilizia, urbanistica.", 'saltelli'),  'slug' => 'diritto-amministrativo'],
+wp-content/themes/saltelli/inc/schema/partial-organization.php:35:    ['name' => 'Diritto amministrativo',               'slug' => 'diritto-amministrativo'],
+wp-content/themes/saltelli/inc/seo/legacy-redirects.php:51:        '/diritto-amministrativo/'                  => '/aree-di-pratica/contenzioso-amministrativo/diritto-amministrativo/',
+
+---
+=== DECISION TREE Phase 2-5 (post-investigation) ===
+
+PHASE 2 — CMS cleanup:
+  ✓ 9 page draft duplicate CPT (202, 208, 170, 223, 279, 288, 297, 2246, 2251) → trash
+  ✓ Page 19 [publish] lo-studio (content 2856) → trash (duplicate URL DEAD; canonical /chi-siamo/lo-studio/ servito da page 2811)
+  ✓ CPT 2680, 2681 → marker [Servizio extra] + draft
+
+PHASE 3 — Migration:
+  ✓ Page 232 (content_len=2531) → CPT competenza Tier-2 privati (slug infortunistica-stradale)
+  ✓ Page 260 (content_len=1731) → CPT competenza Tier-2 privati (slug aste-immobiliari)
+
+PHASE 4 — Term rename:
+  ✓ term_id=994 (name="Contenzioso Amministrativo", slug="contenzioso") → name "Contenzioso amministrativo", slug "contenzioso-amministrativo"
+
+PHASE 5 — Visual P2 polish (target identificati):
+  MED-04 "Te qualsiasi" → fix DB ACF post_meta hero_lede su page contatti (default code OK)
+  MED-05 "PRIMA INCONTRO" → fix DB ACF post_meta hero_eyebrow o trust_signal su page contatti
+  MED-06 "0 GUIDE" empty state → fix template-parts/page-risorse-hub.php riga 97-103 (conditional render)
+  MED-08 card "Per i privati" → edit template-parts/page-aree-di-pratica-hub.php riga 21 (taxonomy chiarezza)
+  MED-09 "napoli" lowercase → fix DB ACF post_meta subtitle su CPT competenza diritto-amministrativo
+  MED-10 "Il responsabilità" blog → fix DB post_title del blog post specifico
+  MED-02 TOC mobile collapse → CSS media query @media (max-width: 767px) su .sl-faq-aggregator__toc
+  MED-11 glossario jump nav → ALREADY EXISTS (.sl-glossario__az sticky in inc/wave3-glossario.php:376) — polish minimo se serve
+
+NOTE:
+- File `template-parts/page-risorse.php` MISSING — usa `page-risorse-hub.php`
+- File `template-parts/page-glossario.php` MISSING — usa `inc/wave3-glossario.php`
+- File `template-parts/archive-blog.php` MISSING — non blocking
+- ACF defaults in `acf-json/group_contatti_v1.json` sono CORRETTI; valori errati in DB post_meta
+- Q4 (CPT competenza Tier-2 publish list) skipped — scope migration usa slug hardcoded, non blocking

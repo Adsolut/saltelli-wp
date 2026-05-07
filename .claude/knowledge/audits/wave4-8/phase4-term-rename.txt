@@ -1,0 +1,27 @@
+=== Phase 4: Term tipo-area rename ===
+
+=== State pre-rename ===
+term_id	name	slug	count
+995	Altri servizi	altri	0
+994	Contenzioso Amministrativo	contenzioso	4
+992	Per i Privati	privati	11
+993	Per le Imprese	imprese	4
+
+=== Rename term 994 ===
+Success: Term updated.
+
+=== State post-rename ===
+term_id	name	slug	count
+995	Altri servizi	altri	0
+994	Contenzioso amministrativo	contenzioso-amministrativo	4
+992	Per i Privati	privati	11
+993	Per le Imprese	imprese	4
+Success: Rewrite rules flushed.
+Success: The cache was flushed.
+Success: 2 transients deleted from the database.
+
+=== Smoke URL post-rename + flush ===
+  [200] /aree-di-pratica/contenzioso-amministrativo/
+  [200] /aree-di-pratica/contenzioso-amministrativo/diritto-amministrativo/
+  [200] /tipo-area/contenzioso/
+  [200] /tipo-area/contenzioso-amministrativo/

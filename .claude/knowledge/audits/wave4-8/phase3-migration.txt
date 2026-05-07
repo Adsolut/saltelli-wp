@@ -1,0 +1,46 @@
+=== Migration page 232 → CPT competenza ===
+Source: ID 232 title="Infortunistica stradale" content_len=2531
+Created CPT competenza ID 3034
+Assigned term tipo-area=privati
+Copied 9 ACF fields
+Set is_tier_1=0 (Tier-2)
+Trashed source page 232
+
+MIGRATION COMPLETED: page 232 → CPT competenza ID 3034
+URL atteso: /aree-di-pratica/privati/infortunistica-stradale/
+
+=== Migration page 260 → CPT competenza ===
+Created CPT competenza ID 3035
+Assigned term tipo-area=privati
+Copied 9 ACF fields
+Trashed source page 260
+MIGRATION COMPLETED: page 260 → CPT competenza ID 3035
+
+=== Flush rewrite + smoke URL post-migration ===
+Success: Rewrite rules flushed.
+Success: The cache was flushed.
+
+=== Smoke URL post-migration ===
+  [200] /aree-di-pratica/privati/infortunistica-stradale/
+  [200] /aree-di-pratica/privati/aste-immobiliari/
+
+=== Verifica ACF field nuovi CPT ===
+ID 3034 [publish] infortunistica-stradale | acf_keys=10 | is_tier_1=none
+  tipo-area: 
+ID 3035 [publish] aste-immobiliari | acf_keys=10 | is_tier_1=none
+  tipo-area: 
+Error: Too many positional arguments: . .  (length=" . strlen($v) . ")\n";
+  }
+
+3034: OK
+3035: OK
+3034: tipo-area=privati is_tier_1=0
+3035: tipo-area=privati is_tier_1=0
+Success: Rewrite rules flushed.
+Success: The cache was flushed.
+Success: 9 transients deleted from the database.
+
+=== Smoke URL post-flush ===
+  [200] /aree-di-pratica/privati/infortunistica-stradale/
+  [200] /aree-di-pratica/privati/aste-immobiliari/
+  [200] /aree-di-pratica/privati/

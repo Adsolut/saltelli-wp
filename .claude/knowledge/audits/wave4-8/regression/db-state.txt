@@ -1,0 +1,8 @@
+Page conflict CPT (publish/draft): 0
+CPT competenza: publish=19 | draft=5
+Term tipo-area:
+  - altri (count=0)
+  - contenzioso-amministrativo (count=4)
+  - privati (count=11)
+  - imprese (count=4)
+Residue diciotto/diciannove: post_content=0 | postmeta=0 | options=0

@@ -95,12 +95,14 @@ $sl_guide_count  = wp_count_posts('saltelli_guida')->publish ?? 0;
                         <?php esc_html_e('PDF scaricabili: cosa fare se ricevi una cartella, come affrontare un licenziamento, separazione.', 'saltelli'); ?>
                     </p>
                     <p class="sl-mono sl-hub-card__meta">
-                        <?php
-                        printf(
-                            esc_html(_n('%s guida', '%s guide', $sl_guide_count, 'saltelli')),
-                            esc_html(number_format_i18n($sl_guide_count))
-                        );
-                        ?>
+                        <?php if ($sl_guide_count > 0) :
+                            printf(
+                                esc_html(_n('%s guida', '%s guide', $sl_guide_count, 'saltelli')),
+                                esc_html(number_format_i18n($sl_guide_count))
+                            );
+                        else :
+                            esc_html_e('In arrivo', 'saltelli');
+                        endif; ?>
                     </p>
                     <span class="sl-mono sl-hub-card__cta"><?php esc_html_e('Scarica →', 'saltelli'); ?></span>
                 </a>

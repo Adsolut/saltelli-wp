@@ -18,7 +18,7 @@ $sl_clusters = [
         'slug'    => 'privati',
         'num'     => '01 / 03',
         'title'   => __('Per i privati', 'saltelli'),
-        'desc'    => __('Famiglie, persone fisiche, lavoratori. Tributario, lavoro, famiglia LGBTQ+, successioni, immigrazione, penale, condominio.', 'saltelli'),
+        'desc'    => __('Famiglie e persone fisiche, lavoratori. Materie: tributario, lavoro, famiglia LGBTQ+, successioni, infortunistica, penale, bancario, condominio, immigrazione.', 'saltelli'),
     ],
     [
         'slug'    => 'imprese',
