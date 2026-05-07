@@ -32,11 +32,11 @@ $tipo_terms = get_terms([
         <header class="sl-section-head sl-areas__archive-head">
             <?php saltelli_render_breadcrumb(); ?>
             <h1 class="sl-section-title">
-                <?php esc_html_e('Diciannove aree.', 'saltelli'); ?><br>
+                <?php esc_html_e('Diciassette aree.', 'saltelli'); ?><br>
                 <em><?php esc_html_e('Tre presidiate in profondità.', 'saltelli'); ?></em>
             </h1>
             <p class="sl-areas__archive-lede">
-                <?php esc_html_e('Lavoriamo in profondità su tributario, lavoro e famiglia LGBTQ+. Le altre sedici aree mantengono presidio attivo per famiglie e imprese di Napoli.', 'saltelli'); ?>
+                <?php esc_html_e('Lavoriamo in profondità su tributario, lavoro e famiglia LGBTQ+. Le altre quattordici aree mantengono presidio attivo per famiglie e imprese di Napoli.', 'saltelli'); ?>
             </p>
         </header>
 

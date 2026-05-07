@@ -45,14 +45,35 @@ get_header();
         </header>
 
         <?php if (have_posts()) : ?>
+            <?php
+            /* Wave 4.7: archive saltelli_caso usa data_caso ACF (priorità) → fallback estratto anno
+               dal titolo ("Cassazione · 2024" → "2024") → fallback get_the_date(). I 9 casi
+               importati Wave 2 hanno data published = data import (5/4 Maggio 2026), inutile
+               come segnale editoriale. caso_categoria sostituisce category blog. */
+            $sl_is_caso_archive = is_post_type_archive('saltelli_caso');
+            ?>
             <ul class="sl-blog__list">
                 <?php while (have_posts()) : the_post();
-                    $cats = get_the_category();
-                    $cat  = !empty($cats) ? $cats[0] : null;
+                    if ($sl_is_caso_archive) {
+                        $caso_terms = get_the_terms(get_the_ID(), 'caso_categoria');
+                        $cat = ($caso_terms && !is_wp_error($caso_terms)) ? $caso_terms[0] : null;
+                        $sl_data_caso = function_exists('get_field') ? get_field('data_caso') : '';
+                        if (!empty($sl_data_caso)) {
+                            $sl_caso_date_display = wp_date('Y', strtotime($sl_data_caso));
+                        } elseif (preg_match('/·\s*(\d{4})/u', get_the_title(), $sl_caso_y_match)) {
+                            $sl_caso_date_display = $sl_caso_y_match[1];
+                        } else {
+                            $sl_caso_date_display = get_the_date('Y');
+                        }
+                    } else {
+                        $cats = get_the_category();
+                        $cat  = !empty($cats) ? $cats[0] : null;
+                        $sl_caso_date_display = '';
+                    }
                     ?>
                     <li class="sl-blog__row">
                         <a href="<?php the_permalink(); ?>" class="sl-blog__row-inner">
-                            <span class="sl-mono sl-blog__date"><?php echo esc_html(get_the_date()); ?></span>
+                            <span class="sl-mono sl-blog__date"><?php echo esc_html($sl_is_caso_archive ? $sl_caso_date_display : get_the_date()); ?></span>
                             <?php if ($cat) : ?>
                                 <span class="sl-mono sl-blog__cat"><?php echo esc_html(strtoupper($cat->name)); ?></span>
                             <?php endif; ?>

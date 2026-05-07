@@ -41,7 +41,7 @@ $sl_clusters = [
         <p class="sl-mono sl-hub-hero__eyebrow"><?php esc_html_e('§ Aree di pratica', 'saltelli'); ?></p>
         <h1 class="sl-page__title sl-hub-hero__h1" id="hub-aree-h1" data-split-reveal>
             <?php
-            $sl_h1 = esc_html__('Diciotto aree,', 'saltelli') . '<br>'
+            $sl_h1 = esc_html__('Diciassette aree,', 'saltelli') . '<br>'
                 . '<em>' . esc_html__('tre cluster.', 'saltelli') . '</em>';
             echo wp_kses(saltelli_split_h1_words($sl_h1), [
                 'span' => ['class' => true, 'data-i' => true],

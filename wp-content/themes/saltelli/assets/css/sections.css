@@ -1580,7 +1580,7 @@
    Quando 0 risultati, mostro un placeholder editoriale
    ═══════════════════════════════════════════════════════════════ */
 .sl-areas__list:empty::before {
-  content: 'Le 19 aree saranno popolate prossimamente. Nel frattempo, contattaci direttamente per la tua pratica.';
+  content: 'Le 17 aree saranno popolate prossimamente. Nel frattempo, contattaci direttamente per la tua pratica.';
   display: block;
   padding: 48px 0;
   font-family: var(--font-display);

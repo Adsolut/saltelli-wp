@@ -82,7 +82,7 @@ $organization = [
     ],
     // TODO: foto sede studio in /wp-content/uploads/sede-studio-saltelli.jpg (Ludovica).
     'image' => home_url('/wp-content/uploads/sede-studio-saltelli.jpg'),
-    'description' => 'Studio legale a Napoli (Chiaia) fondato dall\'Avv. Emiliano Saltelli. Quattro avvocati, 19 aree di pratica. Specializzati in diritto tributario, del lavoro, di famiglia e cartelle esattoriali.',
+    'description' => 'Studio legale a Napoli (Chiaia) fondato dall\'Avv. Emiliano Saltelli. Quattro avvocati, 17 aree di pratica. Specializzati in diritto tributario, del lavoro, di famiglia e cartelle esattoriali.',
     'slogan' => 'Avvocati a Napoli — competenza, trasparenza, risultati.',
     'vatID'  => $studio['vat'],
     'taxID'  => $studio['tax_id'],

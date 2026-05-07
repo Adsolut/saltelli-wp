@@ -55,7 +55,7 @@ if (empty($sl_timeline)) {
         ['y' => '2014', 't' => __('Apertura LGBTQ+', 'saltelli'),    'd' => __('Antonia Battista inaugura una pratica dedicata, prima a Napoli sud.', 'saltelli')],
         ['y' => '2019', 't' => __("Vent'anni", 'saltelli'),          'd' => __("Lo studio passa da 2 a 4 professionisti stabili. Atelier a tutti gli effetti.", 'saltelli')],
         ['y' => '2024', 't' => __('Cassazione + AGE', 'saltelli'),   'd' => __('Annullamento cartella €240k. Conferma in Cassazione su licenziamento illegittimo.', 'saltelli')],
-        ['y' => '2026', 't' => __('Oggi', 'saltelli'),               'd' => __('19 aree presidiate, 4 professionisti, un solo atelier.', 'saltelli')],
+        ['y' => '2026', 't' => __('Oggi', 'saltelli'),               'd' => __('17 aree presidiate, 4 professionisti, un solo atelier.', 'saltelli')],
     ];
 }
 
@@ -166,7 +166,7 @@ $sl_principles_posts = get_posts([
                 <div class="sl-mono">§ 03 — <?php esc_html_e('I nostri quattro', 'saltelli'); ?></div>
                 <h2 class="sl-section-title sl-chi-siamo__h2" id="chi-siamo-team-h">
                     <?php esc_html_e('Quattro avvocati,', 'saltelli'); ?><br>
-                    <em><?php esc_html_e('diciannove aree.', 'saltelli'); ?></em>
+                    <em><?php esc_html_e('diciassette aree.', 'saltelli'); ?></em>
                 </h2>
             </header>
             <ul class="sl-chi-siamo__team-grid" role="list">
