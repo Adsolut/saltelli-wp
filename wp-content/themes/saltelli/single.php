@@ -103,7 +103,8 @@ while (have_posts()) :
 
         <?php if (has_post_thumbnail()) : ?>
             <figure class="sl-post__featured">
-                <?php the_post_thumbnail('saltelli-hero', ['loading' => 'eager', 'decoding' => 'async']); ?>
+                <?php /* Wave 4: blog featured image is above-fold LCP candidate */ ?>
+                <?php the_post_thumbnail('saltelli-hero', ['loading' => 'eager', 'decoding' => 'async', 'fetchpriority' => 'high']); ?>
             </figure>
         <?php endif; ?>
 
