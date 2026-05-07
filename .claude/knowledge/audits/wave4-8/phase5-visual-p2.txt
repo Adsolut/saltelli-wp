@@ -1,0 +1,115 @@
+=== Phase 5 investigation user-facing ===
+
+--- MED-04/05 contatti page typo (curl /contatti/) ---
+contatti page ID: 23
+  hero_eyebrow = § Contatti · Primo incontro gratuito
+  hero_h1_pre = Contatti.
+  hero_h1_em = 
+  hero_lede = Chiedi qualsiasi cosa. In qualsiasi momento.
+  trust_signal = Riceviamo solo su appuntamento. Risposta entro 24 ore.
+  come_arrivare_title = Come arrivare.
+  map_caption = Chiaia · Napoli
+
+--- MED-09 napoli su /diritto-amministrativo/ ---
+Napoli
+Napoli 
+Napoli e Campania
+amministrativo a Napoli
+napoli
+
+--- MED-09 fix: napoli → Napoli in CPT diritto-amministrativo post_content ---
+CPT diritto-amministrativo ID: 2682
+Updated: 1 → 0 occorrenze lowercase
+
+--- MED-10 blog 'Il responsabilità' ---
+ID	post_title
+2322	Somministrazione di lavoro e appalti: tutele e responsabilità del datore
+1631	🩺 Malattia Professionale: Tutele per il Lavoratore e Responsabilità del Datore di Lavoro
+1060	LA RESPONSABILITÀ PRECONTRATTUALE.
+725	I presupposti dell’azione di responsabilità nei confronti dell’amministratore promossa dai creditori sociali.
+2611	Giornata mondiale della sicurezza sul lavoro: diritti del lavoratore e obblighi del datore
+2608	Giornata mondiale della salute: la tutela del lavoratore passa anche dal lavoro
+2596	Clausole ambigue nel contratto: quando sono valide (guida art. 1367 c.c.)
+2533	Festa del Papà: quali sono i diritti del papà lavoratore secondo la legge
+2530	Affidamento dei minori al servizio sociale: la CTU non vincola il giudice
+2523	Frode su Postepay: l’ABF condanna l’intermediario al rimborso di € 2.600
+2512	Straordinari e stress nel personale sanitario: quando è possibile ottenere un risarcimento
+2473	Vuoi Liberarti di un Immobile? La Cassazione 2025 Autorizza la Rinuncia alla Proprietà
+2467	Buoni Fruttiferi Postali: Vittoria Confermata in Appello contro Poste Italiane grazie allo Studio Legale Saltelli
+2394	Controllo del lavoratore e privacy: cosa può (e non può) fare il datore di lavoro
+2378	Smart working e diritto alla disconnessione: cosa prevede la normativa
+2361	Poste Italiane condannata: risarcimento riconosciuto grazie all’azione legale del nostro Studio
+2085	Stage e tirocini: limiti di legge e regole sulla retribuzione
+2074	Perdita d’acqua da tubo condominiale: chi paga e chi risarcisce secondo la legge
+2082	Lavoratori disabili: collocamento mirato e agevolazioni per le aziende
+2068	Quando la casa torna a essere famiglia
+2065	Nessuna adozione se il sostegno funziona: la Cassazione difende il diritto a essere aiutati prima di separare
+2040	Alternanza dei genitori nella casa familiare: la decisione del Tribunale di Roma del 9 ottobre 2025 tutela il minore vittima della conflittualità
+2010	L’inserimento del figlio nel mondo del lavoro comporta la revoca della casa familiare
+1975	Conformità catastale: atto salvo anche se la dichiarazione è falsa? La svolta della Cassazione
+1963	Papà non è un weekend: la verità sull’affido condiviso e la bigenitorialità in Italia
+1884	Un’altra tragedia sul lavoro: ieri sera un operaio ha perso la vita a pochi passi dal nostro studio
+1881	Morta a 14 anni dopo un intervento estetico: in Italia sarebbe stato vietato
+1774	Troppo caldo per lavorare?
+1784	Diritto alla Privacy e Legami Affettivi: Quando la Curiosità Ferisce
+1778	Tragedia a Napoli: tre operai morti in cantiere. La sicurezza sul lavoro è una priorità, non un'opzione
+1777	Il Femminicidio diventa reato autonomo: cosa cambia per il diritto di famiglia
+1694	Dimissioni senza preavviso durante il periodo di prova: cosa dice la legge
+1672	Debiti fiscali del defunto: cosa pagano gli eredi e come evitarlo legalmente
+1703	Vacanze e Genitori Separati: Come Organizzarle Senza Conflitti (e Senza Ferire i Figli)
+1615	Due mamme dalla nascita: la Corte Costituzionale difende i diritti dei figli delle coppie lesbiche
+1536	Morti sul lavoro: una strage silenziosa che chiede giustizia.
+1361	GIORNATA INTERNAZIONALE DELLA SICUREZZA E SALUTE SUL LAVORO
+1372	Riorganizzazione e riconversione aziendale: quando il cambiamento diventa diritto
+1369	Infortunio sul lavoro: cosa fare e come tutelare i propri diritti.
+1366	IL DIRITTO ALLA SALUTE SUL POSTO DI LAVORO.
+1376	Sentenza Turetta: Ergastolo senza Crudeltà? Una riflessione legale e umana, nel nome di Giulia
+1348	Mutuo cointestato e separazione: chi ha sempre pagato le rate ha diritto al rimborso?
+1289	Adozione Internazionale: ora anche per le persone singole.
+1223	Come recuperare il TFR in caso di liquidazione giudiziaria dell’azienda
+1121	Malattie Professionali e Infortuni sul Lavoro: Diritti e Tutele per i Lavoratori
+1113	Separazione e Animali Domestici: Chi si Prende Cura del Pet di Famiglia?
+1038	Papà Separati: Un Ruolo Essenziale per il Benessere dei Figli
+989	Affido esclusivo e benessere dei figli
+974	Successioni e Famiglie Allargate: Soluzioni per Evitare Conflitti
+791	Le nuove regole per i neopatentati: guida a rischio e multe pesanti
+920	Nomina di Amministratore Non Socio nelle Società di Persone: Differenze tra S.N.C. e S.A.S.
+937	La Tragica Vicenda della Bambina di Tufino: Una Riflessione sull'Affido e il Benessere dei Minori
+902	Cassazione 31866/2024: Licenziamento per Giusta Causa e Violenza Domestica
+705	Il Capitale Sociale nelle S.r.l.: Analisi e Implicazioni Normative.
+715	“I Segnali di una Relazione Tossica: La Storia di Giulia Cecchettin e l’Importanza di Parlare”
+711	Eredità digitale: come gestire beni virtuali e account online dopo la morte
+690	Accettazione eredità pura e semplice Cassazione 2024 presupposti
+683	SCIOGLIMENTO E LIQUIDAZIONE SOCIETÀ DI CAPITALI.
+666	Eredità, Spese e Fisco: Le Ultime Novità dalla Cassazione
+669	Dividere la Casa Familiare? Priorità al Benessere dei Figli
+642	Crisi d’impresa e insolvenza (art. 2 C.C.I.I.)
+591	S.R.L. : Novità
+487	ASSISTENZA E CONSULENZA LEGALE AD IMPRESE
+---END---
+PATTERN: Il responsabilit%
+  no results
+PATTERN: %responsabilita etica%
+  no results
+PATTERN: %responsabilit%etica%
+  no results
+
+MED-10: nessun blog post matching 'Il responsabilit%' patterns. Probabile già fixato in passate sessioni.
+
+--- MED-04/05 contatti già OK su live (Phase 5 invest above) ---
+
+--- Phase 5 PROCEDE con: ---
+  ✓ MED-09 napoli → Napoli (DB applied)
+  - MED-06 0 GUIDE conditional render (page-risorse-hub.php)
+  - MED-08 card 'Per i privati' editorial (page-aree-di-pratica-hub.php)
+  - MED-02 TOC mobile collapse (sections.css)
+  - MED-11 glossario polish (already exists - polish minimo)
+
+=== Phase 5 smoke verify (DB-only changes su live) ===
+
+--- MED-04/05 contatti ---
+In qualsiasi momento
+Primo incontro
+
+--- MED-09 napoli capitalization ---
+amministrativo a Napoli

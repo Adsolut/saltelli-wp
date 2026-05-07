@@ -9683,3 +9683,38 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 /* ═══════════════════════════════════════════════════════════════
    WAVE 5 END
    ═══════════════════════════════════════════════════════════════ */
+
+
+/* ═══════════════════════════════════════════════════════════════
+   WAVE 4.8 — Visual P2 polish (MED-02 TOC mobile + MED-11 glossario polish)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* MED-02 — TOC mobile collapse Tier-1 / FAQ aggregator
+   Su mobile (<768px) il TOC sticky ingombra. Lo nascondiamo: gli ancoraggi
+   sezione restano accessibili tramite scroll diretto + back-to-top. */
+@media (max-width: 767px) {
+    .sl-faq-aggregator__toc {
+        display: none;
+    }
+}
+
+/* MED-11 — Glossario jump nav: polish mobile.
+   La nav A-Z esiste già (.sl-glossario__az sticky). Su mobile compattiamo
+   gap e padding per evitare wrap eccessivo + migliore tap target. */
+@media (max-width: 767px) {
+    .sl-glossario__nav-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .sl-glossario__az {
+        gap: 6px;
+        justify-content: space-between;
+    }
+    .sl-glossario__az a,
+    .sl-glossario__az span {
+        font-size: 12px;
+        padding: 4px 6px;
+        min-width: 24px;
+        text-align: center;
+    }
+}
