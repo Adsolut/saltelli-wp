@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.0-wave4-production-readiness');
+define('SALTELLI_THEME_VERSION', '1.3.1-wave4-5-critical-css-webp');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 

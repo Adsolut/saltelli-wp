@@ -1,0 +1,6 @@
+PASS sl-trust-bar: 13
+PASS home sl-mobile-bar: 11
+PASS cro.css enqueue: 2
+PASS tier1 sl-mobile-bar: 11
+PASS tier1 sl-mini-form: 5
+PASS tier2 FAQPage schema: 1

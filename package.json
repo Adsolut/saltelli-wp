@@ -1,0 +1,19 @@
+{
+  "name": "saltelli-wp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build tooling for Studio Legale Saltelli WordPress theme (Wave 4.5+). Tools: penthouse for per-template critical CSS extraction.",
+  "scripts": {
+    "extract-critical": "node scripts/wave4-5/extract-critical.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adsolut-Ai-Agency/saltelli-wp.git"
+  },
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "devDependencies": {
+    "penthouse": "^2.5.0-rc1",
+    "rimraf": "^3.0.2"
+  }
+}

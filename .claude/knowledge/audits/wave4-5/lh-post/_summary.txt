@@ -1,0 +1,12 @@
+avvocato-battista-desktop         perf=100  a11y=96  bp=100  seo=92
+avvocato-battista-mobile          perf=91  a11y=96  bp=100  seo=92
+blog-archive-desktop              perf=99  a11y=96  bp=100  seo=83
+blog-archive-mobile               perf=85  a11y=96  bp=100  seo=83
+contatti-desktop                  perf=100  a11y=97  bp=100  seo=100
+contatti-mobile                   perf=90  a11y=96  bp=100  seo=100
+home-desktop                      perf=100  a11y=88  bp=100  seo=92
+home-mobile                       perf=91  a11y=93  bp=100  seo=92
+tier1-tributario-desktop          perf=100  a11y=95  bp=100  seo=100
+tier1-tributario-mobile           perf=92  a11y=95  bp=100  seo=100
+tier2-cartelle-desktop            perf=100  a11y=96  bp=100  seo=92
+tier2-cartelle-mobile             perf=94  a11y=96  bp=100  seo=92

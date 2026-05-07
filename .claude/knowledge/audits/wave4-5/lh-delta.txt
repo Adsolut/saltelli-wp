@@ -1,0 +1,13 @@
+=== Lighthouse delta Wave 4.5 (vs baseline pre) ===
+avvocato-battista-desktop          97 → 100  (Δ+3)  -
+avvocato-battista-mobile           90 →  91  (Δ+1)  ❌ <92
+blog-archive-desktop               91 →  99  (Δ+8)  ✅ ≥92
+blog-archive-mobile                85 →  85  (Δ+0)  ❌ <92
+contatti-desktop                   97 → 100  (Δ+3)  -
+contatti-mobile                    91 →  90  (Δ-1)  ❌ <92
+home-desktop                      100 → 100  (Δ+0)  -
+home-mobile                        74 →  91  (Δ+17)  ❌ <92
+tier1-tributario-desktop           97 → 100  (Δ+3)  -
+tier1-tributario-mobile            90 →  92  (Δ+2)  ✅ ≥92
+tier2-cartelle-desktop             97 → 100  (Δ+3)  -
+tier2-cartelle-mobile              90 →  94  (Δ+4)  ✅ ≥92

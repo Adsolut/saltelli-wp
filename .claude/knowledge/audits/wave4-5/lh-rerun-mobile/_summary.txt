@@ -1,0 +1,7 @@
+=== Mobile rerun median (3 runs each) ===
+home                              runs=[ 90 92 96 ]  median=92  ✅ ≥92
+tier1-tributario                  runs=[ 89 91 91 ]  median=91  ❌ <92
+tier2-cartelle                    runs=[ 90 90 93 ]  median=90  ❌ <92
+avvocato-battista                 runs=[ 90 92 93 ]  median=92  ✅ ≥92
+contatti                          runs=[ 91 92 92 ]  median=92  ✅ ≥92
+blog-archive                      runs=[ 83 86 87 ]  median=86  ❌ <92
