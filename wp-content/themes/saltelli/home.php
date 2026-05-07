@@ -107,7 +107,7 @@ $last_mod_human = $last_mod ? wp_date('j F Y', strtotime($last_mod)) : '';
         <div class="sl-mono sl-blog2__featured-eyebrow">&sect; In evidenza &middot; <?php echo esc_html($f_date); ?></div>
         <a href="<?php echo esc_url($f_link); ?>" class="sl-blog2__featured">
             <div class="sl-blog2__featured-media<?php echo $f_thumb ? '' : ' is-placeholder'; ?>"
-                 <?php echo $f_thumb ? 'style="background-image:url(' . esc_url($f_thumb) . ')"' : ''; ?>>
+                 <?php echo $f_thumb ? 'style="' . saltelli_bg_with_webp($f_thumb) . '"' : ''; ?>>
                 <span class="sl-mono sl-blog2__featured-plate">Plate &middot; IV</span>
             </div>
             <div class="sl-blog2__featured-body">
@@ -162,7 +162,7 @@ $last_mod_human = $last_mod ? wp_date('j F Y', strtotime($last_mod)) : '';
                     <li class="sl-blog2__cell">
                         <a href="<?php the_permalink(); ?>" class="sl-blog2__card">
                             <div class="sl-blog2__card-media<?php echo $thumb ? '' : ' is-placeholder'; ?>"
-                                 <?php echo $thumb ? 'style="background-image:url(' . esc_url($thumb) . ')"' : ''; ?>>
+                                 <?php echo $thumb ? 'style="' . saltelli_bg_with_webp($thumb) . '"' : ''; ?>>
                                 <span class="sl-blog2__card-media-zoom" aria-hidden="true"></span>
                             </div>
                             <?php if ($c) : ?>
