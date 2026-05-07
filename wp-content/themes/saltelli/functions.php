@@ -19,6 +19,7 @@ require_once SALTELLI_THEME_DIR . '/inc/setup.php';
 require_once SALTELLI_THEME_DIR . '/inc/enqueue.php';
 require_once SALTELLI_THEME_DIR . '/inc/critical-css.php';
 require_once SALTELLI_THEME_DIR . '/inc/perf.php';
+require_once SALTELLI_THEME_DIR . '/inc/security.php';
 require_once SALTELLI_THEME_DIR . '/inc/helpers.php';
 require_once SALTELLI_THEME_DIR . '/inc/cpt-avvocato.php';
 require_once SALTELLI_THEME_DIR . '/inc/cpt-competenza.php';
