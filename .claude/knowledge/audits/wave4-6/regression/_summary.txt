@@ -1,0 +1,10 @@
+Wave 4.6 — Regression smoke summary (2026-05-07T11:25:31Z)
+
+AUDIT-ALIGNED: 32 / 32 (fail 0)
+LEGACY-REDIRECTS: 18 / 18 (fail 0)
+BLOG-CHAIN-SAMPLE: 12 / 12 (fail 0)
+SECURITY-HEADERS: 4 / 5
+WAVE-4.5: see wave45-critical-webp.txt
+
+Failures (if any):
+FAIL missing: strict-transport-security:

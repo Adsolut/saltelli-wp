@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.1-wave4-5-critical-css-webp');
+define('SALTELLI_THEME_VERSION', '1.3.2-wave4-6-cms-editability');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
@@ -31,3 +31,4 @@ require_once SALTELLI_THEME_DIR . '/inc/seo/ai-files.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/legacy-redirects.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/wave5-blog-rewrites.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/yoast-schema-extensions.php';
+require_once SALTELLI_THEME_DIR . '/inc/wave4-6-migration.php';

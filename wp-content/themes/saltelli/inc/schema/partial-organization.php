@@ -98,9 +98,14 @@ $organization = [
     ],
     'geo' => [
         '@type'     => 'GeoCoordinates',
-        // GPS confermati cliente via Google Maps (2026-04-28).
-        'latitude'  => $studio['lat'],
-        'longitude' => $studio['lng'],
+        // Wave 4.6: GPS editabili via Theme Options → Mappa.
+        // Default ACF (40.8333 / 14.2425) è un'approssimazione legacy; la cliente
+        // ha confermato GPS Google Business 2026-05-02 (40.8332541 / 14.2414699)
+        // disponibili nell'array `saltelli_studio_data()`. Logica: se editor
+        // popola Theme Options (anche con la stessa value default), usa quella;
+        // altrimenti fall-back hardcoded di precisione cliente.
+        'latitude'  => (float) saltelli_option('studio_coordinate_lat', $studio['lat']),
+        'longitude' => (float) saltelli_option('studio_coordinate_lng', $studio['lng']),
     ],
     'openingHoursSpecification' => [[
         '@type'     => 'OpeningHoursSpecification',

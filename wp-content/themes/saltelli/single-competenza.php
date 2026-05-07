@@ -1,7 +1,7 @@
 <?php
 /**
  * Template: Single CPT Competenza.
- * Branch su is_tier_1_focus per profondità contenuto.
+ * Branch su is_tier_1 (Wave 1 ACF schema canonico) per profondità contenuto.
  *
  * @package Saltelli
  */
@@ -10,10 +10,9 @@ get_header();
 while (have_posts()) :
     the_post();
     $post_id    = get_the_ID();
-    // Wave 3: prefer is_tier_1 (Wave 1 schema) → fallback is_tier_1_focus (legacy Wave 0).
-    $is_tier_1_v1     = saltelli_field('is_tier_1', $post_id, null);
-    $is_tier_1_legacy = saltelli_field('is_tier_1_focus', $post_id, false);
-    $is_tier_1  = (bool) ($is_tier_1_v1 !== null ? $is_tier_1_v1 : $is_tier_1_legacy);
+    // Wave 4.6: rimosso fallback is_tier_1_focus legacy (rinominato in is_tier_1
+    // dal Wave 1). Tutti i contenuti sono migrati al campo canonico.
+    $is_tier_1  = (bool) saltelli_field('is_tier_1', $post_id, false);
     $answer     = (string) saltelli_field('answer_capsule', $post_id, '');
     $body_ext   = (string) saltelli_field('body_extended', $post_id, '');
     $faq        = saltelli_field('faq', $post_id, []);

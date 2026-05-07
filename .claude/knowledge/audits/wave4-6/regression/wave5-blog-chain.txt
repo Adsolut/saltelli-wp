@@ -1,0 +1,14 @@
+OK chain→200 /blog/le-imposte-di-successione-agli-eredi-e-la-dichiarazione-di-successione/
+OK 200 /risorse/blog/le-imposte-di-successione-agli-eredi-e-la-dichiarazione-di-successione/
+OK chain→200 /blog/falsita-del-testamento-olografo-come-difendersi/
+OK 200 /risorse/blog/falsita-del-testamento-olografo-come-difendersi/
+OK chain→200 /blog/smart-working-come-sta-evolvendo-la-normativa-dopo-lemergenza-covid/
+OK 200 /risorse/blog/smart-working-come-sta-evolvendo-la-normativa-dopo-lemergenza-covid/
+OK chain→200 /blog/monopattini-riforma-multe-salate/
+OK 200 /risorse/blog/monopattini-riforma-multe-salate/
+OK chain→200 /blog/diritti-delle-persone-trans-una-sentenza-europea-di-dignita-e-inclusione/
+OK 200 /risorse/blog/diritti-delle-persone-trans-una-sentenza-europea-di-dignita-e-inclusione/
+OK chain→200 /blog/buoni-fruttiferi-postali-ottieni-il-rimborso/
+OK 200 /risorse/blog/buoni-fruttiferi-postali-ottieni-il-rimborso/
+
+BLOG-CHAIN-SAMPLE: 12 / 12 (fail 0)

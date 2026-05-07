@@ -28,11 +28,18 @@ $studio_foto   = saltelli_option('studio_foto_facciata');
 $team_titolo   = saltelli_option('team_titolo', "Quattro\nprofessionisti.");
 $cases_titolo  = saltelli_option('cases_titolo', 'Casi rappresentativi.');
 
+/* Wave 4.6: CTA default — usata in sl-contact final CTA section.
+   Default ACF identici a quelli legacy hero_* per backward compat. */
+$cta_default_url     = saltelli_option('cta_default_url', $hero_cta_url);
+$cta_default_label   = saltelli_option('cta_default_label', $hero_cta_label);
+$cta_subline_italic  = (string) saltelli_option('cta_subline_italic', '');
+
 // 19 aree — WP_Query CPT competenza, tier-1 first, poi menu_order, poi title.
+// Wave 4.6: use is_tier_1 (Wave 1 ACF schema canonico).
 $competenze = get_posts([
     'post_type'   => 'competenza',
     'numberposts' => -1,
-    'meta_key'    => 'is_tier_1_focus',
+    'meta_key'    => 'is_tier_1',
     'orderby'     => [
         'meta_value_num' => 'DESC',
         'menu_order'     => 'ASC',
@@ -143,7 +150,8 @@ $press = saltelli_press_outlets();
                         $num = str_pad((string) $i, 2, '0', STR_PAD_LEFT);
                         $cat_slug  = saltelli_competenza_category_slug($p->ID);
                         $cat_label = saltelli_competenza_category_label($p->ID);
-                        $is_tier_1 = (bool) saltelli_field('is_tier_1_focus', $p->ID, false);
+                        // Wave 4.6: use is_tier_1 (Wave 1 ACF schema canonico).
+                        $is_tier_1 = (bool) saltelli_field('is_tier_1', $p->ID, false);
                         $lead      = (string) saltelli_field('lead_breve', $p->ID, '');
                         if ($lead === '') {
                             $lead = (string) saltelli_field('answer_capsule', $p->ID, '');
@@ -363,10 +371,15 @@ $press = saltelli_press_outlets();
         </div>
 
         <div class="sl-contact__cta">
-            <a class="sl-btn sl-btn--primary" href="<?php echo esc_url($hero_cta_url); ?>">
-                <span><?php echo esc_html($hero_cta_label); ?></span>
+            <?php /* Wave 4.6: cta_default_url + cta_default_label editabili globally.
+                    cta_subline_italic emessa hidden per future styling editor (designer can show via CSS). */ ?>
+            <a class="sl-btn sl-btn--primary" href="<?php echo esc_url($cta_default_url); ?>">
+                <span><?php echo esc_html($cta_default_label); ?></span>
                 <span class="arrow" aria-hidden="true">→</span>
             </a>
+            <?php if ($cta_subline_italic !== '') : ?>
+                <p class="sl-contact__cta-subline" hidden><em><?php echo esc_html($cta_subline_italic); ?></em></p>
+            <?php endif; ?>
         </div>
     </div>
 </section>

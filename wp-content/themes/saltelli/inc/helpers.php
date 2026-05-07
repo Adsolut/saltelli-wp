@@ -584,20 +584,54 @@ function saltelli_reading_time($post_id) {
 }
 
 /**
- * Casi rappresentativi homepage — ritorna repeater ACF, fallback editoriale 4 casi.
+ * Casi rappresentativi homepage.
+ *
+ * Wave 4.6 — Sorgenti supportate (in ordine di priorità):
+ *   1. ACF post_object multi `casi_rappresentativi_home` (Wave 4.6 schema).
+ *      Editor seleziona da CPT saltelli_caso. Il helper fetcha post + meta
+ *      e mappa a {identifier, descrizione, outcome}.
+ *   2. ACF fake-repeater legacy con sub-keys identifier/descrizione/outcome
+ *      (compat shape pre-Wave 4.6).
+ *   3. Auto-fallback ai 6 saltelli_caso più recenti pubblicati.
+ *   4. Hardcoded editoriale (4 casi statici).
  *
  * @return array<int, array{identifier:string, descrizione:string, outcome:string}>
  */
 function saltelli_homepage_cases() {
     $casi = saltelli_option('casi_rappresentativi_home', []);
+
+    // Path 1+2: ACF popolato.
     if (is_array($casi) && !empty($casi)) {
         $out = [];
         foreach ($casi as $row) {
-            if (!empty($row['identifier']) && !empty($row['descrizione']) && !empty($row['outcome'])) {
+            // Path 1 — post_object IDs (Wave 4.6 schema).
+            if (is_numeric($row) || $row instanceof WP_Post) {
+                $pid = $row instanceof WP_Post ? (int) $row->ID : (int) $row;
+                if ($pid <= 0) continue;
+                $title = get_the_title($pid);
+                $desc  = (string) get_post_meta($pid, 'descrizione', true);
+                if ($desc === '') {
+                    $desc = wp_trim_words(wp_strip_all_tags((string) get_post_field('post_content', $pid)), 30, '…');
+                }
+                $outcome = (string) get_post_meta($pid, 'outcome_label', true);
+                if ($outcome === '') {
+                    $outcome = (string) get_post_meta($pid, 'outcome', true);
+                }
+                if ($title !== '' && $desc !== '') {
+                    $out[] = [
+                        'identifier'  => $title,
+                        'descrizione' => $desc,
+                        'outcome'     => $outcome !== '' ? $outcome : __('Vittoria', 'saltelli'),
+                    ];
+                }
+                continue;
+            }
+            // Path 2 — legacy fake-repeater (identifier/descrizione/outcome inline).
+            if (is_array($row) && !empty($row['identifier']) && !empty($row['descrizione'])) {
                 $out[] = [
                     'identifier'  => (string) $row['identifier'],
                     'descrizione' => (string) $row['descrizione'],
-                    'outcome'     => (string) $row['outcome'],
+                    'outcome'     => !empty($row['outcome']) ? (string) $row['outcome'] : __('Vittoria', 'saltelli'),
                 ];
             }
         }
@@ -605,6 +639,41 @@ function saltelli_homepage_cases() {
             return $out;
         }
     }
+
+    // Path 3: auto-fallback ai 6 casi CPT più recenti pubblicati.
+    $recent = get_posts([
+        'post_type'      => 'saltelli_caso',
+        'posts_per_page' => 6,
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ]);
+    if (!empty($recent)) {
+        $out = [];
+        foreach ($recent as $cp) {
+            $cp_id   = (int) $cp->ID;
+            $desc    = (string) get_post_meta($cp_id, 'descrizione', true);
+            if ($desc === '') {
+                $desc = wp_trim_words(wp_strip_all_tags((string) $cp->post_content), 30, '…');
+            }
+            $outcome = (string) get_post_meta($cp_id, 'outcome_label', true);
+            if ($outcome === '' && $desc !== '') {
+                $outcome = __('Vittoria', 'saltelli');
+            }
+            if ($desc !== '') {
+                $out[] = [
+                    'identifier'  => get_the_title($cp_id),
+                    'descrizione' => $desc,
+                    'outcome'     => $outcome,
+                ];
+            }
+        }
+        if (!empty($out)) {
+            return $out;
+        }
+    }
+
+    // Path 4: hardcoded fallback.
     return [
         ['identifier' => 'vs. AGE Riscossione · 2024', 'descrizione' => 'Annullamento di cartella esattoriale per importo superiore a 240.000 € a carico di società in liquidazione.', 'outcome' => 'Annullamento'],
         ['identifier' => 'Cassazione · 2024',          'descrizione' => 'Conferma in Cassazione di sentenza favorevole in materia di licenziamento per giusta causa illegittimo.',                          'outcome' => 'Vittoria'],
@@ -916,7 +985,15 @@ function saltelli_attorney_formazione($slug) {
 }
 
 /**
- * Earned media outlets — ritorna repeater ACF, fallback editoriale.
+ * Earned media outlets — ritorna repeater ACF (Wave 4.6 schema), fallback editoriale.
+ *
+ * Wave 4.6: il repeater press_outlets ha sub_fields {name, logo, url}. Per
+ * backward compat con il template legacy (foreach $press as $p → echo $p)
+ * questa funzione ritorna stringhe nome (semplice). Usare
+ * `saltelli_press_outlets_full()` per ottenere la struttura completa
+ * incluse le immagini logo.
+ *
+ * Supporta anche il legacy fake-repeater shape `nome` per safety.
  *
  * @return array<int, string>
  */
@@ -925,9 +1002,12 @@ function saltelli_press_outlets() {
     if (is_array($outlets) && !empty($outlets)) {
         $out = [];
         foreach ($outlets as $row) {
-            if (!empty($row['nome'])) {
-                $out[] = (string) $row['nome'];
-            }
+            if (!is_array($row)) continue;
+            // Wave 4.6 schema: 'name'. Legacy fake-repeater: 'nome'.
+            $nm = '';
+            if (!empty($row['name'])) $nm = (string) $row['name'];
+            elseif (!empty($row['nome'])) $nm = (string) $row['nome'];
+            if ($nm !== '') $out[] = $nm;
         }
         if (!empty($out)) {
             return $out;
@@ -937,14 +1017,40 @@ function saltelli_press_outlets() {
 }
 
 /**
+ * Wave 4.6 — Earned media outlets struttura completa {name, logo, url}.
+ * Per template che vogliono renderizzare i loghi.
+ *
+ * @return array<int, array{name:string, logo:string, url:string}>
+ */
+function saltelli_press_outlets_full() {
+    $outlets = saltelli_option('press_outlets', []);
+    if (!is_array($outlets) || empty($outlets)) {
+        return [];
+    }
+    $out = [];
+    foreach ($outlets as $row) {
+        if (!is_array($row)) continue;
+        $nm = '';
+        if (!empty($row['name'])) $nm = (string) $row['name'];
+        elseif (!empty($row['nome'])) $nm = (string) $row['nome'];
+        if ($nm === '') continue;
+        $logo = !empty($row['logo']) ? (string) $row['logo'] : '';
+        $url  = !empty($row['url'])  ? (string) $row['url']  : '';
+        $out[] = ['name' => $nm, 'logo' => $logo, 'url' => $url];
+    }
+    return $out;
+}
+
+/**
  * v0.23.0 — Determina se una competenza è tier-1 deep cluster.
- * Source: ACF flag is_tier_1_focus + fallback whitelist 3 slug.
+ * Source: ACF flag is_tier_1 (Wave 1 schema canonico) + fallback whitelist 3 slug.
+ * Wave 4.6: rinominato is_tier_1_focus → is_tier_1 (Wave 1 ACF schema canonico).
  *
  * @param int $post_id
  * @return bool
  */
 function saltelli_is_tier1_competenza($post_id) {
-    if ((bool) saltelli_field('is_tier_1_focus', $post_id, false)) {
+    if ((bool) saltelli_field('is_tier_1', $post_id, false)) {
         return true;
     }
     $tier1_slugs = ['diritto-tributario', 'diritto-del-lavoro', 'diritto-di-famiglia-lgbtq'];
