@@ -1,0 +1,23 @@
+PASS 200 http://localhost:8080/
+PASS 200 http://localhost:8080/aree-di-pratica/
+PASS 200 http://localhost:8080/aree-di-pratica/privati/diritto-tributario/
+PASS 200 http://localhost:8080/aree-di-pratica/privati/diritto-del-lavoro/
+PASS 200 http://localhost:8080/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/
+PASS 200 http://localhost:8080/aree-di-pratica/privati/cartelle-esattoriali-e-multe/
+PASS 200 http://localhost:8080/aree-di-pratica/privati/responsabilita-medica/
+PASS 200 http://localhost:8080/aree-di-pratica/privati/diritto-bancario/
+PASS 200 http://localhost:8080/aree-di-pratica/privati/risarcimento-danni/
+PASS 200 http://localhost:8080/aree-di-pratica/privati/aste-immobiliari/
+PASS 200 http://localhost:8080/aree-di-pratica/privati/infortunistica-stradale/
+PASS 200 http://localhost:8080/aree-di-pratica/imprese/recupero-crediti/
+PASS 200 http://localhost:8080/aree-di-pratica/imprese/domiciliazione-dimpresa/
+PASS 200 http://localhost:8080/aree-di-pratica/contenzioso-amministrativo/diritto-amministrativo/
+PASS 200 http://localhost:8080/chi-siamo/lo-studio/
+PASS 200 http://localhost:8080/chi-siamo/team/
+PASS 200 http://localhost:8080/chi-siamo/team/emiliano-saltelli/
+PASS 200 http://localhost:8080/chi-siamo/team/antonia-battista/
+PASS 200 http://localhost:8080/costi-e-consulenze/
+PASS 200 http://localhost:8080/contatti/
+PASS 200 http://localhost:8080/risorse/blog/
+
+Total: 21 | Fails: 0

@@ -1,0 +1,20 @@
+PASS 301 /lo-studio/
+PASS 301 /avvocati/
+PASS 301 /avvocati/emiliano-saltelli/
+PASS 301 /competenze/
+PASS 301 /competenze/diritto-tributario/
+PASS 301 /casi/
+PASS 301 /blog/
+PASS 301 /faq/
+PASS 301 /glossario-legale/
+PASS 301 /come-lavoriamo/
+PASS 301 /prima-consulenza/
+PASS 301 /competenze/responsabilita-civile/
+PASS 301 /competenze/consulenze-online/
+PASS 301 /competenze/diritto-commerciale/
+PASS 301 /aste-immobiliari/
+PASS 301 /diritto-tributario/
+PASS 301 /tipo-area/contenzioso/
+PASS 301 /tipo-area/privati/
+
+Total: 18 | Fails: 0

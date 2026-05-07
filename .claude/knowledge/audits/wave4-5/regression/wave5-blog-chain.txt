@@ -1,0 +1,35 @@
+PASS 301→200 /blog/il-femminicidio-diventa-reato-autonomo-cosa-cambia-per-il-diritto-di-famiglia/
+PASS 301→200 /blog/sposato-con-uno-straniero-irreperibile-come-separarsi-o-divorziare-anche-se-non-sai-dove-si-trovi/
+PASS 301→200 /blog/spese-per-i-figli-dopo-la-separazione-il-punto-della-cassazione-su-spese-ordinarie-e-straordinarie/
+PASS 301→200 /blog/case-vacanza-e-genitori-separati-come-si-gestisce-lestate-in-una-seconda-casa/
+PASS 301→200 /blog/vacanze-e-genitori-separati-come-organizzarle-senza-conflitti-e-senza-ferire-i-figli/
+PASS 301→200 /blog/due-mamme-dalla-nascita-la-corte-costituzionale-difende-i-diritti-dei-figli-delle-coppie-lesbiche/
+PASS 301→200 /blog/17-maggio-giornata-internazionale-contro-lomofobia-la-bifobia-e-la-transfobia/
+PASS 301→200 /blog/unione-civile-e-convivenza-per-le-coppie-dello-stesso-sesso-in-italia-diritti-tutele-e-differenze/
+PASS 301→200 /blog/due-case-per-i-figli-di-separati-bigenitorialita-o-doppia-fragilita/
+PASS 301→200 /blog/sentenza-turetta-ergastolo-senza-crudelta-una-riflessione-legale-e-umana-nel-nome-di-giulia/
+PASS 301→200 /blog/il-trasferimento-del-lavoratore-in-caso-di-mobbing-o-straining/
+PASS 301→200 /blog/adozione-internazionale-ora-anche-per-le-persone-singole-la-corte-costituzionale-apre-a-una-genitorialita-piu-inclusiva/
+PASS 301→200 /blog/compravendita-quando-va-pagata-lagenzia-immobiliare/
+PASS 301→200 /blog/le-imposte-di-successione-agli-eredi-e-la-dichiarazione-di-successione/
+PASS 301→200 /blog/accettazione-eredita-pura-e-semplice-cassazione-2024-presupposti/
+PASS 301→200 /blog/diritti-delle-persone-trans-una-sentenza-europea-di-dignita-e-inclusione/
+PASS 301→200 /blog/dividere-la-casa-familiare-priorita-al-benessere-dei-figli/
+PASS 301→200 /blog/falsita-del-testamento-olografo-come-difendersi/
+PASS 301→200 /blog/la-maternita-surrogata-come-reato-universale-cosa-significa-e-quali-sono-gli-aspetti-critici/
+PASS 301→200 /blog/cassazione-validi-gli-accordi-via-email-tra-coniugi/
+PASS 301→200 /blog/debiti-che-i-figli-non-possono-ereditare/
+PASS 301→200 /blog/attenzione-alle-truffe-online/
+PASS 301→200 /blog/buoni-fruttiferi-postali-ottieni-il-rimborso/
+PASS 301→200 /blog/monopattini-riforma-multe-salate/
+PASS 301→200 /blog/esenzione-imu-per-immobile-occupato-in-modo-abusivo/
+PASS 301→200 /blog/smart-working-come-sta-evolvendo-la-normativa-dopo-lemergenza-covid/
+PASS 301→200 /blog/il-diritto-al-pagamento-delle-differenze-retributive-cosa-deve-sapere-un-lavoratore/
+PASS 301→200 /blog/mutuo-cointestato-e-separazione-chi-ha-sempre-pagato-le-rate-ha-diritto-al-rimborso/
+PASS 301→200 /blog/la-manutenzione-del-terreno-non-basta-per-usucapire-come-difendere-i-propri-diritti/
+PASS 301→200 /blog/agenzia-entrate-riscossione-stop-alle-notifiche-automatiche-ai-coobbligati-cosa-sapere-per-difendersi/
+PASS 301→200 /blog/licenziamento-per-scarso-rendimento-le-ultime-novita/
+PASS 301→200 /blog/diritti-del-lavoratore-in-smart-working-cosa-ce-da-sapere/
+PASS 301→200 /blog/locazione-commerciale-e-termine-di-grazia-un-tema-di-dibattito-giurisprudenziale/
+
+Total: 33 | Fails: 0

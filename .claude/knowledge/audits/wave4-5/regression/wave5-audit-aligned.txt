@@ -1,0 +1,34 @@
+PASS 200 /
+PASS 200 /chi-siamo/
+PASS 200 /chi-siamo/lo-studio/
+PASS 200 /chi-siamo/team/
+PASS 200 /chi-siamo/team/emiliano-saltelli/
+PASS 200 /chi-siamo/team/fabiana-saltelli/
+PASS 200 /chi-siamo/team/antonia-battista/
+PASS 200 /chi-siamo/team/stefano-gaetano-tedesco/
+PASS 200 /chi-siamo/risultati/
+PASS 200 /aree-di-pratica/
+PASS 200 /aree-di-pratica/privati/
+PASS 200 /aree-di-pratica/privati/diritto-tributario/
+PASS 200 /aree-di-pratica/privati/diritto-del-lavoro/
+PASS 200 /aree-di-pratica/privati/diritto-di-famiglia-lgbtq/
+PASS 200 /aree-di-pratica/imprese/
+PASS 200 /aree-di-pratica/imprese/recupero-crediti/
+PASS 200 /aree-di-pratica/contenzioso-amministrativo/
+PASS 200 /aree-di-pratica/privati/aste-immobiliari/
+PASS 200 /aree-di-pratica/privati/infortunistica-stradale/
+PASS 200 /risorse/
+PASS 200 /risorse/blog/
+PASS 200 /risorse/domande-frequenti/
+PASS 200 /risorse/glossario-legale/
+PASS 200 /risorse/guide-gratuite/
+PASS 200 /costi-e-consulenze/
+PASS 200 /costi-e-consulenze/costi/
+PASS 200 /costi-e-consulenze/prima-consulenza/
+PASS 200 /costi-e-consulenze/come-lavoriamo/
+PASS 200 /costi-e-consulenze/richiedi-preventivo/
+PASS 200 /contatti/
+PASS 200 /contatti/lavora-con-noi/
+PASS 200 /llms.txt
+
+Total: 32 | Fails: 0

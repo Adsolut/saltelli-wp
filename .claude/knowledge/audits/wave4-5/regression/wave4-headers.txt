@@ -1,0 +1,5 @@
+PASS X-Frame-Options
+PASS X-Content-Type-Options
+PASS Referrer-Policy
+PASS Permissions-Policy
+PASS no wp-emoji
