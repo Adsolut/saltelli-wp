@@ -107,14 +107,17 @@ function saltelli_enqueue_assets() {
 
 }
 
-/* === IMPECCABLE v0.21.0 [perf-T1] Font preload — LCP critical paths ===
-   Playfair Display variable (H1 hero italic) + DM Sans variable (body lede).
+/* === Wave 4 [perf-T1] Font preload — LCP critical paths ===
+   v0.21.0 baseline: Playfair Display variable (H1) + DM Sans variable (body).
+   Wave 4 addition: Playfair Display italic variable — hero lede on home/casi
+   uses italic Playfair (LCP element on home-mobile). Preload reduces FOIT.
    Preload via wp_head priority 2 (after charset/viewport, before CSS chain).
    crossorigin="anonymous" obbligatorio per WOFF2 same-origin. */
 add_action('wp_head', function () {
     $base = SALTELLI_THEME_URI . '/assets/fonts';
     $ver  = SALTELLI_THEME_VERSION;
     echo '<link rel="preload" href="' . esc_url($base . '/playfair-display-variable.woff2?v=' . $ver) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
+    echo '<link rel="preload" href="' . esc_url($base . '/playfair-display-variable-italic.woff2?v=' . $ver) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
     echo '<link rel="preload" href="' . esc_url($base . '/dm-sans-variable.woff2?v=' . $ver) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
 }, 2);
 
