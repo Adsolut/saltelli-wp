@@ -75,7 +75,7 @@
                 "id": ""
             },
             "rows": 3,
-            "default_value": "Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, diciannove aree di pratica, vent'anni di lavoro accanto a famiglie e imprese di Napoli.",
+            "default_value": "Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, diciassette aree di pratica, vent'anni di lavoro accanto a famiglie e imprese di Napoli.",
             "new_lines": "",
             "maxlength": "",
             "placeholder": ""
@@ -1171,5 +1171,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1778152776
+    "modified": 1778168741
 }

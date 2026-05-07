@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.3-wave4-7-cms-hotfix');
+define('SALTELLI_THEME_VERSION', '1.3.4-wave4-7-1-acf-fix');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
