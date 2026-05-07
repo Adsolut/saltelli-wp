@@ -1,0 +1,242 @@
+# Wave 4.7 — Investigation Pre-Cleanup READ-ONLY
+# Generated: 2026-05-07T14:48:00Z
+# Branch: feat/wave4-7-cms-hotfix-critical-fixes
+# Source: PROMPT_AGENT_WAVE4_7_CMS_HOTFIX.md Phase 1
+# Sub-files in same dir: q1b-elena-caps.txt, q2-competenze.txt, q2b-competenze-draft.txt,
+#                        q3-page-draft-content.txt, q3b-cpt-competenza-publish-content.txt,
+#                        q4-page-hub-content.txt, q4b-lo-studio-frontend.txt, q5-cache-adminbar.txt,
+#                        q6-template-aree-canonical.txt
+
+═══════════════════════════════════════════════════════════════════
+Q1 — USERS editor + admin
+═══════════════════════════════════════════════════════════════════
+ID  user_login                              email                                  roles          registered
+ 1  info@studiolegalesaltelli.it            info@studiolegalesaltelli.it          administrator  2019-11-30
+ 4  Avv. Antonia Battista                   antoniabattista@studiolegalesaltelli.it author        2025-04-15
+ 5  Avv. Fabiana Saltelli                   fabiana@studiolegalesaltelli.it       author         2025-04-15
+ 6  Gabriele Cascone                        gabricascone@libero.it                author         2025-04-17
+ 7  Avv. Stefano Gaetano Tedesco            avv.stefanotedesco@libero.it          author         2025-11-11
+ 8  Adsolut Staff                           tech@adsolut.it                       administrator  2026-03-16
+ 9  elena                                   o.sydorenko@adsolut.it                editor         2026-05-07 13:16:22
+
+➜ ELENA_ID = 9 (registrata 3h prima dell'investigation, ruolo editor)
+➜ Email proxy Olha Sydorenko @ Adsolut → Elena editorial proxy
+
+═══════════════════════════════════════════════════════════════════
+Q1b — Elena (UID 9) capabilities
+═══════════════════════════════════════════════════════════════════
+edit_posts: 1
+edit_published_posts: 1
+publish_posts: 1
+edit_pages: 1
+publish_pages: 1
+edit_others_posts: 1
+edit_others_pages: 1
+delete_posts: 1
+upload_files: 1
+manage_categories: 1
+
+➜ Capability OK. Role Editor sufficiente per editare CPT competenza/avvocato/caso/saltelli_trust/saltelli_faq
+   (perché tutti CPT del tema usano capability_type=post → mappano su edit_posts).
+➜ NESSUN bug capability. Phase 2.5 acceptance ✓.
+
+═══════════════════════════════════════════════════════════════════
+Q2 — Competenze (22 in DB vs 17 atteso)
+═══════════════════════════════════════════════════════════════════
+DRAFT (3 surplus, content placeholder):
+  2705  draft  diritto-societario       "Diritto societario"        modified 2026-05-01
+  2706  draft  contrattualistica        "Contrattualistica"          modified 2026-05-01
+  2707  draft  ricorsi                  "Ricorsi"                    modified 2026-05-01
+
+PUBLISH (19 totali — DEC-021 firma 17 → 2 surplus da identificare):
+  2664  publish  diritto-tributario           "Diritto tributario"             [TIER1]
+  2665  publish  diritto-del-lavoro           "Diritto del lavoro"             [TIER1]
+  2666  publish  diritto-di-famiglia-lgbtq    "Diritto di famiglia LGBTQ+"     [TIER1]
+  2667  publish  cartelle-esattoriali-e-multe "Cartelle esattoriali e multe"
+  2668  publish  recupero-crediti              "Recupero crediti"
+  2669  publish  diritto-di-famiglia          "Diritto di famiglia"
+  2670  publish  responsabilita-medica        "Responsabilità medica"
+  2671  publish  diritto-bancario             "Diritto bancario"
+  2672  publish  diritto-condominiale         "Diritto condominiale"
+  2673  publish  diritto-dellimmigrazione     "Diritto dell'immigrazione"
+  2674  publish  diritto-penale               "Diritto penale"
+  2675  publish  diritto-previdenziale        "Diritto previdenziale"
+  2676  publish  diritto-delle-assicurazioni  "Diritto delle assicurazioni"
+  2677  publish  diritto-delle-successioni    "Eredità e successioni"
+  2678  publish  risarcimento-danni           "Risarcimento danni"
+  2679  publish  responsabilita-civile        "Responsabilità civile"
+  2680  publish  domiciliazione-dimpresa      "Domiciliazione d'impresa"        [⚠ candidate surplus — è servizio]
+  2681  publish  consulenze-online            "Consulenze online"               [⚠ candidate surplus — è servizio]
+  2682  publish  diritto-amministrativo       "Diritto amministrativo"
+
+➜ I 5 surplus = 3 draft + 2 publish.
+➜ Le 3 draft hanno content_len ~720 char + meta_count=2 (placeholder skeleton, no ACF) → SAFE TRASH in Phase 2.
+➜ Le 2 publish surplus candidate (consulenze-online + domiciliazione-dimpresa) sono SERVIZI non aree legali.
+   STOP automatico → riportare orchestratore per decisione caso-per-caso (potrebbero essere intenzionali).
+
+═══════════════════════════════════════════════════════════════════
+Q3 — Page draft confliggenti CPT competenza (content size)
+═══════════════════════════════════════════════════════════════════
+ID    content_len  meta  title                            slug
+ 202   3842        22   "Diritto Tributario"             diritto-tributario
+ 208   2873        22   "Cartelle esattoriali e multe"   cartelle-esattoriali-e-multe
+ 170   4221        23   "Recupero Crediti"                recupero-crediti
+ 223   2968        22   "Risarcimento del danno"         risarcimento-del-danno
+ 232   2531        22   "Infortunistica stradale"        infortunistica-stradale
+ 260   1731        22   "Aste immobiliari"                aste-immobiliari
+ 279   2100        22   "Responsabilità medica"          responsabilita-medica
+ 288   1807        22   "Eredità e successioni"          eredita-e-successioni
+ 297   1952        22   "Diritto bancario"                diritto-bancario
+ 2246  3889        23   "Diritto Amministrativo"         diritto-amministrativo
+ 2251  6556        23   "Diritto Penale"                  diritto-penale
+
+➜ TUTTE 11 hanno content_len > 1700 char (NON empty come ipotizzato dal prompt).
+➜ Cross-ref Q3b: il content è già migrato nei CPT publish (vedi sotto).
+
+═══════════════════════════════════════════════════════════════════
+Q3b — CROSS-REF: CPT competenza publish content (verifica migration done)
+═══════════════════════════════════════════════════════════════════
+CPT 2664 "Diritto tributario"             content_len=3557  ↔  Page 202  3842 char  ✓ migrato
+CPT 2667 "Cartelle esattoriali e multe"   content_len=2848  ↔  Page 208  2873 char  ✓ migrato
+CPT 2668 "Recupero crediti"               content_len=3517  ↔  Page 170  4221 char  ✓ migrato
+CPT 2670 "Responsabilità medica"          content_len=2096  ↔  Page 279  2100 char  ✓ migrato
+CPT 2671 "Diritto bancario"               content_len=1948  ↔  Page 297  1952 char  ✓ migrato (quasi identico)
+CPT 2674 "Diritto penale"                 content_len=5904  ↔  Page 2251 6556 char  ✓ migrato
+CPT 2682 "Diritto amministrativo"         content_len=3264  ↔  Page 2246 3889 char  ✓ migrato
+CPT 2677 "Eredità e successioni"          content_len=1803  ↔  Page 288  1807 char  ✓ migrato
+CPT 2678 "Risarcimento danni"             content_len=2932  ↔  Page 223  2968 char  ✓ migrato
+                                                                      Page 232 (Infortunistica stradale) → no CPT slug match, content unico
+                                                                      Page 260 (Aste immobiliari)        → no CPT slug match, content unico
+
+➜ 9/11 page draft sono backup obsoleti (content nei CPT publish).
+➜ 2/11 (232 Infortunistica stradale, 260 Aste immobiliari) NON hanno match CPT esistente — content "orfano".
+➜ NOTA: TUTTI i CPT hanno acf_intro=0 acf_problemi=0. Il content è in post_content (legacy editor),
+   non nei campi ACF Wave 1. ACF non popolato è issue Wave 4.6 ma NON Wave 4.7 scope.
+
+➜ DECISIONE Phase 2:
+   - HARD RULE prompt: "Page draft hanno content significativo → STOP, segnala orchestratore"
+   - NON trasho le 11 page draft in Phase 2 (rispetto HARD RULE).
+   - Riporto orchestratore: 9 sono safe trash (duplicate CPT), 2 hanno content unico da preservare/migrare.
+
+═══════════════════════════════════════════════════════════════════
+Q4 — Page hub Competenze + Aree di Pratica + lo-studio
+═══════════════════════════════════════════════════════════════════
+ID    status   parent  type  slug                  title             content_len
+ 321   publish  0       page  competenze            "Competenze"      3259
+       └ Content: "<h2>LE NOSTRE AREE DI COMPETENZA</h2><ul><li><a>DIVORZISTA - DIRITTO DI FAMIGLIA</a>...
+                    [lista vecchia link] → CONTATTACI" (legacy hub editorial pre-recovery)
+ 2812  publish  0       page  aree-di-pratica       "Aree di Pratica" 0       (hub VIVO Wave 5, content via template)
+ 19    publish  2811    page  lo-studio             "Lo studio"       2856    (parent=2811)
+ 2811  publish  2822    page  lo-studio             "Chi Siamo"       0       (parent=2822, EMPTY)
+ 2822  publish  0       page  chi-siamo             "Chi Siamo"       335     (parent ROOT)
+
+═══════════════════════════════════════════════════════════════════
+Q4b — Lo-studio: quale page è LIVE sul frontend?
+═══════════════════════════════════════════════════════════════════
+get_permalink(19)   → https://staging.../chi-siamo/lo-studio/lo-studio/    [3-LEVEL NESTED]
+get_permalink(2811) → https://staging.../chi-siamo/lo-studio/              [canonical 2-level]
+
+curl /lo-studio/   → HTTP 301 → /chi-siamo/lo-studio/  → HTTP 200
+                     (redirect WordPress nativo, slug raw → canonical via parent chain)
+
+➜ Page 2811 (EMPTY) è la URL canonical /chi-siamo/lo-studio/ — frontend serve QUESTA.
+➜ Page 19 (content 2856 char "Un atelier in senso napoletano...") è su URL DEAD nested 3-level.
+➜ Wave 4.6 phase 3 ha popolato ACF (timeline + founding) probabilmente su page 2811.
+   page-lo-studio.php template legge ACF → output viene da 2811, non da page 19 post_content.
+➜ Page 19 è effettivamente DEAD nel routing canonical, anche se ha post_content storico.
+
+➜ DECISIONE Phase 2:
+   - HARD RULE prompt: "Se 19 ha content reale → STOP segnala orchestratore"
+   - NON trasho page 19 in Phase 2 (rispetto HARD RULE).
+   - Riporto orchestratore: tecnicamente safe trash (URL nested dead, content non renderizzato),
+     ma il post_content "Un atelier in senso napoletano..." è il copy editoriale ORIGINALE Wave 1
+     che potrebbe essere referenziato da Wave 4.6 page-lo-studio template come fallback.
+     Verificare prima del trash che template Lo Studio non legga questo content.
+
+➜ DECISIONE Phase 2 page 321:
+   - Content "<h2>LE NOSTRE AREE DI COMPETENZA</h2><ul>...</ul>" è LEGACY hub list pre-recovery.
+   - Slug "competenze" CONFONDE Elena con CPT competenza menu.
+   - SAFE da rinominare "[Hub legacy] Competenze" + status=draft (rende invisibile a frontend).
+   - APPLICARE in Phase 2.
+
+➜ DECISIONE Phase 2 page 2812:
+   - NO TOUCH (hub VIVO Wave 5, content via template page-aree-di-pratica-hub.php).
+
+═══════════════════════════════════════════════════════════════════
+Q5 — Cache + admin bar hooks (sticky widget verde mobile origin?)
+═══════════════════════════════════════════════════════════════════
+advanced_cache option       → NOT FOUND (no plugin cache attivo)
+object-cache.php drop-in    → NOT FOUND (no Redis/Memcached)
+custom admin_bar_menu hooks → NONE in theme
+
+➜ Cache flush in Phase 5 = wp cache flush + transient + rewrite (sufficiente).
+➜ Sticky widget verde mobile NON è custom admin bar tema. Origin candidate Phase 4:
+   A) WP Admin bar logged-in artefatto audit (più probabile)
+   B) Plugin attivo (verifica Phase 4)
+   C) Hamburger menu mal-posizionato
+   D) Widget legacy custom non visto
+
+═══════════════════════════════════════════════════════════════════
+Q6 — Numero aree hardcoded copy (Phase 3 prep)
+═══════════════════════════════════════════════════════════════════
+USER-FACING (renderizzato a UI):
+  front-page.php:14         "diciannove aree di pratica"  (hero subhead via saltelli_option fallback)
+  front-page.php:131        "Diciannove aree."             (hero H1)
+  archive-competenza.php:35 "Diciannove aree."             (archive H1)
+  page-aree-di-pratica-hub.php:44  "Diciotto aree,"        (HUB H1) ← divergent!
+  page-lo-studio.php:58     "19 aree presidiate"           (timeline 'Oggi')
+  page-lo-studio.php:169    "diciannove aree."             (em emphasis)
+  404.php:77                "tutte le 19 aree di pratica"
+  404.php:129               "diciannove aree?"
+  404.php:154               "Tutte le 19 aree"
+  404.php:234               "le 19 aree di pratica"        (schema description)
+  partial-organization.php:85  "19 aree di pratica"         (schema description)
+  wave4-6-migration.php:49  "19 aree presidiate"           (timeline ACF default value)
+  sections.css:1583         "Le 19 aree saranno popolate prossimamente."  (CSS pseudo-content)
+
+CANONICAL TRUTH:
+  trust-bar.php:26          "17 AREE"                       (DEC-021 firma 17)
+
+COMMENTI INTERNI (no UI render, non touched in Phase 3):
+  front-page.php:37         // 19 aree — WP_Query ...
+  helpers.php:146           comment "H1 'Diciannove aree.'"
+  archive-competenza.php:4  comment "Lista 19 aree con filtro"
+  partial-organization.php:16  comment "le 19 aree"
+  footer.php:73             comment "(3 in footer; 19 totali)"
+  sections.css:11           comment "3. .sl-areas — 19 aree"
+  sections.css:389          comment "3. AREAS — 19 aree"
+
+➜ Phase 3 SCOPE replace: USER-FACING strings → "17"/"Diciassette" allineate a trust-bar.
+➜ Commenti interni: lasciati intatti (refactor history readability, no impatto runtime).
+
+═══════════════════════════════════════════════════════════════════
+DECISION TREE Phase 2 (riepilogo)
+═══════════════════════════════════════════════════════════════════
+[✓ APPLICARE in Phase 2]
+  - Trash 3 competenze draft surplus: 2705 (diritto-societario), 2706 (contrattualistica), 2707 (ricorsi)
+    Reason: content placeholder ~720 char, no ACF, post_modified 2026-05-01 (post-Wave 3)
+  - Rename page hub Competenze ID 321: title="[Hub legacy] Competenze" + status=draft
+    Reason: content legacy lista vecchia + slug confonde Elena con CPT menu
+
+[✗ STOP — riporta orchestratore (HARD RULE)]
+  - 11 page draft confliggenti CPT (Q3): TUTTE content > 1700 char
+    9/11 hanno content duplicato nei CPT publish (safe per cleanup)
+    2/11 (232 Infortunistica stradale, 260 Aste immobiliari) hanno content unico (no CPT match)
+    Decisione orchestratore caso-per-caso necessaria
+  - Duplicate lo-studio ID 19: content 2856 char "Un atelier in senso napoletano..."
+    URL nested 3-level dead, ma content storico Wave 1 — verificare se template fallback lo legge
+  - 2 competenze publish surplus candidate (2680 domiciliazione-dimpresa, 2681 consulenze-online)
+    Sono SERVIZI non aree legali. Decisione orchestratore se trashare per allineare DB → 17 vs DEC-021
+
+[NO TOUCH]
+  - Page 2812 Aree di Pratica (hub VIVO Wave 5, content via template)
+  - Page 2811 Chi Siamo (parent canonical lo-studio, vivo Wave 4.6)
+  - Page 2822 Chi Siamo root (parent chain integrity)
+  - CPT registration / tassonomie / ACF schema
+
+[✓ Phase 3 USER-FACING copy fix]
+  - 13 occorrenze "Diciotto/Diciannove/19" → "Diciassette/17" (allineate trust-bar DEC-021)
+
+═══════════════════════════════════════════════════════════════════
+END investigation-pre.txt
+═══════════════════════════════════════════════════════════════════

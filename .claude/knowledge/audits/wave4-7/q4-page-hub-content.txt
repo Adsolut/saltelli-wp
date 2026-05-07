@@ -1,0 +1,31 @@
+=== Q4: Page hub Competenze + Aree di Pratica + lo-studio ===
+ID 321: status=publish parent=0 type=page slug="competenze" title="Competenze" content_len=3259
+--- content > 1500 chars, showing first 300 + last 100 ---
+<h2>LE NOSTRE AREE DI COMPETENZA</h2>				
+							<ul>
+							<li>
+											<a href="https://staging.studiolegalesaltelli.it/avvocato-divorzista/">
+										DIVORZISTA - DIRITTO DI FAMIGLIA
+											</a>
+									</li>
+								<li>
+											<a href="https://staging.studiolegalesaltelli.it/recu
+... [TRUNCATED] ...
+a href="https://staging.studiolegalesaltelli.it/prenota-un-appuntamento/">
+						CONTATTACI					</a>
+--- ---
+
+ID 2812: status=publish parent=0 type=page slug="aree-di-pratica" title="Aree di Pratica" content_len=0
+
+ID 19: status=publish parent=2811 type=page slug="lo-studio" title="Lo studio" content_len=2856
+--- content > 1500 chars, showing first 300 + last 100 ---
+<p class="sl-page__lede">Un atelier in senso napoletano. Quattro avvocati, una sede storica nel cuore di Chiaia, vent'anni di pratica accanto a famiglie e imprese di Napoli.</p>
+
+<p>Lo Studio Legale Saltelli &amp; Partners nasce nel 1999 per iniziativa di Emiliano Saltelli, allora giovane tributaris
+... [TRUNCATED] ...
+an>Prenota una consulenza gratuita</span> <span class="arrow" aria-hidden="true">→</span></a></p>
+
+--- ---
+
+ID 2811: status=publish parent=2822 type=page slug="lo-studio" title="Chi Siamo" content_len=0
+

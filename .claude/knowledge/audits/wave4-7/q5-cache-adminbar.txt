@@ -1,0 +1,10 @@
+=== Q5: Cache + admin bar hooks ===
+-- advanced_cache option --
+Error: Could not get 'advanced_cache' option. Does it exist?
+
+-- object-cache.php drop-in --
+ls: cannot access '/var/www/saltelli/wp-content/object-cache.php': No such file or directory
+no object-cache.php
+
+-- admin bar hooks in theme (locale) --
+NO custom admin bar hooks (atteso)

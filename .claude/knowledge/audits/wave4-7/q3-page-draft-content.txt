@@ -1,0 +1,12 @@
+=== Q3: Page draft confliggenti — content size ===
+ID 202: status=draft content_len=3842 excerpt_len=0 meta_count=22 title="Diritto Tributario" slug="diritto-tributario"
+ID 208: status=draft content_len=2873 excerpt_len=0 meta_count=22 title="Cartelle esattoriali e multe" slug="cartelle-esattoriali-e-multe"
+ID 170: status=draft content_len=4221 excerpt_len=0 meta_count=23 title="Recupero Crediti" slug="recupero-crediti"
+ID 223: status=draft content_len=2968 excerpt_len=0 meta_count=22 title="Risarcimento del danno" slug="risarcimento-del-danno"
+ID 232: status=draft content_len=2531 excerpt_len=0 meta_count=22 title="Infortunistica stradale" slug="infortunistica-stradale"
+ID 260: status=draft content_len=1731 excerpt_len=0 meta_count=22 title="Aste immobiliari" slug="aste-immobiliari"
+ID 279: status=draft content_len=2100 excerpt_len=0 meta_count=22 title="Responsabilità medica" slug="responsabilita-medica"
+ID 288: status=draft content_len=1807 excerpt_len=0 meta_count=22 title="Eredità e successioni" slug="eredita-e-successioni"
+ID 297: status=draft content_len=1952 excerpt_len=0 meta_count=22 title="Diritto bancario" slug="diritto-bancario"
+ID 2246: status=draft content_len=3889 excerpt_len=0 meta_count=23 title="Diritto Amministrativo" slug="diritto-amministrativo"
+ID 2251: status=draft content_len=6556 excerpt_len=0 meta_count=23 title="Diritto Penale" slug="diritto-penale"

@@ -1,0 +1,18 @@
+=== Q1b: Elena (UID 9) capabilities ===
+Field	Value
+ID	9
+user_login	elena
+user_email	o.sydorenko@adsolut.it
+roles	editor
+
+-- Elena allcaps relevant --
+edit_posts: 1
+edit_published_posts: 1
+publish_posts: 1
+edit_pages: 1
+publish_pages: 1
+edit_others_posts: 1
+edit_others_pages: 1
+delete_posts: 1
+upload_files: 1
+manage_categories: 1

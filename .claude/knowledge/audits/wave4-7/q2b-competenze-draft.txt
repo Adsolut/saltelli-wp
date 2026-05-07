@@ -1,0 +1,4 @@
+=== Q2b: 3 competenze draft (2705, 2706, 2707) content/ACF size ===
+Draft 2705: content_len=731 meta_count=2 acf_intro=0 acf_problemi=0 slug=diritto-societario title="Diritto societario" modified=2026-05-01 08:12:19
+Draft 2706: content_len=714 meta_count=2 acf_intro=0 acf_problemi=0 slug=contrattualistica title="Contrattualistica" modified=2026-05-01 08:12:19
+Draft 2707: content_len=726 meta_count=2 acf_intro=0 acf_problemi=0 slug=ricorsi title="Ricorsi" modified=2026-05-01 08:12:19
