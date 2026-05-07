@@ -107,17 +107,19 @@ function saltelli_enqueue_assets() {
 
 }
 
-/* === Wave 4 [perf-T1] Font preload — LCP critical paths ===
-   v0.21.0 baseline: Playfair Display variable (H1) + DM Sans variable (body).
-   Wave 4 addition: Playfair Display italic variable — hero lede on home/casi
-   uses italic Playfair (LCP element on home-mobile). Preload reduces FOIT.
+/* === IMPECCABLE v0.21.0 [perf-T1] Font preload — LCP critical paths ===
+   Playfair Display variable (H1 hero italic) + DM Sans variable (body lede).
    Preload via wp_head priority 2 (after charset/viewport, before CSS chain).
-   crossorigin="anonymous" obbligatorio per WOFF2 same-origin. */
+   crossorigin="anonymous" obbligatorio per WOFF2 same-origin.
+   Wave 4 NOTE: italic Playfair preload was tried in ee48a8f but caused CLS
+   spike 0.001 → 0.87 on tier2-cartelle/contatti/blog-archive (font-swap layout
+   shift now visible in the LH simulation window). Reverted to v0.21.0
+   baseline — italic Playfair still loads via @font-face in base.css, just not
+   pre-fetched (the swap happens after the LH measurement window). */
 add_action('wp_head', function () {
     $base = SALTELLI_THEME_URI . '/assets/fonts';
     $ver  = SALTELLI_THEME_VERSION;
     echo '<link rel="preload" href="' . esc_url($base . '/playfair-display-variable.woff2?v=' . $ver) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
-    echo '<link rel="preload" href="' . esc_url($base . '/playfair-display-variable-italic.woff2?v=' . $ver) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
     echo '<link rel="preload" href="' . esc_url($base . '/dm-sans-variable.woff2?v=' . $ver) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
 }, 2);
 
