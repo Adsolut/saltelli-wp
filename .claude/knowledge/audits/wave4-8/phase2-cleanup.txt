@@ -1,0 +1,50 @@
+=== Trash 9 page draft duplicate CPT ===
+Trashing page ID 202...
+Success: Trashed post 202.
+Trashing page ID 208...
+Success: Trashed post 208.
+Trashing page ID 170...
+Success: Trashed post 170.
+Trashing page ID 223...
+Success: Trashed post 223.
+Trashing page ID 279...
+Success: Trashed post 279.
+Trashing page ID 288...
+Success: Trashed post 288.
+Trashing page ID 297...
+Success: Trashed post 297.
+Trashing page ID 2246...
+Success: Trashed post 2246.
+Trashing page ID 2251...
+Success: Trashed post 2251.
+
+=== Verifica trash status 9 page ===
+
+=== Verifica trash status 9 page ===
+  ID 202: trash
+  ID 208: trash
+  ID 170: trash
+  ID 223: trash
+  ID 279: trash
+  ID 288: trash
+  ID 297: trash
+  ID 2246: trash
+  ID 2251: trash
+
+=== Trash page 19 (duplicate Lo Studio) ===
+Success: Trashed post 19.
+  ID 19: trash
+
+=== Smoke /chi-siamo/lo-studio/ post-trash 19 ===
+  HTTP 200
+
+=== Marker [Servizio extra] su CPT 2680 + 2681 (decisione cliente Wave 7) ===
+  ID 2680 current title: Domiciliazione d'impresa
+  ID 2680 update: bash: -c: line 1: unexpected EOF while looking for matching `''
+  ID 2681 current title: Consulenze online
+  ID 2681 update: Success: Updated post 2681.
+Updated ID 2680 title=[Servizio extra] Domiciliazione d'impresa status=draft
+
+=== Verifica final state CPT 2680 + 2681 ===
+  ID 2680: status=draft title=[Servizio extra] Domiciliazione d'impresa
+  ID 2681: status=draft title=[Servizio extra] Consulenze online
