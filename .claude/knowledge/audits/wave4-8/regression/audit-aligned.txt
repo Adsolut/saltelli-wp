@@ -1,0 +1,47 @@
+=== Wave 4.8 audit-aligned smoke ===
+  PASS [200] /
+  PASS [200] /chi-siamo/
+  PASS [200] /chi-siamo/lo-studio/
+  PASS [200] /chi-siamo/team/
+  PASS [200] /chi-siamo/team/antonia-battista/
+  PASS [200] /chi-siamo/team/emiliano-saltelli/
+  PASS [200] /chi-siamo/risultati/
+  PASS [200] /aree-di-pratica/
+  PASS [200] /aree-di-pratica/privati/diritto-tributario/
+  PASS [200] /aree-di-pratica/privati/cartelle-esattoriali-e-multe/
+  PASS [200] /aree-di-pratica/privati/diritto-del-lavoro/
+  PASS [200] /aree-di-pratica/privati/diritto-di-famiglia-lgbtq/
+  PASS [200] /aree-di-pratica/privati/responsabilita-medica/
+  PASS [200] /aree-di-pratica/privati/diritto-bancario/
+  PASS [200] /aree-di-pratica/privati/diritto-condominiale/
+  PASS [200] /aree-di-pratica/privati/diritto-penale/
+  PASS [200] /aree-di-pratica/privati/diritto-previdenziale/
+  FAIL [404] /aree-di-pratica/privati/eredita-e-successioni/
+  PASS [200] /aree-di-pratica/privati/risarcimento-danni/
+  PASS [200] /aree-di-pratica/privati/infortunistica-stradale/
+  PASS [200] /aree-di-pratica/privati/aste-immobiliari/
+  PASS [200] /aree-di-pratica/imprese/recupero-crediti/
+  FAIL [404] /aree-di-pratica/imprese/diritto-dell-immigrazione/
+  PASS [200] /aree-di-pratica/contenzioso-amministrativo/
+  PASS [200] /aree-di-pratica/contenzioso-amministrativo/diritto-amministrativo/
+  PASS [200] /risorse/
+  PASS [200] /risorse/blog/
+  PASS [200] /risorse/domande-frequenti/
+  PASS [200] /risorse/glossario-legale/
+  PASS [200] /costi-e-consulenze/
+  PASS [200] /contatti/
+
+TOTAL: 29/31 PASS · 2 FAIL
+
+
+=== CORRECTION: prompt audit list aveva 2 slug errati ===
+  prompt: /aree-di-pratica/privati/eredita-e-successioni/
+  reale:  /aree-di-pratica/privati/diritto-delle-successioni/  (CPT slug 2677)
+  prompt: /aree-di-pratica/imprese/diritto-dell-immigrazione/
+  reale:  /aree-di-pratica/imprese/diritto-dellimmigrazione/  (CPT slug 2673)
+
+=== Re-test con slug reali ===
+  [200] /aree-di-pratica/privati/diritto-delle-successioni/
+  [200] /aree-di-pratica/imprese/diritto-dellimmigrazione/
+
+TOTAL EFFETTIVO con slug reali: 31/31 PASS (29 originali + 2 correzione slug)
