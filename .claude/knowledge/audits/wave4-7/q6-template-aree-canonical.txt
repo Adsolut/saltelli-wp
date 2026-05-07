@@ -1,0 +1,46 @@
+=== Q6: Template area-list / aree-hub: quali competenze sono linkate? ===
+
+-- Cerca template-parts che renderano lista aree --
+mini-form.php
+mobile-sticky-bar.php
+page-aree-di-pratica-hub.php
+page-casi.php
+page-chi-siamo-hub.php
+page-contatti.php
+page-costi-e-consulenze-hub.php
+page-costi.php
+page-faq.php
+page-info-shared.php
+page-lo-studio.php
+page-risorse-hub.php
+testimonials-block.php
+trust-bar.php
+
+-- File con get_posts/WP_Query competenza --
+wp-content/themes/saltelli/single-competenza.php
+wp-content/themes/saltelli/404.php
+wp-content/themes/saltelli/archive-competenza.php
+wp-content/themes/saltelli/taxonomy-tipo-area.php
+wp-content/themes/saltelli/front-page.php
+wp-content/themes/saltelli/inc/cpt-competenza.php
+wp-content/themes/saltelli/inc/helpers.php
+
+-- Slug array hardcoded eventuali --
+wp-content/themes/saltelli/single-competenza.php:89:                        'diritto-tributario'         => 'emiliano-saltelli',
+wp-content/themes/saltelli/taxonomy-tipo-area.php:91:        ['sym' => '§', 't' => __('Tributario', 'saltelli'),  'd' => __("Accertamenti, ricorsi tributari, contenzioso con Agenzia delle Entrate.", 'saltelli'),  'slug' => 'diritto-tributario'],
+wp-content/themes/saltelli/taxonomy-tipo-area.php:92:        ['sym' => '¶', 't' => __('Crediti', 'saltelli'),     'd' => __("Recupero crediti commerciali, decreti ingiuntivi, esecuzioni mobiliari.", 'saltelli'),  'slug' => 'recupero-crediti'],
+wp-content/themes/saltelli/taxonomy-tipo-area.php:96:        ['sym' => '§', 't' => __('Cartelle', 'saltelli'),       'd' => __("Opposizione a cartelle esattoriali, prescrizioni, vizi di notifica.", 'saltelli'),  'slug' => 'cartelle-esattoriali-e-multe'],
+wp-content/themes/saltelli/footer.php:76:    ['n' => '01', 't' => __('Diritto tributario', 'saltelli'),         'href' => '/aree-di-pratica/privati/diritto-tributario/'],
+wp-content/themes/saltelli/inc/critical-css.php:49:            'diritto-tributario',
+wp-content/themes/saltelli/inc/wave3-glossario.php:19:        'Diritto tributario'        => 'diritto-tributario',
+wp-content/themes/saltelli/inc/wave3-glossario.php:23:        'Cartelle e riscossione'    => 'cartelle-esattoriali-e-multe',
+wp-content/themes/saltelli/inc/wave3-glossario.php:29:        'Recupero crediti'          => 'recupero-crediti',
+wp-content/themes/saltelli/inc/helpers.php:879:        'diritto-tributario' => [
+wp-content/themes/saltelli/inc/helpers.php:1056:    $tier1_slugs = ['diritto-tributario', 'diritto-del-lavoro', 'diritto-di-famiglia-lgbtq'];
+wp-content/themes/saltelli/inc/schema/partial-organization.php:18:    ['name' => 'Diritto tributario',                   'slug' => 'diritto-tributario'],
+wp-content/themes/saltelli/inc/schema/partial-organization.php:19:    ['name' => 'Cartelle esattoriali e multe',         'slug' => 'cartelle-esattoriali'],
+wp-content/themes/saltelli/inc/schema/partial-organization.php:20:    ['name' => 'Recupero crediti',                     'slug' => 'recupero-crediti'],
+wp-content/themes/saltelli/inc/seo/legacy-redirects.php:35:        '/recupero-crediti/'                        => '/aree-di-pratica/imprese/recupero-crediti/',
+wp-content/themes/saltelli/inc/seo/legacy-redirects.php:36:        '/cartelle-esattoriali-e-multe/'            => '/aree-di-pratica/privati/cartelle-esattoriali-e-multe/',
+wp-content/themes/saltelli/inc/seo/legacy-redirects.php:48:        '/diritto-tributario/'                      => '/aree-di-pratica/privati/diritto-tributario/',
+wp-content/themes/saltelli/inc/seo/legacy-redirects.php:49:        '/ricorsi-napoli-obiettivo-valore/'         => '/aree-di-pratica/privati/cartelle-esattoriali-e-multe/',

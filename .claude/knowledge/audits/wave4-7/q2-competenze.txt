@@ -1,0 +1,25 @@
+=== Q2: Competenze (22 vs 17 atteso) ===
+ID	post_status	post_name	post_title	post_modified
+2706	draft	contrattualistica	Contrattualistica	2026-05-01 08:12:19
+2707	draft	ricorsi	Ricorsi	2026-05-01 08:12:19
+2705	draft	diritto-societario	Diritto societario	2026-05-01 08:12:19
+2682	publish	diritto-amministrativo	Diritto amministrativo	2026-04-30 16:02:16
+2681	publish	consulenze-online	Consulenze online	2026-04-29 22:25:41
+2680	publish	domiciliazione-dimpresa	Domiciliazione d'impresa	2026-04-30 10:19:26
+2679	publish	responsabilita-civile	Responsabilità civile	2026-04-30 10:19:26
+2678	publish	risarcimento-danni	Risarcimento danni	2026-04-30 10:19:26
+2677	publish	diritto-delle-successioni	Eredità e successioni	2026-04-30 15:43:35
+2676	publish	diritto-delle-assicurazioni	Diritto delle assicurazioni	2026-04-29 22:25:41
+2675	publish	diritto-previdenziale	Diritto previdenziale	2026-04-30 16:02:16
+2674	publish	diritto-penale	Diritto penale	2026-04-30 16:02:15
+2673	publish	diritto-dellimmigrazione	Diritto dell'immigrazione	2026-04-30 10:19:26
+2672	publish	diritto-condominiale	Diritto condominiale	2026-04-30 10:19:26
+2671	publish	diritto-bancario	Diritto bancario	2026-04-30 10:19:26
+2670	publish	responsabilita-medica	Responsabilità medica	2026-04-30 10:19:26
+2669	publish	diritto-di-famiglia	Diritto di famiglia	2026-04-30 10:19:27
+2668	publish	recupero-crediti	Recupero crediti	2026-04-30 15:59:42
+2667	publish	cartelle-esattoriali-e-multe	Cartelle esattoriali e multe	2026-04-30 10:19:27
+2666	publish	diritto-di-famiglia-lgbtq	Diritto di famiglia LGBTQ+	2026-04-30 14:39:07
+2665	publish	diritto-del-lavoro	Diritto del lavoro	2026-04-30 10:19:27
+2664	publish	diritto-tributario	Diritto tributario	2026-04-30 10:19:27
+

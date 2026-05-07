@@ -11,7 +11,7 @@ $studio = saltelli_studio_data();
 
 $hero_eyebrow    = saltelli_option('hero_eyebrow', 'Studio Legale · Napoli · Chiaia · Dal 1999');
 $hero_headline   = saltelli_option('hero_headline', 'Diritto, con misura.');
-$hero_sub        = saltelli_option('hero_subheadline', "Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, diciannove aree di pratica, vent'anni di lavoro accanto a famiglie e imprese di Napoli.");
+$hero_sub        = saltelli_option('hero_subheadline', "Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, diciassette aree di pratica, vent'anni di lavoro accanto a famiglie e imprese di Napoli.");
 $hero_cta_label  = saltelli_option('hero_cta_label', 'Prenota una consulenza gratuita');
 $hero_cta_url    = saltelli_option('hero_cta_url', '/contatti/');
 
@@ -128,7 +128,7 @@ $press = saltelli_press_outlets();
         <div class="sl-section-head">
             <div class="sl-mono">§ 01 — <?php esc_html_e('Aree di pratica', 'saltelli'); ?></div>
             <h2 class="sl-section-title" id="aree-h">
-                <?php esc_html_e('Diciannove aree.', 'saltelli'); ?><br>
+                <?php esc_html_e('Diciassette aree.', 'saltelli'); ?><br>
                 <em><?php esc_html_e('Tre presidiate in profondità.', 'saltelli'); ?></em>
             </h2>
         </div>

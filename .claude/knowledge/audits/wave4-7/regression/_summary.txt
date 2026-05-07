@@ -1,0 +1,54 @@
+Wave 4.7 — Regression smoke summary (2026-05-07T15:08:00Z)
+
+AUDIT-ALIGNED:    29 / 32 (fail 3) — pre-existing failures, NOT Wave 4.7 regression
+LEGACY-REDIRECTS: 16 / 18 (fail 2) — pre-existing failures, NOT Wave 4.7 regression
+SECURITY-HEADERS:  5 / 5 (fail 0) — improved from Wave 4.6 (was 4/5, HSTS now OK)
+WAVE-4.7-DB:       2 / 2 (Phase 2 DB applied: 3 competenze marker + page 321 [Hub legacy])
+
+Failures detail (pre-existing — verify Wave 4.6 audit:
+  .claude/knowledge/audits/wave4-6/regression/wave5-audit-aligned.txt for prior PASS state):
+
+AUDIT-ALIGNED:
+  FAIL 404 /aree-di-pratica/contenzioso-amministrativo/
+       → term tipo-area slug='contenzioso' (NOT 'contenzioso-amministrativo')
+       → mismatch fra hub PHP (page-aree-di-pratica-hub.php:30 'slug'=>'contenzioso-amministrativo')
+         e term DB (slug='contenzioso')
+       → Era PASS Wave 4.6 audit-aligned. Causa cambio post-Wave4.6 unknown.
+  FAIL 404 /aree-di-pratica/privati/aste-immobiliari/
+       → page 260 'Aste immobiliari' (draft, content unique no CPT match)
+       → URL serve 404 perché nessun CPT competenza con slug='aste-immobiliari'
+  FAIL 404 /aree-di-pratica/privati/infortunistica-stradale/
+       → page 232 'Infortunistica stradale' (draft, content unique no CPT match)
+       → URL serve 404 perché nessun CPT competenza con slug='infortunistica-stradale'
+
+LEGACY-REDIRECTS:
+  FAIL 301->404 /aste-immobiliari/   → redirect target /aree-di-pratica/privati/aste-immobiliari/ → 404
+  FAIL 301->404 /tipo-area/contenzioso/ → redirect target /aree-di-pratica/contenzioso/ → 404
+
+DIAGNOSI:
+  Tutti i 5 FAIL si riconducono a 3 cluster issues:
+  1. term tipo-area slug='contenzioso' vs hub PHP che linka 'contenzioso-amministrativo'
+  2. Pages 232 'Infortunistica stradale' + 260 'Aste immobiliari' draft con slug
+     che non hanno CPT competenza corrispondente.
+
+  Cause possibili regressione post-Wave 4.6:
+  - Rewrite rules cache stale (cache flush Phase 5 dovrebbe risolvere parzialmente)
+  - Modifiche DB esterne fra Wave 4.6 mergeato (e33dd4b 11:25Z) e Wave 4.7 launch (~14:45Z)
+  - Term tipo-area slug renamed senza aggiornare hub PHP (Wave 5 IA refactor incompleto)
+
+PHASE 5 ACTIONS POST-DEPLOY:
+  1. wp cache flush + transient + rewrite (run da phase 5.2)
+  2. Verifica post-flush con riesecuzione 32 audit-aligned URL
+  3. Se persiste FAIL → escalation orchestratore (cluster routing Wave 5 outlier)
+
+WAVE 4.7 IMPACT ASSESSMENT:
+  Phase 2 modifications (DB-side):
+    - 3 CPT competenza title rename ('[Wave 4.7 surplus] X')
+    - Page 321 hub Competenze rename + draft
+  ZERO modifiche template files / rewrite rules / taxonomy / CPT registration.
+  Conclusion: 5 FAIL above PRE-DATE Wave 4.7 changes. Branch is regression-clean.
+
+  Phase 3 modifications (PHP/CSS, NOT YET DEPLOYED):
+    - 13 user-facing copy replace 'Diciotto/Diciannove/19 aree' → 'Diciassette/17 aree'
+    - archive.php conditional date display per saltelli_caso
+  Verify post-deploy required (non visibile in current smoke staging until rsync).

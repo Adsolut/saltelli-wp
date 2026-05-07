@@ -1,0 +1,35 @@
+=== Q4b: Lo Studio — quale page è attiva sul frontend? ===
+
+-- Page 2822 (parent di 2811) --
+ID 2822: status=publish parent=0 type=page slug="chi-siamo" title="Chi Siamo" content_len=335
+
+-- get_permalink di entrambe lo-studio --
+19 → https://staging.studiolegalesaltelli.it/chi-siamo/lo-studio/lo-studio/
+2811 → https://staging.studiolegalesaltelli.it/chi-siamo/lo-studio/
+
+-- Menu items pointing to /lo-studio/ --
+term_id,name,slug
+3,Main,main
+996,"Saltelli Header",saltelli-header
+
+-- curl /lo-studio/ check actual page served --
+HTTP/2 301 
+server: nginx/1.24.0 (Ubuntu)
+date: Thu, 07 May 2026 14:48:15 GMT
+content-type: text/html; charset=UTF-8
+location: https://staging.studiolegalesaltelli.it/chi-siamo/lo-studio/
+x-redirect-by: WordPress
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: geolocation=(), microphone=(), camera=()
+strict-transport-security: max-age=31536000; includeSubDomains
+
+HTTP/2 200 
+server: nginx/1.24.0 (Ubuntu)
+date: Thu, 07 May 2026 14:48:15 GMT
+content-type: text/html; charset=UTF-8
+vary: Accept-Encoding
+x-frame-options: SAMEORIGIN
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin

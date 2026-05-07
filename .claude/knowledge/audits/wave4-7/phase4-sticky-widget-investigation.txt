@@ -1,0 +1,89 @@
+# Wave 4.7 — Phase 4 Sticky Widget Verde Mobile Investigation
+# Generated: 2026-05-07T15:01:00Z
+# Branch: feat/wave4-7-cms-hotfix-critical-fixes
+
+═══════════════════════════════════════════════════════════════════
+ORIGIN IDENTIFICATA: `.sl-whatsapp-sticky` (intenzionale, NON bug)
+═══════════════════════════════════════════════════════════════════
+
+Source markup:    wp-content/themes/saltelli/header.php:128-137
+Source CSS:       wp-content/themes/saltelli/assets/css/sections.css:3068-3109
+Storia introduce: v0.13.6 — CONVERSION QUICKWIN audit CRO §3 #5
+
+═══════════════════════════════════════════════════════════════════
+ANALYSIS: posizione effettiva vs audit visuale claim
+═══════════════════════════════════════════════════════════════════
+
+CSS rules attuali (sections.css:3068-3085):
+  position: fixed
+  bottom:   24px       ← BOTTOM (NON top come riportato dall'audit)
+  right:    24px       ← RIGHT (NON left come riportato dall'audit)
+  width:    56px
+  height:   56px
+  background: #25D366  ← WhatsApp brand green (corrispondenza colore audit)
+  border-radius: 50%
+  z-index:  100
+  display:  none       ← default desktop
+  → display: flex via media query (max-width: 1023px) — solo mobile
+  → animation pulse ogni 6s (sl-wa-pulse keyframes)
+
+Conclusione tecnica:
+  ➜ Il widget verde mobile è la WhatsApp CTA editorial brand-coerente.
+  ➜ Posizione corretta UX standard (bottom-right) — NO top-left come audit dice.
+  ➜ Visibile SOLO mobile (<1024px) — coerente con audit "su ~15 pagine mobile".
+
+Discrepanza audit:
+  Claim audit: "verde top-left mobile su ~15 pagine"
+  Codice:      verde bottom-right mobile su tutte le pagine (header.php incluso da
+                 ogni template che chiama get_header()).
+
+Ipotesi discrepanza:
+  - A) Screenshot artifact / Playwright headless rendering anomaly
+  - B) Audit reporter confusione coordinate (top-left ↔ bottom-right inversion)
+  - C) Audit cattura post-scroll in punto specifico dove il widget sembra "top"
+  - D) Pixel ratio mobile viewport audit vs reale (es. emulazione 360x640 a 2x scale)
+
+Verification effettuata:
+  ✓ grep CSS position:fixed → 6 risultati (header mobile, mobile-menu, whatsapp,
+    skip-link focus, attorney sticky, mobile-bar) — solo `sl-whatsapp-sticky`
+    è verde #25D366
+  ✓ grep keyword chat/whatsapp/chat-bubble → solo theme native, no plugin chat
+  ✓ wp plugin list staging: ACF + CF7 + Honeypot + Yoast (NESSUN plugin chat)
+  ✓ curl staging logged-out HTML: solo `<a class="sl-whatsapp-sticky">` sticky
+    found (NO admin bar, body class non contiene `admin-bar` né `logged-in`)
+  ✓ Nessun custom admin_bar_menu hook nel tema (Q5 Phase 1)
+
+═══════════════════════════════════════════════════════════════════
+DECISIONE Phase 4: NO FIX
+═══════════════════════════════════════════════════════════════════
+
+Hypothesis case (dal prompt 4.3):
+  [A] WP Admin bar logged-in → ✗ NO (curl logged-out conferma assenza)
+  [B] Plugin chat → ✗ NO (zero plugin chat installati)
+  [C] Hamburger menu mobile mal-posizionato → ✗ NO (hamburger CSS top-right header.php)
+  [D] Widget legacy custom da rimuovere → ✗ NO (è WhatsApp sticky intenzionale)
+
+Verdetto: il widget verde mobile è un'**implementazione intenzionale** di CRO
+quick win (audit CRO §3 #5 v0.13.6). La posizione **bottom-right** è UX
+standard per CTA contact mobile. La discrepanza con audit visuale "top-left" è
+**artefatto reporting**, non bug funzionale.
+
+Action: NESSUNA modifica codice in Wave 4.7.
+
+═══════════════════════════════════════════════════════════════════
+RACCOMANDAZIONE ORCHESTRATORE
+═══════════════════════════════════════════════════════════════════
+
+1. Verificare audit visuale Playwright config:
+   - viewport mobile usato (360x640? 414x896?)
+   - device pixel ratio (2x? 3x?)
+   - scroll position quando screenshot è preso (top? scrolled?)
+2. Re-run audit visuale con device emulation realistica (iPhone 14 Pro 393x852)
+   per conferma posizione widget bottom-right.
+3. Se cliente ha confermato visivamente "top-left" su device reale: investigare
+   custom user agent o cache browser staging (cache flush Phase 5 dovrebbe
+   risolvere se cache stale).
+
+═══════════════════════════════════════════════════════════════════
+END phase4-sticky-widget-investigation.txt
+═══════════════════════════════════════════════════════════════════

@@ -46,7 +46,7 @@ function saltelli_w46_migrate_lo_studio_timeline() {
         ['year' => '2014', 'title' => 'Apertura LGBTQ+',     'description' => 'Antonia Battista inaugura una pratica dedicata, prima a Napoli sud.'],
         ['year' => '2019', 'title' => "Vent'anni",           'description' => 'Lo studio passa da 2 a 4 professionisti stabili. Atelier a tutti gli effetti.'],
         ['year' => '2024', 'title' => 'Cassazione + AGE',    'description' => 'Annullamento cartella €240k. Conferma in Cassazione su licenziamento illegittimo.'],
-        ['year' => '2026', 'title' => 'Oggi',                'description' => '19 aree presidiate, 4 professionisti, un solo atelier.'],
+        ['year' => '2026', 'title' => 'Oggi',                'description' => '17 aree presidiate, 4 professionisti, un solo atelier.'],
     ];
 
     update_field('timeline_events', $events, $page->ID);

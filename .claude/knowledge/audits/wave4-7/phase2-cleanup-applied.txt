@@ -1,0 +1,100 @@
+# Wave 4.7 — Phase 2 CMS Cleanup APPLIED
+# Generated: 2026-05-07T14:55:30Z
+# Branch: feat/wave4-7-cms-hotfix-critical-fixes
+
+═══════════════════════════════════════════════════════════════════
+APPLICATO ✓
+═══════════════════════════════════════════════════════════════════
+
+[2.1] Competenze draft surplus (3) — marcate `[Wave 4.7 surplus]`:
+  ID 2705 "Diritto societario"     → "[Wave 4.7 surplus] Diritto societario"      (draft, slug=diritto-societario)
+  ID 2706 "Contrattualistica"      → "[Wave 4.7 surplus] Contrattualistica"       (draft, slug=contrattualistica)
+  ID 2707 "Ricorsi"                → "[Wave 4.7 surplus] Ricorsi"                 (draft, slug=ricorsi)
+
+  Reason: CPT competenza NON supporta trash (register_post_type senza supports trash).
+  Force delete violava HARD RULE prompt. Approccio safer: marker title + status=draft.
+  Effetto editorial: Elena nelle CPT list vede chiaramente le 3 voci come "surplus Wave 4.7".
+  Frontend: invariato (draft non visibile).
+  Recoverabilità: piena (nessuna distruzione DB).
+
+[2.3] Page hub "Competenze" (ID 321) — rinominata `[Hub legacy]`:
+  PRIMA: title="Competenze"            status=publish  slug=competenze  content_len=3259
+  DOPO:  title="[Hub legacy] Competenze" status=draft   slug=competenze  content_len=3259
+
+  Effetto editorial: Elena nelle Pages list vede "[Hub legacy] Competenze" come legacy non-touch.
+  Frontend: /competenze/ → 301 → /aree-di-pratica/ (rewrite Wave 5 sostituisce).
+  Slug "competenze" preservato per non rompere eventuali backlinks legacy non ancora tracciati.
+  Recoverabilità: piena (rinome reversibile, content intatto).
+
+═══════════════════════════════════════════════════════════════════
+NON APPLICATO — HARD RULE STOP / RIPORTA ORCHESTRATORE
+═══════════════════════════════════════════════════════════════════
+
+[2.x.A] 11 page draft confliggenti CPT competenza
+  IDs: 202, 208, 170, 223, 232, 260, 279, 288, 297, 2246, 2251
+  Reason: TUTTE content > 1700 char (Q3 → STOP HARD RULE prompt).
+
+  Cross-ref Q3b mostra:
+    9/11 → content duplicato nei CPT publish (slug match) → SAFE TRASH dopo conferma orchestratore
+    2/11 (232 Infortunistica stradale, 260 Aste immobiliari) → no CPT match, content unico
+
+  Action richiesta orchestratore:
+    1. Confirm trash 9/11 backup (content già nei CPT publish)
+    2. Decidere fate 232 + 260: trash con perdita content / migrare content a nuovo CPT / custom
+
+[2.x.B] Duplicate "lo-studio" (ID 19)
+  ID 19: status=publish parent=2811 slug="lo-studio" title="Lo studio" content_len=2856
+  URL: /chi-siamo/lo-studio/lo-studio/ (3-level NESTED, dead route)
+  Content: "Un atelier in senso napoletano. Quattro avvocati, una sede storica nel cuore di Chiaia..."
+  Reason: HARD RULE STOP (content reale).
+
+  Tecnical analysis:
+    - URL canonical /chi-siamo/lo-studio/ è servita da page 2811 (empty post_content, ACF popolato Wave 4.6)
+    - page 19 è isolata su URL nested 3-level dead — frontend non la rende
+    - template page-lo-studio.php legge ACF di 2811, NON post_content di 19
+
+  Action richiesta orchestratore:
+    1. Verifica template page-lo-studio.php non legga page 19 come fallback (probabile NO)
+    2. Confirm trash 19 + redirect /chi-siamo/lo-studio/lo-studio/ → /chi-siamo/lo-studio/ via inc/seo/legacy-redirects.php
+
+[2.x.C] 2 publish surplus competenze
+  ID 2680 "Domiciliazione d'impresa" (publish, content 1566)
+  ID 2681 "Consulenze online"        (publish, content 1507)
+  Reason: HARD RULE STOP (publish con content).
+
+  Analysis:
+    - Sono SERVIZI non aree legali tradizionali (i 17 attesi DEC-021 sono aree giuridiche specifiche)
+    - 19 publish - 17 atteso = 2 surplus → match coi 2 più "non-area"
+
+  Action richiesta orchestratore:
+    1. Confirm cliente: domiciliazione + consulenze restano come "competenze" o migrano a tipo "servizi"?
+    2. Se restano: aggiornare DEC-021 a 19 OR fix copy a "diciannove"
+    3. Se trashate: 19 publish → 17 publish, allineato a copy "Diciassette"
+
+═══════════════════════════════════════════════════════════════════
+[2.5] CAPABILITY Elena (UID 9) — già verificata in Phase 1 Q1b
+═══════════════════════════════════════════════════════════════════
+edit_posts=1, edit_published_posts=1, publish_posts=1, edit_pages=1, publish_pages=1,
+edit_others_posts=1, edit_others_pages=1, delete_posts=1, upload_files=1, manage_categories=1
+➜ NESSUN bug capability. Editor role sufficiente per tutti CPT del tema.
+
+═══════════════════════════════════════════════════════════════════
+RIEPILOGO STATE POST-PHASE 2
+═══════════════════════════════════════════════════════════════════
+DB CPT competenza:
+  - publish: 19 (invariato, 2 publish surplus richiede decisione orchestratore)
+  - draft:    3 (marked [Wave 4.7 surplus] — visibili in CPT list ma non frontend)
+  - trash:    0 (CPT non supporta)
+
+DB pages:
+  - 321 "[Hub legacy] Competenze" → draft (era publish "Competenze")
+  - tutte le altre invariate (incluse 11 draft confliggenti, ID 19 dup, 2811/2812/2822)
+
+Pending orchestratore actions: 14 items
+  - 11 page draft (9 trash + 2 content unique)
+  - 1 page 19 (trash + URL redirect)
+  - 2 competenze publish surplus (decisione retain/trash)
+
+═══════════════════════════════════════════════════════════════════
+END phase2-cleanup-applied.txt
+═══════════════════════════════════════════════════════════════════
