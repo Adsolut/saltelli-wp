@@ -64,29 +64,46 @@ CSS;
 add_action('wp_head', 'saltelli_inline_critical_css', 1);
 
 /**
- * Defer sections.css via preload+onload pattern (190KB → no longer render-blocking).
- * Filtra il <link> tag generato da wp_enqueue_style('saltelli-sections') e
- * lo trasforma in preload async + noscript fallback per JS-disabled.
+ * Defer non-critical CSS bundles via preload+onload pattern.
+ *
+ * Wave 4 (1.3.0): extended from sections-only (v0.21.2) to also include
+ * components, logo, cro. tokens + base remain render-blocking because:
+ *   - tokens.css (~3 KB) defines CSS variables consumed by every selector;
+ *     deferring it would FOUC any below-the-fold component during the
+ *     async load window
+ *   - base.css (~5 KB) carries the @font-face declarations and font-display
+ *     swap mechanism — must be parsed ASAP so the browser begins font
+ *     fetching before script-driven layout work
+ *
+ * Render-blocking budget post-Wave 4: tokens + base ≈ 8 KB + WP core
+ * wpa-css (≈1 KB) + inline critical (~9 KB) = ~18 KB. Just over the
+ * 14 KB TCP slow-start window but acceptable since the inline blob is
+ * served same-packet with the HTML response.
  *
  * Pattern: <link rel="preload" as="style" onload="this.rel='stylesheet'">
  *          <noscript><link rel="stylesheet" ...></noscript>
  */
-function saltelli_defer_sections_css($html, $handle) {
-    if ($handle !== 'saltelli-sections') {
+function saltelli_defer_main_css($html, $handle) {
+    static $async_handles = [
+        'saltelli-components',
+        'saltelli-logo',
+        'saltelli-sections',
+        'saltelli-cro',
+    ];
+    if (!in_array($handle, $async_handles, true)) {
         return $html;
     }
-    // WP usa rel='stylesheet' (single quotes) di default
     $href_match = preg_match("/href=['\"]([^'\"]+)['\"]/", $html, $href_m);
     if (!$href_match) {
         return $html;
     }
     $href = $href_m[1];
     $id_match = preg_match("/id=['\"]([^'\"]+)['\"]/", $html, $id_m);
-    $id = $id_match ? $id_m[1] : 'saltelli-sections-css';
+    $id = $id_match ? $id_m[1] : ($handle . '-css');
 
     $preload  = '<link rel="preload" as="style" id="' . esc_attr($id) . '" href="' . esc_url($href) . '" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
     $noscript = '<noscript><link rel="stylesheet" href="' . esc_url($href) . '"></noscript>' . "\n";
 
     return $preload . $noscript;
 }
-add_filter('style_loader_tag', 'saltelli_defer_sections_css', 10, 2);
+add_filter('style_loader_tag', 'saltelli_defer_main_css', 10, 2);
