@@ -1,0 +1,64 @@
+Building source CSS...
+Source CSS: 327 KB → .cache-source.css
+
+→ home-mobile: http://localhost:8080/
+2026-05-07T10:08:34.324Z [browserdebug] no browser instance, launching new browser..
+2026-05-07T10:08:34.729Z [browserdebug] browser ready
+  ⚠️  16.0KB (>14KB)  →  wp-content/themes/saltelli/assets/css/critical/home-mobile.css
+
+→ home-desktop: http://localhost:8080/
+2026-05-07T10:08:37.477Z [browserdebug] no browser instance, launching new browser..
+2026-05-07T10:08:37.731Z [browserdebug] browser ready
+  ⚠️  17.4KB (>14KB)  →  wp-content/themes/saltelli/assets/css/critical/home-desktop.css
+
+→ competenza-tier1-mobile: http://localhost:8080/aree-di-pratica/privati/diritto-tributario/
+2026-05-07T10:08:40.184Z [browserdebug] no browser instance, launching new browser..
+2026-05-07T10:08:40.436Z [browserdebug] browser ready
+  ⚠️  15.1KB (>14KB)  →  wp-content/themes/saltelli/assets/css/critical/competenza-tier1-mobile.css
+
+→ competenza-tier1-desktop: http://localhost:8080/aree-di-pratica/privati/diritto-tributario/
+2026-05-07T10:08:42.902Z [browserdebug] no browser instance, launching new browser..
+2026-05-07T10:08:43.156Z [browserdebug] browser ready
+  ⚠️  15.9KB (>14KB)  →  wp-content/themes/saltelli/assets/css/critical/competenza-tier1-desktop.css
+
+→ competenza-tier2-mobile: http://localhost:8080/aree-di-pratica/privati/cartelle-esattoriali-e-multe/
+2026-05-07T10:08:45.588Z [browserdebug] no browser instance, launching new browser..
+2026-05-07T10:08:45.783Z [browserdebug] browser ready
+  ⚠️  14.1KB (>14KB)  →  wp-content/themes/saltelli/assets/css/critical/competenza-tier2-mobile.css
+
+→ competenza-tier2-desktop: http://localhost:8080/aree-di-pratica/privati/cartelle-esattoriali-e-multe/
+2026-05-07T10:08:48.256Z [browserdebug] no browser instance, launching new browser..
+2026-05-07T10:08:48.439Z [browserdebug] browser ready
+  ⚠️  16.2KB (>14KB)  →  wp-content/themes/saltelli/assets/css/critical/competenza-tier2-desktop.css
+
+→ single-avvocato-mobile: http://localhost:8080/chi-siamo/team/antonia-battista/
+2026-05-07T10:08:50.963Z [browserdebug] no browser instance, launching new browser..
+2026-05-07T10:08:51.139Z [browserdebug] browser ready
+  ⚠️  14.3KB (>14KB)  →  wp-content/themes/saltelli/assets/css/critical/single-avvocato-mobile.css
+
+→ single-avvocato-desktop: http://localhost:8080/chi-siamo/team/antonia-battista/
+2026-05-07T10:08:53.637Z [browserdebug] no browser instance, launching new browser..
+2026-05-07T10:08:53.933Z [browserdebug] browser ready
+  ⚠️  16.8KB (>14KB)  →  wp-content/themes/saltelli/assets/css/critical/single-avvocato-desktop.css
+
+→ page-generic-mobile: http://localhost:8080/contatti/
+2026-05-07T10:08:56.322Z [browserdebug] no browser instance, launching new browser..
+2026-05-07T10:08:56.581Z [browserdebug] browser ready
+  ⚠️  14.2KB (>14KB)  →  wp-content/themes/saltelli/assets/css/critical/page-generic-mobile.css
+
+→ page-generic-desktop: http://localhost:8080/contatti/
+2026-05-07T10:08:59.050Z [browserdebug] no browser instance, launching new browser..
+2026-05-07T10:08:59.306Z [browserdebug] browser ready
+  ⚠️  15.5KB (>14KB)  →  wp-content/themes/saltelli/assets/css/critical/page-generic-desktop.css
+
+=== Summary ===
+  ⚠️  home-mobile: 16.0 KB
+  ⚠️  home-desktop: 17.4 KB
+  ⚠️  competenza-tier1-mobile: 15.1 KB
+  ⚠️  competenza-tier1-desktop: 15.9 KB
+  ⚠️  competenza-tier2-mobile: 14.1 KB
+  ⚠️  competenza-tier2-desktop: 16.2 KB
+  ⚠️  single-avvocato-mobile: 14.3 KB
+  ⚠️  single-avvocato-desktop: 16.8 KB
+  ⚠️  page-generic-mobile: 14.2 KB
+  ⚠️  page-generic-desktop: 15.5 KB
