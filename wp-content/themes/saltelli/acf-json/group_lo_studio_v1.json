@@ -1,0 +1,130 @@
+{
+    "key": "group_lo_studio_v1",
+    "title": "Saltelli — Page Lo Studio",
+    "fields": [
+        {
+            "key": "field_ls_founding_paragraphs",
+            "label": "Founding story (fallback se editor classico vuoto)",
+            "name": "founding_paragraphs",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Story founding usato come fallback se l'editor classico (post_content) è vuoto. Se compili l'editor classico, ha priorità su questo field.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "default_value": "<p>Lo Studio Saltelli &amp; Partners nasce per iniziativa di Emiliano Saltelli, giovane tributarista formatosi alla Federico II, che apre una stanza al secondo piano di un palazzo nobiliare a Chiaia.</p>\n<p>Nel quarto di secolo successivo, lo Studio è cresciuto come si cresce a Napoli — per accumulazione paziente, una pratica alla volta, un avvocato alla volta — fino a diventare oggi un atelier di quattro professionisti.</p>",
+            "tabs": "visual",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_ls_timeline_year_range",
+            "label": "Timeline — Range anni headline",
+            "name": "timeline_year_range",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Headline grande sopra timeline. Format: 'AAAA → AAAA.'",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "default_value": "1999 → 2026.",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_ls_timeline_events",
+            "label": "Timeline — Eventi storici",
+            "name": "timeline_events",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Eventi cronologici Studio. Min 3, max 12. Ordinati per anno crescente.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "min": 3,
+            "max": 12,
+            "layout": "block",
+            "button_label": "Aggiungi evento",
+            "rows_per_page": 20,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_ls_timeline_year",
+                    "label": "Anno",
+                    "name": "year",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {"width": "15", "class": "", "id": ""},
+                    "default_value": "",
+                    "maxlength": 4,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_ls_timeline_events"
+                },
+                {
+                    "key": "field_ls_timeline_title",
+                    "label": "Titolo evento",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {"width": "35", "class": "", "id": ""},
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_ls_timeline_events"
+                },
+                {
+                    "key": "field_ls_timeline_desc",
+                    "label": "Descrizione (1-2 frasi)",
+                    "name": "description",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {"width": "50", "class": "", "id": ""},
+                    "rows": 2,
+                    "default_value": "",
+                    "new_lines": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_ls_timeline_events"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_slug",
+                "operator": "==",
+                "value": "lo-studio"
+            }
+        ]
+    ],
+    "menu_order": 10,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [],
+    "active": true,
+    "description": "Field group page Lo Studio: founding paragraphs (fallback editor classico) + timeline year range + timeline events repeater.",
+    "show_in_rest": false,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1778500000
+}

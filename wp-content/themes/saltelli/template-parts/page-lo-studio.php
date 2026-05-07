@@ -4,38 +4,63 @@
  *
  * Render della page /chi-siamo/lo-studio/ — la pagina "Lo Studio" sotto l'hub Chi Siamo.
  * Wave 5 IA refactor: rinominato da page-chi-siamo.php (slug 'chi-siamo' è ora la pagina HUB).
- * NO Field Group ACF dedicato — content hardcoded resta inalterato.
+ * Wave 4.6: timeline + founding ora editabili via ACF (group_lo_studio_v1) con
+ * fallback hardcoded immutato per backward compat se Editor non popola.
  *
  * Le CSS classes `.sl-chi-siamo__*` mantengono il prefix legacy per non rompere
  * sections.css existing rules — sono semantiche del template, non della page slug.
  *
  * Sezioni:
  *  § 01 — Lede + drop-cap
- *  § 02 — Founding 1999 (atelier napoletano)
+ *  § 02 — Founding 1999 (atelier napoletano) [Wave 4.6 ACF: founding_paragraphs]
  *  § 03 — Team mini (4 lawyer da CPT)
  *  § 04 — Tre principi (CPT saltelli_principio se popolato, altrimenti hardcoded)
- *  § 05 — Cronologia 1999 → 2026 (timeline hardcoded)
+ *  § 05 — Cronologia 1999 → 2026 [Wave 4.6 ACF: timeline_year_range + timeline_events]
  *  § 06 — CTA finale
  *
  * @package Saltelli
  * @since 1.0.0 Wave 3 (orig. page-chi-siamo.php)
  * @since 1.1.0 Wave 5 (renamed page-lo-studio.php + CAL-05)
+ * @since 1.3.2 Wave 4.6 (ACF editability timeline + founding)
  */
 defined('ABSPATH') || exit;
+
+$sl_lo_studio_pid = get_queried_object_id();
 
 $sl_lawyers_chi = get_posts([
     'post_type'   => 'avvocato',
     'numberposts' => 4,
     'orderby'     => ['menu_order' => 'ASC', 'date' => 'ASC'],
 ]);
-$sl_timeline = [
-    ['y' => '1999', 't' => __('Fondazione', 'saltelli'),         'd' => __('Emiliano Saltelli apre lo studio in Via Vannella Gaetani, focalizzato sul contenzioso tributario.', 'saltelli')],
-    ['y' => '2007', 't' => __('Ingresso di Fabiana', 'saltelli'),'d' => __('Si aggiunge la prima associate — area diritto del lavoro.', 'saltelli')],
-    ['y' => '2014', 't' => __('Apertura LGBTQ+', 'saltelli'),    'd' => __('Antonia Battista inaugura una pratica dedicata, prima a Napoli sud.', 'saltelli')],
-    ['y' => '2019', 't' => __("Vent'anni", 'saltelli'),          'd' => __("Lo studio passa da 2 a 4 professionisti stabili. Atelier a tutti gli effetti.", 'saltelli')],
-    ['y' => '2024', 't' => __('Cassazione + AGE', 'saltelli'),   'd' => __('Annullamento cartella €240k. Conferma in Cassazione su licenziamento illegittimo.', 'saltelli')],
-    ['y' => '2026', 't' => __('Oggi', 'saltelli'),               'd' => __('19 aree presidiate, 4 professionisti, un solo atelier.', 'saltelli')],
-];
+
+/* Wave 4.6 — Timeline ACF (group_lo_studio_v1). Fallback hardcoded preservato. */
+$sl_timeline_year_range = (string) saltelli_field('timeline_year_range', $sl_lo_studio_pid, '1999 → 2026.');
+
+$sl_timeline_acf = saltelli_field('timeline_events', $sl_lo_studio_pid, []);
+$sl_timeline = [];
+if (is_array($sl_timeline_acf) && !empty($sl_timeline_acf)) {
+    foreach ($sl_timeline_acf as $row) {
+        if (!is_array($row)) continue;
+        $y = isset($row['year']) ? (string) $row['year'] : '';
+        $t = isset($row['title']) ? (string) $row['title'] : '';
+        $d = isset($row['description']) ? (string) $row['description'] : '';
+        if ($y === '' && $t === '' && $d === '') continue;
+        $sl_timeline[] = ['y' => $y, 't' => $t, 'd' => $d];
+    }
+}
+if (empty($sl_timeline)) {
+    $sl_timeline = [
+        ['y' => '1999', 't' => __('Fondazione', 'saltelli'),         'd' => __('Emiliano Saltelli apre lo studio in Via Vannella Gaetani, focalizzato sul contenzioso tributario.', 'saltelli')],
+        ['y' => '2007', 't' => __('Ingresso di Fabiana', 'saltelli'),'d' => __('Si aggiunge la prima associate — area diritto del lavoro.', 'saltelli')],
+        ['y' => '2014', 't' => __('Apertura LGBTQ+', 'saltelli'),    'd' => __('Antonia Battista inaugura una pratica dedicata, prima a Napoli sud.', 'saltelli')],
+        ['y' => '2019', 't' => __("Vent'anni", 'saltelli'),          'd' => __("Lo studio passa da 2 a 4 professionisti stabili. Atelier a tutti gli effetti.", 'saltelli')],
+        ['y' => '2024', 't' => __('Cassazione + AGE', 'saltelli'),   'd' => __('Annullamento cartella €240k. Conferma in Cassazione su licenziamento illegittimo.', 'saltelli')],
+        ['y' => '2026', 't' => __('Oggi', 'saltelli'),               'd' => __('19 aree presidiate, 4 professionisti, un solo atelier.', 'saltelli')],
+    ];
+}
+
+/* Wave 4.6 — Founding paragraphs ACF (fallback se editor classico vuoto). */
+$sl_founding_acf = (string) saltelli_field('founding_paragraphs', $sl_lo_studio_pid, '');
 
 // § 04 Principi — query CPT (Wave 2 popolato), fallback hardcoded.
 $sl_principles_posts = get_posts([
@@ -113,8 +138,15 @@ $sl_principles_posts = get_posts([
             </h2>
             <div class="sl-chi-siamo__prose">
                 <?php
+                /* Wave 4.6 priority order:
+                 *  1. Editor classico (post_content) — la fonte primaria per Editor.
+                 *  2. ACF founding_paragraphs — fallback se editor vuoto.
+                 *  3. Hardcoded — fallback ultimo se entrambi vuoti.
+                 */
                 if (get_the_content() !== '') {
                     the_content();
+                } elseif ($sl_founding_acf !== '') {
+                    echo wp_kses_post($sl_founding_acf);
                 } else {
                     ?>
                     <p><?php esc_html_e("Lo Studio Saltelli & Partners nasce per iniziativa di Emiliano Saltelli, giovane tributarista formatosi alla Federico II, che apre una stanza al secondo piano di un palazzo nobiliare a Chiaia.", 'saltelli'); ?></p>
@@ -240,7 +272,7 @@ $sl_principles_posts = get_posts([
     <div class="sl-container">
         <header class="sl-chi-siamo__timeline-head">
             <div class="sl-mono">§ 05 — <?php esc_html_e('Cronologia', 'saltelli'); ?></div>
-            <h2 class="sl-section-title sl-chi-siamo__h2" id="chi-siamo-time-h">1999 → 2026.</h2>
+            <h2 class="sl-section-title sl-chi-siamo__h2" id="chi-siamo-time-h"><?php echo esc_html($sl_timeline_year_range); ?></h2>
         </header>
         <ol class="sl-chi-siamo__timeline-list" role="list">
             <?php $tl_count = count($sl_timeline); foreach ($sl_timeline as $tl_i => $ev) :
