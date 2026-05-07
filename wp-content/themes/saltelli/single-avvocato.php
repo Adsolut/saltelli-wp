@@ -44,13 +44,15 @@ while (have_posts()) :
                     <figure class="sl-attorney__portrait">
                         <?php
                         if (has_post_thumbnail()) {
+                            /* Wave 4: above-fold LCP candidate → eager + fetchpriority high */
                             the_post_thumbnail('saltelli-attorney-portrait', [
-                                'loading'  => 'eager',
-                                'decoding' => 'async',
-                                'alt'      => esc_attr(get_the_title() . ($ruolo ? ' · ' . $ruolo : '')),
+                                'loading'       => 'eager',
+                                'decoding'      => 'async',
+                                'fetchpriority' => 'high',
+                                'alt'           => esc_attr(get_the_title() . ($ruolo ? ' · ' . $ruolo : '')),
                             ]);
                         } elseif (is_array($foto) && !empty($foto['url'])) {
-                            echo '<img src="' . esc_url($foto['url']) . '" alt="' . esc_attr($foto['alt'] ?: get_the_title()) . '" width="600" height="800" decoding="async">';
+                            echo '<img src="' . esc_url($foto['url']) . '" alt="' . esc_attr($foto['alt'] ?: get_the_title()) . '" width="600" height="800" loading="eager" decoding="async" fetchpriority="high">';
                         } else {
                             echo '<span class="sl-team__placeholder" aria-hidden="true"><span class="sl-mono">' . esc_html__('Ritratto · 3:4', 'saltelli') . '</span></span>';
                             echo '<!-- TODO: replace with real Saltelli photo -->';

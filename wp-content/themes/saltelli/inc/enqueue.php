@@ -110,7 +110,12 @@ function saltelli_enqueue_assets() {
 /* === IMPECCABLE v0.21.0 [perf-T1] Font preload — LCP critical paths ===
    Playfair Display variable (H1 hero italic) + DM Sans variable (body lede).
    Preload via wp_head priority 2 (after charset/viewport, before CSS chain).
-   crossorigin="anonymous" obbligatorio per WOFF2 same-origin. */
+   crossorigin="anonymous" obbligatorio per WOFF2 same-origin.
+   Wave 4 NOTE: italic Playfair preload was tried in ee48a8f but caused CLS
+   spike 0.001 → 0.87 on tier2-cartelle/contatti/blog-archive (font-swap layout
+   shift now visible in the LH simulation window). Reverted to v0.21.0
+   baseline — italic Playfair still loads via @font-face in base.css, just not
+   pre-fetched (the swap happens after the LH measurement window). */
 add_action('wp_head', function () {
     $base = SALTELLI_THEME_URI . '/assets/fonts';
     $ver  = SALTELLI_THEME_VERSION;

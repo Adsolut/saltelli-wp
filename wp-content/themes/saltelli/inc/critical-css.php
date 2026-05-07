@@ -65,8 +65,13 @@ add_action('wp_head', 'saltelli_inline_critical_css', 1);
 
 /**
  * Defer sections.css via preload+onload pattern (190KB → no longer render-blocking).
- * Filtra il <link> tag generato da wp_enqueue_style('saltelli-sections') e
- * lo trasforma in preload async + noscript fallback per JS-disabled.
+ *
+ * Wave 4 (1.3.0) note: an experiment to also defer components/logo/cro caused
+ * CLS to spike from 0.001 to 0.29 on home-mobile (Lighthouse 13.2.0). The
+ * inline critical CSS only covers the above-fold blob; the async load window
+ * for components/logo/cro reflowed the rest of the page massively. Reverted
+ * to sections-only deferral — the existing critical-css.php blob was tuned
+ * exactly for that scenario.
  *
  * Pattern: <link rel="preload" as="style" onload="this.rel='stylesheet'">
  *          <noscript><link rel="stylesheet" ...></noscript>
@@ -75,7 +80,6 @@ function saltelli_defer_sections_css($html, $handle) {
     if ($handle !== 'saltelli-sections') {
         return $html;
     }
-    // WP usa rel='stylesheet' (single quotes) di default
     $href_match = preg_match("/href=['\"]([^'\"]+)['\"]/", $html, $href_m);
     if (!$href_match) {
         return $html;

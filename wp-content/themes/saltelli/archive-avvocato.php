@@ -66,14 +66,19 @@ $layout_team = saltelli_team_grid_layout();
                              style="--sl-col:<?php echo (int) $layout['col']; ?>; --sl-span:<?php echo (int) $layout['span']; ?>; --sl-offset:<?php echo (int) $layout['offset']; ?>px;">
                         <a class="sl-team__portrait" href="<?php echo esc_url(get_permalink($av)); ?>" aria-label="<?php echo esc_attr(get_the_title($av)); ?>">
                             <?php
+                            /* Wave 4: first portrait above-fold (LCP candidate) → eager + high priority */
+                            $is_first = ($i === 0);
+                            $loading_attr = $is_first ? 'eager' : 'lazy';
+                            $fetchpri_attr = $is_first ? 'high' : 'auto';
                             if (has_post_thumbnail($av->ID)) {
                                 echo get_the_post_thumbnail($av->ID, 'saltelli-attorney-portrait', [
-                                    'loading'  => 'lazy',
-                                    'decoding' => 'async',
-                                    'alt'      => esc_attr(get_the_title($av) . ($ruolo ? ' · ' . $ruolo : '')),
+                                    'loading'       => $loading_attr,
+                                    'decoding'      => 'async',
+                                    'fetchpriority' => $fetchpri_attr,
+                                    'alt'           => esc_attr(get_the_title($av) . ($ruolo ? ' · ' . $ruolo : '')),
                                 ]);
                             } elseif (is_array($foto) && !empty($foto['url'])) {
-                                echo '<img src="' . esc_url($foto['url']) . '" alt="' . esc_attr($foto['alt'] ?: get_the_title($av)) . '" loading="lazy" decoding="async" width="600" height="800">';
+                                echo '<img src="' . esc_url($foto['url']) . '" alt="' . esc_attr($foto['alt'] ?: get_the_title($av)) . '" loading="' . esc_attr($loading_attr) . '" decoding="async" fetchpriority="' . esc_attr($fetchpri_attr) . '" width="600" height="800">';
                             } else {
                                 echo '<span class="sl-team__placeholder" aria-hidden="true"><span class="sl-mono">' . esc_html__('Ritratto · 3:4', 'saltelli') . '</span></span>';
                             }
