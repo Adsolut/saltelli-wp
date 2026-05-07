@@ -597,7 +597,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "Ordine degli Avvocati di Napoli",
+            "default_value": "Iscritto Ordine Avvocati Napoli",
             "maxlength": "",
             "placeholder": "",
             "prepend": "",
@@ -635,7 +635,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "40.8333",
+            "default_value": "40.8332541",
             "maxlength": "",
             "placeholder": "",
             "prepend": "",
@@ -655,7 +655,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "14.2425",
+            "default_value": "14.2414699",
             "maxlength": "",
             "placeholder": "",
             "prepend": "",
@@ -714,7 +714,7 @@
                 "id": ""
             },
             "rows": 3,
-            "default_value": "Un atelier legale italiano. Quattro avvocati a Chiaia. Vent'anni di pratica accanto a famiglie e imprese.",
+            "default_value": "Un atelier legale italiano.\nQuattro avvocati a Chiaia.\nVent'anni di pratica accanto\na famiglie e imprese.",
             "new_lines": "",
             "maxlength": "",
             "placeholder": ""
@@ -1171,5 +1171,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1778151870
+    "modified": 1778152776
 }

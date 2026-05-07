@@ -59,3 +59,41 @@ function saltelli_w46_migrate_lo_studio_timeline() {
 endif;
 
 add_action('admin_init', 'saltelli_w46_migrate_lo_studio_timeline', 999);
+
+/**
+ * Wave 4.6 — Migrazione idempotente Theme Options legacy.
+ *
+ * Pre-Wave 4.6 alcuni Theme Options erano già salvati in wp_options con
+ * valori che non matchano la presentazione visiva legacy (es. ordine = "Ordine
+ * degli Avvocati di Napoli", quando il footer hardcoded mostrava "Iscritto
+ * Ordine Avvocati Napoli"). Wave 4.6 ora cabla questi field; per preservare
+ * NO breaking change visivo, migriamo i wp_options legacy alla nuova baseline
+ * matching i defaults ACF aggiornati.
+ *
+ * Idempotente: aggiorna solo se il valore corrente è il legacy noto. Non tocca
+ * i valori che l'editor ha già modificato.
+ */
+if (!function_exists('saltelli_w46_migrate_legacy_options')) :
+function saltelli_w46_migrate_legacy_options() {
+    $migrations = [
+        // option_key → [legacy_value, new_value]
+        'options_studio_ordine_avvocati' => [
+            'Ordine degli Avvocati di Napoli',
+            'Iscritto Ordine Avvocati Napoli',
+        ],
+        'options_brand_statement_short'  => [
+            "Un atelier legale italiano. Quattro avvocati a Chiaia. Vent'anni di pratica accanto a famiglie e imprese.",
+            "Un atelier legale italiano.\nQuattro avvocati a Chiaia.\nVent'anni di pratica accanto\na famiglie e imprese.",
+        ],
+    ];
+
+    foreach ($migrations as $key => [$legacy, $target]) {
+        $current = get_option($key, null);
+        if ($current === $legacy) {
+            update_option($key, $target);
+        }
+    }
+}
+endif;
+
+add_action('admin_init', 'saltelli_w46_migrate_legacy_options', 999);

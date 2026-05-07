@@ -4,12 +4,11 @@
  *
  * @package Saltelli
  */
-/* Wave 3: prefer studio_telefono_pubblico (Wave 1 schema) → fallback contact_telefono_pubblico (legacy). */
-$saltelli_phone_label = saltelli_option('studio_telefono_pubblico', '');
-if ($saltelli_phone_label === '') {
-    $saltelli_phone_label = saltelli_option('contact_telefono_pubblico', '+39 081 1813 1119');
-}
+/* Wave 4.6: legge da studio_telefono_pubblico (Wave 1 schema) con default ACF.
+   Il dead alias contact_telefono_pubblico è rimosso (studio_* ha default ACF +39 081 1813 1119). */
+$saltelli_phone_label = saltelli_option('studio_telefono_pubblico', '+39 081 1813 1119');
 $saltelli_phone_e164  = saltelli_studio_phone_e164();
+$saltelli_brand_payoff = (string) saltelli_option('brand_payoff', 'Diritto, con misura');
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -35,6 +34,11 @@ $saltelli_phone_e164  = saltelli_studio_phone_e164();
             </span>
             <span class="sl-logo__h-rule" aria-hidden="true"></span>
             <span class="sl-logo__h-name"><span class="sl-logo__swash">S</span>altelli</span>
+            <?php /* Wave 4.6: brand_payoff editabile via Theme Options. Hidden by default
+                    (designer + editor possono renderlo visibile via CSS override). */ ?>
+            <?php if ($saltelli_brand_payoff !== '') : ?>
+                <span class="sl-brand__payoff" hidden><?php echo esc_html($saltelli_brand_payoff); ?></span>
+            <?php endif; ?>
         </a>
 
         <nav class="sl-header__nav" aria-label="<?php esc_attr_e('Menu principale', 'saltelli'); ?>">

@@ -20,31 +20,55 @@
  */
 $studio        = saltelli_studio_data();
 
-/* Wave 3: legge prima dal Wave 1 schema (studio_*) → fallback legacy Wave 0 (contact_*) → fallback hardcoded. */
-$ftr_via       = saltelli_option('studio_indirizzo_via', '');
-$ftr_cap_citta = saltelli_option('studio_cap_citta', '');
-$ftr_quartiere = saltelli_option('studio_quartiere', '');
+/* Wave 4.6: lettura diretta da studio_* (Wave 1 schema) con default ACF coerenti.
+   I dead alias contact_* sono rimossi: studio_* ha sempre defaults non-empty
+   (configurati in group_theme_options_v1.json) — la fallback chain vecchia era
+   sempre dead-code. Il colophon_indirizzo restano editabili separatamente in Theme
+   Options → Footer per casi in cui studio_* è esplicitamente svuotato. */
+$ftr_via       = saltelli_option('studio_indirizzo_via', 'Via Vannella Gaetani 27');
+$ftr_cap_citta = saltelli_option('studio_cap_citta', '80121 Napoli');
+$ftr_quartiere = saltelli_option('studio_quartiere', 'Chiaia');
 if ($ftr_via !== '' && $ftr_cap_citta !== '') {
     $ftr_indirizzo = $ftr_via . "\n" . $ftr_cap_citta . ($ftr_quartiere !== '' ? ' — ' . $ftr_quartiere : '');
 } else {
     $ftr_indirizzo = saltelli_option('colophon_indirizzo', "Via Vannella Gaetani, 27\n80121 Napoli — Chiaia");
 }
 
-$ftr_tel = saltelli_option('studio_telefono_pubblico', '');
-if ($ftr_tel === '') $ftr_tel = saltelli_option('contact_telefono_pubblico', '+39 081 1813 1119');
-
-$ftr_email = saltelli_option('studio_email', '');
-if ($ftr_email === '') $ftr_email = saltelli_option('contact_email_pubblica', $studio['email']);
-
-$ftr_pec = saltelli_option('studio_pec', '');
-if ($ftr_pec === '') $ftr_pec = saltelli_option('contact_pec', $studio['pec']);
-
-$ftr_piva = saltelli_option('studio_piva', '');
-if ($ftr_piva === '') $ftr_piva = saltelli_option('contact_piva', '06685101211');
+$ftr_tel   = saltelli_option('studio_telefono_pubblico', '+39 081 1813 1119');
+$ftr_email = saltelli_option('studio_email', $studio['email']);
+$ftr_pec   = saltelli_option('studio_pec', $studio['pec']);
+$ftr_piva  = saltelli_option('studio_piva', '06685101211');
 
 $ftr_tel_e164  = saltelli_studio_phone_e164();
 
+/* Wave 4.6: ordine professionale editabile (default match: "Ordine degli Avvocati di Napoli"). */
+$ftr_ordine = (string) saltelli_option('studio_ordine_avvocati', 'Iscritto Ordine Avvocati Napoli');
+
+/* Wave 4.6: brand statement footer (multilinea). Default match hardcoded line-break version. */
+$ftr_brand_statement = (string) saltelli_option('brand_statement_short', '');
+
+/* Wave 4.6: footer credit + URL (era hardcoded "Realizzato da Adsolut Web Agency"). */
+$ftr_credit_text = (string) saltelli_option('footer_credit_text', 'Realizzato da Adsolut Web Agency');
+$ftr_credit_url  = (string) saltelli_option('footer_credit_url', 'https://adsolut.it');
+
+/* Wave 4.6: newsletter conditional. Default = true (mantiene legacy render).
+   Provider è metadata: emessa come data-attr sul form per future logic / analytics. */
+$ftr_newsletter_enabled  = (bool) saltelli_option('footer_newsletter_enabled', true);
+$ftr_newsletter_provider = (string) saltelli_option('footer_newsletter_provider', 'brevo');
+
+/* Wave 4.6: social URLs — Theme Options + fallback discreti.
+   Legacy footer mostrava SOLO Instagram + LinkedIn (Emiliano) + WhatsApp.
+   Per preservare la presentazione legacy: Instagram fallback su $studio,
+   LinkedIn fallback su Emiliano. Facebook/Twitter mostrati SOLO se editor
+   popola esplicitamente ACF (no fallback automatico). */
 $em_li = function_exists('saltelli_attorney_linkedin') ? saltelli_attorney_linkedin('emiliano-saltelli') : '';
+
+$ftr_social = [
+    'instagram' => (string) saltelli_option('social_instagram', $studio['social']['instagram'] ?? ''),
+    'linkedin'  => (string) saltelli_option('social_linkedin', $em_li),
+    'facebook'  => (string) saltelli_option('social_facebook', ''),
+    'twitter'   => (string) saltelli_option('social_twitter', ''),
+];
 
 /* === IMPECCABLE v0.20.2 [T1] aree tier-1 hardcoded da JSX (3 in footer; 19 totali nel sito) === */
 /* v0.21.3 [F1]: $ftr_tier2 array RIMOSSO — non più visualizzato in footer (CTA "Tutte le aree" sostituisce). */
@@ -91,7 +115,9 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
     <?php /* ═══ FASCIA 2 · NEWSLETTER editoriale "Un articolo al mese" (v0.28.0)
             Visual design ispirato a sl-blog2__newsletter (home blog).
             Cream surface bg · italic h2 + italic lede · underline-only field.
-            Brevo form ID + endpoint + field names + GDPR PRESERVATI per backend. */ ?>
+            Brevo form ID + endpoint + field names + GDPR PRESERVATI per backend.
+            Wave 4.6: render gated da footer_newsletter_enabled (default true, mantiene legacy). */ ?>
+    <?php if ($ftr_newsletter_enabled) : ?>
     <section class="sl-foot-newsletter-wrap sl-foot-newsletter-wrap--v3" aria-labelledby="newsletter-h">
         <div class="sl-foot-newsletter-inner sl-container">
             <div class="sl-foot-newsletter sl-foot-newsletter--v3">
@@ -114,6 +140,7 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                           action="https://link.studiolegalesaltelli.it/api/v3/contacts"
                           method="POST"
                           data-sl-newsletter
+                          data-newsletter-provider="<?php echo esc_attr($ftr_newsletter_provider); ?>"
                           novalidate>
                         <div class="sl-foot-newsletter__fields">
                             <label class="sl-foot-newsletter__field" for="newsletter-firstname">
@@ -165,6 +192,7 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
             </div>
         </div>
     </section>
+    <?php endif; /* /footer_newsletter_enabled */ ?>
 
     <?php /* ═══ FASCIA 3 · MAIN FOOTER (v0.21.6: spostata sotto newsletter) 4-col ═══ */ ?>
     <section class="sl-foot-main-wrap">
@@ -179,13 +207,19 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                         <span class="sl-mono sl-foot-logo__row3"><?php esc_html_e('Napoli · Dal 1999', 'saltelli'); ?></span>
                     </a>
 
+                    <?php /* Wave 4.6: brand_statement_short editabile via Theme Options.
+                            Se Editor inserisce testo, sostituisce il fallback 4-righe. */ ?>
                     <p class="sl-foot-brand-statement">
-                        <?php /* v0.21.3 [F4]: "atelier editoriale" → "atelier legale" */ ?>
-                        <?php /* v0.21.6 [T6]: split "accanto a famiglie e imprese" su 2 righe (4 totali) */ ?>
-                        <?php esc_html_e('Un atelier legale italiano.', 'saltelli'); ?><br>
-                        <?php esc_html_e('Quattro avvocati a Chiaia.', 'saltelli'); ?><br>
-                        <?php esc_html_e("Vent'anni di pratica accanto", 'saltelli'); ?><br>
-                        <?php esc_html_e('a famiglie e imprese.', 'saltelli'); ?>
+                        <?php if ($ftr_brand_statement !== '') : ?>
+                            <?php echo wp_kses_post(nl2br(esc_html($ftr_brand_statement))); ?>
+                        <?php else : ?>
+                            <?php /* v0.21.3 [F4]: "atelier editoriale" → "atelier legale" */ ?>
+                            <?php /* v0.21.6 [T6]: split "accanto a famiglie e imprese" su 2 righe (4 totali) */ ?>
+                            <?php esc_html_e('Un atelier legale italiano.', 'saltelli'); ?><br>
+                            <?php esc_html_e('Quattro avvocati a Chiaia.', 'saltelli'); ?><br>
+                            <?php esc_html_e("Vent'anni di pratica accanto", 'saltelli'); ?><br>
+                            <?php esc_html_e('a famiglie e imprese.', 'saltelli'); ?>
+                        <?php endif; ?>
                     </p>
 
                     <?php /* v0.21.5 [R3]: blocco social SPOSTATO in col 4 sotto "Studio professionale".
@@ -282,18 +316,27 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
 
                     <div class="sl-mono sl-foot-col__sublabel"><?php esc_html_e('Studio professionale', 'saltelli'); ?></div>
                     <div class="sl-mono sl-foot-info-block">
-                        <span><?php esc_html_e('Iscritto Ordine Avvocati Napoli', 'saltelli'); ?></span>
+                        <?php /* Wave 4.6: studio_ordine_avvocati editabile (default match legacy). */ ?>
+                        <span><?php echo esc_html($ftr_ordine); ?></span>
                         <span><?php esc_html_e('P.IVA', 'saltelli'); ?> <?php echo esc_html($ftr_piva); ?></span>
                     </div>
 
-                    <?php /* v0.21.5 [R3]: social row spostata da col 1 a col 4 (orfana dopo move contatti v0.21.3) */ ?>
+                    <?php /* v0.21.5 [R3]: social row spostata da col 1 a col 4 (orfana dopo move contatti v0.21.3)
+                             Wave 4.6: $ftr_social[] popolato da Theme Options con fallback su saltelli_studio_data().
+                             4 platform supportati (instagram, linkedin, facebook, twitter) — render solo se URL valorizzato. */ ?>
                     <hr class="sl-foot-hairline" aria-hidden="true">
                     <div class="sl-foot-social">
-                        <?php if (!empty($studio['social']['instagram'])) : ?>
-                            <a class="sl-foot-link sl-mono" href="<?php echo esc_url($studio['social']['instagram']); ?>" rel="noopener" target="_blank">Instagram</a>
+                        <?php if (!empty($ftr_social['instagram'])) : ?>
+                            <a class="sl-foot-link sl-mono sl-foot-social__link sl-foot-social__link--instagram" href="<?php echo esc_url($ftr_social['instagram']); ?>" rel="noopener" target="_blank" aria-label="<?php esc_attr_e('Instagram', 'saltelli'); ?>">Instagram</a>
                         <?php endif; ?>
-                        <?php if ($em_li) : ?>
-                            <a class="sl-foot-link sl-mono" href="<?php echo esc_url($em_li); ?>" rel="noopener" target="_blank">LinkedIn</a>
+                        <?php if (!empty($ftr_social['linkedin'])) : ?>
+                            <a class="sl-foot-link sl-mono sl-foot-social__link sl-foot-social__link--linkedin" href="<?php echo esc_url($ftr_social['linkedin']); ?>" rel="noopener" target="_blank" aria-label="<?php esc_attr_e('LinkedIn', 'saltelli'); ?>">LinkedIn</a>
+                        <?php endif; ?>
+                        <?php if (!empty($ftr_social['facebook'])) : ?>
+                            <a class="sl-foot-link sl-mono sl-foot-social__link sl-foot-social__link--facebook" href="<?php echo esc_url($ftr_social['facebook']); ?>" rel="noopener" target="_blank" aria-label="<?php esc_attr_e('Facebook', 'saltelli'); ?>">Facebook</a>
+                        <?php endif; ?>
+                        <?php if (!empty($ftr_social['twitter'])) : ?>
+                            <a class="sl-foot-link sl-mono sl-foot-social__link sl-foot-social__link--twitter" href="<?php echo esc_url($ftr_social['twitter']); ?>" rel="noopener" target="_blank" aria-label="<?php esc_attr_e('X', 'saltelli'); ?>">X</a>
                         <?php endif; ?>
                         <a class="sl-foot-link sl-mono" href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', (string) $studio['whatsapp'])); ?>" rel="noopener" target="_blank">WhatsApp</a>
                     </div>
@@ -322,13 +365,11 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                     <a class="sl-foot-link" href="<?php echo esc_url(home_url('/note-legali/')); ?>"><?php esc_html_e('Note legali', 'saltelli'); ?></a>
                 </nav>
                 <div class="sl-foot-bottom__credit">
-                    <?php
-                    printf(
-                        /* translators: %s = Adsolut Web Agency link */
-                        esc_html__('Realizzato da %s', 'saltelli'),
-                        '<a href="https://adsolut.it" class="sl-foot-link" rel="noopener" target="_blank">Adsolut Web Agency</a>'
-                    );
-                    ?>
+                    <?php /* Wave 4.6: footer_credit_text + footer_credit_url editabili via Theme Options.
+                            Default match: "Realizzato da Adsolut Web Agency" + https://adsolut.it. */ ?>
+                    <a href="<?php echo esc_url($ftr_credit_url); ?>" class="sl-foot-link" rel="noopener" target="_blank">
+                        <?php echo esc_html($ftr_credit_text); ?>
+                    </a>
                 </div>
             </div>
         </div>
