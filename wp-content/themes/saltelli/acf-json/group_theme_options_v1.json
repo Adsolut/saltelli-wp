@@ -161,7 +161,7 @@
             "name": "studio_body",
             "aria-label": "",
             "type": "wysiwyg",
-            "instructions": "Testo descrittivo Studio in homepage. Brand voice: 1-3 paragrafi editoriali. Se vuoto, usa fallback hardcoded.",
+            "instructions": "Testo descrittivo Studio in homepage. Brand voice: 1-3 paragrafi editoriali. Default popolato; svuota e salva per ripristino.",
             "required": false,
             "conditional_logic": false,
             "wrapper": {
@@ -169,7 +169,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "<p>Lo Studio Saltelli &amp; Partners nasce nel 1999 per iniziativa di Emiliano Saltelli, allora giovane tributarista formatosi alla Federico II. Nel quarto di secolo successivo, lo Studio è cresciuto come si cresce a Napoli — per accumulazione paziente, una pratica alla volta, un avvocato alla volta — fino a diventare oggi un atelier di quattro professionisti.</p>\n<p>Crediamo che il diritto sia, prima di tutto, un'arte di ascolto. Le carte vengono dopo. Per questo non offriamo pacchetti né formule: ogni cliente è una storia, e ogni storia merita il tempo di essere capita.</p>\n<p>Lavoriamo in <a class=\"sl-link\" href=\"https://maps.app.goo.gl/\" rel=\"noopener\">Via Vannella Gaetani 27</a>, in un palazzo nobiliare a due passi dal lungomare di Chiaia. È qui che riceviamo, è qui che si tengono i nostri primi colloqui, ed è qui — quando possibile — che torniamo a vedersi anche per le pratiche più semplici.</p>",
             "tabs": "visual",
             "toolbar": "basic",
             "media_upload": 0,
