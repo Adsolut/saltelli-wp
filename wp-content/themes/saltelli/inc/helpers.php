@@ -526,20 +526,18 @@ function saltelli_option($name, $default = null) {
 /**
  * Wrapper per leggere SCF field attaccato a una Page WP (post_meta).
  *
- * Wave 4.7.fix.3 (2026-05-08): introduce per i field migrati da Theme Options
+ * Wave 4.7.fix.3 (2026-05-08): introdotto per i field migrati da Theme Options
  * a Page metabox. Il helper risolve automaticamente il Page ID corretto:
  *  - Su frontend `is_front_page()` (e show_on_front=page) → page_on_front ID
  *  - Altrove → get_queried_object_id() (la Page WP corrente)
  *  - Override esplicito via $page_id parametro (utile per template fuori loop)
  *
- * Fallback chain (Phase 2-3 transition):
- *  1. get_field($name, $page_id) — letto da postmeta della Page
- *  2. saltelli_option($name, $default) — letto da Theme Options (legacy compat
- *     during data migration). Rimosso in Phase 4 dopo conferma migration.
- *  3. $default
+ * Phase 4 cleanup: rimossa la fallback transition a saltelli_option (le 30
+ * chiavi options_* legacy sono state cancellate post-migration). Il helper
+ * ora legge esclusivamente da postmeta + ritorna $default se vuoto.
  *
  * @param string $name Nome SCF field.
- * @param mixed $default Default se field non popolato (postmeta + options).
+ * @param mixed $default Default se field non popolato.
  * @param int|null $page_id Override esplicito Page ID. Default: auto-detect.
  * @return mixed
  */
@@ -562,15 +560,6 @@ function saltelli_page_field($name, $default = '', $page_id = null) {
     $value = get_field($name, $page_id);
     if ($value !== null && $value !== '' && $value !== false) {
         return $value;
-    }
-
-    // Phase 2-3 transition fallback: legacy Theme Options.
-    // Phase 4 cleanup: rimuovere questa fallback e usare solo $default.
-    if (function_exists('saltelli_option')) {
-        $opt = saltelli_option($name, null);
-        if ($opt !== null && $opt !== '' && $opt !== false) {
-            return $opt;
-        }
     }
 
     return $default;
