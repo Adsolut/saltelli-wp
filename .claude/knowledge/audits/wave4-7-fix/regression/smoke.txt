@@ -1,0 +1,27 @@
+=== Wave 4.7.fix smoke regression ===
+Date: 2026-05-08T12:34:48+02:00
+URL count: 21
+
+  PASS [200] /
+  PASS [200] /chi-siamo/
+  PASS [200] /chi-siamo/lo-studio/
+  PASS [200] /chi-siamo/team/
+  PASS [200] /aree-di-pratica/
+  PASS [200] /aree-di-pratica/privati/diritto-tributario/
+  PASS [200] /aree-di-pratica/privati/cartelle-esattoriali-e-multe/
+  PASS [200] /aree-di-pratica/privati/diritto-del-lavoro/
+  PASS [200] /aree-di-pratica/privati/diritto-di-famiglia-lgbtq/
+  PASS [200] /aree-di-pratica/privati/infortunistica-stradale/
+  PASS [200] /aree-di-pratica/privati/aste-immobiliari/
+  PASS [200] /aree-di-pratica/imprese/recupero-crediti/
+  PASS [200] /aree-di-pratica/imprese/diritto-dellimmigrazione/
+  PASS [200] /aree-di-pratica/contenzioso-amministrativo/
+  PASS [200] /aree-di-pratica/contenzioso-amministrativo/diritto-amministrativo/
+  PASS [200] /risorse/
+  PASS [200] /risorse/blog/
+  PASS [200] /risorse/domande-frequenti/
+  PASS [200] /risorse/glossario-legale/
+  PASS [200] /costi-e-consulenze/
+  PASS [200] /contatti/
+
+TOTAL: 21/21 PASS · 0 FAIL
