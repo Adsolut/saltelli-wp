@@ -161,7 +161,7 @@
             "name": "studio_body",
             "aria-label": "",
             "type": "wysiwyg",
-            "instructions": "Testo descrittivo Studio in homepage. Brand voice: 1-3 paragrafi editoriali. Se vuoto, usa fallback hardcoded.",
+            "instructions": "Testo descrittivo Studio in homepage. Brand voice: 1-3 paragrafi editoriali. Default popolato; svuota e salva per ripristino.",
             "required": false,
             "conditional_logic": false,
             "wrapper": {
@@ -169,7 +169,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "<p>Lo Studio Saltelli &amp; Partners nasce nel 1999 per iniziativa di Emiliano Saltelli, allora giovane tributarista formatosi alla Federico II. Nel quarto di secolo successivo, lo Studio è cresciuto come si cresce a Napoli — per accumulazione paziente, una pratica alla volta, un avvocato alla volta — fino a diventare oggi un atelier di quattro professionisti.</p>\n<p>Crediamo che il diritto sia, prima di tutto, un'arte di ascolto. Le carte vengono dopo. Per questo non offriamo pacchetti né formule: ogni cliente è una storia, e ogni storia merita il tempo di essere capita.</p>\n<p>Lavoriamo in <a class=\"sl-link\" href=\"https://maps.app.goo.gl/\" rel=\"noopener\">Via Vannella Gaetani 27</a>, in un palazzo nobiliare a due passi dal lungomare di Chiaia. È qui che riceviamo, è qui che si tengono i nostri primi colloqui, ed è qui — quando possibile — che torniamo a vedersi anche per le pratiche più semplici.</p>",
             "tabs": "visual",
             "toolbar": "basic",
             "media_upload": 0,
@@ -786,6 +786,26 @@
             "maxlength": 40
         },
         {
+            "key": "field_brand_whatsapp_message_default",
+            "label": "Messaggio WhatsApp default",
+            "name": "whatsapp_message_default",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Testo precompilato del primo messaggio WhatsApp dal pulsante sticky. Usa %s per inserire il contesto della pagina (es. nome avvocato, titolo articolo).",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Ciao, %s sul vostro sito. Vorrei una consulenza.",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_tab_footer",
             "label": "Footer",
             "name": "",
@@ -1148,6 +1168,314 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_tab_footer_aree",
+            "label": "Footer Aree",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_footer_tier1_aree",
+            "label": "Aree tier-1 (footer colonna 2)",
+            "name": "footer_tier1_aree",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Le 3 aree tier-1 mostrate in footer (colonna 'Aree di pratica'). Min 3, max 4.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "min": 3,
+            "max": 4,
+            "layout": "table",
+            "button_label": "Aggiungi area tier-1",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_footer_tier1_aree_numero",
+                    "label": "Numero (es. 01)",
+                    "name": "numero",
+                    "type": "text",
+                    "default_value": "",
+                    "maxlength": 4
+                },
+                {
+                    "key": "field_footer_tier1_aree_label",
+                    "label": "Etichetta",
+                    "name": "label",
+                    "type": "text",
+                    "default_value": ""
+                },
+                {
+                    "key": "field_footer_tier1_aree_url",
+                    "label": "URL (path interno)",
+                    "name": "url",
+                    "type": "text",
+                    "default_value": "",
+                    "instructions": "Path relativo, es. /aree-di-pratica/privati/diritto-tributario/"
+                }
+            ]
+        },
+        {
+            "key": "field_tab_hub_pages",
+            "label": "Hub Pages",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_hub_chisiamo_eyebrow",
+            "label": "Hub Chi Siamo — Eyebrow",
+            "name": "hub_chisiamo_eyebrow",
+            "type": "text",
+            "default_value": "§ Chi siamo",
+            "maxlength": 40
+        },
+        {
+            "key": "field_hub_chisiamo_h1_main",
+            "label": "Hub Chi Siamo — H1 (parte 1)",
+            "name": "hub_chisiamo_h1_main",
+            "type": "text",
+            "default_value": "Quattro avvocati,",
+            "maxlength": 60
+        },
+        {
+            "key": "field_hub_chisiamo_h1_emphasis",
+            "label": "Hub Chi Siamo — H1 (parte 2 in corsivo)",
+            "name": "hub_chisiamo_h1_emphasis",
+            "type": "text",
+            "default_value": "un atelier.",
+            "maxlength": 60
+        },
+        {
+            "key": "field_hub_chisiamo_intro",
+            "label": "Hub Chi Siamo — Intro paragrafo",
+            "name": "hub_chisiamo_intro",
+            "type": "textarea",
+            "default_value": "",
+            "rows": 3
+        },
+        {
+            "key": "field_hub_aree_eyebrow",
+            "label": "Hub Aree di Pratica — Eyebrow",
+            "name": "hub_aree_eyebrow",
+            "type": "text",
+            "default_value": "§ Aree di pratica",
+            "maxlength": 40
+        },
+        {
+            "key": "field_hub_aree_h1_main",
+            "label": "Hub Aree di Pratica — H1 (parte 1)",
+            "name": "hub_aree_h1_main",
+            "type": "text",
+            "default_value": "Diciassette aree,",
+            "maxlength": 60
+        },
+        {
+            "key": "field_hub_aree_h1_emphasis",
+            "label": "Hub Aree di Pratica — H1 (parte 2 in corsivo)",
+            "name": "hub_aree_h1_emphasis",
+            "type": "text",
+            "default_value": "tre cluster.",
+            "maxlength": 60
+        },
+        {
+            "key": "field_hub_aree_intro",
+            "label": "Hub Aree di Pratica — Intro paragrafo",
+            "name": "hub_aree_intro",
+            "type": "textarea",
+            "default_value": "",
+            "rows": 3
+        },
+        {
+            "key": "field_hub_aree_cluster_privati_label",
+            "label": "Cluster Privati — Label",
+            "name": "hub_aree_cluster_privati_label",
+            "type": "text",
+            "default_value": "Per i privati",
+            "maxlength": 40
+        },
+        {
+            "key": "field_hub_aree_cluster_privati_desc",
+            "label": "Cluster Privati — Descrizione",
+            "name": "hub_aree_cluster_privati_desc",
+            "type": "textarea",
+            "default_value": "Famiglie e persone fisiche, lavoratori. Materie: tributario, lavoro, famiglia LGBTQ+, successioni, infortunistica, penale, bancario, condominio, immigrazione.",
+            "rows": 3
+        },
+        {
+            "key": "field_hub_aree_cluster_imprese_label",
+            "label": "Cluster Imprese — Label",
+            "name": "hub_aree_cluster_imprese_label",
+            "type": "text",
+            "default_value": "Per le imprese",
+            "maxlength": 40
+        },
+        {
+            "key": "field_hub_aree_cluster_imprese_desc",
+            "label": "Cluster Imprese — Descrizione",
+            "name": "hub_aree_cluster_imprese_desc",
+            "type": "textarea",
+            "default_value": "Aziende, freelance, partite IVA. Recupero crediti, domiciliazione d'impresa, contenzioso commerciale.",
+            "rows": 3
+        },
+        {
+            "key": "field_hub_aree_cluster_contenzioso_label",
+            "label": "Cluster Contenzioso — Label",
+            "name": "hub_aree_cluster_contenzioso_label",
+            "type": "text",
+            "default_value": "Contenzioso amministrativo",
+            "maxlength": 60
+        },
+        {
+            "key": "field_hub_aree_cluster_contenzioso_desc",
+            "label": "Cluster Contenzioso — Descrizione",
+            "name": "hub_aree_cluster_contenzioso_desc",
+            "type": "textarea",
+            "default_value": "TAR, Consiglio di Stato, ricorsi alla pubblica amministrazione. Cittadini e imprese.",
+            "rows": 3
+        },
+        {
+            "key": "field_hub_risorse_eyebrow",
+            "label": "Hub Risorse — Eyebrow",
+            "name": "hub_risorse_eyebrow",
+            "type": "text",
+            "default_value": "§ Risorse",
+            "maxlength": 40
+        },
+        {
+            "key": "field_hub_risorse_h1_main",
+            "label": "Hub Risorse — H1 (parte 1)",
+            "name": "hub_risorse_h1_main",
+            "type": "text",
+            "default_value": "Approfondire,",
+            "maxlength": 60
+        },
+        {
+            "key": "field_hub_risorse_h1_emphasis",
+            "label": "Hub Risorse — H1 (parte 2 in corsivo)",
+            "name": "hub_risorse_h1_emphasis",
+            "type": "text",
+            "default_value": "senza fretta.",
+            "maxlength": 60
+        },
+        {
+            "key": "field_hub_risorse_intro",
+            "label": "Hub Risorse — Intro paragrafo",
+            "name": "hub_risorse_intro",
+            "type": "textarea",
+            "default_value": "",
+            "rows": 3
+        },
+        {
+            "key": "field_taxonomy_tipoarea_eyebrow",
+            "label": "Tassonomia Tipo Area — Eyebrow",
+            "name": "taxonomy_tipoarea_eyebrow",
+            "type": "text",
+            "default_value": "§ Cluster",
+            "maxlength": 40,
+            "instructions": "Eyebrow comune alle 4 pagine cluster /aree-di-pratica/{privati,imprese,contenzioso-amministrativo,altri}/."
+        },
+        {
+            "key": "field_taxonomy_tipoarea_subtitle_template",
+            "label": "Tassonomia Tipo Area — Sottotitolo (template)",
+            "name": "taxonomy_tipoarea_subtitle_template",
+            "type": "text",
+            "default_value": "Aree di pratica per %s",
+            "instructions": "Usa %s per inserire automaticamente il nome del cluster (es. 'Per i privati')."
+        },
+        {
+            "key": "field_tab_archive_headers",
+            "label": "Archive Headers",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_archive_avvocato_eyebrow",
+            "label": "Archive Avvocati — Eyebrow",
+            "name": "archive_avvocato_eyebrow",
+            "type": "text",
+            "default_value": "§ Studio · Avvocati",
+            "maxlength": 60
+        },
+        {
+            "key": "field_archive_avvocato_h1_main",
+            "label": "Archive Avvocati — H1 (parte 1)",
+            "name": "archive_avvocato_h1_main",
+            "type": "text",
+            "default_value": "Quattro",
+            "maxlength": 60
+        },
+        {
+            "key": "field_archive_avvocato_h1_emphasis",
+            "label": "Archive Avvocati — H1 (parte 2 in corsivo)",
+            "name": "archive_avvocato_h1_emphasis",
+            "type": "text",
+            "default_value": "professionisti.",
+            "maxlength": 60
+        },
+        {
+            "key": "field_archive_avvocato_intro",
+            "label": "Archive Avvocati — Intro paragrafo",
+            "name": "archive_avvocato_intro",
+            "type": "textarea",
+            "default_value": "Un atelier di quattro avvocati a Chiaia. Ogni cliente è una storia, e ogni storia merita il tempo di essere capita.",
+            "rows": 3
+        },
+        {
+            "key": "field_archive_caso_eyebrow",
+            "label": "Archive Casi rappresentativi — Eyebrow",
+            "name": "archive_caso_eyebrow",
+            "type": "text",
+            "default_value": "§ Studio · Casi rappresentativi",
+            "maxlength": 60
+        },
+        {
+            "key": "field_archive_caso_h1_main",
+            "label": "Archive Casi rappresentativi — H1 (parte 1)",
+            "name": "archive_caso_h1_main",
+            "type": "text",
+            "default_value": "Casi",
+            "maxlength": 60
+        },
+        {
+            "key": "field_archive_caso_h1_emphasis",
+            "label": "Archive Casi rappresentativi — H1 (parte 2 in corsivo)",
+            "name": "archive_caso_h1_emphasis",
+            "type": "text",
+            "default_value": "rappresentativi.",
+            "maxlength": 60
+        },
+        {
+            "key": "field_archive_caso_intro",
+            "label": "Archive Casi rappresentativi — Intro paragrafo",
+            "name": "archive_caso_intro",
+            "type": "textarea",
+            "default_value": "Una selezione anonimizzata di pratiche dello Studio. Storie con un dato comune: la complessità non risolta da chi è venuto prima.",
+            "rows": 3
         }
     ],
     "location": [

@@ -58,9 +58,9 @@ add_action('init', function () {
         'menu_position'      => 26,
         'menu_icon'          => 'dashicons-awards',
         'capability_type'    => 'post',
-        'has_archive'        => 'chi-siamo/risultati',
+        'has_archive'        => 'chi-siamo/casi-rappresentativi',
         'rewrite'            => [
-            'slug'       => 'chi-siamo/risultati',
+            'slug'       => 'chi-siamo/casi-rappresentativi',
             'with_front' => false,
             'feeds'      => false,
         ],

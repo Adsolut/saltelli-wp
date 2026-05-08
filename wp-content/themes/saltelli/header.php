@@ -120,8 +120,11 @@ if (is_front_page()) {
 } elseif (is_singular()) {
     $sl_wa_context = sprintf(__('sto leggendo "%s"', 'saltelli'), get_the_title());
 }
+// Wave 4.7.fix.2 P4: messaggio precompilato editable da SCF Brand tab.
+// Default mantiene legacy text. Editor può sostituire con altra formula.
+$sl_wa_msg_template = saltelli_option('whatsapp_message_default', __('Ciao, %s sul vostro sito. Vorrei una consulenza.', 'saltelli'));
 $sl_wa_message = $sl_wa_context !== ''
-    ? sprintf(__('Ciao, %s sul vostro sito. Vorrei una consulenza.', 'saltelli'), $sl_wa_context)
+    ? sprintf($sl_wa_msg_template, $sl_wa_context)
     : __('Ciao, vorrei una consulenza presso lo Studio Legale Saltelli & Partners.', 'saltelli');
 /* === IMPECCABLE v0.20.0 [persuasion + harden] END === */
 ?>

@@ -15,6 +15,12 @@ $avvocati = get_posts([
     'orderby'     => ['menu_order' => 'ASC', 'date' => 'ASC'],
 ]);
 $layout_team = saltelli_team_grid_layout();
+
+// Wave 4.7.fix.2 P4: archive header copy editable da SCF tab "Archive Headers".
+$sl_arch_eyebrow = (string) saltelli_option('archive_avvocato_eyebrow', __('§ Studio · Avvocati', 'saltelli'));
+$sl_arch_h1_main = (string) saltelli_option('archive_avvocato_h1_main', __('Quattro', 'saltelli'));
+$sl_arch_h1_em   = (string) saltelli_option('archive_avvocato_h1_emphasis', __('professionisti.', 'saltelli'));
+$sl_arch_intro   = (string) saltelli_option('archive_avvocato_intro', __('Un atelier di quattro avvocati a Chiaia. Ogni cliente è una storia, e ogni storia merita il tempo di essere capita.', 'saltelli'));
 ?>
 
 <article class="sl-team sl-team--archive sl-team--archive-w2">
@@ -23,11 +29,11 @@ $layout_team = saltelli_team_grid_layout();
         <div>
             <?php saltelli_render_breadcrumb(); ?>
             <div class="sl-mono sl-team__archive-eyebrow" style="margin-bottom: 32px;">
-                <?php esc_html_e('§ Studio · Avvocati', 'saltelli'); ?>
+                <?php echo esc_html($sl_arch_eyebrow); ?>
             </div>
             <h1 class="sl-team__archive-h1" data-split-reveal>
                 <?php
-                $sl_arch_h1 = esc_html__('Quattro', 'saltelli') . '<br><em>' . esc_html__('professionisti.', 'saltelli') . '</em>';
+                $sl_arch_h1 = esc_html($sl_arch_h1_main) . '<br><em>' . esc_html($sl_arch_h1_em) . '</em>';
                 echo wp_kses(saltelli_split_h1_words($sl_arch_h1), [
                     'span' => ['class' => true, 'data-i' => true],
                     'em'   => [],
@@ -35,9 +41,7 @@ $layout_team = saltelli_team_grid_layout();
                 ]);
                 ?>
             </h1>
-            <p class="sl-team__archive-lede">
-                <?php esc_html_e('Un atelier di quattro avvocati a Chiaia. Ogni cliente è una storia, e ogni storia merita il tempo di essere capita.', 'saltelli'); ?>
-            </p>
+            <p class="sl-team__archive-lede"><?php echo esc_html($sl_arch_intro); ?></p>
         </div>
         <aside class="sl-team__archive-trust">
             <div class="sl-mono sl-team__archive-trust-eyebrow">

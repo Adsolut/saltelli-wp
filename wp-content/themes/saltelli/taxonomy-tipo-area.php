@@ -26,6 +26,10 @@ $term_slug  = $term && !empty($term->slug) ? $term->slug : '';
 $term_name  = $term && !empty($term->name) ? $term->name : '';
 $term_desc  = $term && !empty($term->description) ? $term->description : '';
 
+// Wave 4.7.fix.2 P4: UX strings comuni ai 4 cluster editable da SCF "Hub Pages".
+$sl_taxonomy_eyebrow  = (string) saltelli_option('taxonomy_tipoarea_eyebrow', '');
+$sl_taxonomy_subtpl   = (string) saltelli_option('taxonomy_tipoarea_subtitle_template', __('Le aree presidiate dallo studio nel cluster %s. Tier-1 sono le aree di profondità.', 'saltelli'));
+
 // Riusa la query archive-competenza ordering: tier-1 first.
 $competenze = $term ? get_posts([
     'post_type'   => 'competenza',
@@ -151,6 +155,10 @@ $avatar_html = function ($av_post) {
                 <div class="sl-tipoarea__hero-main">
                     <?php saltelli_render_breadcrumb(); ?>
 
+                    <?php if ($sl_taxonomy_eyebrow) : ?>
+                        <p class="sl-mono sl-tipoarea__eyebrow"><?php echo esc_html($sl_taxonomy_eyebrow); ?></p>
+                    <?php endif; ?>
+
                     <h1 class="sl-tipoarea__h1" data-split-reveal>
                         <?php echo wp_kses(saltelli_split_h1_words($term_name . '.'), ['span' => ['class' => true, 'data-i' => true]]); ?>
                     </h1>
@@ -159,11 +167,10 @@ $avatar_html = function ($av_post) {
                         <p class="sl-tipoarea__lede"><?php echo esc_html($term_desc); ?></p>
                     <?php else : ?>
                         <p class="sl-tipoarea__lede">
-                            <?php echo esc_html(sprintf(
-                                /* translators: %s nome categoria es. "Per i Privati" */
-                                __('Le aree presidiate dallo studio nel cluster %s. Tier-1 sono le aree di profondità.', 'saltelli'),
-                                $term_name
-                            )); ?>
+                            <?php
+                            // sprintf will silently work even if template has no %s.
+                            echo esc_html(sprintf($sl_taxonomy_subtpl, $term_name));
+                            ?>
                         </p>
                     <?php endif; ?>
 

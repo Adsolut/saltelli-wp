@@ -15,16 +15,21 @@ defined('ABSPATH') || exit;
 $sl_blog_count   = wp_count_posts('post')->publish ?? 0;
 $sl_faq_count    = wp_count_posts('saltelli_faq')->publish ?? 0;
 $sl_guide_count  = wp_count_posts('saltelli_guida')->publish ?? 0;
+
+// Wave 4.7.fix.2 P4: hub copy editable da SCF tab "Hub Pages".
+$sl_hub_eyebrow = (string) saltelli_option('hub_risorse_eyebrow', __('§ Risorse', 'saltelli'));
+$sl_hub_h1_main = (string) saltelli_option('hub_risorse_h1_main', __('Approfondire,', 'saltelli'));
+$sl_hub_h1_em   = (string) saltelli_option('hub_risorse_h1_emphasis', __('senza fretta.', 'saltelli'));
+$sl_hub_intro   = (string) saltelli_option('hub_risorse_intro', __('Articoli, glossario, domande frequenti, guide gratuite. Materiale per orientarti prima di prenotare una consulenza.', 'saltelli'));
 ?>
 
 <section class="sl-page-hero sl-hub-hero" aria-labelledby="hub-risorse-h1">
     <div class="sl-container sl-hub-hero__inner">
         <?php saltelli_render_breadcrumb(); ?>
-        <p class="sl-mono sl-hub-hero__eyebrow"><?php esc_html_e('§ Risorse', 'saltelli'); ?></p>
+        <p class="sl-mono sl-hub-hero__eyebrow"><?php echo esc_html($sl_hub_eyebrow); ?></p>
         <h1 class="sl-page__title sl-hub-hero__h1" id="hub-risorse-h1" data-split-reveal>
             <?php
-            $sl_h1 = esc_html__('Approfondire,', 'saltelli') . '<br>'
-                . '<em>' . esc_html__('senza fretta.', 'saltelli') . '</em>';
+            $sl_h1 = esc_html($sl_hub_h1_main) . '<br><em>' . esc_html($sl_hub_h1_em) . '</em>';
             echo wp_kses(saltelli_split_h1_words($sl_h1), [
                 'span' => ['class' => true, 'data-i' => true],
                 'em'   => [],
@@ -32,9 +37,7 @@ $sl_guide_count  = wp_count_posts('saltelli_guida')->publish ?? 0;
             ]);
             ?>
         </h1>
-        <p class="sl-page__lede sl-hub-hero__lede">
-            <?php esc_html_e('Articoli, glossario, domande frequenti, guide gratuite. Materiale per orientarti prima di prenotare una consulenza.', 'saltelli'); ?>
-        </p>
+        <p class="sl-page__lede sl-hub-hero__lede"><?php echo esc_html($sl_hub_intro); ?></p>
     </div>
 </section>
 

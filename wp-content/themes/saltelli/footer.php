@@ -70,13 +70,29 @@ $ftr_social = [
     'twitter'   => (string) saltelli_option('social_twitter', ''),
 ];
 
-/* === IMPECCABLE v0.20.2 [T1] aree tier-1 hardcoded da JSX (3 in footer; 19 totali nel sito) === */
-/* v0.21.3 [F1]: $ftr_tier2 array RIMOSSO — non più visualizzato in footer (CTA "Tutte le aree" sostituisce). */
-$ftr_tier1 = [
-    ['n' => '01', 't' => __('Diritto tributario', 'saltelli'),         'href' => '/aree-di-pratica/privati/diritto-tributario/'],
-    ['n' => '02', 't' => __('Diritto del lavoro', 'saltelli'),         'href' => '/aree-di-pratica/privati/diritto-del-lavoro/'],
-    ['n' => '03', 't' => __('Diritto di famiglia LGBTQ+', 'saltelli'), 'href' => '/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/'],
-];
+/* Wave 4.7.fix.2 P4: tier-1 aree footer ora editable da SCF tab "Footer Aree".
+ * Repeater rows con sub-fields numero/label/url. Fallback su valori legacy
+ * se SCF è vuoto / repeater non ancora inizializzato. */
+$ftr_tier1_raw = saltelli_option('footer_tier1_aree', null);
+if (is_array($ftr_tier1_raw) && !empty($ftr_tier1_raw)) {
+    $ftr_tier1 = [];
+    foreach ($ftr_tier1_raw as $row) {
+        if (!is_array($row)) continue;
+        $ftr_tier1[] = [
+            'n'    => (string) ($row['numero'] ?? ''),
+            't'    => (string) ($row['label']  ?? ''),
+            'href' => (string) ($row['url']    ?? '#'),
+        ];
+    }
+}
+if (empty($ftr_tier1)) {
+    // Fallback editoriale (legacy v0.20.2 + v0.21.3 [F1] no tier-2 col).
+    $ftr_tier1 = [
+        ['n' => '01', 't' => __('Diritto tributario', 'saltelli'),         'href' => '/aree-di-pratica/privati/diritto-tributario/'],
+        ['n' => '02', 't' => __('Diritto del lavoro', 'saltelli'),         'href' => '/aree-di-pratica/privati/diritto-del-lavoro/'],
+        ['n' => '03', 't' => __('Diritto di famiglia LGBTQ+', 'saltelli'), 'href' => '/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/'],
+    ];
+}
 
 /* v0.21.3 [F3]: indirizzo split in 2 line per col Info "Studio legale" */
 $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
