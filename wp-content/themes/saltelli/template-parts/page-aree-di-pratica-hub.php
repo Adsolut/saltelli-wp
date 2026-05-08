@@ -13,24 +13,30 @@
  */
 defined('ABSPATH') || exit;
 
+// Wave 4.7.fix.2 P4: hub strings + 3 cluster cards editable da SCF tab "Hub Pages".
+$sl_hub_eyebrow = (string) saltelli_option('hub_aree_eyebrow', __('§ Aree di pratica', 'saltelli'));
+$sl_hub_h1_main = (string) saltelli_option('hub_aree_h1_main', __('Diciassette aree,', 'saltelli'));
+$sl_hub_h1_em   = (string) saltelli_option('hub_aree_h1_emphasis', __('tre cluster.', 'saltelli'));
+$sl_hub_intro   = (string) saltelli_option('hub_aree_intro', __('Le materie sono ripartite per cluster di destinatario. Selezioniamo i casi dove la nostra esperienza fa la differenza concreta.', 'saltelli'));
+
 $sl_clusters = [
     [
         'slug'    => 'privati',
         'num'     => '01 / 03',
-        'title'   => __('Per i privati', 'saltelli'),
-        'desc'    => __('Famiglie e persone fisiche, lavoratori. Materie: tributario, lavoro, famiglia LGBTQ+, successioni, infortunistica, penale, bancario, condominio, immigrazione.', 'saltelli'),
+        'title'   => (string) saltelli_option('hub_aree_cluster_privati_label', __('Per i privati', 'saltelli')),
+        'desc'    => (string) saltelli_option('hub_aree_cluster_privati_desc', __('Famiglie e persone fisiche, lavoratori. Materie: tributario, lavoro, famiglia LGBTQ+, successioni, infortunistica, penale, bancario, condominio, immigrazione.', 'saltelli')),
     ],
     [
         'slug'    => 'imprese',
         'num'     => '02 / 03',
-        'title'   => __('Per le imprese', 'saltelli'),
-        'desc'    => __('Aziende, freelance, partite IVA. Recupero crediti, domiciliazione d\'impresa, contenzioso commerciale.', 'saltelli'),
+        'title'   => (string) saltelli_option('hub_aree_cluster_imprese_label', __('Per le imprese', 'saltelli')),
+        'desc'    => (string) saltelli_option('hub_aree_cluster_imprese_desc', __('Aziende, freelance, partite IVA. Recupero crediti, domiciliazione d\'impresa, contenzioso commerciale.', 'saltelli')),
     ],
     [
         'slug'    => 'contenzioso-amministrativo',
         'num'     => '03 / 03',
-        'title'   => __('Contenzioso amministrativo', 'saltelli'),
-        'desc'    => __('Ricorsi al TAR e al Consiglio di Stato. Atti della pubblica amministrazione, concessioni, procedure di gara.', 'saltelli'),
+        'title'   => (string) saltelli_option('hub_aree_cluster_contenzioso_label', __('Contenzioso amministrativo', 'saltelli')),
+        'desc'    => (string) saltelli_option('hub_aree_cluster_contenzioso_desc', __('Ricorsi al TAR e al Consiglio di Stato. Atti della pubblica amministrazione, concessioni, procedure di gara.', 'saltelli')),
     ],
 ];
 ?>
@@ -38,11 +44,10 @@ $sl_clusters = [
 <section class="sl-page-hero sl-hub-hero" aria-labelledby="hub-aree-h1">
     <div class="sl-container sl-hub-hero__inner">
         <?php saltelli_render_breadcrumb(); ?>
-        <p class="sl-mono sl-hub-hero__eyebrow"><?php esc_html_e('§ Aree di pratica', 'saltelli'); ?></p>
+        <p class="sl-mono sl-hub-hero__eyebrow"><?php echo esc_html($sl_hub_eyebrow); ?></p>
         <h1 class="sl-page__title sl-hub-hero__h1" id="hub-aree-h1" data-split-reveal>
             <?php
-            $sl_h1 = esc_html__('Diciassette aree,', 'saltelli') . '<br>'
-                . '<em>' . esc_html__('tre cluster.', 'saltelli') . '</em>';
+            $sl_h1 = esc_html($sl_hub_h1_main) . '<br><em>' . esc_html($sl_hub_h1_em) . '</em>';
             echo wp_kses(saltelli_split_h1_words($sl_h1), [
                 'span' => ['class' => true, 'data-i' => true],
                 'em'   => [],
@@ -50,9 +55,7 @@ $sl_clusters = [
             ]);
             ?>
         </h1>
-        <p class="sl-page__lede sl-hub-hero__lede">
-            <?php esc_html_e('Le materie sono ripartite per cluster di destinatario. Selezioniamo i casi dove la nostra esperienza fa la differenza concreta.', 'saltelli'); ?>
-        </p>
+        <p class="sl-page__lede sl-hub-hero__lede"><?php echo esc_html($sl_hub_intro); ?></p>
     </div>
 </section>
 
