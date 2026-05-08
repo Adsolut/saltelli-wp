@@ -1,0 +1,41 @@
+=== Phase 4 — Smoke test save E2E ===
+Date: 2026-05-08T13:09:17+02:00
+
+--- Test 1: update_field hero_cta_url + cta_default_url con /contatti/ (replica esatta bug Duccio) ---
+hero_cta_url current: '/contatti/'
+hero_cta_url update_field result: FALSE (failed)
+hero_cta_url new value: '/contatti/'
+
+cta_default_url current: '/contatti/'
+cta_default_url update_field result: FALSE (failed)
+cta_default_url new value: '/contatti/'
+
+--- Test 1b: prove value-change save ---
+Test write hero_cta_url with /test-temp/
+  update_field result: TRUE
+  read-back value: '/test-temp/'
+Restore hero_cta_url to /contatti/
+  update_field result: TRUE
+  read-back value: '/contatti/'
+
+Test write cta_default_url with /test-temp/
+  update_field result: TRUE
+  read-back value: '/test-temp/'
+Restore cta_default_url to /contatti/
+  update_field result: TRUE
+  read-back value: '/contatti/'
+
+--- Test 1c: acf_validate_value (replica del path validazione admin form-submit) ---
+hero_cta_url              type=text   validate(/contatti/)=true
+footer_credit_url         type=url    validate(/contatti/)=false
+cta_default_url           type=text   validate(/contatti/)=true
+
+--- Counter-check: validate https://adsolut.it on social_facebook ---
+social_facebook validate(https://facebook.com/saltelli): true
+social_facebook validate(/relative/): false [should be string error]
+
+--- Test 2: cache flush + frontend reflect ---
+Success: The cache was flushed.
+  href='/contatti/' relative count: 4 (atteso ≥1)
+  href absolute /contatti/ count: 3
+  PASS: Frontend renders relative URL correctly

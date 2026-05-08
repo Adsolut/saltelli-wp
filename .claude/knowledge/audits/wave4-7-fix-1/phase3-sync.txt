@@ -1,0 +1,62 @@
+=== Phase 3 — SCF sync ===
+Date: 2026-05-08T13:04:29+02:00
+
+--- Step 1: scp JSON modificato a staging ---
+
+--- Step 1.5: file su staging /tmp ---
+-rw-r--r-- 1 deploy deploy 36777 May  8 13:04 /tmp/group_theme_options_v1.json
+
+--- Step 2: sudo cp + chown www-data ---
+-rw-r--r-- 1 www-data www-data 36777 May  8 13:04 /var/www/saltelli/wp-content/themes/saltelli/acf-json/group_theme_options_v1.json
+Error: 'sync' is not a registered subcommand of 'acf'. See 'wp help acf' for available subcommands.
+
+--- Step 3a: wp acf json status (pre-sync) ---
+Type	Pending	Total	Status
+field-group	2	17	Sync available
+post-type	0	0	In sync
+taxonomy	0	0	In sync
+options-page	0	0	In sync
+2 item(s) pending sync. Run `wp acf json sync` to apply changes.
+
+--- Step 3b: wp acf json sync ---
+PHP Warning:  Undefined array key "ID" in /var/www/saltelli/wp-content/plugins/secure-custom-fields/includes/post-types/class-acf-field-group.php on line 515
+Warning: Undefined array key "ID" in /var/www/saltelli/wp-content/plugins/secure-custom-fields/includes/post-types/class-acf-field-group.php on line 515
+PHP Warning:  Undefined array key "ID" in /var/www/saltelli/wp-content/plugins/secure-custom-fields/includes/post-types/class-acf-field-group.php on line 515
+Warning: Undefined array key "ID" in /var/www/saltelli/wp-content/plugins/secure-custom-fields/includes/post-types/class-acf-field-group.php on line 515
+PHP Warning:  Undefined array key "ID" in /var/www/saltelli/wp-content/plugins/secure-custom-fields/includes/post-types/class-acf-field-group.php on line 515
+Warning: Undefined array key "ID" in /var/www/saltelli/wp-content/plugins/secure-custom-fields/includes/post-types/class-acf-field-group.php on line 515
+Updated field-group: Saltelli — Settings globali (group_theme_options_v1)
+PHP Warning:  Undefined array key "ID" in /var/www/saltelli/wp-content/plugins/secure-custom-fields/includes/post-types/class-acf-field-group.php on line 515
+Warning: Undefined array key "ID" in /var/www/saltelli/wp-content/plugins/secure-custom-fields/includes/post-types/class-acf-field-group.php on line 515
+PHP Warning:  Undefined array key "ID" in /var/www/saltelli/wp-content/plugins/secure-custom-fields/includes/post-types/class-acf-field-group.php on line 515
+Warning: Undefined array key "ID" in /var/www/saltelli/wp-content/plugins/secure-custom-fields/includes/post-types/class-acf-field-group.php on line 515
+PHP Warning:  Undefined array key "ID" in /var/www/saltelli/wp-content/plugins/secure-custom-fields/includes/post-types/class-acf-field-group.php on line 515
+Warning: Undefined array key "ID" in /var/www/saltelli/wp-content/plugins/secure-custom-fields/includes/post-types/class-acf-field-group.php on line 515
+Updated field-group: Saltelli — Page Lo Studio (group_lo_studio_v1)
+Success: 2 item(s) synced.
+
+--- Step 3c: wp acf json status (post-sync) ---
+Type	Pending	Total	Status
+field-group	1	17	Sync available
+post-type	0	0	In sync
+taxonomy	0	0	In sync
+options-page	0	0	In sync
+1 item(s) pending sync. Run `wp acf json sync` to apply changes.
+
+--- Step 4: cache + transient flush ---
+Success: The cache was flushed.
+Success: 8 transients deleted from the database.
+
+--- Cleanup tmp ---
+cleaned
+
+=== Verifica field type post-sync ===
+NO group found
+FOUND: Saltelli — Settings globali key=group_theme_options_v1
+  hero_cta_url              type=text
+  footer_credit_url         type=url
+  social_instagram          type=url
+  social_linkedin           type=url
+  social_twitter            type=url
+  social_facebook           type=url
+  cta_default_url           type=text
