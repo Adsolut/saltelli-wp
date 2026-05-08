@@ -1,0 +1,304 @@
+=== Wave 4.7.fix Phase 2 — Seed Theme Options · Audit log ===
+Date:   2026-05-08T12:30:00+02:00
+Branch: fix/wave4-7-fix-scf-migration
+Agent:  Agent B (seed script + execution)
+Script: wp-content/themes/saltelli/inc/seed-theme-options.php (8090 bytes)
+Target: staging (178.62.207.50)
+Stack:  SCF 6.8.4 + WP-CLI 2.12.0 + PHP 8.2 + MySQL 8.0
+
+
+─────────────────────────────────────────────────────────────────────────
+1) PRE-SEED STATE
+─────────────────────────────────────────────────────────────────────────
+
+Plugin attivo: secure-custom-fields 6.8.4 (Wave 4.7.fix Phase 1)
+Field group caricati da acf-json/: 17
+Options page registrata: saltelli-settings (acf_add_options_page = YES)
+
+COUNT options_* in wp_options: 26
+  options_brand_payoff
+  options_brand_statement_short
+  options_cta_default_label
+  options_cta_default_url
+  options_cta_subline_italic
+  options_cta_trust_signal
+  options_footer_credit_text
+  options_footer_credit_url
+  options_footer_newsletter_enabled
+  options_footer_newsletter_provider
+  options_social_facebook
+  options_social_instagram
+  options_social_linkedin     (valore "")
+  options_social_twitter      (valore "")
+  options_studio_cap_citta
+  options_studio_coordinate_lat
+  options_studio_coordinate_lng
+  options_studio_email
+  options_studio_indirizzo_via
+  options_studio_orari_sabato
+  options_studio_orari_settimana
+  options_studio_ordine_avvocati
+  options_studio_pec
+  options_studio_piva
+  options_studio_quartiere
+  options_studio_telefono_pubblico
+
+JSON seedable fields totali (escluso tab/message/group/repeater sub_fields):
+  50 chiavi options_<name>
+
+Gap: 24 chiavi mancanti (50 - 26).
+
+
+─────────────────────────────────────────────────────────────────────────
+2) SCRIPT GENERATION
+─────────────────────────────────────────────────────────────────────────
+
+Path: wp-content/themes/saltelli/inc/seed-theme-options.php
+Size: 8090 bytes
+Lint: php -l (staging) → "No syntax errors detected"
+
+Logic:
+- Walk ricorsivo dei fields[] dal JSON.
+- Skip type=tab/message/group(no name)/repeater sub_fields.
+- Tipi seedabili: text, textarea, email, url, number, image, wysiwyg,
+  select, radio, checkbox, true_false, link, post_object, repeater.
+- Repeater: setta options_<name> = numero righe nel default (0 se vuoto).
+- Group: ricorsivo su sub_fields con prefix <name>_.
+- Idempotency: get_option($key, $sentinel) con sentinel
+  '__W47FIX_SEED_NULL__'. Skip se ritorna ≠ sentinel (anche valore vuoto).
+- add_option(..., autoload=false) per consistency Wave 4.6.
+
+Hard rules rispettate:
+- NO require/include in functions.php.
+- NO modifica template/helpers.
+- File dormiente, eseguibile solo on-demand via wp eval-file.
+
+
+─────────────────────────────────────────────────────────────────────────
+3) DEPLOY + EXECUTION
+─────────────────────────────────────────────────────────────────────────
+
+Step 3.1 — scp:
+  scp wp-content/themes/saltelli/inc/seed-theme-options.php \
+      deploy@178.62.207.50:/tmp/seed-theme-options.php
+  → OK (8090 bytes upload).
+
+Step 3.2 — Lint staging:
+  ssh deploy@178.62.207.50 "php -l /tmp/seed-theme-options.php"
+  → "No syntax errors detected in /tmp/seed-theme-options.php"
+
+Step 3.3 — Execute:
+  ssh deploy@178.62.207.50 \
+    "cd /var/www/saltelli && sudo -u www-data wp eval-file \
+     /tmp/seed-theme-options.php --path=/var/www/saltelli"
+
+  STDOUT:
+  ─────────────────────────────────────────────────────────────────
+  Seeded: 24
+  Skipped: 26
+  Total walked: 50
+
+  [Seeded keys]
+    + options_hero_eyebrow
+    + options_hero_headline
+    + options_hero_subheadline
+    + options_hero_cta_label
+    + options_hero_cta_url
+    + options_studio_titolo_sezione
+    + options_studio_body
+    + options_studio_foto_facciata
+    + options_team_titolo
+    + options_cases_titolo
+    + options_casi_rappresentativi_home
+    + options_press_outlets
+    + options_trust_signal_1_label
+    + options_trust_signal_1_caption
+    + options_trust_signal_2_label
+    + options_trust_signal_2_caption
+    + options_trust_signal_3_label
+    + options_trust_signal_3_caption
+    + options_trust_signal_4_label
+    + options_trust_signal_4_caption
+    + options_colophon_indirizzo
+    + options_colophon_orari
+    + options_colophon_email
+    + options_colophon_telefono
+
+  [Skipped keys]
+    = options_studio_indirizzo_via
+    = options_studio_cap_citta
+    = options_studio_quartiere
+    = options_studio_orari_settimana
+    = options_studio_orari_sabato
+    = options_studio_telefono_pubblico
+    = options_studio_email
+    = options_studio_pec
+    = options_studio_piva
+    = options_studio_ordine_avvocati
+    = options_studio_coordinate_lat
+    = options_studio_coordinate_lng
+    = options_brand_payoff
+    = options_brand_statement_short
+    = options_footer_credit_text
+    = options_footer_credit_url
+    = options_footer_newsletter_enabled
+    = options_footer_newsletter_provider
+    = options_social_instagram
+    = options_social_linkedin
+    = options_social_twitter
+    = options_social_facebook
+    = options_cta_default_label
+    = options_cta_default_url
+    = options_cta_trust_signal
+    = options_cta_subline_italic
+  ─────────────────────────────────────────────────────────────────
+
+  Warnings: nessuno.
+  Skipped count: 26 ✓ (atteso ≥26 → match esatto Wave 4.6 baseline).
+
+
+─────────────────────────────────────────────────────────────────────────
+4) POST-SEED VERIFICATION
+─────────────────────────────────────────────────────────────────────────
+
+Step 4.1 — COUNT post-seed:
+  SELECT COUNT(*) FROM wp_options
+   WHERE option_name LIKE 'options_%'
+     AND option_name NOT LIKE '\_options_%';
+  → 50  ✓ (atteso ≥60 nel prompt: WARN soft-relax — 50 = totale field
+              seedable da JSON; non esistono altri default_value da
+              popolare. Gap originale chiuso interamente).
+
+  NB: il prompt orchestratore stimava ≥60 ma il JSON contiene
+  esattamente 50 field seedabili (escluso tab/sub_fields repeater).
+  Math: 26 baseline + 24 seeded = 50 = totale JSON. Coverage 100%.
+
+Step 4.2 — Autoload check (consistency Wave 4.6):
+  Tutte le 50 chiavi options_* hanno autoload="off".
+  → ✓ Nessun bloat options autoload.
+
+Step 4.3 — Lista chiavi nuove seeded (24):
+  options_hero_eyebrow                = "Studio Legale · Napoli · Chiaia · Dal 1999"
+  options_hero_headline               = "Diritto, con misura."
+  options_hero_subheadline            = "Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, …"
+  options_hero_cta_label              = "Prenota una consulenza gratuita"
+  options_hero_cta_url                = "/contatti/"
+  options_studio_titolo_sezione       = "Un atelier, in senso napoletano."
+  options_studio_body                 = ""   (default JSON vuoto — fallback DEC-029 resta)
+  options_studio_foto_facciata        = ""   (image id non seedabile da default)
+  options_team_titolo                 = "Quattro\nprofessionisti."
+  options_cases_titolo                = "Casi rappresentativi."
+  options_casi_rappresentativi_home   = ""   (post_object: editor selezionerà)
+  options_press_outlets               = "0"  (repeater count = 0 righe)
+  options_trust_signal_1_label        = "20+ ANNI"
+  options_trust_signal_1_caption      = "ESPERIENZA"
+  options_trust_signal_2_label        = "4 AVVOCATI"
+  options_trust_signal_2_caption      = "TEAM SPECIALIZZATO"
+  options_trust_signal_3_label        = "17 AREE"
+  options_trust_signal_3_caption      = "DI PRATICA"
+  options_trust_signal_4_label        = "COA FAMIGLIA"
+  options_trust_signal_4_caption      = "MUNICIPALITÀ 1"
+  options_colophon_indirizzo          = "Via Vannella Gaetani, 27\n80121 Napoli — Chiaia"
+  options_colophon_orari              = "Lun – Ven · 10:00 – 19:00\nSolo su appuntamento"
+  options_colophon_email              = ""   (default JSON vuoto — fallback colophon→studio_email)
+  options_colophon_telefono           = "+39 081 1813 1119"
+
+Step 4.4 — Wave 4.6 baseline integrity (sample 4):
+  options_studio_indirizzo_via   = "Via Vannella Gaetani, 27"     ✓ unchanged
+  options_studio_pec             = "emilianosaltelli@avvocatinapoli.legalmail.it"  ✓ editor value preserved
+  options_social_instagram       = "https://www.instagram.com/studiolegalesaltelli/"  ✓ editor value preserved
+  options_footer_newsletter_provider = "brevo"  ✓ editor value preserved (NO regression a default "static")
+
+  → No overwrite. Skip presence-based funziona correttamente anche su
+    valori che divergono dal default JSON (PEC, social_instagram,
+    newsletter_provider).
+
+
+─────────────────────────────────────────────────────────────────────────
+5) SAMPLE READ TEST (get_field via SCF)
+─────────────────────────────────────────────────────────────────────────
+
+ssh deploy@178.62.207.50 "wp eval 'foreach ([6 chiavi nuove] as \$f) {
+  echo \$f . ': '; var_export(get_field(\$f, \"option\")); echo PHP_EOL;
+}' --path=/var/www/saltelli"
+
+Risultati:
+  hero_eyebrow         → 'Studio Legale · Napoli · Chiaia · Dal 1999'   ✓
+  hero_headline        → 'Diritto, con misura.'                          ✓
+  team_titolo          → 'Quattro\nprofessionisti.'                      ✓
+  trust_signal_1_label → '20+ ANNI'                                      ✓
+  colophon_indirizzo   → 'Via Vannella Gaetani, 27\n80121 Napoli — Chiaia'  ✓
+  cases_titolo         → 'Casi rappresentativi.'                         ✓
+
+Tutti e 6 i sample test ritornano i default_value attesi via
+get_field($name, 'option') → SCF read path funzionale end-to-end.
+
+
+─────────────────────────────────────────────────────────────────────────
+6) IDEMPOTENCY RE-RUN TEST
+─────────────────────────────────────────────────────────────────────────
+
+Re-esecuzione script (stesso file in /tmp, immediatamente dopo Step 3.3):
+  Seeded: 0
+  Skipped: 50
+  Total walked: 50
+
+  → ✓ Idempotency garantita. Re-run safe in caso di need future
+       (es. dopo aggiunta di nuovi field default_value al JSON).
+
+
+─────────────────────────────────────────────────────────────────────────
+7) CLEANUP
+─────────────────────────────────────────────────────────────────────────
+
+ssh deploy@178.62.207.50 "rm /tmp/seed-theme-options.php"
+  → File rimosso da /tmp.
+  → ls /tmp/seed-theme-options.php → "No such file or directory" ✓
+
+
+─────────────────────────────────────────────────────────────────────────
+8) CONCLUSIONE
+─────────────────────────────────────────────────────────────────────────
+
+STATO: PASS
+
+Metriche finali:
+  Pre-seed COUNT options_*:    26
+  Seeded:                      24
+  Skipped (Wave 4.6 baseline): 26
+  Post-seed COUNT options_*:   50
+  Coverage rispetto al JSON:   100% (50/50 field seedabili popolati)
+  Autoload bloat:              0 (tutte autoload=off)
+  Wave 4.6 overwrite:          0 (presence-based skip funzionante)
+
+Note:
+- Il prompt orchestratore stimava ≥60 chiavi atteso post-seed; il numero
+  reale è 50 perché il JSON contiene esattamente 50 field seedabili
+  (escluso 8 type=tab + sub_fields del repeater press_outlets che
+  vengono creati a runtime quando l'editor aggiunge righe). Non c'è
+  bug né dato mancante: 50 è il totale corretto per questa field group
+  definition. Gap pre-seed (24 chiavi) chiuso interamente.
+
+- Per le chiavi seedate con default_value vuoto (studio_body,
+  studio_foto_facciata, casi_rappresentativi_home, colophon_email),
+  i fallback DEC-029 nel template restano attivi finché l'editor
+  non popola via WP-Admin. Questo è atteso e non costituisce regressione.
+
+- Field group ora completamente readabile via get_field('<name>', 'option').
+  Il theme non ha più gap fra field group definition e wp_options storage.
+
+Pronto per:
+- Agent C (verifica frontend impact + screenshot regression).
+- Orchestratore commit Phase 2 dopo audit di entrambi gli agent.
+
+Output paths (relativi al repo):
+  Script:    wp-content/themes/saltelli/inc/seed-theme-options.php
+  Audit:     .claude/knowledge/audits/wave4-7-fix/phase2-seed.txt
+
+Eseguibile in futuro (idempotent):
+  scp wp-content/themes/saltelli/inc/seed-theme-options.php \
+      deploy@178.62.207.50:/tmp/seed-theme-options.php
+  ssh deploy@178.62.207.50 \
+      "cd /var/www/saltelli && sudo -u www-data wp eval-file \
+       /tmp/seed-theme-options.php --path=/var/www/saltelli"
+  ssh deploy@178.62.207.50 "rm /tmp/seed-theme-options.php"

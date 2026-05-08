@@ -1,0 +1,158 @@
+================================================================================
+Wave 4.7.fix — Phase 2 Smoke E2E (Agent C)
+================================================================================
+Date         : 2026-05-08
+Agent        : C
+Branch       : fix/wave4-7-fix-scf-migration
+Environment  : Staging only (https://staging.studiolegalesaltelli.it)
+Droplet      : deploy@178.62.207.50 · /var/www/saltelli
+WP version   : 6.9.4
+SCF version  : 6.8.4 (active) · ACF Free 6.8.0 (inactive, fork by Automattic)
+Field tested : hero_subheadline (textarea, group_theme_options_v1)
+Goal         : prove editor pipeline write-side functional end-to-end
+================================================================================
+
+--------------------------------------------------------------------------------
+TEST 1 — Admin menu probe (server-side simulation)
+--------------------------------------------------------------------------------
+
+Method : `wp eval --exec="define('WP_ADMIN', true);"` then `do_action('admin_menu')`.
+Result : PASS
+
+Detail : FOUND (pos=60 label="Saltelli — Settings" slug=saltelli-settings)
+
+Other top-level menu items captured (sanity):
+  [99] Yoast SEO 00 notifications :: wpseo_dashboard
+  [30] Contact :: wpcf7
+  [100] WP Armour :: wp-armour
+  [80] SCF :: edit.php?post_type=acf-field-group
+  [60] Saltelli — Settings :: saltelli-settings
+
+Notes  : First attempt without `WP_ADMIN` predefined returned NOT FOUND (only
+         wp-armour visible) — wp-cli does not auto-load admin context. Once
+         WP_ADMIN was defined via --exec hook before WP loads, the full
+         admin_menu cascade fired and the Saltelli options page was registered
+         at slot 60. SCF's `acf_add_options_page()` is therefore wiring the menu
+         correctly through the acf/init → admin_menu chain.
+         The earlier attempt that included `do_action("plugins_loaded")`
+         crashed with `Cannot redeclare wpa_elementor_extra_validation()`
+         (honeypot plugin double-load); harmless artefact of manual hook
+         re-fire, fixed by relying on wp-cli's natural bootstrap.
+
+--------------------------------------------------------------------------------
+TEST 2 — Field group attached to options page
+--------------------------------------------------------------------------------
+
+Method : `acf_get_field_groups(['options_page' => 'saltelli-settings'])`
+Result : PASS
+
+Field groups attached to saltelli-settings: 1
+  - group_theme_options_v1 :: Saltelli — Settings globali
+
+Notes  : Exactly the expected single group. The location rule
+         `options_page == saltelli-settings` defined in
+         `acf-json/group_theme_options_v1.json` is honoured by SCF.
+         No other groups (avvocato, competenza, costi, etc.) leak into the
+         options page surface — clean separation preserved.
+
+--------------------------------------------------------------------------------
+TEST 3 — E2E update_field → frontend reflect (la prova del nove)
+--------------------------------------------------------------------------------
+
+Method :
+  1. `get_field("hero_subheadline", "option")` — capture current value
+  2. `update_field("hero_subheadline", "<TEST_VALUE>", "option")`
+  3. `wp cache flush` + sleep 2
+  4. `curl https://staging.studiolegalesaltelli.it/ | grep -c "<TEST_VALUE>"`
+
+Pre-test current value (truncated 150ch):
+  type     : string
+  length   : 154
+  preview  : Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia,
+             diciassette aree di pratica, vent'anni di lavoro accanto a famigl
+
+DB raw probe (options_hero_subheadline):
+  exists in DB : YES
+  preview      : Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia,
+                 diciassette aree di pratica, vent'anni di lavoro accanto a famigl
+
+Test value used : TEST_W47FIX_SCF_1778236007
+Frontend match  : 1 (>=1 required)
+Result          : PASS
+
+HTML context (verbatim from curl):
+  <div class="sl-hero__subheadline">
+      TEST_W47FIX_SCF_1778236007            </div>
+
+Conclusion: frontend reflects update_field(option) end-to-end. SCF write-side
+pipeline is functional. Editor changes via Saltelli — Settings will now
+propagate to the live page (no more silent no-op gap from ACF Free era).
+
+--------------------------------------------------------------------------------
+TEST 3b — Reset to JSON default (idempotency)
+--------------------------------------------------------------------------------
+
+Method :
+  1. Read default_value of hero_subheadline from
+     wp-content/themes/saltelli/acf-json/group_theme_options_v1.json
+  2. `update_field("hero_subheadline", $default, "option")`
+  3. `wp cache flush` + sleep 2
+  4. Curl frontend, grep "diciassette aree" (>=1) AND grep test value (==0)
+
+Default value extracted from JSON (length 154):
+  Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia,
+  diciassette aree di pratica, vent'anni di lavoro accanto a famiglie e
+  imprese di Napoli.
+
+Post-reset probes:
+  get_field length     : 154
+  contains "diciassette aree" : YES
+  Frontend "diciassette aree" match : 1 (>=1 required)
+  Frontend test residue match       : 0 (==0 required)
+
+Result : PASS
+
+HTML context (verbatim from curl post-reset):
+  <div class="sl-hero__subheadline">
+      Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia,
+      diciassette aree di pratica, vent'anni di lavoro accanto a famiglie e
+      imprese di Napoli.            </div>
+
+Conclusion: frontend correctly returned to client-presentation copy. No
+residual TEST_W47FIX_SCF_* string. Reset round-trip clean.
+
+--------------------------------------------------------------------------------
+FINAL CONCLUSION
+--------------------------------------------------------------------------------
+
+  Test 1  Admin menu probe              : PASS
+  Test 2  Field group attached          : PASS  (1 group, group_theme_options_v1)
+  Test 3  update_field → frontend       : PASS  (1 match)
+  Test 3b Reset to JSON default         : PASS  (residue=0, default visible)
+
+  TUTTI PASS — SCF migration write-side pipeline is functional end-to-end.
+
+Editor implication:
+  Elena/Ludovica accederanno a "Saltelli — Settings" da WP-admin (slot 60),
+  modificheranno hero_subheadline (ed altri 25+ campi) e il frontend
+  rifletterà le modifiche dopo il salvataggio (e una potenziale cache flush).
+  Il bug originario di Wave 4.6 (silent no-op del function_exists guard +
+  assenza di options page UI) è chiuso.
+
+Non-regression sanity:
+  - Pre-test value already populated in DB (Wave 4.6 migration / Agent B seed
+    o pre-esistente). Test non-destructive: salvato → modificato → reset.
+  - No mutating actions outside Test 3/3b. No template/inc changes. Read-only
+    on theme files.
+  - No retry loops needed (1st curl post-flush already returned ≥1 match in
+    both the test-set phase and the reset phase).
+
+Race condition with Agent B (seed-script):
+  Test 3 design is independent from seed state — read current → set TEST →
+  verify TEST → reset to JSON default. Both pre-state e post-state usano la
+  stessa stringa "diciassette aree" (default JSON e fallback PHP coincidono),
+  quindi nessuna interferenza.
+
+Audit author : Agent C (Wave 4.7.fix Phase 2)
+Audit path   : .claude/knowledge/audits/wave4-7-fix/phase2-smoke-e2e.txt
+================================================================================
