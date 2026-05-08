@@ -1,0 +1,98 @@
+{
+    "key": "group_chi_siamo_v1",
+    "title": "Saltelli — Page Chi Siamo",
+    "fields": [
+        {
+            "key": "field_cs_msg",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "message": "Modifica il contenuto della pagina hub /chi-siamo/. Eyebrow + H1 + paragrafo intro. Le 3 card 'Lo Studio · Il Team · Risultati' sono renderizzate automaticamente dal template.",
+            "new_lines": "wpautop",
+            "esc_html": 0,
+            "wrapper": {"width": "", "class": "", "id": ""}
+        },
+        {
+            "key": "field_hub_chisiamo_eyebrow",
+            "label": "Eyebrow (sopra H1)",
+            "name": "hub_chisiamo_eyebrow",
+            "type": "text",
+            "instructions": "Riga editoriale piccola sopra il titolo. Default: '§ Chi siamo'.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "default_value": "§ Chi siamo",
+            "maxlength": 40,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_hub_chisiamo_h1_main",
+            "label": "H1 — parte 1 (regular)",
+            "name": "hub_chisiamo_h1_main",
+            "type": "text",
+            "instructions": "Prima riga del titolo H1 (font Playfair regular).",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "50", "class": "", "id": ""},
+            "default_value": "Quattro avvocati,",
+            "maxlength": 60,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_hub_chisiamo_h1_emphasis",
+            "label": "H1 — parte 2 (corsivo)",
+            "name": "hub_chisiamo_h1_emphasis",
+            "type": "text",
+            "instructions": "Seconda riga del titolo H1 (renderizzato in corsivo italic).",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "50", "class": "", "id": ""},
+            "default_value": "un atelier.",
+            "maxlength": 60,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_hub_chisiamo_intro",
+            "label": "Intro paragrafo",
+            "name": "hub_chisiamo_intro",
+            "type": "textarea",
+            "instructions": "Paragrafo lede sotto H1 (1-2 frasi).",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "rows": 3,
+            "default_value": "Studio Legale Emiliano Saltelli & Partners. Quattro professionisti in Via Vannella Gaetani, Chiaia. Una bottega — non una catena. Dal 1999.",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_slug",
+                "operator": "==",
+                "value": "chi-siamo"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [],
+    "active": true,
+    "description": "Field group page hub /chi-siamo/ (Page WP 2822). Eyebrow + H1 split + intro lede.",
+    "show_in_rest": false,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1778365000
+}

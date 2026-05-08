@@ -13,30 +13,31 @@
  */
 defined('ABSPATH') || exit;
 
-// Wave 4.7.fix.2 P4: hub strings + 3 cluster cards editable da SCF tab "Hub Pages".
-$sl_hub_eyebrow = (string) saltelli_option('hub_aree_eyebrow', __('§ Aree di pratica', 'saltelli'));
-$sl_hub_h1_main = (string) saltelli_option('hub_aree_h1_main', __('Diciassette aree,', 'saltelli'));
-$sl_hub_h1_em   = (string) saltelli_option('hub_aree_h1_emphasis', __('tre cluster.', 'saltelli'));
-$sl_hub_intro   = (string) saltelli_option('hub_aree_intro', __('Le materie sono ripartite per cluster di destinatario. Selezioniamo i casi dove la nostra esperienza fa la differenza concreta.', 'saltelli'));
+// Wave 4.7.fix.3: hub strings + 3 cluster cards attaccati a Page WP "Aree di Pratica"
+// (page_slug=aree-di-pratica). Edita da WP-Admin → Pagine → Aree di Pratica.
+$sl_hub_eyebrow = (string) saltelli_page_field('hub_aree_eyebrow', __('§ Aree di pratica', 'saltelli'));
+$sl_hub_h1_main = (string) saltelli_page_field('hub_aree_h1_main', __('Diciassette aree,', 'saltelli'));
+$sl_hub_h1_em   = (string) saltelli_page_field('hub_aree_h1_emphasis', __('tre cluster.', 'saltelli'));
+$sl_hub_intro   = (string) saltelli_page_field('hub_aree_intro', __('Le materie sono ripartite per cluster di destinatario. Selezioniamo i casi dove la nostra esperienza fa la differenza concreta.', 'saltelli'));
 
 $sl_clusters = [
     [
         'slug'    => 'privati',
         'num'     => '01 / 03',
-        'title'   => (string) saltelli_option('hub_aree_cluster_privati_label', __('Per i privati', 'saltelli')),
-        'desc'    => (string) saltelli_option('hub_aree_cluster_privati_desc', __('Famiglie e persone fisiche, lavoratori. Materie: tributario, lavoro, famiglia LGBTQ+, successioni, infortunistica, penale, bancario, condominio, immigrazione.', 'saltelli')),
+        'title'   => (string) saltelli_page_field('hub_aree_cluster_privati_label', __('Per i privati', 'saltelli')),
+        'desc'    => (string) saltelli_page_field('hub_aree_cluster_privati_desc', __('Famiglie e persone fisiche, lavoratori. Materie: tributario, lavoro, famiglia LGBTQ+, successioni, infortunistica, penale, bancario, condominio, immigrazione.', 'saltelli')),
     ],
     [
         'slug'    => 'imprese',
         'num'     => '02 / 03',
-        'title'   => (string) saltelli_option('hub_aree_cluster_imprese_label', __('Per le imprese', 'saltelli')),
-        'desc'    => (string) saltelli_option('hub_aree_cluster_imprese_desc', __('Aziende, freelance, partite IVA. Recupero crediti, domiciliazione d\'impresa, contenzioso commerciale.', 'saltelli')),
+        'title'   => (string) saltelli_page_field('hub_aree_cluster_imprese_label', __('Per le imprese', 'saltelli')),
+        'desc'    => (string) saltelli_page_field('hub_aree_cluster_imprese_desc', __('Aziende, freelance, partite IVA. Recupero crediti, domiciliazione d\'impresa, contenzioso commerciale.', 'saltelli')),
     ],
     [
         'slug'    => 'contenzioso-amministrativo',
         'num'     => '03 / 03',
-        'title'   => (string) saltelli_option('hub_aree_cluster_contenzioso_label', __('Contenzioso amministrativo', 'saltelli')),
-        'desc'    => (string) saltelli_option('hub_aree_cluster_contenzioso_desc', __('Ricorsi al TAR e al Consiglio di Stato. Atti della pubblica amministrazione, concessioni, procedure di gara.', 'saltelli')),
+        'title'   => (string) saltelli_page_field('hub_aree_cluster_contenzioso_label', __('Contenzioso amministrativo', 'saltelli')),
+        'desc'    => (string) saltelli_page_field('hub_aree_cluster_contenzioso_desc', __('Ricorsi al TAR e al Consiglio di Stato. Atti della pubblica amministrazione, concessioni, procedure di gara.', 'saltelli')),
     ],
 ];
 ?>

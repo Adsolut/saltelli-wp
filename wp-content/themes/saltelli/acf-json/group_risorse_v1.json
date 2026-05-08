@@ -1,0 +1,98 @@
+{
+    "key": "group_risorse_v1",
+    "title": "Saltelli — Page Risorse",
+    "fields": [
+        {
+            "key": "field_ris_msg",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "message": "Modifica il contenuto della pagina hub /risorse/. Eyebrow + H1 + paragrafo intro. Le 4 card 'Blog · Domande frequenti · Glossario · Guide' sono renderizzate automaticamente dal template.",
+            "new_lines": "wpautop",
+            "esc_html": 0,
+            "wrapper": {"width": "", "class": "", "id": ""}
+        },
+        {
+            "key": "field_hub_risorse_eyebrow",
+            "label": "Eyebrow (sopra H1)",
+            "name": "hub_risorse_eyebrow",
+            "type": "text",
+            "instructions": "Riga editoriale piccola sopra il titolo. Default: '§ Risorse'.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "default_value": "§ Risorse",
+            "maxlength": 40,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_hub_risorse_h1_main",
+            "label": "H1 — parte 1 (regular)",
+            "name": "hub_risorse_h1_main",
+            "type": "text",
+            "instructions": "Prima riga del titolo H1.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "50", "class": "", "id": ""},
+            "default_value": "Approfondire,",
+            "maxlength": 60,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_hub_risorse_h1_emphasis",
+            "label": "H1 — parte 2 (corsivo)",
+            "name": "hub_risorse_h1_emphasis",
+            "type": "text",
+            "instructions": "Seconda riga del titolo H1 (renderizzato in corsivo italic).",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "50", "class": "", "id": ""},
+            "default_value": "senza fretta.",
+            "maxlength": 60,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_hub_risorse_intro",
+            "label": "Intro paragrafo",
+            "name": "hub_risorse_intro",
+            "type": "textarea",
+            "instructions": "Paragrafo lede sotto H1 (1-2 frasi).",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "rows": 3,
+            "default_value": "Articoli, glossario, domande frequenti, guide gratuite. Materiale per orientarti prima di prenotare una consulenza.",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_slug",
+                "operator": "==",
+                "value": "risorse"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [],
+    "active": true,
+    "description": "Field group page hub /risorse/ (Page WP 2813). Eyebrow + H1 split + intro lede.",
+    "show_in_rest": false,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1778365000
+}

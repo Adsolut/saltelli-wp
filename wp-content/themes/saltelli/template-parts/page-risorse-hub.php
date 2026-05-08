@@ -16,11 +16,12 @@ $sl_blog_count   = wp_count_posts('post')->publish ?? 0;
 $sl_faq_count    = wp_count_posts('saltelli_faq')->publish ?? 0;
 $sl_guide_count  = wp_count_posts('saltelli_guida')->publish ?? 0;
 
-// Wave 4.7.fix.2 P4: hub copy editable da SCF tab "Hub Pages".
-$sl_hub_eyebrow = (string) saltelli_option('hub_risorse_eyebrow', __('§ Risorse', 'saltelli'));
-$sl_hub_h1_main = (string) saltelli_option('hub_risorse_h1_main', __('Approfondire,', 'saltelli'));
-$sl_hub_h1_em   = (string) saltelli_option('hub_risorse_h1_emphasis', __('senza fretta.', 'saltelli'));
-$sl_hub_intro   = (string) saltelli_option('hub_risorse_intro', __('Articoli, glossario, domande frequenti, guide gratuite. Materiale per orientarti prima di prenotare una consulenza.', 'saltelli'));
+// Wave 4.7.fix.3: hub copy ora attaccato a Page WP "Risorse" (page_slug=risorse).
+// Edita da WP-Admin → Pagine → Risorse → metabox "Saltelli — Page Risorse".
+$sl_hub_eyebrow = (string) saltelli_page_field('hub_risorse_eyebrow', __('§ Risorse', 'saltelli'));
+$sl_hub_h1_main = (string) saltelli_page_field('hub_risorse_h1_main', __('Approfondire,', 'saltelli'));
+$sl_hub_h1_em   = (string) saltelli_page_field('hub_risorse_h1_emphasis', __('senza fretta.', 'saltelli'));
+$sl_hub_intro   = (string) saltelli_page_field('hub_risorse_intro', __('Articoli, glossario, domande frequenti, guide gratuite. Materiale per orientarti prima di prenotare una consulenza.', 'saltelli'));
 ?>
 
 <section class="sl-page-hero sl-hub-hero" aria-labelledby="hub-risorse-h1">

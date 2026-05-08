@@ -524,6 +524,59 @@ function saltelli_option($name, $default = null) {
 }
 
 /**
+ * Wrapper per leggere SCF field attaccato a una Page WP (post_meta).
+ *
+ * Wave 4.7.fix.3 (2026-05-08): introduce per i field migrati da Theme Options
+ * a Page metabox. Il helper risolve automaticamente il Page ID corretto:
+ *  - Su frontend `is_front_page()` (e show_on_front=page) → page_on_front ID
+ *  - Altrove → get_queried_object_id() (la Page WP corrente)
+ *  - Override esplicito via $page_id parametro (utile per template fuori loop)
+ *
+ * Fallback chain (Phase 2-3 transition):
+ *  1. get_field($name, $page_id) — letto da postmeta della Page
+ *  2. saltelli_option($name, $default) — letto da Theme Options (legacy compat
+ *     during data migration). Rimosso in Phase 4 dopo conferma migration.
+ *  3. $default
+ *
+ * @param string $name Nome SCF field.
+ * @param mixed $default Default se field non popolato (postmeta + options).
+ * @param int|null $page_id Override esplicito Page ID. Default: auto-detect.
+ * @return mixed
+ */
+function saltelli_page_field($name, $default = '', $page_id = null) {
+    if (!function_exists('get_field')) {
+        return $default;
+    }
+
+    if ($page_id === null) {
+        if (is_front_page() && get_option('show_on_front') === 'page') {
+            $page_id = (int) get_option('page_on_front');
+        } else {
+            $page_id = (int) get_queried_object_id();
+        }
+    }
+    if (!$page_id) {
+        return $default;
+    }
+
+    $value = get_field($name, $page_id);
+    if ($value !== null && $value !== '' && $value !== false) {
+        return $value;
+    }
+
+    // Phase 2-3 transition fallback: legacy Theme Options.
+    // Phase 4 cleanup: rimuovere questa fallback e usare solo $default.
+    if (function_exists('saltelli_option')) {
+        $opt = saltelli_option($name, null);
+        if ($opt !== null && $opt !== '' && $opt !== false) {
+            return $opt;
+        }
+    }
+
+    return $default;
+}
+
+/**
  * Layout asimmetrico avvocati homepage (4 ritratti). Indicizzato per posizione (0-3).
  * Replica esattamente i valori del homepage-desktop.jsx:
  *   #0 Emiliano   col 1  span 5  offset 0
@@ -598,7 +651,12 @@ function saltelli_reading_time($post_id) {
  * @return array<int, array{identifier:string, descrizione:string, outcome:string}>
  */
 function saltelli_homepage_cases() {
-    $casi = saltelli_option('casi_rappresentativi_home', []);
+    // Wave 4.7.fix.3: source = Page WP Homepage (page_on_front). Helper saltelli_page_field
+    // ha fallback automatico a Theme Options durante transition Phase 2-3.
+    $homepage_id = (int) get_option('page_on_front');
+    $casi = $homepage_id
+        ? saltelli_page_field('casi_rappresentativi_home', [], $homepage_id)
+        : saltelli_option('casi_rappresentativi_home', []);
 
     // Path 1+2: ACF popolato.
     if (is_array($casi) && !empty($casi)) {
@@ -998,7 +1056,11 @@ function saltelli_attorney_formazione($slug) {
  * @return array<int, string>
  */
 function saltelli_press_outlets() {
-    $outlets = saltelli_option('press_outlets', []);
+    // Wave 4.7.fix.3: source = Page WP Homepage (page_on_front).
+    $homepage_id = (int) get_option('page_on_front');
+    $outlets = $homepage_id
+        ? saltelli_page_field('press_outlets', [], $homepage_id)
+        : saltelli_option('press_outlets', []);
     if (is_array($outlets) && !empty($outlets)) {
         $out = [];
         foreach ($outlets as $row) {
@@ -1023,7 +1085,11 @@ function saltelli_press_outlets() {
  * @return array<int, array{name:string, logo:string, url:string}>
  */
 function saltelli_press_outlets_full() {
-    $outlets = saltelli_option('press_outlets', []);
+    // Wave 4.7.fix.3: source = Page WP Homepage (page_on_front).
+    $homepage_id = (int) get_option('page_on_front');
+    $outlets = $homepage_id
+        ? saltelli_page_field('press_outlets', [], $homepage_id)
+        : saltelli_option('press_outlets', []);
     if (!is_array($outlets) || empty($outlets)) {
         return [];
     }
