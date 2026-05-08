@@ -80,7 +80,11 @@ function saltelli_mvp_to_audit_redirect_map() {
         // Sezioni hub rinomina (statici)
         '/avvocati/'                              => '/chi-siamo/team/',
         '/competenze/'                            => '/aree-di-pratica/',
-        '/casi/'                                  => '/chi-siamo/risultati/',
+        // Wave 4.7.fix.2: rename slug `risultati` → `casi-rappresentativi`
+        // (CPT saltelli_caso has_archive + rewrite slug). Old URL ridireziona,
+        // single-caso URLs gestiti dal pattern regex Step 5 sotto.
+        '/casi/'                                  => '/chi-siamo/casi-rappresentativi/',
+        '/chi-siamo/risultati/'                   => '/chi-siamo/casi-rappresentativi/',
         '/blog/'                                  => '/risorse/blog/',
         '/faq/'                                   => '/risorse/domande-frequenti/',
         '/glossario-legale/'                      => '/risorse/glossario-legale/',
@@ -168,6 +172,14 @@ function saltelli_legacy_redirect() {
     // /category|tag|author/{path}/ → /risorse/blog/category|tag|author/{path}/
     if (preg_match('#^/(category|tag|author)/(.+)$#', $path, $matches)) {
         wp_safe_redirect(home_url("/risorse/blog/{$matches[1]}/{$matches[2]}"), 301);
+        exit;
+    }
+
+    // Step 5 — Wave 4.7.fix.2: rename `risultati` → `casi-rappresentativi`
+    // /chi-siamo/risultati/{slug}/ → /chi-siamo/casi-rappresentativi/{slug}/
+    // (single-caso URLs; archive root path già gestito Step 2 via mvp_map).
+    if (preg_match('#^/chi-siamo/risultati/(.+)$#', $path, $matches)) {
+        wp_safe_redirect(home_url("/chi-siamo/casi-rappresentativi/{$matches[1]}"), 301);
         exit;
     }
 }
