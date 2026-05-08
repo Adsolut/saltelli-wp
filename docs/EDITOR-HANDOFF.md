@@ -1,10 +1,12 @@
 # Manuale Editoriale — Studio Legale Saltelli
 
 > **Destinatari:** Elena Cappabianca, Ludovica Casa, eventuali collaboratori editoriali esterni Adsolut.
-> **Versione:** 1.1 — 2026-05-05 (manuale + strumento di QA editoriale)
+> **Versione:** 2.0 — 2026-05-08 (Wave 4.7.fix: SCF migration + menu Saltelli Settings finalmente funzionale + 10 tab editabili)
 > **Mantenuto da:** Adsolut SRLS · tech@adsolut.it
 > **Repository:** https://github.com/Adsolut-Ai-Agency/saltelli-wp/blob/main/docs/EDITOR-HANDOFF.md
 > **Ambiente coperto:** staging WordPress dello Studio Legale Saltelli (production cut successivo).
+
+> **Cosa è cambiato in v2.0** (2026-05-08): Wave 4.7.fix ha sbloccato il menu **Saltelli — Settings** in WP-Admin (slot 60) che prima era invisibile a causa di un bug architetturale. Adesso puoi modificare **50 campi globali** (10 tab) — **inclusi 4 tab nuovi** (Hero Homepage, Studio Section, Team & Casi, Press Homepage) che prima non erano editabili. Vedi §4.
 
 Questo documento è il **manuale operativo** del nuovo CMS Saltelli. Lo userai sia come riferimento quotidiano per gestire i contenuti, sia come **strumento di QA** durante la fase di debug attiva: ogni volta che incontri un comportamento strano o un campo che non ti convince, segnala — il team tecnico ha bisogno del tuo occhio editoriale per chiudere il cerchio.
 
@@ -45,8 +47,8 @@ Il sito **NON è ancora live in produzione**. Quello che vedi su `staging.studio
 
 Il go-live richiede ancora questi step (in ordine):
 
-1. **Fase di debug attiva** ← siamo qui — Elena, Ludovica e team tecnico Adsolut testano il sito su staging, segnalano bug, popolano contenuti mancanti, validano il copy
-2. **Wave 4 — Production Readiness** (Adsolut) — ottimizzazioni performance, sicurezza, font self-hosted, audit Lighthouse
+1. **Fase di debug attiva** ← siamo qui — Elena, Ludovica e team tecnico Adsolut testano il sito su staging, segnalano bug, popolano contenuti mancanti, validano il copy. **🆕 Sblocco Wave 4.7.fix (2026-05-08)**: ora il menu Saltelli — Settings è visibile e funzionale → puoi finalmente editare i contenuti homepage + footer da WP-Admin senza chiedere al team tecnico.
+2. **Onboarding Elena 30 min** — sessione live di walkthrough sul nuovo menu Saltelli Settings (10 tab) e workflow di edit
 3. **Cut produzione** — DNS switch + tag release v1.0.0 + comunicazione cliente
 
 ### Cosa significa per te in questa fase
@@ -64,9 +66,11 @@ Il go-live richiede ancora questi step (in ordine):
 | Wave | Cosa è stato fatto |
 |---|---|
 | 0 — Foundation CMS | Plugin ACF Free attivo + 8 tipi di contenuto custom (FAQ, Casi, Modalità, Scenari, Principi, Trust signals, Formazione, Guide) |
-| 1 — Field Groups | 16 gruppi di campi ACF creati per pagine, avvocati, aree di pratica, settings globali |
+| 1 — Field Groups | 17 gruppi di campi ACF creati per pagine, avvocati, aree di pratica, settings globali |
 | 2 — Content Migration | 273 campi + 63 elementi CPT popolati con i contenuti del sito (FAQ, casi vinti, body editoriali, ecc.) |
 | 3 — Template Refactor | I template PHP del tema ora leggono dai campi ACF: tu modifichi i campi, il sito si aggiorna |
+| 4 — 4.8 — CMS editability + cleanup migrations + UX polish | Iterazioni multiple su editability, ACF default values, content migration, visual polish |
+| 4.7.fix — SCF migration ⭐ | Sostituito plugin ACF Free → Secure Custom Fields. Ora il menu "Saltelli — Settings" è visibile e tutti i 50 campi globali (10 tab) sono editabili da WP-Admin. |
 
 ### Cosa devi aspettarti DI TROVARE durante il debug (lista incompleta)
 
@@ -174,13 +178,70 @@ Se entra un freelance editorial, **NON dargli il login Administrator**. Aprire t
 
 ---
 
-## 4. Saltelli — Settings (impostazioni globali)
+## 4. Saltelli — Settings (impostazioni globali) ⭐ PRIMA DESTINAZIONE
 
 📍 **Dove**: sidebar WP-Admin, voce **Saltelli — Settings** (icona cogwheel, posizione 60).
 
-Sono **6 tab**. Tutto quello che metti qui appare in **tutte le pagine** del sito (header, footer, schede contatti, ecc.).
+> **🆕 Aggiornamento v2.0 (Wave 4.7.fix · 2026-05-08)**: il menu è ora visibile e tutti i **10 tab** sono editabili. Pre Wave 4.7.fix il menu era silently invisibile (bug architetturale `acf_add_options_page()` ACF Pro-only su ACF Free) e 4 tab nuovi (Hero / Studio Section / Team & Casi / Press) non avevano backing storage. Adesso 50 chiavi options_* sono popolate in DB (24 nuove + 26 baseline Wave 4.6) e ogni modifica si riflette live sul frontend.
 
-### Tab 1 — Studio Info
+Sono **10 tab**. Tutto quello che metti qui appare in **tutte le pagine** del sito (homepage, header, footer, schede contatti, ecc.). Per modificare: clicca sul tab → modifica → click "Update" in alto a destra → ricarica una tab del sito pubblico per verificare.
+
+| Tab | Cosa contiene | Pagine impattate |
+|---|---|---|
+| 1. Hero Homepage | Eyebrow, headline, subheadline, CTA hero | Homepage `/` |
+| 2. Studio Section | Titolo + body sezione "Lo Studio", foto facciata | Homepage `/` |
+| 3. Team & Casi | Titoli sezioni, casi rappresentativi homepage | Homepage `/` |
+| 4. Press Homepage | Loghi outlet press (max 12 righe) | Homepage `/` |
+| 5. Studio Info | Indirizzo, email, PEC, P.IVA, telefono | Footer + schede contatti + schema JSON-LD |
+| 6. Mappa | Coordinate latitudine/longitudine | Schema LocalBusiness |
+| 7. Brand | Payoff, statement, trust signals (4 plate) | Footer + about |
+| 8. Footer | Credit text, newsletter, colophon | Footer |
+| 9. Social | URL Instagram, Facebook, LinkedIn, X | Footer + schede contatti |
+| 10. CTA Defaults | Label, URL, subline italic, trust signal globali | Tutti i bottoni "Prenota" sparsi |
+
+⚠️ **NB importante**: per i campi che lasci vuoti, il frontend continua a mostrare il copy "presentazione cliente" hardcoded nel template (DEC-029 fallback). Cioè: se cancelli "Diritto, con misura." dall'Hero headline, il frontend mostrerà comunque il testo di default. Per "azzerare visivamente" un campo devi metterci una stringa con uno spazio o usare il toggle se previsto.
+
+### Tab 1 — Hero Homepage 🆕
+
+| Campo | Valore default attuale | Note editoriali |
+|---|---|---|
+| Eyebrow (sopra titolo) | Studio Legale · Napoli · Chiaia · Dal 1999 | Riga sopra l'headline. Max 50ch. Usa il separatore "·". |
+| Headline (titolo principale) | Diritto, con misura. | Max 30ch. Punto finale obbligatorio (cifra stilistica). |
+| Subheadline (paragrafo lede) | Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, diciassette aree di pratica, vent'anni di lavoro accanto a famiglie e imprese di Napoli. | 1-2 frasi. Tono editoriale, niente bullet. Cifre come parole ("diciassette", non "17"). |
+| CTA hero — Label | Prenota una consulenza gratuita | Bottone hero. Imperativo. |
+| CTA hero — URL | /contatti/ | Path relativo. |
+
+🔍 **Test debug consigliato**: cambia "Diritto, con misura." in "DIRITTO TEST", salva, ricarica `/`. Verifica che si aggiorni. Poi rimettilo corretto. Questo è il test che ha confermato la pipeline write-side end-to-end durante Wave 4.7.fix Phase 2.
+
+### Tab 2 — Studio Section 🆕
+
+| Campo | Valore default | Note |
+|---|---|---|
+| Titolo sezione studio (homepage) | Un atelier, in senso napoletano. | Punto finale obbligatorio. Max 60ch. |
+| Body sezione studio (homepage) | (vuoto — fallback hardcoded nel template) | 2-3 paragrafi editoriali. Quando lo popoli, sostituisce il fallback. |
+| Foto facciata Studio | (vuoto — image picker) | JPG/WebP, 1920×1080 minimo, esterno Studio (non interni). |
+
+### Tab 3 — Team & Casi 🆕
+
+| Campo | Valore default | Note |
+|---|---|---|
+| Titolo sezione team (homepage) | Quattro\nprofessionisti. | `\n` = a-capo nel layout split. Punto finale. |
+| Titolo sezione casi (homepage) | Casi rappresentativi. | Idem. |
+| Casi rappresentativi in homepage | (vuoto — post_object picker) | Selezione manuale dei 3 casi homepage (CPT saltelli_caso). Se vuoto, fallback hardcoded a 3 casi. |
+
+### Tab 4 — Press Homepage 🆕
+
+Repeater max 12 righe. Ogni riga = 1 outlet stampa con logo.
+
+| Campo riga | Note |
+|---|---|
+| Nome outlet | "Il Mattino", "Repubblica Napoli", ecc. |
+| Logo (SVG/PNG) | SVG preferibile, monochrome navy `#1B2B4B`. Fallback: PNG @2x trasparente. |
+| URL articolo (opz.) | Link diretto all'articolo (apre in new tab). Se vuoto, logo è solo decorativo. |
+
+⚠️ Se aggiungi una riga ma non popoli nome+logo, la riga viene scartata in render. La sezione Press scompare dalla homepage se zero righe valide.
+
+### Tab 5 — Studio Info
 
 | Campo | Valore attuale | Note editoriali |
 |---|---|---|
@@ -199,7 +260,7 @@ Sono **6 tab**. Tutto quello che metti qui appare in **tutte le pagine** del sit
 
 🔍 **Test debug consigliato**: cambia la P.IVA in modo dummy ("123456"), salva, vai sul footer del sito pubblico e verifica che si aggiorni. Poi rimettila corretta.
 
-### Tab 2 — Mappa
+### Tab 6 — Mappa
 
 | Campo | Esempio | Note |
 |---|---|---|
@@ -208,16 +269,22 @@ Sono **6 tab**. Tutto quello che metti qui appare in **tutte le pagine** del sit
 
 Servono allo schema JSON-LD `LocalBusiness` (le AI capiscono dove siamo geograficamente). Per ottenere le coordinate: Google Maps → tasto destro sul pin → copia coordinate.
 
-### Tab 3 — Brand
+### Tab 7 — Brand
 
 | Campo | Esempio | Note |
 |---|---|---|
 | Payoff | Diritto, con misura | Riga sotto il logo. Max 25 caratteri. |
 | Brand statement | Un atelier legale italiano. Quattro avvocati a Chiaia. Vent'anni di pratica accanto a famiglie e imprese. | 1–2 frasi, usato in footer e in `/lo-studio/`. Tono editoriale, niente bullet point. |
+| Trust signal 1 (label + caption) | "20+ ANNI" / "ESPERIENZA" | Plate trust homepage. Caps lock voluto. |
+| Trust signal 2 (label + caption) | "4 AVVOCATI" / "TEAM SPECIALIZZATO" | |
+| Trust signal 3 (label + caption) | "17 AREE" / "DI PRATICA" | |
+| Trust signal 4 (label + caption) | "COA FAMIGLIA" / "MUNICIPALITÀ 1" | |
 
 💡 Il brand statement attuale è la versione finale concordata. Se proponi una variante, segnala via email per discussione — **non sostituirla unilateralmente**, è un asset di brand identity.
 
-### Tab 4 — Footer
+🆕 I 4 trust signal sono stati seedati con i copy ricavati dal brief. Modificabili ma cambia uniformemente in homepage + about.
+
+### Tab 8 — Footer
 
 | Campo | Esempio | Note |
 |---|---|---|
@@ -225,8 +292,12 @@ Servono allo schema JSON-LD `LocalBusiness` (le AI capiscono dove siamo geografi
 | Credit URL | https://adsolut.it | Link del credit |
 | Newsletter footer attiva? | Sì / No | Toggle per mostrare o nascondere il modulo iscrizione |
 | Newsletter provider | Brevo / Mailchimp / Custom | Cambia il provider solo se richiesto da Avv. Saltelli |
+| Colophon indirizzo | Via Vannella Gaetani, 27\n80121 Napoli — Chiaia | Riga colophon footer. `\n` = a-capo. 🆕 Wave 4.7.fix |
+| Colophon orari | Lun – Ven · 10:00 – 19:00\nSolo su appuntamento | Idem. 🆕 |
+| Colophon email | (vuoto — fallback a Studio Info → Email pubblica) | Override colophon. Se vuoto usa Studio Info. 🆕 |
+| Colophon telefono | +39 081 1813 1119 | 🆕 |
 
-### Tab 5 — Social
+### Tab 9 — Social
 
 URL completi degli account ufficiali. Lascia vuoto se l'account non esiste (l'icona scompare automaticamente).
 
@@ -239,7 +310,7 @@ URL completi degli account ufficiali. Lascia vuoto se l'account non esiste (l'ic
 
 🔍 **Task debug per Elena**: chiedere ad Avv. Saltelli se LinkedIn ufficiale dello Studio è disponibile. Se sì, popolarlo qui.
 
-### Tab 6 — CTA Defaults
+### Tab 10 — CTA Defaults
 
 I bottoni "Prenota un incontro" che vedi sparsi sul sito hanno **valori di default** che vengono presi da qui. Le singole pagine possono sovrascriverli, ma se non lo fanno usano questi.
 
@@ -1116,9 +1187,10 @@ Quando il sito evolve (Wave 4 production prep, Wave 5 ACF-izzazione `/lo-studio/
 
 **Cronologia versioni**:
 
+- **v2.0 — 2026-05-08** — Wave 4.7.fix · SCF migration. Sbloccato menu Saltelli — Settings (era invisibile per bug architetturale ACF Free). §4 riscritta: 10 tab invece di 6, aggiunti Hero Homepage + Studio Section + Team & Casi + Press Homepage (4 tab nuovi editabili), aggiornati Brand (4 trust signals) e Footer (4 colophon fields). 50 chiavi `options_*` ora popolate in DB.
 - **v1.1 — 2026-05-05** — Versione estesa post-audit. Aggiunta: §0 fase debug, §6.1 nota bio_estesa avvocati, §10 workflow comuni, §12 sezione GEO, §15 errori comuni, §17 reporting bug. Glossario esteso. Esempi reali buono/cattivo per FAQ + casi + answer capsule.
 - **v1.0 — 2026-05-04** — Prima versione post Wave 3. Copre: 16 ACF Field Group, 9 pagine custom, 4 schede avvocato, 19 aree di pratica, 8 CPT modulari, blog standard.
 
 ---
 
-*Manuale mantenuto da Adsolut SRLS · ultima revisione 2026-05-05 · contatto: tech@adsolut.it*
+*Manuale mantenuto da Adsolut SRLS · ultima revisione 2026-05-08 · contatto: tech@adsolut.it*

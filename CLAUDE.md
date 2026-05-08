@@ -16,14 +16,14 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 
 **Strategy:** "Legal Luxury Minimal" — boutique editoriale italiano, tipografia dominante, palette navy/crema/bronzo. Tier-1 deep clusters: Tributario · Lavoro · Famiglia LGBTQ+. The other 16 practice areas get tier-2 lighter pages.
 
-## Current state — v1.0.0-recovery-wave3-debug
+## Current state — v1.3.6-wave4-7-fix-scf-migration
 
-**Last updated:** 2026-05-05 (repo housekeeping post Debug & QA · Wave 4 ready)
-**Branch:** `main` · feature `feat/debug-qa` mergeata (`fd1f6fc`)
+**Last updated:** 2026-05-08 (Wave 4.7.fix mergeata: SCF migration + Theme Options activation)
+**Branch:** `main` · feature `fix/wave4-7-fix-scf-migration` ⏳ in audit
 **Demo:** ✅ presentata al cliente · feedback iteration assorbita
-**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.0.0-recovery-wave3-debug` · 21/21 PASS
-**Active phase:** Acceptance test editoriale (Elena/Ludovica) + Wave 4 ready to launch + repo housekeeping done
-**Next:** **Wave 4 / Step F (Production Readiness)** — prompt in `prompts/` (1072 righe, 5 phases) · lanciabile in parallelo agli acceptance test
+**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.3.6-wave4-7-fix-scf-migration` · ACF→SCF switched, 50/50 options popolati
+**Active phase:** Acceptance test editoriale (Elena/Ludovica) — ora con menu **Saltelli — Settings** funzionale (slot 60)
+**Next:** Onboarding Elena 30 min · valutare se Wave 4.9 Gutenberg migration ancora in scope · cut produzione
 
 **Infra staging (consolidata 2026-04-30):**
 - Droplet DO `saltelli-staging-ams3-01` · IPv4 `178.62.207.50` · ams3 · s-1vcpu-2gb · Ubuntu 24.04 LTS
@@ -59,8 +59,10 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 | EDITOR-HANDOFF v1.0 (manuale editoriale Elena/Ludovica/esterni) | docs · `60cea61` | ✅ |
 | EDITOR-HANDOFF v1.1 (workflow estesi + nota bio_estesa + fase debug) | docs | ✅ |
 | **Debug & QA — stress test pre-production (4 bugs, 1 P0 architectural fix)** | **1.0.0-recovery-wave3-debug** | **✅** |
+| Wave 4–4.7.1 (font WOFF2, critical CSS, CMS editability, ACF default_value hotfix) | 1.3.0–1.3.4 | ✅ |
+| Wave 4.8 — Cleanup + Migrations + UX Polish FINAL | 1.3.5-wave4-8-cleanup-final | ✅ |
+| **Wave 4.7.fix — SCF Migration + Theme Options Activation (50/50 fields seedabili popolati, write-side pipeline funzionale)** | **1.3.6-wave4-7-fix-scf-migration** | **✅** |
 | Acceptance test editoriale (Elena/Ludovica console+CF7+cross-browser+copy) | parallel | 🔍 ACTIVE |
-| **Wave 4 / Step F — Production Readiness (WOFF2, SRI, Critical CSS, Lighthouse ≥92)** | **1.0.0-rc1** | **⏸ ready to launch** |
 | Cut produzione (DNS switch staging→prod) | 1.0.0 | ⏸ |
 
 ### 0.17.x — consolidation log (4 collisioni di numbering risolte)
@@ -232,13 +234,44 @@ BREAKPOINTS: 375 / 768 / 1024 / 1440 (mobile-first)
 ```
 WordPress 6.x          (current Docker local)
 PHP 8.2+
-ACF Pro                (NOT installed — all fallbacks editorial hardcoded)
+SCF 6.8.4              (Secure Custom Fields, Automattic fork — Wave 4.7.fix)
+ACF Free 6.8.0         (INACTIVE on staging — kept for fast rollback only)
 Yoast SEO              (active — coabitation enforced)
 Custom theme path:     wp-content/themes/saltelli/
 Animation libs:        GSAP 3.12.5 + ScrollTrigger from CDN (deferred)
                        Lenis 1.1.13 (currently disabled by Polish Agent — re-evaluate Step F)
                        SplitText: NOT used (Polish Agent animated <span>s directly)
 ```
+
+### Custom fields plugin — SCF (Wave 4.7.fix, 2026-05-08)
+
+**Plugin attivo:** Secure Custom Fields 6.8.4 — fork Automattic di ACF (Q4 2024)
+**Plugin precedente:** Advanced Custom Fields Free 6.8.0 (deactivated, NOT removed)
+
+**Motivo switch:** ACF Free non include `acf_add_options_page()` (feature ACF Pro-only).
+CMS Diagnosis Round 2 (REPORT.md 2026-05-08) ha identificato bug architetturale: la
+Theme Options page non si registrava mai (silent no-op del `function_exists()` guard
+in `inc/acf-fields.php:30`) → Elena/Ludovica non potevano modificare 50 field globali.
+
+**API compat:** drop-in compatible. `get_field`, `update_field`, `acf_add_options_page`,
+`acf_get_field_groups`, `acf_get_options_pages`, location rules custom (es. `page_slug ==`
+del Debug-QA bug-04 fix), JSON auto-load da `acf-json/`, tutti funzionanti.
+
+**Stato post-switch:** `function_exists(acf_add_options_page)=YES`, `defined(ACF_PRO)=YES`,
+17 field group preserved, options page `saltelli-settings` registrata + visibile in admin
+slot 60. 50 chiavi `options_*` popolate (26 baseline Wave 4.6 + 24 seeded da
+`inc/seed-theme-options.php`).
+
+**Rollback emergency** (1-shot, già testato su staging Phase 1):
+```sh
+ssh deploy@178.62.207.50 "cd /var/www/saltelli && \
+  sudo -u www-data wp plugin deactivate secure-custom-fields --path=/var/www/saltelli && \
+  sudo -u www-data wp plugin activate advanced-custom-fields --path=/var/www/saltelli && \
+  sudo -u www-data wp cache flush --path=/var/www/saltelli"
+```
+
+**Backup pre-switch su droplet:** `~/backups/wave4-7-fix-pre-switch-20260508-1220/`
+(db.sql 59MB · theme.tar.gz 352KB · plugins-acf.tar.gz 6.2MB).
 
 ## Convention summary for agents
 
@@ -303,5 +336,5 @@ Re-read this file. If still in doubt, ask Duccio. Don't guess on:
 - Anything that would appear in schema markup as fact
 
 ---
-*Last updated: 2026-05-05 · v1.0.0-recovery-wave3-debug · Debug & QA chiuso (`fd1f6fc`) · repo housekeeping + history distillation done (`0ee9789`) · workflow rules formalizzate · Wave 4 ready to launch*
+*Last updated: 2026-05-08 · v1.3.6-wave4-7-fix-scf-migration · SCF migration + Theme Options activation · 50/50 options popolati · pipeline write-side Elena finalmente funzionale*
 *Maintained by orchestrator (Claude in chat) after each milestone.*

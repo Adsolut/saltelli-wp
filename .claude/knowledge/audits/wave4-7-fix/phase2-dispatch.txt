@@ -1,0 +1,11 @@
+=== Phase 2 pre-flight ===
+Date: 2026-05-08T12:23:29+02:00
+Branch: fix/wave4-7-fix-scf-migration
+WP-CLI 2.12.0
+
+Audit dir:
+total 24
+drwxr-xr-x@  4 aldosantoro  staff   128 May  8 12:23 .
+drwxr-xr-x@ 14 aldosantoro  staff   448 May  8 12:23 ..
+-rw-r--r--@  1 aldosantoro  staff  6957 May  8 12:23 phase1-pre-switch.txt
+-rw-r--r--@  1 aldosantoro  staff   123 May  8 12:23 phase2-dispatch.txt

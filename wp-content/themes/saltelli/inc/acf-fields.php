@@ -3,15 +3,20 @@
  * ACF bootstrap.
  *
  * Wave 1 v1: i field group sono in `acf-json/` (root del theme), path di
- * default ACF — nessun custom load/save filter necessario. ACF Free 6.8.0
- * picka automaticamente al boot. Sostituisce il setup precedente che
- * usava `inc/acf-json/` con field group placeholder a base repeater
- * (richiedevano ACF Pro mai installato).
+ * default ACF — nessun custom load/save filter necessario. Il plugin
+ * (ACF/SCF) picka automaticamente al boot.
  *
- * I 16 field group Wave 1 sono ACF Free compatible:
+ * Wave 4.7.fix (2026-05-08): switch da Advanced Custom Fields Free 6.8.0
+ * a Secure Custom Fields 6.8.4 (fork Automattic, Q4 2024). Motivo: ACF
+ * Free non include `acf_add_options_page()` (feature ACF Pro-only) →
+ * silent no-op del menu Saltelli Settings. SCF è drop-in compatible API
+ * e include options pages free. CMS Diagnosis Round 2 REPORT.md.
+ *
+ * I 17 field group Wave 1+ sono ACF/SCF compatible:
  *  - 10 CPT (Agent B): avvocato_v1, competenza_v1, *_item_v1
  *  - 5 page (Agent A):  costi_v1, casi_v1, contatti_v1, faq_v1, info_shared_v1
  *  - 1 options (Agent C): theme_options_v1
+ *  - 1 page (post-Wave 1): lo_studio_v1
  *
  * @package Saltelli
  */
@@ -21,7 +26,11 @@ defined('ABSPATH') || exit;
 /**
  * Options page registration.
  *
- * ACF Free supporta `acf_add_options_page()` (no Pro requirement).
+ * SCF (Secure Custom Fields, Automattic fork) supporta `acf_add_options_page()`
+ * come feature free. Pre-Wave 4.7.fix il theme girava su ACF Free 6.8.0 che
+ * NON include questa funzione (Pro-only): il `function_exists()` guard
+ * mascherava l'errore in fase di boot e il menu non veniva mai registrato.
+ *
  * Il field group `group_theme_options_v1` (Agent C) si aggancia qui via
  * location `options_page == saltelli-settings`.
  */
