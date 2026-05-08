@@ -1,0 +1,81 @@
+=== Phase 1 — Call-site saltelli_option con fallback PHP ===
+Total call-site: 53
+Con fallback string literal: 29
+Unique field name con fallback: 23
+
+=== UNIQUE field with hardcoded fallback ===
+
+  brand_payoff  (1 call-site):
+    header.php:11  fallback=Diritto, con misura
+
+  cases_titolo  (1 call-site):
+    front-page.php:29  fallback=Casi rappresentativi.
+
+  colophon_indirizzo  (2 call-site):
+    footer.php:34  fallback=Via Vannella Gaetani, 27\n80121 Napoli — Chiaia
+    front-page.php:18  fallback=Via Vannella Gaetani, 27\n80121 Napoli — Chiaia
+
+  colophon_orari  (1 call-site):
+    front-page.php:19  fallback=Lun – Ven · 10:00 – 19:00\nSolo su appuntamento
+
+  colophon_telefono  (1 call-site):
+    front-page.php:21  fallback=+39 081 1813 1119
+
+  footer_credit_text  (1 call-site):
+    footer.php:51  fallback=Realizzato da Adsolut Web Agency
+
+  footer_credit_url  (1 call-site):
+    footer.php:52  fallback=https://adsolut.it
+
+  footer_newsletter_provider  (1 call-site):
+    footer.php:57  fallback=brevo
+
+  hero_cta_label  (1 call-site):
+    front-page.php:15  fallback=Prenota una consulenza gratuita
+
+  hero_cta_url  (1 call-site):
+    front-page.php:16  fallback=/contatti/
+
+  hero_eyebrow  (1 call-site):
+    front-page.php:12  fallback=Studio Legale · Napoli · Chiaia · Dal 1999
+
+  hero_headline  (1 call-site):
+    front-page.php:13  fallback=Diritto, con misura.
+
+  hero_subheadline  (1 call-site):
+    front-page.php:14  fallback=Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, diciassette ar
+
+  studio_cap_citta  (2 call-site):
+    footer.php:29  fallback=80121 Napoli
+    template-parts/page-contatti.php:162  fallback=80121 Napoli
+
+  studio_indirizzo_via  (2 call-site):
+    footer.php:28  fallback=Via Vannella Gaetani 27
+    template-parts/page-contatti.php:161  fallback=Via Vannella Gaetani, 27
+
+  studio_orari_sabato  (1 call-site):
+    template-parts/page-contatti.php:212  fallback=Sabato su appuntamento
+
+  studio_orari_settimana  (1 call-site):
+    template-parts/page-contatti.php:211  fallback=Lun – Ven · 10:00 – 19:00
+
+  studio_ordine_avvocati  (1 call-site):
+    footer.php:45  fallback=Iscritto Ordine Avvocati Napoli
+
+  studio_piva  (1 call-site):
+    footer.php:40  fallback=06685101211
+
+  studio_quartiere  (2 call-site):
+    footer.php:30  fallback=Chiaia
+    template-parts/page-contatti.php:163  fallback=Chiaia
+
+  studio_telefono_pubblico  (3 call-site):
+    404.php:21  fallback=+39 081 1813 1119
+    header.php:9  fallback=+39 081 1813 1119
+    footer.php:37  fallback=+39 081 1813 1119
+
+  studio_titolo_sezione  (1 call-site):
+    front-page.php:24  fallback=Un atelier, in senso napoletano.
+
+  team_titolo  (1 call-site):
+    front-page.php:28  fallback=Quattro\nprofessionisti.

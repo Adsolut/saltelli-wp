@@ -1,0 +1,65 @@
+=== Phase 7 — URL/Title check + Menu mapping ===
+=== Page slug vs title (potential mismatch) ===
+Total Pages publish: 22
+
+  ID 2811: slug="lo-studio" title="Chi Siamo" (sanitize_title→chi-siamo)
+  ID 2714: slug="prenota-appuntamento" title="Prenota un appuntamento" (sanitize_title→prenota-un-appuntamento)
+  ID 2713: slug="richiedi-preventivo" title="Richiedi un preventivo" (sanitize_title→richiedi-un-preventivo)
+  ID 2699: slug="risultati" title="Casi rappresentativi" (sanitize_title→casi-rappresentativi)
+
+=== Menu items (nav_menu) check ===
+=== Registered menus ===
+
+Menu: Main (slug=main, term_id=3, count=26)
+  - HOME → https://staging.studiolegalesaltelli.it/  (type=page, obj_id=17)
+  - LO STUDIO → #  (type=custom, obj_id=2281)
+  - PRENOTA APPUNTAMENTO → https://staging.studiolegalesaltelli.it/prenota-un-appuntamento/  (type=page, obj_id=361)
+  - COMPETENZE → /competenze/  (type=custom, obj_id=85)
+    - Diritto societario → https://staging.studiolegalesaltelli.it/?page_id=300  (type=page, obj_id=300)
+    - Divorzista - Diritto di Famiglia → https://staging.studiolegalesaltelli.it/?page_id=947  (type=page, obj_id=947)
+    - Diritto Del Lavoro → https://staging.studiolegalesaltelli.it/?page_id=292  (type=page, obj_id=292)
+    - Diritto Condominiale → https://staging.studiolegalesaltelli.it/?page_id=285  (type=page, obj_id=285)
+    - Contrattualistica → https://staging.studiolegalesaltelli.it/?page_id=273  (type=page, obj_id=273)
+    - Diritto Dell'Immigrazione → https://staging.studiolegalesaltelli.it/?page_id=254  (type=page, obj_id=254)
+    - Ricorsi Napoli Obiettivo Valore → https://staging.studiolegalesaltelli.it/?page_id=996  (type=page, obj_id=996)
+    - Invalidità Civile e Diritto Previdenziale → https://staging.studiolegalesaltelli.it/?page_id=2241  (type=page, obj_id=2241)
+  - BLOG → https://staging.studiolegalesaltelli.it/risorse/blog/  (type=page, obj_id=1413)
+  - CONTATTI → https://staging.studiolegalesaltelli.it/contatti/  (type=page, obj_id=23)
+
+Menu: Saltelli Header (slug=saltelli-header, term_id=996, count=22)
+  - Chi Siamo → /chi-siamo/  (type=custom, obj_id=2715)
+    - Lo Studio → /chi-siamo/  (type=custom, obj_id=2716)
+    - Il Team → /avvocati/  (type=custom, obj_id=2717)
+    - Risultati → /casi/  (type=custom, obj_id=2718)
+  - Aree di Pratica → /competenze/  (type=custom, obj_id=2719)
+    - Per i Privati → /tipo-area/privati/  (type=custom, obj_id=2720)
+    - Per le Imprese → /tipo-area/imprese/  (type=custom, obj_id=2721)
+    - Contenzioso Amministrativo → /tipo-area/contenzioso/  (type=custom, obj_id=2722)
+    - Tutte le aree → /competenze/  (type=custom, obj_id=2723)
+  - Risorse → /faq/  (type=custom, obj_id=2724)
+    - Blog → /blog/  (type=custom, obj_id=2725)
+    - Domande Frequenti → /faq/  (type=custom, obj_id=2726)
+    - Guide Gratuite → /guide-gratuite/  (type=custom, obj_id=2727)
+    - Glossario Legale → /glossario-legale/  (type=custom, obj_id=2728)
+  - Costi e Consulenze → /costi/  (type=custom, obj_id=2729)
+    - Prima Consulenza → /prima-consulenza/  (type=custom, obj_id=2730)
+    - Come Lavoriamo → /come-lavoriamo/  (type=custom, obj_id=2731)
+    - Richiedi Preventivo → /richiedi-preventivo/  (type=custom, obj_id=2732)
+  - Contatti → /contatti/  (type=custom, obj_id=2733)
+    - Prenota Appuntamento → /prenota-appuntamento/  (type=custom, obj_id=2734)
+    - Dove Siamo → /contatti/#sede  (type=custom, obj_id=2735)
+    - Lavora con Noi → /lavora-con-noi/  (type=custom, obj_id=2736)
+
+=== nav_menu_locations registered ===
+  primary → menu_id=996
+
+=== /risorse/ behavior check ===
+  /risorse/ final URL after redirect: https://staging.studiolegalesaltelli.it/risorse/
+  Page risorse exists: YES (ID 2813, status publish, content_len=0)
+  Template page-risorse-hub.php: YES
+
+=== /chi-siamo/risultati/ rendered title (curl + grep) ===
+<title>Casi rappresentativi Archive - Studio Legale Saltelli</title>
+
+=== /chi-siamo/team/ rendered title ===
+<title>Avvocati Archive - Studio Legale Saltelli</title>

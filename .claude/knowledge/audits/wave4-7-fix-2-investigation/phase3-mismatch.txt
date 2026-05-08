@@ -1,0 +1,37 @@
+=== Phase 3 — Cross-reference PHP fallback vs JSON default ===
+
+=== SUMMARY ===
+Mismatch CRITICAL (PHP fallback + JSON empty): 0
+Mismatch DIVERGING (PHP != JSON): 5
+OK aligned: 18
+Field PHP custom (no JSON): 0
+
+=== MISMATCH CRITICAL (0) ===
+(admin vuoto, frontend mostra fallback PHP — Elena non sa dove modificare)
+
+=== MISMATCH DIVERGING (5) ===
+
+  colophon_indirizzo:
+    PHP : Via Vannella Gaetani, 27\n80121 Napoli — Chiaia
+    JSON: Via Vannella Gaetani, 27
+80121 Napoli — Chiaia
+
+  footer_newsletter_provider:
+    PHP : brevo
+    JSON: static
+
+  colophon_orari:
+    PHP : Lun – Ven · 10:00 – 19:00\nSolo su appuntamento
+    JSON: Lun – Ven · 10:00 – 19:00
+Solo su appuntamento
+
+  team_titolo:
+    PHP : Quattro\nprofessionisti.
+    JSON: Quattro
+professionisti.
+
+  studio_orari_settimana:
+    PHP : Lun – Ven · 10:00 – 19:00
+    JSON: Lun – Ven · 09:30 – 18:30
+
+=== Field PHP custom (no JSON) - 0 ===

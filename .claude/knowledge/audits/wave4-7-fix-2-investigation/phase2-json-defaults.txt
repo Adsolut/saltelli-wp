@@ -1,0 +1,41 @@
+=== Phase 2 — JSON default_value scan ===
+Total field nel JSON (excl tabs): 53
+CON default_value: 40
+SENZA default_value (empty): 12
+
+=== Field SENZA default_value ===
+  studio_body  type=wysiwyg
+  studio_foto_facciata  type=image
+  casi_rappresentativi_home  type=post_object
+  press_outlets.name  type=text
+  press_outlets.logo  type=image
+  press_outlets.url  type=url
+  studio_pec  type=email
+  colophon_email  type=email
+  social_instagram  type=url
+  social_linkedin  type=url
+  social_twitter  type=url
+  social_facebook  type=url
+
+=== Field CON default_value (sample 20) ===
+  hero_eyebrow  type=text  default=Studio Legale · Napoli · Chiaia · Dal 1999
+  hero_headline  type=text  default=Diritto, con misura.
+  hero_subheadline  type=textarea  default=Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, diciassette ar
+  hero_cta_label  type=text  default=Prenota una consulenza gratuita
+  hero_cta_url  type=text  default=/contatti/
+  studio_titolo_sezione  type=text  default=Un atelier, in senso napoletano.
+  team_titolo  type=textarea  default=Quattro
+professionisti.
+  cases_titolo  type=text  default=Casi rappresentativi.
+  studio_indirizzo_via  type=text  default=Via Vannella Gaetani 27
+  studio_cap_citta  type=text  default=80121 Napoli
+  studio_quartiere  type=text  default=Chiaia
+  studio_orari_settimana  type=text  default=Lun – Ven · 09:30 – 18:30
+  studio_orari_sabato  type=text  default=Sabato su appuntamento
+  studio_telefono_pubblico  type=text  default=+39 081 1813 1119
+  studio_email  type=email  default=info@studiolegalesaltelli.it
+  studio_piva  type=text  default=06685101211
+  studio_ordine_avvocati  type=text  default=Iscritto Ordine Avvocati Napoli
+  studio_coordinate_lat  type=text  default=40.8332541
+  studio_coordinate_lng  type=text  default=14.2414699
+  brand_payoff  type=text  default=Diritto, con misura

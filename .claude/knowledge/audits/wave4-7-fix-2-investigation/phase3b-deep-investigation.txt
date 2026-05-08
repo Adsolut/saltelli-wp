@@ -1,0 +1,126 @@
+=== Phase 3.5 — Deep investigation studio_body + altri pattern fallback ===
+--- 1. studio_body call-site (saltelli_option, saltelli_field, get_field) ---
+wp-content/themes/saltelli/front-page.php:25:$studio_body   = saltelli_option('studio_body', '');
+wp-content/themes/saltelli/front-page.php:199:            if ($studio_body) {
+wp-content/themes/saltelli/front-page.php:200:                echo wp_kses_post($studio_body);
+wp-content/themes/saltelli/acf-json/group_theme_options_v1.json:159:            "key": "field_studio_body",
+wp-content/themes/saltelli/acf-json/group_theme_options_v1.json:161:            "name": "studio_body",
+
+--- 2. saltelli_field() call-site ---
+wp-content/themes/saltelli/404.php:137:                    $sl404_is_tier1 = (bool) saltelli_field('is_tier_1_focus', $sl404_p->ID, false);
+wp-content/themes/saltelli/404.php:173:                    $sl404_read = (string) saltelli_field('reading_time', $sl404_post->ID, '');
+wp-content/themes/saltelli/single-competenza.php:15:    $is_tier_1  = (bool) saltelli_field('is_tier_1', $post_id, false);
+wp-content/themes/saltelli/single-competenza.php:16:    $answer     = (string) saltelli_field('answer_capsule', $post_id, '');
+wp-content/themes/saltelli/single-competenza.php:17:    $body_ext   = (string) saltelli_field('body_extended', $post_id, '');
+wp-content/themes/saltelli/single-competenza.php:18:    $faq        = saltelli_field('faq', $post_id, []);
+wp-content/themes/saltelli/single-competenza.php:19:    $casi       = saltelli_field('casi_rappresentativi', $post_id, []);
+wp-content/themes/saltelli/single-competenza.php:20:    $cta_label  = (string) saltelli_field('cta_label', $post_id, __('Parlane con i nostri avvocati', 'saltelli'));
+wp-content/themes/saltelli/single-competenza.php:21:    $cta_url    = (string) saltelli_field('cta_url', $post_id, '/contatti/');
+wp-content/themes/saltelli/single-competenza.php:23:    $cta_top_label    = (string) saltelli_field('cta_top_label', $post_id, '');
+wp-content/themes/saltelli/single-competenza.php:24:    $cta_top_url      = (string) saltelli_field('cta_top_url', $post_id, '');
+wp-content/themes/saltelli/single-competenza.php:25:    $cta_middle_label = (string) saltelli_field('cta_middle_label', $post_id, '');
+wp-content/themes/saltelli/single-competenza.php:26:    $cta_middle_url   = (string) saltelli_field('cta_middle_url', $post_id, '');
+wp-content/themes/saltelli/single-competenza.php:30:    $articoli   = saltelli_field('articoli_correlati', $post_id, []);
+wp-content/themes/saltelli/single-competenza.php:33:    $tier1_subtitle = (string) saltelli_field('subtitle', $post_id, '');
+wp-content/themes/saltelli/single-competenza.php:99:                            $sl_t1_lawyer_role  = (string) saltelli_field('ruolo_breve', $sl_t1_lawyer_id, '');
+wp-content/themes/saltelli/single-competenza.php:102:                                $sl_t1_foto = saltelli_field('foto_ritratto', $sl_t1_lawyer_id);
+wp-content/themes/saltelli/single-competenza.php:196:                            $ruolo = (string) saltelli_field('ruolo_breve', $av->ID, '');
+wp-content/themes/saltelli/single-competenza.php:197:                            $foto  = saltelli_field('foto_ritratto', $av->ID);
+wp-content/themes/saltelli/single-competenza.php:282:                $sl_faq_a = (string) saltelli_field('risposta', $sl_faq_id, '');
+wp-content/themes/saltelli/single-competenza.php:315:        $sl_related_ids = saltelli_field('related_competenze', $post_id, []);
+wp-content/themes/saltelli/archive-competenza.php:62:                    $is_tier_1 = (bool) saltelli_field('is_tier_1_focus', $p->ID, false);
+wp-content/themes/saltelli/archive-competenza.php:63:                    $lead      = (string) saltelli_field('lead_breve', $p->ID, '');
+wp-content/themes/saltelli/archive-competenza.php:65:                        $lead = (string) saltelli_field('answer_capsule', $p->ID, '');
+wp-content/themes/saltelli/single-avvocato.php:13:    $ruolo      = (string) saltelli_field('hero_role', $post_id, '');
+wp-content/themes/saltelli/single-avvocato.php:15:        $ruolo = (string) saltelli_field('ruolo_breve', $post_id, '');
+wp-content/themes/saltelli/single-avvocato.php:17:    $bio_breve  = (string) saltelli_field('bio_breve', $post_id, '');
+wp-content/themes/saltelli/single-avvocato.php:18:    $bio_est    = (string) saltelli_field('bio_estesa', $post_id, '');
+wp-content/themes/saltelli/single-avvocato.php:19:    $email      = (string) saltelli_field('email_pubblica', $post_id, '');
+wp-content/themes/saltelli/single-avvocato.php:20:    $tel        = (string) saltelli_field('telefono_pubblico', $post_id, '');
+wp-content/themes/saltelli/single-avvocato.php:22:    $whatsapp   = (string) saltelli_field('whatsapp', $post_id, '');
+wp-content/themes/saltelli/single-avvocato.php:24:    $linkedin   = (string) saltelli_field('same_as_linkedin', $post_id, '');
+wp-content/themes/saltelli/single-avvocato.php:29:    $aree       = saltelli_field('aree_competenza_correlate', $post_id, []);
+wp-content/themes/saltelli/single-avvocato.php:30:    $formazione = saltelli_field('formazione', $post_id, []);
+wp-content/themes/saltelli/single-avvocato.php:31:    $foto       = saltelli_field('foto_ritratto', $post_id);
+wp-content/themes/saltelli/single-avvocato.php:149:                                : (bool) saltelli_field('is_tier_1_focus', $aid, false);
+wp-content/themes/saltelli/taxonomy-tipo-area.php:189:                            $ruolo = (string) saltelli_field('ruolo_breve', $av->ID, '');
+wp-content/themes/saltelli/taxonomy-tipo-area.php:274:                        $is_tier_1 = (bool) saltelli_field('is_tier_1_focus', $p->ID, false);
+wp-content/themes/saltelli/archive-avvocato.php:61:                    $ruolo  = (string) saltelli_field('ruolo_breve', $av->ID, '');
+wp-content/themes/saltelli/archive-avvocato.php:63:                    $foto   = saltelli_field('foto_ritratto', $av->ID);
+wp-content/themes/saltelli/front-page.php:154:                        $is_tier_1 = (bool) saltelli_field('is_tier_1', $p->ID, false);
+wp-content/themes/saltelli/front-page.php:155:                        $lead      = (string) saltelli_field('lead_breve', $p->ID, '');
+wp-content/themes/saltelli/front-page.php:157:                            $lead = (string) saltelli_field('answer_capsule', $p->ID, '');
+wp-content/themes/saltelli/front-page.php:252:                    $ruolo  = (string) saltelli_field('ruolo_breve', $av->ID, '');
+wp-content/themes/saltelli/front-page.php:254:                    $foto   = saltelli_field('foto_ritratto', $av->ID);
+wp-content/themes/saltelli/single.php:80:                    $sl_byline_ext  = (string) saltelli_field('byline_extended', $linked_avv_id, '');
+wp-content/themes/saltelli/single.php:81:                    $sl_expertise   = saltelli_field('expertise_topics', $linked_avv_id, []);
+wp-content/themes/saltelli/single.php:127:                    $ruolo = (string) saltelli_field('ruolo_breve', $linked_avv_id, '');
+wp-content/themes/saltelli/single.php:128:                    $bio   = (string) saltelli_field('bio_breve', $linked_avv_id, '');
+wp-content/themes/saltelli/page.php:8: * grazioso: se ACF empty, hardcoded restano via saltelli_field() default.
+
+--- 3. Pattern fallback inline (if/else echo) per blocchi senza saltelli_option ---
+wp-content/themes/saltelli/front-page.php:25:$studio_body   = saltelli_option('studio_body', '');
+wp-content/themes/saltelli/front-page.php:199:            if ($studio_body) {
+wp-content/themes/saltelli/front-page.php:200:                echo wp_kses_post($studio_body);
+
+--- 4. Helpers definitions (saltelli_option, saltelli_field) ---
+19:function saltelli_field($name, $post_id = null, $default = null) {
+57:function saltelli_field_repeater_rows($name, $count, $post_id) {
+515:function saltelli_option($name, $default = null) {
+
+=== 5. Pattern fallback inline if/else (saltelli_option empty + HTML hardcoded) ===
+Files con fallback HTML inline if/else: 8
+Pattern saltelli_option/field empty + else HTML hardcoded: 13
+
+
+  single-competenza.php:27 (var=$cta_middle_label, type=saltelli_field, field=cta_middle_label)
+    else block @ line 61:
+                          <!-- TODO: answer capsule da Elena (40-60 parole) -->                 <?php endif; ?>                  <?php /* Wave 6 — CTA progr
+
+  single-competenza.php:28 (var=$cta_middle_url, type=saltelli_field, field=cta_middle_url)
+    else block @ line 61:
+                          <!-- TODO: answer capsule da Elena (40-60 parole) -->                 <?php endif; ?>                  <?php /* Wave 6 — CTA progr
+
+  single-competenza.php:52 (var=$is_tier_1, type=saltelli_field, field=is_tier_1)
+    else block @ line 61:
+                          <!-- TODO: answer capsule da Elena (40-60 parole) -->                 <?php endif; ?>                  <?php /* Wave 6 — CTA progr
+
+  single-competenza.php:56 (var=$answer, type=saltelli_field, field=answer_capsule)
+    else block @ line 61:
+                          <!-- TODO: answer capsule da Elena (40-60 parole) -->                 <?php endif; ?>                  <?php /* Wave 6 — CTA progr
+
+  404.php:174 (var=$sl404_read, type=saltelli_field, field=reading_time)
+    else block @ line 185:
+                                  <div class="sl-404__article-media sl-404__article-media--placeholder" aria-hidden="true"></div>                         <?
+
+  single-avvocato.php:14 (var=$ruolo, type=saltelli_field, field=ruolo_breve)
+    else block @ line 56:
+                                  echo '<span class="sl-team__placeholder" aria-hidden="true"><span class="sl-mono">' . esc_html__('Ritratto · 3:4', 'saltel
+
+  single-avvocato.php:25 (var=$linkedin, type=saltelli_field, field=same_as_linkedin)
+    else block @ line 56:
+                                  echo '<span class="sl-team__placeholder" aria-hidden="true"><span class="sl-mono">' . esc_html__('Ritratto · 3:4', 'saltel
+
+  taxonomy-tipo-area.php:195 (var=$ruolo, type=saltelli_field, field=ruolo_breve)
+    else block @ line 234:
+                              <article class="sl-tipoarea__scenario">                             <span class="sl-tipoarea__scenario-sym" aria-hidden="true"
+
+  archive-avvocato.php:87 (var=$ruolo, type=saltelli_field, field=ruolo_breve)
+    else block @ line 104:
+              <p class="sl-mono"><?php esc_html_e('Nessun avvocato pubblicato.', 'saltelli'); ?></p>     <?php endif; ?>      <?php /* § Come lavoriamo — 3 
+
+  front-page.php:199 (var=$studio_body, type=saltelli_option, field=studio_body)
+    else block @ line 201:
+                      ?>                 <p>Lo Studio Saltelli &amp; Partners nasce nel 1999 per iniziativa di Emiliano Saltelli, allora giovane tributarist
+
+  template-parts/page-lo-studio.php:176 (var=$ruolo_av, type=saltelli_field, field=ruolo_breve)
+    else block @ line 201:
+                                          echo '<span class="sl-chi-siamo__team-placeholder" aria-hidden="true"><span class="sl-mono">' . esc_html__('Ritrat
+
+  template-parts/page-lo-studio.php:182 (var=$bio_breve_av, type=saltelli_field, field=bio_breve)
+    else block @ line 201:
+                                          echo '<span class="sl-chi-siamo__team-placeholder" aria-hidden="true"><span class="sl-mono">' . esc_html__('Ritrat
+
+  template-parts/page-costi.php:123 (var=$trust, type=saltelli_field, field=trust_mini)
+    else block @ line 128:
+                          <article class="sl-costi-w4__scenario-card">                         <div class="sl-mono"><?php esc_html_e('01 / Modalità classica
