@@ -1,0 +1,35 @@
+=== Phase 2 — JSON diff ===
+diff --git a/wp-content/themes/saltelli/acf-json/group_theme_options_v1.json b/wp-content/themes/saltelli/acf-json/group_theme_options_v1.json
+index ba44ecf..47f02b7 100644
+--- a/wp-content/themes/saltelli/acf-json/group_theme_options_v1.json
++++ b/wp-content/themes/saltelli/acf-json/group_theme_options_v1.json
+@@ -105,8 +105,8 @@
+             "label": "CTA hero — URL",
+             "name": "hero_cta_url",
+             "aria-label": "",
+-            "type": "url",
+-            "instructions": "",
++            "type": "text",
++            "instructions": "Accetta URL relativi (es. /contatti/) o assoluti (https://...).",
+             "required": false,
+             "conditional_logic": false,
+             "wrapper": {
+@@ -1097,8 +1097,8 @@
+             "label": "CTA default URL",
+             "name": "cta_default_url",
+             "aria-label": "",
+-            "type": "url",
+-            "instructions": "",
++            "type": "text",
++            "instructions": "Accetta URL relativi (es. /contatti/) o assoluti (https://...).",
+             "required": false,
+             "conditional_logic": false,
+             "wrapper": {
+@@ -1171,5 +1171,5 @@
+     "display_title": "",
+     "allow_ai_access": false,
+     "ai_description": "",
+-    "modified": 1778168741
++    "modified": 1778238231
+ }
+\ No newline at end of file

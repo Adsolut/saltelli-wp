@@ -105,8 +105,8 @@
             "label": "CTA hero — URL",
             "name": "hero_cta_url",
             "aria-label": "",
-            "type": "url",
-            "instructions": "",
+            "type": "text",
+            "instructions": "Accetta URL relativi (es. /contatti/) o assoluti (https://...).",
             "required": false,
             "conditional_logic": false,
             "wrapper": {
@@ -1097,8 +1097,8 @@
             "label": "CTA default URL",
             "name": "cta_default_url",
             "aria-label": "",
-            "type": "url",
-            "instructions": "",
+            "type": "text",
+            "instructions": "Accetta URL relativi (es. /contatti/) o assoluti (https://...).",
             "required": false,
             "conditional_logic": false,
             "wrapper": {
@@ -1171,5 +1171,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1778168741
+    "modified": 1778238231
 }
