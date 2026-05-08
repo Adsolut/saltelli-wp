@@ -1,0 +1,1175 @@
+{
+    "key": "group_theme_options_v1",
+    "title": "Saltelli — Settings globali",
+    "fields": [
+        {
+            "key": "field_hero_tab",
+            "label": "Hero Homepage",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_hero_eyebrow",
+            "label": "Eyebrow (sopra titolo)",
+            "name": "hero_eyebrow",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Riga editoriale piccola sopra il titolo principale. Format raccomandato: '§ Categoria · Luogo · Anno fondazione'",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Studio Legale · Napoli · Chiaia · Dal 1999",
+            "maxlength": 80,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_hero_headline",
+            "label": "Headline (titolo principale)",
+            "name": "hero_headline",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Titolo H1 della homepage. Brand voice: dichiarazione concisa e memorabile.",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Diritto, con misura.",
+            "maxlength": 60,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_hero_subheadline",
+            "label": "Subheadline (paragrafo lede)",
+            "name": "hero_subheadline",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Paragrafo italic sotto il titolo. 1-3 frasi che spiegano lo Studio.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "default_value": "Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, diciassette aree di pratica, vent'anni di lavoro accanto a famiglie e imprese di Napoli.",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_hero_cta_label",
+            "label": "CTA hero — Label",
+            "name": "hero_cta_label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Prenota una consulenza gratuita",
+            "maxlength": 40,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_hero_cta_url",
+            "label": "CTA hero — URL",
+            "name": "hero_cta_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "/contatti/",
+            "placeholder": ""
+        },
+        {
+            "key": "field_studio_section_tab",
+            "label": "Studio Section",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_studio_titolo_sezione",
+            "label": "Titolo sezione studio (homepage)",
+            "name": "studio_titolo_sezione",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Titolo H2 della sezione 'Lo Studio' in homepage.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Un atelier, in senso napoletano.",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_studio_body",
+            "label": "Body sezione studio (homepage)",
+            "name": "studio_body",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "Testo descrittivo Studio in homepage. Brand voice: 1-3 paragrafi editoriali. Se vuoto, usa fallback hardcoded.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "visual",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_studio_foto_facciata",
+            "label": "Foto facciata Studio",
+            "name": "studio_foto_facciata",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Foto della facciata o ingresso dello Studio. Min 1200×800px, JPG quality 85.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg,jpeg,png,webp"
+        },
+        {
+            "key": "field_team_cases_tab",
+            "label": "Team & Casi",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_team_titolo",
+            "label": "Titolo sezione team (homepage)",
+            "name": "team_titolo",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Titolo H2 della sezione 'Team' in homepage. Linebreaks rispettati.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 2,
+            "default_value": "Quattro\nprofessionisti.",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_cases_titolo",
+            "label": "Titolo sezione casi (homepage)",
+            "name": "cases_titolo",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Casi rappresentativi.",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_casi_rappresentativi_home",
+            "label": "Casi rappresentativi in homepage",
+            "name": "casi_rappresentativi_home",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "Seleziona 3-6 casi da mostrare nella sezione 'Casi rappresentativi' della homepage. Se vuoto, fallback automatico ai 6 casi più recenti.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "saltelli_caso"
+            ],
+            "taxonomy": [],
+            "allow_null": 1,
+            "multiple": 1,
+            "return_format": "id",
+            "ui": 1
+        },
+        {
+            "key": "field_press_tab",
+            "label": "Press Homepage",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_press_outlets",
+            "label": "Press outlets (loghi homepage)",
+            "name": "press_outlets",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Loghi di clienti, giornali o publication che hanno citato lo Studio. Mostrato in homepage sezione press.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "min": 0,
+            "max": 12,
+            "layout": "block",
+            "button_label": "Aggiungi outlet",
+            "rows_per_page": 20,
+            "collapsed": "",
+            "sub_fields": [
+                {
+                    "key": "field_press_outlet_name",
+                    "label": "Nome outlet",
+                    "name": "name",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_press_outlets"
+                },
+                {
+                    "key": "field_press_outlet_logo",
+                    "label": "Logo (SVG/PNG)",
+                    "name": "logo",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "url",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "svg,png,webp",
+                    "parent_repeater": "field_press_outlets"
+                },
+                {
+                    "key": "field_press_outlet_url",
+                    "label": "URL articolo (opz.)",
+                    "name": "url",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "parent_repeater": "field_press_outlets"
+                }
+            ]
+        },
+        {
+            "key": "field_tab_studio",
+            "label": "Studio Info",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_studio_indirizzo_via",
+            "label": "Via",
+            "name": "studio_indirizzo_via",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Via Vannella Gaetani 27",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_studio_cap_citta",
+            "label": "CAP + Città",
+            "name": "studio_cap_citta",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "80121 Napoli",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_studio_quartiere",
+            "label": "Quartiere",
+            "name": "studio_quartiere",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Chiaia",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_studio_orari_settimana",
+            "label": "Orari settimana",
+            "name": "studio_orari_settimana",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Lun – Ven · 09:30 – 18:30",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_studio_orari_sabato",
+            "label": "Orari sabato",
+            "name": "studio_orari_sabato",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Sabato su appuntamento",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_studio_telefono",
+            "label": "Telefono pubblico",
+            "name": "studio_telefono_pubblico",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "+39 081 1813 1119",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_studio_email",
+            "label": "Email pubblica",
+            "name": "studio_email",
+            "aria-label": "",
+            "type": "email",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "info@studiolegalesaltelli.it",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_studio_pec",
+            "label": "PEC",
+            "name": "studio_pec",
+            "aria-label": "",
+            "type": "email",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_studio_piva",
+            "label": "P.IVA",
+            "name": "studio_piva",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "06685101211",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_studio_ordine",
+            "label": "Ordine professionale",
+            "name": "studio_ordine_avvocati",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Iscritto Ordine Avvocati Napoli",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_tab_map",
+            "label": "Mappa",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_studio_lat",
+            "label": "Latitudine",
+            "name": "studio_coordinate_lat",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "40.8332541",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_studio_lng",
+            "label": "Longitudine",
+            "name": "studio_coordinate_lng",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "14.2414699",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_tab_brand",
+            "label": "Brand",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_brand_payoff",
+            "label": "Payoff (sotto logo)",
+            "name": "brand_payoff",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Diritto, con misura",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_brand_statement",
+            "label": "Brand statement (footer/about)",
+            "name": "brand_statement_short",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "default_value": "Un atelier legale italiano.\nQuattro avvocati a Chiaia.\nVent'anni di pratica accanto\na famiglie e imprese.",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_brand_trust_signal_1_label",
+            "label": "Trust signal 1 — Label (Wave 6)",
+            "name": "trust_signal_1_label",
+            "type": "text",
+            "instructions": "Trust bar globale (4 segnali credibilità). Label = numero/titolo grande Playfair.",
+            "default_value": "20+ ANNI",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_1_caption",
+            "label": "Trust signal 1 — Caption (Wave 6)",
+            "name": "trust_signal_1_caption",
+            "type": "text",
+            "instructions": "Caption mono uppercase sotto il numero.",
+            "default_value": "ESPERIENZA",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_2_label",
+            "label": "Trust signal 2 — Label (Wave 6)",
+            "name": "trust_signal_2_label",
+            "type": "text",
+            "default_value": "4 AVVOCATI",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_2_caption",
+            "label": "Trust signal 2 — Caption (Wave 6)",
+            "name": "trust_signal_2_caption",
+            "type": "text",
+            "default_value": "TEAM SPECIALIZZATO",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_3_label",
+            "label": "Trust signal 3 — Label (Wave 6)",
+            "name": "trust_signal_3_label",
+            "type": "text",
+            "default_value": "17 AREE",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_3_caption",
+            "label": "Trust signal 3 — Caption (Wave 6)",
+            "name": "trust_signal_3_caption",
+            "type": "text",
+            "default_value": "DI PRATICA",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_4_label",
+            "label": "Trust signal 4 — Label (Wave 6)",
+            "name": "trust_signal_4_label",
+            "type": "text",
+            "default_value": "COA FAMIGLIA",
+            "maxlength": 40
+        },
+        {
+            "key": "field_brand_trust_signal_4_caption",
+            "label": "Trust signal 4 — Caption (Wave 6)",
+            "name": "trust_signal_4_caption",
+            "type": "text",
+            "default_value": "MUNICIPALITÀ 1",
+            "maxlength": 40
+        },
+        {
+            "key": "field_tab_footer",
+            "label": "Footer",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_footer_credit_text",
+            "label": "Credit text bottom",
+            "name": "footer_credit_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Realizzato da Adsolut Web Agency",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_footer_credit_url",
+            "label": "Credit URL",
+            "name": "footer_credit_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "https://adsolut.it",
+            "placeholder": ""
+        },
+        {
+            "key": "field_footer_newsletter_enabled",
+            "label": "Newsletter footer attiva?",
+            "name": "footer_newsletter_enabled",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 1,
+            "ui": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_footer_newsletter_provider",
+            "label": "Newsletter provider",
+            "name": "footer_newsletter_provider",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "brevo": "Brevo (legacy)",
+                "static": "HTML statico",
+                "none": "Nessuno"
+            },
+            "default_value": "static",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "return_format": "value",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_colophon_indirizzo",
+            "label": "Colophon — Indirizzo (multilinea)",
+            "name": "colophon_indirizzo",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Indirizzo nel colophon footer. Linebreaks supportati. Se vuoto, fallback chain a studio_indirizzo_via + studio_cap_citta.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "default_value": "Via Vannella Gaetani, 27\n80121 Napoli — Chiaia",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_colophon_orari",
+            "label": "Colophon — Orari (multilinea)",
+            "name": "colophon_orari",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "rows": 3,
+            "default_value": "Lun – Ven · 10:00 – 19:00\nSolo su appuntamento",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_colophon_email",
+            "label": "Colophon — Email",
+            "name": "colophon_email",
+            "aria-label": "",
+            "type": "email",
+            "instructions": "Se vuoto, fallback a studio_email.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_colophon_telefono",
+            "label": "Colophon — Telefono",
+            "name": "colophon_telefono",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Se vuoto, fallback a studio_telefono_pubblico.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "+39 081 1813 1119",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_tab_social",
+            "label": "Social",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_social_instagram",
+            "label": "Instagram URL",
+            "name": "social_instagram",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_social_linkedin",
+            "label": "LinkedIn URL",
+            "name": "social_linkedin",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_social_twitter",
+            "label": "X / Twitter URL",
+            "name": "social_twitter",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_social_facebook",
+            "label": "Facebook URL",
+            "name": "social_facebook",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_tab_cta",
+            "label": "CTA Defaults",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_cta_default_label",
+            "label": "CTA default label",
+            "name": "cta_default_label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Prenota un incontro →",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_cta_default_url",
+            "label": "CTA default URL",
+            "name": "cta_default_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "/contatti/",
+            "placeholder": ""
+        },
+        {
+            "key": "field_cta_trust_signal",
+            "label": "CTA trust signal default",
+            "name": "cta_trust_signal",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Risposta entro 24 ore · Riservatezza assoluta",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_cta_subline_italic",
+            "label": "CTA subline (sotto bottone)",
+            "name": "cta_subline_italic",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Prima consulenza conoscitiva gratuita",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "saltelli-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [],
+    "active": true,
+    "description": "",
+    "show_in_rest": false,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1778168741
+}

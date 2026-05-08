@@ -1,0 +1,66 @@
+=== Phase 1 — Identifica field type=url ===
+
+FOUND 8 field con type=url:
+
+  - name: hero_cta_url
+    label: CTA hero — URL
+    default_value: /contatti/
+    prepend: 
+    instructions: 
+
+  - name: press_outlets.url
+    label: URL articolo (opz.)
+    default_value: 
+    prepend: 
+    instructions: 
+
+  - name: footer_credit_url
+    label: Credit URL
+    default_value: https://adsolut.it
+    prepend: 
+    instructions: 
+
+  - name: social_instagram
+    label: Instagram URL
+    default_value: 
+    prepend: 
+    instructions: 
+
+  - name: social_linkedin
+    label: LinkedIn URL
+    default_value: 
+    prepend: 
+    instructions: 
+
+  - name: social_twitter
+    label: X / Twitter URL
+    default_value: 
+    prepend: 
+    instructions: 
+
+  - name: social_facebook
+    label: Facebook URL
+    default_value: 
+    prepend: 
+    instructions: 
+
+  - name: cta_default_url
+    label: CTA default URL
+    default_value: /contatti/
+    prepend: 
+    instructions: 
+
+
+=== Classification interni (cambiare a text) vs esterni (lasciare url) ===
+
+INTERNAL (2) — change to type:text:
+  - hero_cta_url (default: '/contatti/') [name_internal=True name_external=False default_internal=True default_external=False]
+  - cta_default_url (default: '/contatti/') [name_internal=True name_external=False default_internal=True default_external=False]
+
+EXTERNAL (6) — keep type:url:
+  - press_outlets.url (default: '') [name_internal=False name_external=True default_internal=False default_external=False]
+  - footer_credit_url (default: 'https://adsolut.it') [name_internal=False name_external=True default_internal=False default_external=True]
+  - social_instagram (default: '') [name_internal=False name_external=True default_internal=False default_external=False]
+  - social_linkedin (default: '') [name_internal=False name_external=True default_internal=False default_external=False]
+  - social_twitter (default: '') [name_internal=False name_external=True default_internal=False default_external=False]
+  - social_facebook (default: '') [name_internal=False name_external=True default_internal=False default_external=False]
