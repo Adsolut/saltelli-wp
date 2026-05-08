@@ -16,14 +16,14 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 
 **Strategy:** "Legal Luxury Minimal" — boutique editoriale italiano, tipografia dominante, palette navy/crema/bronzo. Tier-1 deep clusters: Tributario · Lavoro · Famiglia LGBTQ+. The other 16 practice areas get tier-2 lighter pages.
 
-## Current state — v1.3.6-wave4-7-fix-scf-migration
+## Current state — v1.3.8-wave4-7-fix-2-true-fix
 
-**Last updated:** 2026-05-08 (Wave 4.7.fix mergeata: SCF migration + Theme Options activation)
-**Branch:** `main` · feature `fix/wave4-7-fix-scf-migration` ⏳ in audit
+**Last updated:** 2026-05-08 (Wave 4.7.fix.2 mergeata: studio_body editorial JSON default + menu primary slug-based rebuild + 14 redirect 301 legacy + SCF tier-2 60→93 fields, 13 tabs + EDITOR-HANDOFF v3.0)
+**Branch:** `main` · last merge `7f5c25f` (Wave 4.7.fix.2 TRUE FIX) · tag `v1.3.8-wave4-7-fix-2-true-fix` · 5 commits P1→P5 + merge no-ff
 **Demo:** ✅ presentata al cliente · feedback iteration assorbita
-**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.3.6-wave4-7-fix-scf-migration` · ACF→SCF switched, 50/50 options popolati
-**Active phase:** Acceptance test editoriale (Elena/Ludovica) — ora con menu **Saltelli — Settings** funzionale (slot 60)
-**Next:** Onboarding Elena 30 min · valutare se Wave 4.9 Gutenberg migration ancora in scope · cut produzione
+**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.3.8-wave4-7-fix-2-true-fix` · 26/26 URL smoke test pass · SCF 93 fields (13 tabs) · menu primary rebuilt slug-based (eliminati 17/22 URL pre-Wave 5)
+**Active phase:** Onboarding Elena 30 min con EDITOR-HANDOFF v3.0 · acceptance test editoriale finale (Elena/Ludovica console+CF7+cross-browser+copy)
+**Next:** Tokens drift audit baseline (3-layer: DESIGN.md→tokens.css→sections.css 605 hardcoded) salvato in `docs/qa/tokens-drift-audit-2026-05-08.md` (untracked, dormiente — sessione dedicata futura) · valutare Wave 4.9 Gutenberg migration · cut produzione
 
 **Infra staging (consolidata 2026-04-30):**
 - Droplet DO `saltelli-staging-ams3-01` · IPv4 `178.62.207.50` · ams3 · s-1vcpu-2gb · Ubuntu 24.04 LTS
@@ -62,6 +62,8 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 | Wave 4–4.7.1 (font WOFF2, critical CSS, CMS editability, ACF default_value hotfix) | 1.3.0–1.3.4 | ✅ |
 | Wave 4.8 — Cleanup + Migrations + UX Polish FINAL | 1.3.5-wave4-8-cleanup-final | ✅ |
 | **Wave 4.7.fix — SCF Migration + Theme Options Activation (50/50 fields seedabili popolati, write-side pipeline funzionale)** | **1.3.6-wave4-7-fix-scf-migration** | **✅** |
+| **Wave 4.7.fix.1 — SCF URL Validation Fix (CTA interni type:url→text)** | **1.3.7-wave4-7-fix-1-scf-url-validation** | **✅** |
+| **Wave 4.7.fix.2 — TRUE FIX (studio_body editorial JSON default + menu primary slug-based rebuild + 14 redirect 301 legacy + SCF tier-2 60→93 fields, 13 tabs + EDITOR-HANDOFF v3.0 + slug rename `risultati`→`casi-rappresentativi`)** | **1.3.8-wave4-7-fix-2-true-fix** | **✅** |
 | Acceptance test editoriale (Elena/Ludovica console+CF7+cross-browser+copy) | parallel | 🔍 ACTIVE |
 | Cut produzione (DNS switch staging→prod) | 1.0.0 | ⏸ |
 
@@ -109,6 +111,7 @@ Per evitare future collisioni quando più agent committano in parallelo:
 - `recovery-v1.0/PROMPT_AGENT_v1.0_WAVE2_CONTENT_MIGRATION.md` — ✅ done
 - `recovery-v1.0/PROMPT_AGENT_v1.0_WAVE3_TEMPLATE_REFACTOR.md` — ✅ done
 - `recovery-v1.0/PROMPT_AGENT_v1.0_DEBUG_QA.md` — ✅ done (4 bugs found, 3 closed + 1 deferred, P0 architectural fix `page_slug ==`)
+- `recovery-v1.0/PROMPT_AGENT_WAVE4_7_FIX_2_TRUE_FIX.md` — ✅ done (5 phases · 21 file · +1688/-57 · 26/26 URL smoke pass · SCF 60→93 fields)
 - **`prompts/PROMPT_AGENT_v1.0_WAVE4_PRODUCTION_READINESS.md`** — ⏸ ready to launch (5 phases, branch dedicato `feat/wave4-production-readiness`)
 - `deploy/PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` — runbook deploy archiviato (Fase 0+infra completata, deploy delta via rsync ad-hoc, Fasi 7-8 ancora aperte; sostituito de facto da `docs/DEPLOY.md`)
 - `_archive/prompts-completed/orchestration-original/` — prompt iniziali sessione 1
@@ -121,7 +124,7 @@ Per evitare future collisioni quando più agent committano in parallelo:
 - `docs/DESIGN.md` — design tokens (colori, typography, spacing)
 - `docs/ARCHITECTURE.md` — mappa theme + ACF schema + WP-Admin↔frontend coupling + WYSIWYG gaps
 - `docs/DEPLOY.md` — runbook deploy droplet + lessons learned
-- `docs/EDITOR-HANDOFF.md` v1.1 — manuale editoriale italiano per Elena/Ludovica/esterni
+- `docs/EDITOR-HANDOFF.md` v3.0 — manuale editoriale italiano per Elena/Ludovica/esterni (post-Wave 4.7.fix.2: include §3.5 "Pagina WP vs Tassonomia vs Archive CPT" + admin path matrix per 15 URL Elena)
 
 **Working knowledge** (`.claude/knowledge/`):
 - `recovery/` — release notes wave (5 file, vivi)
@@ -211,23 +214,33 @@ TYPOGRAPHY
 BREAKPOINTS: 375 / 768 / 1024 / 1440 (mobile-first)
 ```
 
-## Information architecture (current)
+## Information architecture (current — post-Wave 5 IA refactor + Wave 4.7.fix.2 slug rename)
 
 ```
-/                                   Homepage (front-page.php)
-/lo-studio/                         About (page.php)
-/avvocati/                          Team archive (archive-avvocato.php)
-/avvocati/{slug}/                   CPT avvocato (single-avvocato.php) × 4
-/competenze/                        Practice areas archive (archive-competenza.php)
-/competenze/{slug}/                 CPT competenza × 19 — branched tier-1/tier-2 (single-competenza.php)
-/tipo-area/{privati,imprese,contenzioso,altri}/   Taxonomy archive (currently fallback archive.php)
-/casi/                              Cases (page or archive — TBD)
-/costi/                             Costs page (page.php) — added at Audit Alignment
-/blog/                              Blog archive
-/{slug}/                            Single post (single.php) × 326 historical posts
-/contatti/                          Contact (page.php)
-/llms.txt                           Static AI crawler file (served dynamically)
+/                                                  Homepage (front-page.php)
+/chi-siamo/                                        Hub Page WP 2822 (page-chi-siamo-hub.php · SCF tab "Hub Pages")
+/chi-siamo/team/                                   CPT archive avvocato (archive-avvocato.php · SCF tab "Archive Headers")
+/chi-siamo/team/{slug}/                            CPT avvocato (single-avvocato.php) × 4
+/chi-siamo/casi-rappresentativi/                   CPT archive saltelli_caso (archive-saltelli_caso.php · SCF tab "Archive Headers") — rename Wave 4.7.fix.2 da /chi-siamo/risultati/ + 301
+/chi-siamo/casi-rappresentativi/{slug}/            CPT saltelli_caso single
+/aree-di-pratica/                                  Hub Page WP 2812 (page-aree-di-pratica-hub.php · SCF tab "Hub Pages" · 4 cluster cards SCF)
+/aree-di-pratica/{privati,imprese,contenzioso-amministrativo}/   Term tipo-area (taxonomy-tipo-area.php · SCF UX strings)
+/aree-di-pratica/{cluster}/{competenza-slug}/      CPT competenza × 19 — branched tier-1/tier-2 (single-competenza.php)
+/risorse/                                          Hub Page WP 2813 (page-risorse-hub.php · SCF tab "Hub Pages" · 4 resource cards SCF)
+/risorse/{domande-frequenti,guide-gratuite,glossario-legale}/   Pages WP figlie (page.php)
+/risorse/blog/                                     Blog archive (home.php) · post historical × 326
+/costi-e-consulenze/                               Hub Page WP 2695 (page-costi-e-consulenze-hub.php)
+/costi-e-consulenze/{prima-consulenza,come-lavoriamo,richiedi-preventivo}/   Pages WP figlie
+/contatti/                                         Contact (page.php)
+/prenota-appuntamento/                             Page WP 2714
+/llms.txt                                          Static AI crawler file (served dynamically)
 ```
+
+**Redirect 301 legacy attivi** (`inc/redirects.php` · Wave 4.7.fix.2 P2):
+- `/chi-siamo/risultati/` → `/chi-siamo/casi-rappresentativi/`
+- `/competenze/` → `/aree-di-pratica/` · `/tipo-area/{privati,imprese,contenzioso}/` → `/aree-di-pratica/{...}/`
+- `/faq/` → `/risorse/domande-frequenti/` · `/guide-gratuite/` → `/risorse/guide-gratuite/` · `/glossario-legale/` → `/risorse/glossario-legale/` · `/blog/` → `/risorse/blog/`
+- `/costi/` → `/costi-e-consulenze/` · `/prima-consulenza/` → `/costi-e-consulenze/prima-consulenza/` · `/come-lavoriamo/` → `/costi-e-consulenze/come-lavoriamo/` · `/richiedi-preventivo/` → `/costi-e-consulenze/richiedi-preventivo/`
 
 ## Tech stack
 
@@ -336,5 +349,5 @@ Re-read this file. If still in doubt, ask Duccio. Don't guess on:
 - Anything that would appear in schema markup as fact
 
 ---
-*Last updated: 2026-05-08 · v1.3.6-wave4-7-fix-scf-migration · SCF migration + Theme Options activation · 50/50 options popolati · pipeline write-side Elena finalmente funzionale*
+*Last updated: 2026-05-08 · v1.3.8-wave4-7-fix-2-true-fix · studio_body bug fix + menu primary slug-based rebuild + 14 redirect 301 + SCF tier-2 (60→93 fields, 13 tabs) + EDITOR-HANDOFF v3.0 · Elena può editare TUTTO il copy editoriale (incluso hub pages + CPT archive headers)*
 *Maintained by orchestrator (Claude in chat) after each milestone.*
