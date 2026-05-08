@@ -1,0 +1,211 @@
+=== ACF state pre-switch ===
+function_exists(get_field): YES
+function_exists(acf_add_options_page): NO
+function_exists(acf_get_options_pages): NO
+function_exists(update_field): YES
+defined(ACF_VERSION): 6.8.0
+defined(ACF_PRO): NO
+
+=== Field groups loaded (atteso: 17) ===
+COUNT: 17
+- group_avvocato_v1 :: Avvocato — Profilo completo (v1) :: active=YES
+- group_casi_v1 :: Casi — Sezioni :: active=YES
+- group_caso_item_v1 :: Caso rappresentativo — Item :: active=YES
+- group_competenza_v1 :: Competenza — Area di pratica (v1) :: active=YES
+- group_contatti_v1 :: Contatti — Sezioni :: active=YES
+- group_costi_v1 :: Costi — Sezioni :: active=YES
+- group_faq_v1 :: FAQ Aggregator — Sezioni :: active=YES
+- group_faq_item_v1 :: FAQ — Item :: active=YES
+- group_formazione_item_v1 :: Formazione & Titoli — Item :: active=YES
+- group_guida_item_v1 :: Guida gratuita — Item :: active=YES
+- group_info_shared_v1 :: Info Shared — Layout standard :: active=YES
+- group_modalita_item_v1 :: Modalità consulenza — Item :: active=YES
+- group_principio_item_v1 :: Principio studio — Item :: active=YES
+- group_theme_options_v1 :: Saltelli — Settings globali :: active=YES
+- group_scenario_item_v1 :: Scenario costi — Item :: active=YES
+- group_trust_item_v1 :: Trust signal — Item :: active=YES
+- group_lo_studio_v1 :: Saltelli — Page Lo Studio :: active=YES
+
+=== options_* in wp_options (atteso: 26) ===
+COUNT: 26
+
+=== List options_* keys ===
+  options_brand_payoff
+  options_brand_statement_short
+  options_cta_default_label
+  options_cta_default_url
+  options_cta_subline_italic
+  options_cta_trust_signal
+  options_footer_credit_text
+  options_footer_credit_url
+  options_footer_newsletter_enabled
+  options_footer_newsletter_provider
+  options_social_facebook
+  options_social_instagram
+  options_social_linkedin
+  options_social_twitter
+  options_studio_cap_citta
+  options_studio_coordinate_lat
+  options_studio_coordinate_lng
+  options_studio_email
+  options_studio_indirizzo_via
+  options_studio_orari_sabato
+  options_studio_orari_settimana
+  options_studio_ordine_avvocati
+  options_studio_pec
+  options_studio_piva
+  options_studio_quartiere
+  options_studio_telefono_pubblico
+
+=== ACF → SCF atomic switch ===
+
+--- Step 1: install SCF (no activate) ---
+Installing Secure Custom Fields (6.8.4)
+Scaricamento del pacchetto di installazione da https://downloads.wordpress.org/plugin/secure-custom-fields.6.8.4.zip...
+Scompattamento del pacchetto...
+Installazione plugin...
+Plugin installato correttamente.
+Success: Installed 1 of 1 plugins.
+
+--- Step 2: verify install path ---
+SECURITY.md
+acf.php
+assets
+composer.json
+includes
+index.php
+lang
+license.txt
+pro
+readme.txt
+schemas
+secure-custom-fields.php
+src
+vendor
+
+--- Step 3: deactivate ACF + activate SCF ---
+Plugin 'advanced-custom-fields' deactivated.
+Success: Deactivated 1 of 1 plugins.
+Plugin 'secure-custom-fields' activated.
+Success: Activated 1 of 1 plugins.
+
+--- Step 4: cache + transient + rewrite flush ---
+Success: The cache was flushed.
+Success: 15 transients deleted from the database.
+Success: Rewrite rules flushed.
+
+--- Step 5: plugin list post-switch ---
+advanced-custom-fields	inactive	none	6.8.0		off
+secure-custom-fields	active	none	6.8.4		off
+
+=== Post-switch verification ===
+=== SCF API compat ===
+function_exists(get_field): YES
+function_exists(acf_add_options_page): YES
+function_exists(acf_get_options_pages): YES
+function_exists(acf_get_field_groups): YES
+function_exists(update_field): YES
+defined(ACF_VERSION): 6.8.4
+defined(ACF_PRO): YES
+
+=== Field groups loaded (atteso: 17) ===
+COUNT: 17
+group_theme_options_v1 found: YES
+group_theme_options_v1 active: YES
+
+=== Options pages registrate ===
+- saltelli-settings: Impostazioni tema Saltelli | menu: Saltelli — Settings
+
+=== Sample read test (Wave 4.6 popolati) ===
+brand_payoff: Diritto, con misura
+studio_email: info@studiolegalesaltelli.it
+studio_telefono_pubblico: +39 081 1813 1119
+social_linkedin: 
+
+=== options_* count post-switch ===
+COUNT: 26 (atteso: 26 invariato pre-seed)
+
+=== CPT metabox regression check ===
+=== CPT metabox regression check ===
+
+--- avvocato (count: 4) ---
+  ID 2663 (Stefano Gaetano Tedesco):
+    bio_breve: Associate dello Studio. Coordina l'area del diritto condominiale e immobiliare c
+    foro_iscrizione: 
+    social_linkedin: 
+    bio_estesa(len): 0
+  ID 2662 (Antonia Battista):
+    bio_breve: Of-counsel dello Studio dedicata al diritto di famiglia e alla tutela LGBTQ+. Co
+    foro_iscrizione: 
+    social_linkedin: 
+    bio_estesa(len): 1075
+  ID 2661 (Fabiana Saltelli):
+    bio_breve: Partner dello Studio, giuslavorista. Segue licenziamenti, mobbing, contenziosi I
+    foro_iscrizione: 
+    social_linkedin: 
+    bio_estesa(len): 0
+  ID 2660 (Emiliano Saltelli):
+    bio_breve: Fondatore dello Studio. Si occupa di diritto tributario e contenzioso fiscale, d
+    foro_iscrizione: 
+    social_linkedin: 
+    bio_estesa(len): 0
+
+--- competenza Tier-1 (count: 3) ---
+  ID 2666 (Diritto di famiglia LGBTQ+):
+    is_tier_1: 1
+    answer_capsule: Lo Studio Legale Saltelli assiste a Napoli famiglie LGBTQ+ in tutti gli ambiti d
+    sotto_aree(count): 0
+  ID 2665 (Diritto del lavoro):
+    is_tier_1: 1
+    answer_capsule: Lo Studio Legale Saltelli & Partners assiste a Napoli lavoratori e imprese in tu
+    sotto_aree(count): 0
+  ID 2664 (Diritto tributario):
+    is_tier_1: 1
+    answer_capsule: Lo Studio Legale Saltelli & Partners assiste privati e imprese a Napoli in tutto
+    sotto_aree(count): 0
+
+--- saltelli_caso (count: 3) ---
+  ID 2808 (Tribunale di Napoli · 2023 — trascrizione PMA):
+    data_caso: 
+    outcome: 
+  ID 2767 (Cassazione · 2022):
+    data_caso: 
+    outcome: 
+  ID 2766 (Tribunale di Napoli · 2022):
+    data_caso: 
+    outcome: 
+
+=== CPT counts ===
+  avvocato: 4 published
+  competenza: 19 published
+  saltelli_caso: 10 published
+  saltelli_faq: 28 published
+  saltelli_principio: 3 published
+  saltelli_modalita: 3 published
+  saltelli_scenario: 3 published
+  saltelli_formazione: 12 published
+  saltelli_guida: 0 published
+  saltelli_trust: 4 published
+
+=== Phase 1.6 Smoke frontend ===
+  HTTP 200 → /
+  HTTP 200 → /aree-di-pratica/privati/diritto-tributario/
+  HTTP 200 → /contatti/
+  HTTP 200 → /risorse/blog/
+
+--- Frontend hero/heading sniff (deve mostrare brand_payoff popolato) ---
+Diritto, con misura
+Studio Legale Saltelli
+diciassette aree
+
+=== Phase 1 SUMMARY ===
+Backup path on droplet: ~/backups/wave4-7-fix-pre-switch-20260508-1220/
+  - db.sql 59M
+  - theme.tar.gz 352K
+  - plugins-acf.tar.gz 6.2M
+
+PRE-SWITCH:  ACF Free 6.8.0, acf_add_options_page=NO, 17 group, 26 options_*
+POST-SWITCH: SCF 6.8.4, acf_add_options_page=YES, ACF_PRO=YES, 17 group preserved, 26 options_* invariate
+OPTIONS PAGE: 'saltelli-settings' registrata + menu visible 'Saltelli — Settings'
+CPT REGRESSION: PASS (avvocato/competenza/casi field popolati ritornano valori)
+FRONTEND SMOKE: 4/4 200 OK + brand strings render OK
