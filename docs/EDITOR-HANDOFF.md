@@ -1,10 +1,17 @@
 # Manuale Editoriale — Studio Legale Saltelli
 
 > **Destinatari:** Elena Cappabianca, Ludovica Casa, eventuali collaboratori editoriali esterni Adsolut.
-> **Versione:** 2.0 — 2026-05-08 (Wave 4.7.fix: SCF migration + menu Saltelli Settings finalmente funzionale + 10 tab editabili)
+> **Versione:** 3.0 — 2026-05-08 (Wave 4.7.fix.2: Studio Section bug fix + slug `risultati`→`casi-rappresentativi` + menu primary rebuilt + SCF tier-2 migration per hub e archive CPT)
 > **Mantenuto da:** Adsolut SRLS · tech@adsolut.it
 > **Repository:** https://github.com/Adsolut-Ai-Agency/saltelli-wp/blob/main/docs/EDITOR-HANDOFF.md
 > **Ambiente coperto:** staging WordPress dello Studio Legale Saltelli (production cut successivo).
+
+> **Cosa è cambiato in v3.0** (2026-05-08, Wave 4.7.fix.2):
+> - **Bug fix**: il campo "Body sezione studio" (Saltelli Settings → Studio Section) appariva vuoto in admin pur essendo popolato in homepage. Ora il default editoriale (3 paragrafi storici) è seedato e visibile in admin.
+> - **Rinomina URL**: `/chi-siamo/risultati/` è diventato `/chi-siamo/casi-rappresentativi/`. Il vecchio URL ridireziona automaticamente (301).
+> - **Menu primary ricostruito**: 22 voci con riferimenti diretti alle pagine (nessun URL hardcoded). Modifichi una pagina → il menu si aggiorna da solo.
+> - **Nuove sezioni editabili in SCF**: gli hub (`/chi-siamo/`, `/aree-di-pratica/`, `/risorse/`) e le archive CPT (`/chi-siamo/team/`, `/chi-siamo/casi-rappresentativi/`) ora hanno H1, eyebrow e intro modificabili — vedi nuove tab Saltelli Settings ("Hub Pages" e "Archive Headers").
+> - **Vedi §3.5** per la nuova mappa "Pagina WP vs Tassonomia vs Archive CPT".
 
 > **Cosa è cambiato in v2.0** (2026-05-08): Wave 4.7.fix ha sbloccato il menu **Saltelli — Settings** in WP-Admin (slot 60) che prima era invisibile a causa di un bug architetturale. Adesso puoi modificare **50 campi globali** (10 tab) — **inclusi 4 tab nuovi** (Hero Homepage, Studio Section, Team & Casi, Press Homepage) che prima non erano editabili. Vedi §4.
 
@@ -20,6 +27,7 @@ Leggi le sezioni 0–3 una volta tutte. Le altre tienile come riferimento da con
 1. [Cosa devi sapere prima di iniziare](#1-cosa-devi-sapere-prima-di-iniziare)
 2. [Accesso al WP-Admin](#2-accesso-al-wp-admin)
 3. [TL;DR — Mappa rapida "voglio editare X"](#3-tldr--mappa-rapida-voglio-editare-x)
+3.5. [Pagina WP vs Tassonomia vs Archive CPT — mappa per i 15 URL pubblici](#35--pagina-wp-vs-tassonomia-vs-archive-cpt-mappa-per-i-15-url-pubblici)
 4. [Saltelli — Settings (impostazioni globali)](#4-saltelli--settings-impostazioni-globali)
 5. [Le 9 pagine custom](#5-le-9-pagine-custom)
 6. [Le 4 schede avvocato](#6-le-4-schede-avvocato)
@@ -175,6 +183,66 @@ Se entra un freelance editorial, **NON dargli il login Administrator**. Aprire t
 | Aggiungere una guida gratuita PDF | **Guide gratuite** → New | §8.8, §14 |
 | Aggiungere una formazione/titolo a un avvocato | **Formazione & Titoli** → New, poi associare in scheda avvocato | §8.7, §6 |
 | Articolo del blog | **Articoli** → New (o esistente) | §9 |
+
+---
+
+## 3.5 — Pagina WP vs Tassonomia vs Archive CPT (mappa per i 15 URL pubblici)
+
+> **Perché questa sezione esiste.** Nel sito convivono 3 tipi diversi di "pagina": le Pagine WP (familiari), i term taxonomy (es. cluster `/aree-di-pratica/privati/`) e gli archive CPT (es. `/chi-siamo/team/`). Da WP-Admin si modificano in 3 posti diversi. Tieni questa tabella sotto mano la prima settimana.
+
+| URL pubblico | Tipo | Dove la modifichi in WP-Admin | Cosa puoi editare |
+|---|---|---|---|
+| `/` (homepage) | Frontpage WP (template) | **Saltelli — Settings** → Hero/Studio/Team/Press | Hero, body studio, foto facciata, sezione team, press logos |
+| `/chi-siamo/` (hub) | Pagina WP (ID 2822) | **Pagine** → Chi Siamo | Eyebrow / H1 / intro via SCF tab "Hub Pages" (post v3.0) |
+| `/chi-siamo/lo-studio/` | Pagina WP figlia | **Pagine** → Lo Studio | post_content + SCF mission, lineage, faq di studio |
+| `/chi-siamo/team/` | **Archive CPT** avvocato | NIENTE pagina admin diretta | Eyebrow / H1 / intro via SCF tab "Archive Headers" (post v3.0). Per modificare il singolo avvocato → §6. |
+| `/chi-siamo/casi-rappresentativi/` | **Archive CPT** saltelli_caso | NIENTE pagina admin diretta | Eyebrow / H1 / intro via SCF tab "Archive Headers" (post v3.0). Per il singolo caso → **Casi rappresentativi**. |
+| `/aree-di-pratica/` (hub) | Pagina WP (ID 2812) — `post_content` vuoto by design | **Pagine** → Aree di Pratica | Eyebrow / H1 / intro / 3 cluster cards via SCF tab "Hub Pages" (post v3.0) |
+| `/aree-di-pratica/privati/` | **Term taxonomy** (`tipo-area`) | **Articoli** → Tipo area → Per i Privati | Description del term (max ~300 caratteri) |
+| `/aree-di-pratica/imprese/` | **Term taxonomy** | **Articoli** → Tipo area → Per le Imprese | Description |
+| `/aree-di-pratica/contenzioso-amministrativo/` | **Term taxonomy** | **Articoli** → Tipo area → Contenzioso amministrativo | Description |
+| `/aree-di-pratica/{cluster}/{slug}/` | CPT competenza | **Aree di pratica** → l'area che cerchi | Tutto: H1, answer capsule, body, FAQ, casi, CTA — vedi §7 |
+| `/risorse/` (hub) | Pagina WP (ID 2813) — `post_content` vuoto | **Pagine** → Risorse | Eyebrow / H1 / intro / 4 resource cards via SCF tab "Hub Pages" (post v3.0) |
+| `/risorse/blog/` | Pagina WP "Blog" (ID 1413) | **Pagine** → Blog | post_content (i singoli articoli sono in **Articoli**, vedi §9) |
+| `/risorse/domande-frequenti/` | Pagina WP | **Pagine** → Domande frequenti | post_content + SCF intro |
+| `/risorse/guide-gratuite/` | Pagina WP | **Pagine** → Guide gratuite | post_content (le singole guide sono CPT **Guide gratuite**, vedi §8.8) |
+| `/risorse/glossario-legale/` | Pagina WP | **Pagine** → Glossario legale | post_content (template legacy specializzato) |
+| `/costi-e-consulenze/` | Pagina WP | **Pagine** → Costi e consulenze | Tutto via SCF: hero, modalità, scenari, principi, trust, FAQ — vedi §5.1 |
+| `/costi-e-consulenze/{prima-consulenza,come-lavoriamo,richiedi-preventivo}/` | Pagina WP | **Pagine** → la pagina | post_content + SCF intro |
+| `/contatti/` | Pagina WP (ID 23) | **Pagine** → Contatti | Form CF7 + mappa + come arrivare via SCF |
+| `/contatti/lavora-con-noi/` | Pagina WP figlia | **Pagine** → Lavora con noi | post_content + SCF intro |
+
+### 3.5.1 — Tipo di sorgente: 3 paradigmi
+
+**Pagina WP (`Pagine` nel menu admin)** — la modalità classica WordPress. Trovi le pagine sotto "Pagine" nel menu di sinistra. Hanno un editor Gutenberg/classic + sotto i campi SCF specifici (vedi §5). Sono le 9 pagine custom + ~6 hub pages.
+
+**Term taxonomy (`Articoli` → `Tipo area`)** — i 4 cluster `/aree-di-pratica/{privati,imprese,contenzioso-amministrativo,altri}/`. Tecnicamente sono "categorie" speciali per le aree di pratica. Per modificare il copy del cluster → vai sotto **Articoli** (NON Pagine) → **Tipo area** → clicca il cluster → modifica la "Description" (campo single textarea, max ~300 caratteri).
+
+**Archive CPT** — `/chi-siamo/team/` e `/chi-siamo/casi-rappresentativi/`. Sono pagine generate automaticamente dal sito (NON esiste un'entry corrispondente in "Pagine"). Pre-Wave 4.7.fix.2 il copy di queste pagine (eyebrow, H1, intro) era hardcoded nel codice e NON modificabile. Da v3.0 lo modifichi via **Saltelli — Settings** → tab "Archive Headers" (vedi §4).
+
+### 3.5.2 — Blocchi globali ricorrenti (1 modifica → tutto il sito)
+
+Alcuni blocchi appaiono su **molte pagine** ma vivono in **un'unica fonte**. Modificare lì = aggiornare ovunque.
+
+| Blocco | Dove vive in admin | Dove appare nel sito |
+|---|---|---|
+| **CTA pre-footer** ("§ Ultima chiamata · Prenota un incontro") | Saltelli Settings → CTA Defaults | Sopra il footer su ~19 pagine |
+| **Banda Newsletter** ("L'editoriale del giovedì") | Saltelli Settings → Footer (`footer_newsletter_enabled` toggle) | Footer fascia 3 |
+| **Trust signals plate** (4 segnali "20+ ANNI · ESPERIENZA" ecc.) | Saltelli Settings → Brand (campi `trust_signal_*`) | Trust bar globale (1 file, ~3 includes) |
+| **Sticky WhatsApp message** (popup messaggio default) | Saltelli Settings → Brand → "Messaggio WhatsApp default" (post v3.0) | Bottone sticky in basso a destra su tutto il sito |
+| **Footer aree tier-1** (3 link sotto "Aree di pratica") | Saltelli Settings → Footer Aree (post v3.0) | Footer colonna 2 |
+| **Footer colophon** (indirizzo, contatti, P.IVA) | Saltelli Settings → Footer + Studio Info | Footer colonne 3-4 |
+| **Header navigation** (menu superiore) | **Apparenza** → **Menu** → Saltelli Header (NON Saltelli Settings) | Header desktop + mobile |
+
+### 3.5.3 — Cosa NON è editabile direttamente da admin
+
+Per scelta tecnica/SEO alcuni elementi restano lato codice:
+
+- **Markup HTML del form Brevo** (newsletter): se cambi provider serve dev request.
+- **Schema JSON-LD** (Organization, Attorney, FAQPage, ecc.): generati dai template per garantire validazione Google. Modifica solo via dev.
+- **Layout & design tokens** (colori, font, spacing): vivono in `tokens.css`. Volutamente locked per coerenza brand.
+- **Slug URL** delle pagine già pubblicate: cambiarli rompe i link esterni — chiedi al team prima.
+- **Logo, favicon, immagini brand**: vivono come asset statici (`/assets/`). Scambio via dev.
 
 ---
 
