@@ -1,19 +1,27 @@
 # Manuale Editoriale — Studio Legale Saltelli
 
 > **Destinatari:** Elena Cappabianca, Ludovica Casa, eventuali collaboratori editoriali esterni Adsolut.
-> **Versione:** 3.0 — 2026-05-08 (Wave 4.7.fix.2: Studio Section bug fix + slug `risultati`→`casi-rappresentativi` + menu primary rebuilt + SCF tier-2 migration per hub e archive CPT)
+> **Versione:** 4.0 — 2026-05-08 (Wave 4.7.fix.3: Page Metabox migration — il content delle Page WP si modifica DALLA Page WP, non più da Saltelli Settings)
 > **Mantenuto da:** Adsolut SRLS · tech@adsolut.it
 > **Repository:** https://github.com/Adsolut-Ai-Agency/saltelli-wp/blob/main/docs/EDITOR-HANDOFF.md
 > **Ambiente coperto:** staging WordPress dello Studio Legale Saltelli (production cut successivo).
 
-> **Cosa è cambiato in v3.0** (2026-05-08, Wave 4.7.fix.2):
-> - **Bug fix**: il campo "Body sezione studio" (Saltelli Settings → Studio Section) appariva vuoto in admin pur essendo popolato in homepage. Ora il default editoriale (3 paragrafi storici) è seedato e visibile in admin.
-> - **Rinomina URL**: `/chi-siamo/risultati/` è diventato `/chi-siamo/casi-rappresentativi/`. Il vecchio URL ridireziona automaticamente (301).
-> - **Menu primary ricostruito**: 22 voci con riferimenti diretti alle pagine (nessun URL hardcoded). Modifichi una pagina → il menu si aggiorna da solo.
-> - **Nuove sezioni editabili in SCF**: gli hub (`/chi-siamo/`, `/aree-di-pratica/`, `/risorse/`) e le archive CPT (`/chi-siamo/team/`, `/chi-siamo/casi-rappresentativi/`) ora hanno H1, eyebrow e intro modificabili — vedi nuove tab Saltelli Settings ("Hub Pages" e "Archive Headers").
-> - **Vedi §3.5** per la nuova mappa "Pagina WP vs Tassonomia vs Archive CPT".
+> **Cosa è cambiato in v4.0** (2026-05-08, Wave 4.7.fix.3 Page Metabox migration):
+> - **Modello mentale ripristinato**: "modifica pagina = modifica contenuto pagina". Quasi tutto ciò che è specifico di una Page WP si modifica **dalla pagina stessa** (WP Admin → Pagine → seleziona la pagina → Modifica → vedi metabox sotto/a fianco dell'editor).
+> - **4 tab Saltelli Settings rimosse** (Hero Homepage, Studio Section, Team & Casi, Press Homepage): il loro content è migrato a **Pagine → Home** (la Page WP "Home" è il punto di edit della homepage `/`).
+> - **Tab "Hub Pages" rimossa**: il content di `/chi-siamo/`, `/aree-di-pratica/`, `/risorse/` ora si modifica direttamente dalle relative Page WP.
+> - **Saltelli Settings semplificato**: 14 → 9 tab. Ora contiene solo configurazione **globale** (header/footer/brand/contatti/CTA condivise/archive headers/taxonomy).
+> - **Helper saltelli_page_field()**: nuovo helper interno che legge i field SCF dalla Page WP corrente. Trasparente per Elena.
+> - **Migration data**: 30 chiavi options legacy → postmeta delle 4 Page WP target (Home 17, Chi Siamo 2822, Aree di Pratica 2812, Risorse 2813) — script idempotente.
+> - **Vedi §3.5** per la mappa admin path aggiornata.
 
-> **Cosa è cambiato in v2.0** (2026-05-08): Wave 4.7.fix ha sbloccato il menu **Saltelli — Settings** in WP-Admin (slot 60) che prima era invisibile a causa di un bug architetturale. Adesso puoi modificare **50 campi globali** (10 tab) — **inclusi 4 tab nuovi** (Hero Homepage, Studio Section, Team & Casi, Press Homepage) che prima non erano editabili. Vedi §4.
+> **Cosa è cambiato in v3.0** (2026-05-08, Wave 4.7.fix.2):
+> - **Bug fix**: il campo "Body sezione studio" appariva vuoto in admin pur essendo popolato in homepage. Default editoriale (3 paragrafi storici) seedato e visibile.
+> - **Rinomina URL**: `/chi-siamo/risultati/` → `/chi-siamo/casi-rappresentativi/`. Vecchio URL ridireziona 301.
+> - **Menu primary ricostruito**: 22 voci con riferimenti diretti alle pagine (nessun URL hardcoded).
+> - **Nuove sezioni editabili in SCF**: hub e archive CPT ora hanno H1/eyebrow/intro modificabili.
+
+> **Cosa è cambiato in v2.0** (2026-05-08): Wave 4.7.fix ha sbloccato il menu **Saltelli — Settings** che prima era invisibile (bug architetturale ACF Free → SCF migration).
 
 Questo documento è il **manuale operativo** del nuovo CMS Saltelli. Lo userai sia come riferimento quotidiano per gestire i contenuti, sia come **strumento di QA** durante la fase di debug attiva: ogni volta che incontri un comportamento strano o un campo che non ti convince, segnala — il team tecnico ha bisogno del tuo occhio editoriale per chiudere il cerchio.
 
@@ -192,17 +200,17 @@ Se entra un freelance editorial, **NON dargli il login Administrator**. Aprire t
 
 | URL pubblico | Tipo | Dove la modifichi in WP-Admin | Cosa puoi editare |
 |---|---|---|---|
-| `/` (homepage) | Frontpage WP (template) | **Saltelli — Settings** → Hero/Studio/Team/Press | Hero, body studio, foto facciata, sezione team, press logos |
-| `/chi-siamo/` (hub) | Pagina WP (ID 2822) | **Pagine** → Chi Siamo | Eyebrow / H1 / intro via SCF tab "Hub Pages" (post v3.0) |
-| `/chi-siamo/lo-studio/` | Pagina WP figlia | **Pagine** → Lo Studio | post_content + SCF mission, lineage, faq di studio |
-| `/chi-siamo/team/` | **Archive CPT** avvocato | NIENTE pagina admin diretta | Eyebrow / H1 / intro via SCF tab "Archive Headers" (post v3.0). Per modificare il singolo avvocato → §6. |
-| `/chi-siamo/casi-rappresentativi/` | **Archive CPT** saltelli_caso | NIENTE pagina admin diretta | Eyebrow / H1 / intro via SCF tab "Archive Headers" (post v3.0). Per il singolo caso → **Casi rappresentativi**. |
-| `/aree-di-pratica/` (hub) | Pagina WP (ID 2812) — `post_content` vuoto by design | **Pagine** → Aree di Pratica | Eyebrow / H1 / intro / 3 cluster cards via SCF tab "Hub Pages" (post v3.0) |
+| `/` (homepage) | Pagina WP "Home" (ID 17, page_on_front) | **Pagine** → Home | 🆕 v4.0: Hero (eyebrow/headline/sub/CTA), Studio Section (titolo/body/foto facciata), Team & Casi (titoli + casi rappresentativi), Press (loghi) — tutto da metabox "Saltelli — Page Homepage" |
+| `/chi-siamo/` (hub) | Pagina WP (ID 2822) | **Pagine** → Chi Siamo | 🆕 v4.0: Eyebrow / H1 (parte 1 + parte 2 corsivo) / intro paragrafo via metabox "Saltelli — Page Chi Siamo" |
+| `/chi-siamo/lo-studio/` | Pagina WP figlia | **Pagine** → Lo Studio | post_content + SCF mission, lineage, faq di studio (group_lo_studio_v1) |
+| `/chi-siamo/team/` | **Archive CPT** avvocato | NIENTE pagina admin diretta | Eyebrow / H1 / intro via Saltelli — Settings → tab "Archive Headers". Per il singolo avvocato → §6. |
+| `/chi-siamo/casi-rappresentativi/` | **Archive CPT** saltelli_caso | NIENTE pagina admin diretta | Eyebrow / H1 / intro via Saltelli — Settings → tab "Archive Headers". Per il singolo caso → **Casi rappresentativi**. |
+| `/aree-di-pratica/` (hub) | Pagina WP (ID 2812) — `post_content` vuoto by design | **Pagine** → Aree di Pratica | 🆕 v4.0: Hero (eyebrow/H1/intro) + 3 Cluster Cards (Privati/Imprese/Contenzioso label+desc) via metabox "Saltelli — Page Aree di Pratica" — 2 tab |
 | `/aree-di-pratica/privati/` | **Term taxonomy** (`tipo-area`) | **Articoli** → Tipo area → Per i Privati | Description del term (max ~300 caratteri) |
 | `/aree-di-pratica/imprese/` | **Term taxonomy** | **Articoli** → Tipo area → Per le Imprese | Description |
 | `/aree-di-pratica/contenzioso-amministrativo/` | **Term taxonomy** | **Articoli** → Tipo area → Contenzioso amministrativo | Description |
 | `/aree-di-pratica/{cluster}/{slug}/` | CPT competenza | **Aree di pratica** → l'area che cerchi | Tutto: H1, answer capsule, body, FAQ, casi, CTA — vedi §7 |
-| `/risorse/` (hub) | Pagina WP (ID 2813) — `post_content` vuoto | **Pagine** → Risorse | Eyebrow / H1 / intro / 4 resource cards via SCF tab "Hub Pages" (post v3.0) |
+| `/risorse/` (hub) | Pagina WP (ID 2813) — `post_content` vuoto | **Pagine** → Risorse | 🆕 v4.0: Eyebrow / H1 (parte 1 + corsivo) / intro paragrafo via metabox "Saltelli — Page Risorse" |
 | `/risorse/blog/` | Pagina WP "Blog" (ID 1413) | **Pagine** → Blog | post_content (i singoli articoli sono in **Articoli**, vedi §9) |
 | `/risorse/domande-frequenti/` | Pagina WP | **Pagine** → Domande frequenti | post_content + SCF intro |
 | `/risorse/guide-gratuite/` | Pagina WP | **Pagine** → Guide gratuite | post_content (le singole guide sono CPT **Guide gratuite**, vedi §8.8) |
@@ -246,70 +254,31 @@ Per scelta tecnica/SEO alcuni elementi restano lato codice:
 
 ---
 
-## 4. Saltelli — Settings (impostazioni globali) ⭐ PRIMA DESTINAZIONE
+## 4. Saltelli — Settings (impostazioni globali)
 
 📍 **Dove**: sidebar WP-Admin, voce **Saltelli — Settings** (icona cogwheel, posizione 60).
 
-> **🆕 Aggiornamento v2.0 (Wave 4.7.fix · 2026-05-08)**: il menu è ora visibile e tutti i **10 tab** sono editabili. Pre Wave 4.7.fix il menu era silently invisibile (bug architetturale `acf_add_options_page()` ACF Pro-only su ACF Free) e 4 tab nuovi (Hero / Studio Section / Team & Casi / Press) non avevano backing storage. Adesso 50 chiavi options_* sono popolate in DB (24 nuove + 26 baseline Wave 4.6) e ogni modifica si riflette live sul frontend.
+> **🆕 v4.0 (Wave 4.7.fix.3 · 2026-05-08)**: 5 tab sono state **rimosse** da qui (Hero Homepage, Studio Section, Team & Casi, Press Homepage, Hub Pages) — il loro content è migrato alle Page WP corrispondenti. Vai a **Pagine** → seleziona la pagina (Home, Chi Siamo, Aree di Pratica, Risorse) → trovi un metabox dedicato "Saltelli — Page X" sotto l'editor con tutti i field di quella pagina.
 
-Sono **10 tab**. Tutto quello che metti qui appare in **tutte le pagine** del sito (homepage, header, footer, schede contatti, ecc.). Per modificare: clicca sul tab → modifica → click "Update" in alto a destra → ricarica una tab del sito pubblico per verificare.
+Sono **9 tab**. Tutto quello che resta qui è **configurazione globale** del sito (header, footer, brand, contatti studio, CTA condivise tra pagine, header archive CPT, testi cluster taxonomy). Per modificare: clicca sul tab → modifica → click "Update" in alto a destra → ricarica una tab del sito pubblico per verificare.
 
 | Tab | Cosa contiene | Pagine impattate |
 |---|---|---|
-| 1. Hero Homepage | Eyebrow, headline, subheadline, CTA hero | Homepage `/` |
-| 2. Studio Section | Titolo + body sezione "Lo Studio", foto facciata | Homepage `/` |
-| 3. Team & Casi | Titoli sezioni, casi rappresentativi homepage | Homepage `/` |
-| 4. Press Homepage | Loghi outlet press (max 12 righe) | Homepage `/` |
-| 5. Studio Info | Indirizzo, email, PEC, P.IVA, telefono | Footer + schede contatti + schema JSON-LD |
-| 6. Mappa | Coordinate latitudine/longitudine | Schema LocalBusiness |
-| 7. Brand | Payoff, statement, trust signals (4 plate) | Footer + about |
-| 8. Footer | Credit text, newsletter, colophon | Footer |
-| 9. Social | URL Instagram, Facebook, LinkedIn, X | Footer + schede contatti |
-| 10. CTA Defaults | Label, URL, subline italic, trust signal globali | Tutti i bottoni "Prenota" sparsi |
+| 1. Studio Info | Indirizzo, email, PEC, P.IVA, telefono, orari | Footer + schede contatti + schema JSON-LD |
+| 2. Mappa | Coordinate latitudine/longitudine | Schema LocalBusiness + iframe mappa |
+| 3. Brand | Payoff, statement, 4 trust signals, messaggio WhatsApp default | Header + footer + trust bar + sticky WhatsApp |
+| 4. Footer | Credit text, newsletter, colophon (indirizzo/orari/contatti) | Footer |
+| 5. Social | URL Instagram, Facebook, LinkedIn, X | Footer + schede contatti |
+| 6. CTA Defaults | Label, URL, subline italic, trust signal globali | Tutti i bottoni "Prenota" sparsi su 19 templates |
+| 7. Footer Aree | 3 aree tier-1 in colonna footer (repeater) | Footer colonna "Aree di pratica" |
+| 8. Taxonomy Tipo Area | Eyebrow + sottotitolo template per `/aree-di-pratica/{cluster}/` | 4 pagine cluster (term taxonomy) |
+| 9. Archive Headers | Eyebrow / H1 / intro per `/chi-siamo/team/` e `/chi-siamo/casi-rappresentativi/` | 2 archive CPT (no Page WP) |
 
-⚠️ **NB importante**: per i campi che lasci vuoti, il frontend continua a mostrare il copy "presentazione cliente" hardcoded nel template (DEC-029 fallback). Cioè: se cancelli "Diritto, con misura." dall'Hero headline, il frontend mostrerà comunque il testo di default. Per "azzerare visivamente" un campo devi metterci una stringa con uno spazio o usare il toggle se previsto.
+> **Per modificare il contenuto delle pagine specifiche** (Homepage, Chi Siamo, Aree di Pratica, Risorse) vai a **Pagine** → seleziona la pagina → vedi metabox "Saltelli — Page X" sotto l'editor. Vedi §5.
 
-### Tab 1 — Hero Homepage 🆕
+⚠️ **NB importante**: per i campi globali che lasci vuoti, il frontend continua a mostrare il copy default seedato dal JSON. Per "azzerare visivamente" un campo devi metterci una stringa con uno spazio o usare il toggle se previsto.
 
-| Campo | Valore default attuale | Note editoriali |
-|---|---|---|
-| Eyebrow (sopra titolo) | Studio Legale · Napoli · Chiaia · Dal 1999 | Riga sopra l'headline. Max 50ch. Usa il separatore "·". |
-| Headline (titolo principale) | Diritto, con misura. | Max 30ch. Punto finale obbligatorio (cifra stilistica). |
-| Subheadline (paragrafo lede) | Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, diciassette aree di pratica, vent'anni di lavoro accanto a famiglie e imprese di Napoli. | 1-2 frasi. Tono editoriale, niente bullet. Cifre come parole ("diciassette", non "17"). |
-| CTA hero — Label | Prenota una consulenza gratuita | Bottone hero. Imperativo. |
-| CTA hero — URL | /contatti/ | Path relativo. |
-
-🔍 **Test debug consigliato**: cambia "Diritto, con misura." in "DIRITTO TEST", salva, ricarica `/`. Verifica che si aggiorni. Poi rimettilo corretto. Questo è il test che ha confermato la pipeline write-side end-to-end durante Wave 4.7.fix Phase 2.
-
-### Tab 2 — Studio Section 🆕
-
-| Campo | Valore default | Note |
-|---|---|---|
-| Titolo sezione studio (homepage) | Un atelier, in senso napoletano. | Punto finale obbligatorio. Max 60ch. |
-| Body sezione studio (homepage) | (vuoto — fallback hardcoded nel template) | 2-3 paragrafi editoriali. Quando lo popoli, sostituisce il fallback. |
-| Foto facciata Studio | (vuoto — image picker) | JPG/WebP, 1920×1080 minimo, esterno Studio (non interni). |
-
-### Tab 3 — Team & Casi 🆕
-
-| Campo | Valore default | Note |
-|---|---|---|
-| Titolo sezione team (homepage) | Quattro\nprofessionisti. | `\n` = a-capo nel layout split. Punto finale. |
-| Titolo sezione casi (homepage) | Casi rappresentativi. | Idem. |
-| Casi rappresentativi in homepage | (vuoto — post_object picker) | Selezione manuale dei 3 casi homepage (CPT saltelli_caso). Se vuoto, fallback hardcoded a 3 casi. |
-
-### Tab 4 — Press Homepage 🆕
-
-Repeater max 12 righe. Ogni riga = 1 outlet stampa con logo.
-
-| Campo riga | Note |
-|---|---|
-| Nome outlet | "Il Mattino", "Repubblica Napoli", ecc. |
-| Logo (SVG/PNG) | SVG preferibile, monochrome navy `#1B2B4B`. Fallback: PNG @2x trasparente. |
-| URL articolo (opz.) | Link diretto all'articolo (apre in new tab). Se vuoto, logo è solo decorativo. |
-
-⚠️ Se aggiungi una riga ma non popoli nome+logo, la riga viene scartata in render. La sezione Press scompare dalla homepage se zero righe valide.
-
-### Tab 5 — Studio Info
+### Tab 1 — Studio Info
 
 | Campo | Valore attuale | Note editoriali |
 |---|---|---|
@@ -328,7 +297,7 @@ Repeater max 12 righe. Ogni riga = 1 outlet stampa con logo.
 
 🔍 **Test debug consigliato**: cambia la P.IVA in modo dummy ("123456"), salva, vai sul footer del sito pubblico e verifica che si aggiorni. Poi rimettila corretta.
 
-### Tab 6 — Mappa
+### Tab 2 — Mappa
 
 | Campo | Esempio | Note |
 |---|---|---|
@@ -337,7 +306,7 @@ Repeater max 12 righe. Ogni riga = 1 outlet stampa con logo.
 
 Servono allo schema JSON-LD `LocalBusiness` (le AI capiscono dove siamo geograficamente). Per ottenere le coordinate: Google Maps → tasto destro sul pin → copia coordinate.
 
-### Tab 7 — Brand
+### Tab 3 — Brand
 
 | Campo | Esempio | Note |
 |---|---|---|
@@ -352,7 +321,7 @@ Servono allo schema JSON-LD `LocalBusiness` (le AI capiscono dove siamo geografi
 
 🆕 I 4 trust signal sono stati seedati con i copy ricavati dal brief. Modificabili ma cambia uniformemente in homepage + about.
 
-### Tab 8 — Footer
+### Tab 4 — Footer
 
 | Campo | Esempio | Note |
 |---|---|---|
@@ -365,7 +334,7 @@ Servono allo schema JSON-LD `LocalBusiness` (le AI capiscono dove siamo geografi
 | Colophon email | (vuoto — fallback a Studio Info → Email pubblica) | Override colophon. Se vuoto usa Studio Info. 🆕 |
 | Colophon telefono | +39 081 1813 1119 | 🆕 |
 
-### Tab 9 — Social
+### Tab 5 — Social
 
 URL completi degli account ufficiali. Lascia vuoto se l'account non esiste (l'icona scompare automaticamente).
 
@@ -378,7 +347,11 @@ URL completi degli account ufficiali. Lascia vuoto se l'account non esiste (l'ic
 
 🔍 **Task debug per Elena**: chiedere ad Avv. Saltelli se LinkedIn ufficiale dello Studio è disponibile. Se sì, popolarlo qui.
 
-### Tab 10 — CTA Defaults
+### Tab 6 — CTA Defaults
+
+(Tab 7 Footer Aree, Tab 8 Taxonomy Tipo Area, Tab 9 Archive Headers — vedi le tabelle riassuntive sopra. Sono 3 tab tecniche con field semplici, edit on-demand quando cambi assetto strategico, archive CPT copy o cluster taxonomy strings.)
+
+#### Tab 6 dettaglio — CTA Defaults
 
 I bottoni "Prenota un incontro" che vedi sparsi sul sito hanno **valori di default** che vengono presi da qui. Le singole pagine possono sovrascriverli, ma se non lo fanno usano questi.
 
@@ -393,11 +366,40 @@ I bottoni "Prenota un incontro" che vedi sparsi sul sito hanno **valori di defau
 
 ---
 
-## 5. Le 9 pagine custom
+## 5. Le pagine custom
 
 📍 **Dove**: sidebar WP-Admin, voce **Pagine**.
 
 Ogni pagina ha la propria struttura editoriale. Ti elenco la mappa pagina → blocchi modificabili. Tutti i campi sono descritti **dentro WP-Admin** con etichette e istruzioni: questa tabella ti serve come "indice" iniziale.
+
+### 5.0 — 🆕 v4.0: I 4 hub pages con metabox dedicato (Wave 4.7.fix.3)
+
+A partire dal **v4.0** (Wave 4.7.fix.3 Page Metabox migration), 4 Page WP hanno un metabox dedicato con tutti i field di copy della loro pagina:
+
+| Page WP | URL pubblico | Admin path | Metabox content |
+|---|---|---|---|
+| **Home** (ID 17) | `/` | Pagine → Home | Saltelli — Page Homepage (4 tab: Hero / Studio Section / Team & Casi / Press) — 12 field |
+| **Chi Siamo** (ID 2822) | `/chi-siamo/` | Pagine → Chi Siamo | Saltelli — Page Chi Siamo (1 tab: Eyebrow / H1 / intro) — 4 field |
+| **Aree di Pratica** (ID 2812) | `/aree-di-pratica/` | Pagine → Aree di Pratica | Saltelli — Page Aree di Pratica (2 tab: Hero / 3 Cluster Cards) — 10 field |
+| **Risorse** (ID 2813) | `/risorse/` | Pagine → Risorse | Saltelli — Page Risorse (1 tab: Eyebrow / H1 / intro) — 4 field |
+
+**Importante**: queste sono le STESSE Page WP che vedevi prima — è solo cambiato DOVE editi il loro contenuto. Pre-v4.0 i 4 hub copy erano in **Saltelli — Settings** → tab "Hub Pages" + "Hero Homepage" + "Studio Section" + "Team & Casi" + "Press Homepage". Ora sono nelle Page WP di pertinenza.
+
+**Workflow tipico per editare l'hero della homepage (esempio)**:
+1. WP-Admin → Pagine
+2. Click su "Home" (ID 17, slug `home`)
+3. Sotto l'editor classico (post_content, vuoto by design) trovi metabox "Saltelli — Page Homepage"
+4. Click sulla tab "Hero" → modifica eyebrow, headline, subheadline, CTA label/URL
+5. Click "Update" in alto a destra
+6. Ricarica `/` con Ctrl+Shift+R per verificare
+
+**Workflow tipico per modificare l'intro paragrafo di /chi-siamo/**:
+1. WP-Admin → Pagine → Chi Siamo
+2. Sotto l'editor → metabox "Saltelli — Page Chi Siamo" → field "Intro paragrafo"
+3. Modifica → "Update"
+4. Ricarica `/chi-siamo/`
+
+I metabox hanno **field "instructions"** in italiano per ogni campo. Se non sei sicuro su un field, leggi l'instruction sotto il campo prima di editare.
 
 ### 5.1 — Pagina `/costi/` (ID 2695)
 
