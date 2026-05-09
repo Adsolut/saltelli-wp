@@ -16,11 +16,12 @@ defined('ABSPATH') || exit;
 $sl_lawyers_count = wp_count_posts('avvocato')->publish ?? 4;
 $sl_casi_count    = wp_count_posts('saltelli_caso')->publish ?? 9;
 
-// Wave 4.7.fix.2 P4: hub copy editable da SCF tab "Hub Pages".
-$sl_hub_eyebrow = (string) saltelli_option('hub_chisiamo_eyebrow', __('§ Chi siamo', 'saltelli'));
-$sl_hub_h1_main = (string) saltelli_option('hub_chisiamo_h1_main', __('Quattro avvocati,', 'saltelli'));
-$sl_hub_h1_em   = (string) saltelli_option('hub_chisiamo_h1_emphasis', __('un atelier.', 'saltelli'));
-$sl_hub_intro   = (string) saltelli_option('hub_chisiamo_intro', __("Studio Legale Emiliano Saltelli & Partners. Quattro professionisti in Via Vannella Gaetani, Chiaia. Una bottega — non una catena. Dal 1999.", 'saltelli'));
+// Wave 4.7.fix.3: hub copy ora attaccato a Page WP "Chi Siamo" (page_slug=chi-siamo).
+// Edita da WP-Admin → Pagine → Chi Siamo → metabox "Saltelli — Page Chi Siamo".
+$sl_hub_eyebrow = (string) saltelli_page_field('hub_chisiamo_eyebrow', __('§ Chi siamo', 'saltelli'));
+$sl_hub_h1_main = (string) saltelli_page_field('hub_chisiamo_h1_main', __('Quattro avvocati,', 'saltelli'));
+$sl_hub_h1_em   = (string) saltelli_page_field('hub_chisiamo_h1_emphasis', __('un atelier.', 'saltelli'));
+$sl_hub_intro   = (string) saltelli_page_field('hub_chisiamo_intro', __("Studio Legale Emiliano Saltelli & Partners. Quattro professionisti in Via Vannella Gaetani, Chiaia. Una bottega — non una catena. Dal 1999.", 'saltelli'));
 ?>
 
 <section class="sl-page-hero sl-hub-hero" aria-labelledby="hub-chi-siamo-h1">

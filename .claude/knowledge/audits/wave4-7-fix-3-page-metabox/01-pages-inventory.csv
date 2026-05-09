@@ -1,0 +1,23 @@
+ID,post_title,post_name,post_parent,template_php,scf_group_attached_pre_wave_4_7_fix_3,note
+17,Home,home,0,front-page.php,—,Static homepage (page_on_front=17). Front template via is_front_page() WP hierarchy. Slug stabile.
+2822,Chi Siamo,chi-siamo,0,page.php → template-parts/page-chi-siamo-hub.php,—,HUB Page Wave 5
+2811,Chi Siamo,lo-studio,2822,page.php → template-parts/page-lo-studio.php,group_lo_studio_v1 (page_slug == lo-studio),Page nested sotto hub chi-siamo
+2812,Aree di Pratica,aree-di-pratica,0,page.php → template-parts/page-aree-di-pratica-hub.php,—,HUB Page Wave 5
+2813,Risorse,risorse,0,page.php → template-parts/page-risorse-hub.php,—,HUB Page Wave 5
+2695,Costi e Consulenze,costi-e-consulenze,0,page.php → template-parts/page-costi-e-consulenze-hub.php,—,HUB Page Wave 5 (post_content=4649 chars)
+2699,Casi rappresentativi,risultati,2811,page.php (default fallback),—,Slug ≠ title (Wave 4.7.fix.2 P5 lasciato per slug rename CPT only)
+2708,Domande frequenti,domande-frequenti,2813,page.php → template-parts/page-faq.php,group_faq_v1 (page_slug == faq | domande-frequenti),Page con post_content
+2709,Guide gratuite,guide-gratuite,2813,page.php → template-parts/page-info-shared.php,group_info_shared_v1,Page con post_content
+2710,Glossario legale,glossario-legale,2813,page.php → inc/wave3-glossario.php (custom),—,Render specializzato
+2711,Prima consulenza,prima-consulenza,2695,page.php → template-parts/page-info-shared.php,group_info_shared_v1,Sottopagina costi
+2712,Come lavoriamo,come-lavoriamo,2695,page.php → template-parts/page-info-shared.php,group_info_shared_v1,Sottopagina costi
+2713,Richiedi un preventivo,richiedi-preventivo,2695,page.php → template-parts/page-info-shared.php,group_info_shared_v1,Sottopagina costi
+2714,Prenota un appuntamento,prenota-appuntamento,0,page.php (default fallback),—,Page con post_content
+2741,Privacy Policy,privacy-policy,0,page.php (default fallback),—,Pagina legale
+2742,Cookie Policy,cookie-policy,0,page.php (default fallback),—,Pagina legale
+2743,Note legali,note-legali,0,page.php (default fallback),—,Pagina legale
+23,Contatti,contatti,0,page.php → template-parts/page-contatti.php,group_contatti_v1 (page_slug == contatti),Pagina contatti + form CF7
+1413,Blog,blog,2813,home.php (page_for_posts),—,Posts page
+372,Lavora con noi,lavora-con-noi,23,page.php (default fallback),—,Sottopagina contatti
+361,Prenota un appuntamento,prenota-un-appuntamento,0,page.php (default fallback),—,Possibile duplicato 2714
+356,Conferma,conferma,0,page.php (default fallback),—,Page utility

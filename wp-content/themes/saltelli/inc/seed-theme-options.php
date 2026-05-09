@@ -12,6 +12,13 @@
  * 26/50 chiavi sono popolate in DB. I 24 mancanti cadono sui fallback
  * hardcoded DEC-029 nel frontend. Questo script chiude il gap.
  *
+ * Wave 4.7.fix.3 (2026-05-08): post Page Metabox migration, group_theme_options_v1.json
+ * non contiene più i field hero_*, studio_*, team_*, casi_rappresentativi_home,
+ * press_outlets, hub_chisiamo_*, hub_aree_*, hub_risorse_* (migrati a Page metabox).
+ * Lo script seed continua a funzionare correttamente: itera SOLO i field rimasti
+ * in JSON (~50, 9 tab globali). I field migrati NON vengono ri-seedati in
+ * wp_options (the canonical source ora è postmeta delle Page WP).
+ *
  * Esecuzione (solo staging via SSH):
  *   sudo -u www-data wp eval-file /tmp/seed-theme-options.php --path=/var/www/saltelli
  *

@@ -9,24 +9,27 @@ get_header();
 
 $studio = saltelli_studio_data();
 
-$hero_eyebrow    = saltelli_option('hero_eyebrow', 'Studio Legale · Napoli · Chiaia · Dal 1999');
-$hero_headline   = saltelli_option('hero_headline', 'Diritto, con misura.');
-$hero_sub        = saltelli_option('hero_subheadline', "Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, diciassette aree di pratica, vent'anni di lavoro accanto a famiglie e imprese di Napoli.");
-$hero_cta_label  = saltelli_option('hero_cta_label', 'Prenota una consulenza gratuita');
-$hero_cta_url    = saltelli_option('hero_cta_url', '/contatti/');
+// Wave 4.7.fix.3: hero/studio/team/cases ora attaccati a Page WP "Home" (page_on_front).
+// Edita da WP-Admin → Pagine → Home. Helper saltelli_page_field auto-resolve homepage_id.
+$hero_eyebrow    = saltelli_page_field('hero_eyebrow', 'Studio Legale · Napoli · Chiaia · Dal 1999');
+$hero_headline   = saltelli_page_field('hero_headline', 'Diritto, con misura.');
+$hero_sub        = saltelli_page_field('hero_subheadline', "Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, diciassette aree di pratica, vent'anni di lavoro accanto a famiglie e imprese di Napoli.");
+$hero_cta_label  = saltelli_page_field('hero_cta_label', 'Prenota una consulenza gratuita');
+$hero_cta_url    = saltelli_page_field('hero_cta_url', '/contatti/');
 
+// Colophon resta in Theme Options (globale: anche footer.php usa colophon_*).
 $col_indirizzo = saltelli_option('colophon_indirizzo', "Via Vannella Gaetani, 27\n80121 Napoli — Chiaia");
 $col_orari     = saltelli_option('colophon_orari', "Lun – Ven · 10:00 – 19:00\nSolo su appuntamento");
 $col_email     = saltelli_option('colophon_email', $studio['email']);
 $col_tel       = saltelli_option('colophon_telefono', '+39 081 1813 1119');
 $col_tel_e164  = saltelli_studio_phone_e164();
 
-$studio_titolo = saltelli_option('studio_titolo_sezione', 'Un atelier, in senso napoletano.');
-$studio_body   = saltelli_option('studio_body', '');
-$studio_foto   = saltelli_option('studio_foto_facciata');
+$studio_titolo = saltelli_page_field('studio_titolo_sezione', 'Un atelier, in senso napoletano.');
+$studio_body   = saltelli_page_field('studio_body', '');
+$studio_foto   = saltelli_page_field('studio_foto_facciata');
 
-$team_titolo   = saltelli_option('team_titolo', "Quattro\nprofessionisti.");
-$cases_titolo  = saltelli_option('cases_titolo', 'Casi rappresentativi.');
+$team_titolo   = saltelli_page_field('team_titolo', "Quattro\nprofessionisti.");
+$cases_titolo  = saltelli_page_field('cases_titolo', 'Casi rappresentativi.');
 
 /* Wave 4.6: CTA default — usata in sl-contact final CTA section.
    Default ACF identici a quelli legacy hero_* per backward compat. */
