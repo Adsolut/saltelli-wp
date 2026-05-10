@@ -81,21 +81,21 @@ $trust_headline = $aside_h3;
         </aside>
     </header>
 
+    <?php if ($body_content !== '') : ?>
     <section class="sl-info-page__body">
         <div class="sl-mono sl-info-page__body-eyebrow"><?php esc_html_e('§ 01 — Approfondimento', 'saltelli'); ?></div>
         <div class="sl-info-page__prose">
             <?php
-            // Priority 1: ACF body_content (Wave 2 popolato).
-            // Priority 2: get_the_content() (post_content WP nativo).
-            // Priority 3: empty (richiedi-preventivo non ha body editorial).
-            if ($body_content !== '') {
-                echo wp_kses_post($body_content);
-            } elseif (get_the_content() !== '') {
-                the_content();
-            }
+            // Wave 4.7.fix.4 STRATEGY A: source unica = SCF body_content.
+            // Pre-fix.4: aveva fallback the_content() WP nativo per pagine senza
+            // body_content popolato. Post-fix.4: post_content è stato bonificato +
+            // Gutenberg disabled, una sola sorgente di verità per pagina.
+            // Se body_content è vuoto, l'intera sezione __body è skippata (silent).
+            echo wp_kses_post($body_content);
             ?>
         </div>
     </section>
+    <?php endif; ?>
 
     <section class="sl-info-page__cta">
         <div class="sl-info-page__cta-inner">
