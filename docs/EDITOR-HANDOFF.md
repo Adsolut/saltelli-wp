@@ -1,10 +1,19 @@
 # Manuale Editoriale — Studio Legale Saltelli
 
 > **Destinatari:** Elena Cappabianca, Ludovica Casa, eventuali collaboratori editoriali esterni Adsolut.
-> **Versione:** 4.0 — 2026-05-08 (Wave 4.7.fix.3: Page Metabox migration — il content delle Page WP si modifica DALLA Page WP, non più da Saltelli Settings)
+> **Versione:** 5.0 — 2026-05-10 (Wave 4.7.fix.4 STRATEGY A FULL SCF: una sola sorgente di verità per pagina — l'editor classico Gutenberg è disabilitato sulle 12 Pages con metabox SCF, vedi sotto solo i campi)
 > **Mantenuto da:** Adsolut SRLS · tech@adsolut.it
 > **Repository:** https://github.com/Adsolut-Ai-Agency/saltelli-wp/blob/main/docs/EDITOR-HANDOFF.md
 > **Ambiente coperto:** staging WordPress dello Studio Legale Saltelli (production cut successivo).
+
+> **Cosa è cambiato in v5.0** (2026-05-10, Wave 4.7.fix.4 STRATEGY A FULL SCF):
+> - **Una sola sorgente di verità per Page WP**: l'editor Gutenberg/classic è **disabilitato** sulle 12 Page WP con metabox SCF attached. Quando apri una di queste Pages vedi: title + slug + sotto solo il metabox "Saltelli — Page X" con i campi. Niente più ambiguità tra editor di contenuto + metabox separato.
+> - **Pages affette** (Gutenberg disabled): Home (17), Contatti (23), Lavora con noi (372), Domande Frequenti (2708), Guide Gratuite (2709), Prima Consulenza (2711), Come Lavoriamo (2712), Richiedi Preventivo (2713), Lo Studio (2811), Aree di Pratica (2812), Risorse (2813), Chi Siamo (2822).
+> - **Pages NON affette** (Gutenberg attivo come prima): Costi e Consulenze (2695, ha già SCF nativo CPT-based), Privacy / Cookie / Note legali / Glossario / Blog / le pagine senza metabox SCF.
+> - **post_content delle 7 Pages bonificato**: il content che vedevi in editor Gutenberg era ZOMBIE (post_content presente in DB ma NON renderizzato sul frontend per via dei template SCF-first). Ora è stato svuotato. Backup `_legacy_post_content_backup` postmeta preservato per rollback safety.
+> - **Notice editoriale aggiunto**: sulle 12 Pages target vedi un box informativo "Modifica il contenuto qui sotto" sotto il title, sopra il metabox SCF, per chiarire dove editare.
+> - **Admin shortcuts per archive CPT**: nuova guidance sotto Saltelli Settings → tab "Archive Headers" + admin bar shortcut quando visiti `/chi-siamo/team/` o `/chi-siamo/casi-rappresentativi/` su frontend logged-in.
+> - **Vedi §3.5** per la mappa admin path aggiornata + §3.6 (nuovo) per la spiegazione archive CPT workflow.
 
 > **Cosa è cambiato in v4.0** (2026-05-08, Wave 4.7.fix.3 Page Metabox migration):
 > - **Modello mentale ripristinato**: "modifica pagina = modifica contenuto pagina". Quasi tutto ciò che è specifico di una Page WP si modifica **dalla pagina stessa** (WP Admin → Pagine → seleziona la pagina → Modifica → vedi metabox sotto/a fianco dell'editor).
@@ -36,6 +45,7 @@ Leggi le sezioni 0–3 una volta tutte. Le altre tienile come riferimento da con
 2. [Accesso al WP-Admin](#2-accesso-al-wp-admin)
 3. [TL;DR — Mappa rapida "voglio editare X"](#3-tldr--mappa-rapida-voglio-editare-x)
 3.5. [Pagina WP vs Tassonomia vs Archive CPT — mappa per i 15 URL pubblici](#35--pagina-wp-vs-tassonomia-vs-archive-cpt-mappa-per-i-15-url-pubblici)
+3.6. [🆕 Archive CPT: come si edita `/chi-siamo/team/` e `/chi-siamo/casi-rappresentativi/`](#36--archive-cpt-come-si-edita-chi-siamoteam-e-chi-siamocasi-rappresentativi)
 4. [Saltelli — Settings (impostazioni globali)](#4-saltelli--settings-impostazioni-globali)
 5. [Le 9 pagine custom](#5-le-9-pagine-custom)
 6. [Le 4 schede avvocato](#6-le-4-schede-avvocato)
@@ -198,6 +208,8 @@ Se entra un freelance editorial, **NON dargli il login Administrator**. Aprire t
 
 > **Perché questa sezione esiste.** Nel sito convivono 3 tipi diversi di "pagina": le Pagine WP (familiari), i term taxonomy (es. cluster `/aree-di-pratica/privati/`) e gli archive CPT (es. `/chi-siamo/team/`). Da WP-Admin si modificano in 3 posti diversi. Tieni questa tabella sotto mano la prima settimana.
 
+> **🆕 v5.0 (Wave 4.7.fix.4)**: Per le 12 Pages WP con metabox SCF attached l'editor di contenuto (Gutenberg/classic) è ora **disabilitato**. Apri la Page e vedi: title + slug + sotto direttamente i campi SCF nel metabox "Saltelli — Page X". Niente più editor sopra. Una sola sorgente di verità per pagina.
+
 | URL pubblico | Tipo | Dove la modifichi in WP-Admin | Cosa puoi editare |
 |---|---|---|---|
 | `/` (homepage) | Pagina WP "Home" (ID 17, page_on_front) | **Pagine** → Home | 🆕 v4.0: Hero (eyebrow/headline/sub/CTA), Studio Section (titolo/body/foto facciata), Team & Casi (titoli + casi rappresentativi), Press (loghi) — tutto da metabox "Saltelli — Page Homepage" |
@@ -254,6 +266,44 @@ Per scelta tecnica/SEO alcuni elementi restano lato codice:
 
 ---
 
+## 3.6 — Archive CPT: come si edita `/chi-siamo/team/` e `/chi-siamo/casi-rappresentativi/`
+
+> **🆕 v5.0**: queste 2 pagine archivio CPT NON hanno una Page WP corrispondente (sono generate automaticamente dal codice). Per modificarle ci sono due punti distinti — uno per l'header pagina, uno per i singoli elementi.
+
+### `/chi-siamo/team/` (archive CPT Avvocato)
+
+**Header pagina** (titolo grande "Quattro avvocati / un atelier", eyebrow "§ Team", intro):
+- WP Admin → **Saltelli — Settings** → tab **Archive Headers**
+- Modifica i campi relativi a `archive_avvocato_*`
+- Salva → frontend `/chi-siamo/team/` aggiornato
+
+**Singolo avvocato** (foto, bio, specializzazioni, formazione, casi):
+- WP Admin → **Avvocato** (voce di menu dedicato)
+- Seleziona il profilo → Modifica → tutti i campi
+- Vedi §6 per dettaglio campi
+
+**Shortcut comodo**: visitando `/chi-siamo/team/` da frontend loggato come admin, l'admin bar in alto mostra "Modifica header archivio" con submenu "Tutti gli avvocati" — click ti porta direttamente al punto giusto.
+
+### `/chi-siamo/casi-rappresentativi/` (archive CPT Caso)
+
+**Header pagina** (titolo "Casi rappresentativi", eyebrow, intro):
+- WP Admin → **Saltelli — Settings** → tab **Archive Headers**
+- Modifica i campi `archive_caso_*`
+- Salva → frontend aggiornato
+
+**Singolo caso rappresentativo** (titolo, descrizione, outcome, area):
+- WP Admin → **Casi rappresentativi** (voce di menu dedicato)
+- Seleziona il caso → Modifica
+- Vedi §8 per dettaglio campi CPT
+
+**Shortcut**: idem — admin bar su frontend logged-in mostra "Modifica header archivio" + "Tutti i casi rappresentativi".
+
+### Perché NON esistono come Page WP
+
+Per design WordPress: gli archive CPT sono pagine generate automaticamente dal sito a partire dalla collezione di elementi (avvocati, casi). Non hanno entry corrispondente in "Pagine". L'header pagina (titolo + intro) vive quindi in Saltelli Settings (configurazione globale), i singoli elementi nella collezione CPT. È un compromesso WP standard. Per Elena: ricorda "header → Settings, singoli elementi → CPT dedicato".
+
+---
+
 ## 4. Saltelli — Settings (impostazioni globali)
 
 📍 **Dove**: sidebar WP-Admin, voce **Saltelli — Settings** (icona cogwheel, posizione 60).
@@ -274,7 +324,9 @@ Sono **9 tab**. Tutto quello che resta qui è **configurazione globale** del sit
 | 8. Taxonomy Tipo Area | Eyebrow + sottotitolo template per `/aree-di-pratica/{cluster}/` | 4 pagine cluster (term taxonomy) |
 | 9. Archive Headers | Eyebrow / H1 / intro per `/chi-siamo/team/` e `/chi-siamo/casi-rappresentativi/` | 2 archive CPT (no Page WP) |
 
-> **Per modificare il contenuto delle pagine specifiche** (Homepage, Chi Siamo, Aree di Pratica, Risorse) vai a **Pagine** → seleziona la pagina → vedi metabox "Saltelli — Page X" sotto l'editor. Vedi §5.
+> **🆕 v5.0**: il tab "Archive Headers" ora ha un **notice informativo** in cima con link diretti ai CPT Avvocato e Casi rappresentativi (per editare i singoli elementi della lista). Vedi §3.6 per workflow archive.
+
+> **Per modificare il contenuto delle pagine specifiche** (Homepage, Chi Siamo, Aree di Pratica, Risorse) vai a **Pagine** → seleziona la pagina → vedi metabox "Saltelli — Page X" (sotto il title, l'editor classico è disabilitato dal v5.0). Vedi §5.
 
 ⚠️ **NB importante**: per i campi globali che lasci vuoti, il frontend continua a mostrare il copy default seedato dal JSON. Per "azzerare visivamente" un campo devi metterci una stringa con uno spazio o usare il toggle se previsto.
 
@@ -372,34 +424,52 @@ I bottoni "Prenota un incontro" che vedi sparsi sul sito hanno **valori di defau
 
 Ogni pagina ha la propria struttura editoriale. Ti elenco la mappa pagina → blocchi modificabili. Tutti i campi sono descritti **dentro WP-Admin** con etichette e istruzioni: questa tabella ti serve come "indice" iniziale.
 
-### 5.0 — 🆕 v4.0: I 4 hub pages con metabox dedicato (Wave 4.7.fix.3)
+### 5.0 — 🆕 v5.0: 12 Pages WP con metabox SCF dedicato + Gutenberg disabled
 
-A partire dal **v4.0** (Wave 4.7.fix.3 Page Metabox migration), 4 Page WP hanno un metabox dedicato con tutti i field di copy della loro pagina:
+A partire dal **v5.0** (Wave 4.7.fix.4 STRATEGY A FULL SCF), 12 Page WP hanno un metabox SCF dedicato + l'editor di contenuto classico (Gutenberg) **disabilitato**:
 
-| Page WP | URL pubblico | Admin path | Metabox content |
-|---|---|---|---|
-| **Home** (ID 17) | `/` | Pagine → Home | Saltelli — Page Homepage (4 tab: Hero / Studio Section / Team & Casi / Press) — 12 field |
-| **Chi Siamo** (ID 2822) | `/chi-siamo/` | Pagine → Chi Siamo | Saltelli — Page Chi Siamo (1 tab: Eyebrow / H1 / intro) — 4 field |
-| **Aree di Pratica** (ID 2812) | `/aree-di-pratica/` | Pagine → Aree di Pratica | Saltelli — Page Aree di Pratica (2 tab: Hero / 3 Cluster Cards) — 10 field |
-| **Risorse** (ID 2813) | `/risorse/` | Pagine → Risorse | Saltelli — Page Risorse (1 tab: Eyebrow / H1 / intro) — 4 field |
+| Page WP | URL pubblico | Admin path | Metabox content | Da quale Wave |
+|---|---|---|---|---|
+| **Home** (ID 17) | `/` | Pagine → Home | Saltelli — Page Homepage (4 tab) — 12 field | v4.0 |
+| **Contatti** (ID 23) | `/contatti/` | Pagine → Contatti | Saltelli — Page Contatti (hero + map + come arrivare + trust) — 10 field | v5.0 |
+| **Lavora con noi** (ID 372) | `/contatti/lavora-con-noi/` | Pagine → Lavora con noi | Saltelli — Page Servizi (hero + aside + body + CTA finale) — 16 field | v5.0 |
+| **Domande Frequenti** (ID 2708) | `/risorse/domande-frequenti/` | Pagine → Domande frequenti | Saltelli — Page Domande Frequenti (hero + TOC + CTA) — 10 field | v5.0 |
+| **Guide Gratuite** (ID 2709) | `/risorse/guide-gratuite/` | Pagine → Guide gratuite | Saltelli — Page Servizi (hero + aside + body + CTA finale) — 16 field | v5.0 |
+| **Prima Consulenza** (ID 2711) | `/costi-e-consulenze/prima-consulenza/` | Pagine → Prima consulenza | Saltelli — Page Servizi — 16 field | v5.0 |
+| **Come Lavoriamo** (ID 2712) | `/costi-e-consulenze/come-lavoriamo/` | Pagine → Come lavoriamo | Saltelli — Page Servizi — 16 field | v5.0 |
+| **Richiedi Preventivo** (ID 2713) | `/costi-e-consulenze/richiedi-preventivo/` | Pagine → Richiedi preventivo | Saltelli — Page Servizi — 16 field | v5.0 |
+| **Lo Studio** (ID 2811) | `/chi-siamo/lo-studio/` | Pagine → Lo Studio | Saltelli — Page Lo Studio (mission + lineage + faq) | v5.0 |
+| **Aree di Pratica** (ID 2812) | `/aree-di-pratica/` | Pagine → Aree di Pratica | Saltelli — Page Aree di Pratica (2 tab) — 10 field | v4.0 |
+| **Risorse** (ID 2813) | `/risorse/` | Pagine → Risorse | Saltelli — Page Risorse (1 tab) — 4 field | v4.0 |
+| **Chi Siamo** (ID 2822) | `/chi-siamo/` | Pagine → Chi Siamo | Saltelli — Page Chi Siamo (1 tab) — 4 field | v4.0 |
 
-**Importante**: queste sono le STESSE Page WP che vedevi prima — è solo cambiato DOVE editi il loro contenuto. Pre-v4.0 i 4 hub copy erano in **Saltelli — Settings** → tab "Hub Pages" + "Hero Homepage" + "Studio Section" + "Team & Casi" + "Press Homepage". Ora sono nelle Page WP di pertinenza.
+**Cosa è successo in v5.0**: per le 7 Pages aggiunte (le ultime 7 + Lo Studio), il loro `post_content` Gutenberg era ZOMBIE — presente in DB ma NON renderizzato sul frontend (i template usavano già i campi SCF). Vedevi due "sorgenti di verità" apparenti (l'editor Gutenberg pieno + il metabox SCF popolato) ma in realtà solo il metabox SCF controllava il contenuto. Da v5.0:
 
-**Workflow tipico per editare l'hero della homepage (esempio)**:
-1. WP-Admin → Pagine
-2. Click su "Home" (ID 17, slug `home`)
-3. Sotto l'editor classico (post_content, vuoto by design) trovi metabox "Saltelli — Page Homepage"
-4. Click sulla tab "Hero" → modifica eyebrow, headline, subheadline, CTA label/URL
-5. Click "Update" in alto a destra
-6. Ricarica `/` con Ctrl+Shift+R per verificare
+1. Il post_content è stato svuotato (backup recoverable in postmeta per safety)
+2. L'editor Gutenberg/classic è stato disabilitato su queste 12 Pages
+3. Sotto il title vedi solo: un **notice "Modifica il contenuto qui sotto"** + il metabox SCF
 
-**Workflow tipico per modificare l'intro paragrafo di /chi-siamo/**:
+**Workflow tipico per editare la pagina /contatti/ (esempio v5.0)**:
+1. WP-Admin → Pagine → Contatti
+2. Vedi: title "Contatti" + slug "contatti" + notice info "Modifica il contenuto qui sotto" + metabox "Saltelli — Page Contatti"
+3. Modifica nei field SCF del metabox (hero, mappa, come arrivare, trust signal)
+4. Click "Update" in alto a destra
+5. Ricarica `/contatti/` con Ctrl+Shift+R per verificare
+
+**Workflow tipico per modificare l'intro paragrafo di /chi-siamo/ (invariato v4.0+)**:
 1. WP-Admin → Pagine → Chi Siamo
-2. Sotto l'editor → metabox "Saltelli — Page Chi Siamo" → field "Intro paragrafo"
+2. Sotto title + slug → metabox "Saltelli — Page Chi Siamo" → field "Intro paragrafo"
 3. Modifica → "Update"
 4. Ricarica `/chi-siamo/`
 
 I metabox hanno **field "instructions"** in italiano per ogni campo. Se non sei sicuro su un field, leggi l'instruction sotto il campo prima di editare.
+
+**Pages NON affette** (mantieni Gutenberg/classic editor):
+- Costi e Consulenze (2695) hub — già SCF-driven con CPT children
+- Privacy / Cookie / Note legali — pagine puramente testuali
+- Blog (1413) — è solo l'index degli articoli
+- Glossario legale — template legacy specializzato
+- Eventuali pagine future che crei senza metabox SCF attached
 
 ### 5.1 — Pagina `/costi/` (ID 2695)
 
