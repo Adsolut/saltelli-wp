@@ -1,0 +1,10 @@
+Prima consulenza
+---
+prima-consulenza
+---
+<p class="sl-page__lede">Trenta minuti, conoscitivi e gratuiti, per ascoltare la pratica e capire se ha senso procedere. Senza impegno, senza pacchetti.</p>
+<h2>Cosa ricevi</h2>
+<ul><li><strong>Ascolto strutturato</strong> — racconti la pratica, prendiamo nota dei fatti rilevanti</li><li><strong>Valutazione preliminare</strong> — percorribilità giuridica, tempi probabili, rischi</li><li><strong>Indicazioni operative</strong> — primi passi suggeriti, eventuali atti urgenti</li><li><strong>Preventivo personalizzato</strong> — solo se ha senso procedere, basato su complessità e tempi</li></ul>
+<h2>Modalità</h2>
+<p>In studio a Chiaia (Via Vannella Gaetani 27) o in videocall. Solo su appuntamento. Risposta entro 24 ore dalla richiesta.</p>
+<p><a class="sl-btn sl-btn--primary" href="/contatti/"><span>Prenota la prima consulenza</span> <span class="arrow" aria-hidden="true">→</span></a></p>

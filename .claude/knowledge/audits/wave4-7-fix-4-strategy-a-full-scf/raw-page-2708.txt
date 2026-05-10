@@ -1,0 +1,14 @@
+Domande frequenti
+---
+domande-frequenti
+---
+<p class="sl-page__lede">Le risposte alle domande più comuni che riceviamo, organizzate per area di pratica. Per casistica specifica, una prima consulenza conoscitiva è sempre il punto di partenza più rapido.</p>
+<h2>Diritto tributario</h2>
+<p>Cartelle, accertamenti, IRPEF, IMU, contenzioso fiscale. <a href="/competenze/diritto-tributario/" class="sl-link">Vai all'area</a>.</p>
+<h2>Diritto del lavoro</h2>
+<p>Licenziamenti, mobbing, contestazioni disciplinari, INPS. <a href="/competenze/diritto-del-lavoro/" class="sl-link">Vai all'area</a>.</p>
+<h2>Diritto di famiglia e LGBTQ+</h2>
+<p>Unioni civili, genitorialità, separazioni, divorzi, trascrizione atti esteri. <a href="/competenze/diritto-di-famiglia-lgbtq/" class="sl-link">Vai all'area</a>.</p>
+<h2>Eredità e successioni</h2>
+<p>Apertura successione, divisione, contestazione testamento, legato. <a href="/competenze/diritto-delle-successioni/" class="sl-link">Vai all'area</a>.</p>
+<p><a class="sl-btn sl-btn--primary" href="/contatti/"><span>Non trovi risposta? Prenota una consulenza</span> <span class="arrow" aria-hidden="true">→</span></a></p>

@@ -1,0 +1,12 @@
+Lavora con noi
+---
+lavora-con-noi
+---
+<p class="sl-page__lede">Cerchiamo praticanti, associate e of-counsel con percorso editoriale: ricerca approfondita, pratica reale, ascolto del cliente.</p>
+<h2>Profili che cerchiamo</h2>
+<ul><li><strong>Praticanti abilitanti</strong> — laureati Federico II o equipollente, votazione ≥105/110, interesse per tributario, lavoro o famiglia</li><li><strong>Associate</strong> — 3-7 anni di pratica, autonomia su atti standard, casistica documentata</li><li><strong>Of-counsel</strong> — professionisti con specializzazione consolidata, partecipazione a casi tier-1 dello Studio</li></ul>
+<h2>Cosa offriamo</h2>
+<ul><li>Studio storico in Chiaia, ambiente boutique, casistica reale</li><li>Mentorship diretta su pratiche complesse</li><li>Spazio per pubblicazioni, contributi editoriali, partecipazione a convegni</li><li>Compenso trasparente, rapporto formalizzato fin dal primo giorno</li></ul>
+<h2>Come candidarti</h2>
+<p>Inviare CV e una breve lettera di presentazione (max 1 cartella) all'indirizzo <a class="sl-link" href="mailto:info@studiolegalesaltelli.it">info@studiolegalesaltelli.it</a>, indicando area di interesse e disponibilità.</p>
+<p>Risposta entro 10 giorni lavorativi. Solo profili in linea sono ricontattati per colloquio.</p>

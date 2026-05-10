@@ -1,0 +1,9 @@
+Richiedi un preventivo
+---
+richiedi-preventivo
+---
+<p class="sl-page__lede">Per pratiche già definite o per fattibilità preliminare, ricevi un preventivo personalizzato entro 48 ore lavorative.</p>
+<h2>Come funziona</h2>
+<ol><li><strong>Compili il modulo</strong> — area di pratica, sintesi del caso, eventuali documenti</li><li><strong>Esaminiamo</strong> — entro 48 ore valutiamo complessità, tempi, opzioni</li><li><strong>Ricevi il preventivo</strong> — costo trasparente per fasi, modalità di pagamento (anche dilazionato), tempistiche</li></ol>
+<p>Per pratiche complesse o casi che richiedono valutazione approfondita, suggeriamo di partire con una <a href="/prima-consulenza/" class="sl-link">prima consulenza conoscitiva</a> (gratuita, 30 minuti).</p>
+<p><a class="sl-btn sl-btn--primary" href="/contatti/"><span>Vai al modulo richiesta preventivo</span> <span class="arrow" aria-hidden="true">→</span></a></p>

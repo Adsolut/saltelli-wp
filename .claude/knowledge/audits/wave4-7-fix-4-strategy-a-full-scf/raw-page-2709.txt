@@ -1,0 +1,9 @@
+Guide gratuite
+---
+guide-gratuite
+---
+<p class="sl-page__lede">Schede sintetiche scaricabili in PDF — primo orientamento giuridico prima di una consulenza. Stiamo curando le prime guide nelle aree presidiate dallo Studio.</p>
+<h2>In lavorazione</h2>
+<ul><li>Cartelle esattoriali — come leggere e impugnare</li><li>Licenziamento — primi passi e termini di impugnazione</li><li>Famiglie LGBTQ+ — diritti, atti e tutele</li><li>Eredità e successioni — guida pratica</li></ul>
+<p>Per richiedere una guida specifica o ricevere notifica al rilascio, contattaci.</p>
+<p><a class="sl-btn sl-btn--primary" href="/contatti/"><span>Richiedi una guida</span> <span class="arrow" aria-hidden="true">→</span></a></p>
