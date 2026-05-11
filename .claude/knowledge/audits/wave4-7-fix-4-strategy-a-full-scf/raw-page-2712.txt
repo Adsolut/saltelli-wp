@@ -1,0 +1,10 @@
+Come lavoriamo
+---
+come-lavoriamo
+---
+<p class="sl-page__lede">Ascolto prima, carte dopo. Un metodo costruito su vent'anni di pratica accanto a famiglie e imprese di Napoli.</p>
+<h2>Il nostro processo</h2>
+<ol><li><strong>Prima consulenza conoscitiva</strong> — gratuita, 30 minuti, in studio o in videocall. Ascoltiamo la pratica e valutiamo se ha senso procedere.</li><li><strong>Analisi documentale</strong> — esame degli atti, dei termini, dei vincoli normativi. Identifichiamo opzioni e rischi.</li><li><strong>Preventivo personalizzato</strong> — basato su complessità, tempi e probabilità di esito. Nessun pacchetto pre-confezionato.</li><li><strong>Mandato e azione</strong> — accordo formale, esecuzione coordinata con il cliente, aggiornamenti regolari.</li><li><strong>Esito e chiusura</strong> — risultato comunicato in modo trasparente, eventuali sviluppi successivi pianificati.</li></ol>
+<h2>I nostri principi</h2>
+<ul><li><strong>Riservatezza</strong> — tutela rigorosa dei dati e della pratica, in studio e in comunicazione</li><li><strong>Trasparenza</strong> — sui costi, sui tempi, sui rischi e sulle alternative</li><li><strong>Profondità tier-1</strong> — tre aree presidiate in profondità (tributario, lavoro, famiglia LGBTQ+), sedici aree con presidio attivo</li></ul>
+<p><a class="sl-btn sl-btn--primary" href="/contatti/"><span>Iniziamo dalla prima consulenza</span> <span class="arrow" aria-hidden="true">→</span></a></p>
