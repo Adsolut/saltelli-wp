@@ -85,7 +85,25 @@ while (have_posts()) :
             </header>
             <section class="sl-page__content">
                 <div class="sl-container">
-                    <div class="sl-page__prose"><?php the_content(); ?></div>
+                    <div class="sl-page__prose"><?php
+                    /* P4 (wave5-step3-completion): /prenota-appuntamento/ (Page WP 2714 su
+                       staging, 2711 in locale) → contenuto dal metabox SCF
+                       group_prenota_appuntamento_v1 (field prenota_intro, wysiwyg, default =
+                       post_content corrente). Gutenberg disabilitato (SALTELLI_SCF_ONLY_PAGES).
+                       Si renderizza il valore raw via apply_filters('the_content', …): con il
+                       default = post_content l'output è identico a the_content(). Fallback a
+                       the_content() se il campo viene svuotato. Tutte le altre page: invariato. */
+                    if (is_page('prenota-appuntamento') && function_exists('get_field')) {
+                        $sl_pa_body = (string) get_field('prenota_intro', get_the_ID(), false);
+                        if ($sl_pa_body !== '') {
+                            echo apply_filters('the_content', $sl_pa_body);
+                        } else {
+                            the_content();
+                        }
+                    } else {
+                        the_content();
+                    }
+                    ?></div>
                 </div>
             </section>
             <?php

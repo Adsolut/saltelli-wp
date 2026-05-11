@@ -1,0 +1,294 @@
+{
+  "key": "group_tipo_area_term_v1",
+  "title": "Saltelli — Term Tipo Area",
+  "fields": [
+    {
+      "key": "field_tat_msg",
+      "label": "",
+      "name": "",
+      "type": "message",
+      "message": "Contenuto editoriale del cluster (es. \"Per i Privati\"). I valori sono salvati PER TERMINE: per modificarli vai su Aree di pratica, scegli il termine (Per i Privati / Per le Imprese / Contenzioso Amministrativo) e clicca Modifica. Lasciando un campo vuoto il sito mostra il testo predefinito già attivo (nessuna pagina resta mai vuota).",
+      "new_lines": "wpautop",
+      "esc_html": 0
+    },
+    {
+      "key": "field_tat_hero_tab",
+      "label": "Hero",
+      "name": "",
+      "type": "tab",
+      "placement": "top",
+      "endpoint": 0,
+      "selected": 1
+    },
+    {
+      "key": "field_tat_eyebrow",
+      "label": "Hero · Eyebrow (sopra il titolo)",
+      "name": "tipo_area_term_eyebrow",
+      "type": "text",
+      "instructions": "Riga in maiuscoletto sopra il titolo. Vuoto = usa il valore globale da Saltelli — Settings → Hub Pages (oggi \"§ Cluster\").",
+      "default_value": "",
+      "maxlength": 40,
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_h1_main",
+      "label": "Hero · Titolo H1",
+      "name": "tipo_area_term_h1_main",
+      "type": "text",
+      "instructions": "Titolo grande del cluster. Vuoto = nome del termine + punto (es. \"Per i Privati.\").",
+      "default_value": "",
+      "maxlength": 80,
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_h1_emphasis",
+      "label": "Hero · Titolo H1 — seconda parte (corsivo)",
+      "name": "tipo_area_term_h1_emphasis",
+      "type": "text",
+      "instructions": "Parte finale del titolo, mostrata in corsivo (opzionale). Per usarla compila anche \"Titolo H1\".",
+      "default_value": "",
+      "maxlength": 80,
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_intro",
+      "label": "Hero · Lede (paragrafo sotto il titolo)",
+      "name": "tipo_area_term_intro",
+      "type": "textarea",
+      "instructions": "Paragrafo introduttivo del cluster. Vuoto = usa la \"Descrizione\" del termine (campo nativo WordPress, qui sotto). Se anche quella è vuota viene generato un testo dal modello in Saltelli — Settings.",
+      "default_value": "",
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_tat_aside_eyebrow",
+      "label": "Hero · Etichetta colonna destra (avvocati)",
+      "name": "tipo_area_term_aside_eyebrow",
+      "type": "text",
+      "instructions": "Etichetta in maiuscoletto sopra le mini-card degli avvocati di riferimento. Default: \"Avvocati di riferimento\".",
+      "default_value": "",
+      "maxlength": 60
+    },
+    {
+      "key": "field_tat_quando_tab",
+      "label": "Quando rivolgersi (§ 01)",
+      "name": "",
+      "type": "tab",
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_tat_quando_label",
+      "label": "§ 01 — Etichetta sezione",
+      "name": "tipo_area_term_quando_label",
+      "type": "text",
+      "instructions": "Testo dopo \"§ 01 —\". Default: \"Quando rivolgersi\".",
+      "default_value": "",
+      "maxlength": 60
+    },
+    {
+      "key": "field_tat_quando_h2_main",
+      "label": "§ 01 — Titolo (riga 1)",
+      "name": "tipo_area_term_quando_h2_main",
+      "type": "text",
+      "instructions": "Prima riga del titolo della sezione. Default: \"Tre scenari\".",
+      "default_value": "",
+      "maxlength": 60,
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_quando_h2_em",
+      "label": "§ 01 — Titolo (riga 2, corsivo)",
+      "name": "tipo_area_term_quando_h2_em",
+      "type": "text",
+      "instructions": "Seconda riga del titolo, mostrata in corsivo. Default: \"tipici.\".",
+      "default_value": "",
+      "maxlength": 60,
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_scenario1_title",
+      "label": "§ 01 — Scenario 1 · Titolo",
+      "name": "tipo_area_term_scenario1_title",
+      "type": "text",
+      "instructions": "Vuoto = scenario predefinito del cluster (privati: \"Famiglia\"; imprese: \"Tributario\"; contenzioso: \"Cartelle\").",
+      "default_value": "",
+      "maxlength": 60,
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_scenario1_desc",
+      "label": "§ 01 — Scenario 1 · Descrizione",
+      "name": "tipo_area_term_scenario1_desc",
+      "type": "textarea",
+      "instructions": "Vuoto = descrizione predefinita del cluster.",
+      "default_value": "",
+      "rows": 3,
+      "new_lines": "",
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_scenario2_title",
+      "label": "§ 01 — Scenario 2 · Titolo",
+      "name": "tipo_area_term_scenario2_title",
+      "type": "text",
+      "instructions": "Vuoto = scenario predefinito del cluster (privati: \"Eredità\"; imprese: \"Crediti\"; contenzioso: \"Amministrativo\").",
+      "default_value": "",
+      "maxlength": 60,
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_scenario2_desc",
+      "label": "§ 01 — Scenario 2 · Descrizione",
+      "name": "tipo_area_term_scenario2_desc",
+      "type": "textarea",
+      "instructions": "Vuoto = descrizione predefinita del cluster.",
+      "default_value": "",
+      "rows": 3,
+      "new_lines": "",
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_scenario3_title",
+      "label": "§ 01 — Scenario 3 · Titolo",
+      "name": "tipo_area_term_scenario3_title",
+      "type": "text",
+      "instructions": "Vuoto = scenario predefinito del cluster (privati: \"Risarcimento\"; imprese: \"Bancario\"; contenzioso: \"Condominiale\").",
+      "default_value": "",
+      "maxlength": 60,
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_scenario3_desc",
+      "label": "§ 01 — Scenario 3 · Descrizione",
+      "name": "tipo_area_term_scenario3_desc",
+      "type": "textarea",
+      "instructions": "Vuoto = descrizione predefinita del cluster.",
+      "default_value": "",
+      "rows": 3,
+      "new_lines": "",
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_aree_tab",
+      "label": "Aree & Casi (§ 02–§ 03)",
+      "name": "",
+      "type": "tab",
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_tat_lista_label",
+      "label": "§ 02 — Etichetta sezione lista aree",
+      "name": "tipo_area_term_lista_label",
+      "type": "text",
+      "instructions": "Testo dopo \"§ 02 —\". Default: \"Aree di pratica\".",
+      "default_value": "",
+      "maxlength": 60
+    },
+    {
+      "key": "field_tat_lista_empty",
+      "label": "§ 02 — Testo lista vuota",
+      "name": "tipo_area_term_lista_empty",
+      "type": "text",
+      "instructions": "Mostrato solo se il cluster non ha aree di pratica (raro). Default: \"Nessuna competenza in questa categoria.\".",
+      "default_value": "",
+      "maxlength": 120
+    },
+    {
+      "key": "field_tat_casi_label",
+      "label": "§ 03 — Etichetta sezione casi",
+      "name": "tipo_area_term_casi_label",
+      "type": "text",
+      "instructions": "Testo dopo \"§ 03 —\". Default: \"Casi rappresentativi\". La sezione compare solo se il cluster ha casi associati.",
+      "default_value": "",
+      "maxlength": 60
+    },
+    {
+      "key": "field_tat_cta_tab",
+      "label": "CTA finale (§ 04)",
+      "name": "",
+      "type": "tab",
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_tat_cta_label",
+      "label": "§ 04 — Etichetta sezione CTA",
+      "name": "tipo_area_term_cta_label",
+      "type": "text",
+      "instructions": "Testo dopo \"§ 04 —\". Default: \"Primo incontro\".",
+      "default_value": "",
+      "maxlength": 60
+    },
+    {
+      "key": "field_tat_cta_h2_main",
+      "label": "§ 04 — Titolo CTA (riga 1)",
+      "name": "tipo_area_term_cta_h2_main",
+      "type": "text",
+      "instructions": "Prima riga del titolo della CTA finale. Default: \"Hai una pratica\".",
+      "default_value": "",
+      "maxlength": 60,
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_cta_h2_em",
+      "label": "§ 04 — Titolo CTA (riga 2, corsivo)",
+      "name": "tipo_area_term_cta_h2_em",
+      "type": "text",
+      "instructions": "Seconda riga del titolo della CTA, in corsivo. Default: \"simile?\".",
+      "default_value": "",
+      "maxlength": 60,
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_cta_lede",
+      "label": "§ 04 — Testo CTA",
+      "name": "tipo_area_term_cta_lede",
+      "type": "textarea",
+      "instructions": "Paragrafo della CTA finale. Default: \"Il primo incontro è gratuito. Riceviamo solo su appuntamento. Risposta entro 24 ore.\".",
+      "default_value": "",
+      "rows": 3,
+      "new_lines": ""
+    },
+    {
+      "key": "field_tat_cta_btn_label",
+      "label": "§ 04 — Etichetta bottone CTA",
+      "name": "tipo_area_term_cta_btn_label",
+      "type": "text",
+      "instructions": "Testo del bottone della CTA finale. Default: \"Prenota gratuita\".",
+      "default_value": "",
+      "maxlength": 40,
+      "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_cta_btn_url",
+      "label": "§ 04 — Destinazione bottone CTA",
+      "name": "tipo_area_term_cta_btn_url",
+      "type": "text",
+      "instructions": "Percorso relativo (es. /contatti/) o URL completo. Vuoto = /contatti/.",
+      "default_value": "",
+      "maxlength": 200,
+      "wrapper": {"width": "50"}
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "taxonomy",
+        "operator": "==",
+        "value": "tipo-area"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 5 STEP 3 (coverage-completion) — contenuto editoriale per-termine del taxonomy archive tipo-area (/aree-di-pratica/{privati,imprese,contenzioso-amministrativo}/). Valori salvati in term meta (per-term). default_value blank: il template taxonomy-tipo-area.php fa fallback hardcoded byte-invariant finché Elena non popola. Dati dinamici (avvocati, competenze, casi, conteggi, breadcrumb) restano gestiti dal template.",
+  "show_in_rest": 0,
+  "modified": 1778700000
+}

@@ -1,0 +1,46 @@
+{
+  "key": "group_prenota_appuntamento_v1",
+  "title": "Saltelli — Page Prenota Appuntamento",
+  "fields": [
+    {
+      "key": "field_pa_msg",
+      "label": "",
+      "name": "",
+      "type": "message",
+      "message": "Pagina /prenota-appuntamento/. Il TITOLO della pagina (campo \"Titolo\" in alto) è l'H1. Il CONTENUTO sotto il titolo si modifica nel campo \"Contenuto pagina\" qui sotto. L'editor a blocchi (Gutenberg) è disabilitato su questa pagina: una sola sorgente di verità.",
+      "new_lines": "wpautop",
+      "esc_html": 0
+    },
+    {
+      "key": "field_pa_intro",
+      "label": "Contenuto pagina",
+      "name": "prenota_intro",
+      "type": "wysiwyg",
+      "instructions": "Tutto il contenuto editoriale mostrato sotto il titolo. Il valore predefinito è il contenuto attuale della pagina (lede + sezioni \"Modalità\" e \"Tempi di risposta\" + bottone \"Compila il modulo\"): modificalo liberamente. Se svuoti il campo, viene mostrato il contenuto originale della pagina.",
+      "default_value": "<p class=\"sl-page__lede\">Solo su appuntamento, in studio a Chiaia o in videocall. Risposta entro 24 ore dalla richiesta.</p>\n<h2>Modalità</h2>\n<ul><li><strong>In studio</strong> — Via Vannella Gaetani 27, Napoli (Chiaia). Lun-Ven 10:00-19:00.</li><li><strong>Videocall</strong> — Google Meet o Zoom, su richiesta. Stessa fascia oraria.</li><li><strong>Telefono</strong> — primo contatto solo per appuntamenti, non per consulenza tecnica.</li></ul>\n<h2>Tempi di risposta</h2>\n<p>Entro 24 ore lavorative. Per urgenze (termini in scadenza, atti da impugnare entro pochi giorni), segnalalo nel modulo: precediamo il riscontro telefonico.</p>\n<p><a class=\"sl-btn sl-btn--primary\" href=\"/contatti/\"><span>Compila il modulo</span> <span class=\"arrow\" aria-hidden=\"true\">→</span></a></p>",
+      "tabs": "all",
+      "toolbar": "full",
+      "media_upload": 1,
+      "delay": 0
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "prenota-appuntamento"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "Wave 5 STEP 3 (coverage-completion) — Page /prenota-appuntamento/ (WP 2714 su staging, 2711 in locale; location via page_slug per portabilità env). Migrazione Strategy A: il contenuto si edita dal metabox SCF (field prenota_intro, wysiwyg, default = post_content corrente); Gutenberg disabilitato (page ID 2714 aggiunto a SALTELLI_SCF_ONLY_PAGES). page.php renderizza apply_filters('the_content', prenota_intro) raw per questa pagina, con fallback the_content() se il campo è vuoto → output byte-invariant pre/post. H1 = titolo pagina (campo nativo WP), invariato.",
+  "show_in_rest": 0,
+  "modified": 1778700000
+}

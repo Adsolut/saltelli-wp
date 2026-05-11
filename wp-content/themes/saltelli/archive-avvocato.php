@@ -45,14 +45,14 @@ $sl_arch_intro   = (string) saltelli_option('archive_avvocato_intro', __('Un ate
         </div>
         <aside class="sl-team__archive-trust">
             <div class="sl-mono sl-team__archive-trust-eyebrow">
-                <?php esc_html_e('§ Dal 1999', 'saltelli'); ?>
+                <?php echo esc_html(saltelli_option('archive_avvocato_trust_eyebrow', '§ Dal 1999')); ?>
             </div>
             <p class="sl-team__archive-trust-headline">
-                <?php esc_html_e('Vannella Gaetani, 27.', 'saltelli'); ?><br>
-                <em><?php esc_html_e('Chiaia · Napoli.', 'saltelli'); ?></em>
+                <?php echo esc_html(saltelli_option('archive_avvocato_trust_headline_l1', 'Vannella Gaetani, 27.')); ?><br>
+                <em><?php echo esc_html(saltelli_option('archive_avvocato_trust_headline_em', 'Chiaia · Napoli.')); ?></em>
             </p>
             <p class="sl-team__archive-trust-text">
-                <?php esc_html_e('Quattro avvocati, una pratica alla volta. Riceviamo solo su appuntamento, in studio o in videocall.', 'saltelli'); ?>
+                <?php echo esc_html(saltelli_option('archive_avvocato_trust_text', 'Quattro avvocati, una pratica alla volta. Riceviamo solo su appuntamento, in studio o in videocall.')); ?>
             </p>
         </aside>
     </header>
@@ -112,7 +112,7 @@ $sl_arch_intro   = (string) saltelli_option('archive_avvocato_intro', __('Un ate
     <?php /* § Come lavoriamo — 3 principi (riusa pattern chi-siamo) */ ?>
     <section class="sl-team__archive-principles">
         <div class="sl-team__archive-principles-inner">
-            <div class="sl-mono"><?php esc_html_e('§ Come lavoriamo', 'saltelli'); ?></div>
+            <div class="sl-mono"><?php echo esc_html(saltelli_option('archive_avvocato_principles_eyebrow', '§ Come lavoriamo')); ?></div>
             <div>
                 <ol class="sl-team__archive-principles-list" role="list">
                     <li class="sl-team__archive-principle">
