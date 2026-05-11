@@ -40,5 +40,7 @@ require_once SALTELLI_THEME_DIR . '/inc/wave4-6-migration.php';
 require_once SALTELLI_THEME_DIR . '/inc/admin/disable-gutenberg-for-scf-pages.php';
 require_once SALTELLI_THEME_DIR . '/inc/admin/scf-archive-headers-shortcuts.php';
 
-// Wave 4.7.fix.5 admin UX: notice editoriali blog (Articoli + Page contenitore blog).
+// Wave 4.7.fix.5 admin UX: notice editoriali blog (Articoli + Page contenitore blog)
+// + lock-down Customizer / CSS aggiuntivo per ruolo editor (Elena).
 require_once SALTELLI_THEME_DIR . '/inc/admin/post-editor-notices.php';
+require_once SALTELLI_THEME_DIR . '/inc/admin/customizer-lockdown.php';
