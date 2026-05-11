@@ -6,15 +6,22 @@
  * disabilitando il block editor sulle Pages target. Elena vede ora SOLO il
  * metabox SCF + un notice di guidance. Una sola sorgente di verità per Page.
  *
- * Page IDs target (12 totale):
+ * Page IDs target (13 totale):
  *   - 4 hub Wave 4.7.fix.3: 17 (home), 2822 (chi-siamo), 2812 (aree-di-pratica), 2813 (risorse)
  *   - 7 target Wave 4.7.fix.4: 23 (contatti), 2708 (faq), 2709 (guide-gratuite),
  *                              2712 (come-lavoriamo), 2711 (prima-consulenza),
  *                              372 (lavora-con-noi), 2713 (richiedi-preventivo)
  *   - 1 child SCF-driven: 2811 (lo-studio, child di chi-siamo)
+ *   - 1 Wave 5 STEP 3 coverage-completion: 2714 (prenota-appuntamento — group_prenota_appuntamento_v1)
+ *
+ * NB: gli ID si riferiscono al DB di staging; in locale (Docker) alcuni slug hanno
+ * ID diversi (es. prenota-appuntamento = 2711 in locale, 2714 su staging). I match
+ * per-ID che non corrispondono in locale sono no-op innocui; le location dei field
+ * group usano `page_slug ==` per la portabilità (Debug-QA bug-04).
  *
  * @package Saltelli
  * @since 1.3.10 Wave 4.7.fix.4
+ * @since 1.3.13 Wave 5 STEP 3 coverage-completion — +2714 prenota-appuntamento
  */
 
 defined('ABSPATH') || exit;
@@ -29,6 +36,7 @@ if (!defined('SALTELLI_SCF_ONLY_PAGES')) {
         2711,  // prima-consulenza
         2712,  // come-lavoriamo
         2713,  // richiedi-preventivo
+        2714,  // prenota-appuntamento (Wave 5 STEP 3 coverage-completion)
         2811,  // lo-studio (child di chi-siamo)
         2812,  // aree-di-pratica (hub)
         2813,  // risorse (hub)
