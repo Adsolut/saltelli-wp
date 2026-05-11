@@ -150,9 +150,12 @@ while (have_posts()) :
 
         <?php
         // === v0.25.0 T2 — Tier-1 deep cluster H2 (3 cluster × tier-1) ===
-        // Source: helper saltelli_tier1_clusters() · paragraphs GEO-rich 200-300 parole.
-        // Inserito DOPO the_content() per arricchimento topical authority.
-        if ($is_tier_1) :
+        // Source: helper saltelli_tier1_clusters() · paragraphs GEO-rich hardcoded.
+        // Bugfix: render SOLO se body_extended SCF è vuoto. Il campo SCF (sezione __body
+        // sotto) è il corpo editoriale canonico e prevale; questo blocco è il fallback
+        // GEO. Mai entrambi: oggi i 3 tier-1 hanno body_extended = copia verbatim
+        // dell'helper -> renderli entrambi significa testo duplicato scrollando.
+        if ($is_tier_1 && ! $render_extended_body) :
             $sl_t1_slug_cluster = get_post_field('post_name', $post_id);
             $sl_t1_clusters = saltelli_tier1_clusters($sl_t1_slug_cluster);
             if (!empty($sl_t1_clusters)) :
