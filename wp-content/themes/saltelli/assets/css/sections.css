@@ -61,7 +61,7 @@
 .sl-page__breadcrumb {
     font-family: var(--font-mono);
     font-size: 11px;
-    letter-spacing: 0.06em;
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     color: var(--text-muted);
     margin-bottom: 24px;
@@ -287,11 +287,11 @@
   margin: 0 auto;
   overflow: visible;
 }
-.sl-hero__eyebrow { margin-bottom: 40px; font-size: 10px; }
+.sl-hero__eyebrow { margin-bottom: 40px; font-size: var(--fs-caption); }
 .sl-hero__headline {
-  font-size: 64px;
-  line-height: 0.98;
-  letter-spacing: -0.03em;
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
   font-weight: 400;
   margin-bottom: 32px;
   font-family: var(--font-display);
@@ -330,8 +330,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
-.sl-hero__colophon-label { margin-bottom: 6px; font-size: 9px; }
-.sl-hero__colophon-body { font-size: 12px; line-height: 1.5; }
+.sl-hero__colophon-label { margin-bottom: 6px; font-size: var(--fs-caption); }
+.sl-hero__colophon-body { font-size: var(--fs-caption); line-height: 1.5; }
 
 .sl-hero__scroll-indicator { display: none; }
 
@@ -343,8 +343,8 @@
   }
   .sl-hero__eyebrow { margin-bottom: 64px; }
   .sl-hero__headline {
-    font-size: clamp(80px, 9vw, 132px);
-    letter-spacing: -0.035em;
+    font-size: var(--fs-display);
+    letter-spacing: var(--ls-display);
     margin-bottom: 56px;
   }
   .sl-hero__headline .sl-word {
@@ -2080,9 +2080,9 @@ html:not(.js-reveal-ready) [data-reveal] {
 
 @media (max-width: 767px) {
     .sl-hero__headline {
-        font-size: clamp(56px, 14vw, 80px);
-        line-height: 1.05;
-        letter-spacing: -0.02em;
+        font-size: var(--fs-display);
+        line-height: var(--lh-display);
+        letter-spacing: var(--ls-display);
     }
     /* Parole successive "con" + "misura." → inline-block, restano insieme */
     .sl-hero__headline .sl-hero__word:not(:first-child),
@@ -3009,7 +3009,7 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
 .sl-page__breadcrumb {
     font-family: var(--font-mono);
     font-size: 11px;
-    letter-spacing: 0.08em;
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     color: var(--text-muted);
     margin-bottom: var(--sl-space-3);
@@ -3462,7 +3462,7 @@ textarea.sl-input {
    Desktop @media riga 237 già porta a 11px implicitamente (font-size del
    parent .sl-hero__colophon = 13px ereditato), nessuna regressione. */
 .sl-hero__colophon-label {
-    font-size: 10px;
+    font-size: var(--fs-caption);
 }
 
 /* T4+T5 — Footer line-height 2 → 1.7 (allinea body global lh-body 1.65-1.7).
