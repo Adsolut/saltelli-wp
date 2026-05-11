@@ -48,41 +48,41 @@ $sl_hub_intro   = (string) saltelli_page_field('hub_chisiamo_intro', __("Studio 
             <li class="sl-hub-card">
                 <a class="sl-hub-card__link" href="<?php echo esc_url(home_url('/chi-siamo/lo-studio/')); ?>">
                     <p class="sl-mono sl-hub-card__num">01 / 03</p>
-                    <h2 class="sl-hub-card__title"><?php esc_html_e('Lo Studio', 'saltelli'); ?></h2>
+                    <h2 class="sl-hub-card__title"><?php echo esc_html(saltelli_page_field('hub_chisiamo_card1_title', 'Lo Studio')); ?></h2>
                     <p class="sl-hub-card__desc">
-                        <?php esc_html_e('Storia dal 1999, valori, sede in Via Vannella Gaetani 27. Atelier napoletano in Chiaia.', 'saltelli'); ?>
+                        <?php echo esc_html(saltelli_page_field('hub_chisiamo_card1_desc', 'Storia dal 1999, valori, sede in Via Vannella Gaetani 27. Atelier napoletano in Chiaia.')); ?>
                     </p>
-                    <span class="sl-mono sl-hub-card__cta"><?php esc_html_e('Scopri →', 'saltelli'); ?></span>
+                    <span class="sl-mono sl-hub-card__cta"><?php echo esc_html(saltelli_page_field('hub_chisiamo_card1_cta', 'Scopri →')); ?></span>
                 </a>
             </li>
             <li class="sl-hub-card">
                 <a class="sl-hub-card__link" href="<?php echo esc_url(home_url('/chi-siamo/team/')); ?>">
                     <p class="sl-mono sl-hub-card__num">02 / 03</p>
-                    <h2 class="sl-hub-card__title"><?php esc_html_e('Il Team', 'saltelli'); ?></h2>
+                    <h2 class="sl-hub-card__title"><?php echo esc_html(saltelli_page_field('hub_chisiamo_card2_title', 'Il Team')); ?></h2>
                     <p class="sl-hub-card__desc">
                         <?php
                         printf(
-                            esc_html__('%s avvocati, ognuno con specializzazione consolidata. Tributario, lavoro, famiglia LGBTQ+, condominio.', 'saltelli'),
+                            esc_html(saltelli_page_field('hub_chisiamo_card2_desc', '%s avvocati, ognuno con specializzazione consolidata. Tributario, lavoro, famiglia LGBTQ+, condominio.')),
                             esc_html(number_format_i18n($sl_lawyers_count))
                         );
                         ?>
                     </p>
-                    <span class="sl-mono sl-hub-card__cta"><?php esc_html_e('Conosci il team →', 'saltelli'); ?></span>
+                    <span class="sl-mono sl-hub-card__cta"><?php echo esc_html(saltelli_page_field('hub_chisiamo_card2_cta', 'Conosci il team →')); ?></span>
                 </a>
             </li>
             <li class="sl-hub-card">
                 <a class="sl-hub-card__link" href="<?php echo esc_url(home_url('/chi-siamo/casi-rappresentativi/')); ?>">
                     <p class="sl-mono sl-hub-card__num">03 / 03</p>
-                    <h2 class="sl-hub-card__title"><?php esc_html_e('Risultati', 'saltelli'); ?></h2>
+                    <h2 class="sl-hub-card__title"><?php echo esc_html(saltelli_page_field('hub_chisiamo_card3_title', 'Risultati')); ?></h2>
                     <p class="sl-hub-card__desc">
                         <?php
                         printf(
-                            esc_html__('%s casi rappresentativi vinti — Cassazione, Tribunale di Napoli, CTR Campania, TAR.', 'saltelli'),
+                            esc_html(saltelli_page_field('hub_chisiamo_card3_desc', '%s casi rappresentativi vinti — Cassazione, Tribunale di Napoli, CTR Campania, TAR.')),
                             esc_html(number_format_i18n($sl_casi_count))
                         );
                         ?>
                     </p>
-                    <span class="sl-mono sl-hub-card__cta"><?php esc_html_e('Vedi i casi →', 'saltelli'); ?></span>
+                    <span class="sl-mono sl-hub-card__cta"><?php echo esc_html(saltelli_page_field('hub_chisiamo_card3_cta', 'Vedi i casi →')); ?></span>
                 </a>
             </li>
         </ul>
@@ -91,12 +91,12 @@ $sl_hub_intro   = (string) saltelli_page_field('hub_chisiamo_intro', __("Studio 
 
 <section class="sl-hub-cta" aria-label="<?php esc_attr_e('CTA Chi Siamo', 'saltelli'); ?>">
     <div class="sl-container sl-hub-cta__inner">
-        <p class="sl-mono"><?php esc_html_e('§ Iniziamo a parlare', 'saltelli'); ?></p>
+        <p class="sl-mono"><?php echo esc_html(saltelli_page_field('hub_chisiamo_cta_eyebrow', '§ Iniziamo a parlare')); ?></p>
         <h2 class="sl-hub-cta__title">
-            <?php esc_html_e('Prenota una prima consulenza con uno degli avvocati.', 'saltelli'); ?>
+            <?php echo esc_html(saltelli_page_field('hub_chisiamo_cta_title', 'Prenota una prima consulenza con uno degli avvocati.')); ?>
         </h2>
-        <a class="sl-cta sl-cta--primary" href="<?php echo esc_url(home_url('/contatti/')); ?>">
-            <?php esc_html_e('Contattaci', 'saltelli'); ?>
+        <a class="sl-cta sl-cta--primary" href="<?php echo esc_url(home_url(saltelli_page_field('hub_chisiamo_cta_url', '/contatti/'))); ?>">
+            <?php echo esc_html(saltelli_page_field('hub_chisiamo_cta_btn_label', 'Contattaci')); ?>
         </a>
     </div>
 </section>
