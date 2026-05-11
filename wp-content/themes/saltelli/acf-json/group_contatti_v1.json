@@ -82,6 +82,181 @@
       "instructions": "Riga reassurance sotto il form (privacy / orari risposta).",
       "default_value": "Riceviamo solo su appuntamento. Risposta entro 24 ore.",
       "maxlength": 200
+    },
+    {
+      "key": "field_contatti_modulo_tab",
+      "label": "Modulo & conferma (§01)",
+      "name": "",
+      "type": "tab",
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_contatti_form_eyebrow",
+      "label": "§01 Modulo — etichetta sezione",
+      "name": "contatti_form_eyebrow",
+      "type": "text",
+      "instructions": "Riga in maiuscoletto sopra il titolo del modulo.",
+      "default_value": "§ 01 — Modulo"
+    },
+    {
+      "key": "field_contatti_form_h2_main",
+      "label": "§01 Modulo — titolo (riga 1)",
+      "name": "contatti_form_h2_main",
+      "type": "text",
+      "instructions": "Prima riga del titolo del modulo.",
+      "default_value": "Prenota un primo"
+    },
+    {
+      "key": "field_contatti_form_h2_em",
+      "label": "§01 Modulo — titolo (riga 2, corsivo)",
+      "name": "contatti_form_h2_em",
+      "type": "text",
+      "instructions": "Seconda riga del titolo del modulo (mostrata in corsivo).",
+      "default_value": "incontro gratuito."
+    },
+    {
+      "key": "field_contatti_success_eyebrow",
+      "label": "§01 Conferma invio — etichetta",
+      "name": "contatti_success_eyebrow",
+      "type": "text",
+      "instructions": "Etichetta del messaggio di conferma dopo l'invio del modulo.",
+      "default_value": "§ Inviato"
+    },
+    {
+      "key": "field_contatti_success_h3",
+      "label": "§01 Conferma invio — titolo",
+      "name": "contatti_success_h3",
+      "type": "text",
+      "instructions": "Titolo del messaggio di conferma dopo l'invio.",
+      "default_value": "Grazie. Ci sentiamo entro 24 ore."
+    },
+    {
+      "key": "field_contatti_success_text",
+      "label": "§01 Conferma invio — testo",
+      "name": "contatti_success_text",
+      "type": "textarea",
+      "rows": 3,
+      "new_lines": "",
+      "instructions": "Testo del messaggio di conferma dopo l'invio del modulo.",
+      "default_value": "La tua richiesta è stata inviata correttamente. Riceverai una conferma via email e ti ricontatteremo entro 24 ore lavorative."
+    },
+    {
+      "key": "field_contatti_aside_come_tab",
+      "label": "Aside & Come arrivare (§02–§03)",
+      "name": "",
+      "type": "tab",
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_contatti_aside_eyebrow",
+      "label": "§02 Aside — etichetta sezione",
+      "name": "contatti_aside_eyebrow",
+      "type": "text",
+      "instructions": "Etichetta in maiuscoletto della colonna destra (dati studio).",
+      "default_value": "§ 02 — Studio"
+    },
+    {
+      "key": "field_contatti_whatsapp_cta_label",
+      "label": "§02 Aside — etichetta link WhatsApp",
+      "name": "contatti_whatsapp_cta_label",
+      "type": "text",
+      "instructions": "Testo cliccabile del link WhatsApp nella colonna destra.",
+      "default_value": "Scrivi su WhatsApp"
+    },
+    {
+      "key": "field_contatti_come_eyebrow",
+      "label": "§03 Come arrivare — etichetta sezione",
+      "name": "contatti_come_eyebrow",
+      "type": "text",
+      "instructions": "Etichetta in maiuscoletto sopra il titolo 'Come arrivare'.",
+      "default_value": "§ 03 — Come arrivare"
+    },
+    {
+      "key": "field_contatti_come_item1_label",
+      "label": "§03 Come arrivare — voce 1 etichetta",
+      "name": "contatti_come_item1_label",
+      "type": "text",
+      "default_value": "Metro"
+    },
+    {
+      "key": "field_contatti_come_item1_title",
+      "label": "§03 Come arrivare — voce 1 titolo",
+      "name": "contatti_come_item1_title",
+      "type": "text",
+      "default_value": "Linea 6 · Mergellina"
+    },
+    {
+      "key": "field_contatti_come_item1_desc",
+      "label": "§03 Come arrivare — voce 1 descrizione",
+      "name": "contatti_come_item1_desc",
+      "type": "textarea",
+      "rows": 2,
+      "new_lines": "",
+      "default_value": "8 minuti a piedi lungo la Riviera di Chiaia."
+    },
+    {
+      "key": "field_contatti_come_item2_label",
+      "label": "§03 Come arrivare — voce 2 etichetta",
+      "name": "contatti_come_item2_label",
+      "type": "text",
+      "default_value": "Auto"
+    },
+    {
+      "key": "field_contatti_come_item2_title",
+      "label": "§03 Come arrivare — voce 2 titolo",
+      "name": "contatti_come_item2_title",
+      "type": "text",
+      "default_value": "Parcheggio Mergellina"
+    },
+    {
+      "key": "field_contatti_come_item2_desc",
+      "label": "§03 Come arrivare — voce 2 descrizione",
+      "name": "contatti_come_item2_desc",
+      "type": "textarea",
+      "rows": 2,
+      "new_lines": "",
+      "default_value": "Sosta a pagamento, 5 minuti a piedi."
+    },
+    {
+      "key": "field_contatti_come_item3_label",
+      "label": "§03 Come arrivare — voce 3 etichetta",
+      "name": "contatti_come_item3_label",
+      "type": "text",
+      "default_value": "Treno"
+    },
+    {
+      "key": "field_contatti_come_item3_title",
+      "label": "§03 Come arrivare — voce 3 titolo",
+      "name": "contatti_come_item3_title",
+      "type": "text",
+      "default_value": "Napoli Mergellina"
+    },
+    {
+      "key": "field_contatti_come_item3_desc",
+      "label": "§03 Come arrivare — voce 3 descrizione",
+      "name": "contatti_come_item3_desc",
+      "type": "textarea",
+      "rows": 2,
+      "new_lines": "",
+      "default_value": "Stazione FS, 10 minuti a piedi."
+    },
+    {
+      "key": "field_contatti_trust_tab",
+      "label": "Trust (§04)",
+      "name": "",
+      "type": "tab",
+      "placement": "top",
+      "endpoint": 0
+    },
+    {
+      "key": "field_contatti_trust_eyebrow",
+      "label": "§04 Trust — etichetta sezione",
+      "name": "contatti_trust_eyebrow",
+      "type": "text",
+      "instructions": "Etichetta in maiuscoletto sopra la frase di reassurance finale.",
+      "default_value": "La nostra professionalità"
     }
   ],
   "location": [
@@ -102,5 +277,5 @@
   "active": true,
   "description": "Wave 1 v1 — page /contatti/ sezioni hero+map+come arrivare+trust. Form CF7 gestito da plugin (no ACF). Sede classica testuale, NAP da Theme Options.",
   "show_in_rest": 0,
-  "modified": 1777948802
+  "modified": 1778600000
 }

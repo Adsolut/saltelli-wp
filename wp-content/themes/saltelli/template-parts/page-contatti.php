@@ -80,10 +80,10 @@ $chain_contact = saltelli_get_breadcrumb_chain();
         <div class="sl-contatti-w3__main-grid">
 
             <div class="sl-contatti-w3__form-col">
-                <div class="sl-mono"><?php esc_html_e('§ 01 — Modulo', 'saltelli'); ?></div>
+                <div class="sl-mono"><?php echo esc_html(saltelli_field('contatti_form_eyebrow', $pid, '§ 01 — Modulo')); ?></div>
                 <h2 class="sl-contatti-w3__form-h" id="contatti-form-h">
-                    <?php esc_html_e('Prenota un primo', 'saltelli'); ?><br>
-                    <em><?php esc_html_e('incontro gratuito.', 'saltelli'); ?></em>
+                    <?php echo esc_html(saltelli_field('contatti_form_h2_main', $pid, 'Prenota un primo')); ?><br>
+                    <em><?php echo esc_html(saltelli_field('contatti_form_h2_em', $pid, 'incontro gratuito.')); ?></em>
                 </h2>
 
                 <?php
@@ -143,16 +143,16 @@ $chain_contact = saltelli_get_breadcrumb_chain();
                 ?>
 
                 <div class="sl-contatti-w3__success" hidden role="status" aria-live="polite">
-                    <div class="sl-mono sl-contatti-w3__success-eyebrow"><?php esc_html_e('§ Inviato', 'saltelli'); ?></div>
-                    <h3 class="sl-contatti-w3__success-h3"><?php esc_html_e('Grazie. Ci sentiamo entro 24 ore.', 'saltelli'); ?></h3>
+                    <div class="sl-mono sl-contatti-w3__success-eyebrow"><?php echo esc_html(saltelli_field('contatti_success_eyebrow', $pid, '§ Inviato')); ?></div>
+                    <h3 class="sl-contatti-w3__success-h3"><?php echo esc_html(saltelli_field('contatti_success_h3', $pid, 'Grazie. Ci sentiamo entro 24 ore.')); ?></h3>
                     <p class="sl-contatti-w3__success-text">
-                        <?php esc_html_e('La tua richiesta è stata inviata correttamente. Riceverai una conferma via email e ti ricontatteremo entro 24 ore lavorative.', 'saltelli'); ?>
+                        <?php echo esc_html(saltelli_field('contatti_success_text', $pid, 'La tua richiesta è stata inviata correttamente. Riceverai una conferma via email e ti ricontatteremo entro 24 ore lavorative.')); ?>
                     </p>
                 </div>
             </div>
 
             <aside class="sl-contatti-w3__aside" aria-labelledby="contatti-aside-h">
-                <div class="sl-mono" id="contatti-aside-h"><?php esc_html_e('§ 02 — Studio', 'saltelli'); ?></div>
+                <div class="sl-mono" id="contatti-aside-h"><?php echo esc_html(saltelli_field('contatti_aside_eyebrow', $pid, '§ 02 — Studio')); ?></div>
 
                 <div class="sl-contatti-w3__nap">
                     <div class="sl-mono"><?php esc_html_e('Indirizzo', 'saltelli'); ?></div>
@@ -200,7 +200,7 @@ $chain_contact = saltelli_get_breadcrumb_chain();
                     </a>
                     <a class="sl-contatti-w3__cta-row" role="listitem" href="<?php echo esc_url($wa_href); ?>" target="_blank" rel="noopener">
                         <span class="sl-mono"><?php esc_html_e('WhatsApp', 'saltelli'); ?></span>
-                        <span class="sl-contatti-w3__cta-val"><?php esc_html_e('Scrivi su WhatsApp', 'saltelli'); ?> <span class="arrow" aria-hidden="true">→</span></span>
+                        <span class="sl-contatti-w3__cta-val"><?php echo esc_html(saltelli_field('contatti_whatsapp_cta_label', $pid, 'Scrivi su WhatsApp')); ?> <span class="arrow" aria-hidden="true">→</span></span>
                     </a>
                 </div>
 
@@ -221,24 +221,24 @@ $chain_contact = saltelli_get_breadcrumb_chain();
 
     <section class="sl-contatti-w3__come" aria-labelledby="contatti-come-h">
         <div class="sl-contatti-w3__come-grid">
-            <div class="sl-mono sl-contatti-w3__come-mark"><?php esc_html_e('§ 03 — Come arrivare', 'saltelli'); ?></div>
+            <div class="sl-mono sl-contatti-w3__come-mark"><?php echo esc_html(saltelli_field('contatti_come_eyebrow', $pid, '§ 03 — Come arrivare')); ?></div>
             <div class="sl-contatti-w3__come-body">
                 <h2 class="sl-contatti-w3__come-h" id="contatti-come-h"><?php echo esc_html($come_title); ?></h2>
                 <ul class="sl-contatti-w3__come-list" role="list">
                     <li class="sl-contatti-w3__come-item">
-                        <div class="sl-mono"><?php esc_html_e('Metro', 'saltelli'); ?></div>
-                        <h3 class="sl-contatti-w3__come-t"><?php esc_html_e('Linea 6 · Mergellina', 'saltelli'); ?></h3>
-                        <p class="sl-contatti-w3__come-d"><?php esc_html_e('8 minuti a piedi lungo la Riviera di Chiaia.', 'saltelli'); ?></p>
+                        <div class="sl-mono"><?php echo esc_html(saltelli_field('contatti_come_item1_label', $pid, 'Metro')); ?></div>
+                        <h3 class="sl-contatti-w3__come-t"><?php echo esc_html(saltelli_field('contatti_come_item1_title', $pid, 'Linea 6 · Mergellina')); ?></h3>
+                        <p class="sl-contatti-w3__come-d"><?php echo esc_html(saltelli_field('contatti_come_item1_desc', $pid, '8 minuti a piedi lungo la Riviera di Chiaia.')); ?></p>
                     </li>
                     <li class="sl-contatti-w3__come-item">
-                        <div class="sl-mono"><?php esc_html_e('Auto', 'saltelli'); ?></div>
-                        <h3 class="sl-contatti-w3__come-t"><?php esc_html_e('Parcheggio Mergellina', 'saltelli'); ?></h3>
-                        <p class="sl-contatti-w3__come-d"><?php esc_html_e('Sosta a pagamento, 5 minuti a piedi.', 'saltelli'); ?></p>
+                        <div class="sl-mono"><?php echo esc_html(saltelli_field('contatti_come_item2_label', $pid, 'Auto')); ?></div>
+                        <h3 class="sl-contatti-w3__come-t"><?php echo esc_html(saltelli_field('contatti_come_item2_title', $pid, 'Parcheggio Mergellina')); ?></h3>
+                        <p class="sl-contatti-w3__come-d"><?php echo esc_html(saltelli_field('contatti_come_item2_desc', $pid, 'Sosta a pagamento, 5 minuti a piedi.')); ?></p>
                     </li>
                     <li class="sl-contatti-w3__come-item">
-                        <div class="sl-mono"><?php esc_html_e('Treno', 'saltelli'); ?></div>
-                        <h3 class="sl-contatti-w3__come-t"><?php esc_html_e('Napoli Mergellina', 'saltelli'); ?></h3>
-                        <p class="sl-contatti-w3__come-d"><?php esc_html_e('Stazione FS, 10 minuti a piedi.', 'saltelli'); ?></p>
+                        <div class="sl-mono"><?php echo esc_html(saltelli_field('contatti_come_item3_label', $pid, 'Treno')); ?></div>
+                        <h3 class="sl-contatti-w3__come-t"><?php echo esc_html(saltelli_field('contatti_come_item3_title', $pid, 'Napoli Mergellina')); ?></h3>
+                        <p class="sl-contatti-w3__come-d"><?php echo esc_html(saltelli_field('contatti_come_item3_desc', $pid, 'Stazione FS, 10 minuti a piedi.')); ?></p>
                     </li>
                 </ul>
             </div>
@@ -247,7 +247,7 @@ $chain_contact = saltelli_get_breadcrumb_chain();
 
     <section class="sl-contatti-w3__trust" aria-label="<?php esc_attr_e('La nostra professionalità', 'saltelli'); ?>">
         <div class="sl-contatti-w3__trust-inner">
-            <div class="sl-mono sl-contatti-w3__trust-eyebrow"><?php esc_html_e('La nostra professionalità', 'saltelli'); ?></div>
+            <div class="sl-mono sl-contatti-w3__trust-eyebrow"><?php echo esc_html(saltelli_field('contatti_trust_eyebrow', $pid, 'La nostra professionalità')); ?></div>
             <p class="sl-contatti-w3__trust-quote">
                 <?php
                 // Trust signal split su prima sentence per render 3-line (Riceviamo / su appuntamento / Risposta).
