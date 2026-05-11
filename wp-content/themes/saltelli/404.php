@@ -44,6 +44,10 @@ $sl404_articoli = get_posts([
     'orderby'        => 'date',
     'order'          => 'DESC',
 ]);
+
+// Conteggio totale aree di pratica (CPT competenza publish) — dinamico, evita il
+// drift del numero hardcoded nelle stringhe sotto (oggi 19, auto-update futuro).
+$sl404_aree_count = (int) wp_count_posts('competenza')->publish;
 ?>
 
 <main id="main" class="sl-404">
@@ -74,7 +78,7 @@ $sl404_articoli = get_posts([
                     <div class="sl-mono sl-404__card-num"><?php esc_html_e('01 · Torna alla home', 'saltelli'); ?></div>
                     <h2 class="sl-404__card-title"><?php esc_html_e("Riparti dall'inizio.", 'saltelli'); ?></h2>
                     <p class="sl-404__card-text">
-                        <?php esc_html_e('La homepage raccoglie tutte le 17 aree di pratica, gli avvocati e i casi rappresentativi.', 'saltelli'); ?>
+                        <?php printf( esc_html__('La homepage raccoglie tutte le %d aree di pratica, gli avvocati e i casi rappresentativi.', 'saltelli'), $sl404_aree_count ); ?>
                     </p>
                     <a class="sl-btn sl-btn--primary sl-404__card-cta" href="<?php echo esc_url(home_url('/')); ?>">
                         <span><?php esc_html_e('Vai alla home', 'saltelli'); ?></span>
@@ -126,7 +130,7 @@ $sl404_articoli = get_posts([
                 <div class="sl-mono sl-404__section-tag"><?php esc_html_e('§ 02 — Forse cercavi', 'saltelli'); ?></div>
                 <h2 class="sl-404__suggest-title">
                     <?php esc_html_e('Una di queste', 'saltelli'); ?><br>
-                    <em><?php esc_html_e('diciassette aree?', 'saltelli'); ?></em>
+                    <em><?php printf( esc_html__('%d aree?', 'saltelli'), $sl404_aree_count ); ?></em>
                 </h2>
             </header>
             <div class="sl-404__areas sl-areas-archive">
@@ -140,7 +144,7 @@ $sl404_articoli = get_posts([
                     ?>
                     <a class="sl-area<?php echo $sl404_is_tier1 ? ' sl-area--tier1' : ''; ?>"
                        href="<?php echo esc_url(get_permalink($sl404_p)); ?>">
-                        <span class="sl-area__num sl-mono"><?php echo esc_html($sl404_num); ?> / 17</span>
+                        <span class="sl-area__num sl-mono"><?php echo esc_html($sl404_num); ?> / <?php echo esc_html((string) $sl404_aree_count); ?></span>
                         <span class="sl-area__title"><?php echo esc_html(get_the_title($sl404_p)); ?></span>
                         <span class="sl-area__meta sl-mono">
                             <?php echo esc_html($sl404_is_tier1 ? __('Tier 1', 'saltelli') : ($sl404_cat_label ?: __('Tier 2', 'saltelli'))); ?>
@@ -151,7 +155,7 @@ $sl404_articoli = get_posts([
             </div>
             <div class="sl-404__suggest-foot">
                 <a class="sl-btn" href="<?php echo esc_url(saltelli_aree_hub_url()); ?>">
-                    <span><?php esc_html_e('Tutte le 17 aree', 'saltelli'); ?></span>
+                    <span><?php printf( esc_html__('Tutte le %d aree', 'saltelli'), $sl404_aree_count ); ?></span>
                     <span class="arrow" aria-hidden="true">→</span>
                 </a>
             </div>
@@ -231,7 +235,7 @@ if (function_exists('saltelli_emit_jsonld') && !saltelli_seo_plugin_active()) {
         '@id'         => trailingslashit($sl404_home) . '#404',
         'url'         => trailingslashit($sl404_home) . '#404',
         'name'        => __('Pagina non trovata · Studio Legale Saltelli & Partners', 'saltelli'),
-        'description' => __('La pagina richiesta non esiste o è stata spostata. Esplora le 17 aree di pratica, gli articoli recenti o prenota una consulenza gratuita.', 'saltelli'),
+        'description' => sprintf( __('La pagina richiesta non esiste o è stata spostata. Esplora le %d aree di pratica, gli articoli recenti o prenota una consulenza gratuita.', 'saltelli'), $sl404_aree_count ),
         'inLanguage'  => 'it-IT',
         'isPartOf'    => [
             '@type' => 'WebSite',
