@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.11-wave4-7-fix-5-cleanup');
+define('SALTELLI_THEME_VERSION', '1.3.12-wave5-step3-pages-scf');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
