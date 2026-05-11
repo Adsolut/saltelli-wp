@@ -1,44 +1,76 @@
-/*
- * Studio Legale Saltelli & Partners — Design Tokens (locked)
- * Fonte di verità: .claude/knowledge/design/sessione-1/tokens.css (Sessione 1)
+/**
+ * Studio Legale Saltelli & Partners — Design Tokens
+ *
+ * Generated from docs/DESIGN.md (dated 2026-05-08) by Wave 5 Design Realign — 2026-05-11.
+ * DO NOT EDIT MANUALLY — update docs/DESIGN.md and re-derive this file.
+ *
+ * SoT: docs/DESIGN.md front-matter (Google Stitch YAML) + body specs
+ *      (§Typography "letter-spacing optical", §Typography "line-height optical",
+ *       §spacing, §rounded).
  *
  * Contiene SOLO :root (CSS variables) + reset scoped .sl-root.
- * I components live in components.css.
+ * I components live in components.css; le utility/section layout in sections.css.
  */
 
 :root {
-  /* Color */
-  --background: #FAFAF8;
-  --surface: #F2F0EA;
-  --primary: #1B2B4B;
-  --accent: #B8860B;
-  --text: #2D2D2D;
-  --text-muted: #6B6B6B;
-  --border: #E5E0D5;
+  /* ───── Color (DESIGN.md §colors) ───── */
+  --background: #FAFAF8;   /* cream — page surface */
+  --surface: #F2F0EA;      /* cream darker — press strip, /costi/ CTA, accordion bg */
+  --primary: #1B2B4B;      /* navy — headlines, navy buttons, footer bg */
+  --accent: #B8860B;       /* bronze — accent restraint (≤10% of any viewport) */
+  --text: #2D2D2D;         /* body copy — NEVER #000 */
+  --text-muted: #6B6B6B;   /* captions, mono metadata, secondary lede */
+  --border: #E5E0D5;       /* hairlines, dividers, card edges */
 
-  /* Typography */
+  /* ───── Font families (locked pairing) ───── */
   --font-display: "Playfair Display", "Cormorant Garamond", Georgia, serif;
   --font-body: "DM Sans", "Satoshi", -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
 
-  /* Type scale (responsive clamp) */
-  --fs-display: clamp(48px, 8vw, 120px);
-  --fs-h1: clamp(36px, 5vw, 64px);
+  /* ───── Type scale (DESIGN.md §typography) ─────
+     Display + H1 exposed as floor·vw·max sub-tokens so the responsive curve
+     is editable in one place. H2 single-line clamp (no drift). H3 floor/max
+     sub-tokens with inline vw. */
+  --fs-display-floor: 80px;
+  --fs-display-vw: 9vw;
+  --fs-display-max: 132px;
+  --fs-display: clamp(var(--fs-display-floor), var(--fs-display-vw), var(--fs-display-max));
+
+  --fs-h1-floor: 48px;
+  --fs-h1-vw: 6vw;
+  --fs-h1-max: 96px;
+  --fs-h1: clamp(var(--fs-h1-floor), var(--fs-h1-vw), var(--fs-h1-max));
+
   --fs-h2: clamp(28px, 3.5vw, 44px);
-  --fs-h3: clamp(20px, 2vw, 28px);
-  --fs-body: clamp(16px, 1.1vw, 18px);
-  --fs-small: 14px;
-  --fs-micro: 12px;
 
-  --lh-display: 1.05;
-  --lh-heading: 1.15;
-  --lh-body: 1.65;
+  --fs-h3-floor: 22px;
+  --fs-h3-max: 32px;
+  --fs-h3: clamp(var(--fs-h3-floor), 2.2vw, var(--fs-h3-max));
 
-  /* Letter spacing */
-  --ls-display: -0.02em;
-  --ls-mono: 0.08em;
+  --fs-lede: 22px;             /* Playfair italic lede sotto h1 (desktop; 17px mobile in component) */
+  --fs-body-marketing: 18px;   /* DM Sans — marketing copy (NOT legal prose) */
+  --fs-body: 16px;             /* DM Sans — body copy (fisso, no clamp — DESIGN.md §typography.body) */
+  --fs-caption: 11px;          /* JetBrains Mono — metadata primitive (eyebrow, breadcrumb, "01 / 19", labels) */
+  --fs-small: 14px;            /* utility: skip-link, accordion +/− icon (not in DESIGN.md scale) */
+  --fs-micro: 12px;            /* decorative micro-label ONLY — prefer --fs-caption for metadata */
 
-  /* Spacing scale (8-base) */
+  /* ───── Line-height optical (DESIGN.md §Typography "line-height optical") ───── */
+  --lh-display: 0.98;     /* ≥80px display — tight for visual cohesion */
+  --lh-h1: 1.05;          /* H1 */
+  --lh-heading: 1.15;     /* H2 */
+  --lh-h3: 1.2;           /* H3 */
+  --lh-lede: 1.5;         /* Playfair italic lede */
+  --lh-body: 1.7;         /* DM Sans body — "legal content density requires generous leading" */
+  --lh-mono: 1.4;         /* JetBrains Mono caption */
+
+  /* ───── Letter-spacing optical (DESIGN.md §Typography "letter-spacing optical") ───── */
+  --ls-display: -0.035em;   /* ≥80px display — visual tightness for large display */
+  --ls-h1: -0.02em;         /* 48-80px H1 */
+  --ls-h2: -0.01em;         /* 28-44px H2 */
+  --ls-h3: -0.005em;        /* 22-32px H3 */
+  --ls-mono: 0.08em;        /* mono caption — always uppercase */
+
+  /* ───── Spacing scale — CANONICAL (DESIGN.md §spacing). Use --s-* for all new CSS. ───── */
   --s-1: 4px;
   --s-2: 8px;
   --s-3: 16px;
@@ -50,20 +82,32 @@
   --s-9: 128px;
   --s-10: 192px;
 
-  /* Layout */
+  /* ───── Rounded (DESIGN.md §rounded) ───── */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+
+  /* ───── Layout ───── */
   --container-max: 1440px;
   --container-pad: clamp(24px, 5vw, 96px);
-  --gap-desktop: 32px;
-  --gap-tablet: 24px;
-  --gap-mobile: 16px;
+  --gap-desktop: 32px;   /* = --s-5 */
+  --gap-tablet: 24px;    /* = --s-4 */
+  --gap-mobile: 16px;    /* = --s-3 */
 
-  /* Motion */
+  /* ───── Motion ───── */
   --ease-editorial: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --dur-fast: 200ms;
   --dur-base: 300ms;
   --dur-slow: 600ms;
 
-  /* Legacy aliases — back-compat con scaffold base.css esistente */
+  /* ─────────────────────────────────────────────────────────────
+     DEPRECATED — legacy aliases kept ONLY during the design-system
+     transition. ~590 occurrences in sections.css/components.css still
+     reference these scales; do NOT remove until that cleanup wave lands.
+     New CSS: use --s-* (spacing), --fs-*/--lh-*/--ls-* (type), --radius-*.
+     ───────────────────────────────────────────────────────────── */
+
+  /* Legacy color aliases — back-compat con scaffold base.css esistente */
   --color-bg: var(--background);
   --color-primary: var(--primary);
   --color-accent: var(--accent);
@@ -71,35 +115,32 @@
   --color-text-muted: var(--text-muted);
   --color-border: var(--border);
   --container-padding: var(--container-pad);
-  --space-1: var(--s-1);
-  --space-2: var(--s-2);
-  --space-3: 12px;
-  --space-4: var(--s-3);
-  --space-6: var(--s-4);
-  --space-8: var(--s-5);
-  --space-12: var(--s-6);
-  --space-16: var(--s-7);
-  --space-24: var(--s-8);
 
-  /* ─────────────────────────────────────────────────────────────
-     Layout Harmonization v0.12.0 (audit CRO 8/10 target)
-     - Container UNIFICATO 1440 max + clamp pad
-     - Scala 8px (sl- prefix per non collidere con legacy)
-     - Hero spacing per gap header→hero coerente
-     ───────────────────────────────────────────────────────────── */
+  /* DEPRECATED — --space-* legacy aliases (ambiguous: --space-12 = 48px, not 12px) */
+  --space-1: var(--s-1);    /* 4px  */
+  --space-2: var(--s-2);    /* 8px  */
+  --space-3: 12px;          /* ⚠ PHANTOM — 12px not in DESIGN.md scale; kept for legacy compat only */
+  --space-4: var(--s-3);    /* 16px */
+  --space-6: var(--s-4);    /* 24px */
+  --space-8: var(--s-5);    /* 32px */
+  --space-12: var(--s-6);   /* 48px */
+  --space-16: var(--s-7);   /* 64px */
+  --space-24: var(--s-8);   /* 96px */
+
+  /* DEPRECATED — --sl-space-* (v0.12.0 "Layout Harmonization"; indices offset: --sl-space-1 = 8px ≠ --s-1 = 4px) */
   --sl-container-max: var(--container-max);
   --sl-container-pad: var(--container-pad);
-
   --sl-space-1: 8px;
   --sl-space-2: 16px;
   --sl-space-3: 24px;
   --sl-space-4: 32px;
   --sl-space-5: 48px;
   --sl-space-6: 64px;
-  --sl-space-7: 80px;
+  --sl-space-7: 80px;       /* ⚠ PHANTOM — 80px not in DESIGN.md scale; kept for legacy compat only */
   --sl-space-8: 96px;
   --sl-space-9: 128px;
 
+  /* DEPRECATED — hero spacing (phantom 80px/120px caps; kept for .sl-hero / .sl-page__hero compat) */
   --space-hero-top: clamp(64px, 8vw, 120px);
   --space-hero-bottom: clamp(48px, 6vw, 80px);
 }
@@ -132,6 +173,11 @@ html {
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
 }
 
+/* Heading reset — Playfair 400 navy, per-hierarchy optical letter-spacing.
+   font-size is provided by component classes (.sl-hero__headline, .sl-area__title, …)
+   and by base.css for bare h1/h2/h3. h1 defaults to display tightness because the
+   page's main heading on this site is typically display-sized (hero); component
+   classes for smaller h1s may override to var(--ls-h1). */
 .sl-root h1,
 .sl-root h2,
 .sl-root h3,
@@ -139,11 +185,14 @@ html {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 400;
-  letter-spacing: var(--ls-display);
+  letter-spacing: var(--ls-h2);
   color: var(--primary);
   /* Display: kerning + ligature + alternate stylistic set per Playfair Display */
   font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "ss01" 1;
 }
+.sl-root h1 { letter-spacing: var(--ls-display); }
+.sl-root h3,
+.sl-root h4 { letter-spacing: var(--ls-h3); }
 
 .sl-root p { margin: 0; }
 .sl-root a { color: inherit; text-decoration: none; }
@@ -157,7 +206,7 @@ html {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
-  border-radius: 2px;
+  border-radius: var(--radius-xs);
 }
 .sl-root :focus:not(:focus-visible) {
   outline: none;

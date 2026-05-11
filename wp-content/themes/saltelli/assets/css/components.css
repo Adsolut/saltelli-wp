@@ -9,7 +9,7 @@
 /* Mono utility */
 .sl-mono {
   font-family: var(--font-mono);
-  font-size: var(--fs-micro);
+  font-size: var(--fs-caption);
   letter-spacing: var(--ls-mono);
   text-transform: uppercase;
   color: var(--text-muted);
@@ -30,7 +30,7 @@
  */
 .sl-footer__copy.sl-mono {
   text-transform: none;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ls-mono);
   font-size: 11px;
 }
 
@@ -40,7 +40,7 @@
   align-items: baseline;
   gap: 12px;
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: var(--fs-body);
   font-weight: 500;
   color: var(--text);
   background: none;
@@ -48,7 +48,6 @@
   padding: 4px 0;
   cursor: pointer;
   position: relative;
-  letter-spacing: 0.01em;
 }
 .sl-btn::after {
   content: "";
@@ -203,8 +202,8 @@ input.sl-btn[data-loading="true"] {
   display: grid;
   grid-template-columns: 64px 1fr auto;
   align-items: baseline;
-  gap: 32px;
-  padding: 28px 0;
+  gap: var(--s-5);
+  padding: var(--s-4) 0;
   border-bottom: 1px solid var(--border);
   cursor: pointer;
   transition:
@@ -235,7 +234,7 @@ input.sl-btn[data-loading="true"] {
 
 .sl-area__num {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: var(--fs-caption);
   letter-spacing: 0.08em;
   color: var(--text-muted);
   /* FIX P1.1: nascosto mobile (la numerazione 01/19 mescola tier-1 e tier-2). */
@@ -427,7 +426,7 @@ details.sl-acc > div,
 .sl-acc__panel {
   padding: 0 0 24px 0;
   font-size: 16px;
-  line-height: 1.7;
+  line-height: var(--lh-body);
   color: var(--text);
   max-width: 60ch;
 }
