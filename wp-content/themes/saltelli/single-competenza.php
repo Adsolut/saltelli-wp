@@ -32,6 +32,9 @@ while (have_posts()) :
     $tier_label    = $is_tier_1 ? __('Tier 1 · approfondimento', 'saltelli') : __('Area di pratica', 'saltelli');
     $tier1_subtitle = (string) saltelli_field('subtitle', $post_id, '');
     $tier1_class   = $is_tier_1 ? 'sl-tier1 ' : '';
+    // Bugfix: "uno o l'altro" — la sezione __body (body_extended SCF) prevale su
+    // __intro (post_content). Mai entrambe renderizzate insieme.
+    $render_extended_body = $is_tier_1 && $body_ext !== '';
     ?>
     <article <?php post_class($tier1_class . 'sl-competenza sl-competenza--' . ($is_tier_1 ? 'tier-1' : 'tier-2')); ?>>
 
@@ -137,7 +140,7 @@ while (have_posts()) :
             </div>
         </header>
 
-        <?php if (get_the_content()) : ?>
+        <?php if (! $render_extended_body && get_the_content()) : // fallback su post_content solo se la sezione __body (body_extended SCF) non renderizza ?>
             <section class="sl-competenza__intro <?php echo $is_tier_1 ? 'sl-tier1__body' : ''; ?>">
                 <div class="sl-container">
                     <div class="sl-competenza__prose"><?php the_content(); ?></div>
@@ -175,7 +178,7 @@ while (have_posts()) :
         endif;
         ?>
 
-        <?php if ($is_tier_1 && $body_ext !== '') : ?>
+        <?php if ($render_extended_body) : // sezione canonica del corpo editoriale, prevale su post_content ?>
             <section class="sl-competenza__body sl-tier1__body">
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Approfondimento', 'saltelli'); ?></div>
