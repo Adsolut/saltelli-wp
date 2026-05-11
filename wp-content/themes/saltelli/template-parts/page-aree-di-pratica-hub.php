@@ -81,7 +81,7 @@ $sl_clusters = [
                             );
                             ?>
                         </p>
-                        <span class="sl-mono sl-hub-card__cta"><?php esc_html_e('Esplora →', 'saltelli'); ?></span>
+                        <span class="sl-mono sl-hub-card__cta"><?php echo esc_html(saltelli_page_field('hub_aree_card_cta', 'Esplora →')); ?></span>
                     </a>
                 </li>
             <?php endforeach; ?>
@@ -91,12 +91,12 @@ $sl_clusters = [
 
 <section class="sl-hub-cta" aria-label="<?php esc_attr_e('CTA Aree di Pratica', 'saltelli'); ?>">
     <div class="sl-container sl-hub-cta__inner">
-        <p class="sl-mono"><?php esc_html_e('§ Non trovi la materia?', 'saltelli'); ?></p>
+        <p class="sl-mono"><?php echo esc_html(saltelli_page_field('hub_aree_cta_eyebrow', '§ Non trovi la materia?')); ?></p>
         <h2 class="sl-hub-cta__title">
-            <?php esc_html_e('Scrivici una nota: in 24 ore valutiamo se è di nostra competenza.', 'saltelli'); ?>
+            <?php echo esc_html(saltelli_page_field('hub_aree_cta_title', 'Scrivici una nota: in 24 ore valutiamo se è di nostra competenza.')); ?>
         </h2>
-        <a class="sl-cta sl-cta--primary" href="<?php echo esc_url(home_url('/contatti/')); ?>">
-            <?php esc_html_e('Contattaci', 'saltelli'); ?>
+        <a class="sl-cta sl-cta--primary" href="<?php echo esc_url(home_url(saltelli_page_field('hub_aree_cta_url', '/contatti/'))); ?>">
+            <?php echo esc_html(saltelli_page_field('hub_aree_cta_btn_label', 'Contattaci')); ?>
         </a>
     </div>
 </section>
