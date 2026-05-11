@@ -77,7 +77,7 @@ $sl_arch_intro   = (string) saltelli_option('archive_caso_intro', __('Una selezi
             </nav>
 
         <?php else : ?>
-            <p class="sl-mono"><?php esc_html_e('Nessun caso pubblicato.', 'saltelli'); ?></p>
+            <p class="sl-mono"><?php echo esc_html(saltelli_option('archive_caso_empty_text', 'Nessun caso pubblicato.')); ?></p>
         <?php endif; ?>
 
     </div>

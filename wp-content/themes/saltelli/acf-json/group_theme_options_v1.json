@@ -976,6 +976,60 @@
             "type": "textarea",
             "default_value": "Una selezione anonimizzata di pratiche dello Studio. Storie con un dato comune: la complessità non risolta da chi è venuto prima.",
             "rows": 3
+        },
+        {
+            "key": "field_archive_avvocato_trust_eyebrow",
+            "label": "Archive Avvocati — Trust aside · Eyebrow",
+            "name": "archive_avvocato_trust_eyebrow",
+            "type": "text",
+            "instructions": "Etichetta in maiuscoletto nel riquadro 'trust' a destra del hero archivio Team.",
+            "default_value": "§ Dal 1999",
+            "maxlength": 60
+        },
+        {
+            "key": "field_archive_avvocato_trust_headline_l1",
+            "label": "Archive Avvocati — Trust aside · Headline (riga 1)",
+            "name": "archive_avvocato_trust_headline_l1",
+            "type": "text",
+            "instructions": "Prima riga del titolo nel riquadro trust.",
+            "default_value": "Vannella Gaetani, 27.",
+            "maxlength": 80
+        },
+        {
+            "key": "field_archive_avvocato_trust_headline_em",
+            "label": "Archive Avvocati — Trust aside · Headline (riga 2, corsivo)",
+            "name": "archive_avvocato_trust_headline_em",
+            "type": "text",
+            "instructions": "Seconda riga del titolo nel riquadro trust (mostrata in corsivo).",
+            "default_value": "Chiaia · Napoli.",
+            "maxlength": 80
+        },
+        {
+            "key": "field_archive_avvocato_trust_text",
+            "label": "Archive Avvocati — Trust aside · Testo",
+            "name": "archive_avvocato_trust_text",
+            "type": "textarea",
+            "instructions": "Paragrafo nel riquadro trust (1-2 frasi).",
+            "default_value": "Quattro avvocati, una pratica alla volta. Riceviamo solo su appuntamento, in studio o in videocall.",
+            "rows": 3
+        },
+        {
+            "key": "field_archive_avvocato_principles_eyebrow",
+            "label": "Archive Avvocati — Sezione 'Come lavoriamo' · Eyebrow",
+            "name": "archive_avvocato_principles_eyebrow",
+            "type": "text",
+            "instructions": "Etichetta in maiuscoletto sopra la lista dei 3 principi.",
+            "default_value": "§ Come lavoriamo",
+            "maxlength": 60
+        },
+        {
+            "key": "field_archive_caso_empty_text",
+            "label": "Archive Casi rappresentativi — Testo se nessun caso",
+            "name": "archive_caso_empty_text",
+            "type": "text",
+            "instructions": "Mostrato quando non ci sono casi pubblicati.",
+            "default_value": "Nessun caso pubblicato.",
+            "maxlength": 120
         }
     ],
     "location": [
@@ -999,5 +1053,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1778365000
+    "modified": 1778600000
 }
