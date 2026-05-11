@@ -95,7 +95,7 @@ $press = saltelli_press_outlets();
                 <span class="arrow" aria-hidden="true">→</span>
             </a>
             <div class="sl-mono sl-hero__cta-note">
-                <?php esc_html_e('Prima consulenza conoscitiva — risposta entro 24 ore', 'saltelli'); ?>
+                <?php echo esc_html(saltelli_page_field('hero_cta_note', 'Prima consulenza conoscitiva — risposta entro 24 ore')); ?>
             </div>
         </div>
 
@@ -129,10 +129,10 @@ $press = saltelli_press_outlets();
 <section class="sl-areas" id="aree" aria-labelledby="aree-h">
     <div class="sl-container">
         <div class="sl-section-head">
-            <div class="sl-mono">§ 01 — <?php esc_html_e('Aree di pratica', 'saltelli'); ?></div>
+            <div class="sl-mono"><?php echo esc_html(saltelli_page_field('home_areas_eyebrow', '§ 01 — Aree di pratica')); ?></div>
             <h2 class="sl-section-title" id="aree-h">
-                <?php esc_html_e('Diciassette aree.', 'saltelli'); ?><br>
-                <em><?php esc_html_e('Tre presidiate in profondità.', 'saltelli'); ?></em>
+                <?php echo esc_html(saltelli_page_field('home_areas_h2_main', 'Diciassette aree.')); ?><br>
+                <em><?php echo esc_html(saltelli_page_field('home_areas_h2_em', 'Tre presidiate in profondità.')); ?></em>
             </h2>
         </div>
 
@@ -184,7 +184,7 @@ $press = saltelli_press_outlets();
             </div>
 
             <aside class="sl-area__preview" aria-live="polite" data-area-preview>
-                <p class="sl-area__preview-empty"><?php esc_html_e("Passa il cursore su un'area per leggerne la sintesi.", 'saltelli'); ?></p>
+                <p class="sl-area__preview-empty"><?php echo esc_html(saltelli_page_field('home_areas_preview_hint', "Passa il cursore su un'area per leggerne la sintesi.")); ?></p>
             </aside>
         </div>
     </div>
@@ -193,7 +193,7 @@ $press = saltelli_press_outlets();
 <section class="sl-studio" id="studio" aria-labelledby="studio-h">
     <div class="sl-container">
         <div class="sl-section-head">
-            <div class="sl-mono">§ 02 — <?php esc_html_e('Lo studio', 'saltelli'); ?></div>
+            <div class="sl-mono"><?php echo esc_html(saltelli_page_field('home_studio_eyebrow', '§ 02 — Lo studio')); ?></div>
             <h2 class="sl-section-title" id="studio-h"><?php echo esc_html($studio_titolo); ?></h2>
         </div>
 
@@ -230,7 +230,7 @@ $press = saltelli_press_outlets();
 <section class="sl-team" id="avvocati" aria-labelledby="team-h">
     <div class="sl-container">
         <div class="sl-section-head">
-            <div class="sl-mono">§ 03 — <?php esc_html_e('Avvocati', 'saltelli'); ?></div>
+            <div class="sl-mono"><?php echo esc_html(saltelli_page_field('home_team_eyebrow', '§ 03 — Avvocati')); ?></div>
             <h2 class="sl-section-title" id="team-h">
                 <?php
                 $title_lines = preg_split('/\r\n|\r|\n/', $team_titolo);
@@ -297,7 +297,7 @@ $press = saltelli_press_outlets();
 <section class="sl-cases" id="casi" aria-labelledby="cases-h">
     <div class="sl-container">
         <div class="sl-section-head">
-            <div class="sl-mono">§ 04 — <?php esc_html_e('Vittorie recenti', 'saltelli'); ?></div>
+            <div class="sl-mono"><?php echo esc_html(saltelli_page_field('home_cases_eyebrow', '§ 04 — Vittorie recenti')); ?></div>
             <h2 class="sl-section-title" id="cases-h"><?php echo esc_html($cases_titolo); ?></h2>
         </div>
 
@@ -323,7 +323,7 @@ $press = saltelli_press_outlets();
 <section class="sl-press" aria-labelledby="press-h">
     <div class="sl-container">
         <div class="sl-press__inner">
-            <div class="sl-mono sl-press__label" id="press-h">§ 05 — <?php esc_html_e('Parlano di noi', 'saltelli'); ?></div>
+            <div class="sl-mono sl-press__label" id="press-h"><?php echo esc_html(saltelli_page_field('home_press_eyebrow', '§ 05 — Parlano di noi')); ?></div>
             <ul class="sl-press__outlets">
                 <?php foreach ($press as $p) : ?>
                     <li class="sl-press__outlet"><?php echo esc_html($p); ?></li>
@@ -343,15 +343,15 @@ $press = saltelli_press_outlets();
 <section class="sl-contact" id="contatti" aria-labelledby="contact-h">
     <div class="sl-container">
         <div class="sl-section-head">
-            <div class="sl-mono">§ 06 — <?php esc_html_e('Contatti', 'saltelli'); ?></div>
+            <div class="sl-mono"><?php echo esc_html(saltelli_page_field('home_contact_eyebrow', '§ 06 — Contatti')); ?></div>
             <div>
                 <div class="sl-mono sl-contact__eyebrow">
-                    <?php esc_html_e('Prima consulenza conoscitiva gratuita · Risposta entro 24 ore', 'saltelli'); ?>
+                    <?php echo esc_html(saltelli_page_field('home_contact_subline', 'Prima consulenza conoscitiva gratuita · Risposta entro 24 ore')); ?>
                 </div>
                 <h2 class="sl-section-title sl-contact__title" id="contact-h">
-                    <?php esc_html_e('Prenota', 'saltelli'); ?><br>
-                    <?php esc_html_e('un primo', 'saltelli'); ?><br>
-                    <em><?php esc_html_e('incontro.', 'saltelli'); ?></em>
+                    <?php echo esc_html(saltelli_page_field('home_contact_h2_line1', 'Prenota')); ?><br>
+                    <?php echo esc_html(saltelli_page_field('home_contact_h2_line2', 'un primo')); ?><br>
+                    <em><?php echo esc_html(saltelli_page_field('home_contact_h2_line3', 'incontro.')); ?></em>
                 </h2>
             </div>
         </div>
