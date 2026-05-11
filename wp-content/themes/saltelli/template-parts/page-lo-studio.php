@@ -75,20 +75,20 @@ $sl_principles_posts = get_posts([
     <div class="sl-container sl-chi-siamo__hero-grid">
         <aside class="sl-chi-siamo__hero-aside">
             <?php saltelli_render_breadcrumb(); ?>
-            <div class="sl-mono sl-chi-siamo__eyebrow"><?php esc_html_e('§ Lo studio · Chi siamo', 'saltelli'); ?></div>
+            <div class="sl-mono sl-chi-siamo__eyebrow"><?php echo esc_html(saltelli_page_field('lo_studio_hero_eyebrow', '§ Lo studio · Chi siamo')); ?></div>
             <p class="sl-mono sl-chi-siamo__hero-meta">
-                <?php esc_html_e('Un atelier', 'saltelli'); ?><br>
-                <?php esc_html_e('di quattro avvocati', 'saltelli'); ?><br>
-                <?php esc_html_e('in Via Vannella Gaetani 27', 'saltelli'); ?><br>
-                <?php esc_html_e('Chiaia · Napoli', 'saltelli'); ?><br>
-                <?php esc_html_e('Dal 1999', 'saltelli'); ?>
+                <?php echo esc_html(saltelli_page_field('lo_studio_hero_meta_l1', 'Un atelier')); ?><br>
+                <?php echo esc_html(saltelli_page_field('lo_studio_hero_meta_l2', 'di quattro avvocati')); ?><br>
+                <?php echo esc_html(saltelli_page_field('lo_studio_hero_meta_l3', 'in Via Vannella Gaetani 27')); ?><br>
+                <?php echo esc_html(saltelli_page_field('lo_studio_hero_meta_l4', 'Chiaia · Napoli')); ?><br>
+                <?php echo esc_html(saltelli_page_field('lo_studio_hero_meta_l5', 'Dal 1999')); ?>
             </p>
         </aside>
         <h1 class="sl-chi-siamo__h1" id="chi-siamo-h1" data-split-reveal>
             <?php
-            $sl_chi_title = esc_html__('Un atelier', 'saltelli') . '<br>'
-                . esc_html__('di quattro', 'saltelli') . '<br>'
-                . '<em>' . esc_html__('professionisti.', 'saltelli') . '</em>';
+            $sl_chi_title = esc_html(saltelli_page_field('lo_studio_h1_l1', 'Un atelier')) . '<br>'
+                . esc_html(saltelli_page_field('lo_studio_h1_l2', 'di quattro')) . '<br>'
+                . '<em>' . esc_html(saltelli_page_field('lo_studio_h1_em', 'professionisti.')) . '</em>';
             echo wp_kses(saltelli_split_h1_words($sl_chi_title), [
                 'span' => ['class' => true, 'data-i' => true],
                 'em'   => [],
@@ -104,10 +104,9 @@ $sl_principles_posts = get_posts([
         <div class="sl-mono">§ 01 — <?php esc_html_e('Lede', 'saltelli'); ?></div>
         <div class="sl-chi-siamo__prose sl-chi-siamo__prose--dropcap">
             <p>
-                Un atelier di quattro professionisti che da oltre vent'anni accompagna famiglie e imprese di Napoli attraverso le materie di cui si occupa: il diritto tributario di Emiliano, il diritto del lavoro di Fabiana, la tutela LGBTQ+ in materia di famiglia di Antonia, il condominiale e immobiliare di Stefano.
-            </p>
+                <?php echo wp_kses_post(saltelli_page_field('lo_studio_lede_p1', "Un atelier di quattro professionisti che da oltre vent'anni accompagna famiglie e imprese di Napoli attraverso le materie di cui si occupa: il diritto tributario di Emiliano, il diritto del lavoro di Fabiana, la tutela LGBTQ+ in materia di famiglia di Antonia, il condominiale e immobiliare di Stefano.")) . "\n            "; ?></p>
             <p>
-                <?php esc_html_e("Crediamo che il diritto sia, prima di tutto, un'arte di ascolto. Le carte vengono dopo. Per questo non offriamo pacchetti né formule: ogni cliente è una storia, e ogni storia merita il tempo di essere capita.", 'saltelli'); ?>
+                <?php echo esc_html(saltelli_page_field('lo_studio_lede_p2', "Crediamo che il diritto sia, prima di tutto, un'arte di ascolto. Le carte vengono dopo. Per questo non offriamo pacchetti né formule: ogni cliente è una storia, e ogni storia merita il tempo di essere capita.")); ?>
             </p>
         </div>
     </div>
@@ -130,11 +129,11 @@ $sl_principles_posts = get_posts([
     <div class="sl-container sl-chi-siamo__founding-grid">
         <aside class="sl-chi-siamo__founding-mark">
             <div class="sl-mono">§ 02 — 1999</div>
-            <div class="sl-chi-siamo__founding-year">1999.</div>
+            <div class="sl-chi-siamo__founding-year"><?php echo esc_html(saltelli_page_field('lo_studio_founding_year', '1999.')); ?></div>
         </aside>
         <div>
             <h2 class="sl-section-title sl-chi-siamo__h2" id="chi-siamo-founding-h">
-                <?php esc_html_e('Un atelier, in senso napoletano.', 'saltelli'); ?>
+                <?php echo esc_html(saltelli_page_field('lo_studio_founding_h2', 'Un atelier, in senso napoletano.')); ?>
             </h2>
             <div class="sl-chi-siamo__prose">
                 <?php
@@ -163,10 +162,10 @@ $sl_principles_posts = get_posts([
     <section class="sl-chi-siamo__team-mini" aria-labelledby="chi-siamo-team-h">
         <div class="sl-container">
             <header class="sl-chi-siamo__team-head">
-                <div class="sl-mono">§ 03 — <?php esc_html_e('I nostri quattro', 'saltelli'); ?></div>
+                <div class="sl-mono"><?php echo esc_html(saltelli_page_field('lo_studio_team_eyebrow', '§ 03 — I nostri quattro')); ?></div>
                 <h2 class="sl-section-title sl-chi-siamo__h2" id="chi-siamo-team-h">
-                    <?php esc_html_e('Quattro avvocati,', 'saltelli'); ?><br>
-                    <em><?php esc_html_e('diciassette aree.', 'saltelli'); ?></em>
+                    <?php echo esc_html(saltelli_page_field('lo_studio_team_h2_main', 'Quattro avvocati,')); ?><br>
+                    <em><?php echo esc_html(saltelli_page_field('lo_studio_team_h2_em', 'diciassette aree.')); ?></em>
                 </h2>
             </header>
             <ul class="sl-chi-siamo__team-grid" role="list">
@@ -222,10 +221,10 @@ $sl_principles_posts = get_posts([
 
 <section class="sl-chi-siamo__principles" aria-labelledby="chi-siamo-princ-h">
     <div class="sl-container sl-chi-siamo__principles-grid">
-        <div class="sl-mono">§ 04 — <?php esc_html_e('Come lavoriamo', 'saltelli'); ?></div>
+        <div class="sl-mono"><?php echo esc_html(saltelli_page_field('lo_studio_principi_eyebrow', '§ 04 — Come lavoriamo')); ?></div>
         <div>
             <h2 class="sl-section-title sl-chi-siamo__h2" id="chi-siamo-princ-h">
-                <?php esc_html_e('Tre', 'saltelli'); ?> <em><?php esc_html_e('principi.', 'saltelli'); ?></em>
+                <?php echo esc_html(saltelli_page_field('lo_studio_principi_h2_main', 'Tre')); ?> <em><?php echo esc_html(saltelli_page_field('lo_studio_principi_h2_em', 'principi.')); ?></em>
             </h2>
             <ol class="sl-chi-siamo__principles-list" role="list">
                 <?php
@@ -271,7 +270,7 @@ $sl_principles_posts = get_posts([
 <section class="sl-chi-siamo__timeline" aria-labelledby="chi-siamo-time-h">
     <div class="sl-container">
         <header class="sl-chi-siamo__timeline-head">
-            <div class="sl-mono">§ 05 — <?php esc_html_e('Cronologia', 'saltelli'); ?></div>
+            <div class="sl-mono"><?php echo esc_html(saltelli_page_field('lo_studio_timeline_eyebrow', '§ 05 — Cronologia')); ?></div>
             <h2 class="sl-section-title sl-chi-siamo__h2" id="chi-siamo-time-h"><?php echo esc_html($sl_timeline_year_range); ?></h2>
         </header>
         <ol class="sl-chi-siamo__timeline-list" role="list">
@@ -291,17 +290,17 @@ $sl_principles_posts = get_posts([
 
 <section class="sl-chi-siamo__cta" aria-labelledby="chi-siamo-cta-h">
     <div class="sl-container sl-chi-siamo__cta-grid">
-        <div class="sl-mono">§ 06 — <?php esc_html_e('Primo incontro', 'saltelli'); ?></div>
+        <div class="sl-mono"><?php echo esc_html(saltelli_page_field('lo_studio_cta_eyebrow', '§ 06 — Primo incontro')); ?></div>
         <div>
             <h2 class="sl-chi-siamo__cta-title" id="chi-siamo-cta-h">
-                <?php esc_html_e('Prenota', 'saltelli'); ?><br>
-                <em><?php esc_html_e('una consulenza', 'saltelli'); ?><br><?php esc_html_e('gratuita.', 'saltelli'); ?></em>
+                <?php echo esc_html(saltelli_page_field('lo_studio_cta_h2_l1', 'Prenota')); ?><br>
+                <em><?php echo esc_html(saltelli_page_field('lo_studio_cta_h2_l2', 'una consulenza')); ?><br><?php echo esc_html(saltelli_page_field('lo_studio_cta_h2_l3', 'gratuita.')); ?></em>
             </h2>
             <p class="sl-chi-siamo__cta-lede">
-                <?php esc_html_e('Il primo incontro è gratuito e dura il tempo necessario. Riceviamo solo su appuntamento.', 'saltelli'); ?>
+                <?php echo esc_html(saltelli_page_field('lo_studio_cta_lede', 'Il primo incontro è gratuito e dura il tempo necessario. Riceviamo solo su appuntamento.')); ?>
             </p>
-            <a class="sl-btn sl-btn--primary" href="<?php echo esc_url(home_url('/contatti/')); ?>">
-                <span><?php esc_html_e('Prenota un primo incontro', 'saltelli'); ?></span>
+            <a class="sl-btn sl-btn--primary" href="<?php echo esc_url(home_url(saltelli_page_field('lo_studio_cta_url', '/contatti/'))); ?>">
+                <span><?php echo esc_html(saltelli_page_field('lo_studio_cta_btn_label', 'Prenota un primo incontro')); ?></span>
                 <span class="arrow" aria-hidden="true">→</span>
             </a>
         </div>
