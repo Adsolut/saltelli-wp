@@ -118,3 +118,41 @@ Tutti `draft` (mai pubblicate), tutti con un redirect 301 già attivo che copre 
 - `pages-snapshot.csv` — idem CSV con `post_modified`
 
 Rollback Pages: `wp post untrash <ID>` (entro 30gg) oppure restore DB dump.
+
+---
+
+## Esito esecuzione Phase 2 (2026-05-11)
+
+**Theme change deployato** (`inc/seo/legacy-redirects.php` — 1 entry aggiunta a `mvp_map`):
+- `/chi-siamo/lo-studio/risultati/` → `/chi-siamo/casi-rappresentativi/`
+- Deploy via `rsync --rsync-path="sudo rsync" --checksum` (vedi nota deploy sotto) + `chown www-data` + `php -l` OK + `wp cache flush` + `systemctl reload php8.2-fpm`. md5 locale==droplet (`a5dec973...`).
+
+**16 Pages trashed** (tutte `Success: Trashed post <ID>`):
+`21 254 273 285 292 300 305 321 947 996 1540 1558 2241` (13 draft) + `356 361 2699` (3 publish).
+
+**Menu item 365** ("PRENOTA APPUNTAMENTO" → object_id 361, nel menu `Main` term_id 3 senza location) → `wp menu item delete 365` → `Success: Deleted 1 of 1 menu items.`
+
+**Conteggio post-cleanup** (`wp post list --post_type=page`):
+- `publish`: **19** ✓ (corrisponde alla classificazione: 17,23,372,1413,2695,2708,2709,2710,2711,2712,2713,2714,2741,2742,2743,2811,2812,2813,2822)
+- `draft`: **0**
+- `trash`: **28** = 16 nuovi (questa wave) + 12 già trashed da wave precedenti (Wave 5 IA refactor — legacy "competenze" pre-CPT + vecchio "Lo studio"): `19, 170, 202, 208, 223, 232, 260, 279, 288, 297, 2246, 2251`. Non toccati da questa wave; recuperabili dal DB dump completo.
+- `any` (publish+draft): **19** ✓
+
+**Verifica frontend** (curl, 2026-05-11) — tutto OK:
+- 15 URL KEEP testati → tutti 200 (incl. `/chi-siamo/lo-studio/` page-id-2811 con `<h1 class="sl-chi-siamo__h1">` — vedi nota quirk sotto)
+- 8 redirect 301 pre-esistenti → tutti 301 a target corretto (`/lo-studio/`, `/competenze/`, `/faq/`, `/costi/`, `/chi-siamo/risultati/`, `/avvocati/`, `/blog/`, `/lavora-con-noi/`)
+- 12 slug delle draft cancellate → tutti 301 via `legacy_map` (cancellare la draft non rompe il redirect: scatta su `init` prima che WP risolva la page)
+- `/prenota-un-appuntamento/` → 301 → `/contatti/` ✓ (redirect intercetta prima della page trashed)
+- `/conferma/` → 404 ✓ (atteso — legacy thank-you page, no target canonico)
+- `/chi-siamo/lo-studio/risultati/` → 301 → `/chi-siamo/casi-rappresentativi/` ✓ (nuovo redirect)
+
+**Nota deploy (per orchestratore — aggiornare `docs/DEPLOY.md`):** il workflow rsync standard di `DEPLOY.md` (`rsync -avz --delete` come user `deploy`) **è rotto**: la dir theme `/var/www/saltelli/wp-content/themes/saltelli/` è `www-data:www-data` e l'utente `deploy` non ha write perms lì (dopo il primo deploy+chown). rsync fallisce con `mkstemp ... Permission denied` + `failed to set times`. Workaround usato: `rsync --rsync-path="sudo rsync"` (deploy ha NOPASSWD sudo) + `--checksum` (i file locali hanno tutti mtime di oggi da un `git checkout` → senza `--checksum` rsync ri-trasferisce 133 file inutilmente e la connessione SSH muore a metà). Comando funzionante:
+```sh
+rsync -avz --checksum --delete --rsync-path="sudo rsync" \
+  --exclude '.DS_Store' --exclude '*.bak' --exclude 'node_modules' \
+  -e "ssh -o ServerAliveInterval=15" \
+  wp-content/themes/saltelli/ deploy@178.62.207.50:/var/www/saltelli/wp-content/themes/saltelli/
+# poi: ssh deploy@... 'sudo chown -R www-data:www-data /var/www/saltelli/wp-content/themes/saltelli/ && sudo -u www-data wp cache flush --path=/var/www/saltelli && sudo systemctl reload php8.2-fpm'
+```
+
+**Nota quirk Page 2811** (out of scope — segnalo): `post_title` = "Chi Siamo" (non "Lo Studio"), e il frontend di `/chi-siamo/lo-studio/` rende con `<title>Chi Siamo - ...</title>` + classe H1 `sl-chi-siamo__h1`. Stato pre-esistente da Wave 4.7.fix.4. L'orchestratore può valutare di rinominare il `post_title` in "Lo Studio" via Pagine → 2811 (cosmetico).
