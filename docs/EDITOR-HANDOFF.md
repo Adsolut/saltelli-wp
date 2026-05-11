@@ -1,10 +1,17 @@
 # Manuale Editoriale — Studio Legale Saltelli
 
 > **Destinatari:** Elena Cappabianca, Ludovica Casa, eventuali collaboratori editoriali esterni Adsolut.
-> **Versione:** 5.0 — 2026-05-10 (Wave 4.7.fix.4 STRATEGY A FULL SCF: una sola sorgente di verità per pagina — l'editor classico Gutenberg è disabilitato sulle 12 Pages con metabox SCF, vedi sotto solo i campi)
+> **Versione:** 6.0 — 2026-05-11 (Wave 4.7.fix.5 PAGES CLEANUP + BLOG DOC + CUSTOMIZER LOCK: l'admin "Pagine" mostra ora solo le 19 Pages reali · sezione blog completa · Customizer/CSS bloccato per il ruolo editor)
 > **Mantenuto da:** Adsolut SRLS · tech@adsolut.it
 > **Repository:** https://github.com/Adsolut-Ai-Agency/saltelli-wp/blob/main/docs/EDITOR-HANDOFF.md
 > **Ambiente coperto:** staging WordPress dello Studio Legale Saltelli (production cut successivo).
+
+> **Cosa è cambiato in v6.0** (2026-05-11, Wave 4.7.fix.5 PAGES CLEANUP + BLOG DOC + CUSTOMIZER LOCK):
+> - **Pulizia Pagine legacy**: 16 Pages obsolete sono state cestinate — 13 bozze mai pubblicate (vecchie landing SEO 2024-2025 + vecchie "competenze" 2019-2020 pre-CPT) + 3 Pages pubblicate orfane (`conferma` = vecchia thank-you page Elementor, `prenota-un-appuntamento` = doppione legacy che già rimandava a `/contatti/`, `risultati` = vecchio contenitore casi superato dall'archivio CPT). **L'admin "Pagine" ora mostra 19 Pages — le 19 reali del sito**, non più 35 con metà spazzatura. Tutte le 16 cestinate hanno un redirect 301 già attivo (nessun link rotto). Sono in cestino per 30 giorni, recuperabili. Vedi la **lista canonica delle 19 Pages in §3.7**.
+> - **NB Page 2811 "Lo Studio" NON è stata toccata**: resta una delle 12 Pages con metabox SCF (Gutenberg disabilitato) — `/chi-siamo/lo-studio/`, linkata dal footer. (Se vedi un'indicazione contraria in vecchi appunti, ignorala.)
+> - **Customizer + "CSS aggiuntivo" bloccati per il ruolo editor**: chi ha ruolo `editor` (Elena) non vede più — e non può raggiungere — Aspetto → Personalizza né "CSS aggiuntivo". Se ci provi, vedi un messaggio: "Per modificare design/layout/CSS contatta l'amministratore (tech@adsolut.it)". Questo è **voluto** — il design vive nel design system, non si tocca dal CMS. Gli amministratori (Adsolut, Avv. Saltelli) continuano ad avere accesso normale.
+> - **Sezione blog completa (§9 riscritta)**: il blog è 100% WordPress standard (editor Gutenberg + sidebar "Documento") — niente metabox SCF come per le Pages. La §9 ora ha la **mappa completa "campo della sidebar → cosa diventa sul frontend"** (Estratto = lede italico, Immagine in evidenza, Autore = firma + bio avvocato, Categoria = breadcrumb) e l'elenco di cosa **non** è editabile da admin (tempo di lettura, eyebrow "← Editoriale", header dell'archivio blog — tutto generato dal tema).
+> - **Notice contestuali nell'editor Articoli**: quando apri un Articolo (o la Page "Blog" ID 1413) vedi in cima un box promemoria che spiega dove finiscono i campi della sidebar.
 
 > **Cosa è cambiato in v5.0** (2026-05-10, Wave 4.7.fix.4 STRATEGY A FULL SCF):
 > - **Una sola sorgente di verità per Page WP**: l'editor Gutenberg/classic è **disabilitato** sulle 12 Page WP con metabox SCF attached. Quando apri una di queste Pages vedi: title + slug + sotto solo il metabox "Saltelli — Page X" con i campi. Niente più ambiguità tra editor di contenuto + metabox separato.
@@ -46,6 +53,7 @@ Leggi le sezioni 0–3 una volta tutte. Le altre tienile come riferimento da con
 3. [TL;DR — Mappa rapida "voglio editare X"](#3-tldr--mappa-rapida-voglio-editare-x)
 3.5. [Pagina WP vs Tassonomia vs Archive CPT — mappa per i 15 URL pubblici](#35--pagina-wp-vs-tassonomia-vs-archive-cpt-mappa-per-i-15-url-pubblici)
 3.6. [🆕 Archive CPT: come si edita `/chi-siamo/team/` e `/chi-siamo/casi-rappresentativi/`](#36--archive-cpt-come-si-edita-chi-siamoteam-e-chi-siamocasi-rappresentativi)
+3.7. [🆕 Pagine WP del sito — lista canonica (19 Pages)](#37--pagine-wp-del-sito-lista-canonica-19-pages)
 4. [Saltelli — Settings (impostazioni globali)](#4-saltelli--settings-impostazioni-globali)
 5. [Le 9 pagine custom](#5-le-9-pagine-custom)
 6. [Le 4 schede avvocato](#6-le-4-schede-avvocato)
@@ -304,6 +312,43 @@ Per design WordPress: gli archive CPT sono pagine generate automaticamente dal s
 
 ---
 
+## 3.7 — 🆕 Pagine WP del sito — lista canonica (19 Pages)
+
+> **🆕 v6.0 (Wave 4.7.fix.5)**: l'admin **Pagine** ora mostra **esattamente queste 19 Pages** — sono tutte le Pagine reali del sito. Se vedi un cestino con altre voci (vecchie bozze, doppioni), è materiale legacy cestinato — non recuperarlo senza chiedere a tech@adsolut.it.
+
+Legenda colonna "Come si edita":
+- **🔒 SCF metabox** = Page con metabox "Saltelli — Page X", editor Gutenberg disabilitato — apri la Page e vedi solo title + slug + i campi SCF (vedi §5.0).
+- **SCF nativo CPT** = la pagina `/costi-e-consulenze/` usa un Field Group ACF/SCF classico (vedi §5.1).
+- **Gutenberg** = editor a blocchi standard (le pagine legali e il blog).
+
+| ID | Titolo / slug | URL pubblico | Come si edita | Scopo |
+|---|---|---|---|---|
+| **17** | Home / `home` | `/` (front page) | 🔒 SCF "Saltelli — Page Homepage" (4 tab, 12 field) | Homepage: hero, sezione studio, team & casi, press |
+| **2822** | Chi Siamo / `chi-siamo` | `/chi-siamo/` | 🔒 SCF "Saltelli — Page Chi Siamo" (1 tab, 4 field) | Hub Chi Siamo: eyebrow, H1, intro |
+| **2811** | Chi Siamo* / `lo-studio` | `/chi-siamo/lo-studio/` | 🔒 SCF "Saltelli — Page Lo Studio" (mission, lineage, faq) | Pagina "Lo Studio" annidata sotto l'hub (linkata dal footer) |
+| **2812** | Aree di Pratica / `aree-di-pratica` | `/aree-di-pratica/` | 🔒 SCF "Saltelli — Page Aree di Pratica" (2 tab, 10 field) | Hub Aree: hero + 3 cluster card (Privati/Imprese/Contenzioso) |
+| **2813** | Risorse / `risorse` | `/risorse/` | 🔒 SCF "Saltelli — Page Risorse" (1 tab, 4 field) | Hub Risorse: eyebrow, H1, intro |
+| **2695** | Costi e Consulenze / `costi-e-consulenze` | `/costi-e-consulenze/` | SCF nativo CPT (vedi §5.1) — Gutenberg attivo | Hub Costi: trasparenza tariffaria, "come calcoliamo", scenari |
+| **2711** | Prima consulenza / `prima-consulenza` | `/costi-e-consulenze/prima-consulenza/` | 🔒 SCF "Saltelli — Page Servizi" (16 field: hero/aside/body/CTA) | Cosa aspettarsi alla prima consulenza |
+| **2712** | Come lavoriamo / `come-lavoriamo` | `/costi-e-consulenze/come-lavoriamo/` | 🔒 SCF "Saltelli — Page Servizi" (16 field) | Workflow dello studio |
+| **2713** | Richiedi un preventivo / `richiedi-preventivo` | `/costi-e-consulenze/richiedi-preventivo/` | 🔒 SCF "Saltelli — Page Servizi" (16 field) | Form/spiegazione richiesta preventivo |
+| **2708** | Domande frequenti / `domande-frequenti` | `/risorse/domande-frequenti/` | 🔒 SCF "Saltelli — Page Domande Frequenti" (hero/TOC/CTA, 10 field) | Hero + indice. Le 28 FAQ sono moduli separati (§8.1) |
+| **2709** | Guide gratuite / `guide-gratuite` | `/risorse/guide-gratuite/` | 🔒 SCF "Saltelli — Page Servizi" (16 field) | Hub guide PDF (le guide sono moduli, §8.8) |
+| **2710** | Glossario legale / `glossario-legale` | `/risorse/glossario-legale/` | Gutenberg (rendering specializzato dal tema) | Glossario termini legali |
+| **1413** | Blog / `blog` | `/risorse/blog/` | ⚠️ Pagina-contenitore: il suo contenuto NON è mostrato — il blog è generato dal tema. Per gli articoli vai a **Articoli** (vedi §9) | Slot per `/risorse/blog/` (è la "pagina degli articoli" di WP) |
+| **23** | Contatti / `contatti` | `/contatti/` | 🔒 SCF "Saltelli — Page Contatti" (hero/mappa/come arrivare/trust, 10 field) | Pagina contatti + modulo (modulo via Contact Form 7) |
+| **372** | Lavora con noi / `lavora-con-noi` | `/contatti/lavora-con-noi/` | 🔒 SCF "Saltelli — Page Servizi" (16 field) | Carriere |
+| **2714** | Prenota un appuntamento / `prenota-appuntamento` | `/prenota-appuntamento/` | Gutenberg / standard | Pagina prenotazione appuntamento |
+| **2741** | Privacy Policy / `privacy-policy` | `/privacy-policy/` | Gutenberg / Iubenda | Privacy policy (gestita da Iubenda — non riscrivere a mano) |
+| **2742** | Cookie Policy / `cookie-policy` | `/cookie-policy/` | Gutenberg / Iubenda | Cookie policy (gestita da Iubenda) |
+| **2743** | Note legali / `note-legali` | `/note-legali/` | Gutenberg | Note legali |
+
+\* La Page 2811 ha `post_title` = "Chi Siamo" (lo slug è `lo-studio`): è un residuo storico. Sul frontend il titolo della scheda mostra "Chi Siamo" — se vuoi cambiarlo in "Lo Studio" puoi farlo dal campo Titolo della Page 2811 (cosmetico, non urgente). Vedi anche §5.6.
+
+> **Cosa NON trovi più qui** (cestinate Wave 4.7.fix.5, redirect 301 attivi): `lo-studio` top-level (era 2811? no — era una vecchia Page diversa, già cestinata da prima), `risultati` (2699 → ora `/chi-siamo/casi-rappresentativi/` archivio CPT), `conferma` (356, vecchia thank-you Elementor), `prenota-un-appuntamento` (361, doppione di "Prenota un appuntamento" 2714), + 13 vecchie bozze ("Servizi legali", "Lavoro", "Immigrazione", "Diritto societario", "Avvocato Divorzista", ecc.) — tutte mai usate dal sito attuale.
+
+---
+
 ## 4. Saltelli — Settings (impostazioni globali)
 
 📍 **Dove**: sidebar WP-Admin, voce **Saltelli — Settings** (icona cogwheel, posizione 60).
@@ -484,9 +529,13 @@ Slogan: trasparenza tariffaria. **6 blocchi modificabili**:
 
 I blocchi **Modalità di consulenza** (3) e **Scenari costi** (3) e **Trust signals** (4) **non si modificano qui** — sono moduli separati: vedi sezione §8.
 
-### 5.2 — Pagina `/casi/` (ID 2699)
+### 5.2 — Casi rappresentativi → `/chi-siamo/casi-rappresentativi/` (archivio CPT, NON una Page)
 
-Hero + Intro editorial + CTA finale. I 9 casi rappresentativi sono in moduli separati (§8.2).
+> **🆕 v6.0**: la vecchia Page WP `/casi/` (ID 2699) è stata **cestinata** in Wave 4.7.fix.5 (era un residuo: il suo URL reale `/chi-siamo/lo-studio/risultati/` era orfano, e il contenuto era già superato). I casi rappresentativi vivono ora **solo** nell'archivio CPT `/chi-siamo/casi-rappresentativi/`:
+> - **Header pagina** (eyebrow / H1 / intro): Saltelli — Settings → tab "Archive Headers". Vedi §3.6.
+> - **I singoli casi**: sidebar **Casi rappresentativi** (CPT). Vedi §8.2.
+>
+> Il vecchio URL `/casi/` (e `/chi-siamo/risultati/`) ridireziona 301 a `/chi-siamo/casi-rappresentativi/`.
 
 ### 5.3 — Pagina `/contatti/` (ID 23)
 
@@ -807,16 +856,47 @@ Hub delle guide PDF. Pubblico (gli URL `/guide-gratuite/{slug}/` sono indicizzab
 
 📍 **Sidebar → Articoli**
 
-326 post storici migrati dal vecchio sito + nuovi articoli editoriali. Workflow standard WordPress:
+326 post storici migrati dal vecchio sito + nuovi articoli editoriali. URL pubblico: `/risorse/blog/` (l'archivio) e `/risorse/blog/{slug-articolo}/` (il singolo).
 
-| Cosa | Come |
-|---|---|
-| Nuovo articolo | **Articoli → Aggiungi nuovo** |
-| Categoria | Tassonomia `categoria`. **Stiamo lavorando alla ricategorizzazione** sui 3 cluster Tier-1 (tributario · lavoro · LGBTQ+ famiglia). Per ora usa la categoria preesistente |
-| Immagine in evidenza | **Obbligatoria** (16:9, min 1200×675). Vedi §14 |
-| Excerpt (riassunto) | **Obbligatorio** — 150–200 caratteri. Appare nell'archivio blog e nei meta tag social |
-| Drop cap | **Automatico** sul primo paragrafo. Non serve fare nulla. |
-| Articoli correlati | Si associano nella scheda della **Competenza** (§7, campo "Articoli correlati") |
+> **🆕 v6.0 — leggi questo se il blog ti sembra "un fantasma":** il blog è **100% WordPress standard**. NON ha un metabox "Saltelli — Page X" come le altre pagine del sito. Tutto si fa dall'**editor Gutenberg** (il corpo dell'articolo) + la **sidebar destra "Documento"** (titolo, categoria, estratto, immagine in evidenza, autore). Niente di esotico — è il WordPress "classico" di sempre. Quando apri un Articolo vedi anche un **box promemoria in cima** che ricorda dove finiscono i campi della sidebar (e quando apri la Page "Blog" ID 1413 un avviso che ti dice che il suo contenuto non è usato — gli articoli si gestiscono da **Articoli**).
+
+### Creare un nuovo articolo — in breve
+
+1. **Articoli → Aggiungi nuovo**
+2. **Titolo** → diventa l'`<h1>` dell'articolo (50–70 caratteri ideali; niente sensazionalismo). Non mettere un altro H1 nel corpo.
+3. **Corpo** (area Gutenberg) → scrivi con paragrafi e usa **H2/H3 strutturati** per le sezioni: l'indice laterale dell'articolo ("Indice") si genera in automatico da quei titoli, e le AI li usano per estrarre risposte. Il **drop-cap** sul primo paragrafo è automatico — non fare nulla.
+4. **Sidebar destra → "Categorie"** → scegline **una** principale (obbligatoria: appare nel breadcrumb e nel meta sopra il titolo). Per i cluster Tier-1 vedi §9.2.
+5. **Sidebar destra → "Riassunto"** (a volte etichettato "Estratto") → scrivi **1–2 frasi**: diventano il **lede italico** grande sotto il titolo dell'articolo (e l'anteprima nell'archivio + nei social). ⚠️ Se lo lasci vuoto, sotto il titolo non appare nulla — è il campo più dimenticato.
+6. **Sidebar destra → "Immagine in evidenza"** → carica/scegli un'immagine 16:9, min 1200×675, descrittiva (no stock generiche). Praticamente **obbligatoria**: è l'hero del post e la card nell'archivio.
+7. **Sidebar destra → "Autore"** → scegli l'avvocato che firma (Antonia Battista, Fabiana Saltelli, Stefano Gaetano Tedesco, Gabriele Cascone). Se il nome dell'utente combacia con una scheda **Avvocato**, sotto il titolo compare anche la sua bio breve + i suoi temi di competenza, e in fondo al post la sua card.
+8. **Anteprima** → controlla → **Pubblica**.
+9. Verifica: archivio blog `/risorse/blog/` → il nuovo post c'è? E se è legato a un'area di pratica, valuta se aggiungerlo agli "Articoli correlati" della relativa Competenza (§7).
+
+### Mappa: campo della sidebar → cosa diventa sul frontend dell'articolo
+
+| Dove lo metti (admin) | Cosa diventa sul frontend | Editabile? |
+|---|---|---|
+| **Titolo** (in cima all'editor) | `<h1>` dell'articolo | ✅ Sì |
+| **Sidebar → "Riassunto"/"Estratto"** | **Lede italico** grande sotto il titolo (+ anteprima archivio/social) | ✅ Sì — se vuoto, niente lede |
+| **Sidebar → "Categorie"** | Categoria nel meta sopra il titolo (maiuscolo) + 3° segmento del breadcrumb | ✅ Sì — scegline una |
+| **Sidebar → "Stato e visibilità" → data** | Data mostrata nel meta ("13 LUGLIO 2025") | ✅ Sì |
+| **Sidebar → "Autore"** | Firma dell'articolo (+ bio breve + temi competenza, se l'autore combacia con una scheda Avvocato) | ✅ Sì |
+| **Sidebar → "Immagine in evidenza"** | Hero del post + card nell'archivio blog | ✅ Sì — praticamente obbligatoria |
+| **Corpo (Gutenberg)** | Testo dell'articolo | ✅ Sì |
+| **H2/H3 dentro il corpo** | Voci dell'indice laterale "Indice" (auto-generato) | ✅ indirettamente |
+| **Box "Yoast SEO"** (sotto l'editor) | `<title>`, meta description, anteprima Google, Open Graph | ✅ Sì |
+| **Scheda Avvocato** (sidebar Avvocati → l'avvocato firmatario) | Bio breve + ruolo + ritratto + temi competenza mostrati nell'articolo | ✅ Sì — si edita da **Avvocati**, non dall'articolo (§6) |
+
+### Cosa NON è editabile dal blog (è generato automaticamente dal tema)
+
+- **Tempo di lettura "X MIN"**: calcolato dal numero di parole del corpo (~200 parole/minuto). Non si imposta a mano.
+- **Eyebrow "← Editoriale"** (il link "torna al blog" in cima al post): testo fisso nel tema.
+- **Header dell'archivio blog** (`/risorse/blog/`): il titolo grande "Editoriale.", il sottotitolo, il blocco newsletter in fondo — tutto fisso nel tema (la Page "Blog" ID 1413 NON controlla questi testi). L'archivio è generato automaticamente: l'articolo più recente diventa il "in evidenza" grande, gli altri vanno nella griglia.
+- **Breadcrumb** (Home / Editoriale / Categoria / Titolo): generato automaticamente — cambia categoria o titolo dell'articolo e cambia di conseguenza.
+- **Articoli correlati** in fondo al post ("Continua a leggere"): automatici, i 3 articoli più recenti della stessa categoria.
+- **Tag**: puoi assegnarli (sidebar → "Tag") ma il template del singolo post **non li mostra** sul frontend (esistono pagine archivio per tag raggiungibili solo via URL diretto). Se ti serve raggruppare articoli in modo visibile, usa le **Categorie**, non i Tag.
+
+> Se vuoi che uno di questi elementi "fissi" diventi modificabile (es. il titolo dell'archivio blog, o un eyebrow alternativo tipo "← Longform" per certi articoli) → è una modifica al tema, scrivi a tech@adsolut.it. Non si fa dal CMS.
 
 ### 9.1 — Convenzioni post
 
@@ -1093,6 +1173,8 @@ Questo elenco è **assoluto**. Toccare un elemento qui dentro rompe il sito o le
 | **Aggiornamenti automatici plugin** | Disattivati di proposito. Aggiornamenti manuali coordinati con il tecnico. |
 | **Slug delle pagine pubblicate** | Cambiare `/avvocati/emiliano-saltelli/` → `/team/emiliano/` rompe i backlink + l'indicizzazione |
 
+> **🆕 v6.0**: per il ruolo `editor` (Elena) il **Customizer** (Aspetto → Personalizza) e **"CSS aggiuntivo"** sono ora **bloccati a livello di sistema** — la voce non appare nel menu, e se ci provi direttamente vedi un messaggio "Non hai i permessi… contatta l'amministratore (tech@adsolut.it)". Non è un bug: è la rete di sicurezza per non rompere accidentalmente il design. Per modifiche di design/CSS scrivi al tecnico. (Gli amministratori — Adsolut, Avv. Saltelli — continuano ad avere accesso normale.)
+
 ### Se hai dubbi → ferma le mani
 
 Se durante un edit vedi un'opzione che **non è descritta in questo manuale** e ti sembra "interessante", **NON cliccarla**. Apri ticket a `tech@adsolut.it` e chiedi.
@@ -1327,10 +1409,14 @@ Quando il sito evolve (Wave 4 production prep, Wave 5 ACF-izzazione `/lo-studio/
 
 **Cronologia versioni**:
 
+- **v6.0 — 2026-05-11** — Wave 4.7.fix.5 · Pages cleanup + blog doc + Customizer lock. Cestinate 16 Pages legacy (13 bozze + 3 publish orfane: `conferma`, `prenota-un-appuntamento`, `risultati`) → admin "Pagine" mostra 19 Pages reali; aggiunta §3.7 lista canonica delle 19 Pages. §9 "Il blog" riscritta (mappa campo sidebar → frontend + cosa non è editabile). Customizer + "CSS aggiuntivo" bloccati per ruolo `editor` (3 hook: `user_has_cap` strip + `load-customize.php` wp_die + `admin_menu` remove submenu). Notice contestuali nell'editor Articoli + Page Blog. §5.2 aggiornata (Page `/casi/` 2699 cestinata → archivio CPT). NB: un incident di ricorsione (`is_super_admin()` dentro `user_has_cap`) ha causato ~8 min di downtime staging in fase di sviluppo, risolto.
+- **v5.0 — 2026-05-10** — Wave 4.7.fix.4 STRATEGY A FULL SCF. Editor Gutenberg disabilitato sulle 12 Pages con metabox SCF (una sola sorgente di verità per pagina) + notice "Modifica il contenuto qui sotto". `post_content` zombie delle 7 Pages bonificato (backup postmeta preservato). §3.6 nuova (workflow archive CPT) + admin shortcuts.
+- **v4.0 — 2026-05-08** — Wave 4.7.fix.3 Page Metabox migration. 30 chiavi options globali → postmeta delle 4 Page WP (Home/Chi Siamo/Aree/Risorse): "modifica pagina = modifica contenuto pagina". Saltelli Settings 14 → 9 tab (rimosse Hero Homepage / Studio Section / Team & Casi / Press Homepage / Hub Pages).
+- **v3.0 — 2026-05-08** — Wave 4.7.fix.2. Fix "Body sezione studio" vuoto in admin (default editoriale seedato). Rinomina URL `/chi-siamo/risultati/` → `/chi-siamo/casi-rappresentativi/` (301). Menu primary ricostruito (22 voci slug-based). Hub + archive CPT con H1/eyebrow/intro editabili in SCF.
 - **v2.0 — 2026-05-08** — Wave 4.7.fix · SCF migration. Sbloccato menu Saltelli — Settings (era invisibile per bug architetturale ACF Free). §4 riscritta: 10 tab invece di 6, aggiunti Hero Homepage + Studio Section + Team & Casi + Press Homepage (4 tab nuovi editabili), aggiornati Brand (4 trust signals) e Footer (4 colophon fields). 50 chiavi `options_*` ora popolate in DB.
 - **v1.1 — 2026-05-05** — Versione estesa post-audit. Aggiunta: §0 fase debug, §6.1 nota bio_estesa avvocati, §10 workflow comuni, §12 sezione GEO, §15 errori comuni, §17 reporting bug. Glossario esteso. Esempi reali buono/cattivo per FAQ + casi + answer capsule.
 - **v1.0 — 2026-05-04** — Prima versione post Wave 3. Copre: 16 ACF Field Group, 9 pagine custom, 4 schede avvocato, 19 aree di pratica, 8 CPT modulari, blog standard.
 
 ---
 
-*Manuale mantenuto da Adsolut SRLS · ultima revisione 2026-05-08 · contatto: tech@adsolut.it*
+*Manuale mantenuto da Adsolut SRLS · ultima revisione 2026-05-11 · contatto: tech@adsolut.it*

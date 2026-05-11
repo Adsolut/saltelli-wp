@@ -85,6 +85,10 @@ function saltelli_mvp_to_audit_redirect_map() {
         // single-caso URLs gestiti dal pattern regex Step 5 sotto.
         '/casi/'                                  => '/chi-siamo/casi-rappresentativi/',
         '/chi-siamo/risultati/'                   => '/chi-siamo/casi-rappresentativi/',
+        // Wave 4.7.fix.5: Page WP 2699 `risultati` (child di 2811 lo-studio) trashed.
+        // Il suo permalink reale era /chi-siamo/lo-studio/risultati/ (nested sotto
+        // lo-studio), non /chi-siamo/risultati/ — quindi serve un'entry dedicata.
+        '/chi-siamo/lo-studio/risultati/'         => '/chi-siamo/casi-rappresentativi/',
         '/blog/'                                  => '/risorse/blog/',
         '/faq/'                                   => '/risorse/domande-frequenti/',
         '/glossario-legale/'                      => '/risorse/glossario-legale/',

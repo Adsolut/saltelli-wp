@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.10-wave4-7-fix-4-strategy-a-full-scf');
+define('SALTELLI_THEME_VERSION', '1.3.11-wave4-7-fix-5-cleanup');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
@@ -39,3 +39,8 @@ require_once SALTELLI_THEME_DIR . '/inc/wave4-6-migration.php';
 // su frontend logged-in. Caricare in CLI context permette anche eval testing.
 require_once SALTELLI_THEME_DIR . '/inc/admin/disable-gutenberg-for-scf-pages.php';
 require_once SALTELLI_THEME_DIR . '/inc/admin/scf-archive-headers-shortcuts.php';
+
+// Wave 4.7.fix.5 admin UX: notice editoriali blog (Articoli + Page contenitore blog)
+// + lock-down Customizer / CSS aggiuntivo per ruolo editor (Elena).
+require_once SALTELLI_THEME_DIR . '/inc/admin/post-editor-notices.php';
+require_once SALTELLI_THEME_DIR . '/inc/admin/customizer-lockdown.php';
