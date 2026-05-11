@@ -60,7 +60,7 @@
 .sl-page-breadcrumb,
 .sl-page__breadcrumb {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     color: var(--text-muted);
@@ -113,8 +113,8 @@
 .sl-page-cta-final h2 {
     font-family: var(--font-display);
     font-size: clamp(40px, 5vw, 72px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
     font-weight: 400;
     color: var(--background);
     margin: 0 auto 24px;
@@ -125,7 +125,7 @@
     color: var(--accent);
 }
 .sl-page-cta-final p {
-    font-size: 18px;
+    font-size: var(--fs-body-marketing);
     line-height: 1.6;
     color: rgba(250, 250, 248, 0.85);
     margin: 0 auto 40px;
@@ -205,7 +205,7 @@
   font-family: var(--font-display);
   font-size: 17px;
   color: var(--primary);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--ls-h2);
   line-height: 1.1;
 }
 .sl-header__brand-sub {
@@ -215,7 +215,7 @@
 .sl-header__nav { display: none; }
 .sl-header__phone {
   color: var(--primary);
-  font-size: 11px;
+  font-size: var(--fs-caption);
 }
 .sl-header__menu-btn {
   background: none;
@@ -249,10 +249,10 @@
     display: flex;
     gap: 40px;
     justify-content: center;
-    font-size: 14px;
+    font-size: var(--fs-small);
     font-weight: 500;
   }
-  .sl-header__phone { font-size: 12px; }
+  .sl-header__phone { font-size: var(--fs-micro); }
   .sl-header__menu-btn { display: none; }
 }
 
@@ -274,7 +274,7 @@
   font-family: var(--font-display);
   font-size: 28px;
   color: var(--primary);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--ls-h2);
 }
 
 /* =========================================================
@@ -316,7 +316,7 @@
   font-size: 17px;
   font-style: italic;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: var(--lh-lede);
   color: var(--text);
   margin-bottom: 40px;
   max-width: 44ch;
@@ -331,7 +331,7 @@
   gap: 20px;
 }
 .sl-hero__colophon-label { margin-bottom: 6px; font-size: var(--fs-caption); }
-.sl-hero__colophon-body { font-size: var(--fs-caption); line-height: 1.5; }
+.sl-hero__colophon-body { font-size: var(--fs-caption); line-height: var(--lh-lede); }
 
 .sl-hero__scroll-indicator { display: none; }
 
@@ -364,10 +364,10 @@
     gap: 24px;
     font-size: 13px;
     color: var(--text);
-    line-height: 1.7;
+    line-height: var(--lh-body);
   }
   .sl-hero__colophon-label { margin-bottom: 16px; }
-  .sl-hero__colophon-body { font-size: 13px; line-height: 1.7; }
+  .sl-hero__colophon-body { font-size: 13px; line-height: var(--lh-body); }
   .sl-hero__scroll-indicator {
     display: flex;
     position: absolute;
@@ -403,8 +403,8 @@
 }
 .sl-areas__title {
   font-size: 40px;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  letter-spacing: var(--ls-h1);
+  line-height: var(--lh-h1);
   font-family: var(--font-display);
   color: var(--primary);
 }
@@ -423,8 +423,8 @@
   color: var(--text-muted);
   border-bottom: 1px solid transparent;
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-mono);
   text-transform: uppercase;
   transition: color var(--dur-fast) var(--ease-editorial),
               border-color var(--dur-fast) var(--ease-editorial);
@@ -479,7 +479,7 @@
     padding: 28px 0;
     gap: 32px;
   }
-  .sl-areas .sl-area .sl-area__num { font-size: 12px; }
+  .sl-areas .sl-area .sl-area__num { font-size: var(--fs-micro); }
   .sl-areas .sl-area .sl-area__title { font-size: clamp(28px, 3vw, 40px); }
   .sl-areas__preview {
     display: block;
@@ -489,8 +489,8 @@
   }
   .sl-areas__preview-empty {
     color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.7;
+    font-size: var(--fs-small);
+    line-height: var(--lh-body);
     font-style: italic;
     font-family: var(--font-display);
   }
@@ -520,14 +520,14 @@
 }
 .sl-studio__title {
   font-size: 36px;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--ls-h1);
   line-height: 1.1;
   font-family: var(--font-display);
   color: var(--primary);
 }
 .sl-studio__prose {
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   display: grid;
   gap: 16px;
 }
@@ -567,7 +567,7 @@
 }
 .sl-studio__plate-caption {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: var(--fs-body-marketing);
   font-style: italic;
   color: var(--text-muted);
   text-align: center;
@@ -600,7 +600,7 @@
   }
   .sl-studio__plate-label { top: 24px; left: 32px; }
   .sl-studio__plate-bottom { bottom: 24px; right: 32px; }
-  .sl-studio__plate-caption { font-size: 32px; margin-bottom: 8px; }
+  .sl-studio__plate-caption { font-size: var(--fs-h3-max); margin-bottom: 8px; }
 }
 
 /* =========================================================
@@ -617,8 +617,8 @@
 }
 .sl-team__title {
   font-size: 40px;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  letter-spacing: var(--ls-h1);
+  line-height: var(--lh-h1);
   font-family: var(--font-display);
   color: var(--primary);
 }
@@ -659,7 +659,7 @@
   line-height: 1.1;
   color: var(--primary);
   margin: 0 0 12px;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--ls-h1);
   font-weight: 400;
 }
 .sl-lawyer__specs {
@@ -708,10 +708,10 @@
     align-items: flex-end;
     padding: 24px;
   }
-  .sl-lawyer__role { margin-bottom: 8px; font-size: 12px; }
+  .sl-lawyer__role { margin-bottom: 8px; font-size: var(--fs-micro); }
   .sl-lawyer__name { font-size: 36px; margin-bottom: 16px; }
   .sl-lawyer__specs { gap: 8px; }
-  .sl-lawyer__spec { font-size: 11px; padding: 5px 10px; }
+  .sl-lawyer__spec { font-size: var(--fs-caption); padding: 5px 10px; }
 }
 
 /* =========================================================
@@ -728,7 +728,7 @@
 }
 .sl-cases__title {
   font-size: 36px;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--ls-h1);
   line-height: 1.1;
   font-family: var(--font-display);
   color: var(--primary);
@@ -744,15 +744,15 @@
 .sl-case__desc {
   font-size: 17px;
   font-family: var(--font-display);
-  line-height: 1.4;
+  line-height: var(--lh-mono);
   color: var(--primary);
   font-style: italic;
 }
 .sl-case__outcome {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: var(--fs-body-marketing);
   color: var(--accent);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--ls-h2);
 }
 
 @media (min-width: 1024px) {
@@ -816,7 +816,7 @@
     align-items: center;
   }
   .sl-press__item {
-    font-size: 18px;
+    font-size: var(--fs-body-marketing);
     border: 0;
     padding: 0;
   }
@@ -869,7 +869,7 @@
     gap: 64px;
     padding-left: 20%;
   }
-  .sl-contact__item-label { margin-bottom: 16px; font-size: 12px; }
+  .sl-contact__item-label { margin-bottom: 16px; font-size: var(--fs-micro); }
   .sl-contact__item-value { font-size: 24px; }
   .sl-contact__cta-wrap { margin-top: 96px; padding-left: 20%; }
 }
@@ -896,7 +896,7 @@
   margin-bottom: 12px;
 }
 .sl-footer__nav {
-  font-size: 12px;
+  font-size: var(--fs-micro);
   line-height: 2;
   opacity: 0.85;
   margin-bottom: 24px;
@@ -906,7 +906,7 @@
   display: inline;
 }
 .sl-footer__contact {
-  font-size: 12px;
+  font-size: var(--fs-micro);
   line-height: 1.85;
   opacity: 0.85;
   margin-bottom: 32px;
@@ -916,7 +916,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   font-size: 9px;
   font-family: var(--font-mono);
-  letter-spacing: 0.08em;
+  letter-spacing: var(--ls-mono);
   text-transform: uppercase;
   opacity: 0.55;
 }
@@ -964,7 +964,7 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 32px;
-    font-size: 11px;
+    font-size: var(--fs-caption);
     opacity: 0.55;
   }
   .sl-footer__legal-links {
@@ -984,7 +984,7 @@
   font-family: var(--font-display);
   font-size: 17px;
   color: var(--primary);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--ls-h2);
   line-height: 1.1;
 }
 .sl-header__burger {
@@ -1027,7 +1027,7 @@
   font-family: var(--font-display);
   font-size: 28px;
   color: var(--primary);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--ls-h2);
 }
 @media (min-width: 1024px) {
   .sl-header__burger { display: none; }
@@ -1072,7 +1072,7 @@
   font-size: 17px;
   font-style: italic;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: var(--lh-lede);
   color: var(--text);
   margin-bottom: 40px;
   max-width: 44ch;
@@ -1082,7 +1082,7 @@
   grid-template-columns: 1fr;
   gap: 24px;
   font-size: 13px;
-  line-height: 1.7;
+  line-height: var(--lh-body);
 }
 .sl-hero__colophon-item {
   display: grid;
@@ -1155,7 +1155,7 @@
 }
 .sl-section-title {
   font-size: 36px;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--ls-h1);
   line-height: 1.1;
   font-family: var(--font-display);
   color: var(--primary);
@@ -1180,8 +1180,8 @@
   color: var(--text-muted);
   border-bottom: 1px solid transparent;
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-mono);
   text-transform: uppercase;
   transition: color var(--dur-fast) var(--ease-editorial),
               border-color var(--dur-fast) var(--ease-editorial);
@@ -1200,8 +1200,8 @@
 }
 .sl-area__preview-empty {
   color: var(--text-muted);
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: var(--fs-small);
+  line-height: var(--lh-body);
   font-style: italic;
   font-family: var(--font-display);
 }
@@ -1246,7 +1246,7 @@
 .sl-studio__plate-center { display: grid; gap: 4px; text-align: center; }
 .sl-studio__plate-line {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: var(--fs-body-marketing);
   font-style: italic;
   color: var(--text-muted);
 }
@@ -1254,7 +1254,7 @@
   .sl-studio__plate { margin-top: 96px; height: 480px; }
   .sl-studio__plate-tl { top: 24px; left: 32px; }
   .sl-studio__plate-br { bottom: 24px; right: 32px; }
-  .sl-studio__plate-line { font-size: 32px; }
+  .sl-studio__plate-line { font-size: var(--fs-h3-max); }
 }
 
 /* Team — Theme Architect naming */
@@ -1302,7 +1302,7 @@
   line-height: 1.1;
   color: var(--primary);
   margin: 0 0 12px;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--ls-h1);
   font-weight: 400;
 }
 .sl-team__name a { color: inherit; }
@@ -1328,7 +1328,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  line-height: 1.4;
+  line-height: var(--lh-mono);
   white-space: nowrap;
 }
 @media (min-width: 1024px) {
@@ -1345,12 +1345,12 @@
   .sl-team__lawyer:nth-child(3) { grid-column: 2 / span 5; margin-top: 64px; }
   .sl-team__lawyer:nth-child(4) { grid-column: 8 / span 4; margin-top: 32px; }
   .sl-team__portrait { margin-bottom: 24px; }
-  .sl-team__role { margin-bottom: 8px; font-size: 12px; }
+  .sl-team__role { margin-bottom: 8px; font-size: var(--fs-micro); }
   .sl-team__name { font-size: 36px; margin-bottom: 16px; }
   .sl-team__specs { gap: 8px; }
   .sl-team__specs li,
   .sl-attorney__specs li,
-  .sl-tag { font-size: 11px; padding: 5px 14px; /* v0.17.3 padding-inline 14 desktop */ }
+  .sl-tag { font-size: var(--fs-caption); padding: 5px 14px; /* v0.17.3 padding-inline 14 desktop */ }
 }
 
 /* Cases — Theme Architect naming */
@@ -1370,16 +1370,16 @@
 .sl-cases__desc {
   font-size: 17px;
   font-family: var(--font-display);
-  line-height: 1.4;
+  line-height: var(--lh-mono);
   color: var(--primary);
   font-style: italic;
   margin: 0;
 }
 .sl-cases__outcome {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: var(--fs-body-marketing);
   color: var(--accent);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--ls-h2);
 }
 @media (min-width: 1024px) {
   .sl-cases__row {
@@ -1416,7 +1416,7 @@
     align-items: center;
   }
   .sl-press__outlet {
-    font-size: 18px;
+    font-size: var(--fs-body-marketing);
     border: 0;
     padding: 0;
   }
@@ -1453,8 +1453,8 @@
 .site-footer h3 {
   color: rgba(255, 255, 255, 0.6);
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--ls-mono);
   text-transform: uppercase;
   font-weight: 400;
   margin: 0 0 12px;
@@ -1480,7 +1480,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--ls-mono);
   text-transform: uppercase;
   opacity: 0.55;
 }
@@ -1505,7 +1505,7 @@
   padding: 8px 12px;
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--ls-mono);
   text-transform: uppercase;
   color: var(--primary);
 }
@@ -1541,7 +1541,7 @@
 
 .sl-header__nav a {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: var(--fs-small);
   font-weight: 500;
   color: var(--text);
   text-decoration: none;
@@ -1699,7 +1699,7 @@ html:not(.js-reveal-ready) [data-reveal] {
         width: auto;
         flex: 1;
         min-height: 44px;
-        font-size: 11px;
+        font-size: var(--fs-caption);
     }
 }
 
@@ -1783,7 +1783,7 @@ html:not(.js-reveal-ready) [data-reveal] {
     font-size: 15px;
     letter-spacing: 0;
     text-transform: none;
-    line-height: 1.5;
+    line-height: var(--lh-lede);
 }
 .sl-competenza__cta-note {
     margin-top: 12px;
@@ -1794,7 +1794,7 @@ html:not(.js-reveal-ready) [data-reveal] {
     margin-bottom: 8px;
     color: var(--text-muted);
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.06em;
     text-transform: uppercase;
 }
@@ -1812,19 +1812,19 @@ html:not(.js-reveal-ready) [data-reveal] {
 .entry-content h3 {
     text-transform: none;
     font-family: var(--font-display);
-    line-height: 1.15;
-    letter-spacing: -0.01em;
+    line-height: var(--lh-heading);
+    letter-spacing: var(--ls-h2);
     color: var(--primary);
     font-weight: 400;
 }
 .sl-competenza__prose h2,
 .sl-page__prose h2,
 .entry-content h2 {
-    font-size: clamp(28px, 3.5vw, 44px);
+    font-size: var(--fs-h2);
     /* v0.21.24: 80px 24px → 80px 40px (editorial breathing — bottom amplificato). */
     margin-block: 80px 40px;
     max-width: 24ch;
-    line-height: 1.15;
+    line-height: var(--lh-heading);
 }
 .sl-competenza__prose h3,
 .sl-page__prose h3,
@@ -1866,8 +1866,8 @@ html:not(.js-reveal-ready) [data-reveal] {
 .sl-page__breadcrumb {
     margin-bottom: 24px;
     color: var(--text-muted);
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-caption);
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
 }
 .sl-page__breadcrumb a {
@@ -1878,9 +1878,9 @@ html:not(.js-reveal-ready) [data-reveal] {
 .sl-page__breadcrumb a:hover { border-bottom-color: var(--accent); }
 .sl-page__title {
     font-family: var(--font-display);
-    font-size: clamp(48px, 6vw, 96px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    font-size: var(--fs-h1);
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
     color: var(--primary);
     margin: 0;
     max-width: 18ch;
@@ -1926,16 +1926,16 @@ html:not(.js-reveal-ready) [data-reveal] {
     font-family: var(--font-display);
     font-size: clamp(28px, 3vw, 44px);
     color: var(--primary);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     /* v0.21.24: 8px 24px → 8px 40px. /costi/ display: grid + gap 16 non
        beneficia di margin-collapse, ma margin contribuisce alla track height. */
     margin-block: 8px 40px;
     font-weight: 400;
-    line-height: 1.15;
+    line-height: var(--lh-heading);
 }
 .sl-costi__section p {
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
     color: var(--text);
     margin-block: 16px;
     max-width: 60ch;
@@ -1947,8 +1947,8 @@ html:not(.js-reveal-ready) [data-reveal] {
 }
 .sl-costi__section li {
     margin-bottom: 8px;
-    line-height: 1.7;
-    font-size: 16px;
+    line-height: var(--lh-body);
+    font-size: var(--fs-body);
 }
 .sl-costi__section > details,
 .sl-costi__section > .sl-acc {
@@ -1996,7 +1996,7 @@ html:not(.js-reveal-ready) [data-reveal] {
     color: var(--primary);
     margin-bottom: 16px;
     font-weight: 400;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
 }
 .sl-costi__cta p {
     color: var(--text-muted);
@@ -2039,7 +2039,7 @@ html:not(.js-reveal-ready) [data-reveal] {
     .sl-areas-archive .sl-area .sl-area__title {
         order: 1;
         font-size: clamp(28px, 6vw, 36px);
-        line-height: 1.2;
+        line-height: var(--lh-h3);
     }
 
     .sl-area .sl-area__meta,
@@ -2048,7 +2048,7 @@ html:not(.js-reveal-ready) [data-reveal] {
         order: 2;
         position: static;
         margin-top: 4px;
-        font-size: 11px;
+        font-size: var(--fs-caption);
         color: var(--text-muted);
         letter-spacing: 0.06em;
         opacity: 0.85;
@@ -2144,8 +2144,8 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     left: 16px;
     color: rgba(255, 255, 255, 0.78);
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-caption);
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
 }
 
@@ -2194,9 +2194,9 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     grid-area: title;
     font-family: var(--font-display);
     font-size: clamp(40px, 5vw, 84px);
-    line-height: 1.05;
+    line-height: var(--lh-h1);
     color: var(--primary);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     margin: 0;
     max-width: 18ch;
     font-weight: 400;
@@ -2336,7 +2336,7 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     list-style: none;
     position: relative;
     margin-bottom: 12px;
-    line-height: 1.7;
+    line-height: var(--lh-body);
 }
 
 .sl-post__body ul li::before,
@@ -2359,7 +2359,7 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
 .sl-competenza__body ol li,
 .sl-competenza__content ol li {
     margin-bottom: 12px;
-    line-height: 1.7;
+    line-height: var(--lh-body);
 }
 
 .sl-post__body ol li::marker,
@@ -2444,7 +2444,7 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     font-family: var(--font-display);
     font-style: italic;
     font-size: clamp(22px, 2vw, 28px);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: var(--primary);
     max-width: 60ch;
 }
@@ -2513,8 +2513,8 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
 .entry-content figcaption,
 .wp-caption-text {
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-caption);
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     color: var(--text-muted);
     text-align: center;
@@ -2618,10 +2618,10 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
 
 .sl-post__author-text .sl-team__name {
     font-family: var(--font-display);
-    font-size: 18px;
+    font-size: var(--fs-body-marketing);
     margin: 0;
     font-weight: 400;
-    line-height: 1.2;
+    line-height: var(--lh-h3);
 }
 
 .sl-post__author-text .sl-team__name a {
@@ -2661,7 +2661,7 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     font-family: var(--font-display);
     font-size: clamp(28px, 3vw, 44px);
     color: var(--primary);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     margin: 0 0 24px;
     font-weight: 400;
     max-width: 24ch;
@@ -2689,12 +2689,12 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     font-family: var(--font-display);
     font-size: clamp(20px, 2vw, 26px);
     color: var(--primary);
-    letter-spacing: -0.01em;
+    letter-spacing: var(--ls-h2);
 }
 
 .sl-page-contatti__sede-city {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: var(--fs-micro);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -2705,7 +2705,7 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     flex-wrap: wrap;
     gap: 24px;
     align-items: baseline;
-    font-size: 11px;
+    font-size: var(--fs-caption);
 }
 
 .sl-page-contatti__sede-link {
@@ -2728,7 +2728,7 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     margin-bottom: 24px;
     display: block;
     color: var(--accent);
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.06em;
 }
 
@@ -2736,7 +2736,7 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     font-family: var(--font-display);
     font-size: clamp(32px, 4vw, 56px);
     color: var(--primary);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     margin: 0 auto 24px;
     font-weight: 400;
     line-height: 1.1;
@@ -2802,8 +2802,8 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
 .sl-blog__date,
 .sl-blog__cat {
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-caption);
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     color: var(--text-muted);
 }
@@ -2816,10 +2816,10 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     font-family: var(--font-display);
     font-size: clamp(22px, 2vw, 30px);
     font-weight: 400;
-    line-height: 1.2;
+    line-height: var(--lh-h3);
     color: var(--primary);
     margin: 8px 0 0;
-    letter-spacing: -0.01em;
+    letter-spacing: var(--ls-h2);
     max-width: 32ch;
 }
 
@@ -2868,7 +2868,7 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
 .sl-blog__pagination .current,
 .sl-blog__pagination .dots {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: var(--fs-micro);
     letter-spacing: 0.06em;
     color: var(--text-muted);
     text-decoration: none;
@@ -3008,13 +3008,13 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
    ═══════════════════════════════════════════════════════════════ */
 .sl-page__breadcrumb {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     color: var(--text-muted);
     margin-bottom: var(--sl-space-3);
     display: block;
-    line-height: 1.4;
+    line-height: var(--lh-mono);
 }
 .sl-page__breadcrumb a {
     color: var(--text-muted);
@@ -3032,7 +3032,7 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     color: var(--text-muted);
     opacity: 0.5;
     margin-inline: 4px;
-    font-size: 11px;
+    font-size: var(--fs-caption);
 }
 .sl-page__breadcrumb [aria-current="page"] {
     color: var(--primary);
@@ -3124,11 +3124,11 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     font-family: var(--font-display);
     font-size: clamp(28px, 3vw, 44px);
     color: var(--primary);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     margin: 0 0 24px;
     font-weight: 400;
     max-width: 24ch;
-    line-height: 1.15;
+    line-height: var(--lh-heading);
 }
 .sl-page-contatti__form-lede {
     font-family: var(--font-display);
@@ -3153,8 +3153,8 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
 .wpcf7-form label {
     display: block;
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-caption);
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     color: var(--text-muted);
     margin-bottom: 8px;
@@ -3175,7 +3175,7 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     border-bottom: 1px solid var(--border);
     padding: 12px 0;
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: var(--fs-body);
     color: var(--text);
     transition: border-color var(--dur-fast) var(--ease-editorial);
     box-sizing: border-box;
@@ -3265,11 +3265,11 @@ textarea.sl-input {
 .sl-form__row--privacy label,
 .wpcf7-form .wpcf7-acceptance label {
     font-family: var(--font-body);
-    font-size: 14px;
+    font-size: var(--fs-small);
     text-transform: none;
     letter-spacing: 0;
     color: var(--text-muted);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     margin-bottom: 0;
     display: flex;
     /* v0.21.17 [checkbox vcenter]: flex-start → center per allineare verticalmente
@@ -3318,7 +3318,7 @@ textarea.sl-input {
     border: 0;
     padding: 16px 32px;
     font-family: var(--font-body);
-    font-size: 14px;
+    font-size: var(--fs-small);
     font-weight: 500;
     letter-spacing: 0.04em;
     cursor: pointer;
@@ -3340,7 +3340,7 @@ textarea.sl-input {
     margin-top: 56px;
     margin-bottom: 16px;
     color: var(--text-muted);
-    font-size: 11px;
+    font-size: var(--fs-caption);
 }
 .wpcf7-response-output {
     margin-top: 24px !important;
@@ -3348,7 +3348,7 @@ textarea.sl-input {
     border-width: 1px !important;
     border-radius: 0 !important;
     font-family: var(--font-body);
-    font-size: 14px;
+    font-size: var(--fs-small);
 }
 .wpcf7-form.sent .wpcf7-response-output {
     border-color: #2D7A4F !important;
@@ -3363,7 +3363,7 @@ textarea.sl-input {
 }
 .wpcf7-not-valid-tip {
     color: #B83232;
-    font-size: 12px;
+    font-size: var(--fs-micro);
     margin-top: 4px;
     display: block;
     font-family: var(--font-mono);
@@ -3469,10 +3469,10 @@ textarea.sl-input {
    line-height 2 lasciava 16px gap interno, leggeva come "spaced list", non
    come navigation menu. 1.7 mantiene respiro senza sembrare elenco morto. */
 .sl-footer__nav {
-    line-height: 1.7;
+    line-height: var(--lh-body);
 }
 .sl-footer__areas-list {
-    line-height: 1.7;
+    line-height: var(--lh-body);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -3526,7 +3526,7 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(56px, 7vw, 104px);
-    line-height: 0.98;
+    line-height: var(--lh-display);
     letter-spacing: -0.03em;
     margin: 0;
     color: var(--primary);
@@ -3539,8 +3539,8 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(40px, 4.5vw, 64px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
     color: var(--primary);
     margin: 0 0 32px;
 }
@@ -3566,7 +3566,7 @@ textarea.sl-input {
 .sl-chi-siamo__dropcap {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 96px;
+    font-size: var(--fs-h1-max);
     float: left;
     line-height: 0.85;
     margin: 10px 18px 0 0;
@@ -3625,7 +3625,7 @@ textarea.sl-input {
     font-size: clamp(48px, 6vw, 64px);
     color: var(--accent);
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
 }
 
 .sl-chi-siamo__team-mini { padding: 0 0 clamp(80px, 10vw, 128px); }
@@ -3674,12 +3674,12 @@ textarea.sl-input {
     font-size: 26px;
     line-height: 1.1;
     color: var(--primary);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
 }
 .sl-chi-siamo__team-spec {
     font-size: 13px;
     color: var(--text-muted);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
 }
 
 .sl-chi-siamo__principles {
@@ -3706,7 +3706,7 @@ textarea.sl-input {
 }
 .sl-chi-siamo__principle-t {
     font-family: var(--font-display);
-    font-size: 32px;
+    font-size: var(--fs-h3-max);
     color: var(--primary);
     margin: 0 0 12px;
     letter-spacing: -0.015em;
@@ -3754,10 +3754,10 @@ textarea.sl-input {
     font-size: 22px;
     color: var(--primary);
     margin: 0 0 8px;
-    letter-spacing: -0.01em;
+    letter-spacing: var(--ls-h2);
 }
 .sl-chi-siamo__timeline-d {
-    font-size: 16px;
+    font-size: var(--fs-body);
     line-height: 1.6;
     color: var(--text);
     max-width: 62ch;
@@ -3775,7 +3775,7 @@ textarea.sl-input {
     font-weight: 400;
     font-size: clamp(56px, 6.5vw, 96px);
     letter-spacing: -0.025em;
-    line-height: 0.98;
+    line-height: var(--lh-display);
     margin: 0 0 48px;
     color: var(--primary);
 }
@@ -3785,7 +3785,7 @@ textarea.sl-input {
     font-style: italic;
     font-size: 22px;
     color: var(--text);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     max-width: 44ch;
     margin: 0 0 48px;
 }
@@ -3849,9 +3849,9 @@ textarea.sl-input {
 .sl-attorney__casi-desc {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 18px;
+    font-size: var(--fs-body-marketing);
     color: var(--primary);
-    line-height: 1.4;
+    line-height: var(--lh-mono);
     margin: 0;
     max-width: 56ch;
 }
@@ -3860,7 +3860,7 @@ textarea.sl-input {
     font-size: 22px;
     color: var(--accent);
     text-align: right;
-    letter-spacing: -0.01em;
+    letter-spacing: var(--ls-h2);
 }
 @media (max-width: 1023px) {
     .sl-attorney__casi-row {
@@ -3896,9 +3896,9 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-style: italic;
     font-size: 24px;
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: var(--primary);
-    letter-spacing: -0.005em;
+    letter-spacing: var(--ls-h3);
     margin: 0;
 }
 
@@ -3920,7 +3920,7 @@ textarea.sl-input {
 .sl-competenza--tier-1 .sl-competenza__casi .sl-cases__outcome {
     font-size: 56px;
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     text-align: left;
     color: var(--accent);
     margin-top: 8px;
@@ -3932,7 +3932,7 @@ textarea.sl-input {
     .sl-competenza--tier-1 .sl-competenza__casi .sl-cases__row {
         grid-template-columns: 1fr;
     }
-    .sl-competenza--tier-1 .sl-competenza__casi .sl-cases__desc { font-size: 16px; }
+    .sl-competenza--tier-1 .sl-competenza__casi .sl-cases__desc { font-size: var(--fs-body); }
 }
 
 /* Articoli correlati: 3-col grid editorial cards. */
@@ -3959,7 +3959,7 @@ textarea.sl-input {
     font-size: 26px;
     color: var(--primary);
     letter-spacing: -0.015em;
-    line-height: 1.2;
+    line-height: var(--lh-h3);
     display: block;
 }
 @media (min-width: 1024px) {
@@ -4011,7 +4011,7 @@ textarea.sl-input {
     font-weight: 400;
     font-size: clamp(64px, 8vw, 132px);
     line-height: 0.95;
-    letter-spacing: -0.035em;
+    letter-spacing: var(--ls-display);
     color: var(--primary);
     margin: 0;
 }
@@ -4024,7 +4024,7 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-style: italic;
     font-size: 24px;
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: var(--text);
     max-width: 44ch;
     margin: 0 0 32px;
@@ -4076,9 +4076,9 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-style: italic;
     font-size: clamp(24px, 2.5vw, 32px);
-    line-height: 1.4;
+    line-height: var(--lh-mono);
     color: var(--primary);
-    letter-spacing: -0.01em;
+    letter-spacing: var(--ls-h2);
     margin: 0;
     max-width: 44ch;
 }
@@ -4114,8 +4114,8 @@ textarea.sl-input {
     padding: 4px 0;
     color: var(--text-muted);
     font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-micro);
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     transition: color .2s ease, border-color .2s ease;
 }
@@ -4179,7 +4179,7 @@ textarea.sl-input {
     font-style: italic;
     font-size: 20px;
     line-height: 1.45;
-    letter-spacing: -0.005em;
+    letter-spacing: var(--ls-h3);
     color: var(--primary);
     margin: 0;
 }
@@ -4244,7 +4244,7 @@ textarea.sl-input {
     font-weight: 400;
     font-size: clamp(56px, 6.5vw, 96px);
     letter-spacing: -0.025em;
-    line-height: 0.98;
+    line-height: var(--lh-display);
     color: var(--primary);
     margin: 0 0 32px;
 }
@@ -4256,7 +4256,7 @@ textarea.sl-input {
     font-style: italic;
     font-size: 22px;
     color: var(--text);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     max-width: 44ch;
     margin: 0 0 48px;
 }
@@ -4283,11 +4283,11 @@ textarea.sl-input {
 
 .sl-contatti-w3 .sl-mono {
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-caption);
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     color: var(--text-muted);
-    line-height: 1.4;
+    line-height: var(--lh-mono);
 }
 
 /* HERO ------------------------------------------------------------------- */
@@ -4318,7 +4318,7 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-size: clamp(64px, 9vw, 140px);
     line-height: 0.95;
-    letter-spacing: -0.035em;
+    letter-spacing: var(--ls-display);
     font-weight: 400;
     color: var(--primary);
     margin: 0;
@@ -4332,7 +4332,7 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-style: italic;
     font-size: clamp(20px, 2.4vw, 28px);
-    line-height: 1.4;
+    line-height: var(--lh-mono);
     color: var(--text);
     max-width: 32ch;
     margin: 0;
@@ -4377,7 +4377,7 @@ textarea.sl-input {
 .sl-contatti-w3__form-h {
     font-family: var(--font-display);
     font-size: clamp(32px, 4vw, 56px);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     line-height: 1.1;
     color: var(--primary);
     margin: 0 0 48px;
@@ -4513,8 +4513,8 @@ textarea.sl-input {
 .sl-contatti-w3 .wpcf7-form label {
     display: block;
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-caption);
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     color: var(--text-muted);
     margin-bottom: 8px;
@@ -4543,7 +4543,7 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-size: 22px;
     line-height: 1.3;
-    letter-spacing: -0.01em;
+    letter-spacing: var(--ls-h2);
     color: var(--primary);
     font-style: normal;
     margin: 0;
@@ -4607,9 +4607,9 @@ textarea.sl-input {
 
 .sl-contatti-w3__cta-val {
     font-family: var(--font-display);
-    font-size: 18px;
+    font-size: var(--fs-body-marketing);
     font-style: italic;
-    letter-spacing: -0.005em;
+    letter-spacing: var(--ls-h3);
     line-height: 1.3;
     display: inline-flex;
     align-items: baseline;
@@ -4638,7 +4638,7 @@ textarea.sl-input {
 }
 
 .sl-contatti-w3__hours-body {
-    font-size: 14px;
+    font-size: var(--fs-small);
     line-height: 1.85;
     color: var(--text);
 }
@@ -4660,7 +4660,7 @@ textarea.sl-input {
 .sl-contatti-w3__come-h {
     font-family: var(--font-display);
     font-size: clamp(32px, 4vw, 56px);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     line-height: 1.1;
     color: var(--primary);
     margin: 0 0 48px;
@@ -4688,7 +4688,7 @@ textarea.sl-input {
 .sl-contatti-w3__come-t {
     font-family: var(--font-display);
     font-size: 22px;
-    letter-spacing: -0.01em;
+    letter-spacing: var(--ls-h2);
     color: var(--primary);
     margin: 0 0 8px;
     font-weight: 400;
@@ -4696,7 +4696,7 @@ textarea.sl-input {
 }
 
 .sl-contatti-w3__come-d {
-    font-size: 14px;
+    font-size: var(--fs-small);
     line-height: 1.6;
     color: var(--text-muted);
     margin: 0;
@@ -4816,7 +4816,7 @@ textarea.sl-input {
     font-weight: 400;
     font-size: clamp(64px, 9vw, 140px);
     line-height: 0.95;
-    letter-spacing: -0.035em;
+    letter-spacing: var(--ls-display);
     color: var(--primary);
     margin: 0;
 }
@@ -4825,7 +4825,7 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-style: italic;
     font-size: clamp(18px, 2vw, 24px);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: var(--text);
     max-width: 44ch;
     margin: 0 0 24px;
@@ -4869,8 +4869,8 @@ textarea.sl-input {
     color: var(--text-muted);
     border-bottom: 1px solid transparent;
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-caption);
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     white-space: nowrap;
     text-decoration: none;
@@ -4888,7 +4888,7 @@ textarea.sl-input {
 
 @media (min-width: 768px) {
     .sl-blog2__tabs-inner { gap: 32px; padding-block: 20px; }
-    .sl-blog2__tab { font-size: 12px; }
+    .sl-blog2__tab { font-size: var(--fs-micro); }
 }
 
 /* FEATURED ----------------------------------------------------------- */
@@ -4948,7 +4948,7 @@ textarea.sl-input {
     font-weight: 400;
     font-size: clamp(28px, 3.5vw, 48px);
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     color: var(--primary);
     margin: 0 0 24px;
 }
@@ -4956,7 +4956,7 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-style: italic;
     font-size: clamp(17px, 1.5vw, 19px);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: var(--text);
     margin: 0 0 24px;
     max-width: 42ch;
@@ -4989,7 +4989,7 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(32px, 4vw, 56px);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     color: var(--primary);
     margin: 0;
 }
@@ -5069,7 +5069,7 @@ textarea.sl-input {
     overflow: hidden;
 }
 .sl-blog2__card-excerpt {
-    font-size: 16px;
+    font-size: var(--fs-body);
     line-height: 1.55;
     color: var(--text-muted);
     margin: 0;
@@ -5140,8 +5140,8 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(32px, 4vw, 56px);
-    letter-spacing: -0.02em;
-    line-height: 1.05;
+    letter-spacing: var(--ls-h1);
+    line-height: var(--lh-h1);
     color: var(--primary);
     margin: 16px 0 0;
 }
@@ -5221,7 +5221,7 @@ textarea.sl-input {
     font-weight: 400;
     font-size: clamp(56px, 8vw, 132px);
     line-height: 0.95;
-    letter-spacing: -0.035em;
+    letter-spacing: var(--ls-display);
     color: var(--primary);
     margin: 0 0 clamp(24px, 3vw, 32px);
 }
@@ -5229,7 +5229,7 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-style: italic;
     font-size: clamp(18px, 2vw, 24px);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: var(--text);
     max-width: 48ch;
     margin: 0 0 24px;
@@ -5291,8 +5291,8 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-size: 20px;
     color: var(--primary);
-    letter-spacing: -0.01em;
-    line-height: 1.15;
+    letter-spacing: var(--ls-h2);
+    line-height: var(--lh-heading);
 }
 .sl-tipoarea__attorney-role {
     color: var(--text-muted);
@@ -5321,8 +5321,8 @@ textarea.sl-input {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(36px, 4.5vw, 64px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
     color: var(--primary);
     margin: 0;
 }
@@ -5368,7 +5368,7 @@ textarea.sl-input {
     margin: 0 0 16px;
 }
 .sl-tipoarea__scenario-desc {
-    font-size: 16px;
+    font-size: var(--fs-body);
     line-height: 1.6;
     color: var(--text);
     margin: 0;
@@ -5426,8 +5426,8 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 .sl-tipoarea__areas-list .sl-area__num {
     color: var(--text-muted);
-    font-size: 12px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-micro);
+    letter-spacing: var(--ls-mono);
 }
 .sl-tipoarea__areas-list .sl-area__title {
     font-family: var(--font-display);
@@ -5439,7 +5439,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 .sl-tipoarea__areas-list .sl-area__meta {
     color: var(--text-muted);
-    font-size: 12px;
+    font-size: var(--fs-micro);
     text-align: right;
     white-space: nowrap;
 }
@@ -5532,7 +5532,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-weight: 400;
     font-size: clamp(48px, 6.5vw, 96px);
     letter-spacing: -0.025em;
-    line-height: 0.98;
+    line-height: var(--lh-display);
     color: var(--primary);
     margin: 0 0 32px;
 }
@@ -5545,7 +5545,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-style: italic;
     font-size: clamp(18px, 2vw, 22px);
     color: var(--text);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     max-width: 44ch;
     margin: 0 0 48px;
 }
@@ -5573,7 +5573,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
   font-family: var(--font-display);
   font-size: clamp(64px, 8vw, 124px);
   line-height: 0.95;
-  letter-spacing: -0.035em;
+  letter-spacing: var(--ls-display);
   font-weight: 400;
   color: var(--primary);
   margin: 0;
@@ -5587,7 +5587,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
   font-family: var(--font-display);
   font-style: italic;
   font-size: 22px;
-  line-height: 1.5;
+  line-height: var(--lh-lede);
   color: var(--text);
   max-width: 44ch;
   margin: 0 0 24px;
@@ -5662,7 +5662,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 .sl-glossario__letter {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 96px;
+  font-size: var(--fs-h1-max);
   color: var(--accent);
   line-height: 0.9;
   letter-spacing: -0.03em;
@@ -5698,7 +5698,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
   font-size: 28px;
   color: var(--primary);
   letter-spacing: -0.015em;
-  line-height: 1.15;
+  line-height: var(--lh-heading);
   font-weight: 400;
   transition: color 200ms var(--ease-editorial);
 }
@@ -5713,7 +5713,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 .sl-glossario__example {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 16px;
+  font-size: var(--fs-body);
   color: var(--text-muted);
   line-height: 1.55;
   margin: 0 0 16px;
@@ -5730,7 +5730,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
   align-items: center;
 }
 .sl-glossario__related-label { font-size: 13px; }
-.sl-glossario__related a { font-size: 14px; }
+.sl-glossario__related a { font-size: var(--fs-small); }
 
 /* SEARCH NO-RESULT STATE */
 .sl-glossario__empty {
@@ -5759,7 +5759,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 .sl-glossario__faq-h {
   font-family: var(--font-display);
   font-size: clamp(40px, 4.5vw, 64px);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--ls-h1);
   margin: 0 0 48px;
   font-weight: 400;
   color: var(--primary);
@@ -5780,7 +5780,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
   font-family: var(--font-display);
   font-size: clamp(48px, 5.5vw, 80px);
   letter-spacing: -0.025em;
-  line-height: 0.98;
+  line-height: var(--lh-display);
   margin: 0 0 32px;
   font-weight: 400;
   color: var(--primary);
@@ -5794,7 +5794,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
   font-style: italic;
   font-size: 20px;
   color: var(--text);
-  line-height: 1.5;
+  line-height: var(--lh-lede);
   max-width: 44ch;
   margin: 0 0 48px;
 }
@@ -5856,7 +5856,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-weight: 400;
     font-size: clamp(72px, 9vw, 140px);
     line-height: 0.95;
-    letter-spacing: -0.035em;
+    letter-spacing: var(--ls-display);
     color: var(--primary);
     margin: 0;
 }
@@ -5870,7 +5870,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 .sl-404__dropcap {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 96px;
+    font-size: var(--fs-h1-max);
     line-height: 0.85;
     float: left;
     margin: 8px 16px 0 0;
@@ -5881,7 +5881,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-family: var(--font-display);
     font-style: italic;
     font-size: 22px;
-    line-height: 1.5;
+    line-height: var(--lh-lede);
 }
 
 @media (max-width: 1023px) {
@@ -5917,7 +5917,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: 28px;
-    line-height: 1.2;
+    line-height: var(--lh-h3);
     letter-spacing: -0.015em;
     color: var(--primary);
     margin: 0 0 16px;
@@ -5941,7 +5941,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     background: transparent;
     padding: 8px 0;
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: var(--fs-body);
     color: var(--primary);
     outline: none;
     transition: border-color .2s ease;
@@ -5999,8 +5999,8 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(36px, 4vw, 56px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
     color: var(--primary);
     margin: 0;
 }
@@ -6094,7 +6094,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(56px, 6.5vw, 96px);
-    line-height: 0.98;
+    line-height: var(--lh-display);
     letter-spacing: -0.025em;
     color: var(--primary);
     margin: 0 0 32px;
@@ -6106,7 +6106,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-family: var(--font-display);
     font-style: italic;
     font-size: 22px;
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: var(--text);
     max-width: 44ch;
     margin: 0 0 48px;
@@ -6146,7 +6146,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     display: block;
     margin-top: 6px;
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: var(--fs-micro);
     color: #9B3D2E;
     letter-spacing: 0.04em;
     text-transform: none;
@@ -6389,14 +6389,14 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-style: italic;
     font-weight: 400;
     font-size: clamp(36px, 4.5vw, 56px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
     color: var(--primary);
     /* v0.21.21: margin-bottom 48 → 20 (Duccio review specifico: distacco 20px). */
     margin: 0 0 20px;
 }
 .sl-foot-precta__p {
-    font-size: 18px;
+    font-size: var(--fs-body-marketing);
     line-height: 1.6;
     color: var(--text);
     max-width: 50ch;
@@ -6412,7 +6412,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     margin: 20px 0 0;
     font-style: italic;
     color: var(--text-muted);
-    font-size: 11px;
+    font-size: var(--fs-caption);
 }
 
 /* ─── FASCIA 2 · MAIN FOOTER 4-col ─── */
@@ -6452,7 +6452,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     color: var(--background);
 }
 .sl-foot-col__label {
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.32em;
     color: var(--background);
     margin-bottom: 24px;
@@ -6473,7 +6473,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     text-decoration: none;
 }
 .sl-foot-logo__row1 {
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.42em;
     color: var(--background);
 }
@@ -6483,7 +6483,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-weight: 400;
     font-size: 52px;
     line-height: 0.95;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     color: var(--background);
 }
 .sl-foot-logo__swash {
@@ -6500,7 +6500,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-family: var(--font-display);
     font-style: italic;
     font-weight: 400;
-    font-size: 16px;
+    font-size: var(--fs-body);
     line-height: 1.6;
     color: var(--background);
     opacity: 0.9;
@@ -6509,7 +6509,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 .sl-foot-contact-mini {
     display: grid;
     gap: 4px;
-    font-size: 12px;
+    font-size: var(--fs-micro);
     line-height: 1.85;
     color: rgba(255, 255, 255, 0.55);
     margin-bottom: 24px;
@@ -6521,7 +6521,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.32em;
     text-transform: uppercase;
 }
@@ -6536,7 +6536,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     grid-template-columns: 32px 1fr;
     gap: 12px;
     align-items: baseline;
-    font-size: 14px;
+    font-size: var(--fs-small);
     color: var(--background);
 }
 .sl-foot-tier1__num {
@@ -6546,7 +6546,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 .sl-foot-tier2 {
     column-count: 2;
     column-gap: 32px;
-    font-size: 12px;
+    font-size: var(--fs-micro);
     line-height: 2;
     color: rgba(255, 255, 255, 0.78);
 }
@@ -6557,7 +6557,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 .sl-foot-allareas {
     color: var(--accent);
-    font-size: 11px;
+    font-size: var(--fs-caption);
 }
 .sl-foot-allareas .arrow {
     margin-left: 4px;
@@ -6610,9 +6610,9 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     color: var(--background);
 }
 .sl-foot-contact-block__pec {
-    font-size: 11px;
+    font-size: var(--fs-caption);
     word-break: break-all;
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: rgba(255, 255, 255, 0.78);
 }
 
@@ -6620,7 +6620,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 .sl-foot-info-block {
     display: grid;
     gap: 6px;
-    font-size: 12px;
+    font-size: var(--fs-micro);
     line-height: 1.85;
     color: rgba(255, 255, 255, 0.55);
 }
@@ -6628,10 +6628,10 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
    classi non più usate in markup (rimossi AI-friendly + Verificabile in studio).
    CSS conservato commentato per audit-trail; safe to delete in v0.22 cleanup.
 
-.sl-foot-info-block__pec { font-size: 11px; word-break: break-all; color: rgba(255,255,255,0.55); }
-.sl-foot-ai-list { display: grid; gap: 6px; font-size: 12px; color: rgba(255,255,255,0.55); }
+.sl-foot-info-block__pec { font-size: var(--fs-caption); word-break: break-all; color: rgba(255,255,255,0.55); }
+.sl-foot-ai-list { display: grid; gap: 6px; font-size: var(--fs-micro); color: rgba(255,255,255,0.55); }
 .sl-foot-ai-list .sl-foot-link { color: rgba(255,255,255,0.55); }
-.sl-foot-ai-list__cite { font-family: var(--font-display); font-style: italic; font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+.sl-foot-ai-list__cite { font-family: var(--font-display); font-style: italic; font-size: var(--fs-micro); color: rgba(255,255,255,0.55); margin-top: 4px; }
 .sl-foot-badge { display: inline-block; border: 1px solid rgba(255,255,255,0.30); padding: 8px 14px; font-style: italic; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--background); }
 */
 
@@ -6683,20 +6683,20 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-style: italic;
     font-weight: 400;
     font-size: clamp(32px, 3.2vw, 40px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
     color: var(--background);
     margin: 0 0 24px;
 }
 .sl-foot-newsletter__p {
-    font-size: 14px;
+    font-size: var(--fs-small);
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.70);
     max-width: 38ch;
     margin: 0 0 20px;
 }
 .sl-foot-newsletter__trust {
-    font-size: 11px;
+    font-size: var(--fs-caption);
     color: rgba(255, 255, 255, 0.55);
     margin: 0;
 }
@@ -6764,9 +6764,9 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     align-items: start;
     cursor: pointer;
     margin-bottom: 32px;
-    font-size: 12px;
+    font-size: var(--fs-micro);
     color: rgba(255, 255, 255, 0.55);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
 }
 .sl-foot-newsletter__gdpr-link {
     color: var(--background);
@@ -6838,13 +6838,13 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-weight: 400;
     font-size: clamp(28px, 2.8vw, 36px);
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     color: var(--background);
     margin: 0 0 16px;
 }
 .sl-foot-newsletter__success-p {
-    font-size: 12px;
-    line-height: 1.7;
+    font-size: var(--fs-micro);
+    line-height: var(--lh-body);
     color: rgba(255, 255, 255, 0.55);
     max-width: 44ch;
     margin: 0;
@@ -6870,8 +6870,8 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     flex-direction: column;
     gap: 16px;
     align-items: flex-start;
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-caption);
+    letter-spacing: var(--ls-mono);
     color: rgba(255, 255, 255, 0.40);
 }
 @media (min-width: 768px) {
@@ -7034,7 +7034,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 .sl-contatti-w3__form > p:last-of-type {
     margin-top: 32px;
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.32em;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -7315,7 +7315,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-tier1__h1 {
     font-family: var(--font-display);
     font-size: clamp(48px, 7vw, 132px);
-    line-height: 0.98;
+    line-height: var(--lh-display);
     font-weight: 400;
     letter-spacing: -0.025em;
     color: var(--primary);
@@ -7325,7 +7325,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     font-family: var(--font-display);
     font-style: italic;
     font-size: clamp(20px, 1.6vw, 28px);
-    line-height: 1.4;
+    line-height: var(--lh-mono);
     color: var(--text-muted);
     max-width: 56ch;
     margin: 0 0 56px 0;
@@ -7342,11 +7342,11 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     font-family: var(--font-display);
     font-style: italic;
     font-size: clamp(22px, 2vw, 28px);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: var(--primary);
     max-width: 60ch;
     margin: 0;
-    letter-spacing: -0.005em;
+    letter-spacing: var(--ls-h3);
 }
 .sl-tier1__body {
     padding-block: 64px;
@@ -7360,12 +7360,12 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-tier1__cluster-title {
     font-family: var(--font-display);
     font-size: clamp(28px, 3vw, 44px);
-    line-height: 1.15;
+    line-height: var(--lh-heading);
     font-weight: 400;
     margin-block: 80px 32px;
     color: var(--primary);
     max-width: 24ch;
-    letter-spacing: -0.01em;
+    letter-spacing: var(--ls-h2);
 }
 .sl-tier1__cases,
 .sl-tier1__faq,
@@ -7387,7 +7387,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 }
 @media (max-width: 767px) {
     .sl-tier1__h1 { font-size: clamp(40px, 9vw, 64px); }
-    .sl-tier1__sub { font-size: 18px; margin-bottom: 32px; }
+    .sl-tier1__sub { font-size: var(--fs-body-marketing); margin-bottom: 32px; }
     .sl-tier1__cluster-title,
     .sl-tier1__body h2 { margin-block: 56px 24px; font-size: clamp(24px, 5vw, 32px); }
 }
@@ -7463,7 +7463,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 }
 .sl-costi-w4__hero-trust-headline {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--primary);
@@ -7479,7 +7479,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 }
 .sl-costi-w4__hero-trust-list li {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: var(--fs-micro);
     letter-spacing: 0.04em;
     color: var(--text);
     padding: 8px 0;
@@ -7510,7 +7510,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     font-weight: 400;
     font-size: clamp(36px, 4.5vw, 64px);
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     color: var(--primary);
     margin: 0;
     max-width: 22ch;
@@ -7541,15 +7541,15 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(22px, 2.4vw, 32px);
-    line-height: 1.2;
+    line-height: var(--lh-h3);
     color: var(--primary);
     margin: 0 0 20px 0;
-    letter-spacing: -0.01em;
+    letter-spacing: var(--ls-h2);
 }
 .sl-costi-w4__scenario-card p {
     font-family: var(--font-body);
     font-size: 15px;
-    line-height: 1.7;
+    line-height: var(--lh-body);
     color: var(--text);
     margin: 0 0 32px 0;
     max-width: 32ch;
@@ -7599,8 +7599,8 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-costi-w4__scenari-item:last-child { border-bottom: 0; padding-bottom: 0; }
 .sl-costi-w4__scenari-num {
     color: var(--accent);
-    font-size: 14px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-small);
+    letter-spacing: var(--ls-mono);
     padding-top: 4px;
 }
 .sl-costi-w4__scenari-label {
@@ -7610,7 +7610,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-costi-w4__scenari-item p {
     font-family: var(--font-body);
     font-size: 17px;
-    line-height: 1.7;
+    line-height: var(--lh-body);
     color: var(--text);
     margin: 0 0 16px 0;
     max-width: 60ch;
@@ -7640,7 +7640,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 }
 .sl-costi-w4__calc-prose p {
     font-family: var(--font-body);
-    font-size: 18px;
+    font-size: var(--fs-body-marketing);
     line-height: 1.75;
     color: var(--text);
     margin: 0 0 32px 0;
@@ -7664,15 +7664,15 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: 24px;
-    line-height: 1.2;
+    line-height: var(--lh-h3);
     color: var(--primary);
     margin: 0 0 12px 0;
-    letter-spacing: -0.01em;
+    letter-spacing: var(--ls-h2);
 }
 .sl-costi-w4__calc-card p {
     font-family: var(--font-body);
-    font-size: 14px;
-    line-height: 1.7;
+    font-size: var(--fs-small);
+    line-height: var(--lh-body);
     color: var(--text-muted);
     margin: 0;
     max-width: 44ch;
@@ -7711,8 +7711,8 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-costi-w4__trust-plate {
     padding: 32px 24px;
     border: 1px solid var(--border);
-    font-size: 12px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-micro);
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     color: var(--text);
     line-height: 1.6;
@@ -7734,14 +7734,14 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     font-weight: 400;
     font-size: clamp(36px, 4.5vw, 56px);
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     color: var(--primary);
     margin: 0 auto 32px;
     max-width: 20ch;
 }
 .sl-costi-w4__cta-sub {
     font-family: var(--font-body);
-    font-size: 18px;
+    font-size: var(--fs-body-marketing);
     line-height: 1.65;
     color: var(--text);
     margin: 0 auto 48px;
@@ -7750,7 +7750,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-costi-w4__cta-trust {
     margin-top: 48px;
     color: var(--text-muted);
-    letter-spacing: 0.08em;
+    letter-spacing: var(--ls-mono);
 }
 
 /* === v0.23.0 TASK C — .sl-input + .sl-link refinements ===
@@ -7827,7 +7827,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-attorney__competenze .sl-area__title {
     font-family: var(--font-display);
     font-size: clamp(22px, 2vw, 28px);
-    line-height: 1.2;
+    line-height: var(--lh-h3);
     font-weight: 400;
     margin: 0;
     color: var(--primary);
@@ -7841,7 +7841,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     color: var(--accent);
 }
 .sl-attorney__competenze .sl-area__meta {
-    font-size: 11px;
+    font-size: var(--fs-caption);
     color: var(--text-muted);
     text-align: right;
     white-space: nowrap;
@@ -7905,7 +7905,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     align-items: center;
     justify-content: center;
     font-family: var(--font-display);
-    font-size: 32px;
+    font-size: var(--fs-h3-max);
     color: var(--primary);
 }
 .sl-tier1__lawyer-info {
@@ -7916,14 +7916,14 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-tier1__lawyer-name {
     font-family: var(--font-display);
     font-size: clamp(20px, 2vw, 24px);
-    line-height: 1.2;
+    line-height: var(--lh-h3);
     font-weight: 400;
     margin: 0;
     color: var(--primary);
     transition: color var(--dur-fast, 200ms) var(--ease-quart-out, cubic-bezier(0.25, 1, 0.5, 1));
 }
 .sl-tier1__lawyer-role {
-    font-size: 11px;
+    font-size: var(--fs-caption);
     color: var(--text-muted);
     margin: 0;
 }
@@ -7951,7 +7951,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-contatti-w3__success-h3 {
     font-family: var(--font-display);
     font-size: clamp(28px, 3vw, 36px);
-    line-height: 1.2;
+    line-height: var(--lh-h3);
     font-weight: 400;
     color: var(--primary);
     margin: 0 0 16px;
@@ -7986,17 +7986,17 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-tier1__cluster-h2 {
     font-family: var(--font-display);
     font-size: clamp(28px, 3.2vw, 44px);
-    line-height: 1.15;
+    line-height: var(--lh-heading);
     font-weight: 400;
     color: var(--primary);
     margin: 0 0 24px;
     max-width: 24ch;
-    letter-spacing: -0.01em;
+    letter-spacing: var(--ls-h2);
 }
 .sl-tier1__cluster-p {
     font-family: var(--font-body);
     font-size: clamp(16px, 1.4vw, 18px);
-    line-height: 1.7;
+    line-height: var(--lh-body);
     color: var(--text);
     margin: 0 0 20px;
     max-width: 64ch;
@@ -8006,7 +8006,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 }
 @media (max-width: 767px) {
     .sl-tier1__cluster-h2 { font-size: 26px; }
-    .sl-tier1__cluster-p  { font-size: 16px; }
+    .sl-tier1__cluster-p  { font-size: var(--fs-body); }
 }
 
 /* === v0.25.0 T3 — Chi-siamo principles 3-col desktop ====================
@@ -8034,7 +8034,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
         align-items: start;
     }
     .sl-chi-siamo__principle-n {
-        font-size: 14px;
+        font-size: var(--fs-small);
         color: var(--accent);
     }
     .sl-chi-siamo__principle-t {
@@ -8052,7 +8052,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     font-style: italic;
     color: var(--text);
     line-height: 1.55;
-    font-size: 14px;
+    font-size: var(--fs-small);
 }
 
 /* === v0.25.0 END === */
@@ -8146,8 +8146,8 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 }
 .sl-attorney__hero-text .sl-attorney__role {
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-caption);
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     color: var(--text-muted);
     margin-bottom: 24px;
@@ -8155,7 +8155,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-attorney__name {
     font-family: var(--font-display);
     font-size: clamp(56px, 6vw, 88px);
-    line-height: 0.98;
+    line-height: var(--lh-display);
     letter-spacing: -0.025em;
     font-weight: 400;
     margin: 0 0 32px;
@@ -8171,7 +8171,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     font-style: italic;
     color: var(--text);
     margin: 0 0 32px;
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     max-width: 36ch;
 }
 .sl-attorney__hero-text .sl-attorney__specs {
@@ -8205,7 +8205,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
         padding: 16px 20px;
         border-bottom: 1px solid var(--border);
         background: transparent;
-        font-size: 11px;
+        font-size: var(--fs-caption);
     }
     .sl-attorney__sticky-btn:hover,
     .sl-attorney__sticky-btn:focus-visible {
@@ -8268,7 +8268,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     font-family: var(--font-mono);
     font-size: 13px;
     color: var(--accent);
-    letter-spacing: 0.08em;
+    letter-spacing: var(--ls-mono);
 }
 .sl-attorney__timeline .sl-timeline__title {
     font-family: var(--font-display);
@@ -8277,7 +8277,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     color: var(--primary);
 }
 .sl-attorney__timeline .sl-timeline__inst {
-    font-size: 11px;
+    font-size: var(--fs-caption);
     color: var(--text-muted);
     text-align: right;
     white-space: nowrap;
@@ -8311,7 +8311,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 }
 .sl-attorney__casi-id {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -8319,7 +8319,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-attorney__casi-desc {
     font-family: var(--font-display);
     font-size: clamp(16px, 1.6vw, 18px);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     font-style: italic;
     color: var(--text);
     margin: 0;
@@ -8327,7 +8327,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-attorney__casi-outcome {
     text-align: right;
     font-family: var(--font-display);
-    font-size: 16px;
+    font-size: var(--fs-body);
     color: var(--accent);
     font-weight: 400;
 }
@@ -8390,7 +8390,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     font-family: var(--font-display);
     font-size: clamp(20px, 2vw, 26px);
     font-style: italic;
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: var(--primary);
     max-width: 36ch;
     margin: 0;
@@ -8501,7 +8501,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 }
 /* Founding prose font-size 18px (JSX line 126) NON 19px del default lede */
 .sl-chi-siamo__founding .sl-chi-siamo__prose {
-    font-size: 18px;
+    font-size: var(--fs-body-marketing);
     line-height: 1.75;
 }
 .sl-chi-siamo__founding .sl-chi-siamo__prose p {
@@ -8546,7 +8546,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-attorney__cta h2.sl-section-title {
     font-size: clamp(40px, 5vw, 64px) !important;
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--ls-h1);
     margin: 0 0 32px !important;
 }
 
@@ -8574,15 +8574,15 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 .sl-competenza__avvocati h2.sl-section-title,
 .sl-competenza__articoli h2.sl-section-title {
     font-size: clamp(40px, 4.5vw, 64px) !important;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
     margin: 0 0 48px !important;
 }
 /* TIER-1 CTA finale "Hai una pratica simile?" clamp(56,6.5vw,96) mb 32 (JSX line 290) */
 .sl-tier1__cta-final h2.sl-section-title,
 .sl-competenza__cta h2.sl-section-title {
     font-size: clamp(40px, 5vw, 64px) !important;
-    line-height: 0.98;
+    line-height: var(--lh-display);
     letter-spacing: -0.025em;
     margin: 0 0 32px !important;
 }
@@ -8657,8 +8657,8 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(40px, 5vw, 72px);
-    letter-spacing: -0.02em;
-    line-height: 1.05;
+    letter-spacing: var(--ls-h1);
+    line-height: var(--lh-h1);
     color: var(--primary);
     margin: 0;
 }
@@ -8697,7 +8697,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 }
 .sl-foot-newsletter--v3 .sl-foot-newsletter__field-label {
     display: block;
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -8879,7 +8879,7 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
    "Prenoti / una consulenza / gratuita." H2 huge JSX clamp(56,6.5vw,96) mb 48 */
 .sl-chi-siamo__cta h2.sl-chi-siamo__cta-title {
     font-size: clamp(56px, 6.5vw, 96px) !important;
-    line-height: 0.98;
+    line-height: var(--lh-display);
     letter-spacing: -0.025em;
     margin: 0 0 48px !important;
 }
@@ -8896,11 +8896,11 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
 }
 .sl-chi-siamo__prose h2 {
     font-size: clamp(28px, 3vw, 36px);
-    line-height: 1.15;
+    line-height: var(--lh-heading);
 }
 .sl-chi-siamo__prose h3 {
     font-size: clamp(22px, 2.4vw, 28px);
-    line-height: 1.2;
+    line-height: var(--lh-h3);
 }
 .sl-chi-siamo__prose > h2:first-child,
 .sl-chi-siamo__prose > h3:first-child {
@@ -8922,7 +8922,7 @@ h2.sl-casi__cta-title {
    JSX clamp(56,7vw,104) · max-width nessuno · line-height 0.98 (NON 0.92). */
 .sl-chi-siamo__h1 {
     font-size: clamp(56px, 7vw, 104px) !important;
-    line-height: 0.98;
+    line-height: var(--lh-display);
     letter-spacing: -0.03em;
     max-width: none;
 }
@@ -8975,14 +8975,14 @@ h2.sl-casi__cta-title {
     }
     .sl-chi-siamo__principle-n {
         font-family: var(--font-mono) !important;
-        font-size: 11px !important;
+        font-size: var(--fs-caption) !important;
         letter-spacing: 0.06em !important;
         text-transform: uppercase !important;
         color: var(--text-muted) !important;
     }
     .sl-chi-siamo__principle-t {
         font-family: var(--font-display) !important;
-        font-size: 32px !important;
+        font-size: var(--fs-h3-max) !important;
         line-height: 1.1 !important;
         font-weight: 400 !important;
         margin: 0 0 12px !important;
@@ -9042,7 +9042,7 @@ h2.sl-casi__cta-title {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(56px, 7vw, 104px);
-    line-height: 0.98;
+    line-height: var(--lh-display);
     letter-spacing: -0.025em;
     color: var(--primary);
     margin: 0 0 32px;
@@ -9055,7 +9055,7 @@ h2.sl-casi__cta-title {
     font-family: var(--font-display);
     font-style: italic;
     font-size: clamp(20px, 2vw, 26px);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: var(--text);
     max-width: 48ch;
     margin: 0;
@@ -9085,7 +9085,7 @@ h2.sl-casi__cta-title {
     padding: 0;
     display: grid;
     gap: 8px;
-    font-size: 14px;
+    font-size: var(--fs-small);
     color: var(--text);
 }
 
@@ -9132,7 +9132,7 @@ h2.sl-casi__cta-title {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(28px, 3vw, 40px);
-    line-height: 1.15;
+    line-height: var(--lh-heading);
     letter-spacing: -0.015em;
     color: var(--primary);
     margin: 64px 0 24px;
@@ -9143,7 +9143,7 @@ h2.sl-casi__cta-title {
 .sl-info-page__prose h3 {
     font-family: var(--font-display);
     font-size: clamp(22px, 2.4vw, 28px);
-    line-height: 1.2;
+    line-height: var(--lh-h3);
     color: var(--primary);
     margin: 40px 0 16px;
     font-weight: 400;
@@ -9175,7 +9175,7 @@ h2.sl-casi__cta-title {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(40px, 5vw, 72px);
-    line-height: 0.98;
+    line-height: var(--lh-display);
     letter-spacing: -0.025em;
     margin: 0 0 32px;
     color: var(--background);
@@ -9188,7 +9188,7 @@ h2.sl-casi__cta-title {
     font-family: var(--font-display);
     font-style: italic;
     font-size: clamp(18px, 1.8vw, 22px);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: rgba(250, 250, 248, 0.85);
     max-width: 44ch;
     margin: 0 0 32px;
@@ -9202,7 +9202,7 @@ h2.sl-casi__cta-title {
     color: var(--background);
     text-decoration: none;
     font-family: var(--font-body);
-    font-size: 16px;
+    font-size: var(--fs-body);
     transition: color var(--dur-fast, 200ms) var(--ease-editorial, cubic-bezier(0.25, 1, 0.5, 1)),
                 border-bottom-color var(--dur-fast, 200ms) var(--ease-editorial, cubic-bezier(0.25, 1, 0.5, 1));
 }
@@ -9251,7 +9251,7 @@ h2.sl-casi__cta-title {
     font-weight: 400;
     font-size: clamp(64px, 8vw, 132px);
     line-height: 0.95;
-    letter-spacing: -0.035em;
+    letter-spacing: var(--ls-display);
     color: var(--primary);
     margin: 0 0 32px;
 }
@@ -9263,7 +9263,7 @@ h2.sl-casi__cta-title {
     font-family: var(--font-display);
     font-style: italic;
     font-size: clamp(19px, 1.8vw, 24px);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: var(--text);
     max-width: 48ch;
     margin: 0;
@@ -9286,7 +9286,7 @@ h2.sl-casi__cta-title {
     margin: 0;
 }
 .sl-team__archive-trust-text {
-    font-size: 14px;
+    font-size: var(--fs-small);
     color: var(--text);
     margin: 16px 0 0;
     line-height: 1.55;
@@ -9329,7 +9329,7 @@ h2.sl-casi__cta-title {
 }
 .sl-team__archive-principle-num {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -9338,7 +9338,7 @@ h2.sl-casi__cta-title {
     font-family: var(--font-display);
     font-size: clamp(24px, 2.4vw, 32px);
     font-weight: 400;
-    line-height: 1.15;
+    line-height: var(--lh-heading);
     color: var(--primary);
     margin: 0 0 12px;
     letter-spacing: -0.015em;
@@ -9445,7 +9445,7 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(56px, 7vw, 104px);
-    line-height: 0.98;
+    line-height: var(--lh-display);
     letter-spacing: -0.025em;
     color: var(--primary);
     margin: 0 0 32px;
@@ -9458,7 +9458,7 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     font-family: var(--font-display);
     font-style: italic;
     font-size: clamp(20px, 2vw, 26px);
-    line-height: 1.5;
+    line-height: var(--lh-lede);
     color: var(--text);
     max-width: 48ch;
     margin: 0;
@@ -9563,8 +9563,8 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(40px, 6.5vw, 96px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: var(--lh-h1);
+    letter-spacing: var(--ls-h1);
     color: var(--primary);
     margin: 0 0 32px;
 }
@@ -9625,8 +9625,8 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 }
 .sl-hub-card__num {
     color: var(--text-muted);
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-caption);
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     margin: 0;
 }
@@ -9634,7 +9634,7 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(24px, 2.4vw, 32px);
-    line-height: 1.15;
+    line-height: var(--lh-heading);
     letter-spacing: -0.015em;
     color: var(--primary);
     margin: 0;
@@ -9649,14 +9649,14 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 }
 .sl-hub-card__meta {
     color: var(--text-muted);
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.06em;
     margin: 0;
 }
 .sl-hub-card__cta {
     color: var(--accent);
-    font-size: 12px;
-    letter-spacing: 0.08em;
+    font-size: var(--fs-micro);
+    letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     margin: 0;
 }
@@ -9674,7 +9674,7 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: clamp(28px, 3vw, 44px);
-    line-height: 1.2;
+    line-height: var(--lh-h3);
     letter-spacing: -0.015em;
     color: var(--primary);
     margin: 16px 0 32px;
@@ -9712,7 +9712,7 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     }
     .sl-glossario__az a,
     .sl-glossario__az span {
-        font-size: 12px;
+        font-size: var(--fs-micro);
         padding: 4px 6px;
         min-width: 24px;
         text-align: center;
