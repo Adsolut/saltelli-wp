@@ -109,6 +109,78 @@ $scenari_map = [
 ];
 $scenari = $scenari_map[$term_slug] ?? $scenari_map['privati'];
 
+/* ─── P3 (wave5-step3-completion): SCF per-term — group_tipo_area_term_v1 ───
+   Ogni elemento editoriale di questo template è ora editabile PER TERMINE da
+   WP-Admin → Aree di pratica → <termine> → Modifica (campi "Term Tipo Area").
+   I `default_value` nel JSON sono blank: SCF salva i valori in term meta
+   (per-term), e i fallback hardcoded qui sotto garantiscono che il frontend
+   resti invariato finché Elena non popola i campi. Dati dinamici (avvocati,
+   competenze, casi, conteggi, breadcrumb) restano gestiti dal template. */
+$sl_term_field = function ($name, $default = '') use ($term) {
+    if (!$term instanceof WP_Term || !function_exists('get_field')) {
+        return $default;
+    }
+    $v = get_field($name, $term);
+    return ($v !== null && $v !== '' && $v !== false) ? $v : $default;
+};
+
+// Scenari "Quando rivolgersi": override per-term di titolo/descrizione
+// (il simbolo §¶† e lo slug della competenza linkata restano dal map).
+for ($sl_i = 0; $sl_i < 3; $sl_i++) {
+    if (!isset($scenari[$sl_i])) {
+        continue;
+    }
+    $sl_sc_t = (string) $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_title', '');
+    $sl_sc_d = (string) $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_desc', '');
+    if ($sl_sc_t !== '') {
+        $scenari[$sl_i]['t'] = $sl_sc_t;
+    }
+    if ($sl_sc_d !== '') {
+        $scenari[$sl_i]['d'] = $sl_sc_d;
+    }
+}
+
+// Hero eyebrow: fallback al valore globale (Theme Options "Hub Pages", oggi "§ Cluster").
+$sl_eyebrow = (string) $sl_term_field('tipo_area_term_eyebrow', $sl_taxonomy_eyebrow);
+
+// Hero H1: default = nome del termine + ".". h1_emphasis è opzionale (corsivo, appeso a h1_main).
+$sl_h1_main = (string) $sl_term_field('tipo_area_term_h1_main', '');
+$sl_h1_em   = (string) $sl_term_field('tipo_area_term_h1_emphasis', '');
+if ($sl_h1_main === '' && $sl_h1_em === '') {
+    $sl_h1_src = $term_name . '.';
+} else {
+    $sl_h1_src = $sl_h1_main !== '' ? $sl_h1_main : ($term_name . '.');
+    if ($sl_h1_em !== '') {
+        $sl_h1_src .= ' <em>' . $sl_h1_em . '</em>';
+    }
+}
+
+// Hero lede: SCF intro → descrizione del termine (campo nativo WP) → template globale (ramo else nel markup).
+$sl_intro = (string) $sl_term_field('tipo_area_term_intro', '');
+$sl_lede  = $sl_intro !== '' ? $sl_intro : (string) $term_desc;
+
+// Etichette di sezione + microcopy della CTA finale (default = literal originale del template).
+$sl_aside_eyebrow  = (string) $sl_term_field('tipo_area_term_aside_eyebrow', __('Avvocati di riferimento', 'saltelli'));
+$sl_quando_label   = (string) $sl_term_field('tipo_area_term_quando_label', __('Quando rivolgersi', 'saltelli'));
+$sl_quando_h2_main = (string) $sl_term_field('tipo_area_term_quando_h2_main', __('Tre scenari', 'saltelli'));
+$sl_quando_h2_em   = (string) $sl_term_field('tipo_area_term_quando_h2_em', __('tipici.', 'saltelli'));
+$sl_lista_label    = (string) $sl_term_field('tipo_area_term_lista_label', __('Aree di pratica', 'saltelli'));
+$sl_lista_empty    = (string) $sl_term_field('tipo_area_term_lista_empty', __('Nessuna competenza in questa categoria.', 'saltelli'));
+$sl_casi_label     = (string) $sl_term_field('tipo_area_term_casi_label', __('Casi rappresentativi', 'saltelli'));
+$sl_cta_label      = (string) $sl_term_field('tipo_area_term_cta_label', __('Primo incontro', 'saltelli'));
+$sl_cta_h2_main    = (string) $sl_term_field('tipo_area_term_cta_h2_main', __('Hai una pratica', 'saltelli'));
+$sl_cta_h2_em      = (string) $sl_term_field('tipo_area_term_cta_h2_em', __('simile?', 'saltelli'));
+$sl_cta_lede       = (string) $sl_term_field('tipo_area_term_cta_lede', __('Il primo incontro è gratuito. Riceviamo solo su appuntamento. Risposta entro 24 ore.', 'saltelli'));
+$sl_cta_btn_label  = (string) $sl_term_field('tipo_area_term_cta_btn_label', __('Prenota gratuita', 'saltelli'));
+$sl_cta_btn_url_raw = (string) $sl_term_field('tipo_area_term_cta_btn_url', '');
+if ($sl_cta_btn_url_raw === '') {
+    $sl_cta_btn_url = home_url('/contatti/');
+} elseif (preg_match('#^(?:https?:)?//#i', $sl_cta_btn_url_raw)) {
+    $sl_cta_btn_url = $sl_cta_btn_url_raw;
+} else {
+    $sl_cta_btn_url = home_url('/' . ltrim($sl_cta_btn_url_raw, '/'));
+}
+
 /* ─── Casi cluster — filter saltelli_all_cases() ────────────────────
    La cat in saltelli_all_cases() usa label capitalized: Privati / Imprese /
    Contenzioso / Altri. Match case-insensitive su term slug. */
@@ -155,16 +227,16 @@ $avatar_html = function ($av_post) {
                 <div class="sl-tipoarea__hero-main">
                     <?php saltelli_render_breadcrumb(); ?>
 
-                    <?php if ($sl_taxonomy_eyebrow) : ?>
-                        <p class="sl-mono sl-tipoarea__eyebrow"><?php echo esc_html($sl_taxonomy_eyebrow); ?></p>
+                    <?php if ($sl_eyebrow) : ?>
+                        <p class="sl-mono sl-tipoarea__eyebrow"><?php echo esc_html($sl_eyebrow); ?></p>
                     <?php endif; ?>
 
                     <h1 class="sl-tipoarea__h1" data-split-reveal>
-                        <?php echo wp_kses(saltelli_split_h1_words($term_name . '.'), ['span' => ['class' => true, 'data-i' => true]]); ?>
+                        <?php echo wp_kses(saltelli_split_h1_words($sl_h1_src), ['span' => ['class' => true, 'data-i' => true], 'em' => []]); ?>
                     </h1>
 
-                    <?php if ($term_desc) : ?>
-                        <p class="sl-tipoarea__lede"><?php echo esc_html($term_desc); ?></p>
+                    <?php if ($sl_lede !== '') : ?>
+                        <p class="sl-tipoarea__lede"><?php echo esc_html($sl_lede); ?></p>
                     <?php else : ?>
                         <p class="sl-tipoarea__lede">
                             <?php
@@ -186,9 +258,9 @@ $avatar_html = function ($av_post) {
                 </div>
 
                 <?php if (!empty($avvocati_referenti)) : ?>
-                <aside class="sl-tipoarea__hero-aside" aria-label="<?php esc_attr_e('Avvocati di riferimento', 'saltelli'); ?>">
+                <aside class="sl-tipoarea__hero-aside" aria-label="<?php echo esc_attr($sl_aside_eyebrow); ?>">
                     <div class="sl-mono sl-tipoarea__aside-eyebrow">
-                        <?php esc_html_e('Avvocati di riferimento', 'saltelli'); ?>
+                        <?php echo esc_html($sl_aside_eyebrow); ?>
                     </div>
                     <div class="sl-tipoarea__attorneys">
                         <?php foreach ($avvocati_referenti as $entry) :
@@ -219,10 +291,10 @@ $avatar_html = function ($av_post) {
     <section class="sl-tipoarea__quando">
         <div class="sl-container">
             <header class="sl-tipoarea__section-head">
-                <div class="sl-mono sl-tipoarea__section-eyebrow">§ 01 — <?php esc_html_e('Quando rivolgersi', 'saltelli'); ?></div>
+                <div class="sl-mono sl-tipoarea__section-eyebrow">§ 01 — <?php echo esc_html($sl_quando_label); ?></div>
                 <h2 class="sl-tipoarea__section-title">
-                    <?php esc_html_e('Tre scenari', 'saltelli'); ?><br>
-                    <em><?php esc_html_e('tipici.', 'saltelli'); ?></em>
+                    <?php echo esc_html($sl_quando_h2_main); ?><br>
+                    <em><?php echo esc_html($sl_quando_h2_em); ?></em>
                 </h2>
             </header>
             <div class="sl-tipoarea__quando-grid">
@@ -255,7 +327,7 @@ $avatar_html = function ($av_post) {
     <section class="sl-tipoarea__lista">
         <div class="sl-container">
             <header class="sl-tipoarea__section-head">
-                <div class="sl-mono sl-tipoarea__section-eyebrow">§ 02 — <?php esc_html_e('Aree di pratica', 'saltelli'); ?></div>
+                <div class="sl-mono sl-tipoarea__section-eyebrow">§ 02 — <?php echo esc_html($sl_lista_label); ?></div>
                 <h2 class="sl-tipoarea__section-title">
                     <?php
                     /* v0.30.0 — usa parola italiana invece di digit (JSX-faithful "Nove aree.") */
@@ -293,7 +365,7 @@ $avatar_html = function ($av_post) {
                     <?php endforeach; ?>
                 </div>
             <?php else : ?>
-                <p class="sl-mono sl-tipoarea__empty"><?php esc_html_e('Nessuna competenza in questa categoria.', 'saltelli'); ?></p>
+                <p class="sl-mono sl-tipoarea__empty"><?php echo esc_html($sl_lista_empty); ?></p>
             <?php endif; ?>
         </div>
     </section>
@@ -303,7 +375,7 @@ $avatar_html = function ($av_post) {
     <section class="sl-tipoarea__casi">
         <div class="sl-container">
             <header class="sl-tipoarea__section-head">
-                <div class="sl-mono sl-tipoarea__section-eyebrow">§ 03 — <?php esc_html_e('Casi rappresentativi', 'saltelli'); ?></div>
+                <div class="sl-mono sl-tipoarea__section-eyebrow">§ 03 — <?php echo esc_html($sl_casi_label); ?></div>
                 <h2 class="sl-tipoarea__section-title">
                     <?php
                     /* v0.30.0 — fix typo "per per i privati":
@@ -344,17 +416,17 @@ $avatar_html = function ($av_post) {
     <section class="sl-tipoarea__cta">
         <div class="sl-container">
             <div class="sl-tipoarea__cta-grid">
-                <div class="sl-mono sl-tipoarea__section-eyebrow">§ 04 — <?php esc_html_e('Primo incontro', 'saltelli'); ?></div>
+                <div class="sl-mono sl-tipoarea__section-eyebrow">§ 04 — <?php echo esc_html($sl_cta_label); ?></div>
                 <div class="sl-tipoarea__cta-body">
                     <h2 class="sl-tipoarea__cta-title">
-                        <?php esc_html_e('Hai una pratica', 'saltelli'); ?><br>
-                        <em><?php esc_html_e('simile?', 'saltelli'); ?></em>
+                        <?php echo esc_html($sl_cta_h2_main); ?><br>
+                        <em><?php echo esc_html($sl_cta_h2_em); ?></em>
                     </h2>
                     <p class="sl-tipoarea__cta-lede">
-                        <?php esc_html_e('Il primo incontro è gratuito. Riceviamo solo su appuntamento. Risposta entro 24 ore.', 'saltelli'); ?>
+                        <?php echo esc_html($sl_cta_lede); ?>
                     </p>
-                    <a class="sl-btn sl-btn--primary sl-tipoarea__cta-btn" href="<?php echo esc_url(home_url('/contatti/')); ?>">
-                        <span><?php esc_html_e('Prenota gratuita', 'saltelli'); ?></span>
+                    <a class="sl-btn sl-btn--primary sl-tipoarea__cta-btn" href="<?php echo esc_url($sl_cta_btn_url); ?>">
+                        <span><?php echo esc_html($sl_cta_btn_label); ?></span>
                         <span class="arrow" aria-hidden="true">→</span>
                     </a>
                 </div>
