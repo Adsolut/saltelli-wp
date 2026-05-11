@@ -150,7 +150,7 @@ $sl404_articoli = get_posts([
                 <?php endforeach; ?>
             </div>
             <div class="sl-404__suggest-foot">
-                <a class="sl-btn" href="<?php echo esc_url(get_post_type_archive_link('competenza')); ?>">
+                <a class="sl-btn" href="<?php echo esc_url(saltelli_aree_hub_url()); ?>">
                     <span><?php esc_html_e('Tutte le 17 aree', 'saltelli'); ?></span>
                     <span class="arrow" aria-hidden="true">→</span>
                 </a>

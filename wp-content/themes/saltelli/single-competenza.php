@@ -39,7 +39,7 @@ while (have_posts()) :
             <div class="sl-container">
                 <?php saltelli_render_breadcrumb(); ?>
 
-                <a class="sl-mono sl-competenza__back" href="<?php echo esc_url(get_post_type_archive_link('competenza')); ?>">
+                <a class="sl-mono sl-competenza__back" href="<?php echo esc_url(saltelli_aree_hub_url()); ?>">
                     ← <?php esc_html_e('Tutte le aree', 'saltelli'); ?>
                 </a>
 

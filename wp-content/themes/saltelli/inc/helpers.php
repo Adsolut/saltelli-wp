@@ -133,6 +133,26 @@ function saltelli_get_attorneys_for_competenza($competenza_id) {
 }
 
 /**
+ * URL della page hub "Aree di pratica" (Page WP, slug `aree-di-pratica`).
+ *
+ * Il CPT `competenza` ha `has_archive => false` dal Wave 5 IA refactor: l'archivio
+ * pubblico /aree-di-pratica/ è una Page WP (hub, ID 2812 su staging), non il CPT
+ * archive. `get_post_type_archive_link('competenza')` quindi ritorna `false` →
+ * `esc_url(false)` = href vuoto. Questo helper risolve l'URL via slug (portabile
+ * cross-env, coerente col pattern `page_slug ==` dei field group SCF), fallback hard.
+ *
+ * @return string URL assoluto della hub /aree-di-pratica/.
+ */
+function saltelli_aree_hub_url() {
+    static $url = null;
+    if ($url === null) {
+        $page = get_page_by_path('aree-di-pratica');
+        $url  = ($page ? get_permalink($page) : '') ?: home_url('/aree-di-pratica/');
+    }
+    return $url;
+}
+
+/**
  * Genera la catena breadcrumb come array di nodi:
  *   [ ['name' => 'Home', 'url' => 'https://...'], ['name' => 'Competenze', 'url' => '...'], ['name' => 'Diritto tributario'] ]
  * L'ultimo nodo NON ha 'url' (è la pagina corrente).
@@ -193,7 +213,7 @@ function saltelli_get_breadcrumb_chain($post_id = null) {
             if (is_tax('tipo-area')) {
                 $chain[] = [
                     'name' => saltelli_breadcrumb_pt_label('competenza'),
-                    'url'  => get_post_type_archive_link('competenza'),
+                    'url'  => saltelli_aree_hub_url(),
                 ];
             }
             $chain[] = ['name' => $term->name];
@@ -214,7 +234,7 @@ function saltelli_get_breadcrumb_chain($post_id = null) {
     if ($post->post_type === 'avvocato') {
         $chain[] = ['name' => saltelli_breadcrumb_pt_label('avvocato'), 'url' => get_post_type_archive_link('avvocato')];
     } elseif ($post->post_type === 'competenza') {
-        $chain[] = ['name' => saltelli_breadcrumb_pt_label('competenza'), 'url' => get_post_type_archive_link('competenza')];
+        $chain[] = ['name' => saltelli_breadcrumb_pt_label('competenza'), 'url' => saltelli_aree_hub_url()];
     } elseif ($post->post_type === 'post') {
         $blog_page_id = (int) get_option('page_for_posts');
         if ($blog_page_id) {
