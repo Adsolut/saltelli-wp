@@ -16,14 +16,14 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 
 **Strategy:** "Legal Luxury Minimal" — boutique editoriale italiano, tipografia dominante, palette navy/crema/bronzo. Tier-1 deep clusters: Tributario · Lavoro · Famiglia LGBTQ+. The other 16 practice areas get tier-2 lighter pages.
 
-## Current state — v1.3.10-wave4-7-fix-4-strategy-a-full-scf
+## Current state — v1.3.13-wave5-step3-coverage (CUT-READY)
 
-**Last updated:** 2026-05-08 (Wave 4.7.fix.4 mergeata: 12 Page WP con Gutenberg disabled · post_content dualità eliminata · admin shortcuts per archive CPT · EDITOR-HANDOFF v5.0)
-**Branch:** `main` · last merge Wave 4.7.fix.4 STRATEGY A · tag `v1.3.10-wave4-7-fix-4-strategy-a-full-scf` · 6 commits P1→P6 + merge no-ff · +2755/-38 su 26 file
+**Last updated:** 2026-05-11 (5 wave + 4 chore consecutivi: Wave 4.7.fix.5 → Wave 5 STEP 1 audit + STEP 2 design realign + STEP 3 Pages SCF + STEP 3 coverage → 4 chore frontend polish · Elena OK definitivo su tutte le 19 Pages + 2 archive CPT + 3 term tipo-area · EDITOR-HANDOFF v6.0)
+**Branch:** `main` · last merge `a799659` (chore tier-1 clusters duplicate body fix) · tag `v1.3.13-wave5-step3-coverage` · 47 commits totali dal v1.3.10
 **Demo:** ✅ presentata al cliente · feedback iteration assorbita
-**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.3.10-wave4-7-fix-4-strategy-a-full-scf` · 12 Page WP con Gutenberg disabled (4 hub + 7 dual-source bonificate + 1 child legacy lo-studio) · 1 migrazione reale post_content → SCF (Page 2713 richiedi-preventivo, 879 chars) · 6 cleanup post_content zombie · 7 backup `_legacy_post_content_backup` post_meta recoverable · 12/12 smoke test PASS · frontend content invariato
-**Active phase:** Acceptance test editoriale Elena con modello mentale ripristinato definitivo ("una sola sorgente di verità per Page = SCF metabox, editor classico disabilitato") · validazione workflow rivisto post-Wave 4.7.fix.4 via WP-Admin reale
-**Next:** Tokens drift audit baseline (3-layer: DESIGN.md→tokens.css→sections.css 605 hardcoded) salvato in `docs/qa/tokens-drift-audit-2026-05-08.md` (untracked, dormiente — sessione dedicata futura) · valutare Wave 4.9 Gutenberg migration (ora superflua dato che Gutenberg è disabilitato sulle 12 Pages SCF-only) · cut produzione · valutare ripristino Yoast `twitter:label1` reading-time meta (-102 byte side effect benigno su 2 pagine)
+**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.3.13-wave5-step3-coverage` · **13 Page WP Gutenberg-disabled** (12 + Prenota appuntamento 2714) · **19 Pages canoniche** (35 → 19 post cleanup fix.5) · **7 Pages alto-traffico con SCF metabox completa** (Home/Chi Siamo/Lo Studio/Aree di Pratica/Risorse/Costi e Consulenze/Contatti, 107 field text/textarea) · **2 archive CPT** con SCF "Archive Headers" expanded (Team + Casi rappresentativi) · **3 term tipo-area** con SCF group dedicato (privati/imprese/contenzioso-amministrativo, 23 field per content per-term) · tokens.css rebuilt da DESIGN.md (12 token allineati + 4 mancanti aggiunti + top-15 violazioni hardcoded fixed) · 4 chore frontend polish (Tutte le aree href + 404 count dinamico + breadcrumb cluster + 2 duplicate body sections) · cross-page smoke test PASS · **Elena OK definitivo 2026-05-11**
+**Active phase:** Front-end debug visivo (drift design system rimanenti ~590 hardcoded values in sections.css + cleanup CSS disallineamenti residui) · pre-cut produzione checklist
+**Next:** Wave 6.0 backlog candidate (CPT competenza Strategy A migration: disable Gutenberg + post_content → body_extended unification, post-cut) · Wave 5.1 backlog candidate (Image Expansion per Pages: hero + featured + cluster cards) · Cut produzione (DNS switch staging → prod) · valutare ripristino Yoast `twitter:label1` reading-time meta (-102 byte side effect benigno su 2 pagine)
 
 **Infra staging (consolidata 2026-04-30):**
 - Droplet DO `saltelli-staging-ams3-01` · IPv4 `178.62.207.50` · ams3 · s-1vcpu-2gb · Ubuntu 24.04 LTS
@@ -66,7 +66,16 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 | **Wave 4.7.fix.2 — TRUE FIX (studio_body editorial JSON default + menu primary slug-based rebuild + 14 redirect 301 legacy + SCF tier-2 60→93 fields, 13 tabs + EDITOR-HANDOFF v3.0 + slug rename `risultati`→`casi-rappresentativi`)** | **1.3.8-wave4-7-fix-2-true-fix** | **✅** |
 | **Wave 4.7.fix.3 — PAGE METABOX MIGRATION (30 SCF field da Theme Options globali → Page metabox delle 4 Page WP: Home 17, Chi Siamo 2822, Aree 2812, Risorse 2813. Theme Options 13/14 → 9 tab. Helper `saltelli_page_field()` introdotto. EDITOR-HANDOFF v4.0. Risolve feedback Elena "il CMS non è usabile in questo modo")** | **1.3.9-wave4-7-fix-3-page-metabox** | **✅** |
 | **Wave 4.7.fix.4 — STRATEGY A FULL SCF MIGRATION (Gutenberg disabled per 12 Page WP target: 4 hub + 7 dual-source bonificate + 1 child legacy lo-studio. Discovery empirica ha rivelato 6/7 post_content zombie + 1/7 live (Page 2713 → SCF body_content). Admin shortcuts per archive CPT. EDITOR-HANDOFF v5.0. Modello mentale editor definitivo: una sola sorgente di verità per Page = SCF metabox)** | **1.3.10-wave4-7-fix-4-strategy-a-full-scf** | **✅** |
-| Acceptance test editoriale Elena via WP-Admin reale post-Wave 4.7.fix.4 | parallel | 🔍 ACTIVE |
+| **Wave 4.7.fix.5 — PAGES CLEANUP + BLOG DOC + CUSTOMIZER LOCK (35 Pages → 19 KEEP, 16 cestinate: 13 draft orfani 2019-2025 + 3 publish duplicate. Blog editing audit 02-blog-editing-map.md + admin sidebar notices. WP Customizer lock-down per ruolo editor con filter user_has_cap. Incident OOM ricorsione is_super_admin risolto. EDITOR-HANDOFF v6.0)** | **1.3.11-wave4-7-fix-5-cleanup** | **✅** |
+| **Wave 5 STEP 1 — Pages Completeness Audit (read-only, 16 deliverable: 13 audit Pages + 2 archive CPT + decision matrix con field SCF da aggiungere per Page con type incluso image + repeater, stima ordine implementation STEP 3)** | audit/wave5-pages-completeness | **✅** |
+| **Wave 5 STEP 2 — Design Realignment (tokens.css rebuilt da docs/DESIGN.md come SoT: 12 token disallineati + 4 mancanti corretti, letter-spacing ottico 4 valori per hierarchy, line-height ottico 5 valori, top-15 violazioni hardcoded fixed in components.css + sections.css. Remaining ~590 hardcoded values deferred a wave dedicata)** | feat/wave5-design-realign | **✅** |
+| **Wave 5 STEP 3 — Pages SCF expansion completa (7 Pages alto-traffico: Home 17 + Chi Siamo 2822 + Aree di Pratica 2812 + Risorse 2813 + Costi e Consulenze 2695 + Lo Studio 2811 + Contatti 23 con 107 field text/textarea conservative pattern Elena-approved. Default_value byte-per-byte = hardcoded → frontend invariato pre/post. Image/repeater rinviati a backlog Wave 5.1)** | **1.3.12-wave5-step3-pages-scf** | **✅** |
+| **Wave 5 STEP 3 coverage completion — chiusura gap Elena 6 elementi mancanti (2 archive CPT Team + Casi rappresentativi con tab "Archive Headers" espansa + riuso CPT saltelli_principio · 3 term tipo-area privati/imprese/contenzioso-amministrativo con nuovo group_tipo_area_term_v1 attached a taxonomy 23 field per-term · 1 Page Prenota appuntamento 2714 con nuovo group_prenota_appuntamento_v1 + Gutenberg disabled SCF-only 13 IDs)** | **1.3.13-wave5-step3-coverage** | **✅** |
+| **Chore fix single-competenza frontend regression** (helper saltelli_aree_hub_url() risolve hub via get_page_by_path post Wave 5 IA refactor has_archive=>false. Swap in 4 call sites: single-competenza.php back link + 404.php CTA + 2 breadcrumb nodes in helpers.php) | chore | **✅** |
+| **Chore pre-cut polish** (404.php count aree dinamico via wp_count_posts + breadcrumb cluster intermediate node + docs/DEPLOY.md §2 rsync command completato) | chore | **✅** |
+| **Chore fix single-competenza duplicate body** (logica template "uno o l'altro" tra sl-competenza__intro/post_content e sl-competenza__body/body_extended SCF, mai entrambi simultanei) | chore | **✅** |
+| **Chore fix single-competenza tier-1 clusters duplicate body_extended** (rimossa duplicazione tra helper saltelli_tier1_clusters hardcoded e sl-competenza__body SCF, polish Duccio) | chore | **✅** |
+| Acceptance test editoriale Elena | **OK DEFINITIVO 2026-05-11** | **✅** |
 | Cut produzione (DNS switch staging→prod) | 1.0.0 | ⏸ |
 
 ### 0.17.x — consolidation log (4 collisioni di numbering risolte)
@@ -116,6 +125,8 @@ Per evitare future collisioni quando più agent committano in parallelo:
 - `recovery-v1.0/PROMPT_AGENT_WAVE4_7_FIX_2_TRUE_FIX.md` — ✅ done (5 phases · 21 file · +1688/-57 · 26/26 URL smoke pass · SCF 60→93 fields)
 - `recovery-v1.0/PROMPT_AGENT_WAVE4_7_FIX_3_PAGE_METABOX.md` — ✅ done (5 phases · 20 file · +1849/-643 · 30 field migrati · 4 Pages WP affected · Theme Options 13/14→9 tab · 4/4 smoke pass)
 - `recovery-v1.0/PROMPT_AGENT_WAVE4_7_FIX_4_STRATEGY_A_FULL_SCF.md` — ✅ done (6 phases · 26 file · +2755/-38 · pivot empirico 6/7 zombie + 1/7 live · 12 Pages Gutenberg-disabled · admin shortcuts CPT · 12/12 smoke pass)
+- `recovery-v1.0/PROMPT_AGENT_WAVE4_7_FIX_5_PAGES_CLEANUP_BLOG_DOC.md` — ✅ done (5 phases · 10 file · +686/-15 · 35→19 Pages cleanup · Customizer lock per role editor · blog audit + admin notices · incident OOM is_super_admin risolto)
+- Wave 5 STEP 1/2/3 prompt — inline in chat orchestratore (non file), audit + design realign + 7+6 Pages SCF expansion · 8 commit P1→P8 STEP 3 + 4 commit STEP 3 coverage + 4 chore frontend fixes
 - **`prompts/PROMPT_AGENT_v1.0_WAVE4_PRODUCTION_READINESS.md`** — ⏸ ready to launch (5 phases, branch dedicato `feat/wave4-production-readiness`)
 - `deploy/PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` — runbook deploy archiviato (Fase 0+infra completata, deploy delta via rsync ad-hoc, Fasi 7-8 ancora aperte; sostituito de facto da `docs/DEPLOY.md`)
 - `_archive/prompts-completed/orchestration-original/` — prompt iniziali sessione 1
@@ -128,7 +139,7 @@ Per evitare future collisioni quando più agent committano in parallelo:
 - `docs/DESIGN.md` — design tokens (colori, typography, spacing)
 - `docs/ARCHITECTURE.md` — mappa theme + ACF schema + WP-Admin↔frontend coupling + WYSIWYG gaps
 - `docs/DEPLOY.md` — runbook deploy droplet + lessons learned
-- `docs/EDITOR-HANDOFF.md` v5.0 — manuale editoriale italiano per Elena/Ludovica/esterni (post-Wave 4.7.fix.4: modello mentale definitivo "una sola sorgente di verità per Page = SCF metabox, editor classico disabilitato sulle 12 Pages target", §3.6 dedicata agli archive CPT, admin path matrix per 15 URL Elena)
+- `docs/EDITOR-HANDOFF.md` v6.0 — manuale editoriale italiano per Elena/Ludovica/esterni (post-Wave 4.7.fix.5 + Wave 5 STEP 3 coverage: §3.7 lista canonica 19 Pages KEEP, §9 blog editing chiarezza completa, §3.6 archive CPT + admin shortcuts, modello mentale "una sola sorgente di verità per Page = SCF metabox" applicato a 13 Pages SCF-only)
 
 **Working knowledge** (`.claude/knowledge/`):
 - `recovery/` — release notes wave (5 file, vivi)
@@ -224,6 +235,23 @@ Le Wave 4.7.fix.2 e 4.7.fix.3 hanno fatto smoke test SOLO frontend (`curl` su UR
 Tool consigliato: WP-CLI `wp eval` con `apply_filters('use_block_editor_for_post', true, $post)` + `get_post($id)->post_content` per simulare admin view, oppure manual login admin se SSO disponibile su staging.
 
 **Falso negativo classico** (= cosa NON è stato fatto in fix.2/fix.3): assumere che "post_content non renderizzato sul frontend" = "post_content invisibile a Elena". È falso: l'editor admin mostra `post_content` sempre, indipendentemente da cosa fa il template. Lei lo vede, lo modifica, salva, frontend non cambia = perde fiducia nel CMS.
+
+### Lesson learned — Mai chiamare cap functions dentro `user_has_cap` o `map_meta_cap` filter (Wave 4.7.fix.5)
+
+Durante Wave 4.7.fix.5 Phase 4 (Customizer lock-down per ruolo editor) la prima versione di `inc/admin/customizer-lockdown.php` aveva, dentro la callback del filtro `user_has_cap`, una chiamata a `is_super_admin($user->ID)` come check ulteriore oltre `in_array('administrator', $user->roles)`. **`is_super_admin()` su single-site fa internamente `$user->has_cap('delete_users')`** → `apply_filters('user_has_cap', ...)` → ri-trigger della stessa callback → `is_super_admin()` → **ricorsione infinita**.
+
+Test successivo con `wp eval 'wp_set_current_user(9); current_user_can("customize")'` (WP-CLI ha `memory_limit = -1`) ha saturato RAM 2GB + swap 2GB → thrashing → nginx/sshd/php-fpm non rispondenti per ~8 min (frontend `000`, SSH "banner exchange timed out"). OOM killer ha terminato php runaway → servizi ripristinati. Nessun reboot.
+
+**Regola tassativa**: dentro callback dei filtri `user_has_cap`, `map_meta_cap`, `user_can` **MAI chiamare**:
+- `current_user_can()`, `user_can()` → fanno cap check, ricorsione
+- `is_super_admin()` → su single-site fa `has_cap('delete_users')`, ricorsione
+- Funzioni che internamente fanno cap check
+
+**Accesso safe ai dati user dentro queste callback**:
+- `$user->roles` (array)
+- `$user->caps` (array raw)
+- `$user->allcaps` (array merged)
+- Accesso diretto a property, NON passa dal filtro → no ricorsione
 
 ## Design system (locked)
 
@@ -381,5 +409,5 @@ Re-read this file. If still in doubt, ask Duccio. Don't guess on:
 - Anything that would appear in schema markup as fact
 
 ---
-*Last updated: 2026-05-08 · v1.3.10-wave4-7-fix-4-strategy-a-full-scf · 12 Page WP con Gutenberg disabled (4 hub + 7 dual-source bonificate + 1 child legacy lo-studio) · 1 migrazione reale post_content → SCF + 6 cleanup zombie · admin shortcuts per archive CPT · EDITOR-HANDOFF v5.0 · modello mentale editor definitivo "una sola sorgente di verità per Page = SCF metabox, editor classico disabilitato" · 2 nuove lesson learned in Workflow rules (OPcache + admin-side smoke test obbligatorio)*
+*Last updated: 2026-05-11 · v1.3.13-wave5-step3-coverage CUT-READY · 5 wave consecutive (fix.5 + Wave 5 STEP 1 audit + STEP 2 design realign + STEP 3 Pages SCF + STEP 3 coverage) + 4 chore frontend polish · 19 Pages canoniche · 13 Pages Gutenberg-disabled SCF-only · 7 Pages alto-traffico SCF expansion completa (107 field) · 2 archive CPT + 3 term tipo-area SCF metabox · tokens.css rebuilt da DESIGN.md · EDITOR-HANDOFF v6.0 · Elena OK definitivo 2026-05-11 · 3 lesson learned in Workflow rules (OPcache + admin-side smoke test + cap-recursion in user_has_cap) · prossimo: front-end debug visivo + cut produzione*
 *Maintained by orchestrator (Claude in chat) after each milestone.*
