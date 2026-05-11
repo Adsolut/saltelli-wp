@@ -187,6 +187,86 @@
             "new_lines": "",
             "maxlength": "",
             "placeholder": ""
+        },
+        {
+            "key": "field_hub_aree_card_cta",
+            "label": "Card cluster — etichetta CTA (condivisa)",
+            "name": "hub_aree_card_cta",
+            "type": "text",
+            "instructions": "Microtesto cliccabile in fondo a ogni card cluster (uguale per tutte e 3).",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "default_value": "Esplora →",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_adp_cta_tab",
+            "label": "CTA finale",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_hub_aree_cta_eyebrow",
+            "label": "CTA — etichetta sopra il titolo",
+            "name": "hub_aree_cta_eyebrow",
+            "type": "text",
+            "instructions": "Riga in maiuscoletto sopra il titolo della sezione CTA finale.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "default_value": "§ Non trovi la materia?",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_hub_aree_cta_title",
+            "label": "CTA — titolo",
+            "name": "hub_aree_cta_title",
+            "type": "textarea",
+            "instructions": "Titolo della sezione CTA finale (1 frase).",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "rows": 2,
+            "default_value": "Scrivici una nota: in 24 ore valutiamo se è di nostra competenza.",
+            "new_lines": "",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_hub_aree_cta_btn_label",
+            "label": "CTA — etichetta bottone",
+            "name": "hub_aree_cta_btn_label",
+            "type": "text",
+            "instructions": "Testo del bottone della CTA finale.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "50", "class": "", "id": ""},
+            "default_value": "Contattaci",
+            "maxlength": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_hub_aree_cta_url",
+            "label": "CTA — destinazione bottone",
+            "name": "hub_aree_cta_url",
+            "type": "text",
+            "instructions": "Percorso relativo (es. /contatti/) o URL completo.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "50", "class": "", "id": ""},
+            "default_value": "/contatti/",
+            "maxlength": "",
+            "placeholder": ""
         }
     ],
     "location": [
@@ -210,5 +290,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1778365000
+    "modified": 1778457600
 }
