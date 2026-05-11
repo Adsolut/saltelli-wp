@@ -235,6 +235,18 @@ function saltelli_get_breadcrumb_chain($post_id = null) {
         $chain[] = ['name' => saltelli_breadcrumb_pt_label('avvocato'), 'url' => get_post_type_archive_link('avvocato')];
     } elseif ($post->post_type === 'competenza') {
         $chain[] = ['name' => saltelli_breadcrumb_pt_label('competenza'), 'url' => saltelli_aree_hub_url()];
+        // Cluster intermedio: term tipo-area (privati / imprese / contenzioso-amministrativo).
+        // Coerente con la struttura URL /aree-di-pratica/{cluster}/{competenza}/ e col breadcrumb
+        // del taxonomy archive. Primo term = quello usato dal permalink rewrite (cpt-competenza.php).
+        $sl_tipo_area = get_the_terms($post_id, 'tipo-area');
+        if (is_array($sl_tipo_area) && !empty($sl_tipo_area)) {
+            $sl_cluster      = $sl_tipo_area[0];
+            $sl_cluster_link = get_term_link($sl_cluster);
+            $chain[]         = [
+                'name' => $sl_cluster->name,
+                'url'  => is_wp_error($sl_cluster_link) ? '' : $sl_cluster_link,
+            ];
+        }
     } elseif ($post->post_type === 'post') {
         $blog_page_id = (int) get_option('page_for_posts');
         if ($blog_page_id) {

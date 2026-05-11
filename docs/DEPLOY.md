@@ -81,6 +81,7 @@ Da locale:
 
 ```bash
 rsync -avz --delete \
+    --rsync-path="sudo rsync" \
     --exclude '.DS_Store' \
     --exclude '*.bak' \
     --exclude 'node_modules' \
@@ -88,6 +89,8 @@ rsync -avz --delete \
     wp-content/themes/saltelli/ \
     deploy@178.62.207.50:/var/www/saltelli/wp-content/themes/saltelli/
 ```
+
+`--rsync-path="sudo rsync"` è **obbligatorio**: dopo il primo deploy lo Step 4 chowna il theme dir a `www-data`, quindi l'utente `deploy` non ha più write diretto su quei file/dir — rsync deve girare via `sudo` lato remoto (l'utente `deploy` ha NOPASSWD sudo, niente `requiretty`). Senza questo flag il rsync fallisce con `rsync: [receiver] mkstemp ... Permission denied (13)` / `failed to set times on ...: Operation not permitted`. Per deploy chirurgici di pochi file, rsync il singolo path esatto (es. `… inc/helpers.php deploy@…:/var/www/saltelli/wp-content/themes/saltelli/inc/helpers.php`) sempre con `--rsync-path="sudo rsync"`.
 
 `--delete` rimuove file lato server che non sono più in locale (idempotente). Usalo solo se sicuro.
 
