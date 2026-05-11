@@ -16,14 +16,14 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 
 **Strategy:** "Legal Luxury Minimal" — boutique editoriale italiano, tipografia dominante, palette navy/crema/bronzo. Tier-1 deep clusters: Tributario · Lavoro · Famiglia LGBTQ+. The other 16 practice areas get tier-2 lighter pages.
 
-## Current state — v1.3.8-wave4-7-fix-2-true-fix
+## Current state — v1.3.10-wave4-7-fix-4-strategy-a-full-scf
 
-**Last updated:** 2026-05-08 (Wave 4.7.fix.2 mergeata: studio_body editorial JSON default + menu primary slug-based rebuild + 14 redirect 301 legacy + SCF tier-2 60→93 fields, 13 tabs + EDITOR-HANDOFF v3.0)
-**Branch:** `main` · last merge `7f5c25f` (Wave 4.7.fix.2 TRUE FIX) · tag `v1.3.8-wave4-7-fix-2-true-fix` · 5 commits P1→P5 + merge no-ff
+**Last updated:** 2026-05-08 (Wave 4.7.fix.4 mergeata: 12 Page WP con Gutenberg disabled · post_content dualità eliminata · admin shortcuts per archive CPT · EDITOR-HANDOFF v5.0)
+**Branch:** `main` · last merge Wave 4.7.fix.4 STRATEGY A · tag `v1.3.10-wave4-7-fix-4-strategy-a-full-scf` · 6 commits P1→P6 + merge no-ff · +2755/-38 su 26 file
 **Demo:** ✅ presentata al cliente · feedback iteration assorbita
-**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.3.8-wave4-7-fix-2-true-fix` · 26/26 URL smoke test pass · SCF 93 fields (13 tabs) · menu primary rebuilt slug-based (eliminati 17/22 URL pre-Wave 5)
-**Active phase:** Onboarding Elena 30 min con EDITOR-HANDOFF v3.0 · acceptance test editoriale finale (Elena/Ludovica console+CF7+cross-browser+copy)
-**Next:** Tokens drift audit baseline (3-layer: DESIGN.md→tokens.css→sections.css 605 hardcoded) salvato in `docs/qa/tokens-drift-audit-2026-05-08.md` (untracked, dormiente — sessione dedicata futura) · valutare Wave 4.9 Gutenberg migration · cut produzione
+**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.3.10-wave4-7-fix-4-strategy-a-full-scf` · 12 Page WP con Gutenberg disabled (4 hub + 7 dual-source bonificate + 1 child legacy lo-studio) · 1 migrazione reale post_content → SCF (Page 2713 richiedi-preventivo, 879 chars) · 6 cleanup post_content zombie · 7 backup `_legacy_post_content_backup` post_meta recoverable · 12/12 smoke test PASS · frontend content invariato
+**Active phase:** Acceptance test editoriale Elena con modello mentale ripristinato definitivo ("una sola sorgente di verità per Page = SCF metabox, editor classico disabilitato") · validazione workflow rivisto post-Wave 4.7.fix.4 via WP-Admin reale
+**Next:** Tokens drift audit baseline (3-layer: DESIGN.md→tokens.css→sections.css 605 hardcoded) salvato in `docs/qa/tokens-drift-audit-2026-05-08.md` (untracked, dormiente — sessione dedicata futura) · valutare Wave 4.9 Gutenberg migration (ora superflua dato che Gutenberg è disabilitato sulle 12 Pages SCF-only) · cut produzione · valutare ripristino Yoast `twitter:label1` reading-time meta (-102 byte side effect benigno su 2 pagine)
 
 **Infra staging (consolidata 2026-04-30):**
 - Droplet DO `saltelli-staging-ams3-01` · IPv4 `178.62.207.50` · ams3 · s-1vcpu-2gb · Ubuntu 24.04 LTS
@@ -64,7 +64,9 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 | **Wave 4.7.fix — SCF Migration + Theme Options Activation (50/50 fields seedabili popolati, write-side pipeline funzionale)** | **1.3.6-wave4-7-fix-scf-migration** | **✅** |
 | **Wave 4.7.fix.1 — SCF URL Validation Fix (CTA interni type:url→text)** | **1.3.7-wave4-7-fix-1-scf-url-validation** | **✅** |
 | **Wave 4.7.fix.2 — TRUE FIX (studio_body editorial JSON default + menu primary slug-based rebuild + 14 redirect 301 legacy + SCF tier-2 60→93 fields, 13 tabs + EDITOR-HANDOFF v3.0 + slug rename `risultati`→`casi-rappresentativi`)** | **1.3.8-wave4-7-fix-2-true-fix** | **✅** |
-| Acceptance test editoriale (Elena/Ludovica console+CF7+cross-browser+copy) | parallel | 🔍 ACTIVE |
+| **Wave 4.7.fix.3 — PAGE METABOX MIGRATION (30 SCF field da Theme Options globali → Page metabox delle 4 Page WP: Home 17, Chi Siamo 2822, Aree 2812, Risorse 2813. Theme Options 13/14 → 9 tab. Helper `saltelli_page_field()` introdotto. EDITOR-HANDOFF v4.0. Risolve feedback Elena "il CMS non è usabile in questo modo")** | **1.3.9-wave4-7-fix-3-page-metabox** | **✅** |
+| **Wave 4.7.fix.4 — STRATEGY A FULL SCF MIGRATION (Gutenberg disabled per 12 Page WP target: 4 hub + 7 dual-source bonificate + 1 child legacy lo-studio. Discovery empirica ha rivelato 6/7 post_content zombie + 1/7 live (Page 2713 → SCF body_content). Admin shortcuts per archive CPT. EDITOR-HANDOFF v5.0. Modello mentale editor definitivo: una sola sorgente di verità per Page = SCF metabox)** | **1.3.10-wave4-7-fix-4-strategy-a-full-scf** | **✅** |
+| Acceptance test editoriale Elena via WP-Admin reale post-Wave 4.7.fix.4 | parallel | 🔍 ACTIVE |
 | Cut produzione (DNS switch staging→prod) | 1.0.0 | ⏸ |
 
 ### 0.17.x — consolidation log (4 collisioni di numbering risolte)
@@ -112,6 +114,8 @@ Per evitare future collisioni quando più agent committano in parallelo:
 - `recovery-v1.0/PROMPT_AGENT_v1.0_WAVE3_TEMPLATE_REFACTOR.md` — ✅ done
 - `recovery-v1.0/PROMPT_AGENT_v1.0_DEBUG_QA.md` — ✅ done (4 bugs found, 3 closed + 1 deferred, P0 architectural fix `page_slug ==`)
 - `recovery-v1.0/PROMPT_AGENT_WAVE4_7_FIX_2_TRUE_FIX.md` — ✅ done (5 phases · 21 file · +1688/-57 · 26/26 URL smoke pass · SCF 60→93 fields)
+- `recovery-v1.0/PROMPT_AGENT_WAVE4_7_FIX_3_PAGE_METABOX.md` — ✅ done (5 phases · 20 file · +1849/-643 · 30 field migrati · 4 Pages WP affected · Theme Options 13/14→9 tab · 4/4 smoke pass)
+- `recovery-v1.0/PROMPT_AGENT_WAVE4_7_FIX_4_STRATEGY_A_FULL_SCF.md` — ✅ done (6 phases · 26 file · +2755/-38 · pivot empirico 6/7 zombie + 1/7 live · 12 Pages Gutenberg-disabled · admin shortcuts CPT · 12/12 smoke pass)
 - **`prompts/PROMPT_AGENT_v1.0_WAVE4_PRODUCTION_READINESS.md`** — ⏸ ready to launch (5 phases, branch dedicato `feat/wave4-production-readiness`)
 - `deploy/PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` — runbook deploy archiviato (Fase 0+infra completata, deploy delta via rsync ad-hoc, Fasi 7-8 ancora aperte; sostituito de facto da `docs/DEPLOY.md`)
 - `_archive/prompts-completed/orchestration-original/` — prompt iniziali sessione 1
@@ -124,7 +128,7 @@ Per evitare future collisioni quando più agent committano in parallelo:
 - `docs/DESIGN.md` — design tokens (colori, typography, spacing)
 - `docs/ARCHITECTURE.md` — mappa theme + ACF schema + WP-Admin↔frontend coupling + WYSIWYG gaps
 - `docs/DEPLOY.md` — runbook deploy droplet + lessons learned
-- `docs/EDITOR-HANDOFF.md` v3.0 — manuale editoriale italiano per Elena/Ludovica/esterni (post-Wave 4.7.fix.2: include §3.5 "Pagina WP vs Tassonomia vs Archive CPT" + admin path matrix per 15 URL Elena)
+- `docs/EDITOR-HANDOFF.md` v5.0 — manuale editoriale italiano per Elena/Ludovica/esterni (post-Wave 4.7.fix.4: modello mentale definitivo "una sola sorgente di verità per Page = SCF metabox, editor classico disabilitato sulle 12 Pages target", §3.6 dedicata agli archive CPT, admin path matrix per 15 URL Elena)
 
 **Working knowledge** (`.claude/knowledge/`):
 - `recovery/` — release notes wave (5 file, vivi)
@@ -193,6 +197,33 @@ Se come orchestratore vedi un fix necessario mentre Claude Code sta lavorando: *
 ### Identità git
 
 Dal 2026-05-05 entrambe le sessioni committano sotto `AdsolutAdv <aldo.santoro@adsolut.it>` (config locale repo). La storia precedente firmata `Codencore <git@adhost.it>` resta immutabile.
+
+### Lesson learned — OPcache stale dopo edit `inc/helpers.php` (Wave 4.7.fix.3)
+
+PHP-FPM mantiene OPcache su file `inc/helpers.php` e altri `.php` letti hot. Quando si edita un helper su staging via rsync, le modifiche **non sono visibili al frontend immediatamente** finché OPcache non rigenera l'opcode. Sintomo: helper aggiornato sul disco ma frontend continua a usare la versione precedente (smoke test inspiegabilmente fallito post-deploy).
+
+Mitigazione obbligatoria post-edit di file PHP critici (helpers, migrations, hooks):
+
+```sh
+ssh deploy@178.62.207.50 "sudo systemctl reload php8.2-fpm"
+# oppure più chirurgico:
+ssh deploy@178.62.207.50 "sudo -u www-data wp eval 'opcache_reset();' --path=/var/www/saltelli"
+```
+
+**File trigger** (cache bust raccomandato dopo modifica): `inc/helpers.php`, `inc/cpt-*.php`, `inc/migrations/*.php`, `inc/admin/*.php`, `functions.php`, `inc/redirects.php`.
+
+### Lesson learned — Admin-side smoke test per ogni Wave che tocca Pages WP (Wave 4.7.fix.4)
+
+Le Wave 4.7.fix.2 e 4.7.fix.3 hanno fatto smoke test SOLO frontend (`curl` su URL → 200 + content render). Hanno mancato il problema "Elena vede content legacy nel `post_content` che non viene renderizzato sul frontend ma confonde in admin". La Wave 4.7.fix.4 ha richiesto emergency cleanup di una situazione che era già presente post-fix.3 se solo avessimo controllato in admin.
+
+**Step obbligatorio post-deploy per ogni Wave che tocca SCF field group, template Pages, o `post_content`**:
+
+1. **Frontend smoke test** (esistente): `curl -s URL | grep <content>` su ogni Page affetta — verifica content visibile invariato.
+2. **Admin-side smoke test** (nuovo): per ogni Page WP affetta, simulare apertura WP-Admin → Pagine → seleziona Page → Modifica. Descrivere COSA VEDE L'EDITOR (Gutenberg attivo o disabled, `post_content` content presente o vuoto, metabox SCF visibili e popolate, notice presenti).
+
+Tool consigliato: WP-CLI `wp eval` con `apply_filters('use_block_editor_for_post', true, $post)` + `get_post($id)->post_content` per simulare admin view, oppure manual login admin se SSO disponibile su staging.
+
+**Falso negativo classico** (= cosa NON è stato fatto in fix.2/fix.3): assumere che "post_content non renderizzato sul frontend" = "post_content invisibile a Elena". È falso: l'editor admin mostra `post_content` sempre, indipendentemente da cosa fa il template. Lei lo vede, lo modifica, salva, frontend non cambia = perde fiducia nel CMS.
 
 ## Design system (locked)
 
@@ -325,6 +356,7 @@ Lezione v0.19→v0.30: l'agent Code aveva tradotto solo 20% dei JSX inline (quel
 5. **Decisions autonomously taken must be reported.** Better verbose than mute.
 6. **Never write to:** `_thumbnail_id` on CPT avvocato, `bio_estesa` on existing avvocati, `tokens.css` design variables, `config.local.json` (gitignored — credentials).
 7. **Never disable plugins** during a run.
+8. **Admin-side smoke test obbligatorio** per ogni Wave che tocca SCF field group, template Pages, o `post_content`. Frontend `curl` da solo NON copre ciò che Elena vede in WP-Admin. Vedi § "Lesson learned — Admin-side smoke test" sopra.
 
 ## Tone of communication when reporting back to Duccio
 
@@ -349,5 +381,5 @@ Re-read this file. If still in doubt, ask Duccio. Don't guess on:
 - Anything that would appear in schema markup as fact
 
 ---
-*Last updated: 2026-05-08 · v1.3.8-wave4-7-fix-2-true-fix · studio_body bug fix + menu primary slug-based rebuild + 14 redirect 301 + SCF tier-2 (60→93 fields, 13 tabs) + EDITOR-HANDOFF v3.0 · Elena può editare TUTTO il copy editoriale (incluso hub pages + CPT archive headers)*
+*Last updated: 2026-05-08 · v1.3.10-wave4-7-fix-4-strategy-a-full-scf · 12 Page WP con Gutenberg disabled (4 hub + 7 dual-source bonificate + 1 child legacy lo-studio) · 1 migrazione reale post_content → SCF + 6 cleanup zombie · admin shortcuts per archive CPT · EDITOR-HANDOFF v5.0 · modello mentale editor definitivo "una sola sorgente di verità per Page = SCF metabox, editor classico disabilitato" · 2 nuove lesson learned in Workflow rules (OPcache + admin-side smoke test obbligatorio)*
 *Maintained by orchestrator (Claude in chat) after each milestone.*
