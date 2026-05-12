@@ -210,7 +210,14 @@ while (have_posts()) :
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Approfondimento', 'saltelli'); ?></div>
                     <div class="sl-competenza__prose sl-competenza__prose--extended" data-toc-source>
-                        <?php echo wp_kses_post($body_ext); ?>
+                        <?php
+                        /* Wave 6.0 partial — body_extended render via apply_filters('the_content') invece di wp_kses_post()
+                         * per allineamento semantic con post_content render (wpautop + shortcode + oEmbed).
+                         * Prerequisito per migration post_content → body_extended (vedi scripts/migrate-cpt-competenza-content.php). */
+                        $sl_body_ext_rendered = apply_filters('the_content', $body_ext);
+                        $sl_body_ext_rendered = str_replace(']]>', ']]&gt;', $sl_body_ext_rendered);
+                        echo $sl_body_ext_rendered;
+                        ?>
                     </div>
                 </div>
             </section>

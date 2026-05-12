@@ -114,3 +114,50 @@ if (!empty($src) && empty($dst)) {
 - Wave Elena FB Batch 1 changelog: `CLAUDE.md` riga "Wave Elena Feedback Batch 1 — 13 fix Q+S" (5 fix S)
 - Wave Elena FB Batch 3 changelog: `CLAUDE.md` riga "Wave Elena Feedback Batch 3 — 1 fix J"
 - Cleanup chore Wave C BEM rename: vedi commit `chore/post-batch3-housekeeping` (CSS dead-code cleanup `.sl-tier1__*` 71 rule rimosse)
+
+---
+
+## Wave 6.0 partial — CPT competenza migration script
+
+**Contesto:** Elena non riesce a editare comodamente alcune CPT competenza
+(es. post 2670 `responsabilita-medica`) perché hanno `post_content` compilato
+in HTML classic pre-Gutenberg. Gutenberg moderno apre quel content in 1
+"Blocco classico" monolitico → UX confusa. Migration `post_content` →
+`body_extended` SCF wysiwyg unifica pattern SCF-only su tutte le 19 competenze.
+
+**Script disponibile:** `wp-content/themes/saltelli/scripts/migrate-cpt-competenza-content.php`
+
+**Prerequisito template:** `single-competenza.php` riga ~213 patchato per renderare
+`body_extended` via `apply_filters('the_content', $body_ext)` invece di
+`wp_kses_post()` — allineamento semantic con post_content render (wpautop +
+shortcode + oEmbed). Frontend pixel-identical pre/post migration.
+
+**Logica script (idempotent, fail-safe `--dry-run` default):**
+
+1. SKIP `already`  — `body_extended` già popolato
+2. SKIP `empty`    — `post_content` vuoto
+3. SKIP `gutenberg` — `post_content` contiene blocchi `<!-- wp: -->` (manual review)
+4. MIGRATE        — backup `_legacy_post_content_backup` postmeta → copia in `body_extended` → svuota `post_content`
+
+**Esecuzione (WP-CLI):**
+
+```sh
+# DRY-RUN (default, no DB writes):
+ssh deploy@178.62.207.50 "sudo -u www-data wp eval-file /var/www/saltelli/wp-content/themes/saltelli/scripts/migrate-cpt-competenza-content.php --dry-run --path=/var/www/saltelli"
+
+# WET-RUN (esegui migration reale):
+ssh deploy@178.62.207.50 "sudo -u www-data wp eval-file /var/www/saltelli/wp-content/themes/saltelli/scripts/migrate-cpt-competenza-content.php --wet-run --path=/var/www/saltelli"
+```
+
+**Rollback per singolo post:**
+
+```sh
+ssh deploy@178.62.207.50 "sudo -u www-data wp post meta get {ID} _legacy_post_content_backup --path=/var/www/saltelli" > /tmp/restore.html
+ssh deploy@178.62.207.50 "sudo -u www-data wp post update {ID} --post_content=\"\$(cat /tmp/restore.html)\" --path=/var/www/saltelli"
+ssh deploy@178.62.207.50 "sudo -u www-data wp post meta delete {ID} body_extended --path=/var/www/saltelli"
+```
+
+**Status:** pre-cut staging dry-run prima del wet-run effettivo.
+
+Wave 6.0 full (disable Gutenberg per CPT competenza con `SALTELLI_SCF_ONLY_PAGES`-like
+allowlist + UI metabox styling) resta backlog post-cut.
