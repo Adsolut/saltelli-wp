@@ -412,27 +412,15 @@ $avatar_html = function ($av_post) {
     </section>
     <?php endif; ?>
 
-    <!-- CTA FINALE -->
-    <section class="sl-tipoarea__cta">
-        <div class="sl-container">
-            <div class="sl-tipoarea__cta-grid">
-                <div class="sl-mono sl-tipoarea__section-eyebrow">§ 04 — <?php echo esc_html($sl_cta_label); ?></div>
-                <div class="sl-tipoarea__cta-body">
-                    <h2 class="sl-tipoarea__cta-title">
-                        <?php echo esc_html($sl_cta_h2_main); ?><br>
-                        <em><?php echo esc_html($sl_cta_h2_em); ?></em>
-                    </h2>
-                    <p class="sl-tipoarea__cta-lede">
-                        <?php echo esc_html($sl_cta_lede); ?>
-                    </p>
-                    <a class="sl-btn sl-btn--primary sl-tipoarea__cta-btn" href="<?php echo esc_url($sl_cta_btn_url); ?>">
-                        <span><?php echo esc_html($sl_cta_btn_label); ?></span>
-                        <span class="arrow" aria-hidden="true">→</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <?php
+    /* === Wave-S fix #16 — sezione .sl-tipoarea__cta "§ 04 — Primo incontro"
+       rimossa per i 3 term pages (privati/imprese/contenzioso-amministrativo) —
+       feedback Elena: ridondante con la pre-footer "§ Ultima chiamata"
+       globale (vedi footer.php:107). I 9 SCF field associati
+       (tipo_area_term_cta_label, cta_h2_main, cta_h2_em, cta_lede, cta_btn_label,
+       cta_btn_url) restano nel group_tipo_area_term_v1 JSON come orphan —
+       cleanup post-cut. CSS .sl-tipoarea__cta* (sections.css) resta orphan. === */
+    ?>
 
 </div><!-- /.sl-tipoarea -->
 

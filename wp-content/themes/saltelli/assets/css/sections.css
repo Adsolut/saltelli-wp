@@ -5464,11 +5464,12 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     text-align: right;
     white-space: nowrap;
 }
-.sl-tipoarea__areas-list .sl-area--tier1 .sl-area__title::before {
-    content: "★ ";
-    color: var(--accent);
-    font-style: italic;
-}
+/* === Wave-S fix #17 — stellina "★" tier-1 rimossa (feedback Elena: bug visivo
+   sui 3 term pages). L'effetto "prima lettera bronze" su .sl-area--tier1 è già
+   gestito globalmente da components.css:271 (.sl-area--tier1 .sl-area__title::first-letter
+   { color: var(--accent); }) — stesso pattern della homepage areas list. Rimuovendo
+   il ::before "★ " la regola first-letter torna a colpire la lettera reale del
+   titolo (es. "D" di "Diritto tributario") invece del carattere stellina iniettato. */
 @media (max-width: 767px) {
     .sl-tipoarea__areas-list .sl-area {
         grid-template-columns: 1fr;

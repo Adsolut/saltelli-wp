@@ -89,14 +89,10 @@ $sl_clusters = [
     </div>
 </section>
 
-<section class="sl-hub-cta" aria-label="<?php esc_attr_e('CTA Aree di Pratica', 'saltelli'); ?>">
-    <div class="sl-container sl-hub-cta__inner">
-        <p class="sl-mono"><?php echo esc_html(saltelli_page_field('hub_aree_cta_eyebrow', '§ Non trovi la materia?')); ?></p>
-        <h2 class="sl-hub-cta__title">
-            <?php echo esc_html(saltelli_page_field('hub_aree_cta_title', 'Scrivici una nota: in 24 ore valutiamo se è di nostra competenza.')); ?>
-        </h2>
-        <a class="sl-cta sl-cta--primary" href="<?php echo esc_url(home_url(saltelli_page_field('hub_aree_cta_url', '/contatti/'))); ?>">
-            <?php echo esc_html(saltelli_page_field('hub_aree_cta_btn_label', 'Contattaci')); ?>
-        </a>
-    </div>
-</section>
+<?php
+/* === Wave-S fix #9 — sezione .sl-hub-cta "Scrivici una nota: in 24 ore..."
+   rimossa (feedback Elena: ridondante con CTA "§ Ultima chiamata" della pre-footer
+   globale + voce contatti nel menu primary). I 4 SCF field associati
+   (hub_aree_cta_eyebrow/title/url/btn_label) restano nel group JSON come orphan —
+   da pulire post-cut con migration dedicata. CSS .sl-hub-cta orphan in sections.css. */
+?>
