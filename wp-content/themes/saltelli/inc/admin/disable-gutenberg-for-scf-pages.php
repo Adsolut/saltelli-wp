@@ -6,12 +6,13 @@
  * disabilitando il block editor sulle Pages target. Elena vede ora SOLO il
  * metabox SCF + un notice di guidance. Una sola sorgente di verità per Page.
  *
- * Page IDs target (13 totale):
- *   - 4 hub Wave 4.7.fix.3: 17 (home), 2822 (chi-siamo), 2812 (aree-di-pratica), 2813 (risorse)
+ * Page IDs target (12 totale post-Wave P7):
+ *   - 3 hub Wave 4.7.fix.3: 17 (home), 2812 (aree-di-pratica), 2813 (risorse)
  *   - 7 target Wave 4.7.fix.4: 23 (contatti), 2708 (faq), 2709 (guide-gratuite),
  *                              2712 (come-lavoriamo), 2711 (prima-consulenza),
  *                              372 (lavora-con-noi), 2713 (richiedi-preventivo)
- *   - 1 child SCF-driven: 2811 (lo-studio, child di chi-siamo)
+ *   - 1 editorial SCF-driven: 2811 (chi-siamo — ex lo-studio, rinominata slug in Wave P7;
+ *                             Page 2822 hub legacy cancellata, consolidamento chi-siamo = lo-studio)
  *   - 1 Wave 5 STEP 3 coverage-completion: 2714 (prenota-appuntamento — group_prenota_appuntamento_v1)
  *
  * NB: gli ID si riferiscono al DB di staging; in locale (Docker) alcuni slug hanno
@@ -22,6 +23,7 @@
  * @package Saltelli
  * @since 1.3.10 Wave 4.7.fix.4
  * @since 1.3.13 Wave 5 STEP 3 coverage-completion — +2714 prenota-appuntamento
+ * @since 1.3.15 Wave P7 consolidamento — −2822 (cancellata), 2811 ora slug `chi-siamo`. 13 → 12 IDs.
  */
 
 defined('ABSPATH') || exit;
@@ -37,10 +39,10 @@ if (!defined('SALTELLI_SCF_ONLY_PAGES')) {
         2712,  // come-lavoriamo
         2713,  // richiedi-preventivo
         2714,  // prenota-appuntamento (Wave 5 STEP 3 coverage-completion)
-        2811,  // lo-studio (child di chi-siamo)
+        2811,  // chi-siamo (ex lo-studio — rinominata slug in Wave P7 consolidamento)
         2812,  // aree-di-pratica (hub)
         2813,  // risorse (hub)
-        2822,  // chi-siamo (hub)
+        // 2822 RIMOSSO — Page hub chi-siamo cancellata in Wave P7 (consolidamento chi-siamo = lo-studio)
     ]);
 }
 

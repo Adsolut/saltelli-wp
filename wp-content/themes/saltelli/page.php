@@ -18,34 +18,33 @@ get_header();
 
 while (have_posts()) :
     the_post();
-    // Wave 5 routing post-rename:
-    //   /chi-siamo/        → HUB Chi Siamo (page-chi-siamo-hub.php)
-    //   /chi-siamo/lo-studio/ → page Lo Studio (page-lo-studio.php)
+    // Wave P7 routing post-consolidamento (chi-siamo = lo-studio):
+    //   /chi-siamo/        → page editoriale (page-lo-studio.php) — Page 2811 rinominata slug
     //   /aree-di-pratica/  → HUB Aree (page-aree-di-pratica-hub.php)
     //   /risorse/          → HUB Risorse (page-risorse-hub.php)
     //   /costi-e-consulenze/ → HUB Costi (page-costi-e-consulenze-hub.php)
-    $sl_lo_studio = is_page('lo-studio');
-    $sl_chi_siamo_hub = is_page('chi-siamo');
+    // NB: 'lo-studio' slug non esiste più (redirect 301 → /chi-siamo/), il check resta
+    //     per safety se per qualche motivo l'URL viene servito direttamente.
+    $sl_chi_siamo = is_page('chi-siamo') || is_page('lo-studio');
     $sl_casi      = is_page('casi');
-    $sl_hub_any   = $sl_chi_siamo_hub
-        || is_page('aree-di-pratica')
+    $sl_hub_any   = is_page('aree-di-pratica')
         || is_page('risorse')
         || is_page('costi-e-consulenze');
     ?>
-    <article <?php post_class('sl-page' . ($sl_lo_studio ? ' sl-chi-siamo' : '') . ($sl_casi ? ' sl-casi-page' : '') . ($sl_hub_any ? ' sl-page--hub' : '')); ?>>
+    <article <?php post_class('sl-page' . ($sl_chi_siamo ? ' sl-chi-siamo' : '') . ($sl_casi ? ' sl-casi-page' : '') . ($sl_hub_any ? ' sl-page--hub' : '')); ?>>
 
         <?php
         // Wave 5 — hub pages (precedenza prima dei legacy is_page case).
-        if ($sl_chi_siamo_hub) {
-            get_template_part('template-parts/page', 'chi-siamo-hub');
+        if ($sl_chi_siamo) {
+            // Wave P7 consolidamento: /chi-siamo/ rende ora la pagina editoriale completa
+            // (ex "Lo Studio", Page 2811) — l'hub 3-card legacy (page-chi-siamo-hub.php) è dismesso.
+            get_template_part('template-parts/page', 'lo-studio');
         } elseif (is_page('aree-di-pratica')) {
             get_template_part('template-parts/page', 'aree-di-pratica-hub');
         } elseif (is_page('risorse')) {
             get_template_part('template-parts/page', 'risorse-hub');
         } elseif (is_page('costi-e-consulenze')) {
             get_template_part('template-parts/page', 'costi-e-consulenze-hub');
-        } elseif ($sl_lo_studio) {
-            get_template_part('template-parts/page', 'lo-studio');
         } elseif ($sl_casi) {
             get_template_part('template-parts/page', 'casi');
         } elseif (is_page('contatti')) {
