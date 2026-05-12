@@ -59,24 +59,26 @@ add_filter('upload_mimes', function ($mimes) {
 });
 
 /**
- * /lo-studio/ legacy → /chi-siamo/lo-studio/ (Wave 5 IA refactor).
+ * /lo-studio/ legacy → /chi-siamo/ (Wave P7 consolidamento).
  *
  * v0.10.0: introdotto perché /lo-studio/ catturava blog posts "lo-studio-..." →
  *          redirect canonical WP 301 indesiderato. Hook init priority 1 PRIMA
  *          di parse_request blocca questo.
- * Wave 5: target aggiornato. Ora /lo-studio/ è una page WP annidata sotto
- *          la hub /chi-siamo/, accessibile a /chi-siamo/lo-studio/.
+ * Wave 5: target era /chi-siamo/lo-studio/ (page annidata sotto hub).
+ * Wave P7: consolidamento — Page 2811 rinominata slug `chi-siamo`, hub 2822
+ *          cancellata. Target ora /chi-siamo/. Anche /chi-siamo/lo-studio/
+ *          (vecchio permalink annidato) viene catturato qui.
  *
- * NB: anche `inc/seo/legacy-redirects.php` mappa /lo-studio/ → /chi-siamo/lo-studio/.
- * Questo hook è ridondante ma kept per safety: se legacy-redirects.php non
- * caricato (es. theme partial), il behavior corretto persiste.
+ * NB: anche `inc/seo/legacy-redirects.php` mappa /lo-studio/ e
+ * /chi-siamo/lo-studio/ → /chi-siamo/. Questo hook è ridondante ma kept per
+ * safety: se legacy-redirects.php non caricato, il behavior corretto persiste.
  */
 add_action('init', function () {
     if (is_admin() || (defined('WP_CLI') && WP_CLI)) return;
     $request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
     $path = (string) parse_url($request_uri, PHP_URL_PATH);
-    if ($path === '/lo-studio/' || $path === '/lo-studio') {
-        wp_safe_redirect(home_url('/chi-siamo/lo-studio/'), 301);
+    if (in_array($path, ['/lo-studio', '/lo-studio/', '/chi-siamo/lo-studio', '/chi-siamo/lo-studio/'], true)) {
+        wp_safe_redirect(home_url('/chi-siamo/'), 301);
         exit;
     }
 }, 1);

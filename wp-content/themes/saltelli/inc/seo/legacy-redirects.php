@@ -62,8 +62,10 @@ function saltelli_legacy_redirect_map() {
         // Funnel utility legacy → contatti
         '/prenota-un-appuntamento/'                 => '/contatti/',
 
-        // Legacy menu /lo-studio/ → /chi-siamo/lo-studio/ (Wave 5: pagina annidata sotto hub)
-        '/lo-studio/'                               => '/chi-siamo/lo-studio/',
+        // Wave P7 consolidamento: /lo-studio/ e /chi-siamo/lo-studio/ → /chi-siamo/
+        // (Page 2811 ex "Lo Studio" rinominata slug `chi-siamo`, Page 2822 hub cancellata).
+        '/lo-studio/'                               => '/chi-siamo/',
+        '/chi-siamo/lo-studio/'                     => '/chi-siamo/',
     ];
 }
 endif;

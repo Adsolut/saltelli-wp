@@ -1,6 +1,6 @@
 {
     "key": "group_lo_studio_v1",
-    "title": "Saltelli — Page Lo Studio",
+    "title": "Saltelli — Page Chi Siamo (editoriale)",
     "fields": [
         {
             "key": "field_ls_advanced_tab",
@@ -519,7 +519,7 @@
             {
                 "param": "page_slug",
                 "operator": "==",
-                "value": "lo-studio"
+                "value": "chi-siamo"
             }
         ]
     ],
@@ -530,10 +530,10 @@
     "instruction_placement": "label",
     "hide_on_screen": [],
     "active": true,
-    "description": "Field group page Lo Studio: founding paragraphs (fallback editor classico) + timeline year range + timeline events repeater.",
+    "description": "Field group page Chi Siamo (editoriale, ex Lo Studio — Wave P7 consolidamento): hero + lede + founding paragraphs + 4 lawyers mini + 3 principi + timeline year range + timeline events repeater. Field name prefix `lo_studio_` mantenuto per non orfanare eventuali valori salvati. Location: page_slug == chi-siamo (era lo-studio).",
     "show_in_rest": false,
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1778600000
+    "modified": 1778700000
 }
