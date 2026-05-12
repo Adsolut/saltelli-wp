@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.16-wave-design-handoff-p9-archive-casi');
+define('SALTELLI_THEME_VERSION', '1.3.17-wave-elena-fb-batch-1');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
