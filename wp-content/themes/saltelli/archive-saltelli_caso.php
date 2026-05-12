@@ -17,6 +17,16 @@ $sl_arch_h1_main = (string) saltelli_option('archive_caso_h1_main', __('Casi', '
 $sl_arch_h1_em   = (string) saltelli_option('archive_caso_h1_emphasis', __('rappresentativi.', 'saltelli'));
 $sl_arch_intro   = (string) saltelli_option('archive_caso_intro', __('Una selezione anonimizzata di pratiche dello Studio. Storie con un dato comune: la complessità non risolta da chi è venuto prima.', 'saltelli'));
 
+// Wave Elena FB Batch 2 #13 — trust capsule (uniforma a archive-avvocato pattern).
+// TODO Wave 5.1: spostare archive_caso_trust_* in SCF additive (Theme Options tab "Archive Headers").
+$sl_casi_count           = (int) (wp_count_posts('saltelli_caso')->publish ?? 0);
+$sl_arch_trust_eyebrow   = __('§ Anonimizzati', 'saltelli');
+$sl_arch_trust_headline  = $sl_casi_count > 0
+    ? sprintf(__('%d casi anonimizzati.', 'saltelli'), $sl_casi_count)
+    : __('Casi anonimizzati.', 'saltelli');
+$sl_arch_trust_headline_em = __('Dal 2008.', 'saltelli');
+$sl_arch_trust_text      = __('Storie reali, dati protetti. Outcome verificabili. Pattern ricorrenti che attraversano materie e tribunali.', 'saltelli');
+
 // Pull-quote "caso simbolo" — ADDITIVE Wave P9 Design Handoff. Default vuoti:
 // se i 4 campi sono tutti vuoti la sezione non viene renderizzata.
 $sl_caso_simbolo_eyebrow = (string) saltelli_option('archive_caso_simbolo_eyebrow', '');
@@ -26,27 +36,43 @@ $sl_caso_simbolo_attr    = (string) saltelli_option('archive_caso_simbolo_attr',
 $sl_caso_simbolo_show    = ($sl_caso_simbolo_eyebrow !== '' || $sl_caso_simbolo_number !== '' || $sl_caso_simbolo_quote !== '' || $sl_caso_simbolo_attr !== '');
 ?>
 
-<section class="sl-blog sl-blog--archive sl-blog--casi">
+<section class="sl-blog sl-blog--archive sl-blog--casi sl-archive-casi">
     <div class="sl-container">
 
-        <header class="sl-section-head sl-page-hero sl-page-hero--compact">
-            <?php if (function_exists('saltelli_render_breadcrumb')) saltelli_render_breadcrumb(); ?>
-            <div class="sl-mono"><?php echo esc_html($sl_arch_eyebrow); ?></div>
-            <h1 class="sl-section-title sl-team__archive-h1" data-split-reveal>
-                <?php
-                $sl_h1 = esc_html($sl_arch_h1_main) . '<br><em>' . esc_html($sl_arch_h1_em) . '</em>';
-                if (function_exists('saltelli_split_h1_words')) {
-                    echo wp_kses(saltelli_split_h1_words($sl_h1), [
-                        'span' => ['class' => true, 'data-i' => true],
-                        'em'   => [],
-                        'br'   => [],
-                    ]);
-                } else {
-                    echo wp_kses($sl_h1, ['em' => [], 'br' => []]);
-                }
-                ?>
-            </h1>
-            <p class="sl-blog__archive-lede"><?php echo esc_html($sl_arch_intro); ?></p>
+        <header class="sl-archive-casi__hero sl-page-hero sl-page-hero--compact">
+            <div>
+                <?php if (function_exists('saltelli_render_breadcrumb')) saltelli_render_breadcrumb(); ?>
+                <div class="sl-mono sl-archive-casi__eyebrow" style="margin-bottom: 32px;">
+                    <?php echo esc_html($sl_arch_eyebrow); ?>
+                </div>
+                <h1 class="sl-archive-casi__h1" data-split-reveal>
+                    <?php
+                    $sl_h1 = esc_html($sl_arch_h1_main) . '<br><em>' . esc_html($sl_arch_h1_em) . '</em>';
+                    if (function_exists('saltelli_split_h1_words')) {
+                        echo wp_kses(saltelli_split_h1_words($sl_h1), [
+                            'span' => ['class' => true, 'data-i' => true],
+                            'em'   => [],
+                            'br'   => [],
+                        ]);
+                    } else {
+                        echo wp_kses($sl_h1, ['em' => [], 'br' => []]);
+                    }
+                    ?>
+                </h1>
+                <p class="sl-archive-casi__lede"><?php echo esc_html($sl_arch_intro); ?></p>
+            </div>
+            <aside class="sl-archive-casi__trust" role="complementary" aria-label="<?php esc_attr_e('Studio · casi', 'saltelli'); ?>">
+                <div class="sl-mono sl-archive-casi__trust-eyebrow">
+                    <?php echo esc_html($sl_arch_trust_eyebrow); ?>
+                </div>
+                <p class="sl-archive-casi__trust-headline">
+                    <?php echo esc_html($sl_arch_trust_headline); ?><br>
+                    <em><?php echo esc_html($sl_arch_trust_headline_em); ?></em>
+                </p>
+                <p class="sl-archive-casi__trust-text">
+                    <?php echo esc_html($sl_arch_trust_text); ?>
+                </p>
+            </aside>
         </header>
 
         <?php /* === design-handoff archive-casi P9 — pull-quote "caso simbolo" (conditional) === */ ?>
