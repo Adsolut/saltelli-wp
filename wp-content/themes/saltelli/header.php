@@ -84,7 +84,7 @@ $saltelli_brand_payoff = (string) saltelli_option('brand_payoff', 'Diritto, con 
 (function(){
     var h = document.querySelector('.sl-header');
     if (!h) return;
-    var update = function(){ h.setAttribute('data-scrolled', window.scrollY > 80 ? 'true' : 'false'); };
+    var update = function(){ h.setAttribute('data-scrolled', window.scrollY > 40 ? 'true' : 'false'); }; /* === design-handoff chrome (P1) === soglia 40px = JSX S2Header */
     update();
     window.addEventListener('scroll', update, { passive: true });
     var b = h.querySelector('.sl-header__burger');
