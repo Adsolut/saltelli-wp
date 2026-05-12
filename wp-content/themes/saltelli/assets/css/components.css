@@ -197,7 +197,11 @@ input.sl-btn[data-loading="true"] {
 }
 /* === IMPECCABLE v0.22.2 END === */
 
-/* List item — area di pratica */
+/* List item — area di pratica
+   Wave-Q fix #5 (feedback Elena): la row è già un <a class="sl-area"> wrapping
+   intero row in front-page.php → clickable totale. Garantisco esplicito
+   text-decoration: none + color: inherit per evitare underline ereditati e
+   cursor: pointer su intero rettangolo. */
 .sl-area {
   display: grid;
   grid-template-columns: 64px 1fr auto;
@@ -206,6 +210,8 @@ input.sl-btn[data-loading="true"] {
   padding: var(--s-4) 0;
   border-bottom: 1px solid var(--border);
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
   transition:
     transform var(--dur-fast) var(--ease-editorial),
     padding-left var(--dur-fast) var(--ease-editorial);
@@ -262,13 +268,19 @@ input.sl-btn[data-loading="true"] {
   line-height: 1.1;
 }
 
-/* FIX P1.2: drop-cap oro SOLO su tier-1 (reset esplicito sugli altri).
-   Reset paranoia: garantiamo che le 16 non-tier-1 ereditino var(--primary). */
-.sl-area:not(.sl-area--tier1) .sl-area__title::first-letter {
+/* Wave-Q fix #6 (feedback Elena): "la prima lettera si colora bronze ma non per
+   tutte le voci, o per tutte o per nessuno". Pre-fix: tier-1 permanente bronze,
+   tier-2 permanente inherit → inconsistenza. Post-fix: TUTTE le voci ereditano
+   var(--primary) a riposo + bronze su hover/focus (idle uniformity + hover
+   indicator omogeneo). Distinzione tier-1 resta su .sl-area__num (oro accent)
+   in components.css:250 e tipografia/scala. */
+.sl-area .sl-area__title::first-letter {
   color: inherit;
   font-size: inherit;
+  transition: color var(--dur-base) var(--ease-editorial);
 }
-.sl-area--tier1 .sl-area__title::first-letter {
+.sl-area:hover .sl-area__title::first-letter,
+.sl-area:focus-visible .sl-area__title::first-letter {
   color: var(--accent);
 }
 .sl-area__meta {

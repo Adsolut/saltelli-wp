@@ -126,7 +126,10 @@ if (empty($sl_faq_topics)) {
                                 </button>
                                 <div class="sl-acc__panel" id="<?php echo esc_attr($sl_acc_id); ?>">
                                     <div class="sl-acc__inner">
-                                        <?php echo esc_html($sl_qa[1]); ?>
+                                        <?php // Wave-Q fix #20 (feedback Elena): la risposta SCF saltelli_faq:risposta è inserita come HTML
+                                              // (paragrafi <p>, link <a>) dall'editor. Pre-fix usava esc_html() → "&lt;p&gt;" letterale a video.
+                                              // Switch a wp_kses_post() → render normale ma sanitizzato (tag safe-list WP). ?>
+                                        <?php echo wp_kses_post($sl_qa[1]); ?>
                                     </div>
                                 </div>
                             </div>

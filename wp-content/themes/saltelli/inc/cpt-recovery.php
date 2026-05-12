@@ -181,3 +181,18 @@ add_action('init', function () {
         'rewrite'           => false,
     ]);
 });
+
+/**
+ * Wave-Q fix #14 (feedback Elena): l'archive /chi-siamo/casi-rappresentativi/
+ * mostra tutti i casi in una sola pagina (no paginazione). I casi totali sono
+ * pochi (~7-8), `posts_per_page` default WP (10) creava una pagina 2 con 1 caso
+ * solo → UX scadente. Alziamo ppp a 24 sull'archive CPT saltelli_caso.
+ */
+add_action('pre_get_posts', function ($query) {
+    if (is_admin() || !$query->is_main_query()) {
+        return;
+    }
+    if ($query->is_post_type_archive('saltelli_caso')) {
+        $query->set('posts_per_page', 24);
+    }
+});

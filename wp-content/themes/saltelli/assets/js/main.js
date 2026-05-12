@@ -277,6 +277,17 @@
         });
       });
 
+      // Wave-Q fix #4: apply initial filter on page load. Pre-fix il bottone "Tutte"
+      // (data-filter="*") era attivo di default → mostrava tutto, no init filter needed.
+      // Post-fix il primo cluster è attivo (data-filter="privati") → serve apply().
+      const initialBtn = tabs.querySelector('.sl-areas__filter.is-active') || buttons[0];
+      if (initialBtn) {
+        const initialFilter = initialBtn.dataset.filter || '*';
+        if (initialFilter !== '*') {
+          applyFilter(initialFilter);
+        }
+      }
+
       tabs.dataset.slFilterBound = '1';
     });
   }
@@ -446,8 +457,10 @@
   });
   /* === IMPECCABLE v0.20.2 [T2] END === */
 
-  /* === FIX v0.19.1 [F3] BEGIN — accordion .sl-acc toggle (button-based, JSX-faithful) === */
-  // Idempotente: marker dataset evita doppia bind se main.js si re-inizializza.
+  /* === FIX v0.19.1 [F3] + Wave-Q fix #21 BEGIN — accordion .sl-acc toggle single-open ===
+     Wave-Q fix #21 (feedback Elena): "tutti gli accordion restano aperti". Behavior
+     desiderata = classico single-open (apertura item N → chiusura altri sibling).
+     Idempotente: marker dataset evita doppia bind se main.js si re-inizializza. */
   document.querySelectorAll('.sl-acc[data-sl-acc]').forEach((root) => {
     if (root.dataset.slAccBound === '1') return;
     root.addEventListener('click', (e) => {
@@ -457,10 +470,20 @@
       if (!item) return;
       const isOpen = item.getAttribute('data-open') === 'true';
       const next = !isOpen;
+      // Wave-Q fix #21: chiudi tutti gli altri sibling prima di aprire questo.
+      if (next) {
+        root.querySelectorAll('.sl-acc__item[data-open="true"]').forEach((sibling) => {
+          if (sibling !== item) {
+            sibling.setAttribute('data-open', 'false');
+            const siblingBtn = sibling.querySelector('.sl-acc__btn');
+            if (siblingBtn) siblingBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
       item.setAttribute('data-open', next ? 'true' : 'false');
       btn.setAttribute('aria-expanded', next ? 'true' : 'false');
     });
     root.dataset.slAccBound = '1';
   });
-  /* === FIX v0.19.1 [F3] END === */
+  /* === FIX v0.19.1 [F3] + Wave-Q fix #21 END === */
 })();
