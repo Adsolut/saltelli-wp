@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.15-wave5-design-handoff-p7-chi-siamo-consolidamento');
+define('SALTELLI_THEME_VERSION', '1.3.16-wave-design-handoff-p9-archive-casi');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 

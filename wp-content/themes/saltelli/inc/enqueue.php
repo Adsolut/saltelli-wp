@@ -105,6 +105,17 @@ function saltelli_enqueue_assets() {
         ['in_footer' => true, 'strategy' => 'defer']
     );
 
+    /* === design-handoff archive-casi P9 — filtri caso_categoria (vanilla, client-side) === */
+    if (is_post_type_archive('saltelli_caso')) {
+        wp_enqueue_script(
+            'saltelli-archive-casi-filter',
+            SALTELLI_THEME_URI . '/assets/js/archive-casi-filter.js',
+            [],
+            $ver,
+            ['in_footer' => true, 'strategy' => 'defer']
+        );
+    }
+
 }
 
 /* === IMPECCABLE v0.21.0 [perf-T1] Font preload — LCP critical paths ===
