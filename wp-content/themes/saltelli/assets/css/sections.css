@@ -9840,3 +9840,295 @@ body.single-post .entry-content > p:first-of-type::first-letter {
         margin-left: 20%;                  /* JSX inline marginLeft: 20% — solo desktop, mobile resta full-width */
     }
 }
+
+/* === Wave Elena FB Batch 2 #23 — single-competenza layout unify =============
+   Template-only refactor: single-competenza.php ora emette UNA struttura
+   editoriale unica per le 19 competenze. Le differenze visive tier-1 vs tier-2
+   sono CSS-driven via modifier `.sl-competenza--tier-1`.
+
+   Classi BEM rinominate (template-side) da `.sl-tier1__*` → `.sl-competenza__*`
+   per allineamento naming a scope coerente. Le rule storiche `.sl-tier1__*`
+   restano nel file come dead-code inerte ma non sono più target di alcun
+   markup. Cleanup integrale defer a wave dedicata.
+
+   Tier-2 ora rende:
+   - body_extended SCF (era invisibile pre-refactor — fix #23 core)
+   - casi rappresentativi (era tier-1-only)
+   - avvocato di riferimento card (era tier-1-only, ora deriva da lead_attorneys[0])
+
+   Stylings tier-1-only (display-band H1, capsule asym indent desktop, hero
+   asym grid 8fr/4fr, photo aspect 1/1, cluster typography, lift padding
+   sezioni) scoped sotto `.sl-competenza--tier-1`.
+   ============================================================================ */
+
+/* --- Subtitle (tier-1 italic display) ---------------------------------- */
+.sl-competenza__sub {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(20px, 1.6vw, 28px);
+    line-height: var(--lh-mono);
+    color: var(--text-muted);
+    max-width: 56ch;
+    margin: 0 0 56px 0;
+    font-weight: 400;
+}
+@media (max-width: 767px) {
+    .sl-competenza__sub {
+        font-size: var(--fs-body-marketing);
+        margin-bottom: 32px;
+    }
+}
+/* tier-2: subtitle resa neutra body, no italic display */
+.sl-competenza--tier-2 .sl-competenza__sub {
+    font-style: normal;
+    font-family: var(--font-body);
+    font-size: var(--fs-body-marketing);
+    color: var(--text);
+    margin-bottom: 32px;
+}
+
+/* --- Body wrap (unified padding) --------------------------------------- */
+.sl-competenza__body-wrap {
+    padding-block: clamp(48px, 6vw, 64px);
+}
+.sl-competenza--tier-1 .sl-competenza__body-wrap {
+    padding-block: 64px;
+}
+.sl-competenza--tier-1 .sl-competenza__body-wrap .sl-competenza__prose,
+.sl-competenza--tier-1 .sl-competenza__body-wrap .sl-container > .sl-competenza__prose {
+    max-width: 720px;
+    margin-inline: auto;
+}
+.sl-competenza--tier-1 .sl-competenza__body-wrap h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 44px);
+    line-height: var(--lh-heading);
+    font-weight: 400;
+    margin-block: 80px 32px;
+    color: var(--primary);
+    max-width: 24ch;
+    letter-spacing: var(--ls-h2);
+}
+@media (max-width: 767px) {
+    .sl-competenza--tier-1 .sl-competenza__body-wrap h2 {
+        margin-block: 56px 24px;
+        font-size: clamp(24px, 5vw, 32px);
+    }
+}
+
+/* --- Tier-1 hero display-band H1 + asym grid (modifier-scoped) ---------- */
+.sl-competenza--tier-1 .sl-competenza__hero {
+    padding-block: clamp(64px, 8vw, 120px) clamp(32px, 4vw, 48px);
+}
+.sl-competenza--tier-1 .sl-competenza__eyebrow {
+    margin-bottom: 24px;
+    color: var(--accent);
+}
+.sl-competenza--tier-1 .sl-competenza__title {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 10vw, 160px);
+    line-height: 0.95;
+    font-weight: 400;
+    letter-spacing: var(--ls-display);
+    color: var(--primary);
+    margin-block: 0 24px;
+}
+@media (max-width: 767px) {
+    .sl-competenza--tier-1 .sl-competenza__title {
+        font-size: clamp(40px, 9vw, 64px);
+    }
+}
+.sl-competenza--tier-1 .sl-competenza__answer-wrap {
+    padding: 32px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin-block: 48px;
+    max-width: 60ch;
+    margin-inline: auto;
+}
+.sl-competenza--tier-1 .sl-competenza__answer {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2vw, 26px);
+    font-style: italic;
+    line-height: var(--lh-lede);
+    color: var(--primary);
+    max-width: 36ch;
+    margin: 0;
+}
+@media (min-width: 1024px) {
+    .sl-competenza--tier-1 .sl-competenza__answer-wrap {
+        margin-left: 20%;
+    }
+    .sl-competenza--tier-1 .sl-competenza__hero .sl-container {
+        display: grid;
+        grid-template-columns: 8fr 4fr;
+        gap: 64px;
+        align-items: end;
+    }
+    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-page__breadcrumb,
+    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__back,
+    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__eyebrow,
+    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__title,
+    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__sub {
+        grid-column: 1;
+    }
+    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__answer-wrap {
+        grid-column: 2;
+        grid-row: 1 / span 6;
+        align-self: end;
+    }
+    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__hero-cta,
+    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__ref-lawyer {
+        grid-column: 1 / -1;
+    }
+}
+
+/* --- Avvocato di riferimento card (universal, era tier-1-only) ---------- */
+.sl-competenza__ref-lawyer {
+    padding-block: 48px;
+    border-block: 1px solid var(--border);
+    margin-block: 56px;
+}
+.sl-competenza__ref-lawyer-eyebrow {
+    margin-bottom: 24px;
+}
+.sl-competenza__ref-lawyer-card {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform var(--dur-base, 400ms) var(--ease-quart-out, cubic-bezier(0.25, 1, 0.5, 1));
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .sl-competenza__ref-lawyer-card:hover {
+        transform: translateX(8px);
+    }
+    .sl-competenza__ref-lawyer-card:hover .sl-competenza__ref-lawyer-name {
+        color: var(--accent);
+    }
+}
+.sl-competenza__ref-lawyer-photo,
+.sl-competenza__ref-lawyer-placeholder {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 0;
+    display: block;
+    aspect-ratio: 1 / 1;
+}
+.sl-competenza__ref-lawyer-placeholder {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: var(--fs-h3-max);
+    color: var(--primary);
+}
+.sl-competenza__ref-lawyer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.sl-competenza__ref-lawyer-name {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2vw, 24px);
+    line-height: var(--lh-h3);
+    font-weight: 400;
+    margin: 0;
+    color: var(--primary);
+    transition: color var(--dur-fast, 200ms) var(--ease-quart-out, cubic-bezier(0.25, 1, 0.5, 1));
+}
+.sl-competenza__ref-lawyer-role {
+    font-size: var(--fs-caption);
+    color: var(--text-muted);
+    margin: 0;
+}
+.sl-competenza__ref-lawyer-link {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--accent);
+    margin-top: 4px;
+}
+
+/* --- Hardcoded clusters fallback (ora .sl-competenza__cluster*) -------- */
+.sl-competenza__clusters {
+    padding-block: clamp(40px, 6vw, 80px);
+}
+.sl-competenza__cluster {
+    max-width: 72ch;
+    margin-block: clamp(40px, 6vw, 80px);
+    padding-block: clamp(24px, 3vw, 40px);
+    border-top: 1px solid var(--border);
+}
+.sl-competenza__cluster:first-of-type {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+.sl-competenza__cluster-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.2vw, 44px);
+    line-height: var(--lh-heading);
+    font-weight: 400;
+    color: var(--primary);
+    margin: 0 0 24px;
+    max-width: 24ch;
+    letter-spacing: var(--ls-h2);
+    margin-block-start: 80px;
+}
+.sl-competenza__clusters .sl-competenza__cluster:first-of-type .sl-competenza__cluster-h2 {
+    margin-block-start: 0;
+}
+.sl-competenza__cluster-p {
+    font-family: var(--font-body);
+    font-size: clamp(16px, 1.4vw, 18px);
+    line-height: var(--lh-body);
+    color: var(--text);
+    margin: 0 0 20px;
+}
+.sl-competenza__cluster-p:last-child {
+    margin-bottom: 0;
+}
+@media (max-width: 767px) {
+    .sl-competenza__cluster-h2 { font-size: 26px; }
+    .sl-competenza__cluster-p  { font-size: var(--fs-body); }
+}
+
+/* --- Tier-1 padding lift sezioni universali ----------------------------- */
+.sl-competenza--tier-1 .sl-competenza__casi,
+.sl-competenza--tier-1 .sl-competenza__faq,
+.sl-competenza--tier-1 .sl-competenza__articoli,
+.sl-competenza--tier-1 .sl-competenza__cta {
+    padding-block: clamp(64px, 8vw, 128px);
+}
+.sl-competenza--tier-1 .sl-competenza__faq .sl-acc {
+    max-width: 720px;
+    margin-inline: auto;
+    margin-top: 32px;
+}
+.sl-competenza--tier-1 .sl-competenza__cta {
+    text-align: center;
+}
+.sl-competenza--tier-1 .sl-competenza__cta .sl-mono {
+    margin-bottom: 24px;
+    color: var(--text-muted);
+}
+
+/* --- Tier-1 casi 3-col grid (override stacked default) ------------------ */
+@media (min-width: 1024px) {
+    .sl-competenza--tier-1 .sl-competenza__casi .sl-cases__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+    }
+    .sl-competenza--tier-1 .sl-competenza__casi .sl-cases__row {
+        border-top: 1px solid var(--accent);
+        padding-top: 24px;
+        padding-block: 24px 32px;
+    }
+}
+/* === Wave Elena FB Batch 2 #23 END === */
