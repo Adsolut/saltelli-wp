@@ -77,18 +77,87 @@
       header.dataset.slScrollBound = '1';
     }
 
-    // 3. Mobile menu toggle
+    // 3. Mobile menu toggle + submenu accordion (Wave Elena FB Batch 2, #2)
+    //    - Burger toggle (idempotente con inline script in header.php)
+    //    - Click su voce parent (.menu-item-has-children > a) con figli: NON naviga,
+    //      toggla submenu inline accordion-style (aria-expanded sync).
+    //    - Click su voce leaf o link figlio: naviga normalmente.
+    //    - ESC, click outside (backdrop), close button = chiusi tramite inline header.php.
     const menuBtn = document.querySelector('.sl-header__menu-btn, .sl-header__burger');
     const mobileMenu = document.querySelector('.sl-mobile-menu, .sl-header__mobile');
+    const mobileBackdrop = document.querySelector('.sl-header__mobile-backdrop');
+    const mobileClose = document.querySelector('.sl-header__mobile-close');
+
+    function setMobileMenuOpen(open) {
+      if (!menuBtn || !mobileMenu) return;
+      mobileMenu.classList.toggle('is-open', open);
+      if (open) {
+        mobileMenu.removeAttribute('hidden');
+        if (mobileBackdrop) mobileBackdrop.removeAttribute('hidden');
+      } else {
+        mobileMenu.setAttribute('hidden', '');
+        if (mobileBackdrop) mobileBackdrop.setAttribute('hidden', '');
+        // Collapse submenus when drawer closes
+        mobileMenu.querySelectorAll('.menu-item-has-children.is-open').forEach((parent) => {
+          parent.classList.remove('is-open');
+          const ctrl = parent.querySelector(':scope > a, :scope > .sl-submenu-toggle');
+          if (ctrl) ctrl.setAttribute('aria-expanded', 'false');
+        });
+      }
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.documentElement.classList.toggle('sl-menu-open', open);
+    }
+
     if (menuBtn && mobileMenu && !menuBtn.dataset.slMenuBound) {
       menuBtn.addEventListener('click', () => {
         const open = mobileMenu.hasAttribute('hidden') || !mobileMenu.classList.contains('is-open');
-        mobileMenu.classList.toggle('is-open', open);
-        if (open) mobileMenu.removeAttribute('hidden');
-        else mobileMenu.setAttribute('hidden', '');
-        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        setMobileMenuOpen(open);
       });
       menuBtn.dataset.slMenuBound = '1';
+    }
+    if (mobileClose && !mobileClose.dataset.slMenuBound) {
+      mobileClose.addEventListener('click', () => setMobileMenuOpen(false));
+      mobileClose.dataset.slMenuBound = '1';
+    }
+    if (mobileBackdrop && !mobileBackdrop.dataset.slMenuBound) {
+      mobileBackdrop.addEventListener('click', () => setMobileMenuOpen(false));
+      mobileBackdrop.dataset.slMenuBound = '1';
+    }
+    if (!document.documentElement.dataset.slMenuEscBound) {
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menuBtn && menuBtn.getAttribute('aria-expanded') === 'true') {
+          setMobileMenuOpen(false);
+          menuBtn.focus();
+        }
+      });
+      document.documentElement.dataset.slMenuEscBound = '1';
+    }
+
+    // Accordion submenu: voci parent con figli → toggla submenu, non navigano.
+    // Solo entro il drawer mobile (.sl-header__mobile), per evitare interferenze con desktop.
+    if (mobileMenu && !mobileMenu.dataset.slSubmenuBound) {
+      const parents = mobileMenu.querySelectorAll('.menu-item-has-children');
+      parents.forEach((parent) => {
+        const directLink = parent.querySelector(':scope > a');
+        if (!directLink) return;
+        // ARIA: dichiarare che apre/chiude un sottomenù
+        directLink.setAttribute('aria-haspopup', 'true');
+        directLink.setAttribute('aria-expanded', 'false');
+        // Bind: tap su voce parent → toggla, NON naviga
+        directLink.addEventListener('click', (e) => {
+          // Solo in modalità mobile/tablet drawer (≤1023px)
+          if (window.matchMedia('(min-width: 1024px)').matches) return;
+          e.preventDefault();
+          const isOpen = parent.classList.toggle('is-open');
+          directLink.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          // Chiudi siblings (accordion single-open opzionale: lo lascio multi-open
+          // per UX più tollerante; commentare la riga sotto per single-open).
+          // parent.parentElement.querySelectorAll(':scope > .menu-item-has-children.is-open').forEach((sib) => {
+          //   if (sib !== parent) { sib.classList.remove('is-open'); const c = sib.querySelector(':scope > a'); if (c) c.setAttribute('aria-expanded','false'); }
+          // });
+        });
+      });
+      mobileMenu.dataset.slSubmenuBound = '1';
     }
 
     // Gate per CSS: appena JS è in piedi, togliamo il fallback opacity:1 !important
