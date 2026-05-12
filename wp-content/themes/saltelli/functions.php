@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.13-wave5-step3-coverage');
+define('SALTELLI_THEME_VERSION', '1.3.14-wave5-design-handoff-p3-home');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 

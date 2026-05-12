@@ -17,6 +17,50 @@ $hero_sub        = saltelli_page_field('hero_subheadline', "Studio Legale Saltel
 $hero_cta_label  = saltelli_page_field('hero_cta_label', 'Prenota una consulenza gratuita');
 $hero_cta_url    = saltelli_page_field('hero_cta_url', '/contatti/');
 
+/* Wave 5 design-handoff P3 — hero variant B "cream scrim asimmetrico" (bg image).
+   SCF additive: hero_image (return_format=id), hero_image_credit, hero_image_alt.
+   hero_image vuoto (stato attuale) → placeholder Picsum (seed 'saltelli-marble');
+   foto reale via Media Library = backlog Wave 5.1 (Elena swap). AVIF/WebP defer
+   Wave 5.1 (Picsum serve solo JPG; serve plugin Image Optimization). */
+$hero_image_id  = (int) saltelli_page_field('hero_image');
+$hero_credit    = (string) saltelli_page_field('hero_image_credit', '');
+$hero_image_alt = (string) saltelli_page_field('hero_image_alt', '');
+$hero_alt       = $hero_image_alt !== '' ? $hero_image_alt : 'Studio Legale Saltelli, hero banner';
+
+$hero_media_html = '';
+if ($hero_image_id) {
+    // Foto reale dalla Media Library — srcset/sizes auto via WP.
+    $hero_media_html = wp_get_attachment_image($hero_image_id, 'full', false, [
+        'loading'       => 'eager',
+        'fetchpriority' => 'high',
+        'decoding'      => 'async',
+        'sizes'         => '100vw',
+        'alt'           => esc_attr($hero_alt),
+    ]);
+}
+if ($hero_media_html === '') {
+    // Placeholder Picsum (hero_image vuoto o attachment rotto) — <picture> 3 source
+    // desktop/tablet/mobile + srcset 1x/2x. loading=eager + fetchpriority=high (LCP).
+    $picsum_seed = 'saltelli-marble';
+    $picsum = static function ($w, $h) use ($picsum_seed) {
+        return 'https://picsum.photos/seed/' . $picsum_seed . '/' . (int) $w . '/' . (int) $h;
+    };
+    $hero_media_html = sprintf(
+        '<picture>' .
+            '<source media="(min-width: 1024px)" srcset="%1$s 1x, %2$s 2x">' .
+            '<source media="(min-width: 640px)" srcset="%3$s 1x, %4$s 2x">' .
+            '<img src="%5$s" srcset="%5$s 1x, %6$s 2x" alt="%7$s" width="768" height="600" loading="eager" fetchpriority="high" decoding="async">' .
+        '</picture>',
+        esc_url($picsum(1920, 1080)),
+        esc_url($picsum(3840, 2160)),
+        esc_url($picsum(1280, 800)),
+        esc_url($picsum(2560, 1600)),
+        esc_url($picsum(768, 600)),
+        esc_url($picsum(1536, 1200)),
+        esc_attr($hero_alt)
+    );
+}
+
 // Colophon resta in Theme Options (globale: anche footer.php usa colophon_*).
 $col_indirizzo = saltelli_option('colophon_indirizzo', "Via Vannella Gaetani, 27\n80121 Napoli — Chiaia");
 $col_orari     = saltelli_option('colophon_orari', "Lun – Ven · 10:00 – 19:00\nSolo su appuntamento");
@@ -72,6 +116,10 @@ $press = saltelli_press_outlets();
 ?>
 
 <section class="sl-hero sl-page-hero sl-page-hero--homepage" id="hero">
+    <?php /* design-handoff P3: bg image (variant B cream scrim). aria-hidden = decorativo; alt sull'img per SEO image search. */ ?>
+    <div class="sl-hero__media" aria-hidden="true">
+        <?php echo $hero_media_html; // markup interno costruito con esc_url()/esc_attr() sopra (Picsum) o wp_get_attachment_image() (foto reale) ?>
+    </div>
     <div class="sl-hero__inner sl-container">
         <div class="sl-hero__main">
             <div class="sl-mono sl-hero__eyebrow"><?php echo esc_html($hero_eyebrow); ?></div>
@@ -124,6 +172,9 @@ $press = saltelli_press_outlets();
         <span class="sl-hero__scroll-line"></span>
         <span class="sl-mono"><?php esc_html_e('Scorri', 'saltelli'); ?></span>
     </div>
+    <?php if ($hero_credit !== '') : ?>
+        <div class="sl-hero__photo-credit"><?php esc_html_e('Photo', 'saltelli'); ?> · <?php echo esc_html($hero_credit); ?></div>
+    <?php endif; ?>
 </section>
 
 <section class="sl-areas" id="aree" aria-labelledby="aree-h">

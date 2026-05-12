@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Saltelli &amp; Partners — Hero Banner · Proposta</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="styles/saltelli.css">
+
+<style>
+  body, html { margin: 0; padding: 0; background: #ECE9E2; }
+
+  /* ─────────────────────────────────────────────
+     HERO BANNER · sistema base condiviso
+     Aggiunge solo l'immagine come sfondo del lettering.
+     Il resto del DS resta inalterato (tokens · fonts · scale).
+     ───────────────────────────────────────────── */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    isolation: isolate;
+  }
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero__inner {
+    position: relative;
+    z-index: 2;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: clamp(80px, 12vw, 160px) var(--container-pad) clamp(64px, 10vw, 112px);
+    display: grid;
+    gap: var(--s-8);
+  }
+  .hero__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: var(--ls-mono);
+    text-transform: uppercase;
+  }
+  .hero__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(56px, 9vw, 132px);
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+    margin: 0;
+  }
+  .hero__title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero__lede {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.45;
+    max-width: 44ch;
+    margin: 0;
+  }
+  .hero__meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: baseline;
+    padding-top: var(--s-5);
+    border-top: 1px solid currentColor;
+    opacity: 0.85;
+  }
+  .hero__photo-credit {
+    position: absolute;
+    bottom: 16px;
+    right: 24px;
+    z-index: 3;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+
+  /* ── A · FULL-BLEED + SCRIM NAVY ───────────────
+     Photo full-bleed, scrim navy 80% bottom-left → 50% top-right.
+     Testo crema su overlay scuro. Drammatica, riconoscibile. */
+  .hero--A .hero__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(27,43,75,0.86) 0%, rgba(27,43,75,0.62) 60%, rgba(27,43,75,0.35) 100%);
+  }
+  .hero--A .hero__media img {
+    filter: grayscale(0.35) contrast(1.05) brightness(0.85);
+  }
+  .hero--A .hero__inner { color: var(--background); }
+  .hero--A .hero__kicker { color: rgba(245, 240, 225, 0.7); }
+  .hero--A .hero__title { color: var(--background); }
+  .hero--A .hero__lede { color: rgba(245, 240, 225, 0.88); }
+  .hero--A .hero__photo-credit { color: rgba(245,240,225,0.7); }
+
+  /* ── B · CREAM SCRIM ASIMMETRICO ────────────────
+     Photo full-bleed, ma scrim crema verticale copre 0→55%.
+     Testo navy su crema (lettura editoriale, comfort), bordo dx
+     mostra l'immagine sfumata. Continuità col DS attuale. */
+  .hero--B { background: var(--background); }
+  .hero--B .hero__media img { filter: grayscale(0.7) contrast(1.05); }
+  .hero--B .hero__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+      var(--background) 0%,
+      var(--background) 38%,
+      rgba(250,250,248,0.92) 50%,
+      rgba(250,250,248,0.4) 72%,
+      rgba(250,250,248,0) 100%);
+  }
+  .hero--B .hero__inner { color: var(--text); }
+  .hero--B .hero__kicker { color: var(--text-muted); }
+  .hero--B .hero__title { color: var(--primary); }
+  .hero--B .hero__lede { color: var(--text); }
+  .hero--B .hero__photo-credit { color: var(--text-muted); }
+
+  /* ── C · DUOTONE BRONZE/NAVY ───────────────────
+     Photo grayscale → blend con tinta navy + accenti bronze.
+     Testo crema. Mood notturno, palazzo nobiliare, classico. */
+  .hero--C { background: var(--primary); }
+  .hero--C .hero__media img {
+    filter: grayscale(1) contrast(1.18) brightness(0.5);
+  }
+  .hero--C .hero__media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--primary);
+    mix-blend-mode: multiply;
+    opacity: 0.7;
+  }
+  .hero--C .hero__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(184,134,11,0.32) 0%, transparent 55%),
+      linear-gradient(180deg, transparent 60%, rgba(27,43,75,0.7) 100%);
+  }
+  .hero--C .hero__inner { color: var(--background); }
+  .hero--C .hero__kicker { color: var(--accent); }
+  .hero--C .hero__title { color: var(--background); }
+  .hero--C .hero__title em { color: var(--accent); }
+  .hero--C .hero__lede { color: rgba(245,240,225,0.85); }
+  .hero--C .hero__photo-credit { color: rgba(184,134,11,0.7); }
+
+  /* ── D · TYPE-AS-WINDOW ────────────────────────
+     L'immagine è visibile SOLO attraverso il display headline
+     (background-clip: text). Resto della pagina su crema.
+     La più "minimale-novel" — il lettering È l'immagine. */
+  .hero--D { background: var(--background); }
+  .hero--D .hero__media { display: none; }
+  .hero--D .hero__inner { color: var(--text); padding-top: clamp(96px, 14vw, 200px); }
+  .hero--D .hero__kicker { color: var(--text-muted); }
+  .hero--D .hero__title {
+    /* immagine inserita inline via style su elemento */
+    background-size: cover;
+    background-position: center;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    /* fallback: navy */
+  }
+  @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+    .hero--D .hero__title { color: var(--primary) !important; -webkit-text-fill-color: var(--primary) !important; }
+  }
+  .hero--D .hero__lede { color: var(--text); }
+  .hero--D .hero__photo-credit { color: var(--text-muted); position: relative; bottom: auto; right: auto; display: inline-block; margin-top: 8px; }
+  .hero--D .hero__title-shadow {
+    /* sottilissima ombra navy per dare presenza al lettering */
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    color: var(--primary);
+    opacity: 0.04;
+    z-index: -1;
+  }
+
+  /* ── Mobile (375) tweaks ───────────────────────
+     Le stesse classi, viewport ridotta, gli artboard simulano. */
+  .hero--mobile .hero__inner {
+    padding: 88px 24px 56px;
+    gap: 32px;
+  }
+  .hero--mobile .hero__title { font-size: 56px; line-height: 0.98; }
+  .hero--mobile .hero__lede  { font-size: 18px; }
+  .hero--mobile .hero__meta  { font-size: 11px; gap: 20px; padding-top: 20px; }
+
+  /* ── Header minimal in-artboard (semplificato) ── */
+  .hero-nav {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px var(--container-pad);
+    max-width: var(--container-max);
+    margin: 0 auto;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  .hero-nav__items { display: flex; gap: 32px; text-transform: uppercase; }
+  .hero--mobile .hero-nav { padding: 20px 24px; }
+  .hero--mobile .hero-nav__items { display: none; }
+
+  /* invert nav color quando hero è scuro */
+  .hero--A .hero-nav, .hero--C .hero-nav { color: rgba(245,240,225,0.85); }
+  .hero--B .hero-nav, .hero--D .hero-nav { color: var(--primary); }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="sl-logo.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+/* ─────────────────────────────────────────────
+   Hero copy (riusabile su tutte le varianti)
+   ───────────────────────────────────────────── */
+const HERO_COPY = {
+  kicker: "§ Studio Legale Saltelli & Partners — Napoli, Chiaia",
+  title: ["Diritto,", <em key="em">con misura.</em>],
+  lede: "Quattro avvocati a Chiaia, diciannove aree di pratica, vent'anni accanto a famiglie e imprese di Napoli.",
+  meta: ["Dal 1999", "P.IVA 03487520634", "Via Vannella Gaetani, 27"],
+};
+
+/* Photo dataset — Picsum seeds restituiscono foto reali editoriali.
+   Su produzione: sostituire con asset proprietari (DSLR, palazzo a Chiaia,
+   architettura, materiali). Resta la responsiveness via <picture>. */
+const PHOTOS = {
+  A: { seed: "saltelli-rooftops", subject: "Tetti di Napoli — golden hour" },
+  B: { seed: "saltelli-marble",   subject: "Dettaglio palazzo nobiliare" },
+  C: { seed: "saltelli-archive",  subject: "Archivio · libri e carte" },
+  D: { seed: "saltelli-chiaia",   subject: "Lungomare Chiaia · pietra e mare" },
+};
+function picsum(seed, w, h) { return `https://picsum.photos/seed/${seed}/${w}/${h}`; }
+
+/* ─────────────────────────────────────────────
+   <HeroPicture> — pattern responsive condiviso
+   <picture>
+     <source media="(min-width: 1024px)" srcset="…1920w 1x, …3840w 2x">
+     <source media="(min-width: 640px)"  srcset="…1280w 1x, …2560w 2x">
+     <img src="…768w" srcset="…768w 1x, …1536w 2x" loading="eager"
+          fetchpriority="high" decoding="async" alt="">
+   </picture>
+   In produzione: AVIF + WebP + JPG fallback, 3 breakpoint, art-direction
+   verticale per mobile. Qui simulato con un solo URL Picsum dinamico. */
+function HeroPicture({ seed, alt, mobile }) {
+  return (
+    <picture>
+      <source media="(min-width: 1024px)" srcSet={`${picsum(seed, 1920, 1080)} 1x, ${picsum(seed, 3840, 2160)} 2x`} />
+      <source media="(min-width: 640px)"  srcSet={`${picsum(seed, 1280, 800)} 1x, ${picsum(seed, 2560, 1600)} 2x`} />
+      <img src={picsum(seed, 768, mobile ? 900 : 600)}
+           srcSet={`${picsum(seed, 768, mobile ? 900 : 600)} 1x, ${picsum(seed, 1536, mobile ? 1800 : 1200)} 2x`}
+           alt={alt} loading="eager" fetchpriority="high" decoding="async" />
+    </picture>
+  );
+}
+
+/* Header semplificato, in-frame */
+function HeroNav({ tone }) {
+  return (
+    <nav className="hero-nav">
+      <SLLogoHorizontal tone={tone} size="md" />
+      <div className="hero-nav__items">
+        <span>Studio</span><span>Avvocati</span><span>Competenze</span><span>Casi</span><span>Contatti</span>
+      </div>
+    </nav>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   <Hero> — un'unica sorgente, 4 varianti via prop
+   ───────────────────────────────────────────── */
+function Hero({ variant = "A", device = "desktop" }) {
+  const photo = PHOTOS[variant];
+  const isMobile = device === "mobile";
+  const cls = `hero hero--${variant}` + (isMobile ? " hero--mobile" : "");
+  const navTone = (variant === "A" || variant === "C") ? "light" : "dark";
+
+  /* Variant D: image clipped to title via inline background */
+  const titleStyle = variant === "D"
+    ? { backgroundImage: `url(${picsum(photo.seed, 1920, 1080)})` }
+    : undefined;
+
+  return (
+    <section className={cls} style={{ minHeight: isMobile ? 720 : 720 }}>
+      {variant !== "D" && (
+        <div className="hero__media" aria-hidden="true">
+          <HeroPicture seed={photo.seed} alt="" mobile={isMobile} />
+        </div>
+      )}
+      <HeroNav tone={navTone} />
+      <div className="hero__inner">
+        <div className="hero__kicker">{HERO_COPY.kicker}</div>
+        <h1 className="hero__title" style={titleStyle}>
+          {HERO_COPY.title[0]}<br/>{HERO_COPY.title[1]}
+        </h1>
+        {variant === "D" && (
+          <div className="hero__photo-credit">
+            Photo · {photo.subject} · clip-path su lettering
+          </div>
+        )}
+        <p className="hero__lede">{HERO_COPY.lede}</p>
+        <div className="hero__meta sl-mono">
+          {HERO_COPY.meta.map((m, i) => <span key={i}>{m}</span>)}
+        </div>
+      </div>
+      {variant !== "D" && (
+        <div className="hero__photo-credit">
+          Photo · {photo.subject}
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   Canvas: 4 varianti × (Desktop + Mobile)
+   ───────────────────────────────────────────── */
+const App = () => (
+  <DesignCanvas>
+    <DCSection id="hero-A" title="A · Full-bleed + scrim navy"
+      subtitle="Photo full-bleed · scrim navy 86→35% diagonale · testo crema · drammatica, presente">
+      <DCArtboard id="A-d" label="Desktop · 1440 × 720" width={1440} height={720}>
+        <Hero variant="A" device="desktop" />
+      </DCArtboard>
+      <DCArtboard id="A-m" label="Mobile · 375 × 720" width={375} height={720}>
+        <Hero variant="A" device="mobile" />
+      </DCArtboard>
+    </DCSection>
+
+    <DCSection id="hero-B" title="B · Cream scrim asimmetrico"
+      subtitle="Photo a destra che sfuma in crema 0→38% · testo navy su crema · continuità col DS attuale">
+      <DCArtboard id="B-d" label="Desktop · 1440 × 720" width={1440} height={720}>
+        <Hero variant="B" device="desktop" />
+      </DCArtboard>
+      <DCArtboard id="B-m" label="Mobile · 375 × 720" width={375} height={720}>
+        <Hero variant="B" device="mobile" />
+      </DCArtboard>
+    </DCSection>
+
+    <DCSection id="hero-C" title="C · Duotone navy/bronze"
+      subtitle="Photo grayscale → multiply navy · radial bronze top-right · mood notturno classico">
+      <DCArtboard id="C-d" label="Desktop · 1440 × 720" width={1440} height={720}>
+        <Hero variant="C" device="desktop" />
+      </DCArtboard>
+      <DCArtboard id="C-m" label="Mobile · 375 × 720" width={375} height={720}>
+        <Hero variant="C" device="mobile" />
+      </DCArtboard>
+    </DCSection>
+
+    <DCSection id="hero-D" title="D · Type-as-window"
+      subtitle="L'immagine è visibile SOLO attraverso il display headline · background-clip: text · minimale, novel">
+      <DCArtboard id="D-d" label="Desktop · 1440 × 720" width={1440} height={720}>
+        <Hero variant="D" device="desktop" />
+      </DCArtboard>
+      <DCArtboard id="D-m" label="Mobile · 375 × 720" width={375} height={720}>
+        <Hero variant="D" device="mobile" />
+      </DCArtboard>
+    </DCSection>
+
+    <DCPostIt top={32} left={48} width={300}>
+      Hero banner · proposta esterna.
+      Solo lettering + titolo della hero ricevono l'immagine.
+      Il resto del DS resta intatto.
+      ⤢ per fullscreen.
+    </DCPostIt>
+
+    <DCPostIt top={32} right={48} width={300}>
+      Pattern responsive:
+      &lt;picture&gt; con 3 source (desk/tablet/mob)
+      + srcset 1x/2x · AVIF/WebP/JPG in prod.
+      loading="eager" + fetchpriority="high".
+    </DCPostIt>
+  </DesignCanvas>
+);
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

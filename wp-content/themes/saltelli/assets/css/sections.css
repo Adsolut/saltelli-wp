@@ -9734,3 +9734,81 @@ body.single-post .entry-content > p:first-of-type::first-letter {
         text-align: center;
     }
 }
+
+/* === design-handoff home P3 — hero variant B (cream scrim asimmetrico) ====
+   Source: design-handoff/home/hero-banner.html righe 115-137 (variant B) +
+   pattern responsive <picture> righe 270-289. Decisione orchestratore acquisita
+   (NON rinegoziare): variant B "cream scrim asimmetrico", Picsum placeholder ora,
+   foto reale via SCF hero_image (Wave 5.1 — Elena swap Media Library).
+
+   .sl-hero è homepage-only: front-page.php è l'unico template che usa la bare
+   class `.sl-hero` (tutti gli altri hero usano `.sl-page-hero`). Questo blocco
+   AGGIUNGE solo il background image: .sl-hero__inner e tutto il suo contenuto
+   (eyebrow / h1 / lede / colophon / scroll-indicator) restano invariati.
+
+   Token alignment §A KEEP CURRENT: var(--background), var(--font-mono),
+   var(--text-muted), var(--ls-mono). I valori grayscale(0.7), contrast(1.05) e i
+   percentages del gradient sono per-selector (motivati dal JSX hero-banner.html),
+   non token — genuinamente nuovi → decisione per-selector, mai :root. Il
+   font-size 10px del credit è un phantom deliberato (più piccolo di --fs-caption
+   11px: intento "minuscolo, sussurrato" in basso a destra). */
+.sl-hero {
+    /* override .sl-hero { overflow: visible } (riga ~294): il bg image va
+       contenuto nel box hero; isolation isola lo stacking dei suoi z-index. */
+    overflow: hidden;
+    isolation: isolate;
+}
+.sl-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+.sl-hero__media picture {
+    /* <picture> è display:inline by default → l'<img> dentro non risolve
+       height:100%. display:contents lo rende figlio diretto di .sl-hero__media
+       (che è position:absolute; inset:0 → ha altezza definita). Per la foto
+       reale via wp_get_attachment_image() non c'è <picture>: l'<img> è già
+       figlio diretto di .sl-hero__media → nessun effetto. */
+    display: contents;
+}
+.sl-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* variant B (hero-banner.html riga 120): desatura + leggero contrasto */
+    filter: grayscale(0.7) contrast(1.05);
+}
+.sl-hero__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* scrim crema asimmetrico (hero-banner.html righe 125-130): solido 0→38%
+       (testo navy in comfort di lettura), transizione 38→72%, foto visibile
+       72→100% sul bordo destro. rgba(250,250,248,a) = var(--background) #FAFAF8
+       ad alpha variabile (CSS non ha "var() ad alpha" senza color-mix; tenuto
+       come literal per matchare 1:1 il design source). */
+    background: linear-gradient(90deg,
+        var(--background) 0%,
+        var(--background) 38%,
+        rgba(250, 250, 248, 0.92) 50%,
+        rgba(250, 250, 248, 0.4) 72%,
+        rgba(250, 250, 248, 0) 100%);
+}
+.sl-hero__inner {
+    /* sopra il bg image (.sl-hero__media z-index 0) */
+    position: relative;
+    z-index: 2;
+}
+.sl-hero__photo-credit {
+    position: absolute;
+    bottom: 16px;
+    right: 24px;
+    z-index: 3;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: var(--ls-mono);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.55;
+}
