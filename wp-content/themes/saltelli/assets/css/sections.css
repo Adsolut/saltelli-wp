@@ -8199,6 +8199,21 @@ html:not(.js-reveal-ready) .sl-glossario__h1 .sl-word {
     padding: 0;
 }
 
+/* === design-handoff single-avvocato P5 === */
+/* Spec tag pill padding sync to JSX L98 (6px 12px). WP mobile era 4px 12px,
+   desktop 5px 14px (v0.17.3 padding-inline 14). Override solo attorney —
+   non propaga a .sl-team__specs (scope specifico hero attorney). */
+.sl-attorney__specs li,
+.sl-attorney__hero-text .sl-attorney__specs li {
+    padding: 6px 12px;
+}
+@media (min-width: 1024px) {
+    .sl-attorney__specs li,
+    .sl-attorney__hero-text .sl-attorney__specs li {
+        padding: 6px 12px; /* JSX prototype single-breakpoint = 6px 12px */
+    }
+}
+
 /* === STICKY OVERRIDE — fixed toolbar → grid sidebar === */
 @media (min-width: 1024px) {
     .sl-attorney__sticky {
