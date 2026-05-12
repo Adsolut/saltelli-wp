@@ -16,14 +16,14 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 
 **Strategy:** "Legal Luxury Minimal" — boutique editoriale italiano, tipografia dominante, palette navy/crema/bronzo. Tier-1 deep clusters: Tributario · Lavoro · Famiglia LGBTQ+. The other 16 practice areas get tier-2 lighter pages.
 
-## Current state — v1.3.13-wave5-step3-coverage (CUT-READY)
+## Current state — v1.3.16-wave-design-handoff-p9-archive-casi (CUT-READY)
 
-**Last updated:** 2026-05-11 (5 wave + 5 chore consecutivi: Wave 4.7.fix.5 → Wave 5 STEP 1 audit + STEP 2 design realign + STEP 3 Pages SCF + STEP 3 coverage → 4 chore frontend polish → Wave 5 STEP 4 sections.css drift cleanup (328 token swaps) · Elena OK definitivo su tutte le 19 Pages + 2 archive CPT + 3 term tipo-area · EDITOR-HANDOFF v6.0)
-**Branch:** `main` · last merge `5309876` (Wave 5 STEP 4 — sections.css drift cleanup, 328 token swaps) · tag `v1.3.13-wave5-step3-coverage` (Wave 5 STEP 4 = no version bump, chore frontend cleanup) · 49 commits totali dal v1.3.10
+**Last updated:** 2026-05-12 (Sequenza Design Handoff COMPLETATA 12/12: 9 wave merge + 2 skip 0-drift + 1 skip orchestrator decision · pre-flight Agent multi-agentic ottimizzazione ~25% riduzione ETA totale)
+**Branch:** `main` · last merge `c3db3bc` (Wave P12 404 FINAL) · tag `v1.3.16-wave-design-handoff-p9-archive-casi` · ~30 commit totali Design Handoff dal v1.3.13
 **Demo:** ✅ presentata al cliente · feedback iteration assorbita
-**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.3.13-wave5-step3-coverage` + Wave 5 STEP 4 CSS (328 token swaps, computed-neutral) · **13 Page WP Gutenberg-disabled** (12 + Prenota appuntamento 2714) · **19 Pages canoniche** (35 → 19 post cleanup fix.5) · **7 Pages alto-traffico con SCF metabox completa** (Home/Chi Siamo/Lo Studio/Aree di Pratica/Risorse/Costi e Consulenze/Contatti, 107 field text/textarea) · **2 archive CPT** con SCF "Archive Headers" expanded (Team + Casi rappresentativi) · **3 term tipo-area** con SCF group dedicato (privati/imprese/contenzioso-amministrativo, 23 field per content per-term) · tokens.css rebuilt da DESIGN.md (12 token allineati + 4 mancanti aggiunti + top-15 violazioni hardcoded fixed) · 4 chore frontend polish (Tutte le aree href + 404 count dinamico + breadcrumb cluster + 2 duplicate body sections) · sections.css drift cleanup STEP 4 (328 hardcoded typography literals → var(--token), ~460 phantom residui documentati) · cross-page smoke test PASS · **Elena OK definitivo 2026-05-11**
-**Active phase:** Front-end debug visivo — STEP 4 ha risolto 328/788 hardcoded typography in sections.css (~42%); restano ~460 phantom residui (valori senza token in tokens.css: 13px×27, 10px×21, 17px×19, -0.015em×21, 0.06em×14, 1.1×21, 1.55×18, 1.6×16, ~70 ad-hoc clamp() curves… · `font-size: 22px`×23 AMBIGUO --fs-h3-floor vs --fs-lede · `line-height: 1.65`×5 = vecchio --lh-body deprecato) — vedi `.claude/knowledge/audits/wave5-step4-sections-cleanup/` · pre-cut produzione checklist
-**Next:** "Phantom resolution" wave backlog candidate (STEP 4 §"Recommended order": 1° `font-size: 22px`×23 per-selector resolve + esporre `--fs-h2-floor: 28px` — entrambi computed-neutral; 2° promuovere valori ricorrenti a token espliciti — neutral; 3° clamp() consolidation + caption-nebula normalization — CAMBIA computed values, serve design sign-off + Playwright pixel-diff) · Wave 6.0 backlog candidate (CPT competenza Strategy A migration: disable Gutenberg + post_content → body_extended unification, post-cut) · Wave 5.1 backlog candidate (Image Expansion per Pages: hero + featured + cluster cards) · Cut produzione (DNS switch staging → prod) · valutare ripristino Yoast `twitter:label1` reading-time meta (-102 byte side effect benigno su 2 pagine)
+**Live staging:** https://staging.studiolegalesaltelli.it allineato a `1.3.16-wave-design-handoff-p9-archive-casi` · **13 Page WP Gutenberg-disabled** (12 + Prenota appuntamento 2714) · **18 Pages canoniche** (post-P7 consolidamento chi-siamo=lo-studio: Page 2822 hub legacy DELETED, Page 2811 rinominato slug `chi-siamo` con 34 field group_lo_studio_v1 Elena preserved) · **Design Handoff completato 12 template**: chrome (P1), home + hero variant B (P3 v1.3.14), single-competenza-tier1 (P4), single-avvocato (P5), chi-siamo consolidamento (P7 v1.3.15), blog-archive (P8), archive-casi + pull-quote ADDITIVE +4 SCF (P9 v1.3.16), glossario-legale (P10), 404 (P12). Skipped 0-drift: footer (P2), taxonomy-tipo-area (P6). Skip orchestrator decision: contatti (P11, backlog post-cut). · tokens.css rebuilt da DESIGN.md (Wave 5 STEP 2) · sections.css drift cleanup STEP 4 (328 token swaps + Design Handoff ~15 fix CSS) · cross-page smoke test PASS
+**Active phase:** Pre-cut produzione checklist · acceptance test finale design handoff Elena (review visivo 11 template implementati) · DNS switch staging → prod
+**Next:** Cut produzione (DNS switch staging → prod) · backlog post-cut: P11 contatti (token alignment + select aree dinamico CPT competenza), Wave 5 STEP 5 phantom resolution (~460 defer typography catalogati + 5 nuovi defer P12), Wave 5.1 Image Expansion (foto reali via Media Library, swap Picsum), single-post JSX request Design (alta priorità SEO, 326 post), indagine 32 card pagina 1 blog vs ppp=9 (discrepanza pre-esistente Wave P8), valutare ripristino Yoast `twitter:label1` reading-time meta · valutare Wave 6.0 (CPT competenza Strategy A migration: disable Gutenberg + post_content → body_extended unification)
 
 **Infra staging (consolidata 2026-04-30):**
 - Droplet DO `saltelli-staging-ams3-01` · IPv4 `178.62.207.50` · ams3 · s-1vcpu-2gb · Ubuntu 24.04 LTS
@@ -77,6 +77,19 @@ Building a deliberately differentiated, AI-ready, performance-obsessed custom Wo
 | **Chore fix single-competenza tier-1 clusters duplicate body_extended** (rimossa duplicazione tra helper saltelli_tier1_clusters hardcoded e sl-competenza__body SCF, polish Duccio) | chore | **✅** |
 | Acceptance test editoriale Elena | **OK DEFINITIVO 2026-05-11** | **✅** |
 | **Wave 5 STEP 4 — sections.css drift cleanup** (328 hardcoded typography literals → var(--token) reference, solo dove il valore matcha esattamente un token in tokens.css. Conservative: exact match only, ZERO cambio computed CSS values, frontend pixel-perfect invariato pre/post. font-size 129 swaps (11px→--fs-caption 44×, 12px→--fs-micro 28×, 14px→--fs-small, 16px→--fs-body, 18px→--fs-body-marketing, 32px→--fs-h3-max, 96px→--fs-h1-max, clamp(48,6vw,96)→--fs-h1, clamp(28,3.5vw,44)→--fs-h2) + letter-spacing 91 (-0.02em→--ls-h1 37×, 0.08em→--ls-mono 24×, -0.01em→--ls-h2, -0.035em→--ls-display, -0.005em→--ls-h3) + line-height 108 (1.5→--lh-lede 29×, 1.7→--lh-body 17×, 0.98→--lh-display, 1.05→--lh-h1, 1.15→--lh-heading, 1.2→--lh-h3, 1.4→--lh-mono). ~460 phantom residui documentati in audits/wave5-step4-sections-cleanup/02-phantom-values-remaining.md con file:line + rationale + ranked plan. Drift typography sections.css ~42% risolto (788 literal sul file attuale → ~460; "605" era la stima baseline 2026-05-08, il file è cresciuto via STEP 2/3 + chore). 21/21 token mappings verificati byte-equal al literale che sostituiscono. Smoke test 5 URL: HTML markup invariato. No version bump) | chore | **✅** |
+| **DESIGN HANDOFF AUDIT — RECOMMENDATION strategy** (audit branch dedicato `audit/design-handoff-strategy`, 4 deliverable: 01-jsx-inventory + 02-jsx-to-wp-mapping + 03-tokens-reconciliation + RECOMMENDATION.md 402 righe. SoT decision: KEEP CURRENT tokens.css. 15 JSX bundle Design analizzati: 12 COMPLIANT + 1 ADDITIVE (archive-casi pull-quote caso simbolo) + 1 RE-INTERPRETATION (contatti mappa iframe BLOCCATA) + 1 n/a design-system. Sequence 12 mini-wave proposta) | audit/design-handoff-strategy | **✅** |
+| **Design Handoff Wave P1 chrome** (header verify + drift cleanup, 9 drift trovati, 5 fixati + 2 deferred + 2 kept-deliberate. CSS scope marker scoped, header.php markup invariato. No version bump) | chore | **✅** |
+| **Design Handoff Wave P2 footer SKIPPED** (0 drift fixabili, branch deleted. Pattern WP wins per decisioni Duccio v0.21.x già in changelog: order fasce v0.21.6 + tier-2 drop v0.21.3 + margin h2 precta v0.21.21) | skip | **✅** |
+| **Design Handoff Wave P3 home — hero variant B + SCF additive** (cream scrim asimmetrico 90deg, .sl-hero overflow hidden + isolation isolate homepage-only, .sl-hero__media absolute + picture display:contents + filter grayscale(0.7) contrast(1.05), .sl-hero__media::after linear-gradient cream scrim, .sl-hero__photo-credit mono 10px. +3 SCF additive: hero_image image return_format id, hero_image_credit text 60ch, hero_image_alt text 100ch. PHP saltelli_page_field() auto-resolve page_on_front + wp_get_attachment_image() o Picsum placeholder fallback seed 'saltelli-marble' con `<picture>` 3 source srcset 1x/2x + loading=eager fetchpriority=high. AVIF/WebP defer Wave 5.1) | **1.3.14-wave5-design-handoff-p3-home** | **✅** |
+| **Design Handoff Wave P4 single-competenza-tier1** (H1 display-band: clamp(72,10vw,160) + var(--ls-display) + lh 0.95. Answer capsule margin-left 20% @≥1024. Avvocato lead photo aspect-ratio 1/1. 5 fix CSS scope) | chore | **✅** |
+| **Design Handoff Wave P5 single-avvocato** (1 fix CSS minor .sl-attorney__specs li padding mobile 4px 12px → 6px 12px. Template 95% già allineato. Aspect-ratio ritratto WP wins 3:4 mobile foto reale + 1:1 desktop. foto_ritratto _thumbnail_id=2683 + bio_estesa HARD-PROTECTED preserved) | chore | **✅** |
+| **Design Handoff Wave P6 taxonomy-tipo-area SKIPPED** (0 drift fixabili, branch deleted. group_tipo_area_term_v1 + Wave 5 STEP 3 coverage refactor +110 righe taxonomy-tipo-area.php già coprono 23 field per-term + UX strings) | skip | **✅** |
+| **Design Handoff Wave P7 chi-siamo = lo-studio CONSOLIDAMENTO (Opzione A)** (consolidamento 2 Pages in 1: Page 2811 lo-studio rinominato slug → chi-siamo + Page 2822 hub legacy DELETED + redirect 301 /lo-studio/ + /chi-siamo/lo-studio/ → /chi-siamo/. group_lo_studio_v1 location page_slug→chi-siamo, title rinominato. group_chi_siamo_v1.json DELETED (4 hub field orphan). 34 field Elena content preserved. SALTELLI_SCF_ONLY_PAGES 13→12 IDs. Menu primary auto-aggiornato. page.php routing /chi-siamo/ → template-parts/page-lo-studio.php) | **1.3.15-wave-design-handoff-p7-chi-siamo-lo-studio-consolidamento** | **✅** |
+| **Design Handoff Wave P8 blog-archive** (1 fix CSS .sl-blog2__card-title letter-spacing -0.015em → var(--ls-h1) phantom §4 normalize. .sl-blog2__featured-title era già su token da wave precedente. Template 98% già allineato. SCF WP-native zero touch. QA pagination 1-37 OK, /page/50/ → 404. Memo: 32 card pagina 1 vs ppp=9 Settings Reading discrepanza pre-esistente NON toccata) | chore | **✅** |
+| **Design Handoff Wave P9 archive-casi — pull-quote ADDITIVE + filtri JS** (+4 SCF additive nel tab Archive Headers: archive_caso_simbolo_eyebrow/number/quote/attr per pull-quote "caso simbolo" conditional render. Filtri tabs hardcode 5 (Tutti/Privati/Imprese/Contenzioso/Altri) + JS vanilla client-side toggle (assets/js/archive-casi-filter.js ~40 righe). data-category=term_slug sui .sl-blog__row del loop. wp_enqueue_script conditional in inc/enqueue.php. CSS scope marker. group_caso_item_v1 + CPT registration invariati) | **1.3.16-wave-design-handoff-p9-archive-casi** | **✅** |
+| **Design Handoff Wave P10 glossario-legale** (1 fix CSS .sl-glossario__lede 22px → var(--fs-lede) computed-neutral. Altri 5 phantom defer Wave 5 STEP 5. SCF zero (60 termini + 5 FAQ in array PHP hardcoded, Wave 3 decisione confermata RECOMMENDATION §J). Schema JSON-LD DefinedTermSet + FAQPage invariato) | chore | **✅** |
+| **Design Handoff Wave P11 contatti SKIP orchestrator decision** (template page-contatti.php già allineato Wave 5 STEP 3 P7 Elena-approved. 2 fix CSS minor (token alignment) + select aree dinamico CPT competenza = backlog post-cut, non blocker. Decisione preserved v0.17.3 no-iframe mappa OpenStreetMap. Prompt PROMPT_AGENT_DESIGN_HANDOFF_P11_CONTATTI.md resta in prompts/ come backlog) | skip-backlog | **⏸** |
+| **Design Handoff Wave P12 404 (FINAL 12/12)** (2 fix CSS computed-neutral: .sl-404__lede-prose font-size 22px → var(--fs-lede) + .sl-404__article-title 22px → var(--fs-h3-floor). 5 phantom defer Wave 5 STEP 5: title clamp(72,9vw,140) display-band orphan, dropcap 72px ×2 decorative, card-title 28px candidate --fs-h2-floor, lede-prose 19px mobile intermediate prose-band, cta-title clamp(56,6.5vw,96) display-band CTA orphan. 404.php invariato (chore precedenti Wave 4.7.fix.5 + pre-cut polish + saltelli_aree_hub_url helper integri)) | chore | **✅** |
 | Cut produzione (DNS switch staging→prod) | 1.0.0 | ⏸ |
 
 ### 0.17.x — consolidation log (4 collisioni di numbering risolte)
@@ -128,6 +141,20 @@ Per evitare future collisioni quando più agent committano in parallelo:
 - `recovery-v1.0/PROMPT_AGENT_WAVE4_7_FIX_4_STRATEGY_A_FULL_SCF.md` — ✅ done (6 phases · 26 file · +2755/-38 · pivot empirico 6/7 zombie + 1/7 live · 12 Pages Gutenberg-disabled · admin shortcuts CPT · 12/12 smoke pass)
 - `recovery-v1.0/PROMPT_AGENT_WAVE4_7_FIX_5_PAGES_CLEANUP_BLOG_DOC.md` — ✅ done (5 phases · 10 file · +686/-15 · 35→19 Pages cleanup · Customizer lock per role editor · blog audit + admin notices · incident OOM is_super_admin risolto)
 - Wave 5 STEP 1/2/3/4 prompt — inline in chat orchestratore (non file): STEP 1 audit + STEP 2 design realign + STEP 3 7+6 Pages SCF expansion + STEP 4 328 sections.css token swaps · 8 commit P1→P8 STEP 3 + 4 commit STEP 3 coverage + 4 chore frontend fixes + STEP 4 (1 feat commit `9fbfe61` + merge `5309876`) · output knowledge: `audits/wave5-pages-completeness/` (STEP 1) + `audits/wave5-step4-sections-cleanup/` (STEP 4)
+- **Design Handoff sequenza P1-P12** (2026-05-12, 12 wave consecutive, 11 prompt file):
+  - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_AUDIT.md` — ✅ done (audit master strategy, 4 deliverable RECOMMENDATION 402 righe)
+  - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P1_CHROME.md` — ✅ done (9 drift, 5 fix + 2 deferred + 2 kept-deliberate)
+  - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P2_FOOTER.md` — ✅ done (0 drift, branch deleted, WP wins v0.21.x)
+  - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P3_HOME.md` — ✅ done (v1.3.14, hero variant B + 3 SCF additive)
+  - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P4_SINGLE_COMPETENZA_TIER1.md` — ✅ done (5 fix CSS H1 display-band + capsule indent + photo)
+  - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P5_SINGLE_AVVOCATO.md` — ✅ done (1 fix CSS spec pill padding, template 95% allineato)
+  - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P6_TAXONOMY_TIPO_AREA.md` — ✅ done (0 drift, branch deleted)
+  - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P7_CHI_SIAMO_LO_STUDIO_CONSOLIDAMENTO.md` — ✅ done (v1.3.15, consolidamento 2 Pages in 1 Opzione A)
+  - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P8_BLOG_ARCHIVE.md` — ✅ done (1 fix CSS letter-spacing, 98% allineato, QA pagination 326 post)
+  - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P9_ARCHIVE_CASI.md` — ✅ done (v1.3.16, +4 SCF additive pull-quote + filtri JS)
+  - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P10_GLOSSARIO_LEGALE.md` — ✅ done (1 fix CSS lede computed-neutral)
+  - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P12_404.md` — ✅ done (FINAL 12/12, 2 fix CSS computed-neutral)
+- **`prompts/PROMPT_AGENT_DESIGN_HANDOFF_P11_CONTATTI.md`** — ⏸ SKIP orchestrator decision, backlog post-cut (Page contatti Elena-approved, 2 fix CSS minor + select aree dinamico = nice-to-have non blocker)
 - **`prompts/PROMPT_AGENT_v1.0_WAVE4_PRODUCTION_READINESS.md`** — ⏸ ready to launch (5 phases, branch dedicato `feat/wave4-production-readiness`)
 - `deploy/PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` — runbook deploy archiviato (Fase 0+infra completata, deploy delta via rsync ad-hoc, Fasi 7-8 ancora aperte; sostituito de facto da `docs/DEPLOY.md`)
 - `_archive/prompts-completed/orchestration-original/` — prompt iniziali sessione 1
@@ -255,6 +282,38 @@ Test successivo con `wp eval 'wp_set_current_user(9); current_user_can("customiz
 - `$user->allcaps` (array merged)
 - Accesso diretto a property, NON passa dal filtro → no ricorsione
 
+### Lesson learned — Design Handoff pre-flight via Agent multi-agentic in parallelo (sequenza Design Handoff 12/12)
+
+Durante la sequenza Design Handoff (12 wave consecutive), l'orchestratore ha applicato un pattern multi-agentic per ridurre dead-time tra wave Code:
+
+```
+Wave N (Code esegue, 30 min-3h)
+  └─ in parallelo, orchestratore lancia:
+     ├─ Agent A — pre-flight Wave N+1 (Explore agent legge JSX + WP template + produce tabella drift in 5-10 min)
+     └─ Agent B — audit verify Wave N-1 pushata (read-only check)
+```
+
+Quando Code finisce Wave N e pusha:
+- Audit Wave N pronto (Agent B output) → orchestratore decide merge/iterate veloce
+- Prompt Wave N+1 già pronto (Agent A ha pre-mappato drift, prompt è 80% scritto)
+
+**Risparmio misurato**: ~25% riduzione ETA totale sequenza (~14-19h ridotti a ~12-15h reali). Specialmente effettivo su wave LIGHT (P10 glossario, P12 404) dove il pre-flight Agent ha identificato 1-2 fix CSS prima che Code fosse lanciato.
+
+**Pattern applicabile**: ogni sequenza multi-wave con scope simile e file disgiunti (es. design refactor multi-template, audit cleanup multi-area). NON applicabile a wave con dipendenze hard tra commit (es. P7 consolidamento data ops che vincolava P8/P11).
+
+**Esempio comando Agent pre-flight standard** (lean prompt template):
+```
+Sei Explore agent per [path repo]. Pre-flight Wave [N+1] [scope].
+READ-ONLY. Output max 700 parole con:
+1. JSX structure mapping
+2. Drift CSS focus (tabella max 12 righe)
+3. SCF reads check
+4. Stima severity + ETA
+5. Cross-ref phantom (se applicabile)
+6. Decisioni open per orchestratore
+7. Stima righe CSS/PHP/SCF
+```
+
 ## Design system (locked)
 
 ```
@@ -275,30 +334,33 @@ TYPOGRAPHY
 BREAKPOINTS: 375 / 768 / 1024 / 1440 (mobile-first)
 ```
 
-## Information architecture (current — post-Wave 5 IA refactor + Wave 4.7.fix.2 slug rename)
+## Information architecture (current — post-Wave 5 IA refactor + Wave 4.7.fix.2 slug rename + Design Handoff P7 consolidamento chi-siamo=lo-studio)
 
 ```
-/                                                  Homepage (front-page.php)
-/chi-siamo/                                        Hub Page WP 2822 (page-chi-siamo-hub.php · SCF tab "Hub Pages")
+/                                                  Homepage (front-page.php · hero variant B cream scrim asimmetrico + 3 SCF additive hero_image/credit/alt)
+/chi-siamo/                                        Page WP 2811 — POST-P7 CONSOLIDAMENTO (template-parts/page-lo-studio.php editorial: hero + lede + Plate I + 1999 + 4 lawyers + 3 principi + timeline + CTA · group_lo_studio_v1 34 field Elena content)
 /chi-siamo/team/                                   CPT archive avvocato (archive-avvocato.php · SCF tab "Archive Headers")
 /chi-siamo/team/{slug}/                            CPT avvocato (single-avvocato.php) × 4
-/chi-siamo/casi-rappresentativi/                   CPT archive saltelli_caso (archive-saltelli_caso.php · SCF tab "Archive Headers") — rename Wave 4.7.fix.2 da /chi-siamo/risultati/ + 301
+/chi-siamo/casi-rappresentativi/                   CPT archive saltelli_caso (archive-saltelli_caso.php · SCF tab "Archive Headers" + 4 SCF additive Wave P9 pull-quote caso simbolo · filtri tabs vanilla JS)
 /chi-siamo/casi-rappresentativi/{slug}/            CPT saltelli_caso single
 /aree-di-pratica/                                  Hub Page WP 2812 (page-aree-di-pratica-hub.php · SCF tab "Hub Pages" · 4 cluster cards SCF)
-/aree-di-pratica/{privati,imprese,contenzioso-amministrativo}/   Term tipo-area (taxonomy-tipo-area.php · SCF UX strings)
-/aree-di-pratica/{cluster}/{competenza-slug}/      CPT competenza × 19 — branched tier-1/tier-2 (single-competenza.php)
+/aree-di-pratica/{privati,imprese,contenzioso-amministrativo}/   Term tipo-area (taxonomy-tipo-area.php · group_tipo_area_term_v1 23 field per-term Wave 5 STEP 3 coverage)
+/aree-di-pratica/{cluster}/{competenza-slug}/      CPT competenza × 19 — branched tier-1/tier-2 (single-competenza.php · Wave P4 H1 display-band clamp(72,10vw,160) + ls --ls-display + lh 0.95 tier-1)
 /risorse/                                          Hub Page WP 2813 (page-risorse-hub.php · SCF tab "Hub Pages" · 4 resource cards SCF)
-/risorse/{domande-frequenti,guide-gratuite,glossario-legale}/   Pages WP figlie (page.php)
+/risorse/{domande-frequenti,guide-gratuite,glossario-legale}/   Pages WP figlie (page.php · glossario hardcoded 60 termini Wave 3 confermato P10)
 /risorse/blog/                                     Blog archive (home.php) · post historical × 326
 /costi-e-consulenze/                               Hub Page WP 2695 (page-costi-e-consulenze-hub.php)
 /costi-e-consulenze/{prima-consulenza,come-lavoriamo,richiedi-preventivo}/   Pages WP figlie
-/contatti/                                         Contact (page.php)
+/contatti/                                         Contact (page.php · group_contatti_v1 19 field Wave 5 STEP 3 P7 Elena-approved · NO mappa iframe v0.17.3 preserved)
 /prenota-appuntamento/                             Page WP 2714
+/404                                               404.php (count aree dinamico wp_count_posts + breadcrumb cluster + saltelli_aree_hub_url helper)
 /llms.txt                                          Static AI crawler file (served dynamically)
 ```
 
-**Redirect 301 legacy attivi** (`inc/redirects.php` · Wave 4.7.fix.2 P2):
+**Redirect 301 legacy attivi** (`inc/redirects.php` · Wave 4.7.fix.2 P2 + Wave Design Handoff P7):
 - `/chi-siamo/risultati/` → `/chi-siamo/casi-rappresentativi/`
+- `/lo-studio/` → `/chi-siamo/` (Design Handoff P7 consolidamento)
+- `/chi-siamo/lo-studio/` → `/chi-siamo/` (Design Handoff P7 consolidamento, legacy nested)
 - `/competenze/` → `/aree-di-pratica/` · `/tipo-area/{privati,imprese,contenzioso}/` → `/aree-di-pratica/{...}/`
 - `/faq/` → `/risorse/domande-frequenti/` · `/guide-gratuite/` → `/risorse/guide-gratuite/` · `/glossario-legale/` → `/risorse/glossario-legale/` · `/blog/` → `/risorse/blog/`
 - `/costi/` → `/costi-e-consulenze/` · `/prima-consulenza/` → `/costi-e-consulenze/prima-consulenza/` · `/come-lavoriamo/` → `/costi-e-consulenze/come-lavoriamo/` · `/richiedi-preventivo/` → `/costi-e-consulenze/richiedi-preventivo/`
@@ -411,5 +473,5 @@ Re-read this file. If still in doubt, ask Duccio. Don't guess on:
 - Anything that would appear in schema markup as fact
 
 ---
-*Last updated: 2026-05-11 · v1.3.13-wave5-step3-coverage CUT-READY · 5 wave consecutive (fix.5 + Wave 5 STEP 1 audit + STEP 2 design realign + STEP 3 Pages SCF + STEP 3 coverage) + 5 chore frontend polish (4 + Wave 5 STEP 4 sections.css drift cleanup: 328 typography literal → var(--token), computed-neutral, ~460 phantom residui documentati) · 19 Pages canoniche · 13 Pages Gutenberg-disabled SCF-only · 7 Pages alto-traffico SCF expansion completa (107 field) · 2 archive CPT + 3 term tipo-area SCF metabox · tokens.css rebuilt da DESIGN.md · EDITOR-HANDOFF v6.0 · Elena OK definitivo 2026-05-11 · 3 lesson learned in Workflow rules (OPcache + admin-side smoke test + cap-recursion in user_has_cap) · prossimo: front-end debug visivo (phantom resolution wave: 22px×23 + clamp() consolidation) + cut produzione*
+*Last updated: 2026-05-12 · v1.3.16-wave-design-handoff-p9-archive-casi CUT-READY · Sequenza Design Handoff COMPLETATA 12/12 (9 wave merge + 2 skip 0-drift P2 footer + P6 taxonomy + 1 skip orchestrator decision P11 contatti backlog) · 18 Pages canoniche post-P7 consolidamento chi-siamo=lo-studio · 13 Pages Gutenberg-disabled SCF-only · Design Handoff template completati: chrome + home (hero variant B + 3 SCF) + single-competenza-tier1 + single-avvocato + chi-siamo consolidamento + blog-archive + archive-casi (+4 SCF + filtri JS) + glossario-legale + 404 · 4 lesson learned in Workflow rules (OPcache + admin-side smoke test + cap-recursion in user_has_cap + Design Handoff pre-flight Agent multi-agentic ~25% ETA reduction) · prossimo: acceptance test visivo Elena 11 template + cut produzione (DNS switch staging → prod) · backlog post-cut: P11 contatti + Wave 5 STEP 5 phantom resolution + Wave 5.1 Image Expansion + single-post JSX request Design*
 *Maintained by orchestrator (Claude in chat) after each milestone.*
