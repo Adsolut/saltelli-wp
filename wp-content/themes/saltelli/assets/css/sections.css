@@ -5080,7 +5080,7 @@ textarea.sl-input {
     font-weight: 400;
     font-size: clamp(20px, 1.5vw, 24px);
     line-height: 1.25;
-    letter-spacing: -0.015em;
+    letter-spacing: var(--ls-h1); /* === design-handoff blog-archive P8 === was -0.015em literal — normalize phantom §4 (computed -0.005em diff invisible) */
     color: var(--primary);
     margin: 0;
     display: -webkit-box;
