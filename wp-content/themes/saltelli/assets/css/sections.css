@@ -213,7 +213,12 @@
   margin-top: 2px;
 }
 .sl-header__nav { display: none; }
-.sl-header__phone {
+/* === design-handoff chrome (P1) === JSX phone color = var(--primary).
+   Specificità .sl-header .sl-header__phone (0,2,0) per battere
+   .sl-root a { color: inherit } (0,1,1) di tokens.css — altrimenti il
+   telefono ereditava var(--text). font-size var(--fs-caption)=11px su tutti
+   i breakpoint (JSX: 11px md & sm; rimosso l'override desktop --fs-micro=12px). */
+.sl-header .sl-header__phone {
   color: var(--primary);
   font-size: var(--fs-caption);
 }
@@ -236,9 +241,11 @@
 
 @media (min-width: 1024px) {
   .sl-header__inner {
-    /* D2 fidelity — JSX exact: padding fisso 24px 96px desktop (no clamp).
-       Mobile resta padding 16px 20px del base. */
-    padding: 24px 96px;
+    /* === design-handoff chrome (P1) === JSX chrome/index.jsx:
+       padding "20px clamp(24px,5vw,96px)". Orizzontale = var(--container-pad)
+       (= la clamp; è anche ciò che applica lo shim .sl-container su questo el);
+       verticale 20px allinea l'altezza della banda all'header JSX (era 24px). */
+    padding: 20px var(--container-pad);
     display: grid;
     grid-template-columns: auto 1fr auto;
     gap: 48px;
@@ -247,12 +254,11 @@
   .sl-header__brand-title { font-size: 22px; }
   .sl-header__nav {
     display: flex;
-    gap: 40px;
+    gap: 36px; /* JSX chrome nav gap — NB: .sl-header__nav ha 1 figlio (l'ul); il gap reale è su .sl-header__menu (vedi FIX A) */
     justify-content: center;
     font-size: var(--fs-small);
     font-weight: 500;
   }
-  .sl-header__phone { font-size: var(--fs-micro); }
   .sl-header__menu-btn { display: none; }
 }
 
@@ -1516,6 +1522,7 @@
 /* ═══════════════════════════════════════════════════════════════
    FIX A — Header navigation: forza display flex inline
    per i menu emessi da wp_nav_menu (con classe .menu o variations)
+   gap 36px = JSX chrome/index.jsx nav (=== design-handoff chrome P1).
    ═══════════════════════════════════════════════════════════════ */
 .sl-header__nav ul,
 .sl-header__nav .menu,
@@ -1525,7 +1532,7 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 32px;
+  gap: 36px;
   align-items: center;
 }
 
@@ -1539,18 +1546,27 @@
   content: '';
 }
 
+/* === design-handoff chrome (P1) === JSX usa <a className="sl-link"
+   borderBottomColor:transparent> → underline bronzo a hover. Allineato
+   al pattern .sl-link (components.css). letter-spacing: normal — il
+   phantom 0.01em (Wave 5 STEP 4 doc §"0.01em": eliminate→0) va resettato
+   esplicitamente perché il critical CSS inline (assets/css/critical/*.css,
+   stale — generato pre-Wave 5) lo riporta ancora; vedi report P1. */
 .sl-header__nav a {
   font-family: var(--font-body);
   font-size: var(--fs-small);
   font-weight: 500;
   color: var(--text);
   text-decoration: none;
-  letter-spacing: 0.01em;
+  letter-spacing: normal;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
   transition: color var(--dur-fast) var(--ease-editorial);
 }
 
 .sl-header__nav a:hover {
   color: var(--accent);
+  border-bottom-color: var(--accent);
 }
 
 /* Skip link visibile only on focus */

@@ -8,7 +8,7 @@
  * Behaviors:
  *   1. Lenis smooth scroll (lerp 0.1) — disabilitato su prefers-reduced-motion + mobile
  *   2. GSAP ticker integrato con Lenis (no double rAF)
- *   3. Header solid-on-scroll — toggle .is-scrolled dopo 80px scroll
+ *   3. Header solid-on-scroll — toggle .is-scrolled dopo 40px scroll (= JSX S2Header, design-handoff chrome P1)
  *   4. Mobile menu toggle (burger / hidden attr)
  *   5. Hero headline reveal — REVEAL 1 v0.15: stagger 80ms su .sl-hero__word, power3.out (true quart-out)
  *   6. Sezioni fade-in scroll-trigger 80% viewport (.sl-areas/.sl-studio/.sl-team/.sl-cases/.sl-press/.sl-contact)
@@ -68,7 +68,7 @@
     if (header && !header.dataset.slScrollBound) {
       const onScroll = () => {
         const y = window.scrollY || window.pageYOffset || 0;
-        const scrolled = y > 80;
+        const scrolled = y > 40; /* === design-handoff chrome (P1) === allineato a header.php inline + JSX S2Header */
         header.classList.toggle('is-scrolled', scrolled);
         header.setAttribute('data-scrolled', scrolled ? 'true' : 'false');
       };

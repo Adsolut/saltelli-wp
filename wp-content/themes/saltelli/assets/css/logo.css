@@ -316,10 +316,15 @@
 
 /* ──────────────────────────────────────────────────────────────────────
    RESPONSIVE — Mobile sotto 768px
+   === design-handoff chrome (P1) === Valori = SLLogoHorizontal/SLLogoStack
+   size="sm" di design-handoff/logo/index.jsx.
+   NB: h-top/h-bot mantengono il tracking 0.28em/0.20em (più stretto del "sm"
+   JSX 0.32em/0.24em) per fit del lockup su header 375px — delta otticamente
+   impercettibile.
    ────────────────────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
     .sl-logo--horizontal {
-        gap: 16px;
+        gap: 18px;
     }
     .sl-logo--horizontal .sl-logo__h-name {
         font-size: 24px;
@@ -336,7 +341,14 @@
         height: 28px;
     }
 
+    .sl-logo--stack .sl-logo__s-row1 {
+        font-size: 9px;
+        letter-spacing: 0.36em;
+    }
     .sl-logo--stack .sl-logo__s-row2 {
-        font-size: 40px;
+        font-size: 28px;
+    }
+    .sl-logo--stack .sl-logo__s-row3 {
+        font-size: 8px;
     }
 }
