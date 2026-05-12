@@ -7,16 +7,16 @@
       "label": "",
       "name": "",
       "type": "message",
-      "message": "Pagina /prenota-appuntamento/. Il TITOLO della pagina (campo \"Titolo\" in alto) è l'H1. Il CONTENUTO sotto il titolo si modifica nel campo \"Contenuto pagina\" qui sotto. L'editor a blocchi (Gutenberg) è disabilitato su questa pagina: una sola sorgente di verità.",
+      "message": "LEGACY (data backward-compat) — Wave Elena FB Batch 3 #22: la pagina /prenota-appuntamento/ è stata uniformata al layout di Richiedi preventivo (template-parts/page-info-shared.php). I 16 campi nuovi (Hero · Eyebrow, Hero · H1 prefix, Hero · H1 italic, Hero · Lede, Aside · *, Body · Editorial content, CTA finale · *) si trovano nelle metabox di seguito (gruppo \"Page Servizi\"). Il campo legacy \"Contenuto pagina\" qui sotto resta attivo come fallback: se il nuovo campo \"Body · Editorial content\" è vuoto, viene letto questo. Migrazione consigliata: copia il contenuto da qui a \"Body · Editorial content\", poi puoi svuotare questo campo.",
       "new_lines": "wpautop",
       "esc_html": 0
     },
     {
       "key": "field_pa_intro",
-      "label": "Contenuto pagina",
+      "label": "Contenuto pagina (legacy fallback)",
       "name": "prenota_intro",
       "type": "wysiwyg",
-      "instructions": "Tutto il contenuto editoriale mostrato sotto il titolo. Il valore predefinito è il contenuto attuale della pagina (lede + sezioni \"Modalità\" e \"Tempi di risposta\" + bottone \"Compila il modulo\"): modificalo liberamente. Se svuoti il campo, viene mostrato il contenuto originale della pagina.",
+      "instructions": "LEGACY — usato come fallback per \"Body · Editorial content\" (gruppo Page Servizi) finché non migri il contenuto al nuovo campo. Vedi messaggio sopra.",
       "default_value": "<p class=\"sl-page__lede\">Solo su appuntamento, in studio a Chiaia o in videocall. Risposta entro 24 ore dalla richiesta.</p>\n<h2>Modalità</h2>\n<ul><li><strong>In studio</strong> — Via Vannella Gaetani 27, Napoli (Chiaia). Lun-Ven 10:00-19:00.</li><li><strong>Videocall</strong> — Google Meet o Zoom, su richiesta. Stessa fascia oraria.</li><li><strong>Telefono</strong> — primo contatto solo per appuntamenti, non per consulenza tecnica.</li></ul>\n<h2>Tempi di risposta</h2>\n<p>Entro 24 ore lavorative. Per urgenze (termini in scadenza, atti da impugnare entro pochi giorni), segnalalo nel modulo: precediamo il riscontro telefonico.</p>\n<p><a class=\"sl-btn sl-btn--primary\" href=\"/contatti/\"><span>Compila il modulo</span> <span class=\"arrow\" aria-hidden=\"true\">→</span></a></p>",
       "tabs": "all",
       "toolbar": "full",
@@ -40,7 +40,7 @@
   "instruction_placement": "label",
   "hide_on_screen": "",
   "active": true,
-  "description": "Wave 5 STEP 3 (coverage-completion) — Page /prenota-appuntamento/ (WP 2714 su staging, 2711 in locale; location via page_slug per portabilità env). Migrazione Strategy A: il contenuto si edita dal metabox SCF (field prenota_intro, wysiwyg, default = post_content corrente); Gutenberg disabilitato (page ID 2714 aggiunto a SALTELLI_SCF_ONLY_PAGES). page.php renderizza apply_filters('the_content', prenota_intro) raw per questa pagina, con fallback the_content() se il campo è vuoto → output byte-invariant pre/post. H1 = titolo pagina (campo nativo WP), invariato.",
+  "description": "LEGACY DATA-COMPAT — Wave Elena FB Batch 3 #22 (2026-05-12): la pagina /prenota-appuntamento/ è stata uniformata al layout di Richiedi preventivo via group_info_shared_v1 (16 field hero/aside/body/cta). Questo group resta attivo SOLO per data backward-compat (preservare il contenuto editor pre-esistente nel campo prenota_intro) — letto come fallback per body_content nel template-part page-info-shared.php quando il nuovo campo è vuoto. Origine storica: Wave 5 STEP 3 (coverage-completion) — page_slug location per portabilità env (2714 staging, 2711 locale). Gutenberg disabilitato (page ID 2714 in SALTELLI_SCF_ONLY_PAGES). H1 = titolo pagina nativo WP, invariato.",
   "show_in_rest": 0,
-  "modified": 1778700000
+  "modified": 1778800000
 }
