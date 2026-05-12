@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.19-wave-elena-fb-batch-3');
+define('SALTELLI_THEME_VERSION', '1.3.20-chore-post-batch3-housekeeping');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
