@@ -160,6 +160,13 @@
         "operator": "==",
         "value": "richiedi-preventivo"
       }
+    ],
+    [
+      {
+        "param": "page_slug",
+        "operator": "==",
+        "value": "prenota-appuntamento"
+      }
     ]
   ],
   "menu_order": 0,
@@ -169,7 +176,7 @@
   "instruction_placement": "label",
   "hide_on_screen": "",
   "active": true,
-  "description": "Wave 1 v1 — Field Group condiviso layout info-page+ standard. Targets: /guide-gratuite/ (2706), /come-lavoriamo/ (2709), /prima-consulenza/ (2708), /lavora-con-noi/ (372), /richiedi-preventivo/ (2710). Multi-location OR clauses.",
+  "description": "Wave 1 v1 — Field Group condiviso layout info-page+ standard. Targets: /guide-gratuite/ (2706), /come-lavoriamo/ (2709), /prima-consulenza/ (2708), /lavora-con-noi/ (372), /richiedi-preventivo/ (2710). Multi-location OR clauses. Wave Elena FB Batch 3 #22 (2026-05-12): aggiunta location /prenota-appuntamento/ (2714) — layout uniforma a Richiedi preventivo. SCF legacy group_prenota_appuntamento_v1 resta attivo per backward-compat (data preservation campo prenota_intro), letto come fallback per body_content nel template-part.",
   "show_in_rest": 0,
-  "modified": 1777948804
+  "modified": 1778800000
 }

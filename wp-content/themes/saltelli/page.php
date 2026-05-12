@@ -54,7 +54,12 @@ while (have_posts()) :
             include SALTELLI_THEME_DIR . '/inc/wave3-glossario.php';
         } elseif (is_page(['faq', 'domande-frequenti'])) {
             get_template_part('template-parts/page', 'faq');
-        } elseif (is_page(['guide-gratuite', 'come-lavoriamo', 'prima-consulenza', 'lavora-con-noi', 'richiedi-preventivo'])) {
+        } elseif (is_page(['guide-gratuite', 'come-lavoriamo', 'prima-consulenza', 'lavora-con-noi', 'richiedi-preventivo', 'prenota-appuntamento'])) {
+            // Wave Elena FB Batch 3 #22 — prenota-appuntamento layout uniforma richiedi-preventivo.
+            // Page 2714 (prenota-appuntamento) ora renderizza con il template editoriale shared
+            // (hero 8/4 + trust aside + body + CTA navy finale) invece del default page.php fallback.
+            // Backward-compat: il template-part legge prenota_intro (SCF group_prenota_appuntamento_v1
+            // legacy, ancora attivo per data-preservation) come fallback per body_content quando vuoto.
             get_template_part('template-parts/page', 'info-shared');
         } elseif (is_page('costi')) {
             get_template_part('template-parts/page', 'costi');
@@ -85,23 +90,11 @@ while (have_posts()) :
             <section class="sl-page__content">
                 <div class="sl-container">
                     <div class="sl-page__prose"><?php
-                    /* P4 (wave5-step3-completion): /prenota-appuntamento/ (Page WP 2714 su
-                       staging, 2711 in locale) → contenuto dal metabox SCF
-                       group_prenota_appuntamento_v1 (field prenota_intro, wysiwyg, default =
-                       post_content corrente). Gutenberg disabilitato (SALTELLI_SCF_ONLY_PAGES).
-                       Si renderizza il valore raw via apply_filters('the_content', …): con il
-                       default = post_content l'output è identico a the_content(). Fallback a
-                       the_content() se il campo viene svuotato. Tutte le altre page: invariato. */
-                    if (is_page('prenota-appuntamento') && function_exists('get_field')) {
-                        $sl_pa_body = (string) get_field('prenota_intro', get_the_ID(), false);
-                        if ($sl_pa_body !== '') {
-                            echo apply_filters('the_content', $sl_pa_body);
-                        } else {
-                            the_content();
-                        }
-                    } else {
-                        the_content();
-                    }
+                    /* Wave Elena FB Batch 3 #22 — /prenota-appuntamento/ legacy block rimosso.
+                       Page 2714 ora rotta da page-info-shared.php (vedi router sopra). Questo
+                       blocco resta come default fallback per qualsiasi altra Page senza routing
+                       dedicato (es. Pages nuove create via wp-admin senza slug noto). */
+                    the_content();
                     ?></div>
                 </div>
             </section>
