@@ -646,6 +646,30 @@ function saltelli_competenza_category_slug($post_id) {
 }
 
 /**
+ * Wave-Q fix #18 (feedback Elena): label badge competenza eterogenea su homepage/
+ * archive/term/single-avvocato — "TIER 1 · APPROFONDIMENTO →" vs "APPROFONDISCI →"
+ * vs "TIER 2" vs cluster name. Helper centralizzato per label uniforme.
+ * Distinzione visiva tier-1 vs tier-2 resta su .sl-area__num (oro accent) + tipografia.
+ *
+ * Post-fix: tier-1 e tier-2 → "Approfondimento" omogeneo (prefix "TIER 1 ·" rimosso).
+ *
+ * @param int|null  $post_id   ID post competenza (default current post).
+ * @param bool|null $is_tier_1 Override flag tier-1 (default: lookup ACF is_tier_1).
+ * @param string    $cat_label Label categoria opzionale (informativo, non usato nel testo).
+ * @return string Testo localizzato.
+ */
+function saltelli_tier_badge_label($post_id = null, $is_tier_1 = null, $cat_label = '') {
+    if ($post_id === null) {
+        $post_id = get_the_ID();
+    }
+    if ($is_tier_1 === null && $post_id) {
+        $is_tier_1 = (bool) saltelli_field('is_tier_1', $post_id, false);
+    }
+    unset($cat_label, $is_tier_1); // argument list preserved for forward compat / future opt-in.
+    return __('Approfondimento', 'saltelli');
+}
+
+/**
  * Reading time stimato per un blog post (200 parole/min).
  *
  * @param int $post_id

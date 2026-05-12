@@ -74,7 +74,8 @@ $tipo_terms = get_terms([
                         <span class="sl-area__num sl-mono"><?php echo esc_html($num); ?> / <?php echo esc_html(str_pad((string) $total, 2, '0', STR_PAD_LEFT)); ?></span>
                         <span class="sl-area__title"><?php echo esc_html(get_the_title($p)); ?></span>
                         <span class="sl-area__meta sl-mono">
-                            <?php echo esc_html($is_tier_1 ? __('Tier 1 · approfondimento', 'saltelli') : ($cat_label ?: __('Tier 2', 'saltelli'))); ?>
+                            <?php // Wave-Q fix #18: label uniforme via helper centralizzato. ?>
+                            <?php echo esc_html(saltelli_tier_badge_label($p->ID, $is_tier_1, $cat_label)); ?>
                             <span class="arrow" aria-hidden="true">→</span>
                         </span>
                     </a>

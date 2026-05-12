@@ -1094,9 +1094,10 @@
   display: grid;
   gap: 6px;
 }
-.sl-hero__scroll {
-  display: none;
-}
+/* Wave-Q fix #3 — eyebrow "Scorri" rimosso (feedback Elena: ridondante con CTA
+   Prenota consulenza). Rimosso markup .sl-hero__scroll/__scroll-line in front-page.php
+   + regole CSS desktop ≥1024. La regola legacy .sl-hero__scroll-indicator (riga 342)
+   resta dormiente — phantom backlog Wave 5 STEP 5. */
 @media (min-width: 1024px) {
   .sl-hero__inner {
     grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
@@ -1121,24 +1122,6 @@
     transform: translateY(40px);
   }
   .sl-hero__subheadline { font-size: 22px; margin-bottom: 16px; }
-  /* D9 fidelity — JSX exact: scroll indicator orizzontale absolute bottom-left.
-     Mobile (<1024) display: none ereditato da .sl-hero__scroll base. */
-  .sl-hero__scroll {
-    position: absolute;
-    bottom: 32px;
-    left: 96px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 0;
-    z-index: 5;
-  }
-  .sl-hero__scroll-line {
-    display: block;
-    width: 1px;
-    height: 32px;
-    background: var(--text-muted);
-  }
 }
 
 /* Section head + title (usato da front-page.php)

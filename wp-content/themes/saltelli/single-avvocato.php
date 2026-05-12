@@ -147,9 +147,8 @@ while (have_posts()) :
                             $is_tier_1 = function_exists('saltelli_is_tier1_competenza')
                                 ? saltelli_is_tier1_competenza($aid)
                                 : (bool) saltelli_field('is_tier_1_focus', $aid, false);
-                            $tier_label = $is_tier_1
-                                ? __('Tier 1 · approfondimento', 'saltelli')
-                                : __('Tier 2', 'saltelli');
+                            // Wave-Q fix #18: label uniforme via helper centralizzato.
+                            $tier_label = saltelli_tier_badge_label($aid, $is_tier_1);
                             $cluster = saltelli_competenza_category_label($aid);
                             $num     = str_pad((string) ($sl_idx + 1), 2, '0', STR_PAD_LEFT);
                         ?>

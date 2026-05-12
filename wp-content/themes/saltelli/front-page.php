@@ -104,12 +104,25 @@ $avvocati = get_posts([
 $layout_team = saltelli_team_grid_layout();
 
 // Filter pillole (tassonomia)
+// Wave-Q fix #4 (feedback Elena): tab "Tutte" + "Altri servizi" rimossi → solo
+// 3 cluster canonici (privati / imprese / contenzioso-amministrativo). Exclude
+// eventuali term `altri-servizi` / `altri` / `altro` creati in admin (non canonici IA Wave 5).
 $tipo_terms = get_terms([
     'taxonomy'   => 'tipo-area',
     'hide_empty' => false,
     'orderby'    => 'count',
     'order'      => 'DESC',
 ]);
+if (is_array($tipo_terms) && !is_wp_error($tipo_terms)) {
+    $tipo_terms = array_values(array_filter($tipo_terms, function ($t) {
+        return !in_array($t->slug, ['altri-servizi', 'altri', 'altro'], true);
+    }));
+} else {
+    $tipo_terms = [];
+}
+$default_filter_slug = (!empty($tipo_terms) && isset($tipo_terms[0]->slug))
+    ? $tipo_terms[0]->slug
+    : 'privati';
 
 $cases = saltelli_homepage_cases();
 $press = saltelli_press_outlets();
@@ -168,10 +181,7 @@ $press = saltelli_press_outlets();
             </div>
         </aside>
     </div>
-    <div class="sl-hero__scroll" aria-hidden="true">
-        <span class="sl-hero__scroll-line"></span>
-        <span class="sl-mono"><?php esc_html_e('Scorri', 'saltelli'); ?></span>
-    </div>
+    <?php /* Wave-Q fix #3: rimosso eyebrow "Scorri" (feedback Elena: ridondante con CTA Prenota una consulenza gratuita). */ ?>
     <?php if ($hero_credit !== '') : ?>
         <div class="sl-hero__photo-credit"><?php esc_html_e('Photo', 'saltelli'); ?> · <?php echo esc_html($hero_credit); ?></div>
     <?php endif; ?>
@@ -188,9 +198,11 @@ $press = saltelli_press_outlets();
         </div>
 
         <div class="sl-areas__filters" role="tablist">
-            <button class="sl-areas__filter sl-mono is-active" type="button" data-filter="*" aria-pressed="true"><?php esc_html_e('Tutte', 'saltelli'); ?></button>
-            <?php foreach ($tipo_terms as $term) : ?>
-                <button class="sl-areas__filter sl-mono" type="button" data-filter="<?php echo esc_attr($term->slug); ?>" aria-pressed="false"><?php echo esc_html($term->name); ?></button>
+            <?php // Wave-Q fix #4: rimosso "Tutte" + "Altri servizi" → 3 cluster canonici, primo (privati) attivo di default. ?>
+            <?php foreach ($tipo_terms as $idx => $term) :
+                $is_active = ($idx === 0);
+                ?>
+                <button class="sl-areas__filter sl-mono<?php echo $is_active ? ' is-active' : ''; ?>" type="button" data-filter="<?php echo esc_attr($term->slug); ?>" aria-pressed="<?php echo $is_active ? 'true' : 'false'; ?>"><?php echo esc_html($term->name); ?></button>
             <?php endforeach; ?>
         </div>
 
@@ -204,6 +216,11 @@ $press = saltelli_press_outlets();
                         $num = str_pad((string) $i, 2, '0', STR_PAD_LEFT);
                         $cat_slug  = saltelli_competenza_category_slug($p->ID);
                         $cat_label = saltelli_competenza_category_label($p->ID);
+                        // Wave-Q fix #4: rimosso tab "Tutte" → orfani (cat vuota) o non-canonici
+                        // ricadono sul cluster di default per restare visibili sotto un filtro.
+                        if (!in_array($cat_slug, ['privati', 'imprese', 'contenzioso-amministrativo'], true)) {
+                            $cat_slug = $default_filter_slug;
+                        }
                         // Wave 4.6: use is_tier_1 (Wave 1 ACF schema canonico).
                         $is_tier_1 = (bool) saltelli_field('is_tier_1', $p->ID, false);
                         $lead      = (string) saltelli_field('lead_breve', $p->ID, '');
@@ -223,7 +240,8 @@ $press = saltelli_press_outlets();
                             <span class="sl-area__num sl-mono"><?php echo esc_html($num); ?> / <?php echo esc_html(str_pad((string) count($competenze), 2, '0', STR_PAD_LEFT)); ?></span>
                             <span class="sl-area__title"><?php echo esc_html(get_the_title($p)); ?></span>
                             <span class="sl-area__meta sl-mono">
-                                <?php echo esc_html($is_tier_1 ? __('Tier 1 · approfondimento', 'saltelli') : ($cat_label ?: __('Tier 2', 'saltelli'))); ?>
+                                <?php // Wave-Q fix #18: label uniforme via helper centralizzato. ?>
+                                <?php echo esc_html(saltelli_tier_badge_label($p->ID, $is_tier_1, $cat_label)); ?>
                                 <span class="arrow" aria-hidden="true">→</span>
                             </span>
                         </a>
