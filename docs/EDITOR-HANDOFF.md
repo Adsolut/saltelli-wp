@@ -344,7 +344,7 @@ Legenda colonna "Come si edita":
 | **1413** | Blog / `blog` | `/risorse/blog/` | ⚠️ Pagina-contenitore: il suo contenuto NON è mostrato — il blog è generato dal tema. Per gli articoli vai a **Articoli** (vedi §9) | Slot per `/risorse/blog/` (è la "pagina degli articoli" di WP) |
 | **23** | Contatti / `contatti` | `/contatti/` | 🔒 SCF "Saltelli — Page Contatti" (hero/mappa/come arrivare/trust, 10 field) | Pagina contatti + modulo (modulo via Contact Form 7) |
 | **372** | Lavora con noi / `lavora-con-noi` | `/contatti/lavora-con-noi/` | 🔒 SCF "Saltelli — Page Servizi" (16 field) | Carriere |
-| **2714** | Prenota un appuntamento / `prenota-appuntamento` | `/prenota-appuntamento/` | Gutenberg / standard | Pagina prenotazione appuntamento |
+| **2714** | Prenota un appuntamento / `prenota-appuntamento` | `/prenota-appuntamento/` | 🔒 SCF — Gutenberg disabled · **2 metabox**: "Saltelli — Page Prenota Appuntamento" + "Saltelli — Page Servizi" (info-shared: hero/lede/trust/CTA). Dal v6.1 (Wave Elena FB Batch 3 #22) la pagina usa il template-part condiviso `page-info-shared.php`, identico a `richiedi-preventivo` (2713) | Pagina prenotazione appuntamento |
 | **2741** | Privacy Policy / `privacy-policy` | `/privacy-policy/` | Gutenberg / Iubenda | Privacy policy (gestita da Iubenda — non riscrivere a mano) |
 | **2742** | Cookie Policy / `cookie-policy` | `/cookie-policy/` | Gutenberg / Iubenda | Cookie policy (gestita da Iubenda) |
 | **2743** | Note legali / `note-legali` | `/note-legali/` | Gutenberg | Note legali |
