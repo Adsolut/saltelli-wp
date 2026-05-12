@@ -4145,6 +4145,11 @@ textarea.sl-input {
 
 .sl-casi__filter-count { margin-left: 6px; opacity: 0.65; }
 
+/* === design-handoff archive-casi P9 — pull-quote + filtri innestati in .sl-blog--casi === */
+.sl-blog--casi .sl-casi__pull-frame { margin: 56px 0; }
+.sl-blog--casi .sl-casi__filter-bar { margin: 0 0 40px; }
+.sl-blog__row.is-hidden { display: none; }
+
 /* LISTA ------------------------------------------------------------- */
 .sl-casi__list-wrap {
     max-width: 1440px;

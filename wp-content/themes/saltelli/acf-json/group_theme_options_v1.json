@@ -1030,6 +1030,43 @@
             "instructions": "Mostrato quando non ci sono casi pubblicati.",
             "default_value": "Nessun caso pubblicato.",
             "maxlength": 120
+        },
+        {
+            "key": "field_archive_caso_simbolo_eyebrow",
+            "label": "Caso simbolo — eyebrow",
+            "name": "archive_caso_simbolo_eyebrow",
+            "type": "text",
+            "instructions": "Eyebrow della sezione pull-quote 'caso simbolo' su /chi-siamo/casi-rappresentativi/. Es. 'Caso simbolo · 2024'. Se i 4 campi 'Caso simbolo' sono tutti vuoti la sezione non viene renderizzata sul frontend.",
+            "maxlength": 60,
+            "default_value": ""
+        },
+        {
+            "key": "field_archive_caso_simbolo_number",
+            "label": "Caso simbolo — numero/importo",
+            "name": "archive_caso_simbolo_number",
+            "type": "text",
+            "instructions": "Numero/importo principale grande nel pull-quote. Es. '€240k' o '01 / 19'. Display 80-140px Playfair italic.",
+            "maxlength": 20,
+            "default_value": ""
+        },
+        {
+            "key": "field_archive_caso_simbolo_quote",
+            "label": "Caso simbolo — citazione",
+            "name": "archive_caso_simbolo_quote",
+            "type": "textarea",
+            "instructions": "Citazione editoriale del caso simbolo. Visibile 24-32px Playfair italic. Le virgolette tipografiche vengono aggiunte dal template.",
+            "rows": 4,
+            "maxlength": 300,
+            "default_value": ""
+        },
+        {
+            "key": "field_archive_caso_simbolo_attr",
+            "label": "Caso simbolo — attribuzione",
+            "name": "archive_caso_simbolo_attr",
+            "type": "text",
+            "instructions": "Attribuzione fonte del caso. Es. 'Vs. AGE Riscossione · CTP Napoli · 2024'. Mono 11px.",
+            "maxlength": 100,
+            "default_value": ""
         }
     ],
     "location": [
@@ -1053,5 +1090,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1778600000
+    "modified": 1778976000
 }
