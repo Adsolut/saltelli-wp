@@ -3752,6 +3752,9 @@ textarea.sl-input {
 }
 .sl-chi-siamo__plate-line2 { color: rgba(255, 255, 255, 0.85); }
 
+/* DEAD CODE — sezione "§ 02 — 1999 founding" rimossa Wave Elena FB Batch 1 (Wave S #12) ·
+   markup template-parts/page-lo-studio.php non emette più `.sl-chi-siamo__founding*` ·
+   cleanup target Wave 6.1 (vedi docs/SCF_ORPHAN_FIELDS.md §B) */
 .sl-chi-siamo__founding { padding: 0 0 clamp(80px, 10vw, 128px); }
 .sl-chi-siamo__founding-grid {
     display: grid;
@@ -5724,6 +5727,9 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 
 /* CTA finale ──────────────────────────────────────────────────────── */
+/* DEAD CODE — sezione "§ 04 — Primo incontro" rimossa Wave Elena FB Batch 1 (Wave S #16) ·
+   markup template-parts/taxonomy-tipo-area.php non emette più `.sl-tipoarea__cta*` per
+   i 3 term (privati/imprese/contenzioso) · cleanup target Wave 6.1 (vedi docs/SCF_ORPHAN_FIELDS.md §C) */
 .sl-tipoarea__cta {
     padding-block: clamp(72px, 10vw, 128px) clamp(96px, 12vw, 160px);
 }
@@ -7519,95 +7525,10 @@ html:not(.js-reveal-ready) .sl-archive-casi__h1 .sl-word {
 /* === IMPECCABLE v0.22.2 END === */
 
 /* === v0.23.0 TASK A — Tier-1 deep cluster pixel-perfect ===
-   Scope additivo a .sl-competenza--tier-1 (no replace, classes coexist).
-   Source JSX: .claude/knowledge/design/sessione-2/saltelli-s2-practice-tier1.jsx */
-
-.sl-tier1__hero {
-    padding-block: clamp(64px, 8vw, 120px) clamp(32px, 4vw, 48px);
-}
-.sl-tier1__eyebrow {
-    margin-bottom: 24px;
-    color: var(--accent);
-}
-.sl-tier1__h1 {
-    font-family: var(--font-display);
-    font-size: clamp(48px, 7vw, 132px);
-    line-height: var(--lh-display);
-    font-weight: 400;
-    letter-spacing: -0.025em;
-    color: var(--primary);
-    margin-block: 0 24px;
-}
-.sl-tier1__sub {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(20px, 1.6vw, 28px);
-    line-height: var(--lh-mono);
-    color: var(--text-muted);
-    max-width: 56ch;
-    margin: 0 0 56px 0;
-    font-weight: 400;
-}
-.sl-tier1__capsule {
-    padding-block: 32px;
-    border-block: 1px solid var(--accent);
-    margin-block: 48px;
-    max-width: 60ch;
-    margin-inline: auto;
-}
-.sl-tier1__capsule-text {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(22px, 2vw, 28px);
-    line-height: var(--lh-lede);
-    color: var(--primary);
-    max-width: 60ch;
-    margin: 0;
-    letter-spacing: var(--ls-h3);
-}
-.sl-tier1__body {
-    padding-block: 64px;
-}
-.sl-tier1__body .sl-competenza__prose,
-.sl-tier1__body .sl-container > .sl-competenza__prose {
-    max-width: 720px;
-    margin-inline: auto;
-}
-.sl-tier1__body h2,
-.sl-tier1__cluster-title {
-    font-family: var(--font-display);
-    font-size: clamp(28px, 3vw, 44px);
-    line-height: var(--lh-heading);
-    font-weight: 400;
-    margin-block: 80px 32px;
-    color: var(--primary);
-    max-width: 24ch;
-    letter-spacing: var(--ls-h2);
-}
-.sl-tier1__cases,
-.sl-tier1__faq,
-.sl-tier1__related,
-.sl-tier1__cta-final {
-    padding-block: clamp(64px, 8vw, 128px);
-}
-.sl-tier1__faq .sl-acc {
-    max-width: 720px;
-    margin-inline: auto;
-    margin-top: 32px;
-}
-.sl-tier1__cta-final {
-    text-align: center;
-}
-.sl-tier1__cta-final .sl-mono {
-    margin-bottom: 24px;
-    color: var(--text-muted);
-}
-@media (max-width: 767px) {
-    .sl-tier1__h1 { font-size: clamp(40px, 9vw, 64px); }
-    .sl-tier1__sub { font-size: var(--fs-body-marketing); margin-bottom: 32px; }
-    .sl-tier1__cluster-title,
-    .sl-tier1__body h2 { margin-block: 56px 24px; font-size: clamp(24px, 5vw, 32px); }
-}
+   REMOVED: chore/post-batch3-housekeeping — Wave C BEM rename (.sl-tier1__* → .sl-competenza__*)
+   ha lasciato 71 rule orfane prive di markup reference (PHP/JS grep = 0 match).
+   Stili tier-1 vivi ora scoped sotto `.sl-competenza--tier-1` nel blocco
+   "Wave Elena FB Batch 2 #23 — single-competenza layout unify" (linea ~10053). */
 
 /* === v0.23.0 TASK B — /costi/ Sessione 2 pixel-perfect ===
    Scope namespace .sl-costi-w4__* (NO collision con legacy .sl-costi__*).
@@ -8079,77 +8000,10 @@ html:not(.js-reveal-ready) .sl-archive-casi__h1 .sl-word {
 }
 
 /* === v0.24.0 TASK 4 — Tier-1 "Avvocato di riferimento" card ==============
-   Mapping fisso: tributario→Emiliano, lavoro→Fabiana, lgbtq→Antonia.
-   Source: saltelli-s2-practice-tier1.jsx (referente block).
+   REMOVED: chore/post-batch3-housekeeping — Wave C BEM rename (.sl-tier1__* → .sl-competenza__*)
+   ha lasciato rule orfane. Equivalenti `.sl-competenza__ref-lawyer*` vivono
+   nel blocco "Wave Elena FB Batch 2 #23" (linea ~10053).
    ========================================================================== */
-.sl-tier1__lawyer {
-    padding-block: 48px;
-    border-block: 1px solid var(--border);
-    margin-block: 56px;
-}
-.sl-tier1__lawyer-eyebrow {
-    margin-bottom: 24px;
-}
-.sl-tier1__lawyer-card {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 24px;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-    transition: transform var(--dur-base, 400ms) var(--ease-quart-out, cubic-bezier(0.25, 1, 0.5, 1));
-}
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-    .sl-tier1__lawyer-card:hover {
-        transform: translateX(8px);
-    }
-    .sl-tier1__lawyer-card:hover .sl-tier1__lawyer-name {
-        color: var(--accent);
-    }
-}
-.sl-tier1__lawyer-photo,
-.sl-tier1__lawyer-placeholder {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 0;
-    display: block;
-}
-.sl-tier1__lawyer-placeholder {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-size: var(--fs-h3-max);
-    color: var(--primary);
-}
-.sl-tier1__lawyer-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-.sl-tier1__lawyer-name {
-    font-family: var(--font-display);
-    font-size: clamp(20px, 2vw, 24px);
-    line-height: var(--lh-h3);
-    font-weight: 400;
-    margin: 0;
-    color: var(--primary);
-    transition: color var(--dur-fast, 200ms) var(--ease-quart-out, cubic-bezier(0.25, 1, 0.5, 1));
-}
-.sl-tier1__lawyer-role {
-    font-size: var(--fs-caption);
-    color: var(--text-muted);
-    margin: 0;
-}
-.sl-tier1__lawyer-link {
-    font-family: var(--font-body);
-    font-size: 13px;
-    color: var(--accent);
-    margin-top: 4px;
-}
 
 /* === v0.24.0 TASK 6 — /contatti/ form success state ======================
    Pattern: hidden by default · revealed via wpcf7mailsent JS handler.
@@ -8183,48 +8037,11 @@ html:not(.js-reveal-ready) .sl-archive-casi__h1 .sl-word {
 /* === v0.24.0 END === */
 
 /* === v0.25.0 T2 — Tier-1 deep cluster (3 cluster × 3 tier-1) ============
-   H2 + 1-2 paragrafi GEO-rich post the_content() solo per tier-1.
-   Source: helper saltelli_tier1_clusters() in inc/helpers.php.
+   REMOVED: chore/post-batch3-housekeeping — Wave C BEM rename
+   (.sl-tier1__cluster* → .sl-competenza__cluster*) ha lasciato rule orfane.
+   Stili cluster vivi ora scoped sotto `.sl-competenza--tier-1` nel blocco
+   "Wave Elena FB Batch 2 #23" (linea ~10053).
    ========================================================================== */
-.sl-tier1__clusters {
-    padding-block: clamp(40px, 6vw, 80px);
-}
-.sl-tier1__cluster {
-    max-width: 72ch;
-    margin-block: clamp(40px, 6vw, 80px);
-    padding-block: clamp(24px, 3vw, 40px);
-    border-top: 1px solid var(--border);
-}
-.sl-tier1__cluster:first-of-type {
-    border-top: 0;
-    margin-top: 0;
-    padding-top: 0;
-}
-.sl-tier1__cluster-h2 {
-    font-family: var(--font-display);
-    font-size: clamp(28px, 3.2vw, 44px);
-    line-height: var(--lh-heading);
-    font-weight: 400;
-    color: var(--primary);
-    margin: 0 0 24px;
-    max-width: 24ch;
-    letter-spacing: var(--ls-h2);
-}
-.sl-tier1__cluster-p {
-    font-family: var(--font-body);
-    font-size: clamp(16px, 1.4vw, 18px);
-    line-height: var(--lh-body);
-    color: var(--text);
-    margin: 0 0 20px;
-    max-width: 64ch;
-}
-.sl-tier1__cluster-p:last-child {
-    margin-bottom: 0;
-}
-@media (max-width: 767px) {
-    .sl-tier1__cluster-h2 { font-size: 26px; }
-    .sl-tier1__cluster-p  { font-size: var(--fs-body); }
-}
 
 /* === v0.25.0 T3 — Chi-siamo principles 3-col desktop ====================
    Esistente .sl-chi-siamo__principles-list (column rows): override su ≥1024
@@ -8582,73 +8399,11 @@ html:not(.js-reveal-ready) .sl-archive-casi__h1 .sl-word {
 
 /* ═══════════════════════════════════════════════════════════════
    v0.27.0 TASK 2 — TIER-1 visual refinement
-   Source: saltelli-s2-practice-tier1.jsx
+   REMOVED: chore/post-batch3-housekeeping — selettori chiavi su `.sl-tier1__hero`,
+   `.sl-tier1__capsule`, `.sl-tier1__cluster*`, `.sl-tier1__cases` orfani post
+   Wave C BEM rename. Hero asym grid + cases 3-col + capsule tier-1 vivono ora
+   sotto `.sl-competenza--tier-1` (blocco "Wave Elena FB Batch 2 #23", ~10053).
    ═══════════════════════════════════════════════════════════════ */
-
-/* === Hero asym 8fr/4fr desktop === */
-@media (min-width: 1024px) {
-    .sl-tier1__hero .sl-container {
-        display: grid;
-        grid-template-columns: 8fr 4fr;
-        gap: 64px;
-        align-items: end;
-    }
-    .sl-tier1__hero .sl-container > .sl-page__breadcrumb,
-    .sl-tier1__hero .sl-container > .sl-competenza__back,
-    .sl-tier1__hero .sl-container > .sl-competenza__eyebrow,
-    .sl-tier1__hero .sl-container > .sl-competenza__title,
-    .sl-tier1__hero .sl-container > .sl-tier1__sub {
-        grid-column: 1;
-    }
-    .sl-tier1__hero .sl-container > .sl-competenza__answer-wrap,
-    .sl-tier1__hero .sl-container > .sl-tier1__capsule {
-        grid-column: 2;
-        grid-row: 1 / span 6;
-        align-self: end;
-    }
-    .sl-tier1__hero .sl-container > .sl-competenza__hero-cta,
-    .sl-tier1__hero .sl-container > .sl-tier1__lawyer {
-        grid-column: 1 / -1;
-    }
-}
-
-/* === Capsule italic editorial === */
-.sl-tier1__capsule {
-    padding: 32px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-}
-.sl-tier1__capsule-text {
-    font-family: var(--font-display);
-    font-size: clamp(20px, 2vw, 26px);
-    font-style: italic;
-    line-height: var(--lh-lede);
-    color: var(--primary);
-    max-width: 36ch;
-    margin: 0;
-}
-
-/* === Cluster H2 (v0.25.0 deep cluster) — refinement spacing === */
-.sl-tier1__cluster-h2 {
-    margin-block-start: 80px;
-}
-.sl-tier1__clusters .sl-tier1__cluster:first-of-type .sl-tier1__cluster-h2 {
-    margin-block-start: 0;
-}
-
-/* === Cases 3-col grid (override stacked default for tier-1 only) === */
-@media (min-width: 1024px) {
-    .sl-tier1__cases .sl-cases__list {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 32px;
-    }
-    .sl-tier1__cases .sl-cases__row {
-        border-top: 1px solid var(--accent);
-        padding-top: 24px;
-        padding-block: 24px 32px;
-    }
-}
 
 /* ═══════════════════════════════════════════════════════════════
    v0.27.0 TASK 3 — CHI-SIAMO visual refinement
@@ -8798,9 +8553,9 @@ html:not(.js-reveal-ready) .sl-archive-casi__h1 .sl-word {
     margin: 0 0 48px !important;
 }
 
-/* TIER-1 — section H2 mb 48 (JSX line 240, 270 saltelli-s2-practice-tier1) */
-.sl-tier1__cases h2.sl-section-title,
-.sl-tier1__faq h2.sl-section-title,
+/* TIER-1 — section H2 mb 48 (JSX line 240, 270 saltelli-s2-practice-tier1)
+   chore/post-batch3-housekeeping: rimossi selettori `.sl-tier1__cases` + `.sl-tier1__faq`
+   orfani post Wave C BEM rename. Live target: `.sl-competenza__*` (markup attuale). */
 .sl-competenza__casi h2.sl-section-title,
 .sl-competenza__faq h2.sl-section-title,
 .sl-competenza__avvocati h2.sl-section-title,
@@ -8810,8 +8565,8 @@ html:not(.js-reveal-ready) .sl-archive-casi__h1 .sl-word {
     letter-spacing: var(--ls-h1);
     margin: 0 0 48px !important;
 }
-/* TIER-1 CTA finale "Hai una pratica simile?" clamp(56,6.5vw,96) mb 32 (JSX line 290) */
-.sl-tier1__cta-final h2.sl-section-title,
+/* TIER-1 CTA finale "Hai una pratica simile?" clamp(56,6.5vw,96) mb 32 (JSX line 290)
+   chore/post-batch3-housekeeping: rimosso selettore `.sl-tier1__cta-final` orfano. */
 .sl-competenza__cta h2.sl-section-title {
     font-size: clamp(40px, 5vw, 64px) !important;
     line-height: var(--lh-display);
@@ -9596,13 +9351,14 @@ h2.sl-casi__cta-title {
    STATIC (no animation) per evitare flash/disappear.
    ═══════════════════════════════════════════════════════════════ */
 
-/* MASTER UNIFIED first-letter rule — desktop (14 essential scopes v0.35.1) */
+/* MASTER UNIFIED first-letter rule — desktop (13 essential scopes v0.35.1)
+   chore/post-batch3-housekeeping: rimosso `.sl-tier1__body` orfano post Wave C
+   BEM rename. La drop-cap tier-1 ora atterra su `.sl-competenza__prose` (già in lista). */
 .sl-studio__prose[data-drop-cap] > p:first-of-type::first-letter,
 .sl-attorney__bio-prose > p:first-of-type::first-letter,
 .sl-attorney__bio > p:first-of-type::first-letter,
 .sl-page__prose > p:first-of-type::first-letter,
 .sl-competenza__prose > p:first-of-type::first-letter,
-.sl-tier1__body > p:first-of-type::first-letter,
 .sl-chi-siamo__lede-text > p:first-of-type::first-letter,
 .sl-chi-siamo__prose > p:first-of-type::first-letter,
 .sl-info-page__prose > p:first-of-type::first-letter,
@@ -9628,12 +9384,12 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 }
 
 @media (max-width: 767px) {
+    /* chore/post-batch3-housekeeping: rimosso `.sl-tier1__body` orfano (vedi nota desktop sopra). */
     .sl-studio__prose[data-drop-cap] > p:first-of-type::first-letter,
     .sl-attorney__bio-prose > p:first-of-type::first-letter,
     .sl-attorney__bio > p:first-of-type::first-letter,
     .sl-page__prose > p:first-of-type::first-letter,
     .sl-competenza__prose > p:first-of-type::first-letter,
-    .sl-tier1__body > p:first-of-type::first-letter,
     .sl-chi-siamo__lede-text > p:first-of-type::first-letter,
     .sl-chi-siamo__prose > p:first-of-type::first-letter,
     .sl-info-page__prose > p:first-of-type::first-letter,
@@ -9893,6 +9649,9 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     margin: 0;
 }
 
+/* DEAD CODE — sezione "Scrivici nota 24h" rimossa Wave Elena FB Batch 1 (Wave S #9) ·
+   markup template-parts/page-aree-di-pratica-hub.php non emette più `.sl-hub-cta*` ·
+   cleanup target Wave 6.1 (vedi docs/SCF_ORPHAN_FIELDS.md §A) */
 .sl-hub-cta {
     padding: clamp(64px, 10vw, 120px) 0;
     border-top: 1px solid var(--border);
@@ -10029,26 +9788,13 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     opacity: 0.55;
 }
 
-/* === design-handoff single-competenza-tier1 P4 === */
-/* Allinea hero H1 tier-1, answer-capsule indent desktop e avvocato photo aspect-ratio
-   al JSX source design-handoff/single-competenza-tier1/index.jsx. Aggiunte in coda al
-   file → vincono il cascade (per le proprietà qui impostate) su .sl-tier1__h1 (line 7331
-   + mobile override 7405), .sl-tier1__capsule (7350/8400) e .sl-tier1__lawyer-photo (7909).
-   Token alignment §A KEEP CURRENT: font-size + line-height literal per-selector (tier-1
-   display-band one-off, non riusabile); letter-spacing usa il token esistente var(--ls-display). */
-.sl-tier1__h1 {
-    font-size: clamp(72px, 10vw, 160px);   /* JSX literal — tier-1 display-band (era clamp(48px, 7vw, 132px)) */
-    letter-spacing: var(--ls-display);     /* -0.035em — H1 tier-1 è display-sized (era -0.025em literal) */
-    line-height: 0.95;                     /* JSX literal — phantom candidate --lh-display-tight, deferred Wave 5 STEP 5 (era var(--lh-display) = 0.98) */
-}
-.sl-tier1__lawyer-photo {
-    aspect-ratio: 1 / 1;                   /* JSX explicit (l'<img> ha già width/height 80px → ridondante ma esplicito) */
-}
-@media (min-width: 1024px) {
-    .sl-tier1__capsule {
-        margin-left: 20%;                  /* JSX inline marginLeft: 20% — solo desktop, mobile resta full-width */
-    }
-}
+/* === design-handoff single-competenza-tier1 P4 ===
+   REMOVED: chore/post-batch3-housekeeping — override su `.sl-tier1__h1`,
+   `.sl-tier1__lawyer-photo`, `.sl-tier1__capsule` orfani post Wave C BEM rename.
+   Le proprietà (H1 display-band clamp(72,10vw,160), aspect-ratio 1/1, capsule
+   margin-left 20% desktop) sono migrate sotto `.sl-competenza--tier-1` nel
+   blocco "Wave Elena FB Batch 2 #23" (linea ~10053).
+   ============================================================================ */
 
 /* === Wave Elena FB Batch 2 #23 — single-competenza layout unify =============
    Template-only refactor: single-competenza.php ora emette UNA struttura
@@ -10057,8 +9803,9 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 
    Classi BEM rinominate (template-side) da `.sl-tier1__*` → `.sl-competenza__*`
    per allineamento naming a scope coerente. Le rule storiche `.sl-tier1__*`
-   restano nel file come dead-code inerte ma non sono più target di alcun
-   markup. Cleanup integrale defer a wave dedicata.
+   sono state RIMOSSE in chore/post-batch3-housekeeping (49 rule, -294 righe)
+   dopo verifica grep PHP/JS = 0 reference. Gli equivalenti `.sl-competenza__*`
+   tier-1-only vivono qui sotto, scoped via `.sl-competenza--tier-1`.
 
    Tier-2 ora rende:
    - body_extended SCF (era invisibile pre-refactor — fix #23 core)

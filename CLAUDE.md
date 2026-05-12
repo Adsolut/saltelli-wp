@@ -157,12 +157,14 @@ Per evitare future collisioni quando più agent committano in parallelo:
   - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P9_ARCHIVE_CASI.md` — ✅ done (v1.3.16, +4 SCF additive pull-quote + filtri JS)
   - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P10_GLOSSARIO_LEGALE.md` — ✅ done (1 fix CSS lede computed-neutral)
   - `recovery-v1.0/PROMPT_AGENT_DESIGN_HANDOFF_P12_404.md` — ✅ done (FINAL 12/12, 2 fix CSS computed-neutral)
-- **`prompts/PROMPT_AGENT_DESIGN_HANDOFF_P11_CONTATTI.md`** — ⏸ SKIP orchestrator decision, backlog post-cut (Page contatti Elena-approved, 2 fix CSS minor + select aree dinamico = nice-to-have non blocker)
-- **`prompts/PROMPT_AGENT_v1.0_WAVE4_PRODUCTION_READINESS.md`** — ⏸ ready to launch (5 phases, branch dedicato `feat/wave4-production-readiness`)
+- **`prompts/_BACKLOG_PROMPT_AGENT_DESIGN_HANDOFF_P11_CONTATTI.md`** — ⏸ SKIP orchestrator decision, backlog post-cut (Page contatti Elena-approved, 2 fix CSS minor + select aree dinamico = nice-to-have non blocker). Rinominato con prefix `_BACKLOG_` in `chore/post-batch3-housekeeping` 2026-05-12.
+- ~~`prompts/PROMPT_AGENT_v1.0_WAVE4_PRODUCTION_READINESS.md`~~ — ❌ obsolete (Wave 4 effettivamente eseguita via Wave 4.5/4.6/4.7.*/4.8 path completed 1.3.0→1.3.11). Spostato in `_archive/prompts-completed/_obsolete/` da `chore/post-batch3-housekeeping`.
 - `deploy/PROMPT_AGENT_G_DEPLOY_DIGITALOCEAN.md` — runbook deploy archiviato (Fase 0+infra completata, deploy delta via rsync ad-hoc, Fasi 7-8 ancora aperte; sostituito de facto da `docs/DEPLOY.md`)
 - `_archive/prompts-completed/orchestration-original/` — prompt iniziali sessione 1
 - `_archive/prompts-completed/pre-recovery-v0.x/` — 17 prompt iterazioni v0.* (sessione 1+2 design)
 - `_archive/prompts-completed/recovery-v0.9/` — recovery preliminare
+- `_archive/prompts-completed/recovery-v1.0/` — Wave 0+1+2+3 + Debug QA + Wave 4.5/4.6/4.7.*/4.8 + Wave 5 IA + Design Handoff P1-P12 (P11 escluso, ancora backlog)
+- `_archive/prompts-completed/_obsolete/` — prompt mai eseguiti o superseded (Wave 4 production-readiness v1.0 path scartato, Wave 6 GEO/CRO mai eseguito design pivoted, EDITOR-HANDOFF v1 legacy 27 KB superseded by `docs/EDITOR-HANDOFF.md` v6.0 98 KB)
 
 **Operational docs** (`/docs/`):
 - `docs/BRIEF.md` — brief originale del progetto (cliente, team, 19 aree, AI-readiness)

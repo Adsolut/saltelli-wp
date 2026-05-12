@@ -21,7 +21,14 @@ Il progetto Saltelli usa il seguente pattern di orchestrazione:
 
 | Prompt | Status | Ultima modifica |
 |---|---|---|
-| `PROMPT_AGENT_v1.0_WAVE4_PRODUCTION_READINESS.md` | ⏸ ready to launch (non ancora eseguito) | 2026-05-05 |
+| `_BACKLOG_PROMPT_AGENT_DESIGN_HANDOFF_P11_CONTATTI.md` | ⏸ backlog post-cut (page contatti Elena-approved, 2 fix CSS minor + select aree dinamico = nice-to-have non blocker) | 2026-05-12 |
+
+**Convenzione prefix**: `_BACKLOG_` davanti al filename indica prompt non eseguito ma in pausa per decisione orchestrator (es. scope deferred a fase successiva).
+
+**Cleanup 2026-05-12** (`chore/post-batch3-housekeeping`):
+- Spostati 18 prompt completati a `_archive/prompts-completed/recovery-v1.0/` (Wave 4.5/4.6/4.7/4.8/5 + visual debug audit + working artifacts).
+- Spostati 5 file obsoleti a `_archive/prompts-completed/_obsolete/` (`PROMPT_AGENT_v1.0_WAVE4_PRODUCTION_READINESS.md` superato da Wave 4.5+; `PROMPT_AGENT_v1.1_WAVE6_GEO_CRO_BLOCKS.md` + 2 file Wave 6 mai eseguito, design pivoted to Wave 5 STEP 1-4; `EDITOR-HANDOFF.md` v1 legacy 27 KB superseded by `docs/EDITOR-HANDOFF.md` v6.0 98 KB).
+- Rinominato `PROMPT_AGENT_DESIGN_HANDOFF_P11_CONTATTI.md` → `_BACKLOG_` prefix per chiarezza.
 
 ## Come usarli
 
@@ -51,7 +58,8 @@ _archive/prompts-completed/
 ├── orchestration-original/    ← prompt iniziali del progetto
 ├── pre-recovery-v0.x/         ← prompt fasi v0.* (sessioni 1+2 design)
 ├── recovery-v0.9/             ← recovery preliminare
-├── recovery-v1.0/             ← Wave 0+1+2+3 + Debug QA
+├── recovery-v1.0/             ← Wave 0+1+2+3 + Debug QA + Wave 4.5/4.6/4.7/4.8/5 + Design Handoff P1-P12 (escluso P11 ancora backlog)
+├── _obsolete/                 ← prompt mai eseguiti / superseded (Wave 4 production-readiness v1.0, Wave 6 GEO/CRO, EDITOR-HANDOFF v1 legacy)
 └── deploy/                    ← runbook deploy
 ```
 
@@ -59,4 +67,4 @@ Il merge commit conserva i 7+ commit del branch dedicato (no squash). Così `git
 
 ---
 
-*Maintained by orchestrator (Claude in chat). Last updated: 2026-05-05.*
+*Maintained by orchestrator (Claude in chat). Last updated: 2026-05-12 — chore/post-batch3-housekeeping cleanup.*
