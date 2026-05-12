@@ -99,19 +99,17 @@ $sl_principles_posts = get_posts([
     </div>
 </section>
 
-<section class="sl-chi-siamo__lede" aria-label="<?php esc_attr_e('Lede editoriale', 'saltelli'); ?>">
-    <div class="sl-container sl-chi-siamo__lede-grid">
-        <div class="sl-mono">§ 01 — <?php esc_html_e('Lede', 'saltelli'); ?></div>
-        <div class="sl-chi-siamo__prose sl-chi-siamo__prose--dropcap">
-            <p>
-                <?php echo wp_kses_post(saltelli_page_field('lo_studio_lede_p1', "Un atelier di quattro professionisti che da oltre vent'anni accompagna famiglie e imprese di Napoli attraverso le materie di cui si occupa: il diritto tributario di Emiliano, il diritto del lavoro di Fabiana, la tutela LGBTQ+ in materia di famiglia di Antonia, il condominiale e immobiliare di Stefano.")) . "\n            "; ?></p>
-            <p>
-                <?php echo esc_html(saltelli_page_field('lo_studio_lede_p2', "Crediamo che il diritto sia, prima di tutto, un'arte di ascolto. Le carte vengono dopo. Per questo non offriamo pacchetti né formule: ogni cliente è una storia, e ogni storia merita il tempo di essere capita.")); ?>
-            </p>
-        </div>
-    </div>
-</section>
-
+<?php
+/* === Wave-S fix #11 — Plate I "Facciata studio" spostato qui (banner subito sotto hero,
+   prima del lede §01) — feedback Elena: l'immagine era in mezzo al testo, deve essere
+   il primo elemento visivo dopo il page hero. CSS .sl-chi-siamo__plate immutato (rules
+   in sections.css 3574+ funzionano indipendentemente dalla posizione).
+   NB Elena: "questa immagine non è modificabile" — Plate I è hardcoded (nessun SCF
+   field nel group_lo_studio_v1). BACKLOG: aggiungere `lo_studio_plate_image` (image),
+   `lo_studio_plate_caption_line1/line2` (text), `lo_studio_plate_eyebrow_tl/br` (text)
+   per renderlo editabile da admin — fuori scope wave S (additive SCF richiede coordinate
+   con Elena per default values byte-equal). === */
+?>
 <section class="sl-chi-siamo__plate" aria-hidden="true">
     <div class="sl-container">
         <div class="sl-chi-siamo__plate-frame">
@@ -125,38 +123,27 @@ $sl_principles_posts = get_posts([
     </div>
 </section>
 
-<section class="sl-chi-siamo__founding" aria-labelledby="chi-siamo-founding-h">
-    <div class="sl-container sl-chi-siamo__founding-grid">
-        <aside class="sl-chi-siamo__founding-mark">
-            <div class="sl-mono">§ 02 — 1999</div>
-            <div class="sl-chi-siamo__founding-year"><?php echo esc_html(saltelli_page_field('lo_studio_founding_year', '1999.')); ?></div>
-        </aside>
-        <div>
-            <h2 class="sl-section-title sl-chi-siamo__h2" id="chi-siamo-founding-h">
-                <?php echo esc_html(saltelli_page_field('lo_studio_founding_h2', 'Un atelier, in senso napoletano.')); ?>
-            </h2>
-            <div class="sl-chi-siamo__prose">
-                <?php
-                /* Wave 4.6 priority order:
-                 *  1. Editor classico (post_content) — la fonte primaria per Editor.
-                 *  2. ACF founding_paragraphs — fallback se editor vuoto.
-                 *  3. Hardcoded — fallback ultimo se entrambi vuoti.
-                 */
-                if (get_the_content() !== '') {
-                    the_content();
-                } elseif ($sl_founding_acf !== '') {
-                    echo wp_kses_post($sl_founding_acf);
-                } else {
-                    ?>
-                    <p><?php esc_html_e("Lo Studio Saltelli & Partners nasce per iniziativa di Emiliano Saltelli, giovane tributarista formatosi alla Federico II, che apre una stanza al secondo piano di un palazzo nobiliare a Chiaia.", 'saltelli'); ?></p>
-                    <p><?php esc_html_e('Nel quarto di secolo successivo, lo Studio è cresciuto come si cresce a Napoli — per accumulazione paziente, una pratica alla volta, un avvocato alla volta — fino a diventare oggi un atelier di quattro professionisti.', 'saltelli'); ?></p>
-                    <?php
-                }
-                ?>
-            </div>
+<section class="sl-chi-siamo__lede" aria-label="<?php esc_attr_e('Lede editoriale', 'saltelli'); ?>">
+    <div class="sl-container sl-chi-siamo__lede-grid">
+        <div class="sl-mono">§ 01 — <?php esc_html_e('Lede', 'saltelli'); ?></div>
+        <div class="sl-chi-siamo__prose sl-chi-siamo__prose--dropcap">
+            <p>
+                <?php echo wp_kses_post(saltelli_page_field('lo_studio_lede_p1', "Un atelier di quattro professionisti che da oltre vent'anni accompagna famiglie e imprese di Napoli attraverso le materie di cui si occupa: il diritto tributario di Emiliano, il diritto del lavoro di Fabiana, la tutela LGBTQ+ in materia di famiglia di Antonia, il condominiale e immobiliare di Stefano.")) . "\n            "; ?></p>
+            <p>
+                <?php echo esc_html(saltelli_page_field('lo_studio_lede_p2', "Crediamo che il diritto sia, prima di tutto, un'arte di ascolto. Le carte vengono dopo. Per questo non offriamo pacchetti né formule: ogni cliente è una storia, e ogni storia merita il tempo di essere capita.")); ?>
+            </p>
         </div>
     </div>
 </section>
+
+<?php
+/* === Wave-S fix #12 — sezione .sl-chi-siamo__founding "§ 02 — 1999" rimossa
+   (feedback Elena: ridondante con § Lo studio precedente / lede). I SCF field
+   associati (lo_studio_founding_year, lo_studio_founding_h2, founding_paragraphs)
+   restano orphan nel group_lo_studio_v1 JSON — cleanup post-cut. Il content
+   storico "1999" appare ancora nella timeline §05 come anno fondazione.
+   CSS .sl-chi-siamo__founding* (3613+ sections.css) resta orphan. === */
+?>
 
 <?php if (!empty($sl_lawyers_chi)) : ?>
     <section class="sl-chi-siamo__team-mini" aria-labelledby="chi-siamo-team-h">
