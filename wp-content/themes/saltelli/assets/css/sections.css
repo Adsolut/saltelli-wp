@@ -9812,3 +9812,24 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     color: var(--text-muted);
     opacity: 0.55;
 }
+
+/* === design-handoff single-competenza-tier1 P4 === */
+/* Allinea hero H1 tier-1, answer-capsule indent desktop e avvocato photo aspect-ratio
+   al JSX source design-handoff/single-competenza-tier1/index.jsx. Aggiunte in coda al
+   file → vincono il cascade (per le proprietà qui impostate) su .sl-tier1__h1 (line 7331
+   + mobile override 7405), .sl-tier1__capsule (7350/8400) e .sl-tier1__lawyer-photo (7909).
+   Token alignment §A KEEP CURRENT: font-size + line-height literal per-selector (tier-1
+   display-band one-off, non riusabile); letter-spacing usa il token esistente var(--ls-display). */
+.sl-tier1__h1 {
+    font-size: clamp(72px, 10vw, 160px);   /* JSX literal — tier-1 display-band (era clamp(48px, 7vw, 132px)) */
+    letter-spacing: var(--ls-display);     /* -0.035em — H1 tier-1 è display-sized (era -0.025em literal) */
+    line-height: 0.95;                     /* JSX literal — phantom candidate --lh-display-tight, deferred Wave 5 STEP 5 (era var(--lh-display) = 0.98) */
+}
+.sl-tier1__lawyer-photo {
+    aspect-ratio: 1 / 1;                   /* JSX explicit (l'<img> ha già width/height 80px → ridondante ma esplicito) */
+}
+@media (min-width: 1024px) {
+    .sl-tier1__capsule {
+        margin-left: 20%;                  /* JSX inline marginLeft: 20% — solo desktop, mobile resta full-width */
+    }
+}
