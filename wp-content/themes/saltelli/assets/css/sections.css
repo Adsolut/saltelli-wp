@@ -5900,9 +5900,10 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 
 .sl-404__lede-prose {
+    /* === design-handoff 404 P12 (FINAL) === */
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 22px;
+    font-size: var(--fs-lede); /* was 22px literal — token alignment lede stilistico */
     line-height: var(--lh-lede);
 }
 
@@ -6079,9 +6080,10 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 .sl-404__article-cat { color: var(--text-muted); }
 
 .sl-404__article-title {
+    /* === design-handoff 404 P12 (FINAL) === */
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: 22px;
+    font-size: var(--fs-h3-floor); /* was 22px literal — heading h3 articoli recenti */
     line-height: 1.25;
     letter-spacing: -0.015em;
     color: var(--primary);
