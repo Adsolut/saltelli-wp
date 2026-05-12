@@ -1,0 +1,164 @@
+/* Saltelli & Partners — Componenti tipografici condivisi
+   Definisce le classi .sl-* usate da design-system.jsx (Sessione 1)
+   e da tutte le pagine Sessione 2. Tokens da tokens.css. */
+
+.sl-root {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--background);
+  line-height: var(--lh-body);
+}
+
+.sl-root h1, .sl-root h2, .sl-root h3, .sl-root h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--primary);
+  margin: 0;
+  line-height: var(--lh-heading);
+}
+
+.sl-root p { margin: 0; }
+.sl-root a { color: inherit; }
+
+/* Mono micro-label */
+.sl-mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: inline-block;
+}
+
+/* Link tipografico — underline che diventa bronzo al hover */
+.sl-link {
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1px;
+  transition: border-color var(--dur-base) var(--ease-editorial), color var(--dur-base) var(--ease-editorial);
+}
+.sl-link:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
+/* Button minimal — testo + linea sotto, freccia trasla 6px su hover */
+.sl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: transparent;
+  border: 0;
+  padding: 0 0 12px 0;
+  border-bottom: 1px solid var(--primary);
+  color: var(--primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color var(--dur-base) var(--ease-editorial), color var(--dur-base) var(--ease-editorial);
+}
+.sl-btn .arrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  transition: transform var(--dur-base) var(--ease-editorial);
+}
+.sl-btn:hover { border-bottom-color: var(--accent); color: var(--accent); }
+.sl-btn:hover .arrow { transform: translateX(6px); }
+
+.sl-btn--primary { font-size: 17px; padding-bottom: 14px; border-bottom-width: 1px; }
+
+/* Lista aree (tipografica numerata) */
+.sl-area {
+  display: grid;
+  grid-template-columns: 80px 1fr 200px;
+  gap: 32px;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform var(--dur-base) var(--ease-editorial), border-bottom-color var(--dur-base) var(--ease-editorial);
+}
+.sl-area:hover {
+  transform: translateX(8px);
+  border-bottom-color: var(--accent);
+}
+.sl-area__num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.sl-area__title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: -0.015em;
+  color: var(--primary);
+  transition: color var(--dur-base) var(--ease-editorial);
+}
+.sl-area:hover .sl-area__title { color: var(--accent); }
+.sl-area__meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: right;
+}
+.sl-area--tier1 .sl-area__num::before {
+  content: "★ ";
+  color: var(--accent);
+}
+
+/* FAQ accordion */
+.sl-acc { display: grid; }
+.sl-acc__item {
+  border-bottom: 1px solid var(--border);
+}
+.sl-acc__item:first-child { border-top: 1px solid var(--border); }
+.sl-acc__btn {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 28px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  color: var(--primary);
+  transition: color var(--dur-base) var(--ease-editorial);
+}
+.sl-acc__btn:hover { color: var(--accent); }
+.sl-acc__icon {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  color: var(--text-muted);
+  transition: transform var(--dur-base) var(--ease-editorial), color var(--dur-base) var(--ease-editorial);
+}
+.sl-acc__item[data-open="true"] .sl-acc__icon {
+  transform: rotate(45deg);
+  color: var(--accent);
+}
+.sl-acc__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-base) var(--ease-editorial);
+}
+.sl-acc__item[data-open="true"] .sl-acc__panel { grid-template-rows: 1fr; }
+.sl-acc__panel > .sl-acc__inner {
+  overflow: hidden;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text);
+}
+.sl-acc__item[data-open="true"] .sl-acc__inner { padding-bottom: 28px; }
