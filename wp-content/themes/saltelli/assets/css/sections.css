@@ -1015,29 +1015,170 @@
   inset: 60px 0 0 0;
   background: var(--background);
   z-index: 40;
-  padding: 32px 20px;
+  padding: 0;
   border-top: 1px solid var(--border);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .sl-header__mobile[hidden] { display: none; }
 .sl-header__mobile.is-open,
 .sl-header__mobile:not([hidden]) { display: block; }
+
+/* Wave Elena FB Batch 2 — Wave M (#2): backdrop overlay + body lock + drawer chrome */
+.sl-header__mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(27, 43, 75, 0.32);
+  z-index: 39;
+  cursor: pointer;
+}
+.sl-header__mobile-backdrop[hidden] { display: none; }
+html.sl-menu-open,
+html.sl-menu-open body { overflow: hidden; }
+
+/* Bar superiore drawer con label + close button */
+.sl-header__mobile-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--background);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.sl-header__mobile-eyebrow {
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.sl-header__mobile-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 0;
+  padding: 8px 4px;
+  cursor: pointer;
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  min-height: 44px;
+}
+.sl-header__mobile-close:hover,
+.sl-header__mobile-close:focus-visible {
+  color: var(--accent);
+}
+.sl-header__mobile-close-icon { display: block; }
+
+/* Menu list — voci principali */
 .sl-header__mobile-menu {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 16px 20px 8px;
+}
+.sl-header__mobile-menu > li {
+  border-bottom: 1px solid var(--border);
+}
+.sl-header__mobile-menu > li:last-child {
+  border-bottom: 0;
 }
 .sl-header__mobile-menu a {
   display: block;
   padding: 16px 0;
-  border-bottom: 1px solid var(--border);
   font-family: var(--font-display);
   font-size: 28px;
   color: var(--primary);
   letter-spacing: var(--ls-h2);
+  text-decoration: none;
 }
+
+/* Voce parent con figli: chevron indicator + accordion */
+.sl-header__mobile-menu .menu-item-has-children > a {
+  position: relative;
+  padding-right: 32px;
+}
+.sl-header__mobile-menu .menu-item-has-children > a::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-right: 1.5px solid var(--text);
+  border-bottom: 1.5px solid var(--text);
+  transform: translateY(-75%) rotate(45deg);
+  transition: transform var(--dur-fast, 200ms) var(--ease-editorial, ease);
+  opacity: 0.7;
+}
+.sl-header__mobile-menu .menu-item-has-children.is-open > a::after {
+  transform: translateY(-25%) rotate(-135deg);
+  opacity: 1;
+}
+
+/* Submenu (livello 2) — accordion inline */
+.sl-header__mobile-menu .sub-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 280ms var(--ease-editorial, ease);
+}
+.sl-header__mobile-menu .menu-item-has-children.is-open > .sub-menu {
+  max-height: 600px; /* generoso per 3-5 figli; clamp tramite overflow:hidden del drawer */
+}
+.sl-header__mobile-menu .sub-menu li {
+  border-bottom: 1px dashed var(--border);
+}
+.sl-header__mobile-menu .sub-menu li:last-child {
+  border-bottom: 0;
+}
+.sl-header__mobile-menu .sub-menu a {
+  font-size: 18px;
+  padding: 12px 0 12px 24px;
+  color: var(--text);
+  letter-spacing: var(--ls-h3, -0.005em);
+  font-weight: 400;
+}
+.sl-header__mobile-menu .sub-menu a:hover,
+.sl-header__mobile-menu .sub-menu a:focus-visible {
+  color: var(--accent);
+}
+
+/* Footer drawer (telefono) */
+.sl-header__mobile-foot {
+  padding: 24px 20px 32px;
+  border-top: 1px solid var(--border);
+  margin-top: 16px;
+}
+.sl-header__mobile-foot a {
+  font-size: var(--fs-small);
+  color: var(--primary);
+}
+
+/* Tablet (768-1023): drawer max-width 480 da destra */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .sl-header__mobile {
+    inset: 60px 0 0 auto;
+    width: min(480px, 100vw);
+    border-left: 1px solid var(--border);
+  }
+}
+
 @media (min-width: 1024px) {
   .sl-header__burger { display: none; }
   .sl-header__brand-name { font-size: 22px; }
+  /* Desktop: drawer mobile + backdrop sempre nascosti, anche se per qualche
+     ragione l'attributo hidden venisse rimosso da JS race condition. */
+  .sl-header__mobile,
+  .sl-header__mobile-backdrop {
+    display: none !important;
+  }
 }
 
 /* Hero — word reveal alt + subheadline alt

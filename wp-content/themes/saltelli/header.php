@@ -64,14 +64,26 @@ $saltelli_brand_payoff = (string) saltelli_option('brand_payoff', 'Diritto, con 
 
     </div>
 
-    <div class="sl-header__mobile" id="sl-mobile-menu" hidden>
+    <div class="sl-header__mobile-backdrop" aria-hidden="true" hidden></div>
+    <div class="sl-header__mobile" id="sl-mobile-menu" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e('Menu di navigazione', 'saltelli'); ?>" hidden>
+        <div class="sl-header__mobile-bar">
+            <span class="sl-header__mobile-eyebrow sl-mono"><?php esc_html_e('Menu', 'saltelli'); ?></span>
+            <button class="sl-header__mobile-close" type="button" aria-label="<?php esc_attr_e('Chiudi menu', 'saltelli'); ?>" aria-controls="sl-mobile-menu">
+                <span class="sl-header__mobile-close-label"><?php esc_html_e('Chiudi', 'saltelli'); ?></span>
+                <svg class="sl-header__mobile-close-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <path d="M5 5l14 14M19 5L5 19" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
         <?php
+        /* Wave Elena FB Batch 2 — Wave M (#2): depth 1 → 2 per esporre submenu
+           cliccabili da mobile/tablet. JS in main.js gestisce accordion + back. */
         wp_nav_menu([
             'theme_location' => 'primary',
             'container'      => false,
             'menu_class'     => 'sl-header__mobile-menu',
             'fallback_cb'    => 'saltelli_header_menu_fallback',
-            'depth'          => 1,
+            'depth'          => 2,
         ]);
         ?>
         <div class="sl-header__mobile-foot">
@@ -87,15 +99,58 @@ $saltelli_brand_payoff = (string) saltelli_option('brand_payoff', 'Diritto, con 
     var update = function(){ h.setAttribute('data-scrolled', window.scrollY > 40 ? 'true' : 'false'); }; /* === design-handoff chrome (P1) === soglia 40px = JSX S2Header */
     update();
     window.addEventListener('scroll', update, { passive: true });
+
+    /* Wave Elena FB Batch 2 — Wave M (#2): drawer mobile con submenu accordion.
+       Inline script = safety net minimale (burger toggle + ESC + backdrop + close).
+       L'accordion submenu è in assets/js/main.js (deferred, behavior più ricco). */
     var b = h.querySelector('.sl-header__burger');
     var m = h.querySelector('.sl-header__mobile');
-    if (b && m) {
+    var bd = h.querySelector('.sl-header__mobile-backdrop');
+    var closeBtn = h.querySelector('.sl-header__mobile-close');
+
+    function setOpen(open) {
+        if (!b || !m) return;
+        b.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+            m.removeAttribute('hidden');
+            if (bd) bd.removeAttribute('hidden');
+        } else {
+            m.setAttribute('hidden', '');
+            if (bd) bd.setAttribute('hidden', '');
+            /* collapse all open submenus */
+            var openParents = m.querySelectorAll('.menu-item-has-children.is-open');
+            for (var i = 0; i < openParents.length; i++) {
+                openParents[i].classList.remove('is-open');
+                var ctrl = openParents[i].querySelector(':scope > a, :scope > .sl-submenu-toggle');
+                if (ctrl) ctrl.setAttribute('aria-expanded', 'false');
+            }
+        }
+        document.documentElement.classList.toggle('sl-menu-open', open);
+    }
+
+    if (b && m && !b.dataset.slMenuBound) {
         b.addEventListener('click', function(){
             var open = b.getAttribute('aria-expanded') === 'true';
-            b.setAttribute('aria-expanded', open ? 'false' : 'true');
-            if (open) { m.setAttribute('hidden', ''); } else { m.removeAttribute('hidden'); }
-            document.documentElement.classList.toggle('sl-menu-open', !open);
+            setOpen(!open);
         });
+        b.dataset.slMenuBound = '1';
+    }
+    if (closeBtn && !closeBtn.dataset.slMenuBound) {
+        closeBtn.addEventListener('click', function(){ setOpen(false); });
+        closeBtn.dataset.slMenuBound = '1';
+    }
+    if (bd && !bd.dataset.slMenuBound) {
+        bd.addEventListener('click', function(){ setOpen(false); });
+        bd.dataset.slMenuBound = '1';
+    }
+    if (!document.documentElement.dataset.slMenuEscBound) {
+        document.addEventListener('keydown', function(e){
+            if (e.key === 'Escape' && b && b.getAttribute('aria-expanded') === 'true') {
+                setOpen(false);
+                if (b) b.focus();
+            }
+        });
+        document.documentElement.dataset.slMenuEscBound = '1';
     }
 })();
 </script>
