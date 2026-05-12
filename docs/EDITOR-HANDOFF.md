@@ -1,5 +1,11 @@
 # Manuale Editoriale — Studio Legale Saltelli
 
+> ⚠️ **Aggiornamento pending v6.1**: dopo Wave Elena FB Batch 1-3 (2026-05-12) alcune sezioni necessitano refresh:
+> - §3.7: lista canonica Pages = 18 (post Design Handoff P7 consolidamento `chi-siamo` = `lo-studio` in un'unica Page 2811 · Page 2822 hub legacy DELETED).
+> - §3.5: Page 2714 prenota-appuntamento ora vede **2 metabox** (info-shared `body_content` + legacy `prenota_intro`) durante transizione Wave J (#22). Editor: usare `body_content` (info-shared) come nuovo content body; il legacy `prenota_intro` sarà migrato + disattivato in Wave 6.1 post-cut.
+> - Cleanup completo manuale + data migration `prenota_intro` → `body_content` → Wave 6.1 dedicata post-cut produzione.
+> - Vedi anche `docs/SCF_ORPHAN_FIELDS.md` per audit field SCF orphan post Wave S (3 section rimosse: `.sl-hub-cta`, `.sl-chi-siamo__founding`, `.sl-tipoarea__cta`).
+
 > **Destinatari:** Elena Cappabianca, Ludovica Casa, eventuali collaboratori editoriali esterni Adsolut.
 > **Versione:** 6.0 — 2026-05-11 (Wave 4.7.fix.5 PAGES CLEANUP + BLOG DOC + CUSTOMIZER LOCK: l'admin "Pagine" mostra ora solo le 19 Pages reali · sezione blog completa · Customizer/CSS bloccato per il ruolo editor)
 > **Mantenuto da:** Adsolut SRLS · tech@adsolut.it
