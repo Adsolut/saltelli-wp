@@ -5599,10 +5599,11 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
   color: var(--text-muted);
 }
 .sl-glossario__hero-meta { padding-bottom: 24px; }
+/* === design-handoff glossario-legale P10 === */
 .sl-glossario__lede {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 22px;
+  font-size: var(--fs-lede); /* was 22px literal — token-aware, computed-neutral */
   line-height: var(--lh-lede);
   color: var(--text);
   max-width: 44ch;
