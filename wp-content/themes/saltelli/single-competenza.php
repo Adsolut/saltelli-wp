@@ -1,7 +1,27 @@
 <?php
 /**
  * Template: Single CPT Competenza.
- * Branch su is_tier_1 (Wave 1 ACF schema canonico) per profondità contenuto.
+ *
+ * Wave Elena FB Batch 2 — #23 layout unify (2026-05-12)
+ * ────────────────────────────────────────────────────
+ * Tutte le 19 competenze passano dalla STESSA struttura editoriale.
+ * Differenze tier-1 vs tier-2 sono CSS-driven via modifier `.sl-competenza--tier-1`
+ * / `.sl-competenza--tier-2` (display-band H1, capsule indent, photo ratio, asym grid).
+ *
+ * Body rendering — single render path con conditional graceful:
+ *   1. `body_extended` SCF (priorità) → renderizzato in `.sl-competenza__body`
+ *   2. `post_content` (fallback)       → renderizzato in `.sl-competenza__intro`
+ *   3. tier-1 hardcoded clusters helper → fallback ulteriore solo se entrambi i sopra vuoti
+ *      (preserva il deep cluster GEO-rich per i 3 tier-1 quando body_extended non popolato)
+ *   4. nessuno popolato → sezione body skip (graceful empty state)
+ *
+ * Sezioni opzionali (avvocato lead, casi, FAQ, correlati, articoli):
+ * tutte conditional su field SCF popolati, NON su tier. Se tier-2 popola `casi_rappresentativi`
+ * vedrà la sezione "vittorie recenti". Se tier-1 non popola, non vedrà.
+ *
+ * NO data migration in questa wave (post_content lasciato in DB invariato).
+ * NO modifica field group SCF.
+ * Defer Wave 6.0 Strategy A per migration post_content → body_extended.
  *
  * @package Saltelli
  */
@@ -10,8 +30,6 @@ get_header();
 while (have_posts()) :
     the_post();
     $post_id    = get_the_ID();
-    // Wave 4.6: rimosso fallback is_tier_1_focus legacy (rinominato in is_tier_1
-    // dal Wave 1). Tutti i contenuti sono migrati al campo canonico.
     $is_tier_1  = (bool) saltelli_field('is_tier_1', $post_id, false);
     $answer     = (string) saltelli_field('answer_capsule', $post_id, '');
     $body_ext   = (string) saltelli_field('body_extended', $post_id, '');
@@ -29,16 +47,28 @@ while (have_posts()) :
     $lead_atts  = saltelli_get_attorneys_for_competenza($post_id);
     $articoli   = saltelli_field('articoli_correlati', $post_id, []);
     $cat_label  = saltelli_competenza_category_label($post_id);
-    $tier_label    = $is_tier_1 ? __('Tier 1 · approfondimento', 'saltelli') : __('Area di pratica', 'saltelli');
-    $tier1_subtitle = (string) saltelli_field('subtitle', $post_id, '');
-    $tier1_class   = $is_tier_1 ? 'sl-tier1 ' : '';
-    // Bugfix: "uno o l'altro" — la sezione __body (body_extended SCF) prevale su
-    // __intro (post_content). Mai entrambe renderizzate insieme.
-    $render_extended_body = $is_tier_1 && $body_ext !== '';
-    ?>
-    <article <?php post_class($tier1_class . 'sl-competenza sl-competenza--' . ($is_tier_1 ? 'tier-1' : 'tier-2')); ?>>
+    $tier_label    = saltelli_tier_badge_label($post_id, $is_tier_1, $cat_label);
+    $subtitle      = (string) saltelli_field('subtitle', $post_id, '');
 
-        <header class="sl-competenza__hero sl-page-hero <?php echo $is_tier_1 ? 'sl-tier1__hero' : ''; ?>">
+    // === Wave Elena FB Batch 2 #23 — Body source resolution (single path) ===
+    // Priorità: body_extended SCF → post_content → tier-1 hardcoded clusters fallback.
+    // Per ogni competenza è renderizzato UN SOLO body source, mai più di uno.
+    $has_post_content = (trim(strip_tags(get_the_content())) !== '');
+    $render_body_extended = ($body_ext !== '');
+    $render_post_content  = (! $render_body_extended && $has_post_content);
+    // Tier-1 hardcoded clusters: fallback ulteriore solo per i 3 tier-1 slug noti,
+    // SOLO se body_extended e post_content sono entrambi vuoti.
+    $render_tier1_clusters = false;
+    $tier1_clusters_data = [];
+    if ($is_tier_1 && ! $render_body_extended && ! $render_post_content) {
+        $tier1_slug = get_post_field('post_name', $post_id);
+        $tier1_clusters_data = saltelli_tier1_clusters($tier1_slug);
+        $render_tier1_clusters = ! empty($tier1_clusters_data);
+    }
+    ?>
+    <article <?php post_class('sl-competenza sl-competenza--' . ($is_tier_1 ? 'tier-1' : 'tier-2')); ?>>
+
+        <header class="sl-competenza__hero sl-page-hero">
             <div class="sl-container">
                 <?php saltelli_render_breadcrumb(); ?>
 
@@ -46,23 +76,21 @@ while (have_posts()) :
                     ← <?php esc_html_e('Tutte le aree', 'saltelli'); ?>
                 </a>
 
-                <div class="sl-mono sl-competenza__eyebrow <?php echo $is_tier_1 ? 'sl-tier1__eyebrow' : ''; ?>">
+                <div class="sl-mono sl-competenza__eyebrow">
                     <?php echo esc_html($tier_label); ?><?php echo $cat_label ? ' · ' . esc_html($cat_label) : ''; ?>
                 </div>
 
-                <h1 class="sl-competenza__title <?php echo $is_tier_1 ? 'sl-tier1__h1' : ''; ?>" data-split-reveal><?php echo wp_kses(saltelli_split_h1_words(get_the_title()), ['span' => ['class' => true, 'data-i' => true]]); ?></h1>
+                <h1 class="sl-competenza__title" data-split-reveal><?php echo wp_kses(saltelli_split_h1_words(get_the_title()), ['span' => ['class' => true, 'data-i' => true]]); ?></h1>
 
-                <?php if ($is_tier_1 && $tier1_subtitle !== '') : ?>
-                    <p class="sl-tier1__sub"><?php echo esc_html($tier1_subtitle); ?></p>
+                <?php if ($subtitle !== '') : ?>
+                    <p class="sl-competenza__sub"><?php echo esc_html($subtitle); ?></p>
                 <?php endif; ?>
 
                 <?php if ($answer !== '') : ?>
-                    <div class="sl-competenza__answer-wrap <?php echo $is_tier_1 ? 'sl-tier1__capsule' : ''; ?>">
+                    <div class="sl-competenza__answer-wrap">
                         <div class="sl-mono sl-competenza__answer-eyebrow"><?php esc_html_e('Risposta in 50 parole', 'saltelli'); ?></div>
-                        <p class="sl-competenza__answer <?php echo $is_tier_1 ? 'sl-tier1__capsule-text' : ''; ?>"><?php echo esc_html($answer); ?></p>
+                        <p class="sl-competenza__answer"><?php echo esc_html($answer); ?></p>
                     </div>
-                <?php else : ?>
-                    <!-- TODO: answer capsule da Elena (40-60 parole) -->
                 <?php endif; ?>
 
                 <?php /* Wave 6 — CTA progressive top (ghost) sotto answer capsule */ ?>
@@ -83,10 +111,17 @@ while (have_posts()) :
                 </div>
 
                 <?php
-                // === v0.24.0 TASK 4 — Tier-1 "Avvocato di riferimento" card ===
-                // Mapping fisso: tributario→Emiliano, lavoro→Fabiana, lgbtq→Antonia.
-                // Source: saltelli-s2-practice-tier1.jsx (referente block).
-                if ($is_tier_1) :
+                // === Avvocato di riferimento card ===
+                // Wave Elena FB Batch 2 #23: in precedenza tier-1-only via map fisso
+                // (3 slug → 3 lawyers). Ora deriva dal field SCF `lead_attorneys` per
+                // TUTTE le competenze: rendera la prima lead se popolata. Tier-1 con
+                // mapping legacy mantiene compat via fallback hardcoded.
+                $sl_ref_lawyer_id = 0;
+                if (! empty($lead_atts) && isset($lead_atts[0])) {
+                    $sl_ref_lawyer_id = (int) $lead_atts[0]->ID;
+                }
+                if (! $sl_ref_lawyer_id && $is_tier_1) {
+                    // Legacy fallback per i 3 tier-1 senza lead_attorneys popolato.
                     $sl_t1_slug = get_post_field('post_name', $post_id);
                     $sl_t1_lawyer_map = [
                         'diritto-tributario'         => 'emiliano-saltelli',
@@ -94,95 +129,84 @@ while (have_posts()) :
                         'diritto-di-famiglia-lgbtq'  => 'antonia-battista',
                     ];
                     $sl_t1_lawyer_slug = $sl_t1_lawyer_map[$sl_t1_slug] ?? null;
-                    if ($sl_t1_lawyer_slug) :
+                    if ($sl_t1_lawyer_slug) {
                         $sl_t1_lawyer = get_page_by_path($sl_t1_lawyer_slug, OBJECT, 'avvocato');
-                        if ($sl_t1_lawyer) :
-                            $sl_t1_lawyer_id    = (int) $sl_t1_lawyer->ID;
-                            $sl_t1_lawyer_title = get_the_title($sl_t1_lawyer_id);
-                            $sl_t1_lawyer_role  = (string) saltelli_field('ruolo_breve', $sl_t1_lawyer_id, '');
-                            $sl_t1_lawyer_photo = get_the_post_thumbnail_url($sl_t1_lawyer_id, 'saltelli-attorney-square');
-                            if (!$sl_t1_lawyer_photo) {
-                                $sl_t1_foto = saltelli_field('foto_ritratto', $sl_t1_lawyer_id);
-                                if (is_array($sl_t1_foto) && !empty($sl_t1_foto['url'])) {
-                                    $sl_t1_lawyer_photo = $sl_t1_foto['url'];
-                                }
-                            }
+                        if ($sl_t1_lawyer) {
+                            $sl_ref_lawyer_id = (int) $sl_t1_lawyer->ID;
+                        }
+                    }
+                }
+                if ($sl_ref_lawyer_id) :
+                    $sl_t1_lawyer_title = get_the_title($sl_ref_lawyer_id);
+                    $sl_t1_lawyer_role  = (string) saltelli_field('ruolo_breve', $sl_ref_lawyer_id, '');
+                    $sl_t1_lawyer_photo = get_the_post_thumbnail_url($sl_ref_lawyer_id, 'saltelli-attorney-square');
+                    if (! $sl_t1_lawyer_photo) {
+                        $sl_t1_foto = saltelli_field('foto_ritratto', $sl_ref_lawyer_id);
+                        if (is_array($sl_t1_foto) && ! empty($sl_t1_foto['url'])) {
+                            $sl_t1_lawyer_photo = $sl_t1_foto['url'];
+                        }
+                    }
                 ?>
-                <aside class="sl-tier1__lawyer" aria-label="<?php esc_attr_e('Avvocato di riferimento', 'saltelli'); ?>" data-reveal>
-                    <div class="sl-mono sl-tier1__lawyer-eyebrow"><?php esc_html_e('§ Avvocato di riferimento', 'saltelli'); ?></div>
-                    <a href="<?php echo esc_url(get_permalink($sl_t1_lawyer_id)); ?>" class="sl-tier1__lawyer-card">
+                <aside class="sl-competenza__ref-lawyer" aria-label="<?php esc_attr_e('Avvocato di riferimento', 'saltelli'); ?>" data-reveal>
+                    <div class="sl-mono sl-competenza__ref-lawyer-eyebrow"><?php esc_html_e('§ Avvocato di riferimento', 'saltelli'); ?></div>
+                    <a href="<?php echo esc_url(get_permalink($sl_ref_lawyer_id)); ?>" class="sl-competenza__ref-lawyer-card">
                         <?php if ($sl_t1_lawyer_photo) : ?>
                             <img
                                 src="<?php echo esc_url($sl_t1_lawyer_photo); ?>"
                                 alt="<?php echo esc_attr($sl_t1_lawyer_title); ?>"
-                                class="sl-tier1__lawyer-photo"
+                                class="sl-competenza__ref-lawyer-photo"
                                 width="80" height="80"
                                 loading="lazy" decoding="async">
                         <?php else : ?>
-                            <span class="sl-tier1__lawyer-placeholder" aria-hidden="true">
+                            <span class="sl-competenza__ref-lawyer-placeholder" aria-hidden="true">
                                 <?php echo esc_html(mb_strtoupper(mb_substr($sl_t1_lawyer_title, 0, 1))); ?>
                             </span>
                         <?php endif; ?>
-                        <div class="sl-tier1__lawyer-info">
-                            <h3 class="sl-tier1__lawyer-name"><?php echo esc_html($sl_t1_lawyer_title); ?></h3>
+                        <div class="sl-competenza__ref-lawyer-info">
+                            <h3 class="sl-competenza__ref-lawyer-name"><?php echo esc_html($sl_t1_lawyer_title); ?></h3>
                             <?php if ($sl_t1_lawyer_role !== '') : ?>
-                                <p class="sl-tier1__lawyer-role sl-mono"><?php echo esc_html($sl_t1_lawyer_role); ?></p>
+                                <p class="sl-competenza__ref-lawyer-role sl-mono"><?php echo esc_html($sl_t1_lawyer_role); ?></p>
                             <?php endif; ?>
-                            <span class="sl-tier1__lawyer-link"><?php esc_html_e('Vai alla scheda →', 'saltelli'); ?></span>
+                            <span class="sl-competenza__ref-lawyer-link"><?php esc_html_e('Vai alla scheda →', 'saltelli'); ?></span>
                         </div>
                     </a>
                 </aside>
-                <?php
-                        endif;
-                    endif;
-                endif;
-                ?>
+                <?php endif; ?>
             </div>
         </header>
 
-        <?php if (! $render_extended_body && get_the_content()) : // fallback su post_content solo se la sezione __body (body_extended SCF) non renderizza ?>
-            <section class="sl-competenza__intro <?php echo $is_tier_1 ? 'sl-tier1__body' : ''; ?>">
+        <?php /* === Body source: post_content (fallback) === */ ?>
+        <?php if ($render_post_content) : ?>
+            <section class="sl-competenza__intro sl-competenza__body-wrap">
                 <div class="sl-container">
                     <div class="sl-competenza__prose"><?php the_content(); ?></div>
                 </div>
             </section>
         <?php endif; ?>
 
-        <?php
-        // === v0.25.0 T2 — Tier-1 deep cluster H2 (3 cluster × tier-1) ===
-        // Source: helper saltelli_tier1_clusters() · paragraphs GEO-rich hardcoded.
-        // Bugfix: render SOLO se body_extended SCF è vuoto. Il campo SCF (sezione __body
-        // sotto) è il corpo editoriale canonico e prevale; questo blocco è il fallback
-        // GEO. Mai entrambi: oggi i 3 tier-1 hanno body_extended = copia verbatim
-        // dell'helper -> renderli entrambi significa testo duplicato scrollando.
-        if ($is_tier_1 && ! $render_extended_body) :
-            $sl_t1_slug_cluster = get_post_field('post_name', $post_id);
-            $sl_t1_clusters = saltelli_tier1_clusters($sl_t1_slug_cluster);
-            if (!empty($sl_t1_clusters)) :
-        ?>
-            <section class="sl-tier1__clusters sl-tier1__body" aria-label="<?php esc_attr_e('Approfondimenti tematici', 'saltelli'); ?>">
+        <?php /* === Body source: tier-1 hardcoded clusters (fallback solo se body_extended e post_content vuoti) === */ ?>
+        <?php if ($render_tier1_clusters) : ?>
+            <section class="sl-competenza__clusters sl-competenza__body-wrap" aria-label="<?php esc_attr_e('Approfondimenti tematici', 'saltelli'); ?>">
                 <div class="sl-container">
-                    <?php foreach ($sl_t1_clusters as $sl_idx_c => $sl_cluster) :
+                    <?php foreach ($tier1_clusters_data as $sl_idx_c => $sl_cluster) :
                         $sl_cluster_id = 'tier1-cluster-' . (int) $sl_idx_c;
                     ?>
-                        <article class="sl-tier1__cluster" data-reveal aria-labelledby="<?php echo esc_attr($sl_cluster_id); ?>">
-                            <h2 class="sl-tier1__cluster-h2" id="<?php echo esc_attr($sl_cluster_id); ?>">
+                        <article class="sl-competenza__cluster" data-reveal aria-labelledby="<?php echo esc_attr($sl_cluster_id); ?>">
+                            <h2 class="sl-competenza__cluster-h2" id="<?php echo esc_attr($sl_cluster_id); ?>">
                                 <?php echo esc_html($sl_cluster['h2']); ?>
                             </h2>
                             <?php foreach ($sl_cluster['paragraphs'] as $sl_par) : ?>
-                                <p class="sl-tier1__cluster-p"><?php echo esc_html($sl_par); ?></p>
+                                <p class="sl-competenza__cluster-p"><?php echo esc_html($sl_par); ?></p>
                             <?php endforeach; ?>
                         </article>
                     <?php endforeach; ?>
                 </div>
             </section>
-        <?php
-            endif;
-        endif;
-        ?>
+        <?php endif; ?>
 
-        <?php if ($render_extended_body) : // sezione canonica del corpo editoriale, prevale su post_content ?>
-            <section class="sl-competenza__body sl-tier1__body">
+        <?php /* === Body source: body_extended SCF (canonico, priorità) === */ ?>
+        <?php if ($render_body_extended) : ?>
+            <section class="sl-competenza__body sl-competenza__body-wrap">
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Approfondimento', 'saltelli'); ?></div>
                     <div class="sl-competenza__prose sl-competenza__prose--extended" data-toc-source>
@@ -192,7 +216,7 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
-        <?php if (!empty($lead_atts)) : ?>
+        <?php if (! empty($lead_atts)) : ?>
             <section class="sl-competenza__avvocati" aria-labelledby="comp-avv-h">
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Referenti', 'saltelli'); ?></div>
@@ -232,19 +256,28 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
-        <?php if ($is_tier_1 && is_array($casi) && !empty($casi)) : ?>
-            <section class="sl-competenza__casi sl-tier1__cases" aria-labelledby="comp-casi-h">
+        <?php /* Wave Elena FB Batch 2 #23: casi sezione resa universale (era tier-1-only).
+                Conditional su field SCF populated, NON su tier. Tier-2 con casi popolati ora visibili. */ ?>
+        <?php if (is_array($casi) && ! empty($casi)) :
+            // Pre-filter validity per evitare sezione vuota se tutti i row sono incompleti.
+            $valid_casi = [];
+            foreach ($casi as $caso) {
+                if (! empty($caso['titolo']) && ! empty($caso['descrizione_anonimizzata'])) {
+                    $valid_casi[] = $caso;
+                }
+            }
+            if (! empty($valid_casi)) :
+        ?>
+            <section class="sl-competenza__casi" aria-labelledby="comp-casi-h">
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Tre vittorie recenti', 'saltelli'); ?></div>
                     <h2 class="sl-section-title" id="comp-casi-h"><?php esc_html_e('Tre vittorie recenti.', 'saltelli'); ?></h2>
                     <ol class="sl-cases__list" role="list">
-                        <?php foreach ($casi as $caso) :
-                            if (empty($caso['titolo']) || empty($caso['descrizione_anonimizzata'])) continue;
-                            ?>
+                        <?php foreach ($valid_casi as $caso) : ?>
                             <li class="sl-cases__row">
                                 <span class="sl-mono sl-cases__id"><?php echo esc_html($caso['titolo']); ?></span>
                                 <p class="sl-cases__desc"><?php echo esc_html($caso['descrizione_anonimizzata']); ?></p>
-                                <?php if (!empty($caso['esito'])) : ?>
+                                <?php if (! empty($caso['esito'])) : ?>
                                     <span class="sl-cases__outcome"><?php echo esc_html($caso['esito']); ?></span>
                                 <?php endif; ?>
                             </li>
@@ -252,7 +285,9 @@ while (have_posts()) :
                     </ol>
                 </div>
             </section>
-        <?php endif; ?>
+        <?php
+            endif;
+        endif; ?>
 
         <?php /* Wave 6 — CTA progressive middle (primary), prima della FAQ */ ?>
         <?php if ($cta_middle_label !== '' && $cta_middle_url !== '') : ?>
@@ -292,7 +327,7 @@ while (have_posts()) :
             }
         }
         if (!empty($valid_faq)) : ?>
-                <section class="sl-competenza__faq <?php echo $is_tier_1 ? 'sl-tier1__faq' : ''; ?>" aria-labelledby="comp-faq-h">
+                <section class="sl-competenza__faq" aria-labelledby="comp-faq-h">
                     <div class="sl-container">
                         <div class="sl-mono">§ <?php esc_html_e('Domande frequenti', 'saltelli'); ?></div>
                         <h2 class="sl-section-title" id="comp-faq-h"><?php esc_html_e('Cinque domande frequenti.', 'saltelli'); ?></h2>
@@ -377,7 +412,7 @@ while (have_posts()) :
         <?php endif; ?>
 
         <?php if (!empty($articoli)) : ?>
-            <section class="sl-competenza__articoli <?php echo $is_tier_1 ? 'sl-tier1__related' : ''; ?>" aria-labelledby="comp-art-h">
+            <section class="sl-competenza__articoli" aria-labelledby="comp-art-h">
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Editoriale', 'saltelli'); ?></div>
                     <h2 class="sl-section-title" id="comp-art-h"><?php esc_html_e('Approfondimenti correlati', 'saltelli'); ?></h2>
@@ -418,7 +453,7 @@ while (have_posts()) :
             </div>
         </section>
 
-        <section class="sl-competenza__cta <?php echo $is_tier_1 ? 'sl-tier1__cta-final' : ''; ?>">
+        <section class="sl-competenza__cta">
             <div class="sl-container">
                 <div class="sl-mono">§ <?php esc_html_e('Pronto?', 'saltelli'); ?></div>
                 <h2 class="sl-section-title">
