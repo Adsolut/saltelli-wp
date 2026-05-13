@@ -840,20 +840,25 @@
  * 8. CONTACT
  * ========================================================= */
 .sl-contact {
-  /* v0.17.2 — armonizzato a 56px mobile uniforme */
-  padding-block: 56px;
+  /* Elena fix 2026-05-13: padding ridotto 56→32 mobile (compressione sezione
+     §06 Contatti dopo headline su 1 riga "Riceviamo solo su appuntamento."). */
+  padding-block: 32px;
 }
 .sl-contact__head {
   display: grid;
   gap: 16px;
-  margin-bottom: 48px;
+  /* Elena fix 2026-05-13: margin-bottom 48→24 mobile */
+  margin-bottom: 24px;
 }
 .sl-contact__title {
-  font-size: 56px;
+  /* Elena fix 2026-05-13: font-size ridotto 56→36 mobile per non andare a-capo
+     forzato con il nuovo testo single-line "Riceviamo solo su appuntamento." */
+  font-size: 36px;
   letter-spacing: -0.025em;
-  line-height: 0.95;
+  line-height: 1.05;
   font-family: var(--font-display);
   color: var(--primary);
+  text-wrap: balance;
 }
 .sl-contact__title em { font-style: italic; color: var(--accent); }
 .sl-contact__grid {
@@ -868,16 +873,21 @@
   color: var(--primary);
   word-break: break-word;
 }
-.sl-contact__cta-wrap { margin-top: 48px; }
+/* Elena fix 2026-05-13: margin-top 48→24 mobile */
+.sl-contact__cta-wrap { margin-top: 24px; }
 
 @media (min-width: 1024px) {
-  .sl-contact { padding-block: 80px; /* v0.17.2 armonizzato a 80 desktop */ }
+  /* Elena fix 2026-05-13: padding-block ridotto 80→48 desktop per compressione sezione */
+  .sl-contact { padding-block: 48px; }
   .sl-contact__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
-    margin-bottom: 80px;
+    /* Elena fix 2026-05-13: margin-bottom 80→40 desktop */
+    margin-bottom: 40px;
   }
-  .sl-contact__title { font-size: clamp(56px, 6vw, 96px); line-height: 1; }
+  /* Elena fix 2026-05-13: headline font ridotto clamp(56, 6vw, 96) → clamp(36, 3.5vw, 56)
+     per fit 1 riga "Riceviamo solo su appuntamento." (~31 char). */
+  .sl-contact__title { font-size: clamp(36px, 3.5vw, 56px); line-height: 1.1; }
   .sl-contact__grid {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 64px;
@@ -885,7 +895,8 @@
   }
   .sl-contact__item-label { margin-bottom: 16px; font-size: var(--fs-micro); }
   .sl-contact__item-value { font-size: 24px; }
-  .sl-contact__cta-wrap { margin-top: 96px; padding-left: 20%; }
+  /* Elena fix 2026-05-13: margin-top CTA 96→40 desktop */
+  .sl-contact__cta-wrap { margin-top: 40px; padding-left: 20%; }
 }
 
 /* =========================================================
