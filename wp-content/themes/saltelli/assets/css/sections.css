@@ -1950,16 +1950,15 @@ html:not(.js-reveal-ready) [data-reveal] {
         position: static;
     }
 
-    /* Disabilita hover/focus-within trigger del L1 — solo click */
+    /* Elena fix 2026-05-13 (revised): mega panel apribile su HOVER o
+       FOCUS-WITHIN (oltre a .is-open per retrocompat click esplicito).
+       Pre-fix click-only rompeva navigation L1 (click su "Aree di pratica",
+       "Chi siamo" ecc. faceva solo toggle senza andare alla hub-page).
+       Ora L1 anchor naviga nativamente al click; mouse hover apre overlay
+       (desktop pointer fine); Tab+focus apre via :focus-within (a11y kbd).
+       flexbox + colonne centrate, gap 80px, padding 40×48. */
     .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:hover > .sub-menu,
-    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:focus-within > .sub-menu {
-        display: none;
-    }
-
-    /* Mega panel visibile solo su .is-open.
-       Elena fix 2026-05-13: flexbox + colonne centrate orizzontalmente
-       (justify-content:center), gap ampio 80px, padding verticale generoso 40px
-       per "più centrale e più spazio" (feedback post-v1.3.28). */
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:focus-within > .sub-menu,
     .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu {
         display: flex;
         flex-direction: row;
