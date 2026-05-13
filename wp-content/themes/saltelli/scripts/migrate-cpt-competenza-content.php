@@ -59,9 +59,13 @@ if (! defined('WP_CLI') || ! WP_CLI) {
     return;
 }
 
-// Default to dry-run (fail-safe). Wet-run requires explicit `--wet-run`.
+// Default to dry-run (fail-safe). Wet-run requires explicit `wet-run` arg.
+// NOTE: WP-CLI eval-file intercetta i `--flag` come global args (anche se sconosciuti).
+// Per evitare "Error: unknown --wet-run parameter" passare positional senza dashes:
+//   wp eval-file script.php wet-run --path=/var/www/saltelli
+// Backward-compat: accetta anche `--wet-run` se sopravvive al parser WP-CLI.
 $sl_args = isset($args) && is_array($args) ? $args : [];
-$sl_mode = in_array('--wet-run', $sl_args, true) ? 'wet' : 'dry';
+$sl_mode = (in_array('--wet-run', $sl_args, true) || in_array('wet-run', $sl_args, true) || in_array('wet', $sl_args, true)) ? 'wet' : 'dry';
 
 WP_CLI::log('');
 WP_CLI::log('================================================================');

@@ -211,12 +211,13 @@ while (have_posts()) :
                     <div class="sl-mono">§ <?php esc_html_e('Approfondimento', 'saltelli'); ?></div>
                     <div class="sl-competenza__prose sl-competenza__prose--extended" data-toc-source>
                         <?php
-                        /* Wave 6.0 partial — body_extended render via apply_filters('the_content') invece di wp_kses_post()
-                         * per allineamento semantic con post_content render (wpautop + shortcode + oEmbed).
-                         * Prerequisito per migration post_content → body_extended (vedi scripts/migrate-cpt-competenza-content.php). */
-                        $sl_body_ext_rendered = apply_filters('the_content', $body_ext);
-                        $sl_body_ext_rendered = str_replace(']]>', ']]&gt;', $sl_body_ext_rendered);
-                        echo $sl_body_ext_rendered;
+                        /* Wave 6.0 partial ROLLBACK 2026-05-13 — apply_filters('the_content', ...) causava WSOD su staging
+                         * (likely cause: shortcode legacy nel content migrato OR do_blocks parse error OR oEmbed timeout).
+                         * Ripristinato wp_kses_post() — render safe per HTML literal (i contenuti migrati 16/19 sono
+                         * `<h2>` + `<p>` + `<strong>` literal, no shortcode, no Gutenberg blocks → renderizzano correttamente).
+                         * Investigation: vedi error log droplet + git log v1.3.23-rollback.
+                         * Apply_filters re-introduzione futura: serve sanitize shortcode + do_blocks guard pre-call. */
+                        echo wp_kses_post($body_ext);
                         ?>
                     </div>
                 </div>
