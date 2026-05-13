@@ -1931,11 +1931,17 @@ html:not(.js-reveal-ready) [data-reveal] {
         display: none;
     }
 
-    /* Mega panel visibile solo su .is-open */
+    /* Mega panel visibile solo su .is-open.
+       Elena fix 2026-05-13: cambiato da grid auto-fit 1fr (stirava le colonne
+       all'intero container) a flexbox left-aligned — colonne compatte raggruppate
+       a sinistra, spazio vuoto a destra (pattern Saverio L. / boutique editoriale). */
     .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 24px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 48px;
         position: absolute;
         top: 100%;
         left: 0;
@@ -1950,13 +1956,16 @@ html:not(.js-reveal-ready) [data-reveal] {
         z-index: 100;
         min-width: 0;
     }
-
-    /* L2 = column: header style + L3 list sotto.
+    /* L2 = column: larghezza naturale (flex item) + display flex column per L2 header + L3 list.
        Elena fix 2026-05-13: passato da Playfair 18px (troppo dramatico) a
-       DM Sans 14px 700 — più sobrio, in linea con la grafica del menu. */
+       DM Sans 14px 700 — più sobrio, in linea con la grafica del menu.
+       min/max-width: colonne compatte, no stretch full-container. */
     .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu > li {
         display: flex;
         flex-direction: column;
+        flex: 0 0 auto;
+        min-width: 180px;
+        max-width: 240px;
     }
     .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu > li > a {
         font-family: var(--font-body);
