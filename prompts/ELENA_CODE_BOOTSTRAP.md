@@ -35,6 +35,21 @@ Elena è una content editor professionale dello Studio Legale (NON developer).
 - Approva ogni modifica codice prima del commit
 - Pusha su branch dedicato, NON committa diretto su main
 
+# GIT IDENTITY — IMPORTANTE
+
+Elena lavora sullo **stesso account Git di Duccio** (Adsolut Web Agency). NON
+configurare `git config user.name "Elena"`. L'identità Git resta `Adsolut Web
+Agency` come per Duccio.
+
+Elena è identificabile via:
+- **Nome branch**: SEMPRE `feat/elena-fix-{descrizione-breve}` (mai diverso pattern)
+- **Commit message prefix**: SEMPRE `feat(elena-fix): {descrizione}` come prima riga
+- **Body commit**: include nota "Autore: Elena Cappabianca" per audit trail nel diff log
+
+Questo permette a Duccio (orchestrator) di filtrare via `git log --oneline --grep="elena-fix"`
+i suoi contributi senza permission management GitHub. Inoltre rende lineare il diff
+ownership senza dover gestire credenziali separate.
+
 # STATO PROGETTO (cosa è già stato fatto, sintesi)
 
 - 18 dei 23 feedback originari Elena consegnati + Elena-approved (Batch 1+2+3 + Wave 6.0 partial)
@@ -133,11 +148,18 @@ Verifica syntax:
 - JS: node --check file.js
 - CSS: visual review
 
-## Step 6 — Commit + push branch
+## Step 6 — Commit + push branch (NOTA: shared Git identity Adsolut)
+
+Elena lavora con identità Git "Adsolut Web Agency" (stessa di Duccio). Identificazione
+del suo contributo via NAME BRANCH + PREFIX COMMIT, mai via user.email.
 
 git add [file specifici, NO git add -A se inceri]
 git status  # mostra a Elena per review
+
 git commit -m "feat(elena-fix): {nome-bug} — {descrizione breve}
+
+Autore: Elena Cappabianca (via shared Adsolut git identity)
+Branch: feat/elena-fix-{nome-bug-breve}
 
 - File modificato: {path}
 - Linea: {N}
@@ -147,6 +169,9 @@ git commit -m "feat(elena-fix): {nome-bug} — {descrizione breve}
 - Test: {come Elena può verificare frontend post-deploy}"
 
 git push origin feat/elena-fix-{nome-bug-breve}
+
+# IMPORTANTE: NO git push origin main (sempre solo branch dedicato)
+# IMPORTANTE: NO git checkout main + merge (solo Duccio merge no-ff)
 
 ## Step 7 — Componi email a Duccio per merge + deploy
 
@@ -307,34 +332,49 @@ git clone https://github.com/Adsolut-Ai-Agency/saltelli-wp.git
 cd saltelli-wp
 ```
 
-### 3. Configurare identità Git per Elena
+### 3. Identità Git (shared account Adsolut — non modificare)
 
+Lavori sullo **stesso account Git di Duccio** (`Adsolut Web Agency`). Questo per:
+- Audit trail consistente (`git log` mostra sempre Adsolut)
+- Zero permission management GitHub (non serve invitarti come collaborator separato)
+- Tu sei identificata via **prefisso commit message** + **nome branch**, non via Git identity
+
+**Verifica** (non modificare):
 ```bash
 cd ~/Desktop/DEV/saltelli-wp
-git config user.name "Elena Cappabianca"
-git config user.email "elena.cappabianca@studiolegalesaltelli.it"
-
-# Verifica
 git config user.name
+# expected: "AdsolutAdv" o "Adsolut Web Agency"
+
 git config user.email
+# expected: aldo.santoro@adsolut.it (o equivalente Adsolut)
 ```
+
+Se compaiono nomi diversi (es. tuo nome system MacOS), **chiedi a Duccio** prima di toccare. NON eseguire `git config --global`.
+
+**Convention naming per identificarti** (Duccio + Code lo capiscono automaticamente):
+- **Nome branch sempre**: `feat/elena-fix-{breve-descrizione}`
+- **Commit message sempre**: `feat(elena-fix): {breve}` (Code mette il prefix automaticamente)
+- **Email tech@adsolut.it**: firmati "Elena" nel corpo email
 
 ### 4. Verificare accesso al repository
 
 ```bash
 git remote -v
-# expected: origin → https://github.com/Adsolut-Ai-Agency/saltelli-wp.git
+# expected: origin → https://github.com/Adsolut-Ai-Agency/saltelli-wp.git (o equivalente)
 
 git status
 # expected: working tree clean su main
 
 git log --oneline -3
 # expected: ultimi 3 commit visibili
+
+git fetch origin 2>&1 | head -3
+# expected: fetch OK (zero errori auth)
 ```
 
-Se NON hai accesso al repository GitHub (errore "permission denied"):
-- Chiedi a Duccio di aggiungerti come collaborator (read access)
-- Oppure usa SSH key se preferito (Duccio te la setup)
+Se compare errore di autenticazione `permission denied`:
+- Chiedi a Duccio: probabilmente serve riconfigurare credentials Git (token GitHub scaduto o macchina nuova non autorizzata)
+- Non tentare workaround in autonomia (rischio di rompere setup)
 
 ### 5. (Opzionale) Setup PHP CLI per syntax check locale
 
