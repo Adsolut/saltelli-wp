@@ -3332,7 +3332,7 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     background: #25D366;
     color: #FFFFFF;
     border-radius: 50%;
-    display: none; /* default hidden, mostrato in mobile media query */
+    display: flex; /* Elena fix 2026-05-13: era 'none' (visibile solo mobile via @media). Ora visibile su tutti i viewport. */
     align-items: center;
     justify-content: center;
     text-decoration: none;
@@ -3359,10 +3359,12 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
     border: 0;
 }
 
-/* Mobile only — display:flex sotto 1024 */
-@media (max-width: 1023px) {
+/* Phone (max-width 768): alza il FAB per non sovrapporsi alla
+   mobile sticky bar (Pattern 3, .sl-mobile-bar) che occupa la fascia bottom
+   con altezza ~72-80px + safe-area-inset. */
+@media (max-width: 768px) {
     .sl-whatsapp-sticky {
-        display: flex;
+        bottom: 96px;
     }
 }
 
@@ -6593,10 +6595,11 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 
 /* === IMPECCABLE v0.20.0 [delight — WhatsApp pulse + a11y] BEGIN ===
    Pulse 1× every 6s (Duccio constraint: minimal, no heavy animation).
-   prefers-reduced-motion safety + 48×48 touch target mobile. */
-.sl-whatsapp-sticky {
-    position: relative;
-}
+   prefers-reduced-motion safety + 48×48 touch target mobile.
+   Elena fix 2026-05-13: rimosso il `position: relative` che overridava
+   il `position: fixed` originale (riga 3327) → il FAB si renderizzava
+   inline nel DOM (top-left). `::after` absolute è OK perché `position:
+   fixed` del parent fornisce già il containing block. */
 .sl-whatsapp-sticky::after {
     content: "";
     position: absolute;
