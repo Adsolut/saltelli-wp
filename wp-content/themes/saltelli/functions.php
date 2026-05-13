@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.41-elena-fix-footer-precta-spacing');
+define('SALTELLI_THEME_VERSION', '1.3.42-elena-fix-footer-precta-spacing-important');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
