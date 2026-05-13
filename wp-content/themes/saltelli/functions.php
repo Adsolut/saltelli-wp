@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.33-elena-fix-team-portrait-size');
+define('SALTELLI_THEME_VERSION', '1.3.34-elena-fix-cases-padding-bottom-home');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 

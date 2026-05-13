@@ -727,6 +727,11 @@
   /* v0.14.1 padding-block; v0.16.2 80 → 56 mobile */
   padding-block: 56px;
 }
+/* Elena fix 2026-05-13: su homepage la sezione .sl-cases è seguita da
+   .sl-front-testimonials (di solito vuota) + .sl-press (banda cream).
+   Lo spazio padding-bottom standard creava un gap eccessivo sopra il press band.
+   Riduco bottom su home per simmetria con lo spazio sotto il press band. */
+.home .sl-cases { padding-bottom: 24px; }
 .sl-cases__head {
   display: grid;
   gap: 16px;
@@ -763,6 +768,8 @@
 
 @media (min-width: 1024px) {
   .sl-cases { padding-block: 80px; /* v0.16.2 era 128 */ }
+  /* Elena fix 2026-05-13: home override desktop */
+  .home .sl-cases { padding-bottom: 32px; }
   .sl-cases__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
