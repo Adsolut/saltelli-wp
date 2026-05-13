@@ -1893,6 +1893,20 @@ html:not(.js-reveal-ready) [data-reveal] {
     color: var(--accent);
 }
 
+/* Elena fix 2026-05-13 — Menu livello 3 (flyout laterale a destra)
+   Trigger: wp_nav_menu depth=3 in header.php → sotto-sotto-menu emessi come
+   .sub-menu annidata in .sub-menu. Senza override si sovrapporrebbero al L2
+   (entrambi position:absolute top:100% left:0). Posiziono il L3 a destra del
+   suo parent L2 (top:0 left:100%), pattern Mac-style flyout. */
+.sl-header__nav .sub-menu .menu-item-has-children > a::after {
+    content: " →";
+}
+.sl-header__nav .sub-menu .sub-menu {
+    top: 0;
+    left: 100%;
+    margin-left: -1px; /* sovrapposizione del border per attacco visivo continuo */
+}
+
 /* Mobile / tablet: stack inline, no overlay positioning */
 @media (max-width: 1023px) {
     .sl-header__nav .menu-item-has-children > a::after {
@@ -1906,6 +1920,13 @@ html:not(.js-reveal-ready) [data-reveal] {
         padding: 8px 0 8px 16px;
         background: transparent;
         min-width: 0;
+    }
+    /* Elena fix 2026-05-13 — L3 mobile: extra indent per gerarchia visibile */
+    .sl-header__nav .sub-menu .sub-menu {
+        top: auto;
+        left: auto;
+        margin-left: 0;
+        padding-left: 16px; /* indent ulteriore rispetto al L2 */
     }
 }
 
