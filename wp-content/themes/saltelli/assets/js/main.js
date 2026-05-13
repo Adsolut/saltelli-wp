@@ -376,7 +376,6 @@
     const buildPreviewHTML = (area) => {
       const cat = area.dataset.areaLabel || area.dataset.areaCat || '';
       const lead = area.dataset.areaLead || '';
-      const href = area.getAttribute('href') || '#';
       const num = area.dataset.areaNum || '';
 
       // Costruzione DOM via template stringa, ma con escape minimo: i data-attr arrivano già da PHP esc_attr.
@@ -384,13 +383,12 @@
       const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
       const numLabel = num ? `${esc(num)} · ` : '';
+      // Elena fix 2026-05-13: rimossa CTA "Approfondisci" dalla preview hover —
+      // ridondante con label "APPROFONDIMENTO →" già su riga (.sl-area__meta) +
+      // la riga stessa è <a class="sl-area"> cliccabile per intero.
       return [
         `<div class="sl-mono sl-area__preview-cat">${numLabel}${esc(cat)}</div>`,
         `<p class="sl-area__preview-lead">${esc(lead)}</p>`,
-        `<a class="sl-btn" href="${esc(href)}">`,
-        `  <span>Approfondisci</span>`,
-        `  <span class="arrow" aria-hidden="true">→</span>`,
-        `</a>`,
       ].join('');
     };
 
