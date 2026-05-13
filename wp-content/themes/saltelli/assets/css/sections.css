@@ -6711,7 +6711,9 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 .sl-foot-precta {
     background: var(--surface);
     border-bottom: 1px solid var(--primary);
-    padding-block: clamp(64px, 9vw, 128px);
+    /* Elena fix 2026-05-13: padding-block ridotto clamp(64,9vw,128) → clamp(40,5vw,72)
+       per compressione verticale sezione (era troppo grande). */
+    padding-block: clamp(40px, 5vw, 72px);
     padding-inline: clamp(24px, 5vw, 96px);
 }
 .sl-foot-precta__inner {
@@ -6720,7 +6722,8 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 .sl-foot-cta {
     display: grid;
-    gap: 32px;
+    /* Elena fix 2026-05-13: gap 32→16 mobile per ridurre spazio h2/p/action */
+    gap: 16px;
 }
 /* === v0.27.8 — Pre-CTA layout 3fr/9fr per allineamento cross-page ===
    Issue Duccio: pre-CTA "§ Ultima chiamata" usava 8fr/4fr (eyebrow + h2 + p
@@ -6735,7 +6738,9 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 @media (min-width: 1024px) {
     .sl-foot-cta {
         grid-template-columns: 3fr 9fr;
-        gap: 64px;
+        /* Elena fix 2026-05-13: row-gap ridotto 64→16 (col-gap resta 64 orizzontale) */
+        column-gap: 64px;
+        row-gap: 16px;
         align-items: start;
     }
     /* Lede wrapper trasparente: figli partecipano direttamente al grid */
@@ -6758,7 +6763,8 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     .sl-foot-precta__action {
         grid-column: 2;
         grid-row: 3;
-        margin-top: 32px;
+        /* Elena fix 2026-05-13: margin-top extra 32→8 prima del bottone */
+        margin-top: 8px;
     }
 }
 .sl-foot-precta__eyebrow {
