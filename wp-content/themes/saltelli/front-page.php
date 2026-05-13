@@ -455,16 +455,29 @@ $press = saltelli_press_outlets();
                     <?php echo esc_html(saltelli_page_field('home_contact_subline', 'Prima consulenza conoscitiva gratuita · Risposta entro 24 ore')); ?>
                 </div>
                 <?php
-                /* Elena fix 2026-05-13: rendering condizionale dei <br> — se h2_line2
-                   o h2_line3 sono vuoti (caso nuovo headline su 1 riga
-                   "Riceviamo solo su appuntamento."), non si emette break né <em>
-                   vuoto. SCF defaults invariati per retro-compat editor. */
+                /* Elena fix 2026-05-13: rendering condizionale headline contatti.
+                   - Multi-line mode (line1+line2+line3 popolati): pattern editoriale
+                     originale, line3 in <em> oro (.sl-contact__title em).
+                   - Single-line mode (solo line1, line2/3 vuote): auto-italicize
+                     l'ULTIMA PAROLA di line1 in <em> per preservare l'accento oro
+                     (feedback Elena 2026-05-13). Es. "Riceviamo solo su
+                     appuntamento." → "Riceviamo solo su <em>appuntamento.</em>". */
                 $sl_h2_l1 = (string) saltelli_page_field('home_contact_h2_line1', 'Riceviamo solo su appuntamento.');
                 $sl_h2_l2 = (string) saltelli_page_field('home_contact_h2_line2', '');
                 $sl_h2_l3 = (string) saltelli_page_field('home_contact_h2_line3', '');
+
+                $sl_h2_l1_html = esc_html($sl_h2_l1);
+                if ($sl_h2_l2 === '' && $sl_h2_l3 === '' && $sl_h2_l1 !== '') {
+                    $parts = preg_split('/\s+/', trim($sl_h2_l1));
+                    if (is_array($parts) && count($parts) > 1) {
+                        $last = array_pop($parts);
+                        $rest = implode(' ', $parts);
+                        $sl_h2_l1_html = esc_html($rest) . ' <em>' . esc_html($last) . '</em>';
+                    }
+                }
                 ?>
                 <h2 class="sl-section-title sl-contact__title" id="contact-h">
-                    <?php echo esc_html($sl_h2_l1); ?>
+                    <?php echo $sl_h2_l1_html; // esc_html già applicato per ogni segmento, <em> safe ?>
                     <?php if ($sl_h2_l2 !== '') : ?><br><?php echo esc_html($sl_h2_l2); ?><?php endif; ?>
                     <?php if ($sl_h2_l3 !== '') : ?><br><em><?php echo esc_html($sl_h2_l3); ?></em><?php endif; ?>
                 </h2>
