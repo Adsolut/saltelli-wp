@@ -68,19 +68,30 @@ Custom WordPress theme deliberatamente differenziato, AI-ready, performance-obse
 
 ## Workflow rules (orchestratore ↔ Claude Code)
 
-### Pattern
+### Pattern attori (3 sessioni possibili, 2026-05-13)
 ```
-┌─ Orchestratore (Claude in chat, su Claude.ai)
-│   └─ pianifica, scrive prompt, audita, mergea
+┌─ Orchestratore Duccio (Claude in chat, su Claude.ai/Cowork)
+│   └─ pianifica wave, scrive prompt Code, audita, decide cut produzione
 │   └─ commits: docs/*, prompts/*, .claude/knowledge/*, CLAUDE.md, README.md
+│   └─ deploy: production (post DNS switch) — esclusiva
 │
-└─ Claude Code (sessione dedicata su terminale)
-    └─ esegue prompt assegnato, lavora in branch dedicato
-    └─ commits: wp-content/themes/saltelli/*, scripts/*, .claude/knowledge/audits/{nome}/*
+├─ Code Duccio (sessione dedicata terminale)
+│   └─ esegue prompt orchestratore, lavora in branch dedicato feat/{nome}
+│   └─ commits: wp-content/themes/saltelli/*, scripts/*
+│   └─ deploy: production (post-cut) — coordinato con orchestratore Duccio
+│
+└─ Code Elena (sessione dedicata terminale post-onboarding 2026-05-13)
+    └─ orchestratrice junior + Code dev pair
+    └─ identifica bug visivi → fix → branch feat/elena-fix-{nome} → merge no-ff main → deploy
+    └─ commits: wp-content/themes/saltelli/* via Adsolut shared git identity (audit via prefix commit message + branch name)
+    └─ deploy: STAGING ONLY autonomo (rsync + OPcache + smoke)
+    └─ deploy production: ❌ MAI, escalation Duccio
 ```
 
 ### One-writer-at-a-time (HARD RULE)
 Solo una sessione attiva sui commit alla volta. Quando l'orchestratore lancia un task per Code, l'orchestratore **NON committa** finché Code non ha pushato e l'audit è completato. Quando l'orchestratore lavora, Code è fermo. **Niente committi paralleli.**
+
+Quando Elena lavora in Code session autonoma su staging: orchestratore Duccio + Code Duccio **NON committano** durante il flusso Elena (per evitare race su main durante suo merge no-ff). Elena segnala start/end ogni sessione via Slack/notifica email Step 12 a Duccio.
 
 Se vedi un fix urgente durante l'attesa: **annotalo, non committarlo**. Discutere in chat dopo l'audit (es. commit `0ee9789` + `b6bfbf9` del 2026-05-05).
 

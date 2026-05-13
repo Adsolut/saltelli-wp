@@ -93,7 +93,13 @@ NON fai mai in autonomia:
 - Spiegare PRIMA cosa farai, ASPETTARE conferma, POI eseguire
 - Mai promettere fix che non puoi consegnare (escalation a Duccio se serve)
 
-# WORKFLOW STANDARD (8 step per ogni bug)
+# WORKFLOW STANDARD (12 step per ogni bug — Elena ora autonoma su STAGING)
+
+**IMPORTANTE — Sblocco staging-autonomy (2026-05-13):**
+Elena ora gestisce in autonomia merge + deploy + smoke su STAGING (era Duccio prima).
+Production (post-cut DNS switch a `studiolegalesaltelli.it`) resta SEMPRE Duccio.
+La sequenza qui sotto copre l'intero ciclo end-to-end: bug found → fix → merge → deploy →
+smoke → notification a Duccio (informativa, non bloccante).
 
 ## Step 1 — Elena descrive il bug
 
@@ -173,70 +179,241 @@ git push origin feat/elena-fix-{nome-bug-breve}
 # IMPORTANTE: NO git push origin main (sempre solo branch dedicato)
 # IMPORTANTE: NO git checkout main + merge (solo Duccio merge no-ff)
 
-## Step 7 — Componi email a Duccio per merge + deploy
+## Step 7 — Merge no-ff su main (Elena autonoma)
 
-Email pronta da inviare:
+```bash
+# Elena ha already pushato il branch al Step 6. Ora merge su main.
+
+git checkout main
+git pull origin main   # assicurati di partire da HEAD aggiornato
+git merge --no-ff origin/feat/elena-fix-{nome-bug-breve} -m "Merge feat/elena-fix-{nome-bug-breve} — {descrizione bug breve} (Elena)"
+
+# Verifica merge clean
+git log --oneline -3
+git status   # working tree clean
+```
+
+Se merge ha conflitti:
+- STOP, NON tentare resolve automatico
+- Escalation a Duccio (vedi sezione ESCALATION)
+
+## Step 8 — Version bump + chore commit
+
+```bash
+# Trova versione attuale
+CURRENT_VERSION=$(grep "SALTELLI_THEME_VERSION" wp-content/themes/saltelli/functions.php | grep -oE "'1\.[0-9]+\.[0-9]+[^']*'" | tr -d "'")
+# Es: 1.3.25-fix-home-areas-numerazione
+
+# Decidi nuova versione: incrementa patch + suffix breve descrittivo
+# Pattern: 1.3.X-fix-{tema-breve}
+# Esempi:
+#   1.3.26-fix-mobile-menu-close
+#   1.3.27-fix-copy-contatti
+#   1.3.28-fix-hover-card-tablet
+NEW_VERSION="1.3.X-fix-{tema-breve}"
+
+# Edit functions.php
+sed -i.bak "s/SALTELLI_THEME_VERSION', '${CURRENT_VERSION}'/SALTELLI_THEME_VERSION', '${NEW_VERSION}'/" wp-content/themes/saltelli/functions.php
+rm wp-content/themes/saltelli/functions.php.bak
+
+# Edit style.css
+sed -i.bak "s/Version: ${CURRENT_VERSION}/Version: ${NEW_VERSION}/" wp-content/themes/saltelli/style.css
+rm wp-content/themes/saltelli/style.css.bak
+
+# Edit CLAUDE.md Current state header (1-line replace)
+sed -i.bak "s/v${CURRENT_VERSION} (CUT-READY)/v${NEW_VERSION} (CUT-READY)/" CLAUDE.md
+rm CLAUDE.md.bak
+
+# Verify triple
+grep SALTELLI_THEME_VERSION wp-content/themes/saltelli/functions.php
+grep -i "Version:" wp-content/themes/saltelli/style.css | head -1
+grep "Current state" CLAUDE.md | head -1
+
+# Commit version bump
+git add -A
+git status --short
+git commit -m "chore: bump v${NEW_VERSION} post-merge feat/elena-fix-{nome-bug-breve}
+
+Wave Elena fix {N} — primo/secondo/etc contributo Elena via Code session autonoma post-onboarding.
+Merge feat/elena-fix-{nome-bug-breve} (commit ${ELENA_SHA}) su main.
+File modificati: {lista}"
+```
+
+## Step 9 — Push origin + tag annotated
+
+```bash
+# Push main
+git push origin main
+
+# Tag annotated (storia release per audit)
+git tag -a v${NEW_VERSION} -m "v${NEW_VERSION} — Wave Elena fix {N}
+
+{Descrizione fix in 2-3 righe}
+
+Branch: feat/elena-fix-{nome-bug-breve}
+SHA Elena: ${ELENA_SHA}
+SHA merge: $(git rev-parse main)"
+
+git push origin v${NEW_VERSION}
+
+# Verify tag
+git ls-remote --tags origin v${NEW_VERSION}
+```
+
+## Step 10 — Rsync deploy staging + OPcache reload
+
+```bash
+# Rsync delta su droplet staging
+rsync -avz --delete \
+  --exclude='.git' --exclude='node_modules' --exclude='.DS_Store' \
+  wp-content/themes/saltelli/ \
+  deploy@178.62.207.50:/var/www/saltelli/wp-content/themes/saltelli/
+
+# OPcache reload + WP cache flush (mandatory per file PHP modificati — vedi docs/LESSONS-LEARNED.md §1)
+ssh deploy@178.62.207.50 "sudo systemctl reload php8.2-fpm && sudo -u www-data wp cache flush --path=/var/www/saltelli"
+```
+
+## Step 11 — Smoke test post-deploy
+
+```bash
+# Verify version triple su droplet (filesystem + HTTP)
+ssh deploy@178.62.207.50 "grep -i 'Version:' /var/www/saltelli/wp-content/themes/saltelli/style.css | head -1"
+ssh deploy@178.62.207.50 "grep SALTELLI_THEME_VERSION /var/www/saltelli/wp-content/themes/saltelli/functions.php"
+curl -s https://staging.studiolegalesaltelli.it/wp-content/themes/saltelli/style.css | head -10 | grep -i version
+
+# Expected: tutti e 3 = "${NEW_VERSION}"
+
+# Smoke 5 URL critici + URL specifico del fix
+echo "=== smoke v${NEW_VERSION} ==="
+for url in "/" "/aree-di-pratica/" "/risorse/domande-frequenti/" "{URL_specifico_fix}" "{URL_regressione_check}"; do
+  status=$(curl -sI "https://staging.studiolegalesaltelli.it$url" | head -1 | tr -d '\r\n')
+  size=$(curl -s "https://staging.studiolegalesaltelli.it$url" | wc -c)
+  echo "  $url → $status ($size byte)"
+done
+
+# Smoke specifico fix (Elena descrive cosa cercare nel markup)
+# Esempi:
+#   curl -s "https://staging.studiolegalesaltelli.it/" | grep -c 'sl-area__num'  # numerazione presente
+#   curl -s "https://staging.studiolegalesaltelli.it/contatti/" | grep -c 'tel:0818131119'  # numero telefono aggiornato
+```
+
+Se smoke fail (HTTP non-200 o version mismatch):
+- STOP, NON procedere a Step 12
+- Escalation immediata a Duccio (vedi rollback procedure in sezione ESCALATION)
+
+## Step 12 — Notifica informativa a Duccio + verify visuale Elena
 
 ```
 A: tech@adsolut.it (Duccio)
-CC: aldo.santoro@adsolut.it
-SUBJECT: Fix Saltelli da merge + deploy — branch feat/elena-fix-{nome}
+SUBJECT: [STAGING DEPLOY DONE] v${NEW_VERSION} — {tema-fix-breve}
 
 Ciao Duccio,
 
-ho pushato un fix su branch dedicato. Dettagli:
+ho deployato un nuovo fix su staging. Tutto OK, smoke verde.
 
-BRANCH: feat/elena-fix-{nome-bug-breve}
-COMMIT: {SHA git}
-PROBLEMA: {breve descrizione bug Elena ha trovato}
-URL impattato: {staging URL}
-FIX: {cosa è stato cambiato in linguaggio non-tech}
+DETTAGLI:
+- Versione: v${NEW_VERSION}
+- Branch: feat/elena-fix-{nome-bug-breve}
+- SHA commit: ${ELENA_SHA}
+- Tag: v${NEW_VERSION}
+- Staging: https://staging.studiolegalesaltelli.it
+- URL fix: {URL_specifico_fix}
 
-Quando puoi fai merge + deploy + mi confermi quando posso verificare frontend.
+FIX:
+{Descrizione bug + soluzione in linguaggio non-tech}
 
-Grazie,
+SMOKE TEST POST-DEPLOY:
+- HTTP 200 su 5 URL critici ✅
+- Version triple match v${NEW_VERSION} ✅
+- {Smoke specifico fix} ✅
+
+Sto verificando frontend visivamente ora. Se trovo qualcosa torno qui.
+
+Grazie del workflow,
 Elena
 ```
 
-## Step 8 — Riepiloga a Elena
+Questa è una **notifica informativa** (Duccio non deve fare nulla, solo essere informato). Non bloccare suo workflow. Se Elena trova regressione frontend post-deploy, allora apre nuova session Code per fix.
 
-Confermale:
-- Branch creato e pushato
-- Email pronta da inviare a Duccio (copy-paste-ready)
-- Cosa aspettarsi: Duccio confermerà via Slack/email quando ha mergiato + deployato (~30 min - 2h)
-- Cosa lei può fare nel frattempo: continuare QA su altri URL, NON ri-toccare quel branch
+Verify visuale Elena (manuale):
+1. Apri https://staging.studiolegalesaltelli.it/ in browser pulito (incognito + Ctrl+Shift+R)
+2. Vai a URL specifico del fix
+3. Verifica che il comportamento sia quello atteso
+4. Verifica pagine adiacenti per assicurarti che il fix non abbia regressioni
+5. Se OK → close ticket
+6. Se KO → nuova session Code per fix-of-fix (mai toccare stesso branch già mergiato)
 
 # COSA NON FARE MAI
 
-Hard rule:
+Hard rule (aggiornato 2026-05-13 post sblocco staging-autonomy):
 
-1. NO commit su main locale (sempre branch feat/elena-fix-*)
-2. NO git push origin main (solo push branch dedicato)
-3. NO modifica wp-content/themes/saltelli/assets/css/tokens.css (design system)
+1. NO commit diretto su main senza Step 7-8 workflow (sempre via merge no-ff di branch feat/elena-fix-*)
+2. NO `git push --force` / `--force-with-lease` su origin main (mai overscript history pubblica)
+3. NO modifica wp-content/themes/saltelli/assets/css/tokens.css (design system, scelta architetturale)
 4. NO modifica wp-content/themes/saltelli/inc/cpt-*.php (CPT registration core)
-5. NO modifica file root: functions.php (eccetto chiedere Duccio), style.css (eccetto chiedere Duccio)
+5. NO modifica file root: functions.php eccetto SALTELLI_THEME_VERSION constant (Step 8), style.css eccetto Version header (Step 8)
 6. NO `--force` su git operations
 7. NO eliminazione files (rm) senza esplicita conferma Elena
-8. NO git rebase / git reset --hard (rischio perdita work, solo Duccio)
+8. NO git rebase / git reset --hard (rischio perdita work, escalation Duccio per casi complessi)
 9. NO modifica .git/ folder
-10. NO SSH al droplet (Elena non ha credenziali, è di Duccio)
-11. NO esecuzione script in scripts/migrate-* (sono ops produzione, solo Duccio)
-12. NO modifica config.local.json (gitignored, credenziali)
-13. NO touch su _archive/ folder (storia archiviata)
+10. NO esecuzione script in scripts/migrate-* (sono ops produzione strategy, escalation Duccio)
+11. NO modifica config.local.json (gitignored, credenziali)
+12. NO touch su _archive/ folder (storia archiviata)
+13. NO DB ops aggressive su droplet:
+    - NO `wp option update siteurl/home` (modifica WP install root URL)
+    - NO `wp db drop` / `wp db reset`
+    - NO `DELETE FROM wp_posts/wp_postmeta WHERE ...` direct SQL
+    - NO `wp user delete` su Avv. Saltelli (UID 1) o Adsolut Staff (UID 8)
+14. **NO TOUCH PRODUCTION** (post-cut DNS switch):
+    - `studiolegalesaltelli.it` (production) gestita SEMPRE da Duccio
+    - Elena lavora ESCLUSIVAMENTE su staging (`staging.studiolegalesaltelli.it`)
+    - Se vedi un bug LIVE in production (sito già live) → NON tentare fix in autonomia,
+      escalation immediata Duccio (chiamata + email URGENTE)
+15. NO `rsync --delete` su path che possa toccare `/var/www/saltelli/wp-content/uploads/` o `/var/www/saltelli/wp-content/plugins/` (path safe: solo `/wp-content/themes/saltelli/`)
+16. NO `ssh deploy@... "rm -rf ..."` con path non specifico
+17. NO modifica nginx config (`/etc/nginx/*`) sul droplet
+18. NO `sudo certbot ...` (SSL ops, solo Duccio)
+19. NO accesso production droplet con credenziali staging (se in futuro production droplet sarà diverso)
 
 # ESCALATION A DUCCIO
 
-Subito (Elena scrive a Duccio in chat) se:
-- Il bug è BLOCKER (sito giù, form non invia, errore 500)
+Subito (Elena chiama + scrive a Duccio in chat) se:
+- Il bug è BLOCKER (sito giù in production, form non invia, errore 500 production)
 - Tu (Code) non sai diagnosticare la causa root con sicurezza
-- Il fix richiederebbe modifiche a file VIETATI (lista sopra)
-- Il fix richiederebbe modifiche database (SCF data, postmeta, wp_options)
-- Sospetti regressione su altre pagine non-target
-- Stato Git inaspettato (working tree non clean dopo pull, conflitti)
+- Il fix richiederebbe modifiche a file VIETATI (lista hard rule)
+- Il fix richiederebbe modifiche database (SCF data, postmeta, wp_options, user delete)
+- Sospetti regressione su altre pagine non-target dopo merge + deploy staging
+- Stato Git inaspettato (working tree non clean dopo pull, conflitti merge)
+- **Smoke post-deploy staging FAIL** (HTTP non-200 / version mismatch / regressione visibile)
+- **Production touch necessario** (post-cut DNS switch a studiolegalesaltelli.it)
+- **Cut produzione** (DNS switch finale) — sempre Duccio
+- **SSL operations** (renew, regen, certbot) — sempre Duccio
+- **Plugin install/remove/update** — sempre Duccio
+- **WP core upgrade** — sempre Duccio
+- **Migration script ops** (scripts/migrate-*.php su droplet) — sempre Duccio
 
-Non-bloccante (può aspettare email standard a Duccio):
-- Bug priorità BASSA che possono essere accumulati in batch
+Non-bloccante (può aspettare notifica informativa email standard a Duccio):
+- Bug fix completato + deployato + smoke OK (notifica Step 12)
+- Bug priorità BASSA accumulati in batch settimanale
 - Domande "come fare X" senza essere bug
+- Backlog wave grosse (Wave 6.0 full, Wave 6.1 SCF cleanup, P11 contatti, etc.)
+
+# ROLLBACK PROCEDURE (se smoke post-deploy FAIL)
+
+Se Step 11 smoke restituisce HTTP non-200 o version triple mismatch o regressione visiva:
+
+**NON eseguire rollback in autonomia.** Chiamata immediata + email a Duccio.
+
+Duccio decide se:
+- Rollback completo via `git reset --hard ${PREVIOUS_TAG}` + `--force-with-lease` push + re-rsync (Duccio only)
+- Rollback parziale via `git revert ${COMMIT_PROBLEMATIC}` (può essere Elena con Code in autonomia se conferma orchestrator)
+- Forward fix urgente in nuovo branch feat/elena-fix-rollback-* + re-deploy
+
+Elena deve fornire a Duccio:
+- Output Step 11 smoke (cosa è fallito)
+- Eventuali screenshot frontend pre/post deploy
+- Commit SHA del fix problematico
+- File modificati nel fix
 
 # RISORSE CHIAVE DEL REPO
 
@@ -376,7 +553,63 @@ Se compare errore di autenticazione `permission denied`:
 - Chiedi a Duccio: probabilmente serve riconfigurare credentials Git (token GitHub scaduto o macchina nuova non autorizzata)
 - Non tentare workaround in autonomia (rischio di rompere setup)
 
-### 5. (Opzionale) Setup PHP CLI per syntax check locale
+### 5. SSH key droplet staging (richiesto per deploy autonomo)
+
+Elena ora gestisce merge + deploy su staging in autonomia. Serve accesso SSH al droplet.
+
+**Setup one-time (Duccio fornisce a Elena via vault sicuro)**:
+
+```bash
+# Verifica SSH config esistente
+cat ~/.ssh/config 2>/dev/null | grep -A3 "Host saltelli-staging" || echo "no config"
+
+# Setup SSH config (se non già presente)
+cat >> ~/.ssh/config << 'EOF'
+Host saltelli-staging
+    HostName 178.62.207.50
+    User deploy
+    IdentityFile ~/.ssh/saltelli_staging_ed25519
+    StrictHostKeyChecking no
+EOF
+
+# Setup SSH key (Duccio invia via 1Password/Bitwarden vault link)
+# ATTESO: file ~/.ssh/saltelli_staging_ed25519 (privata) + ~/.ssh/saltelli_staging_ed25519.pub (pubblica)
+chmod 600 ~/.ssh/saltelli_staging_ed25519
+chmod 644 ~/.ssh/saltelli_staging_ed25519.pub
+
+# Test connection
+ssh deploy@178.62.207.50 "hostname && date" 2>&1 | head -3
+# Expected: saltelli-staging-ams3-01 + data current
+# Se "Permission denied" → SSH key non corretta, chiedi Duccio
+```
+
+Pattern shortcut (post-setup):
+- `ssh deploy@178.62.207.50 ...` lungo
+- oppure `ssh saltelli-staging ...` corto (usando SSH config alias)
+
+### 6. Vault credentials staging (1Password / Bitwarden)
+
+File `.saltelli-staging-secrets` contiene credenziali rotanti per WP-Admin staging (Emiliano, Adsolut, Elena). **NON è in git** (gitignored). Duccio te lo invia via vault link.
+
+```bash
+# Salvare in workspace root (gitignored)
+cat > .saltelli-staging-secrets << 'EOF'
+# Credenziali staging Saltelli — NON pushare mai a Git
+# Vault: https://[1password/bitwarden link]
+
+WP_EMILIANO_PWD="[password Emiliano]"   # UID 1, info@studiolegalesaltelli.it
+WP_ADSOLUT_PWD="[password tech]"         # UID 8, tech@adsolut.it
+WP_ELENA_PWD="[password Elena]"          # UID 9, elena.cappabianca@studiolegalesaltelli.it (administrator post Wave 4.7.fix.5)
+EOF
+
+chmod 600 .saltelli-staging-secrets
+
+# Verifica `.gitignore` include `.saltelli-staging-secrets`
+grep -c "saltelli-staging-secrets" .gitignore
+# Expected: ≥1
+```
+
+### 7. (Opzionale) Setup PHP CLI per syntax check locale
 
 Non strettamente necessario (Code può eseguire `node --check` per JS), ma utile per controllare sintassi PHP prima di pushare:
 
