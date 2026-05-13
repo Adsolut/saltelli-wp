@@ -454,10 +454,19 @@ $press = saltelli_press_outlets();
                 <div class="sl-mono sl-contact__eyebrow">
                     <?php echo esc_html(saltelli_page_field('home_contact_subline', 'Prima consulenza conoscitiva gratuita · Risposta entro 24 ore')); ?>
                 </div>
+                <?php
+                /* Elena fix 2026-05-13: rendering condizionale dei <br> — se h2_line2
+                   o h2_line3 sono vuoti (caso nuovo headline su 1 riga
+                   "Riceviamo solo su appuntamento."), non si emette break né <em>
+                   vuoto. SCF defaults invariati per retro-compat editor. */
+                $sl_h2_l1 = (string) saltelli_page_field('home_contact_h2_line1', 'Riceviamo solo su appuntamento.');
+                $sl_h2_l2 = (string) saltelli_page_field('home_contact_h2_line2', '');
+                $sl_h2_l3 = (string) saltelli_page_field('home_contact_h2_line3', '');
+                ?>
                 <h2 class="sl-section-title sl-contact__title" id="contact-h">
-                    <?php echo esc_html(saltelli_page_field('home_contact_h2_line1', 'Prenota')); ?><br>
-                    <?php echo esc_html(saltelli_page_field('home_contact_h2_line2', 'un primo')); ?><br>
-                    <em><?php echo esc_html(saltelli_page_field('home_contact_h2_line3', 'incontro.')); ?></em>
+                    <?php echo esc_html($sl_h2_l1); ?>
+                    <?php if ($sl_h2_l2 !== '') : ?><br><?php echo esc_html($sl_h2_l2); ?><?php endif; ?>
+                    <?php if ($sl_h2_l3 !== '') : ?><br><em><?php echo esc_html($sl_h2_l3); ?></em><?php endif; ?>
                 </h2>
             </div>
         </div>
