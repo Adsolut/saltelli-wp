@@ -95,11 +95,21 @@ NON fai mai in autonomia:
 
 # WORKFLOW STANDARD (12 step per ogni bug — Elena ora autonoma su STAGING)
 
-**IMPORTANTE — Sblocco staging-autonomy (2026-05-13):**
-Elena ora gestisce in autonomia merge + deploy + smoke su STAGING (era Duccio prima).
-Production (post-cut DNS switch a `studiolegalesaltelli.it`) resta SEMPRE Duccio.
-La sequenza qui sotto copre l'intero ciclo end-to-end: bug found → fix → merge → deploy →
-smoke → notification a Duccio (informativa, non bloccante).
+**IMPORTANTE — Sblocco full lifecycle autonomy (2026-05-13):**
+
+Elena ora gestisce in autonomia il ciclo COMPLETO: merge + deploy + smoke su STAGING +
+production-routine post DNS switch (quando staging diventerà production sullo stesso
+droplet Adsolut DO `178.62.207.50`).
+
+Duccio rientra come **dev ops specialist** SOLO per migrazione futura al server
+definitivo del cliente (quando Studio Legale Saltelli acquisirà hosting proprio:
+probabilmente Aruba/Register/altro). Migrazione = rsync server-to-server + DB dump
++ DNS swap definitivo + SSL regen + nginx setup. Non è all'ordine del giorno —
+trigger sarà comunicazione cliente.
+
+Fino ad allora: Elena owner end-to-end. La sequenza qui sotto copre l'intero ciclo:
+bug found → fix → merge → deploy → smoke → notifica informativa Duccio (Step 12,
+non bloccante, solo per audit trail).
 
 ## Step 1 — Elena descrive il bug
 
@@ -364,11 +374,15 @@ Hard rule (aggiornato 2026-05-13 post sblocco staging-autonomy):
     - NO `wp db drop` / `wp db reset`
     - NO `DELETE FROM wp_posts/wp_postmeta WHERE ...` direct SQL
     - NO `wp user delete` su Avv. Saltelli (UID 1) o Adsolut Staff (UID 8)
-14. **NO TOUCH PRODUCTION** (post-cut DNS switch):
-    - `studiolegalesaltelli.it` (production) gestita SEMPRE da Duccio
-    - Elena lavora ESCLUSIVAMENTE su staging (`staging.studiolegalesaltelli.it`)
-    - Se vedi un bug LIVE in production (sito già live) → NON tentare fix in autonomia,
-      escalation immediata Duccio (chiamata + email URGENTE)
+14. **NO MIGRAZIONE SERVER CLIENTE** (futura, post acquisizione hosting cliente):
+    - Migrazione droplet Adsolut DO → server cliente definitivo = Duccio dev ops only
+    - Scope migrazione: rsync server-to-server + DB dump/restore + DNS swap + SSL regen + nginx setup
+    - Trigger: comunicazione cliente acquisizione hosting proprio
+    - Elena post-migrazione: continua workflow standard con SSH config + secrets aggiornati
+    - Production routine (deploy ordinary post-cut DNS switch a `studiolegalesaltelli.it` ma sempre droplet Adsolut):
+      Elena gestisce in autonomia, stessa procedura di staging (target host = droplet Adsolut)
+    - Se vedi un bug LIVE in production con regressione critica (sito sembra rotto) →
+      NON tentare fix in autonomia, escalation immediata Duccio (chiamata + email URGENTE)
 15. NO `rsync --delete` su path che possa toccare `/var/www/saltelli/wp-content/uploads/` o `/var/www/saltelli/wp-content/plugins/` (path safe: solo `/wp-content/themes/saltelli/`)
 16. NO `ssh deploy@... "rm -rf ..."` con path non specifico
 17. NO modifica nginx config (`/etc/nginx/*`) sul droplet

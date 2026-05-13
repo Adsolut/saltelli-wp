@@ -68,24 +68,46 @@ Custom WordPress theme deliberatamente differenziato, AI-ready, performance-obse
 
 ## Workflow rules (orchestratore ↔ Claude Code)
 
-### Pattern attori (3 sessioni possibili, 2026-05-13)
+### Pattern attori (fase corrente vs fase futura, 2026-05-13)
+
+**Fase corrente (Elena owner full lifecycle, droplet Adsolut DO)**:
 ```
-┌─ Orchestratore Duccio (Claude in chat, su Claude.ai/Cowork)
-│   └─ pianifica wave, scrive prompt Code, audita, decide cut produzione
-│   └─ commits: docs/*, prompts/*, .claude/knowledge/*, CLAUDE.md, README.md
-│   └─ deploy: production (post DNS switch) — esclusiva
+┌─ Code Elena (orchestratrice junior + Code dev pair, sessione terminale)
+│   └─ ciclo end-to-end: identifica bug visivo → fix → branch feat/elena-fix-{nome}
+│       → merge no-ff main → version bump → push origin + tag → rsync deploy staging
+│       → OPcache + WP cache flush → smoke 5 URL → notifica informativa Duccio (Step 12)
+│   └─ commits: wp-content/themes/saltelli/* via Adsolut shared git identity
+│       (audit via prefix `feat(elena-fix):` + branch name + body note "Autore: Elena Cappabianca")
+│   └─ deploy: staging droplet Adsolut DO `178.62.207.50` autonomo
+│   └─ post-cut DNS switch staging→prod (futuro, ancora Adsolut droplet): Elena gestisce production routine
 │
-├─ Code Duccio (sessione dedicata terminale)
-│   └─ esegue prompt orchestratore, lavora in branch dedicato feat/{nome}
-│   └─ commits: wp-content/themes/saltelli/*, scripts/*
-│   └─ deploy: production (post-cut) — coordinato con orchestratore Duccio
+└─ Duccio out-of-the-loop (operational standby)
+    └─ informato via notifica Step 12 (no required action)
+    └─ disponibile per:
+        - Crisis BLOCKER (sito giù, regressione critica post-deploy Elena)
+        - Decisioni strategiche (cut produzione, nuove wave grosse, design changes)
+        - Wave grosse backlog (6.0 full, 6.1 SCF cleanup, P11 contatti, 5.1 Image, single-post JSX)
+        - Escalation Elena su file VIETATI / DB ops / production touch
+```
+
+**Fase futura (migrazione server cliente definitivo)**:
+```
+┌─ Duccio dev ops specialist (rientro on-demand)
+│   └─ migrazione droplet Adsolut DO → server definitivo cliente (hosting cliente proprio:
+│       probabilmente Aruba/Register/altro acquisito da Studio Legale Saltelli)
+│   └─ scope migrazione:
+│        - rsync /var/www/saltelli → server cliente
+│        - dump + restore DB
+│        - DNS A-record swap definitivo
+│        - SSL Let's Encrypt regen su server cliente
+│        - nginx config + PHP-FPM + WP install verify
+│        - SSL renewal cron + monitoring + backup policy
+│   └─ trigger: cliente acquisisce hosting proprio + comunica a Adsolut
 │
-└─ Code Elena (sessione dedicata terminale post-onboarding 2026-05-13)
-    └─ orchestratrice junior + Code dev pair
-    └─ identifica bug visivi → fix → branch feat/elena-fix-{nome} → merge no-ff main → deploy
-    └─ commits: wp-content/themes/saltelli/* via Adsolut shared git identity (audit via prefix commit message + branch name)
-    └─ deploy: STAGING ONLY autonomo (rsync + OPcache + smoke)
-    └─ deploy production: ❌ MAI, escalation Duccio
+└─ Elena continua workflow standard post-migrazione
+    └─ SSH config + secrets aggiornati con nuove credenziali server cliente
+    └─ deploy rsync continua identico (solo target host cambia)
+    └─ Duccio fornisce nuovo `.saltelli-prod-secrets` via vault
 ```
 
 ### One-writer-at-a-time (HARD RULE)
