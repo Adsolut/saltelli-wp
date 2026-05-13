@@ -81,18 +81,26 @@ $cta_default_url     = saltelli_option('cta_default_url', $hero_cta_url);
 $cta_default_label   = saltelli_option('cta_default_label', $hero_cta_label);
 $cta_subline_italic  = (string) saltelli_option('cta_subline_italic', '');
 
-// 19 aree — WP_Query CPT competenza, tier-1 first, poi menu_order, poi title.
-// Wave 4.6: use is_tier_1 (Wave 1 ACF schema canonico).
+// Aree CPT competenza — Elena fix 2026-05-13: query "pulita" senza meta_key per
+// evitare INNER JOIN su postmeta (WP gotcha: meta_key + orderby=meta_value_num
+// esclude i post che non hanno quel meta salvato → competenze create da admin con
+// checkbox is_tier_1 mai toccato sparivano dalla home). Sort tier-1-first PHP-side.
 $competenze = get_posts([
     'post_type'   => 'competenza',
     'numberposts' => -1,
-    'meta_key'    => 'is_tier_1',
-    'orderby'     => [
-        'meta_value_num' => 'DESC',
-        'menu_order'     => 'ASC',
-        'title'          => 'ASC',
-    ],
+    'orderby'     => ['menu_order' => 'ASC', 'title' => 'ASC'],
 ]);
+if (!empty($competenze)) {
+    usort($competenze, function ($a, $b) {
+        $at = (int) get_post_meta($a->ID, 'is_tier_1', true) ? 1 : 0;
+        $bt = (int) get_post_meta($b->ID, 'is_tier_1', true) ? 1 : 0;
+        if ($at !== $bt) return $bt - $at;
+        $am = (int) $a->menu_order;
+        $bm = (int) $b->menu_order;
+        if ($am !== $bm) return $am - $bm;
+        return strcmp((string) $a->post_title, (string) $b->post_title);
+    });
+}
 // fallback: se nessuna competenza creata, lista dummy mostra solo CTA.
 
 // 4 lawyers
@@ -123,6 +131,33 @@ if (is_array($tipo_terms) && !is_wp_error($tipo_terms)) {
 $default_filter_slug = (!empty($tipo_terms) && isset($tipo_terms[0]->slug))
     ? $tipo_terms[0]->slug
     : 'privati';
+
+// Elena fix 2026-05-13: numerazione per-cluster (evita "buca" 02, …, 06, 08…).
+// Pre-fix: $i globale 1..N nel loop render; il filtro JS nascondeva item non-matching →
+// numeri saltati nel tab attivo. Post-fix: ogni cluster ha indice locale 01..N e total
+// proprio. Mappa pre-calcolata qui per usarla 1:1 nel render.
+$canonical_clusters_h = ['privati', 'imprese', 'contenzioso-amministrativo'];
+$cluster_counts_h     = array_fill_keys($canonical_clusters_h, 0);
+$cluster_running_h    = array_fill_keys($canonical_clusters_h, 0);
+$cluster_index_map_h  = []; // post_id => ['num' => '01', 'total' => '12']
+foreach ($competenze as $p) {
+    $cs = saltelli_competenza_category_slug($p->ID);
+    if (!in_array($cs, $canonical_clusters_h, true)) {
+        $cs = $default_filter_slug;
+    }
+    $cluster_counts_h[$cs] = ($cluster_counts_h[$cs] ?? 0) + 1;
+}
+foreach ($competenze as $p) {
+    $cs = saltelli_competenza_category_slug($p->ID);
+    if (!in_array($cs, $canonical_clusters_h, true)) {
+        $cs = $default_filter_slug;
+    }
+    $cluster_running_h[$cs] = ($cluster_running_h[$cs] ?? 0) + 1;
+    $cluster_index_map_h[$p->ID] = [
+        'num'   => str_pad((string) $cluster_running_h[$cs], 2, '0', STR_PAD_LEFT),
+        'total' => str_pad((string) ($cluster_counts_h[$cs] ?? 0), 2, '0', STR_PAD_LEFT),
+    ];
+}
 
 $cases = saltelli_homepage_cases();
 $press = saltelli_press_outlets();
@@ -210,10 +245,7 @@ $press = saltelli_press_outlets();
             <div class="sl-areas__list">
                 <?php
                 if (!empty($competenze)) :
-                    $i = 0;
                     foreach ($competenze as $p) :
-                        $i++;
-                        $num = str_pad((string) $i, 2, '0', STR_PAD_LEFT);
                         $cat_slug  = saltelli_competenza_category_slug($p->ID);
                         $cat_label = saltelli_competenza_category_label($p->ID);
                         // Wave-Q fix #4: rimosso tab "Tutte" → orfani (cat vuota) o non-canonici
@@ -221,6 +253,9 @@ $press = saltelli_press_outlets();
                         if (!in_array($cat_slug, ['privati', 'imprese', 'contenzioso-amministrativo'], true)) {
                             $cat_slug = $default_filter_slug;
                         }
+                        // Elena fix 2026-05-13: num/total per-cluster da mappa pre-calcolata.
+                        $num         = isset($cluster_index_map_h[$p->ID]) ? $cluster_index_map_h[$p->ID]['num']   : '01';
+                        $num_total_h = isset($cluster_index_map_h[$p->ID]) ? $cluster_index_map_h[$p->ID]['total'] : '01';
                         // Wave 4.6: use is_tier_1 (Wave 1 ACF schema canonico).
                         $is_tier_1 = (bool) saltelli_field('is_tier_1', $p->ID, false);
                         $lead      = (string) saltelli_field('lead_breve', $p->ID, '');
@@ -237,7 +272,7 @@ $press = saltelli_press_outlets();
                            data-area-cat="<?php echo esc_attr($cat_slug); ?>"
                            data-area-lead="<?php echo esc_attr($lead); ?>"
                            data-area-label="<?php echo esc_attr($cat_label ?: ($is_tier_1 ? 'Tier 1' : 'Tier 2')); ?>">
-                            <span class="sl-area__num sl-mono"><?php echo esc_html($num); ?> / <?php echo esc_html(str_pad((string) count($competenze), 2, '0', STR_PAD_LEFT)); ?></span>
+                            <span class="sl-area__num sl-mono"><?php echo esc_html($num); ?> / <?php echo esc_html($num_total_h); ?></span>
                             <span class="sl-area__title"><?php echo esc_html(get_the_title($p)); ?></span>
                             <span class="sl-area__meta sl-mono">
                                 <?php // Wave-Q fix #18: label uniforme via helper centralizzato. ?>
