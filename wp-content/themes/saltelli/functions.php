@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.26-elena-fixes-hover-menu-mega');
+define('SALTELLI_THEME_VERSION', '1.3.27-elena-fix-mega-menu-style');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
