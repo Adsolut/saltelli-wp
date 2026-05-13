@@ -48,7 +48,7 @@ $saltelli_brand_payoff = (string) saltelli_option('brand_payoff', 'Diritto, con 
                 'container'      => false,
                 'menu_class'     => 'sl-header__menu',
                 'fallback_cb'    => 'saltelli_header_menu_fallback',
-                'depth'          => 2,
+                'depth'          => 3,
             ]);
             ?>
         </nav>
@@ -83,7 +83,7 @@ $saltelli_brand_payoff = (string) saltelli_option('brand_payoff', 'Diritto, con 
             'container'      => false,
             'menu_class'     => 'sl-header__mobile-menu',
             'fallback_cb'    => 'saltelli_header_menu_fallback',
-            'depth'          => 2,
+            'depth'          => 3,
         ]);
         ?>
         <div class="sl-header__mobile-foot">
