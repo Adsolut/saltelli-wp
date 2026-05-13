@@ -424,14 +424,16 @@ $press = saltelli_press_outlets();
     </div>
 </section>
 
+<?php /* Elena fix 2026-05-13: §05 ora "Recensioni Google" placeholder — integrazione
+       reale (API Places vs SCF manuale) da decidere quando Elena ha accessi
+       Google Cloud / Place ID. Rimosse 6 voci press: Il Mattino, La Repubblica,
+       Il Sole 24 Ore, Diritto.it, Altalex, Camera Avvocati Napoli. */ ?>
 <section class="sl-press" aria-labelledby="press-h">
     <div class="sl-container">
         <div class="sl-press__inner">
-            <div class="sl-mono sl-press__label" id="press-h"><?php echo esc_html(saltelli_page_field('home_press_eyebrow', '§ 05 — Parlano di noi')); ?></div>
+            <div class="sl-mono sl-press__label" id="press-h"><?php echo esc_html(saltelli_page_field('home_press_eyebrow', '§ 05 — Recensioni')); ?></div>
             <ul class="sl-press__outlets">
-                <?php foreach ($press as $p) : ?>
-                    <li class="sl-press__outlet"><?php echo esc_html($p); ?></li>
-                <?php endforeach; ?>
+                <li class="sl-press__outlet"><?php esc_html_e('Recensioni Google', 'saltelli'); ?></li>
             </ul>
         </div>
     </div>
