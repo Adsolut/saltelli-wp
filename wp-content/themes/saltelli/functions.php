@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.35-elena-fix-contact-compact');
+define('SALTELLI_THEME_VERSION', '1.3.36-elena-fix-menu-hover-l1-clickable');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
