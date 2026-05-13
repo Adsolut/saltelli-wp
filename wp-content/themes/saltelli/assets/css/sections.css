@@ -8975,10 +8975,14 @@ html:not(.js-reveal-ready) .sl-archive-casi__h1 .sl-word {
    (x=444). Allineamento "linea di impaginazione" delle sezioni pagina.
    ─────────────────────────────────────────────────────────────── */
 @media (min-width: 1024px) {
-    /* Pre-CTA: 3fr/9fr · eyebrow LEFT · h2+p+action RIGHT (display:contents trick) */
+    /* Pre-CTA: 3fr/9fr · eyebrow LEFT · h2+p+action RIGHT (display:contents trick).
+       Elena fix 2026-05-13: split gap unico 64 → column-gap 64 (orizzontale) +
+       row-gap 16 (verticale h2/p/action era 64, troppo spazio). margin-top
+       action 32 → 8 (ulteriore compressione). */
     .sl-foot-cta {
         grid-template-columns: 3fr 9fr !important;
-        gap: 64px !important;
+        column-gap: 64px !important;
+        row-gap: 16px !important;
         align-items: start !important;
     }
     .sl-foot-precta__lede {
@@ -8999,7 +9003,7 @@ html:not(.js-reveal-ready) .sl-archive-casi__h1 .sl-word {
     .sl-foot-precta__action {
         grid-column: 2 !important;
         grid-row: 3 !important;
-        margin-top: 32px !important;
+        margin-top: 8px !important;
         align-self: start;
     }
 }
