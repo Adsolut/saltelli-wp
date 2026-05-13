@@ -133,6 +133,56 @@
       document.documentElement.dataset.slMenuEscBound = '1';
     }
 
+    // Elena fix 2026-05-13: Desktop mega-menu click-to-open (≥1024).
+    // L1 con figli → click toggla .is-open sul parent <li>; CSS apre il mega panel
+    // (grid colonne L2 + L3 inline). Click outside / Esc chiudono. Su <1024 il
+    // bind sotto (mobile accordion) prende il sopravvento — i due check
+    // matchMedia('(min-width: 1024px)') sono mutuamente esclusivi.
+    const headerMenu = document.querySelector('.sl-header__menu');
+    if (headerMenu && !headerMenu.dataset.slMegaBound) {
+      const desktopMQ = window.matchMedia('(min-width: 1024px)');
+      const l1Parents = headerMenu.querySelectorAll(':scope > .menu-item-has-children');
+
+      const closeAllMega = () => {
+        l1Parents.forEach((p) => {
+          p.classList.remove('is-open');
+          const a = p.querySelector(':scope > a');
+          if (a) a.setAttribute('aria-expanded', 'false');
+        });
+      };
+
+      l1Parents.forEach((parent) => {
+        const link = parent.querySelector(':scope > a');
+        if (!link) return;
+        link.setAttribute('aria-haspopup', 'true');
+        link.setAttribute('aria-expanded', 'false');
+        link.addEventListener('click', (e) => {
+          if (!desktopMQ.matches) return; // mobile: lascia gestire all'accordion sotto
+          e.preventDefault();
+          const wasOpen = parent.classList.contains('is-open');
+          closeAllMega();
+          if (!wasOpen) {
+            parent.classList.add('is-open');
+            link.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      // Click outside chiude (solo desktop)
+      document.addEventListener('click', (e) => {
+        if (!desktopMQ.matches) return;
+        if (!e.target.closest('.sl-header__menu')) closeAllMega();
+      });
+
+      // Esc chiude (solo desktop — mobile drawer Esc già gestito sopra)
+      document.addEventListener('keydown', (e) => {
+        if (!desktopMQ.matches) return;
+        if (e.key === 'Escape') closeAllMega();
+      });
+
+      headerMenu.dataset.slMegaBound = '1';
+    }
+
     // Accordion submenu: voci parent con figli → toggla submenu, non navigano.
     // Solo entro il drawer mobile (.sl-header__mobile), per evitare interferenze con desktop.
     if (mobileMenu && !mobileMenu.dataset.slSubmenuBound) {

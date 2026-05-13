@@ -1893,21 +1893,9 @@ html:not(.js-reveal-ready) [data-reveal] {
     color: var(--accent);
 }
 
-/* Elena fix 2026-05-13 — Menu livello 3 (flyout laterale a destra)
-   Trigger: wp_nav_menu depth=3 in header.php → sotto-sotto-menu emessi come
-   .sub-menu annidata in .sub-menu. Senza override si sovrapporrebbero al L2
-   (entrambi position:absolute top:100% left:0). Posiziono il L3 a destra del
-   suo parent L2 (top:0 left:100%), pattern Mac-style flyout. */
-.sl-header__nav .sub-menu .menu-item-has-children > a::after {
-    content: " →";
-}
-.sl-header__nav .sub-menu .sub-menu {
-    top: 0;
-    left: 100%;
-    margin-left: -1px; /* sovrapposizione del border per attacco visivo continuo */
-}
-
-/* Mobile / tablet: stack inline, no overlay positioning */
+/* Mobile / tablet: stack inline, no overlay positioning
+   (sl-header__nav desktop nav è display:none su <1024, quindi queste regole
+   sono di fatto inattive — kept per safety in caso di override flex su mobile.) */
 @media (max-width: 1023px) {
     .sl-header__nav .menu-item-has-children > a::after {
         content: "";
@@ -1921,12 +1909,96 @@ html:not(.js-reveal-ready) [data-reveal] {
         background: transparent;
         min-width: 0;
     }
-    /* Elena fix 2026-05-13 — L3 mobile: extra indent per gerarchia visibile */
-    .sl-header__nav .sub-menu .sub-menu {
+}
+
+/* Elena fix 2026-05-13 — Mega-menu desktop click-to-open (≥1024)
+   Supersede PR #3 flyout L3. Click su L1 con figli (binding JS in main.js
+   bindDesktopMegaMenu) toggla .is-open → pannello mega panoramico full
+   container width, L2 = column headers, L3 stacked inline sotto come lista.
+   Mobile drawer (.sl-header__mobile-menu) invariato. */
+@media (min-width: 1024px) {
+    /* Anchor: .sl-header__inner relative per dare contesto al mega panel */
+    .sl-header__inner { position: relative; }
+    /* L1 NON anchor: position:static così il sub-menu absolute si ancora
+       all'inner (full container width invece di larghezza voce L1) */
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children {
+        position: static;
+    }
+
+    /* Disabilita hover/focus-within trigger del L1 — solo click */
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:hover > .sub-menu,
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:focus-within > .sub-menu {
+        display: none;
+    }
+
+    /* Mega panel visibile solo su .is-open */
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 32px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: auto;
+        max-width: var(--container-max);
+        margin: 0 auto;
+        padding: 32px 40px;
+        background: var(--background);
+        border: 1px solid var(--border);
+        box-shadow: 0 12px 48px rgba(27, 43, 75, 0.1);
+        z-index: 100;
+        min-width: 0;
+    }
+
+    /* L2 = column: header style + L3 list sotto */
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu > li {
+        display: flex;
+        flex-direction: column;
+    }
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu > li > a {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--primary);
+        padding: 0 0 8px 0;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 12px;
+        white-space: normal;
+    }
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu > li > a::after {
+        content: ""; /* niente freccia per i column header L2 */
+    }
+
+    /* L3 inline lista — override dell'absolute default */
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu .sub-menu {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
         top: auto;
         left: auto;
-        margin-left: 0;
-        padding-left: 16px; /* indent ulteriore rispetto al L2 */
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+        min-width: 0;
+    }
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu .sub-menu a {
+        font-size: 14px;
+        color: var(--text);
+        padding: 4px 0;
+        white-space: normal;
+    }
+
+    /* L1 chevron ruota su .is-open */
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children > a::after {
+        display: inline-block;
+        transition: transform var(--dur-fast, 200ms) ease;
+    }
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > a::after {
+        transform: rotate(180deg);
     }
 }
 
