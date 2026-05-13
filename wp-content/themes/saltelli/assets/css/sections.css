@@ -1957,12 +1957,15 @@ html:not(.js-reveal-ready) [data-reveal] {
         min-width: 0;
     }
     /* L2 = column: larghezza naturale (flex item) + display flex column per L2 header + L3 list.
-       Elena fix 2026-05-13: passato da Playfair 18px (troppo dramatico) a
-       DM Sans 14px 700 — più sobrio, in linea con la grafica del menu.
-       min/max-width: colonne compatte, no stretch full-container. */
+       Elena fix 2026-05-13:
+       - DM Sans 14px 700 (era Playfair 18 troppo dramatico)
+       - align-items flex-start + text-align left: L3 sotto-voci allineate al
+         left edge del titolo L2 (era visualmente centrate per default stretch). */
     .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu > li {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
         flex: 0 0 auto;
         min-width: 180px;
         max-width: 240px;
@@ -1977,6 +1980,8 @@ html:not(.js-reveal-ready) [data-reveal] {
         margin-bottom: 10px;
         white-space: normal;
         letter-spacing: 0;
+        text-align: left;
+        align-self: stretch; /* l'underline va a tutta la column width per visual separator */
     }
     .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu > li > a::after {
         content: ""; /* niente freccia per i column header L2 */
@@ -1987,6 +1992,7 @@ html:not(.js-reveal-ready) [data-reveal] {
         position: static;
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
         gap: 6px;
         top: auto;
         left: auto;
@@ -1996,12 +2002,19 @@ html:not(.js-reveal-ready) [data-reveal] {
         background: transparent;
         box-shadow: none;
         min-width: 0;
+        width: 100%; /* match column width per left-align stabile */
+    }
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu .sub-menu li {
+        width: 100%;
+        text-align: left;
     }
     .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu .sub-menu a {
         font-size: 14px;
         color: var(--text);
         padding: 4px 0;
         white-space: normal;
+        text-align: left;
+        display: block;
     }
 
     /* L1 chevron ruota su .is-open */

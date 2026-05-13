@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.29-elena-fix-mega-menu-center-space');
+define('SALTELLI_THEME_VERSION', '1.3.30-elena-fix-mega-menu-left-align-text');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
