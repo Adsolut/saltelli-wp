@@ -783,8 +783,9 @@
  * 7. PRESS — Earned media strip
  * ========================================================= */
 .sl-press {
-  /* v0.17.2 — armonizzato a 56px mobile (era 48) per rhythm cross-section */
-  padding-block: 56px;
+  /* Elena fix 2026-05-13: padding ridotto 56→32 mobile (sezione ora placeholder
+     "Recensioni Google", non più 6 voci press) per chiudere il vuoto sopra/sotto. */
+  padding-block: 32px;
   background: var(--surface);
 }
 .sl-press__inner {
@@ -806,7 +807,7 @@
 }
 
 @media (min-width: 1024px) {
-  .sl-press { padding-block: 80px; /* v0.17.2 armonizzato a 80 desktop */ }
+  .sl-press { padding-block: 48px; /* Elena fix 2026-05-13: 80→48 desktop, sezione ora placeholder */ }
   .sl-press__inner {
     display: flex;
     align-items: center;

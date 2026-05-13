@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.31-elena-fix-whatsapp-fab');
+define('SALTELLI_THEME_VERSION', '1.3.32-elena-fix-press-to-reviews-placeholder');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
