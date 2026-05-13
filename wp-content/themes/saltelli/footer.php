@@ -2,7 +2,7 @@
 /**
  * Footer System v2 — 4 fasce editoriali (replicato da saltelli-s2-footer.jsx).
  *
- *   Fascia 1: § Ultima chiamata · pre-footer CTA (cream surface, asimm 8/4)
+ *   Fascia 1: § Contattaci · pre-footer CTA (cream surface, asimm 8/4) [rename Elena 2026-05-13, era "§ Ultima chiamata"]
  *   Fascia 2: Main 4-col (brand · aree · studio · info istituzionali) on navy
  *   Fascia 3: Newsletter "L'editoriale del giovedì" (Brevo legacy form)
  *   Fascia 4: Bottom legal (copy + privacy/cookie/note + Adsolut credit)
@@ -104,7 +104,7 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
     <div class="sl-foot-precta__inner">
         <div class="sl-foot-cta">
             <div class="sl-foot-precta__lede">
-                <div class="sl-mono sl-foot-precta__eyebrow"><?php esc_html_e('§ Ultima chiamata', 'saltelli'); ?></div>
+                <div class="sl-mono sl-foot-precta__eyebrow"><?php esc_html_e('§ Contattaci', 'saltelli'); ?></div>
                 <h2 class="sl-foot-precta__h2" id="precta-h">
                     <?php esc_html_e('Vorresti raccontarci', 'saltelli'); ?><br>
                     <?php esc_html_e('la tua pratica?', 'saltelli'); ?>
