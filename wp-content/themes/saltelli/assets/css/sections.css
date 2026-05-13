@@ -1148,7 +1148,7 @@ html.sl-menu-open body { overflow: hidden; }
   overflow: hidden;
   transition: max-height 280ms var(--ease-editorial, ease);
 }
-.sl-header__mobile-menu .menu-item-has-children.is-open > .sub-menu {
+.sl-header__mobile-menu .menu-item-has-children:is(:hover, :focus-within, .is-open) > .sub-menu {
   max-height: 600px; /* generoso per 3-5 figli; clamp tramite overflow:hidden del drawer */
 }
 .sl-header__mobile-menu .sub-menu li {
@@ -1957,9 +1957,7 @@ html:not(.js-reveal-ready) [data-reveal] {
        Ora L1 anchor naviga nativamente al click; mouse hover apre overlay
        (desktop pointer fine); Tab+focus apre via :focus-within (a11y kbd).
        flexbox + colonne centrate, gap 80px, padding 40×48. */
-    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:hover > .sub-menu,
-    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:focus-within > .sub-menu,
-    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu {
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:is(:hover, :focus-within, .is-open) > .sub-menu {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -1985,7 +1983,7 @@ html:not(.js-reveal-ready) [data-reveal] {
        - DM Sans 14px 700 (era Playfair 18 troppo dramatico)
        - align-items flex-start + text-align left: L3 sotto-voci allineate al
          left edge del titolo L2 (era visualmente centrate per default stretch). */
-    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu > li {
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:is(:hover, :focus-within, .is-open) > .sub-menu > li {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -1994,7 +1992,7 @@ html:not(.js-reveal-ready) [data-reveal] {
         min-width: 180px;
         max-width: 240px;
     }
-    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu > li > a {
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:is(:hover, :focus-within, .is-open) > .sub-menu > li > a {
         font-family: var(--font-body);
         font-size: 14px;
         font-weight: 700;
@@ -2007,12 +2005,12 @@ html:not(.js-reveal-ready) [data-reveal] {
         text-align: left;
         align-self: stretch; /* l'underline va a tutta la column width per visual separator */
     }
-    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu > li > a::after {
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:is(:hover, :focus-within, .is-open) > .sub-menu > li > a::after {
         content: ""; /* niente freccia per i column header L2 */
     }
 
     /* L3 inline lista — override dell'absolute default */
-    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu .sub-menu {
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:is(:hover, :focus-within, .is-open) > .sub-menu .sub-menu {
         position: static;
         display: flex;
         flex-direction: column;
@@ -2028,11 +2026,11 @@ html:not(.js-reveal-ready) [data-reveal] {
         min-width: 0;
         width: 100%; /* match column width per left-align stabile */
     }
-    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu .sub-menu li {
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:is(:hover, :focus-within, .is-open) > .sub-menu .sub-menu li {
         width: 100%;
         text-align: left;
     }
-    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > .sub-menu .sub-menu a {
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:is(:hover, :focus-within, .is-open) > .sub-menu .sub-menu a {
         font-size: 14px;
         color: var(--text);
         padding: 4px 0;
@@ -2046,9 +2044,7 @@ html:not(.js-reveal-ready) [data-reveal] {
         display: inline-block;
         transition: transform var(--dur-fast, 200ms) ease;
     }
-    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:hover > a::after,
-    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:focus-within > a::after,
-    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > a::after {
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:is(:hover, :focus-within, .is-open) > a::after {
         transform: rotate(180deg);
     }
 
