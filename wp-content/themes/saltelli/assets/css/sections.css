@@ -2041,13 +2041,33 @@ html:not(.js-reveal-ready) [data-reveal] {
         display: block;
     }
 
-    /* L1 chevron ruota su .is-open */
+    /* L1 chevron ruota su hover / focus / is-open */
     .sl-header__nav > ul.sl-header__menu > .menu-item-has-children > a::after {
         display: inline-block;
         transition: transform var(--dur-fast, 200ms) ease;
     }
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:hover > a::after,
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children:focus-within > a::after,
     .sl-header__nav > ul.sl-header__menu > .menu-item-has-children.is-open > a::after {
         transform: rotate(180deg);
+    }
+
+    /* Elena fix 2026-05-13: hover-bridge pseudo-element.
+       Problema: tra il bottom del L1 anchor e il top:100% del mega panel c'è un
+       gap di ~20px (padding-bottom di .sl-header__inner). Mouse che attraversa
+       il gap esce dal :hover del li → panel scompare.
+       Fix: ::before invisibile sul panel che si estende SOPRA per coprire il gap.
+       Il ::before è figlio del panel (che è figlio del li), quindi tenerlo
+       "hoverato" tiene :hover sul li → panel resta aperto. Pseudo non renderizzato
+       quando panel è display:none → bridge attivo solo quando serve. */
+    .sl-header__nav > ul.sl-header__menu > .menu-item-has-children > .sub-menu::before {
+        content: "";
+        position: absolute;
+        top: -32px;
+        left: 0;
+        right: 0;
+        height: 32px;
+        /* trasparente, solo hit area */
     }
 }
 
