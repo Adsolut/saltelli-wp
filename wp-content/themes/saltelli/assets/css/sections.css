@@ -1399,6 +1399,11 @@ html.sl-menu-open body { overflow: hidden; }
 .sl-team__portrait {
   display: block;
   aspect-ratio: 3 / 4;
+  /* Elena fix 2026-05-13: max-width per evitare che la portrait stiri all'intera
+     colonna grid (era ~480px desktop, troppo grande). Limito a 280 mobile, 340
+     desktop tramite override @media più sotto. */
+  max-width: 280px;
+  width: 100%;
   background: linear-gradient(135deg, #c8c5be 0%, #6e6c66 100%);
   margin-bottom: 16px;
   position: relative;
@@ -1475,7 +1480,8 @@ html.sl-menu-open body { overflow: hidden; }
   .sl-team__lawyer:nth-child(2) { grid-column: 7 / span 5; margin-top: 96px; }
   .sl-team__lawyer:nth-child(3) { grid-column: 2 / span 5; margin-top: 64px; }
   .sl-team__lawyer:nth-child(4) { grid-column: 8 / span 4; margin-top: 32px; }
-  .sl-team__portrait { margin-bottom: 24px; }
+  /* Elena fix 2026-05-13: portrait max-width desktop ridotta (era full column ~480px) */
+  .sl-team__portrait { margin-bottom: 24px; max-width: 340px; }
   .sl-team__role { margin-bottom: 8px; font-size: var(--fs-micro); }
   .sl-team__name { font-size: 36px; margin-bottom: 16px; }
   .sl-team__specs { gap: 8px; }
