@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.23-rollback-the-content-filter');
+define('SALTELLI_THEME_VERSION', '1.3.24-wave-6-0-partial-stabilized');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
