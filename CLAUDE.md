@@ -17,13 +17,15 @@ Custom WordPress theme deliberatamente differenziato, AI-ready, performance-obse
 
 **Strategy:** "Legal Luxury Minimal" — boutique editoriale italiano, tipografia dominante, palette navy/crema/bronzo. Tier-1 deep clusters: Tributario · Lavoro · Famiglia LGBTQ+. Le altre 16 practice areas → tier-2 lighter pages.
 
-## Current state — v1.3.24-wave-6-0-partial-stabilized (CUT-READY)
+## Current state — v1.3.25-fix-home-areas-numerazione (CUT-READY)
 
-**Updated:** 2026-05-13 · **Branch:** `main` · last merge `d93b50a` (rollback template v1.3.23) · prev merge `9b5221c` (Wave 6.0 partial v1.3.22) · sanitize DB ops eseguito post-rollback (no commit codice, solo DB staging) · ~46 commit post-v1.3.13
+**Updated:** 2026-05-13 · **Branch:** `main` · last merge `d186262` (Elena fix #1 v1.3.25) · prev merge `d93b50a` (rollback template v1.3.23) · prev merge `9b5221c` (Wave 6.0 partial v1.3.22) · ~48 commit post-v1.3.13
 
 **Status:**
 - Demo ✅ presentata · feedback Elena 23 punti triage: 18 chiusi + 1 pre-batch + 1 zero-code deferred + 3 defer post-cut
-- Staging `https://staging.studiolegalesaltelli.it` allineato v1.3.23 template rollback
+- Wave Elena post-onboarding fix #1 (2026-05-13): primo contributo Elena via Code session autonoma — branch `feat/elena-fix-home-areas-numerazione-cluster` (`55e35b7`) → merge no-ff in `d186262` → tag `v1.3.25-fix-home-areas-numerazione`
+- Fix homepage §01 Aree: numerazione per-cluster coerente (era globale sequenziale, "buca" 02,06,08…) + visibilità competenze tier-2 orphan (rimosso INNER JOIN gotcha `meta_key=is_tier_1 + orderby=meta_value_num`, sort tier-1-first ora PHP-side via usort)
+- Staging `https://staging.studiolegalesaltelli.it` allineato v1.3.25
 - 13 Page WP Gutenberg-disabled · 18 Pages canoniche
 - Design Handoff completato 12/12 template · Wave Elena FB Batch 1+2+3 + Wave 6.0 partial COMPLETATI
 - tokens.css rebuilt da DESIGN.md (Wave 5 STEP 2) · sections.css drift cleanup STEP 4 (328 token swaps)
@@ -246,6 +248,6 @@ Rileggi questo file. Se persiste il dubbio, chiedi a Duccio. Don't guess su:
 - Anything che apparirebbe in schema markup come fact
 
 ---
-*Updated: 2026-05-13 · v1.3.24-wave-6-0-partial-stabilized CUT-READY*
+*Updated: 2026-05-13 · v1.3.25-fix-home-areas-numerazione CUT-READY*
 *Storia dettagliata → `docs/CHANGELOG.md` · Pattern operativi → `docs/LESSONS-LEARNED.md`*
 *Maintained by orchestrator dopo ogni milestone.*
