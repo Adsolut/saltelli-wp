@@ -978,9 +978,10 @@
     gap: 64px;
     padding-left: 20%;
   }
-  /* Elena fix 2026-05-14: layout 2-col quando c'è mappa (voci stack sx + mappa dx) */
+  /* Elena fix 2026-05-14: layout 2-col quando c'è mappa (voci stack sx + mappa dx).
+     Revised: mappa "cartolina" 360px max, voci col fluid → mappa NON domina. */
   .sl-contact__grid--with-map {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 360px;
     gap: 48px;
     padding-left: 20%;
     align-items: start;
@@ -1012,10 +1013,13 @@
 .sl-contact__map {
     border: 1px solid var(--border);
     background: var(--surface);
-    aspect-ratio: 4 / 3;
+    /* Elena fix 2026-05-14: aspect 4/3 → 5/3 (più orizzontale, meno alta).
+       max-width 360 desktop per match grid col definita sopra. */
+    aspect-ratio: 5 / 3;
     overflow: hidden;
     position: relative;
     width: 100%;
+    max-width: 360px;
 }
 .sl-contact__map iframe {
     position: absolute;
