@@ -10453,12 +10453,11 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     }
     .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__answer-wrap {
         grid-column: 2;
-        /* Elena fix 2026-05-14 (revised PR #50): grid-row auto metteva box in row 6
-           (sotto col sinistra che ha breadcrumb→eyebrow→title→subtitle). Ora
-           grid-row 1 / span 5 esplicito + align-self center → box centrato
-           verticalmente nell'altezza del col sinistra (allineato visivamente col title). */
-        grid-row: 1 / span 5;
-        align-self: center;
+        /* Elena fix 2026-05-14 (revised x3): allinea top del box col TOP del titolo h1.
+           Markup col 1: row1=breadcrumb · row2=back · row3=eyebrow · row4=title · row5=subtitle
+           Box parte da row 4 (= row del title) → top edges allineati. */
+        grid-row: 4 / span 2;
+        align-self: start;
         margin-top: 0;
     }
     .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__cta-top,
