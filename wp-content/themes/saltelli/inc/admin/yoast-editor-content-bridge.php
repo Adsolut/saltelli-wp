@@ -53,7 +53,11 @@ function saltelli_yoast_editor_bridge_enqueue($hook) {
         return;
     }
 
-    $synthetic_content = saltelli_yoast_build_synthetic_content($post);
+    // v1.3.93: builder unificato (HTTPS loopback + fallback SCF) in
+    // inc/seo/yoast-content-analysis.php — saltelli_yoast_get_content_for_analysis().
+    $synthetic_content = function_exists('saltelli_yoast_get_content_for_analysis')
+        ? saltelli_yoast_get_content_for_analysis($post)
+        : saltelli_yoast_build_synthetic_content($post);
 
     // Empty handle script (inline only) per beneficiare di wp_add_inline_script.
     wp_register_script(
