@@ -10453,11 +10453,13 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     }
     .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__answer-wrap {
         grid-column: 2;
-        /* Elena fix 2026-05-14: grid-row 1/span 6 → auto, align-self end → start
-           → il box prende altezza naturale del content (no stretch a 6 rows del title huge). */
-        grid-row: auto;
-        align-self: start;
-        margin-top: 80px; /* allinea visivamente sotto breadcrumb+eyebrow */
+        /* Elena fix 2026-05-14 (revised PR #50): grid-row auto metteva box in row 6
+           (sotto col sinistra che ha breadcrumb→eyebrow→title→subtitle). Ora
+           grid-row 1 / span 5 esplicito + align-self center → box centrato
+           verticalmente nell'altezza del col sinistra (allineato visivamente col title). */
+        grid-row: 1 / span 5;
+        align-self: center;
+        margin-top: 0;
     }
     .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__cta-top,
     .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__hero-cta,
