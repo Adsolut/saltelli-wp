@@ -517,17 +517,19 @@ $sl_blog_posts = get_posts([
     </div>
 </section>
 
-<?php /* Elena fix 2026-05-13: §06 ora "Recensioni Google" placeholder (era §05 — renumber post-aggiunta §05 Dal blog 2026-05-14) — integrazione
-       reale (API Places vs SCF manuale) da decidere quando Elena ha accessi
-       Google Cloud / Place ID. Rimosse 6 voci press: Il Mattino, La Repubblica,
-       Il Sole 24 Ore, Diritto.it, Altalex, Camera Avvocati Napoli. */ ?>
-<section class="sl-press" aria-labelledby="press-h">
+<?php /* Elena fix 2026-05-14: §05 Recensioni Google — placeholder swappato con widget
+       Elfsight Google Reviews. Script elfsightcdn.com/platform.js caricato via
+       wp_enqueue_script in inc/enqueue.php (async, footer, solo is_front_page()).
+       Il <div class="elfsight-app-{uuid}"> è il mount-point dove la platform.js
+       inietta il widget. data-elfsight-app-lazy attiva il lazy-load Elfsight. */ ?>
+<section class="sl-front-reviews" aria-labelledby="reviews-h">
     <div class="sl-container">
-        <div class="sl-press__inner">
-            <div class="sl-mono sl-press__label" id="press-h"><?php echo esc_html(saltelli_page_field('home_press_eyebrow', '§ 05 — Recensioni')); ?></div>
-            <ul class="sl-press__outlets">
-                <li class="sl-press__outlet"><?php esc_html_e('Recensioni Google', 'saltelli'); ?></li>
-            </ul>
+        <div class="sl-front-reviews__head">
+            <div class="sl-mono sl-front-reviews__label" id="reviews-h"><?php echo esc_html(saltelli_page_field('home_press_eyebrow', '§ 05 — Recensioni')); ?></div>
+        </div>
+        <div class="sl-front-reviews__widget">
+            <!-- Elfsight Google Reviews | Untitled Google Reviews -->
+            <div class="elfsight-app-ff7f7838-3389-49dd-a9e8-6afb12bdbab3" data-elfsight-app-lazy></div>
         </div>
     </div>
 </section>
