@@ -60,10 +60,17 @@ function saltelli_yoast_editor_bridge_enqueue($hook) {
         : saltelli_yoast_build_synthetic_content($post);
 
     // Empty handle script (inline only) per beneficiare di wp_add_inline_script.
+    //
+    // v1.3.97 fix: la dipendenza precedente 'wp-seo-post-scraper' è un handle
+    // INESISTENTE in Yoast attuale (Yoast 25.x usa 'wp-seo-post-edit' per
+    // Gutenberg e 'wp-seo-post-edit-classic' per Classic Editor). Senza
+    // dipendenza valida WP enqueueva ma il timing rispetto a YoastSEO globale
+    // poteva non funzionare. Ora nessuna dep formale: la polling JS aspetta
+    // YoastSEO.app fino a 12s, robusta a qualunque ordine di caricamento.
     wp_register_script(
         'saltelli-yoast-editor-bridge',
         '',
-        ['wp-seo-post-scraper'], // Yoast post analysis script handle
+        [], // no dep — JS polling handles timing
         '1.0',
         true
     );
