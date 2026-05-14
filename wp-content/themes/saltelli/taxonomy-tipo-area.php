@@ -329,14 +329,16 @@ $avatar_html = function ($av_post) {
                     ?>
                     <?php if ($sl_sc_href !== '') : ?>
                         <a class="sl-tipoarea__scenario" href="<?php echo esc_url($sl_sc_href); ?>">
-                            <?php /* Elena fix 2026-05-14: icon priority — image SCF override → glyph fallback */ ?>
+                            <?php /* Elena fix 2026-05-14: icon priority — image SCF override → glyph fallback.
+                                       L'icona è renderizzata come <span> con CSS mask-image: la PNG/SVG
+                                       fa da maschera, l'effective color è --accent (oro). Funziona per PNG
+                                       a sfondo trasparente o SVG. Se l'icona ha bg solido non si rende
+                                       correttamente (Elena: usa PNG trasparenti / SVG line-art). */ ?>
                             <?php if (isset($s['icon']) && is_array($s['icon']) && !empty($s['icon']['url'])) : ?>
-                                <img class="sl-tipoarea__scenario-icon"
-                                     src="<?php echo esc_url($s['icon']['url']); ?>"
-                                     alt="<?php echo esc_attr($s['icon']['alt'] ?: ''); ?>"
-                                     loading="lazy"
-                                     decoding="async"
-                                     aria-hidden="true">
+                                <span class="sl-tipoarea__scenario-icon"
+                                      role="img"
+                                      aria-label="<?php echo esc_attr($s['icon']['alt'] ?: ''); ?>"
+                                      style="--sl-icon-url: url('<?php echo esc_url($s['icon']['url']); ?>')"></span>
                             <?php else : ?>
                                 <span class="sl-tipoarea__scenario-sym" aria-hidden="true"><?php echo esc_html($s['sym']); ?></span>
                             <?php endif; ?>
@@ -346,14 +348,16 @@ $avatar_html = function ($av_post) {
                         </a>
                     <?php else : ?>
                         <article class="sl-tipoarea__scenario">
-                            <?php /* Elena fix 2026-05-14: icon priority — image SCF override → glyph fallback */ ?>
+                            <?php /* Elena fix 2026-05-14: icon priority — image SCF override → glyph fallback.
+                                       L'icona è renderizzata come <span> con CSS mask-image: la PNG/SVG
+                                       fa da maschera, l'effective color è --accent (oro). Funziona per PNG
+                                       a sfondo trasparente o SVG. Se l'icona ha bg solido non si rende
+                                       correttamente (Elena: usa PNG trasparenti / SVG line-art). */ ?>
                             <?php if (isset($s['icon']) && is_array($s['icon']) && !empty($s['icon']['url'])) : ?>
-                                <img class="sl-tipoarea__scenario-icon"
-                                     src="<?php echo esc_url($s['icon']['url']); ?>"
-                                     alt="<?php echo esc_attr($s['icon']['alt'] ?: ''); ?>"
-                                     loading="lazy"
-                                     decoding="async"
-                                     aria-hidden="true">
+                                <span class="sl-tipoarea__scenario-icon"
+                                      role="img"
+                                      aria-label="<?php echo esc_attr($s['icon']['alt'] ?: ''); ?>"
+                                      style="--sl-icon-url: url('<?php echo esc_url($s['icon']['url']); ?>')"></span>
                             <?php else : ?>
                                 <span class="sl-tipoarea__scenario-sym" aria-hidden="true"><?php echo esc_html($s['sym']); ?></span>
                             <?php endif; ?>
