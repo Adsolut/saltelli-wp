@@ -545,19 +545,41 @@ $sl_blog_posts = get_posts([
             </div>
         </div>
 
-        <div class="sl-contact__grid">
-            <div class="sl-contact__item">
-                <div class="sl-mono"><?php esc_html_e('Indirizzo', 'saltelli'); ?></div>
-                <p class="sl-contact__big"><?php echo wp_kses_post(nl2br(esc_html($col_indirizzo))); ?></p>
+        <?php
+        /* Elena fix 2026-05-14: aggiunta mini mappa Google nel §07 Contatti home.
+           Single source of truth: l'iframe è letto da meta map_iframe della page
+           /contatti/ — editor modifica una volta lì, vale per /contatti/ sidebar
+           E homepage §07. */
+        $sl_home_contatti_page = get_page_by_path('contatti');
+        $sl_home_map_iframe = $sl_home_contatti_page
+            ? (string) get_post_meta($sl_home_contatti_page->ID, 'map_iframe', true)
+            : '';
+        $sl_home_map_allowed = ['iframe' => [
+            'src' => true, 'width' => true, 'height' => true, 'style' => true,
+            'allowfullscreen' => true, 'loading' => true, 'referrerpolicy' => true,
+            'frameborder' => true, 'title' => true, 'aria-label' => true,
+        ]];
+        ?>
+        <div class="sl-contact__grid sl-contact__grid--with-map">
+            <div class="sl-contact__items-stack">
+                <div class="sl-contact__item">
+                    <div class="sl-mono"><?php esc_html_e('Indirizzo', 'saltelli'); ?></div>
+                    <p class="sl-contact__big"><?php echo wp_kses_post(nl2br(esc_html($col_indirizzo))); ?></p>
+                </div>
+                <div class="sl-contact__item">
+                    <div class="sl-mono"><?php esc_html_e('Telefono', 'saltelli'); ?></div>
+                    <p class="sl-contact__big"><a href="tel:<?php echo esc_attr($col_tel_e164); ?>"><?php echo esc_html($col_tel); ?></a></p>
+                </div>
+                <div class="sl-contact__item">
+                    <div class="sl-mono"><?php esc_html_e('Email', 'saltelli'); ?></div>
+                    <p class="sl-contact__big"><a href="mailto:<?php echo esc_attr($col_email); ?>"><?php echo esc_html($col_email); ?></a></p>
+                </div>
             </div>
-            <div class="sl-contact__item">
-                <div class="sl-mono"><?php esc_html_e('Telefono', 'saltelli'); ?></div>
-                <p class="sl-contact__big"><a href="tel:<?php echo esc_attr($col_tel_e164); ?>"><?php echo esc_html($col_tel); ?></a></p>
-            </div>
-            <div class="sl-contact__item">
-                <div class="sl-mono"><?php esc_html_e('Email', 'saltelli'); ?></div>
-                <p class="sl-contact__big"><a href="mailto:<?php echo esc_attr($col_email); ?>"><?php echo esc_html($col_email); ?></a></p>
-            </div>
+            <?php if ($sl_home_map_iframe !== '') : ?>
+                <div class="sl-contact__map" aria-label="<?php esc_attr_e('Mappa studio Saltelli — Chiaia, Napoli', 'saltelli'); ?>">
+                    <?php echo wp_kses($sl_home_map_iframe, $sl_home_map_allowed); ?>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div class="sl-contact__cta">
