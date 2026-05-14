@@ -134,9 +134,10 @@ for ($sl_i = 0; $sl_i < 3; $sl_i++) {
     if (!isset($scenari[$sl_i])) {
         continue;
     }
-    $sl_sc_t   = (string) $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_title', '');
-    $sl_sc_d   = (string) $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_desc', '');
-    $sl_sc_url = (string) $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_url', '');
+    $sl_sc_t    = (string) $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_title', '');
+    $sl_sc_d    = (string) $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_desc', '');
+    $sl_sc_url  = (string) $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_url', '');
+    $sl_sc_icon = $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_icon', null);
     if ($sl_sc_t !== '') {
         $scenari[$sl_i]['t'] = $sl_sc_t;
     }
@@ -145,6 +146,9 @@ for ($sl_i = 0; $sl_i < 3; $sl_i++) {
     }
     if ($sl_sc_url !== '') {
         $scenari[$sl_i]['url'] = trim($sl_sc_url);
+    }
+    if (is_array($sl_sc_icon) && !empty($sl_sc_icon['url'])) {
+        $scenari[$sl_i]['icon'] = $sl_sc_icon;
     }
 }
 
@@ -325,14 +329,34 @@ $avatar_html = function ($av_post) {
                     ?>
                     <?php if ($sl_sc_href !== '') : ?>
                         <a class="sl-tipoarea__scenario" href="<?php echo esc_url($sl_sc_href); ?>">
-                            <span class="sl-tipoarea__scenario-sym" aria-hidden="true"><?php echo esc_html($s['sym']); ?></span>
+                            <?php /* Elena fix 2026-05-14: icon priority — image SCF override → glyph fallback */ ?>
+                            <?php if (isset($s['icon']) && is_array($s['icon']) && !empty($s['icon']['url'])) : ?>
+                                <img class="sl-tipoarea__scenario-icon"
+                                     src="<?php echo esc_url($s['icon']['url']); ?>"
+                                     alt="<?php echo esc_attr($s['icon']['alt'] ?: ''); ?>"
+                                     loading="lazy"
+                                     decoding="async"
+                                     aria-hidden="true">
+                            <?php else : ?>
+                                <span class="sl-tipoarea__scenario-sym" aria-hidden="true"><?php echo esc_html($s['sym']); ?></span>
+                            <?php endif; ?>
                             <h3 class="sl-tipoarea__scenario-title"><?php echo esc_html($s['t']); ?></h3>
                             <p class="sl-tipoarea__scenario-desc"><?php echo esc_html($s['d']); ?></p>
                             <span class="sl-mono sl-tipoarea__scenario-leggi"><?php esc_html_e('Leggi', 'saltelli'); ?> <span class="arrow" aria-hidden="true">→</span></span>
                         </a>
                     <?php else : ?>
                         <article class="sl-tipoarea__scenario">
-                            <span class="sl-tipoarea__scenario-sym" aria-hidden="true"><?php echo esc_html($s['sym']); ?></span>
+                            <?php /* Elena fix 2026-05-14: icon priority — image SCF override → glyph fallback */ ?>
+                            <?php if (isset($s['icon']) && is_array($s['icon']) && !empty($s['icon']['url'])) : ?>
+                                <img class="sl-tipoarea__scenario-icon"
+                                     src="<?php echo esc_url($s['icon']['url']); ?>"
+                                     alt="<?php echo esc_attr($s['icon']['alt'] ?: ''); ?>"
+                                     loading="lazy"
+                                     decoding="async"
+                                     aria-hidden="true">
+                            <?php else : ?>
+                                <span class="sl-tipoarea__scenario-sym" aria-hidden="true"><?php echo esc_html($s['sym']); ?></span>
+                            <?php endif; ?>
                             <h3 class="sl-tipoarea__scenario-title"><?php echo esc_html($s['t']); ?></h3>
                             <p class="sl-tipoarea__scenario-desc"><?php echo esc_html($s['d']); ?></p>
                         </article>

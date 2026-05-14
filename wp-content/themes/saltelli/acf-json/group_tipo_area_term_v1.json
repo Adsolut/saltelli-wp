@@ -138,6 +138,19 @@
       "placeholder": "/aree-di-pratica/privati/diritto-di-famiglia/"
     },
     {
+      "key": "field_tat_scenario1_icon",
+      "label": "§ 01 — Scenario 1 · Icona",
+      "name": "tipo_area_term_scenario1_icon",
+      "type": "image",
+      "instructions": "Icona dello scenario 1 (consigliato SVG o PNG trasparente, ~80×80 px). Vuoto = simbolo tipografico predefinito (§).",
+      "default_value": "",
+      "return_format": "array",
+      "preview_size": "thumbnail",
+      "library": "all",
+      "mime_types": "svg,png,jpg,jpeg,webp",
+      "wrapper": {"width": ""}
+    },
+    {
       "key": "field_tat_scenario2_title",
       "label": "§ 01 — Scenario 2 · Titolo",
       "name": "tipo_area_term_scenario2_title",
@@ -169,6 +182,19 @@
       "placeholder": "/aree-di-pratica/privati/diritto-delle-successioni/"
     },
     {
+      "key": "field_tat_scenario2_icon",
+      "label": "§ 01 — Scenario 2 · Icona",
+      "name": "tipo_area_term_scenario2_icon",
+      "type": "image",
+      "instructions": "Icona dello scenario 2. Vuoto = simbolo tipografico predefinito (¶).",
+      "default_value": "",
+      "return_format": "array",
+      "preview_size": "thumbnail",
+      "library": "all",
+      "mime_types": "svg,png,jpg,jpeg,webp",
+      "wrapper": {"width": ""}
+    },
+    {
       "key": "field_tat_scenario3_title",
       "label": "§ 01 — Scenario 3 · Titolo",
       "name": "tipo_area_term_scenario3_title",
@@ -198,6 +224,19 @@
       "default_value": "",
       "wrapper": {"width": ""},
       "placeholder": "/aree-di-pratica/privati/risarcimento-danni/"
+    },
+    {
+      "key": "field_tat_scenario3_icon",
+      "label": "§ 01 — Scenario 3 · Icona",
+      "name": "tipo_area_term_scenario3_icon",
+      "type": "image",
+      "instructions": "Icona dello scenario 3. Vuoto = simbolo tipografico predefinito (†).",
+      "default_value": "",
+      "return_format": "array",
+      "preview_size": "thumbnail",
+      "library": "all",
+      "mime_types": "svg,png,jpg,jpeg,webp",
+      "wrapper": {"width": ""}
     },
     {
       "key": "field_tat_aree_tab",
