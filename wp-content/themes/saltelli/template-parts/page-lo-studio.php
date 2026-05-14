@@ -131,6 +131,18 @@ $sl_plate_has_image = is_array($sl_plate_image) && !empty($sl_plate_image['url']
     <div class="sl-container sl-chi-siamo__lede-grid">
         <div class="sl-mono">§ 01 — <?php esc_html_e('Lede', 'saltelli'); ?></div>
         <div class="sl-chi-siamo__prose sl-chi-siamo__prose--dropcap">
+            <?php
+            /* Elena fix 2026-05-14 — re-inserito render del campo SCF
+               `founding_paragraphs` (era orphan dopo Wave-S fix #12: la
+               sezione §02 "1999" era stata rimossa ma il campo SCF resta
+               in admin con contenuto editato da Elena). Ora viene reso
+               COME PRIMO BLOCCO nel §01 Lede, così la storia 1999 apre
+               il racconto, poi atelier (p1), poi filosofia (p2). */
+            $sl_founding_html = (string) saltelli_field('founding_paragraphs', $sl_lo_studio_pid, '');
+            if ($sl_founding_html !== '') {
+                echo wp_kses_post($sl_founding_html);
+            }
+            ?>
             <p>
                 <?php echo wp_kses_post(saltelli_page_field('lo_studio_lede_p1', "Un atelier di quattro professionisti che da oltre vent'anni accompagna famiglie e imprese di Napoli attraverso le materie di cui si occupa: il diritto tributario di Emiliano, il diritto del lavoro di Fabiana, la tutela LGBTQ+ in materia di famiglia di Antonia, il condominiale e immobiliare di Stefano.")) . "\n            "; ?></p>
             <p>
