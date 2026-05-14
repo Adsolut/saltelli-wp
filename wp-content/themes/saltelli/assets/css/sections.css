@@ -9888,10 +9888,10 @@ h2.sl-casi__cta-title {
 .sl-attorney__bio-prose > p:first-of-type::first-letter,
 .sl-attorney__bio > p:first-of-type::first-letter,
 .sl-page__prose > p:first-of-type::first-letter,
-/* Elena fix 2026-05-14: drop-cap RIMOSSO da .sl-competenza__prose perché
-   content body può iniziare con caratteri non-letterali ("01.", "(", numeri)
-   → drop-cap su digit gigante = visivamente buggato. Drop-cap rimane su
-   chi-siamo/studio/attorney/page-prose per editorial flow normale. */
+/* Elena fix 2026-05-14 (revised): drop-cap su .sl-competenza__prose SOLO se
+   modifier --drop-cap presente (PHP add quando body inizia con lettera, skip
+   quando inizia con digit/punctuation → evita glitch "0" gigante). */
+.sl-competenza__prose--drop-cap > p:first-of-type::first-letter,
 .sl-chi-siamo__lede-text > p:first-of-type::first-letter,
 .sl-chi-siamo__prose > p:first-of-type::first-letter,
 .sl-info-page__prose > p:first-of-type::first-letter,
@@ -9922,7 +9922,8 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     .sl-attorney__bio-prose > p:first-of-type::first-letter,
     .sl-attorney__bio > p:first-of-type::first-letter,
     .sl-page__prose > p:first-of-type::first-letter,
-    /* Elena fix 2026-05-14: drop-cap rimosso da .sl-competenza__prose mobile (matching desktop) */
+    /* Elena fix 2026-05-14 (revised): drop-cap mobile solo se modifier --drop-cap */
+    .sl-competenza__prose--drop-cap > p:first-of-type::first-letter,
     .sl-chi-siamo__lede-text > p:first-of-type::first-letter,
     .sl-chi-siamo__prose > p:first-of-type::first-letter,
     .sl-info-page__prose > p:first-of-type::first-letter,
