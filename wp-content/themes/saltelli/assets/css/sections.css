@@ -3912,6 +3912,27 @@ textarea.sl-input {
 }
 .sl-chi-siamo__plate-line2 { color: rgba(255, 255, 255, 0.85); }
 
+/* Elena fix 2026-05-14: img reale quando SCF lo_studio_plate_image popolato.
+   Img position:absolute inset:0 cover il frame. Pseudo ::before originale
+   (gradient placeholder grigio) sostituito da scrim leggero in bottom per
+   leggibilità caption bianca sopra foto. */
+.sl-chi-siamo__plate-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+.sl-chi-siamo__plate--has-image .sl-chi-siamo__plate-frame::before {
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.45) 100%);
+    opacity: 1;
+    z-index: 2;
+}
+.sl-chi-siamo__plate--has-image .sl-chi-siamo__plate-caption {
+    z-index: 3;
+}
+
 /* DEAD CODE — sezione "§ 02 — 1999 founding" rimossa Wave Elena FB Batch 1 (Wave S #12) ·
    markup template-parts/page-lo-studio.php non emette più `.sl-chi-siamo__founding*` ·
    cleanup target Wave 6.1 (vedi docs/SCF_ORPHAN_FIELDS.md §B) */
