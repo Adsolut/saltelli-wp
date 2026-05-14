@@ -10055,7 +10055,12 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     padding: clamp(16px, 2vw, 32px) 0 clamp(32px, 4vw, 56px);
 }
 .sl-hub-hero__inner {
-    max-width: 920px;
+    /* Elena fix 2026-05-14: max-width 920 RIMOSSO → contenuto allineato col
+       padding-inline del parent .sl-page-hero (clamp 24-96). Risultato: hub
+       pages (Aree/Risorse/Costi/Chi-siamo) hanno lo stesso offset orizzontale
+       delle taxonomy/cluster pages (.sl-tipoarea__hero) → layout uniforme
+       cross-page come richiesto da Elena. */
+    max-width: none;
 }
 .sl-hub-hero__eyebrow {
     color: var(--text-muted);
