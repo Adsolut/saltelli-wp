@@ -4053,10 +4053,10 @@ textarea.sl-input {
 }
 
 .sl-chi-siamo__timeline {
-    /* Elena fix 2026-05-14: padding-bottom 80-128 → 24-40 per attaccare il
-       footer pre-CTA "§ Contattaci" (cream banner subito sotto). Padding-top
-       invariato per separazione dalla §04 sopra. */
-    padding: clamp(80px, 10vw, 128px) 0 clamp(24px, 3vw, 40px);
+    /* Elena fix 2026-05-14 (v1.3.48 → v1.3.49 revised): padding-bottom 24-40 → 0
+       per attacco DIRETTO al footer pre-CTA cream (Elena feedback: "deve essere
+       ridotto ancora"). Padding-top invariato per separazione dalla §04. */
+    padding: clamp(80px, 10vw, 128px) 0 0;
 }
 .sl-chi-siamo__timeline-head {
     display: grid;

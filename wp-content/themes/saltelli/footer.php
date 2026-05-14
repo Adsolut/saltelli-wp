@@ -107,7 +107,7 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                 <div class="sl-mono sl-foot-precta__eyebrow"><?php esc_html_e('§ Contattaci', 'saltelli'); ?></div>
                 <h2 class="sl-foot-precta__h2" id="precta-h">
                     <?php esc_html_e('Vorresti raccontarci', 'saltelli'); ?><br>
-                    <?php esc_html_e('la tua pratica?', 'saltelli'); ?>
+                    <?php esc_html_e('il tuo caso?', 'saltelli'); ?>
                 </h2>
                 <p class="sl-foot-precta__p">
                     <?php esc_html_e('Trenta minuti di prima consulenza conoscitiva gratuita. In studio o online. Risposta entro 24 ore.', 'saltelli'); ?>

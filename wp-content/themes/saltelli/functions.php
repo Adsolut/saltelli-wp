@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.48-elena-fix-chi-siamo-timeline-bottom-attach');
+define('SALTELLI_THEME_VERSION', '1.3.49-elena-fix-footer-text-and-timeline-zero');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
