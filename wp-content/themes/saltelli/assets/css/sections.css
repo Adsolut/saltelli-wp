@@ -10471,13 +10471,14 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     }
 }
 
-/* Elena fix 2026-05-14 (Issue 2): CTA top + hero-cta spacing verticale ridotto.
-   Era spazio eccessivo sopra/sotto i 2 bottoni nel hero. */
-.sl-competenza__cta-top { margin-block: 16px 8px; }
-.sl-competenza__hero-cta { margin-block: 8px 16px; }
+/* Elena fix 2026-05-14 (revised v2): CTA top + hero-cta margin ULTRA compatti.
+   Era 16/8 mobile + 24/8 desktop. Adesso 8/4 mobile + 8/4 desktop per attacco
+   stretto al subtitle. */
+.sl-competenza__cta-top { margin-block: 8px 4px; }
+.sl-competenza__hero-cta { margin-block: 4px 8px; }
 @media (min-width: 1024px) {
-    .sl-competenza__cta-top { margin-block: 24px 8px; }
-    .sl-competenza__hero-cta { margin-block: 8px 24px; }
+    .sl-competenza__cta-top { margin-block: 8px 4px; }
+    .sl-competenza__hero-cta { margin-block: 4px 12px; }
 }
 
 /* Elena fix 2026-05-14 (Issue 3): § Approfondimento body-wrap padding-top ridotto
@@ -10491,9 +10492,11 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 
 /* --- Avvocato di riferimento card (universal, era tier-1-only) ---------- */
 .sl-competenza__ref-lawyer {
-    padding-block: 48px;
+    /* Elena fix 2026-05-14: padding-block 48 → 20, margin-block 56 → 16 → attacco
+       compatto al hero sopra. */
+    padding-block: 20px;
     border-block: 1px solid var(--border);
-    margin-block: 56px;
+    margin-block: 16px;
 }
 .sl-competenza__ref-lawyer-eyebrow {
     margin-bottom: 24px;
