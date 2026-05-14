@@ -10371,15 +10371,15 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 .sl-competenza__body-wrap {
     padding-block: clamp(48px, 6vw, 64px);
 }
-.sl-competenza--tier-1 .sl-competenza__body-wrap {
+.sl-competenza__body-wrap {
     padding-block: 64px;
 }
-.sl-competenza--tier-1 .sl-competenza__body-wrap .sl-competenza__prose,
-.sl-competenza--tier-1 .sl-competenza__body-wrap .sl-container > .sl-competenza__prose {
+.sl-competenza__body-wrap .sl-competenza__prose,
+.sl-competenza__body-wrap .sl-container > .sl-competenza__prose {
     max-width: 720px;
     margin-inline: auto;
 }
-.sl-competenza--tier-1 .sl-competenza__body-wrap h2 {
+.sl-competenza__body-wrap h2 {
     font-family: var(--font-display);
     font-size: clamp(28px, 3vw, 44px);
     line-height: var(--lh-heading);
@@ -10390,22 +10390,22 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     letter-spacing: var(--ls-h2);
 }
 @media (max-width: 767px) {
-    .sl-competenza--tier-1 .sl-competenza__body-wrap h2 {
+    .sl-competenza__body-wrap h2 {
         margin-block: 56px 24px;
         font-size: clamp(24px, 5vw, 32px);
     }
 }
 
 /* --- Tier-1 hero display-band H1 + asym grid (modifier-scoped) ---------- */
-.sl-competenza--tier-1 .sl-competenza__hero {
+.sl-competenza__hero {
     /* Elena fix 2026-05-14: padding-top 64-120 → 24-48 (attacco header), bottom 32-48 → 16-24 (compressione). */
     padding-block: clamp(24px, 3vw, 48px) clamp(16px, 2vw, 24px);
 }
-.sl-competenza--tier-1 .sl-competenza__eyebrow {
+.sl-competenza__eyebrow {
     margin-bottom: 24px;
     color: var(--accent);
 }
-.sl-competenza--tier-1 .sl-competenza__title {
+.sl-competenza__title {
     font-family: var(--font-display);
     font-size: clamp(72px, 10vw, 160px);
     line-height: 0.95;
@@ -10415,11 +10415,11 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     margin-block: 0 24px;
 }
 @media (max-width: 767px) {
-    .sl-competenza--tier-1 .sl-competenza__title {
+    .sl-competenza__title {
         font-size: clamp(40px, 9vw, 64px);
     }
 }
-.sl-competenza--tier-1 .sl-competenza__answer-wrap {
+.sl-competenza__answer-wrap {
     padding: 32px;
     border: 1px solid var(--border);
     background: var(--surface);
@@ -10427,7 +10427,7 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     max-width: 60ch;
     margin-inline: auto;
 }
-.sl-competenza--tier-1 .sl-competenza__answer {
+.sl-competenza__answer {
     font-family: var(--font-display);
     font-size: clamp(20px, 2vw, 26px);
     font-style: italic;
@@ -10437,10 +10437,10 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     margin: 0;
 }
 @media (min-width: 1024px) {
-    .sl-competenza--tier-1 .sl-competenza__answer-wrap {
+    .sl-competenza__answer-wrap {
         margin-left: 0; /* Elena fix 2026-05-14: ridotto da 20% (in grid contesto si allinea automaticamente) */
     }
-    .sl-competenza--tier-1 .sl-competenza__hero .sl-container {
+    .sl-competenza__hero .sl-container {
         display: grid;
         /* Elena fix 2026-05-14 (Issue 1): 8fr 4fr → 7fr 5fr → col destra
            più larga per "Risposta in 50 parole" box quadrato non rettangolo verticale. */
@@ -10451,14 +10451,14 @@ body.single-post .entry-content > p:first-of-type::first-letter {
         row-gap: 4px;
         align-items: start;
     }
-    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-page__breadcrumb,
-    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__back,
-    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__eyebrow,
-    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__title,
-    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__sub {
+    .sl-competenza__hero .sl-container > .sl-page__breadcrumb,
+    .sl-competenza__hero .sl-container > .sl-competenza__back,
+    .sl-competenza__hero .sl-container > .sl-competenza__eyebrow,
+    .sl-competenza__hero .sl-container > .sl-competenza__title,
+    .sl-competenza__hero .sl-container > .sl-competenza__sub {
         grid-column: 1;
     }
-    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__answer-wrap {
+    .sl-competenza__hero .sl-container > .sl-competenza__answer-wrap {
         grid-column: 2;
         /* Elena fix 2026-05-14 (revised x3): allinea top del box col TOP del titolo h1.
            Markup col 1: row1=breadcrumb · row2=back · row3=eyebrow · row4=title · row5=subtitle
@@ -10467,9 +10467,9 @@ body.single-post .entry-content > p:first-of-type::first-letter {
         align-self: start;
         margin-top: 0;
     }
-    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__cta-top,
-    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__hero-cta,
-    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__ref-lawyer {
+    .sl-competenza__hero .sl-container > .sl-competenza__cta-top,
+    .sl-competenza__hero .sl-container > .sl-competenza__hero-cta,
+    .sl-competenza__hero .sl-container > .sl-competenza__ref-lawyer {
         grid-column: 1 / -1;
     }
 }
@@ -10486,10 +10486,10 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 
 /* Elena fix 2026-05-14 (Issue 3): § Approfondimento body-wrap padding-top ridotto
    per chiudere gap eccessivo sotto hero. */
-.sl-competenza--tier-1 .sl-competenza__body-wrap {
+.sl-competenza__body-wrap {
     padding-block: 24px clamp(48px, 6vw, 64px) !important;
 }
-.sl-competenza--tier-1 .sl-competenza__body-wrap h2:first-of-type {
+.sl-competenza__body-wrap h2:first-of-type {
     margin-block-start: 16px !important;
 }
 
