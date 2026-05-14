@@ -10450,6 +10450,20 @@ body.single-post .entry-content > p:first-of-type::first-letter {
         row-gap: 4px;
         align-items: start;
     }
+    /* Elena fix 2026-05-14 (revised x6): se title > 20 chars (PHP add modifier
+       class) il box answer va SOTTO invece di affianco — title lunghi (Eredità
+       e successioni, Diritto previdenziale, Contrattualistica) avevano box col 2
+       troppo stretto. */
+    .sl-competenza--long-title .sl-competenza__hero .sl-container {
+        display: block;
+    }
+    .sl-competenza--long-title .sl-competenza__hero .sl-container > .sl-competenza__answer-wrap {
+        grid-row: auto;
+        grid-column: auto;
+        max-width: 60ch;
+        margin-block: 24px 16px;
+        margin-inline: 0;
+    }
     .sl-competenza__hero .sl-container > .sl-page__breadcrumb,
     .sl-competenza__hero .sl-container > .sl-competenza__back,
     .sl-competenza__hero .sl-container > .sl-competenza__eyebrow,
