@@ -124,19 +124,27 @@ $sl_term_field = function ($name, $default = '') use ($term) {
     return ($v !== null && $v !== '' && $v !== false) ? $v : $default;
 };
 
-// Scenari "Quando rivolgersi": override per-term di titolo/descrizione
-// (il simbolo §¶† e lo slug della competenza linkata restano dal map).
+// Scenari "Quando rivolgersi": override per-term di titolo/descrizione/URL link
+// (il simbolo §¶† resta dal map; lo slug della competenza linkata viene
+// usato come fallback se URL custom non popolato).
+// Elena fix 2026-05-14: aggiunto override URL via SCF tipo_area_term_scenarioN_url
+// per permettere a editor di puntare il link "Leggi →" alla pagina che vuole
+// (es. interno tax /aree-di-pratica/..., esterno https://, anchor #id).
 for ($sl_i = 0; $sl_i < 3; $sl_i++) {
     if (!isset($scenari[$sl_i])) {
         continue;
     }
-    $sl_sc_t = (string) $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_title', '');
-    $sl_sc_d = (string) $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_desc', '');
+    $sl_sc_t   = (string) $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_title', '');
+    $sl_sc_d   = (string) $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_desc', '');
+    $sl_sc_url = (string) $sl_term_field('tipo_area_term_scenario' . ($sl_i + 1) . '_url', '');
     if ($sl_sc_t !== '') {
         $scenari[$sl_i]['t'] = $sl_sc_t;
     }
     if ($sl_sc_d !== '') {
         $scenari[$sl_i]['d'] = $sl_sc_d;
+    }
+    if ($sl_sc_url !== '') {
+        $scenari[$sl_i]['url'] = trim($sl_sc_url);
     }
 }
 
@@ -299,9 +307,21 @@ $avatar_html = function ($av_post) {
             </header>
             <div class="sl-tipoarea__quando-grid">
                 <?php foreach ($scenari as $s) :
-                    /* === FIX v0.19.1 [F1] BEGIN — wrap scenario in <a> + add "Leggi →" link (JSX parity) === */
-                    $sl_sc_slug = isset($s['slug']) ? (string) $s['slug'] : '';
-                    $sl_sc_href = $sl_sc_slug !== '' ? home_url('/competenze/' . $sl_sc_slug . '/') : '';
+                    /* === FIX v0.19.1 [F1] + Elena fix 2026-05-14 ===
+                       Priorità URL link "Leggi →":
+                         1. $s['url'] (override SCF tipo_area_term_scenarioN_url)
+                         2. $s['slug'] (fallback hardcoded → /competenze/{slug}/)
+                         3. '' (no link → render <article> non cliccabile) */
+                    $sl_sc_url_override = isset($s['url']) ? (string) $s['url'] : '';
+                    if ($sl_sc_url_override !== '') {
+                        // URL custom: se inizia con / lo passo a home_url(), altrimenti uso tale e quale
+                        $sl_sc_href = (strpos($sl_sc_url_override, 'http') === 0)
+                            ? $sl_sc_url_override
+                            : home_url($sl_sc_url_override);
+                    } else {
+                        $sl_sc_slug = isset($s['slug']) ? (string) $s['slug'] : '';
+                        $sl_sc_href = $sl_sc_slug !== '' ? home_url('/competenze/' . $sl_sc_slug . '/') : '';
+                    }
                     ?>
                     <?php if ($sl_sc_href !== '') : ?>
                         <a class="sl-tipoarea__scenario" href="<?php echo esc_url($sl_sc_href); ?>">
