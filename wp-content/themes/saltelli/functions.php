@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.89-elena-fix-home-reviews-tighten-gap');
+define('SALTELLI_THEME_VERSION', '1.3.90-elena-feat-yoast-content-analysis');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
@@ -31,6 +31,7 @@ require_once SALTELLI_THEME_DIR . '/inc/seo/ai-files.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/legacy-redirects.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/wave5-blog-rewrites.php';
 require_once SALTELLI_THEME_DIR . '/inc/seo/yoast-schema-extensions.php';
+require_once SALTELLI_THEME_DIR . '/inc/seo/yoast-content-analysis.php';
 require_once SALTELLI_THEME_DIR . '/inc/wave4-6-migration.php';
 
 // Wave 4.7.fix.4 admin UX (Strategy A FULL SCF).
