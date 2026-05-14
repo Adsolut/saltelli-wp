@@ -1612,6 +1612,52 @@ html.sl-menu-open body { overflow: hidden; }
 .sl-team__lawyer { display: flex; flex-direction: column; }
 .sl-team__lawyer:nth-child(odd) { margin-right: 32px; }
 .sl-team__lawyer:nth-child(even) { margin-left: 32px; }
+
+/* Pagination dots — default hidden, visible solo mobile carousel */
+.sl-team__dots {
+  display: none;
+}
+
+/* Elena fix 2026-05-14: carousel mobile §03 Team — stesso pattern §05 Dal blog.
+   4 lawyer card swipeable orizzontale + dot indicator active. */
+@media (max-width: 767px) {
+  .sl-team__grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    margin-top: 24px;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    padding-inline: 8px;
+    margin-inline: -8px;
+  }
+  .sl-team__grid::-webkit-scrollbar { display: none; }
+  .sl-team__lawyer {
+    flex: 0 0 80%;
+    scroll-snap-align: center;
+    margin: 0 !important; /* override nth-child odd/even margins */
+  }
+  .sl-team__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .sl-team__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: background 200ms ease, transform 200ms ease;
+  }
+  .sl-team__dot.is-active {
+    background: var(--accent);
+    transform: scale(1.2);
+  }
+}
 .sl-team__portrait {
   display: block;
   aspect-ratio: 3 / 4;

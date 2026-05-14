@@ -314,6 +314,7 @@
     // CSS-only carousel su <768 (scroll-snap). JS aggiorna dot attivo via
     // IntersectionObserver sulle card. Desktop: dots display:none, no binding side-effects.
     bindFrontBlogCarouselDots();
+    bindFrontTeamCarouselDots();
 
     // 8. Resize debounced — ScrollTrigger refresh
     if (hasScrollTrigger) {
@@ -327,10 +328,18 @@
 
   // ---- Front blog mobile carousel dots (Elena fix 2026-05-14) -------------
   function bindFrontBlogCarouselDots() {
-    const grid = document.querySelector('[data-sl-blog-carousel]');
-    if (!grid || grid.dataset.slBlogCarouselBound === '1') return;
-    const cards = grid.querySelectorAll('.sl-front-blog__card');
-    const dots = document.querySelectorAll('.sl-front-blog__dot');
+    bindCarouselDotsGeneric('[data-sl-blog-carousel]', '.sl-front-blog__card', '.sl-front-blog__dot', 'slBlogCarouselBound');
+  }
+  // ---- Front team mobile carousel dots (Elena fix 2026-05-14) -------------
+  function bindFrontTeamCarouselDots() {
+    bindCarouselDotsGeneric('[data-sl-team-carousel]', '.sl-team__lawyer', '.sl-team__dot', 'slTeamCarouselBound');
+  }
+  // Helper generico: IntersectionObserver + active dot toggle. Idempotente.
+  function bindCarouselDotsGeneric(gridSel, cardSel, dotSel, boundFlag) {
+    const grid = document.querySelector(gridSel);
+    if (!grid || grid.dataset[boundFlag] === '1') return;
+    const cards = grid.querySelectorAll(cardSel);
+    const dots = document.querySelectorAll(dotSel);
     if (!cards.length || dots.length !== cards.length || !('IntersectionObserver' in window)) return;
 
     const io = new IntersectionObserver((entries) => {
@@ -345,7 +354,7 @@
     }, { root: grid, threshold: [0.5, 0.75] });
 
     cards.forEach((card) => io.observe(card));
-    grid.dataset.slBlogCarouselBound = '1';
+    grid.dataset[boundFlag] = '1';
   }
 
   // ---- Filter tabs §01 Aree di pratica ------------------------------------

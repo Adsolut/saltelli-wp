@@ -351,7 +351,8 @@ $press = saltelli_press_outlets();
         </div>
 
         <?php if (!empty($avvocati)) : ?>
-            <div class="sl-team__grid">
+            <?php /* Elena fix 2026-05-14: data-sl-team-carousel per JS mobile carousel (stesso pattern §05 Dal blog) */ ?>
+            <div class="sl-team__grid" data-sl-team-carousel>
                 <?php foreach ($avvocati as $i => $av) :
                     $layout = $layout_team[$i] ?? ['col' => 1, 'span' => 12, 'offset' => 0];
                     $ruolo  = (string) saltelli_field('ruolo_breve', $av->ID, '');
@@ -391,6 +392,13 @@ $press = saltelli_press_outlets();
                         <?php endif; ?>
                     </article>
                 <?php endforeach; ?>
+            </div>
+
+            <?php /* Dots indicator: visible solo mobile carousel (CSS @media <768) */ ?>
+            <div class="sl-team__dots" aria-hidden="true">
+                <?php for ($sl_team_dot_i = 0; $sl_team_dot_i < count($avvocati); $sl_team_dot_i++) : ?>
+                    <span class="sl-team__dot<?php echo $sl_team_dot_i === 0 ? ' is-active' : ''; ?>"></span>
+                <?php endfor; ?>
             </div>
         <?php else : ?>
             <p class="sl-mono"><?php esc_html_e('Nessun avvocato pubblicato.', 'saltelli'); ?></p>
