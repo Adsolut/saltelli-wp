@@ -204,12 +204,21 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
-        <?php /* === Body source: body_extended SCF (canonico, priorità) === */ ?>
+        <?php
+        /* === Body source: body_extended SCF (canonico, priorità) === */
+        /* Elena fix 2026-05-14: smart drop-cap. Strip HTML del body e check
+           primo carattere "real" — se è lettera (a-z, A-Z, accentate) →
+           class --drop-cap aggiunta. Se digit/punctuation/altro → no drop-cap
+           (evita "01." → "0" gigante glitch). */
+        $sl_body_plain = trim(strip_tags((string) $body_ext));
+        $sl_first_char = mb_substr($sl_body_plain, 0, 1);
+        $sl_has_drop_cap = $sl_body_plain !== '' && preg_match('/^[\p{L}]$/u', $sl_first_char);
+        ?>
         <?php if ($render_body_extended) : ?>
             <section class="sl-competenza__body sl-competenza__body-wrap">
                 <div class="sl-container">
                     <div class="sl-mono">§ <?php esc_html_e('Approfondimento', 'saltelli'); ?></div>
-                    <div class="sl-competenza__prose sl-competenza__prose--extended" data-toc-source>
+                    <div class="sl-competenza__prose sl-competenza__prose--extended<?php echo $sl_has_drop_cap ? ' sl-competenza__prose--drop-cap' : ''; ?>" data-toc-source>
                         <?php
                         /* Wave 6.0 partial ROLLBACK 2026-05-13 — apply_filters('the_content', ...) causava WSOD su staging
                          * (likely cause: shortcode legacy nel content migrato OR do_blocks parse error OR oEmbed timeout).
