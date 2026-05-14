@@ -3873,7 +3873,17 @@ textarea.sl-input {
     color: var(--primary);
 }
 
-.sl-chi-siamo__plate { padding: 0 0 clamp(80px, 10vw, 128px); }
+/* Elena fix 2026-05-14: banner Plate I deve attaccare al menu sopra +
+   ridurre gap tra banner e hero (banner → hero text). */
+.sl-chi-siamo { margin-top: 0; padding-top: 0; }
+.sl-chi-siamo > .sl-chi-siamo__plate:first-child { margin-top: 0; }
+/* Plate padding-bottom: 80-128 → 0 (gap già coperto da hero padding-top ridotto sotto) */
+.sl-chi-siamo__plate { padding: 0; }
+/* Hero --extended padding-top ridotto: 96-144 → 32-56 per chiudere il vuoto sotto banner.
+   Bottom padding mantenuto invariato (gap normale prima del lede §01). */
+.sl-chi-siamo__hero.sl-page-hero--extended {
+    padding-block-start: clamp(32px, 4vw, 56px);
+}
 .sl-chi-siamo__plate-frame {
     height: clamp(360px, 50vw, 560px);
     background: var(--surface);
