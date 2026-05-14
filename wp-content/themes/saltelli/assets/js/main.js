@@ -310,6 +310,11 @@
     // data-filter="*" mostra tutte; altri filtri mostrano solo .sl-area con matching data-area-cat
     bindAreaFilters();
 
+    // 10. Front blog mobile carousel — active dot tracking (Elena fix 2026-05-14)
+    // CSS-only carousel su <768 (scroll-snap). JS aggiorna dot attivo via
+    // IntersectionObserver sulle card. Desktop: dots display:none, no binding side-effects.
+    bindFrontBlogCarouselDots();
+
     // 8. Resize debounced — ScrollTrigger refresh
     if (hasScrollTrigger) {
       let resizeTimer;
@@ -318,6 +323,29 @@
         resizeTimer = setTimeout(() => window.ScrollTrigger.refresh(), 200);
       });
     }
+  }
+
+  // ---- Front blog mobile carousel dots (Elena fix 2026-05-14) -------------
+  function bindFrontBlogCarouselDots() {
+    const grid = document.querySelector('[data-sl-blog-carousel]');
+    if (!grid || grid.dataset.slBlogCarouselBound === '1') return;
+    const cards = grid.querySelectorAll('.sl-front-blog__card');
+    const dots = document.querySelectorAll('.sl-front-blog__dot');
+    if (!cards.length || dots.length !== cards.length || !('IntersectionObserver' in window)) return;
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+          const idx = Array.prototype.indexOf.call(cards, entry.target);
+          if (idx >= 0) {
+            dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+          }
+        }
+      });
+    }, { root: grid, threshold: [0.5, 0.75] });
+
+    cards.forEach((card) => io.observe(card));
+    grid.dataset.slBlogCarouselBound = '1';
   }
 
   // ---- Filter tabs §01 Aree di pratica ------------------------------------

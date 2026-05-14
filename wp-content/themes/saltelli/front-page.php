@@ -441,7 +441,9 @@ $sl_blog_posts = get_posts([
             </h2>
         </div>
 
-        <div class="sl-front-blog__grid">
+        <?php /* Elena fix 2026-05-14: pagination dots mobile carousel — visible <768px only,
+                  active state via JS IntersectionObserver in main.js */ ?>
+        <div class="sl-front-blog__grid" data-sl-blog-carousel>
             <?php foreach ($sl_blog_posts as $bp) :
                 $cats     = get_the_category($bp->ID);
                 $cat_name = !empty($cats) ? $cats[0]->name : '';
@@ -473,6 +475,13 @@ $sl_blog_posts = get_posts([
                     </div>
                 </a>
             <?php endforeach; ?>
+        </div>
+
+        <?php /* Dots indicator: visible only on mobile (CSS @media <768) */ ?>
+        <div class="sl-front-blog__dots" aria-hidden="true">
+            <?php for ($sl_dot_i = 0; $sl_dot_i < count($sl_blog_posts); $sl_dot_i++) : ?>
+                <span class="sl-front-blog__dot<?php echo $sl_dot_i === 0 ? ' is-active' : ''; ?>"></span>
+            <?php endfor; ?>
         </div>
     </div>
 </section>

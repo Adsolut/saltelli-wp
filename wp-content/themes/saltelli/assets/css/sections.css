@@ -876,6 +876,53 @@
   border-top: 1px solid var(--border);
 }
 
+/* Pagination dots — default hidden, visible solo mobile carousel */
+.sl-front-blog__dots {
+  display: none;
+}
+
+/* Elena fix 2026-05-14: carousel mobile §05 Dal blog — scroll-snap orizzontale
+   + pagination dots. JS in main.js gestisce active dot via IntersectionObserver. */
+@media (max-width: 767px) {
+  .sl-front-blog__grid {
+    display: flex;
+    grid-template-columns: none; /* override grid mobile */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    margin-top: 24px;
+    padding-bottom: 4px;
+    scrollbar-width: none; /* Firefox */
+    /* Padding inline serve a far apparire "edge peek" delle card adiacenti */
+    padding-inline: 8px;
+    margin-inline: -8px;
+  }
+  .sl-front-blog__grid::-webkit-scrollbar { display: none; /* WebKit/Blink */ }
+  .sl-front-blog__card {
+    flex: 0 0 85%; /* ~85% viewport width → mostra ~15% card successiva */
+    scroll-snap-align: center;
+  }
+  .sl-front-blog__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .sl-front-blog__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: background 200ms ease, transform 200ms ease;
+  }
+  .sl-front-blog__dot.is-active {
+    background: var(--accent);
+    transform: scale(1.2);
+  }
+}
+
 /* =========================================================
  * 7. PRESS — Earned media strip
  * ========================================================= */
