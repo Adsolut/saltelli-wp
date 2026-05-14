@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.72-elena-fix-competenza-hero-answer-row');
+define('SALTELLI_THEME_VERSION', '1.3.73-elena-fix-competenza-remove-mini-form-final-cta');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
