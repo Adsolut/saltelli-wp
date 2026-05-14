@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.91-elena-fix-yoast-content-no-loopback');
+define('SALTELLI_THEME_VERSION', '1.3.92-elena-feat-yoast-editor-bridge');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
@@ -45,3 +45,8 @@ require_once SALTELLI_THEME_DIR . '/inc/admin/scf-archive-headers-shortcuts.php'
 // + lock-down Customizer / CSS aggiuntivo per ruolo editor (Elena).
 require_once SALTELLI_THEME_DIR . '/inc/admin/post-editor-notices.php';
 require_once SALTELLI_THEME_DIR . '/inc/admin/customizer-lockdown.php';
+
+// Wave Elena 2026-05-14: Yoast editor bridge per template SCF-driven.
+// Inietta synthetic content nell'analyzer Yoast (via JS plugin API) così la
+// metabox vede testo+link reali quando post_content è vuoto.
+require_once SALTELLI_THEME_DIR . '/inc/admin/yoast-editor-content-bridge.php';
