@@ -206,13 +206,18 @@ while (have_posts()) :
 
         <?php
         /* === Body source: body_extended SCF (canonico, priorità) === */
-        /* Elena fix 2026-05-14: smart drop-cap. Strip HTML del body e check
-           primo carattere "real" — se è lettera (a-z, A-Z, accentate) →
-           class --drop-cap aggiunta. Se digit/punctuation/altro → no drop-cap
-           (evita "01." → "0" gigante glitch). */
-        $sl_body_plain = trim(strip_tags((string) $body_ext));
-        $sl_first_char = mb_substr($sl_body_plain, 0, 1);
-        $sl_has_drop_cap = $sl_body_plain !== '' && preg_match('/^[\p{L}]$/u', $sl_first_char);
+        /* Elena fix 2026-05-14 (revised v2): smart drop-cap.
+           Pipeline robusta: strip HTML → decode entities (&nbsp; ecc.) →
+           strip unicode whitespace iniziale (\p{Z} include U+00A0 NBSP) →
+           check primo char è lettera (\p{L} include accentate é à è ì ò ù).
+           Pre-fix v1: trim() default NON riconosce U+00A0 come whitespace →
+           Penale che inizia con &nbsp; non triggherava drop-cap. */
+        $sl_body_plain = (string) $body_ext;
+        $sl_body_plain = strip_tags($sl_body_plain);
+        $sl_body_plain = html_entity_decode($sl_body_plain, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $sl_body_plain = preg_replace('/^[\s\p{Z}]+/u', '', $sl_body_plain);
+        $sl_first_char = mb_substr((string) $sl_body_plain, 0, 1);
+        $sl_has_drop_cap = $sl_first_char !== '' && preg_match('/^[\p{L}]$/u', $sl_first_char);
         ?>
         <?php if ($render_body_extended) : ?>
             <section class="sl-competenza__body sl-competenza__body-wrap">
