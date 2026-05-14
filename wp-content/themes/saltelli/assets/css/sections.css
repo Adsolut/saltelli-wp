@@ -809,8 +809,10 @@
  * 3-col grid desktop, 1-col stack mobile. Card cream + hover lift.
  * ========================================================= */
 .sl-front-blog {
-  /* Elena fix 2026-05-14: armonizzazione clamp(56,7vw,96) → clamp(40,5vw,56) */
-  padding-block: clamp(40px, 5vw, 56px);
+  /* Elena fix 2026-05-14 #1: armonizzazione clamp(56,7vw,96) → clamp(40,5vw,56).
+     Elena fix 2026-05-14 #2: padding-bottom ridotto a clamp(8,1vw,16) per chiudere
+     il "vuoto" cream visibile tra cards blog e banda §05 Recensioni Google (Elfsight). */
+  padding-block: clamp(40px, 5vw, 56px) clamp(8px, 1vw, 16px);
   background: var(--background);
 }
 .sl-front-blog__grid {
@@ -986,17 +988,19 @@
   }
 }
 
-/* === v1.3.88 Elena fix 2026-05-14 — §05 Recensioni Google (Elfsight widget) ===
+/* === v1.3.89 Elena fix 2026-05-14 — §05 Recensioni Google (Elfsight widget) ===
    Sostituisce il placeholder .sl-press che mostrava solo "Recensioni Google" su
    striscia surface. La sezione ora ospita il widget Elfsight. Manteniamo
-   background surface per coerenza visiva con §06 Trust bar sotto. */
+   background surface per coerenza visiva con §06 Trust bar sotto.
+   2026-05-14 #2: padding-top ridotto per chiudere lo spazio bianco tra blog
+   cards e questa banda surface (feedback Elena). */
 .sl-front-reviews {
-  padding-block: 48px;
+  padding-block: clamp(8px, 1vw, 16px) clamp(32px, 4vw, 48px);
   background: var(--surface);
 }
 .sl-front-reviews__head {
   max-width: var(--container-max);
-  margin: 0 auto 24px;
+  margin: 0 auto 16px;
 }
 .sl-front-reviews__label {
   color: var(--primary);
@@ -1007,11 +1011,8 @@
   margin: 0 auto;
 }
 @media (min-width: 1024px) {
-  .sl-front-reviews {
-    padding-block: 64px;
-  }
   .sl-front-reviews__head {
-    margin-bottom: 32px;
+    margin-bottom: 20px;
   }
 }
 
