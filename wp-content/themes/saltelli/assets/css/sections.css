@@ -6829,8 +6829,11 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 
 /* ─── FASCIA 1 · PRE-FOOTER CTA ─── */
 .sl-foot-precta {
-    background: var(--surface);
-    border-bottom: 1px solid var(--primary);
+    /* Elena fix 2026-05-14: theme palette navy (era cream surface).
+       Stesso BG del footer principale per continuità visuale.
+       Border-bottom rimosso (era navy line, ora seamless). */
+    background: var(--primary);
+    border-bottom: none;
     /* Elena fix 2026-05-13: padding-block ridotto clamp(64,9vw,128) → clamp(40,5vw,72)
        per compressione verticale sezione (era troppo grande). */
     padding-block: clamp(40px, 5vw, 72px);
@@ -6888,7 +6891,7 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     }
 }
 .sl-foot-precta__eyebrow {
-    color: var(--accent);
+    color: var(--accent); /* oro — invariato */
     margin-bottom: 32px;
 }
 .sl-foot-precta__h2 {
@@ -6898,14 +6901,17 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     font-size: clamp(36px, 4.5vw, 56px);
     line-height: var(--lh-h1);
     letter-spacing: var(--ls-h1);
-    color: var(--primary);
+    /* Elena fix 2026-05-14: navy → oro (theme dark, h2 in oro per gerarchia
+       e contrasto sul navy BG). */
+    color: var(--accent);
     /* v0.21.21: margin-bottom 48 → 20 (Duccio review specifico: distacco 20px). */
     margin: 0 0 20px;
 }
 .sl-foot-precta__p {
     font-size: var(--fs-body-marketing);
     line-height: 1.6;
-    color: var(--text);
+    /* Elena fix 2026-05-14: dark text → background (cream/bianco) per contrasto navy BG */
+    color: var(--background);
     max-width: 50ch;
     margin: 0;
 }
@@ -6913,12 +6919,14 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     padding-bottom: 8px;
 }
 .sl-foot-precta__action .sl-btn {
-    color: var(--primary);
+    /* Elena fix 2026-05-14: navy → background (bianco/cream) per CTA visible su navy */
+    color: var(--background);
 }
 .sl-foot-precta__trust {
     margin: 20px 0 0;
     font-style: italic;
-    color: var(--text-muted);
+    /* Elena fix 2026-05-14: muted → rgba bianco 0.7 per leggibilità navy */
+    color: rgba(255, 255, 255, 0.7);
     font-size: var(--fs-caption);
 }
 
@@ -9066,9 +9074,10 @@ html:not(.js-reveal-ready) .sl-archive-casi__h1 .sl-word {
 .sl-foot-newsletter-wrap.sl-foot-newsletter-wrap--v3 {
     padding-block: clamp(48px, 6vw, 80px) !important;
 }
-/* Pre-CTA border-bottom hairline soft tra le due fascia cream */
+/* Elena fix 2026-05-14: pre-CTA ora navy theme (non più cream surface).
+   Border-bottom rimosso — seamless transition con footer main navy sottostante. */
 .sl-foot-precta {
-    border-bottom: 1px solid var(--border) !important;
+    border-bottom: none !important;
 }
 
 /* === v0.28.4 — UNIFIED EDITORIAL LAYOUT 3fr/9fr cross-page ============
