@@ -7522,11 +7522,16 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
     /* footer ha bg --primary navy → white-tint già OK; nessun override necessario */
 }
 .sl-prefooter-cta__trust,
-.sl-foot-precta__trust,
 .sl-area__meta {
     /* cream background → muted #6B6B6B = ratio 4.45:1 (pass AA per text 18px+).
        Per body text small mono <16px applichiamo darker scope. */
     color: #5A5A5A;
+}
+/* Elena fix 2026-05-14: .sl-foot-precta__trust SCORPORATO da rule sopra —
+   .sl-foot-precta ora theme navy (PR #31), trust necessita color chiaro per
+   leggibilità. White con leggera opacità per tono editorial subtle. */
+.sl-foot-precta__trust {
+    color: rgba(255, 255, 255, 0.85) !important;
 }
 /* === IMPECCABLE v0.21.2 [perf-T4] END === */
 
@@ -8892,9 +8897,13 @@ html:not(.js-reveal-ready) .sl-archive-casi__h1 .sl-word {
     margin: 0 0 32px !important;
 }
 
-/* PRE-CTA UNIVERSALE "Vorresti raccontarci la tua pratica?" mb 24 */
+/* PRE-CTA UNIVERSALE "Vorresti raccontarci il tuo caso?" mb 24.
+   Elena fix 2026-05-14: aggiunto color !important per forzare oro su navy
+   BG (theme navy). Specificity della rule originale .sl-foot-precta__h2
+   nel blocco base era battuta da cascade ordering. */
 .sl-foot-precta h2.sl-foot-precta__h2 {
     margin: 0 0 24px !important;
+    color: var(--accent) !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════

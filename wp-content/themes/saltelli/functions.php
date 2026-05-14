@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.52-elena-fix-footer-precta-navy-theme');
+define('SALTELLI_THEME_VERSION', '1.3.53-elena-fix-footer-precta-colors-important');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
