@@ -3913,9 +3913,9 @@ textarea.sl-input {
 .sl-chi-siamo__plate-line2 { color: rgba(255, 255, 255, 0.85); }
 
 /* Elena fix 2026-05-14: img reale quando SCF lo_studio_plate_image popolato.
-   Img position:absolute inset:0 cover il frame. Pseudo ::before originale
-   (gradient placeholder grigio) sostituito da scrim leggero in bottom per
-   leggibilità caption bianca sopra foto. */
+   Plate I ora BANNER TOP della pagina (spostato prima del hero), caption
+   rimossa → foto pulita senza overlay testuale. Nascondo gradient
+   ::before placeholder quando img presente. */
 .sl-chi-siamo__plate-img {
     position: absolute;
     inset: 0;
@@ -3925,12 +3925,7 @@ textarea.sl-input {
     z-index: 1;
 }
 .sl-chi-siamo__plate--has-image .sl-chi-siamo__plate-frame::before {
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.45) 100%);
-    opacity: 1;
-    z-index: 2;
-}
-.sl-chi-siamo__plate--has-image .sl-chi-siamo__plate-caption {
-    z-index: 3;
+    display: none; /* nasconde gradient placeholder grigio quando foto reale */
 }
 
 /* DEAD CODE — sezione "§ 02 — 1999 founding" rimossa Wave Elena FB Batch 1 (Wave S #12) ·

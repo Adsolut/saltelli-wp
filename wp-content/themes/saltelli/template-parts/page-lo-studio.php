@@ -71,6 +71,34 @@ $sl_principles_posts = get_posts([
 ]);
 ?>
 
+<?php
+/* === Wave-S fix #11 + Elena fix 2026-05-14 — Plate I "Facciata studio"
+   spostato come BANNER TOP della pagina (prima del hero, era subito sotto).
+   Caption "Via Vannella Gaetani, 27" + "Palazzo nobiliare · Chiaia · Napoli"
+   rimossa dall'immagine (richiesta Elena: foto pulita senza overlay testuale).
+   Editabile via SCF `lo_studio_plate_image` (image, tab Hero). */
+$sl_plate_image = saltelli_page_field('lo_studio_plate_image', null);
+$sl_plate_has_image = is_array($sl_plate_image) && !empty($sl_plate_image['url']);
+?>
+<section class="sl-chi-siamo__plate<?php echo $sl_plate_has_image ? ' sl-chi-siamo__plate--has-image' : ''; ?>" aria-hidden="<?php echo $sl_plate_has_image ? 'false' : 'true'; ?>">
+    <div class="sl-container">
+        <div class="sl-chi-siamo__plate-frame">
+            <?php if ($sl_plate_has_image) : ?>
+                <img class="sl-chi-siamo__plate-img"
+                     src="<?php echo esc_url($sl_plate_image['url']); ?>"
+                     alt="<?php echo esc_attr($sl_plate_image['alt'] ?: __('Facciata Studio Saltelli, Via Vannella Gaetani 27, Napoli', 'saltelli')); ?>"
+                     loading="eager"
+                     decoding="async"
+                     width="<?php echo isset($sl_plate_image['width']) ? (int) $sl_plate_image['width'] : 1440; ?>"
+                     height="<?php echo isset($sl_plate_image['height']) ? (int) $sl_plate_image['height'] : 560; ?>">
+            <?php else : ?>
+                <div class="sl-mono sl-chi-siamo__plate-tl"><?php esc_html_e('Plate I · Facciata studio', 'saltelli'); ?></div>
+                <div class="sl-mono sl-chi-siamo__plate-br"><?php esc_html_e('Foto B/N · 1440 × 560 · placeholder', 'saltelli'); ?></div>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+
 <section class="sl-chi-siamo__hero sl-page-hero sl-page-hero--extended" aria-labelledby="chi-siamo-h1">
     <div class="sl-container sl-chi-siamo__hero-grid">
         <aside class="sl-chi-siamo__hero-aside">
@@ -96,37 +124,6 @@ $sl_principles_posts = get_posts([
             ]);
             ?>
         </h1>
-    </div>
-</section>
-
-<?php
-/* === Wave-S fix #11 + Elena fix 2026-05-14 — Plate I "Facciata studio"
-   subito sotto hero, prima di §01 lede. Ora editabile via SCF
-   `lo_studio_plate_image` (image, tab Hero). Se field popolato → <img>
-   reale con overlay caption. Se vuoto → placeholder grafico legacy. */
-$sl_plate_image = saltelli_page_field('lo_studio_plate_image', null);
-$sl_plate_has_image = is_array($sl_plate_image) && !empty($sl_plate_image['url']);
-?>
-<section class="sl-chi-siamo__plate<?php echo $sl_plate_has_image ? ' sl-chi-siamo__plate--has-image' : ''; ?>" aria-hidden="<?php echo $sl_plate_has_image ? 'false' : 'true'; ?>">
-    <div class="sl-container">
-        <div class="sl-chi-siamo__plate-frame">
-            <?php if ($sl_plate_has_image) : ?>
-                <img class="sl-chi-siamo__plate-img"
-                     src="<?php echo esc_url($sl_plate_image['url']); ?>"
-                     alt="<?php echo esc_attr($sl_plate_image['alt'] ?: __('Facciata Studio Saltelli, Via Vannella Gaetani 27, Napoli', 'saltelli')); ?>"
-                     loading="lazy"
-                     decoding="async"
-                     width="<?php echo isset($sl_plate_image['width']) ? (int) $sl_plate_image['width'] : 1440; ?>"
-                     height="<?php echo isset($sl_plate_image['height']) ? (int) $sl_plate_image['height'] : 560; ?>">
-            <?php else : ?>
-                <div class="sl-mono sl-chi-siamo__plate-tl"><?php esc_html_e('Plate I · Facciata studio', 'saltelli'); ?></div>
-                <div class="sl-mono sl-chi-siamo__plate-br"><?php esc_html_e('Foto B/N · 1440 × 560 · placeholder', 'saltelli'); ?></div>
-            <?php endif; ?>
-            <div class="sl-chi-siamo__plate-caption">
-                <div class="sl-chi-siamo__plate-line1"><?php esc_html_e('Via Vannella Gaetani, 27', 'saltelli'); ?></div>
-                <div class="sl-mono sl-chi-siamo__plate-line2"><?php esc_html_e('Palazzo nobiliare · Chiaia · Napoli', 'saltelli'); ?></div>
-            </div>
-        </div>
     </div>
 </section>
 
