@@ -450,3 +450,48 @@ details.sl-acc > div,
 .sl-acc__panel p:last-child {
   margin-bottom: 0;
 }
+
+/* === v1.3.96 Elena fix 2026-05-14 — Editorial prose inline link styling ===
+   Pre-fix: la global rule `a { color: var(--primary); text-decoration: none; }`
+   rende i link inline nei body editoriali (Chi Siamo, Competenza, Casi, Info
+   pages, blog post) invisibili come hyperlink — colore navy ok ma indistin-
+   guibile dal testo, soprattutto in paragrafi lunghi.
+   Post-fix: regola unica che copre i 5 prose container del tema. Navy
+   underline 1px con offset 4px (editoriale, accoppia bene con Playfair),
+   hover/focus swap a accent bronze. Anche FAQ/accordion answer + WP
+   entry-content (blog content) coperti per consistency. */
+.sl-chi-siamo__prose a,
+.sl-competenza__prose a,
+.sl-info-page__prose a,
+.sl-page__prose a,
+.sl-studio__prose a,
+.sl-faq__answer a,
+.sl-acc__panel a,
+.entry-content a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--primary);
+  transition: color var(--dur-fast, 200ms) var(--ease-editorial, ease),
+              text-decoration-color var(--dur-fast, 200ms) var(--ease-editorial, ease);
+}
+.sl-chi-siamo__prose a:hover,
+.sl-competenza__prose a:hover,
+.sl-info-page__prose a:hover,
+.sl-page__prose a:hover,
+.sl-studio__prose a:hover,
+.sl-faq__answer a:hover,
+.sl-acc__panel a:hover,
+.entry-content a:hover,
+.sl-chi-siamo__prose a:focus-visible,
+.sl-competenza__prose a:focus-visible,
+.sl-info-page__prose a:focus-visible,
+.sl-page__prose a:focus-visible,
+.sl-studio__prose a:focus-visible,
+.sl-faq__answer a:focus-visible,
+.sl-acc__panel a:focus-visible,
+.entry-content a:focus-visible {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}

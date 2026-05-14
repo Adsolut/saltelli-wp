@@ -4175,24 +4175,6 @@ textarea.sl-input {
 .sl-chi-siamo__prose p { margin: 0 0 24px; }
 .sl-chi-siamo__prose p:last-child { margin-bottom: 0; }
 .sl-chi-siamo__prose--dropcap p:first-of-type { text-indent: 0; }
-/* Elena fix 2026-05-14: link inline nei paragrafi del §01 Lede.
-   Pre-fix: color: var(--primary) ma text-decoration: none ereditato globale →
-   visivamente indistinguibile dal testo. Post-fix: navy + underline editoriale
-   con offset 4px (Playfair-friendly), hover swap a bronze accent. */
-.sl-chi-siamo__prose a {
-  color: var(--primary);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-  text-decoration-color: var(--primary);
-  transition: color var(--dur-fast, 200ms) var(--ease-editorial, ease),
-              text-decoration-color var(--dur-fast, 200ms) var(--ease-editorial, ease);
-}
-.sl-chi-siamo__prose a:hover,
-.sl-chi-siamo__prose a:focus-visible {
-  color: var(--accent);
-  text-decoration-color: var(--accent);
-}
 .sl-chi-siamo__dropcap {
     font-family: var(--font-display);
     font-style: italic;
