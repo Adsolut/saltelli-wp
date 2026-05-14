@@ -116,6 +116,16 @@ function saltelli_mvp_to_audit_redirect_map() {
         // Post 2669 `diritto-di-famiglia` (NO LGBTQ+) eliminato per consolidamento
         // con sibling 2666 `diritto-di-famiglia-lgbtq` (DEC-021 cliente-firmato).
         '/aree-di-pratica/privati/diritto-di-famiglia/' => '/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/',
+
+        // Elena fix 2026-05-14 — GSC audit recovery 4 URL 404 con backlink Google:
+        // a) Typo apostrofo /bonifico-ai-figli .../l-agenzia .../ (38 impr Google,
+        //    URL mai esistito ma indicizzato per backlink errato): redirect a
+        //    versione corretta post 1573 senza dash.
+        '/bonifico-ai-figli-i-limiti-da-non-superare-per-evitare-problemi-con-l-agenzia-delle-entrate/' => '/bonifico-ai-figli-i-limiti-da-non-superare-per-evitare-problemi-con-lagenzia-delle-entrate/',
+        // b) /donazione-ai-figli/ (38 impr, articolo mai migrato e non esistente
+        //    nemmeno sul vecchio sito): topic match all'articolo bonifico-ai-figli
+        //    (stesso tema "donazioni/bonifici figli vs agenzia entrate").
+        '/donazione-ai-figli-i-limiti-da-non-superare-per-evitare-problemi-con-l-agenzia-delle-entrate/' => '/bonifico-ai-figli-i-limiti-da-non-superare-per-evitare-problemi-con-lagenzia-delle-entrate/',
     ];
 }
 endif;
