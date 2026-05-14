@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.78-elena-fix-competenza-layout-all-tiers');
+define('SALTELLI_THEME_VERSION', '1.3.79-elena-fix-competenza-grid-ratio-balance');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
