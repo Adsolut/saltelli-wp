@@ -10434,13 +10434,15 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 }
 @media (min-width: 1024px) {
     .sl-competenza--tier-1 .sl-competenza__answer-wrap {
-        margin-left: 20%;
+        margin-left: 0; /* Elena fix 2026-05-14: ridotto da 20% (in grid contesto si allinea automaticamente) */
     }
     .sl-competenza--tier-1 .sl-competenza__hero .sl-container {
         display: grid;
-        grid-template-columns: 8fr 4fr;
-        gap: 64px;
-        align-items: end;
+        /* Elena fix 2026-05-14 (Issue 1): 8fr 4fr → 7fr 5fr → col destra
+           più larga per "Risposta in 50 parole" box quadrato non rettangolo verticale. */
+        grid-template-columns: 7fr 5fr;
+        gap: 48px;
+        align-items: start;
     }
     .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-page__breadcrumb,
     .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__back,
@@ -10451,13 +10453,35 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     }
     .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__answer-wrap {
         grid-column: 2;
-        grid-row: 1 / span 6;
-        align-self: end;
+        /* Elena fix 2026-05-14: grid-row 1/span 6 → auto, align-self end → start
+           → il box prende altezza naturale del content (no stretch a 6 rows del title huge). */
+        grid-row: auto;
+        align-self: start;
+        margin-top: 80px; /* allinea visivamente sotto breadcrumb+eyebrow */
     }
+    .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__cta-top,
     .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__hero-cta,
     .sl-competenza--tier-1 .sl-competenza__hero .sl-container > .sl-competenza__ref-lawyer {
         grid-column: 1 / -1;
     }
+}
+
+/* Elena fix 2026-05-14 (Issue 2): CTA top + hero-cta spacing verticale ridotto.
+   Era spazio eccessivo sopra/sotto i 2 bottoni nel hero. */
+.sl-competenza__cta-top { margin-block: 16px 8px; }
+.sl-competenza__hero-cta { margin-block: 8px 16px; }
+@media (min-width: 1024px) {
+    .sl-competenza__cta-top { margin-block: 24px 8px; }
+    .sl-competenza__hero-cta { margin-block: 8px 24px; }
+}
+
+/* Elena fix 2026-05-14 (Issue 3): § Approfondimento body-wrap padding-top ridotto
+   per chiudere gap eccessivo sotto hero. */
+.sl-competenza--tier-1 .sl-competenza__body-wrap {
+    padding-block: 24px clamp(48px, 6vw, 64px) !important;
+}
+.sl-competenza--tier-1 .sl-competenza__body-wrap h2:first-of-type {
+    margin-block-start: 16px !important;
 }
 
 /* --- Avvocato di riferimento card (universal, era tier-1-only) ---------- */

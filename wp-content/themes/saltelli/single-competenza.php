@@ -224,45 +224,11 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
-        <?php if (! empty($lead_atts)) : ?>
-            <section class="sl-competenza__avvocati" aria-labelledby="comp-avv-h">
-                <div class="sl-container">
-                    <div class="sl-mono">§ <?php esc_html_e('Referenti', 'saltelli'); ?></div>
-                    <h2 class="sl-section-title" id="comp-avv-h"><?php esc_html_e('Avvocati referenti', 'saltelli'); ?></h2>
-                    <ul class="sl-competenza__lead-list">
-                        <?php foreach ($lead_atts as $av) :
-                            $ruolo = (string) saltelli_field('ruolo_breve', $av->ID, '');
-                            $foto  = saltelli_field('foto_ritratto', $av->ID);
-                            ?>
-                            <li class="sl-competenza__lead">
-                                <a class="sl-team__portrait sl-competenza__lead-portrait" href="<?php echo esc_url(get_permalink($av)); ?>" aria-label="<?php echo esc_attr(get_the_title($av)); ?>">
-                                    <?php
-                                    if (has_post_thumbnail($av->ID)) {
-                                        echo get_the_post_thumbnail($av->ID, 'saltelli-attorney-square', [
-                                            'loading'  => 'lazy',
-                                            'decoding' => 'async',
-                                            'alt'      => esc_attr(get_the_title($av)),
-                                        ]);
-                                    } elseif (is_array($foto) && !empty($foto['url'])) {
-                                        /* IMPECCABLE v0.21.0 [perf-T2]: width/height esplicite (CLS prevention) */
-                                        echo '<img src="' . esc_url($foto['url']) . '" alt="' . esc_attr($foto['alt'] ?: get_the_title($av)) . '" loading="lazy" decoding="async" width="600" height="600">';
-                                    } else {
-                                        echo '<span class="sl-team__placeholder" aria-hidden="true"></span>';
-                                    }
-                                    ?>
-                                </a>
-                                <?php if ($ruolo) : ?>
-                                    <div class="sl-mono"><?php echo esc_html($ruolo); ?></div>
-                                <?php endif; ?>
-                                <h3 class="sl-team__name">
-                                    <a href="<?php echo esc_url(get_permalink($av)); ?>"><?php echo esc_html(get_the_title($av)); ?></a>
-                                </h3>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            </section>
-        <?php endif; ?>
+        <?php /* Elena fix 2026-05-14 (Issue 4): rimossa <section sl-competenza__avvocati>
+                  "§ Referenti / Avvocati referenti" — ridondante con .sl-competenza__ref-lawyer
+                  già renderizzato nel hero sopra ("§ Avvocato di riferimento" Fabiana ecc.).
+                  CSS .sl-competenza__avvocati* + .sl-competenza__lead* restano orphan
+                  (cleanup Wave 6.1). */ ?>
 
         <?php /* Wave Elena FB Batch 2 #23: casi sezione resa universale (era tier-1-only).
                 Conditional su field SCF populated, NON su tier. Tier-2 con casi popolati ora visibili. */ ?>
