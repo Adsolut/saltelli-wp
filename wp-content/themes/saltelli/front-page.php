@@ -136,27 +136,43 @@ $default_filter_slug = (!empty($tipo_terms) && isset($tipo_terms[0]->slug))
 // Pre-fix: $i globale 1..N nel loop render; il filtro JS nascondeva item non-matching →
 // numeri saltati nel tab attivo. Post-fix: ogni cluster ha indice locale 01..N e total
 // proprio. Mappa pre-calcolata qui per usarla 1:1 nel render.
+//
+// Elena fix 2026-05-14: supporto multi-cluster. Una competenza con più term
+// tipo-area (es. Contrattualistica = Privati + Imprese) deve apparire sotto
+// ogni tab a cui appartiene. Mappa diventa [post_id][cluster] e nel render si
+// emette un <a> per ogni cluster del post (numerazione locale al cluster).
 $canonical_clusters_h = ['privati', 'imprese', 'contenzioso-amministrativo'];
 $cluster_counts_h     = array_fill_keys($canonical_clusters_h, 0);
 $cluster_running_h    = array_fill_keys($canonical_clusters_h, 0);
-$cluster_index_map_h  = []; // post_id => ['num' => '01', 'total' => '12']
+$cluster_index_map_h  = []; // post_id => [cluster_slug => ['num' => '01', 'total' => '12']]
+$post_clusters_map_h  = []; // post_id => [cluster_slug, …] (cluster reali del post, post fallback)
+
+// Slug→name map per label tab (es. 'privati' => 'Per i Privati').
+$cluster_name_map_h = [];
+foreach ($tipo_terms as $term) {
+    $cluster_name_map_h[$term->slug] = $term->name;
+}
+
 foreach ($competenze as $p) {
-    $cs = saltelli_competenza_category_slug($p->ID);
-    if (!in_array($cs, $canonical_clusters_h, true)) {
-        $cs = $default_filter_slug;
+    $slugs = saltelli_competenza_category_slugs($p->ID);
+    $slugs = array_values(array_intersect($slugs, $canonical_clusters_h));
+    if (empty($slugs)) {
+        // Orfani / non-canonici → ricadono sul cluster di default per restare visibili.
+        $slugs = [$default_filter_slug];
     }
-    $cluster_counts_h[$cs] = ($cluster_counts_h[$cs] ?? 0) + 1;
+    $post_clusters_map_h[$p->ID] = $slugs;
+    foreach ($slugs as $cs) {
+        $cluster_counts_h[$cs] = ($cluster_counts_h[$cs] ?? 0) + 1;
+    }
 }
 foreach ($competenze as $p) {
-    $cs = saltelli_competenza_category_slug($p->ID);
-    if (!in_array($cs, $canonical_clusters_h, true)) {
-        $cs = $default_filter_slug;
+    foreach ($post_clusters_map_h[$p->ID] as $cs) {
+        $cluster_running_h[$cs] = ($cluster_running_h[$cs] ?? 0) + 1;
+        $cluster_index_map_h[$p->ID][$cs] = [
+            'num'   => str_pad((string) $cluster_running_h[$cs], 2, '0', STR_PAD_LEFT),
+            'total' => str_pad((string) ($cluster_counts_h[$cs] ?? 0), 2, '0', STR_PAD_LEFT),
+        ];
     }
-    $cluster_running_h[$cs] = ($cluster_running_h[$cs] ?? 0) + 1;
-    $cluster_index_map_h[$p->ID] = [
-        'num'   => str_pad((string) $cluster_running_h[$cs], 2, '0', STR_PAD_LEFT),
-        'total' => str_pad((string) ($cluster_counts_h[$cs] ?? 0), 2, '0', STR_PAD_LEFT),
-    ];
 }
 
 $cases = saltelli_homepage_cases();
@@ -246,16 +262,6 @@ $press = saltelli_press_outlets();
                 <?php
                 if (!empty($competenze)) :
                     foreach ($competenze as $p) :
-                        $cat_slug  = saltelli_competenza_category_slug($p->ID);
-                        $cat_label = saltelli_competenza_category_label($p->ID);
-                        // Wave-Q fix #4: rimosso tab "Tutte" → orfani (cat vuota) o non-canonici
-                        // ricadono sul cluster di default per restare visibili sotto un filtro.
-                        if (!in_array($cat_slug, ['privati', 'imprese', 'contenzioso-amministrativo'], true)) {
-                            $cat_slug = $default_filter_slug;
-                        }
-                        // Elena fix 2026-05-13: num/total per-cluster da mappa pre-calcolata.
-                        $num         = isset($cluster_index_map_h[$p->ID]) ? $cluster_index_map_h[$p->ID]['num']   : '01';
-                        $num_total_h = isset($cluster_index_map_h[$p->ID]) ? $cluster_index_map_h[$p->ID]['total'] : '01';
                         // Wave 4.6: use is_tier_1 (Wave 1 ACF schema canonico).
                         $is_tier_1 = (bool) saltelli_field('is_tier_1', $p->ID, false);
                         $lead      = (string) saltelli_field('lead_breve', $p->ID, '');
@@ -265,22 +271,31 @@ $press = saltelli_press_outlets();
                                 $lead = wp_trim_words($lead, 18, '…');
                             }
                         }
-                        ?>
-                        <a class="sl-area<?php echo $is_tier_1 ? ' sl-area--tier1' : ''; ?>"
-                           href="<?php echo esc_url(get_permalink($p)); ?>"
-                           data-area-num="<?php echo esc_attr($num); ?>"
-                           data-area-cat="<?php echo esc_attr($cat_slug); ?>"
-                           data-area-lead="<?php echo esc_attr($lead); ?>"
-                           data-area-label="<?php echo esc_attr($cat_label ?: ($is_tier_1 ? 'Tier 1' : 'Tier 2')); ?>">
-                            <span class="sl-area__num sl-mono"><?php echo esc_html($num); ?> / <?php echo esc_html($num_total_h); ?></span>
-                            <span class="sl-area__title"><?php echo esc_html(get_the_title($p)); ?></span>
-                            <span class="sl-area__meta sl-mono">
-                                <?php // Wave-Q fix #18: label uniforme via helper centralizzato. ?>
-                                <?php echo esc_html(saltelli_tier_badge_label($p->ID, $is_tier_1, $cat_label)); ?>
-                                <span class="arrow" aria-hidden="true">→</span>
-                            </span>
-                        </a>
-                    <?php endforeach;
+                        // Elena fix 2026-05-14: render un <a> per ogni cluster del post.
+                        // Una competenza multi-tab (es. Contrattualistica = Privati+Imprese)
+                        // appariva solo sotto la prima tab pre-fix.
+                        $post_clusters_h = $post_clusters_map_h[$p->ID] ?? [$default_filter_slug];
+                        foreach ($post_clusters_h as $cat_slug) :
+                            $cat_label   = $cluster_name_map_h[$cat_slug] ?? '';
+                            $num         = $cluster_index_map_h[$p->ID][$cat_slug]['num']   ?? '01';
+                            $num_total_h = $cluster_index_map_h[$p->ID][$cat_slug]['total'] ?? '01';
+                            ?>
+                            <a class="sl-area<?php echo $is_tier_1 ? ' sl-area--tier1' : ''; ?>"
+                               href="<?php echo esc_url(get_permalink($p)); ?>"
+                               data-area-num="<?php echo esc_attr($num); ?>"
+                               data-area-cat="<?php echo esc_attr($cat_slug); ?>"
+                               data-area-lead="<?php echo esc_attr($lead); ?>"
+                               data-area-label="<?php echo esc_attr($cat_label ?: ($is_tier_1 ? 'Tier 1' : 'Tier 2')); ?>">
+                                <span class="sl-area__num sl-mono"><?php echo esc_html($num); ?> / <?php echo esc_html($num_total_h); ?></span>
+                                <span class="sl-area__title"><?php echo esc_html(get_the_title($p)); ?></span>
+                                <span class="sl-area__meta sl-mono">
+                                    <?php // Wave-Q fix #18: label uniforme via helper centralizzato. ?>
+                                    <?php echo esc_html(saltelli_tier_badge_label($p->ID, $is_tier_1, $cat_label)); ?>
+                                    <span class="arrow" aria-hidden="true">→</span>
+                                </span>
+                            </a>
+                        <?php endforeach;
+                    endforeach;
                 else :
                     ?>
                     <p class="sl-mono"><?php esc_html_e('Nessuna area di pratica pubblicata.', 'saltelli'); ?></p>

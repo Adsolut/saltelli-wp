@@ -646,6 +646,27 @@ function saltelli_competenza_category_slug($post_id) {
 }
 
 /**
+ * Tutti gli slug `tipo-area` di una competenza (multi-cluster support).
+ *
+ * Elena fix 2026-05-14: una competenza può appartenere a più cluster (es. Contrattualistica
+ * = Privati + Imprese). I render basati su singolo slug (vedi front-page.php §01 Aree)
+ * la mostravano solo sotto la prima tab. Helper ritorna l'array completo per consentire
+ * il render duplicato per-cluster.
+ *
+ * @param int $post_id
+ * @return string[] Lista slug (eventualmente vuota).
+ */
+function saltelli_competenza_category_slugs($post_id) {
+    $terms = get_the_terms($post_id, 'tipo-area');
+    if (is_wp_error($terms) || empty($terms)) {
+        return [];
+    }
+    return array_values(array_map(function ($t) {
+        return (string) $t->slug;
+    }, $terms));
+}
+
+/**
  * Wave-Q fix #18 (feedback Elena): label badge competenza eterogenea su homepage/
  * archive/term/single-avvocato — "TIER 1 · APPROFONDIMENTO →" vs "APPROFONDISCI →"
  * vs "TIER 2" vs cluster name. Helper centralizzato per label uniforme.
