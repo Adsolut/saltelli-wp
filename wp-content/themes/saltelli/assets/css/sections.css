@@ -36,7 +36,10 @@
 
 /* ─── Foundation: Page Hero (Y-distance unificata) ─── */
 .sl-page-hero {
-    padding-block: clamp(96px, 10vw, 120px) clamp(64px, 8vw, 96px);
+    /* Elena fix 2026-05-14: padding-top 96-120 → 32-56 per "attaccare" hero
+       al menu sticky cross-page (hub Aree/Risorse/Costi/Contatti). Bottom
+       64-96 → 40-64 (compressione coerente con armonizzazione globale). */
+    padding-block: clamp(32px, 4vw, 56px) clamp(40px, 5vw, 64px);
     max-width: 1440px;
     margin-inline: auto;
     padding-inline: clamp(24px, 5vw, 96px);
@@ -4948,7 +4951,9 @@ textarea.sl-input {
 .sl-contatti-w3__hero {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 120px clamp(24px, 5vw, 96px) 80px;
+    /* Elena fix 2026-05-14: padding-top 120 → 32, bottom 80 → 48 per attacco
+       header (era hero contatti hardcoded prima di .sl-page-hero baseline). */
+    padding: 32px clamp(24px, 5vw, 96px) 48px;
 }
 
 .sl-contatti-w3__hero-grid {
