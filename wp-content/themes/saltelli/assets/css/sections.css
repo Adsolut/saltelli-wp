@@ -3812,7 +3812,11 @@ textarea.sl-input {
 }
 .sl-chi-siamo__hero-grid {
     display: grid;
-    grid-template-columns: 5fr 7fr;
+    /* Elena fix 2026-05-14: 5fr 7fr → 3fr 9fr per allineare H1 col 2 con il
+       resto delle sezioni della pagina (§01 lede, §03 team, ecc. che usano
+       pattern unified 3fr/9fr). Pre-fix: H1 partiva al ~42% mentre lede
+       sotto partiva al 25% → visivamente disallineato. */
+    grid-template-columns: 3fr 9fr;
     gap: 64px;
     align-items: end;
 }
