@@ -141,25 +141,11 @@ $sl_arch_intro   = (string) saltelli_option('archive_avvocato_intro', __('Un ate
         </div>
     </section>
 
-    <?php /* CTA finale dark navy */ ?>
-    <section class="sl-info-page__cta">
-        <div class="sl-info-page__cta-inner">
-            <div class="sl-mono sl-info-page__cta-eyebrow"><?php esc_html_e('§ Pronto?', 'saltelli'); ?></div>
-            <div>
-                <h2 class="sl-info-page__cta-h2">
-                    <?php esc_html_e('Vuoi raccontarci', 'saltelli'); ?><br>
-                    <em><?php esc_html_e('la tua pratica?', 'saltelli'); ?></em>
-                </h2>
-                <p class="sl-info-page__cta-p">
-                    <?php esc_html_e('Trenta minuti di prima consulenza gratuita. In studio o online. Risposta entro 24 ore.', 'saltelli'); ?>
-                </p>
-                <a class="sl-info-page__cta-btn" href="<?php echo esc_url(home_url('/contatti/')); ?>">
-                    <span><?php esc_html_e('Prenota un incontro', 'saltelli'); ?></span>
-                    <span class="arrow" aria-hidden="true">→</span>
-                </a>
-            </div>
-        </div>
-    </section>
+    <?php /* Elena fix 2026-05-14: rimossa <section sl-info-page__cta> "§ Pronto?
+       Vuoi raccontarci la tua pratica?" dark navy — ridondante con footer
+       pre-CTA "§ Contattaci" cross-page. Stesso fix applicato in page-faq.php
+       e page-info-shared.php. CSS .sl-info-page__cta* resta orphan (cleanup
+       target Wave 6.1). */ ?>
 
 </article>
 

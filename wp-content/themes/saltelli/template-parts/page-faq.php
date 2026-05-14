@@ -140,32 +140,11 @@ if (empty($sl_faq_topics)) {
         </div>
     </section>
 
-    <section class="sl-info-page__cta">
-        <div class="sl-info-page__cta-inner">
-            <div class="sl-mono sl-info-page__cta-eyebrow"><?php echo esc_html($cta_eyebrow); ?></div>
-            <div>
-                <?php
-                // CTA H2 split: keep "non è qui?" italic if present (pre-Wave3 markup).
-                if (preg_match('/^(.+?)\s+(non è qui\??)/u', $cta_h2_full, $m)) {
-                    $cta_h2_pre = $m[1];
-                    $cta_h2_em  = $m[2];
-                } else {
-                    $cta_h2_pre = $cta_h2_full;
-                    $cta_h2_em  = '';
-                }
-                ?>
-                <h2 class="sl-info-page__cta-h2">
-                    <?php echo esc_html($cta_h2_pre); ?><?php if ($cta_h2_em !== '') : ?><br>
-                    <em><?php echo esc_html($cta_h2_em); ?></em><?php endif; ?>
-                </h2>
-                <p class="sl-info-page__cta-p"><?php echo esc_html($cta_p); ?></p>
-                <a class="sl-info-page__cta-btn" href="<?php echo esc_url($cta_url); ?>">
-                    <span><?php echo esc_html(rtrim($cta_label, ' →')); ?></span>
-                    <span class="arrow" aria-hidden="true">→</span>
-                </a>
-            </div>
-        </div>
-    </section>
+    <?php /* Elena fix 2026-05-14: rimossa <section sl-info-page__cta>
+       (CTA finale dark navy "La tua FAQ non è qui?") — ridondante con footer
+       pre-CTA "§ Contattaci" cross-page. Helper vars $cta_eyebrow, $cta_h2_full,
+       $cta_p, $cta_url, $cta_label restano definiti sopra (rimangono dead vars,
+       cleanup minore Wave 6.1). */ ?>
 
     <?php
     // Schema FAQPage cumulativo (audit GEO §4.3 critical).

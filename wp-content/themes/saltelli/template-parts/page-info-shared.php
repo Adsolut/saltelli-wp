@@ -136,20 +136,9 @@ $trust_headline = $aside_h3;
     </section>
     <?php endif; ?>
 
-    <section class="sl-info-page__cta">
-        <div class="sl-info-page__cta-inner">
-            <div class="sl-mono sl-info-page__cta-eyebrow"><?php echo esc_html($cta_final_eyebrow); ?></div>
-            <div>
-                <h2 class="sl-info-page__cta-h2"><?php echo esc_html($cta_final_h2); ?></h2>
-                <?php if ($cta_final_p !== '') : ?>
-                    <p class="sl-info-page__cta-p"><?php echo esc_html($cta_final_p); ?></p>
-                <?php endif; ?>
-                <a class="sl-info-page__cta-btn" href="<?php echo esc_url($cta_final_cta_url); ?>">
-                    <span><?php echo esc_html($cta_final_cta_label); ?></span>
-                    <span class="arrow" aria-hidden="true">→</span>
-                </a>
-            </div>
-        </div>
-    </section>
+    <?php /* Elena fix 2026-05-14: rimossa <section sl-info-page__cta>
+       (CTA finale dark navy) — ridondante con footer pre-CTA "§ Contattaci"
+       cross-page. Helper vars $cta_final_* restano definiti sopra (dead
+       vars cleanup minore Wave 6.1). */ ?>
 
 </article>
