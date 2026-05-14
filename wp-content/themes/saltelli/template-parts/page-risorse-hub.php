@@ -44,10 +44,10 @@ $sl_hub_intro   = (string) saltelli_page_field('hub_risorse_intro', __('Articoli
 
 <section class="sl-hub-grid-section" aria-label="<?php esc_attr_e('Risorse', 'saltelli'); ?>">
     <div class="sl-container">
-        <ul class="sl-hub-grid sl-hub-grid--4">
+        <ul class="sl-hub-grid sl-hub-grid--3">
             <li class="sl-hub-card">
                 <a class="sl-hub-card__link" href="<?php echo esc_url(home_url('/risorse/blog/')); ?>">
-                    <p class="sl-mono sl-hub-card__num">01 / 04</p>
+                    <p class="sl-mono sl-hub-card__num">01 / 03</p>
                     <h2 class="sl-hub-card__title"><?php echo esc_html(saltelli_page_field('hub_risorse_card1_title', 'Blog')); ?></h2>
                     <p class="sl-hub-card__desc">
                         <?php echo esc_html(saltelli_page_field('hub_risorse_card1_desc', 'Articoli scritti dai nostri avvocati su sentenze, novità normative, casi reali.')); ?>
@@ -65,7 +65,7 @@ $sl_hub_intro   = (string) saltelli_page_field('hub_risorse_intro', __('Articoli
             </li>
             <li class="sl-hub-card">
                 <a class="sl-hub-card__link" href="<?php echo esc_url(home_url('/risorse/domande-frequenti/')); ?>">
-                    <p class="sl-mono sl-hub-card__num">02 / 04</p>
+                    <p class="sl-mono sl-hub-card__num">02 / 03</p>
                     <h2 class="sl-hub-card__title"><?php echo esc_html(saltelli_page_field('hub_risorse_card2_title', 'Domande frequenti')); ?></h2>
                     <p class="sl-hub-card__desc">
                         <?php echo esc_html(saltelli_page_field('hub_risorse_card2_desc', 'Risposte sintetiche alle domande che riceviamo più spesso, divise per area di pratica.')); ?>
@@ -83,7 +83,7 @@ $sl_hub_intro   = (string) saltelli_page_field('hub_risorse_intro', __('Articoli
             </li>
             <li class="sl-hub-card">
                 <a class="sl-hub-card__link" href="<?php echo esc_url(home_url('/risorse/glossario-legale/')); ?>">
-                    <p class="sl-mono sl-hub-card__num">03 / 04</p>
+                    <p class="sl-mono sl-hub-card__num">03 / 03</p>
                     <h2 class="sl-hub-card__title"><?php echo esc_html(saltelli_page_field('hub_risorse_card3_title', 'Glossario legale')); ?></h2>
                     <p class="sl-hub-card__desc">
                         <?php echo esc_html(saltelli_page_field('hub_risorse_card3_desc', 'Termini giuridici spiegati con linguaggio piano. Ricerca alfabetica, voci compatte.')); ?>
@@ -91,26 +91,9 @@ $sl_hub_intro   = (string) saltelli_page_field('hub_risorse_intro', __('Articoli
                     <span class="sl-mono sl-hub-card__cta"><?php echo esc_html(saltelli_page_field('hub_risorse_card3_cta', 'Sfoglia →')); ?></span>
                 </a>
             </li>
-            <li class="sl-hub-card">
-                <a class="sl-hub-card__link" href="<?php echo esc_url(home_url('/risorse/guide-gratuite/')); ?>">
-                    <p class="sl-mono sl-hub-card__num">04 / 04</p>
-                    <h2 class="sl-hub-card__title"><?php echo esc_html(saltelli_page_field('hub_risorse_card4_title', 'Guide gratuite')); ?></h2>
-                    <p class="sl-hub-card__desc">
-                        <?php echo esc_html(saltelli_page_field('hub_risorse_card4_desc', 'PDF scaricabili: cosa fare se ricevi una cartella, come affrontare un licenziamento, separazione.')); ?>
-                    </p>
-                    <p class="sl-mono sl-hub-card__meta">
-                        <?php if ($sl_guide_count > 0) :
-                            printf(
-                                esc_html(_n('%s guida', '%s guide', $sl_guide_count, 'saltelli')),
-                                esc_html(number_format_i18n($sl_guide_count))
-                            );
-                        else :
-                            echo esc_html(saltelli_page_field('hub_risorse_card4_empty_text', 'In arrivo'));
-                        endif; ?>
-                    </p>
-                    <span class="sl-mono sl-hub-card__cta"><?php echo esc_html(saltelli_page_field('hub_risorse_card4_cta', 'Scarica →')); ?></span>
-                </a>
-            </li>
+            <?php /* Elena fix 2026-05-14: rimosso card4 "Guide gratuite" (era 04/04).
+                       SCF hub_risorse_card4_* + helper $sl_guide_count restano
+                       orphan (cleanup target Wave 6.1). Grid --4 → --3. */ ?>
         </ul>
     </div>
 </section>
