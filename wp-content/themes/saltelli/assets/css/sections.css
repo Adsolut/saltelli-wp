@@ -34,6 +34,16 @@
     padding-inline: clamp(24px, 5vw, 96px);
 }
 
+/* Elena fix 2026-05-14: reset top margin/padding default dell'article <article class="sl-page">
+   cross-page (hub Aree/Risorse/Costi/FAQ/glossario/ecc.). Il browser applica
+   margin-block ~1em ad article → vuoto sopra il primo hero. Reset esplicito
+   garantisce che .sl-page-hero attacchi all'header sticky come homepage.
+   .sl-chi-siamo override già definito altrove (PR #24) — compatibile, no conflict. */
+.sl-page {
+    margin-top: 0;
+    padding-top: 0;
+}
+
 /* ─── Foundation: Page Hero (Y-distance unificata) ─── */
 .sl-page-hero {
     /* Elena fix 2026-05-14: padding-top 96-120 → 32-56 per "attaccare" hero
