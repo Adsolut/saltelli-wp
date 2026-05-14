@@ -5861,16 +5861,26 @@ textarea.sl-input {
     color: var(--accent);
     margin-bottom: 16px;
 }
-/* Elena fix 2026-05-14: icona immagine (alternativa al glyph) — stessa altezza
-   visiva del glyph (~56px) per layout coerente, object-fit:contain per evitare
-   stretch su immagini non-quadrate. */
+/* Elena fix 2026-05-14 (revised): icona immagine renderizzata via CSS mask-image.
+   La PNG/SVG dal SCF fa da maschera; il color effettivo è --accent (oro brand).
+   Funziona perfettamente con PNG trasparente line-art (icons8 style) o SVG.
+   Limitazione: immagini con bg solido renderizzeranno il quadrato intero oro
+   (Elena: usa solo PNG trasparenti o SVG). */
 .sl-tipoarea__scenario-icon {
     display: block;
-    width: auto;
+    width: clamp(40px, 5vw, 56px);
     height: clamp(40px, 5vw, 56px);
     max-width: 64px;
-    object-fit: contain;
     margin-bottom: 16px;
+    background-color: var(--accent);
+    -webkit-mask-image: var(--sl-icon-url);
+    mask-image: var(--sl-icon-url);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
 }
 .sl-tipoarea__scenario-title {
     font-family: var(--font-display);
