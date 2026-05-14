@@ -986,6 +986,35 @@
   }
 }
 
+/* === v1.3.88 Elena fix 2026-05-14 — §05 Recensioni Google (Elfsight widget) ===
+   Sostituisce il placeholder .sl-press che mostrava solo "Recensioni Google" su
+   striscia surface. La sezione ora ospita il widget Elfsight. Manteniamo
+   background surface per coerenza visiva con §06 Trust bar sotto. */
+.sl-front-reviews {
+  padding-block: 48px;
+  background: var(--surface);
+}
+.sl-front-reviews__head {
+  max-width: var(--container-max);
+  margin: 0 auto 24px;
+}
+.sl-front-reviews__label {
+  color: var(--primary);
+  margin: 0;
+}
+.sl-front-reviews__widget {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+@media (min-width: 1024px) {
+  .sl-front-reviews {
+    padding-block: 64px;
+  }
+  .sl-front-reviews__head {
+    margin-bottom: 32px;
+  }
+}
+
 /* =========================================================
  * 8. CONTACT
  * ========================================================= */

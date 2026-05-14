@@ -116,6 +116,21 @@ function saltelli_enqueue_assets() {
         );
     }
 
+    /* === Elena fix 2026-05-14: Elfsight Google Reviews widget (solo homepage) ===
+       Script third-party (elfsightcdn.com/platform.js) async, footer. Mount-point
+       <div class="elfsight-app-{uuid}"> in front-page.php sezione §05 Recensioni.
+       data-elfsight-app-lazy attribute attiva il lazy-load nativo di Elfsight
+       (widget renderizzato solo quando entra in viewport). */
+    if (is_front_page()) {
+        wp_enqueue_script(
+            'saltelli-elfsight-platform',
+            'https://elfsightcdn.com/platform.js',
+            [],
+            null,
+            ['in_footer' => true, 'strategy' => 'async']
+        );
+    }
+
 }
 
 /* === IMPECCABLE v0.21.0 [perf-T1] Font preload — LCP critical paths ===
