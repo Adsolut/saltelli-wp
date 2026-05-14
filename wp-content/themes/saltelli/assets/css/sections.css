@@ -10442,11 +10442,10 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     }
     .sl-competenza__hero .sl-container {
         display: grid;
-        /* Elena fix 2026-05-14 (Issue 1): 8fr 4fr → 7fr 5fr → col destra
-           più larga per "Risposta in 50 parole" box quadrato non rettangolo verticale. */
-        grid-template-columns: 7fr 5fr;
-        /* Elena fix 2026-05-14 (revised x4): row-gap 48 → 4 (stretto verticale).
-           Column-gap 48 invariato (separazione orizzontale title↔box). */
+        /* Elena fix 2026-05-14 (revised x5): 7fr/5fr troppo asimmetrico per tier-2
+           con title corti → box col 2 stretto, wraps in tower narrow. 1fr/1fr
+           50/50 → box più largo, text in righe più lunghe, look bilanciato. */
+        grid-template-columns: 1fr 1fr;
         column-gap: 48px;
         row-gap: 4px;
         align-items: start;
