@@ -10457,50 +10457,17 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     .sl-competenza__answer-wrap {
         margin-left: 0; /* Elena fix 2026-05-14: ridotto da 20% (in grid contesto si allinea automaticamente) */
     }
+    /* Elena fix 2026-05-14 (revised x7): grid affianco rimosso completamente.
+       Title huge (clamp 72-160px) wrap su 2+ lines anche per title corti,
+       quindi col 2 finiva sempre stretta. UNIFORME stack per TUTTE le competenze:
+       hero blocco verticale, box answer-wrap subito sotto title con max-width 60ch. */
     .sl-competenza__hero .sl-container {
-        display: grid;
-        /* Elena fix 2026-05-14 (revised x5): 7fr/5fr troppo asimmetrico per tier-2
-           con title corti → box col 2 stretto, wraps in tower narrow. 1fr/1fr
-           50/50 → box più largo, text in righe più lunghe, look bilanciato. */
-        grid-template-columns: 1fr 1fr;
-        column-gap: 48px;
-        row-gap: 4px;
-        align-items: start;
-    }
-    /* Elena fix 2026-05-14 (revised x6): se title > 20 chars (PHP add modifier
-       class) il box answer va SOTTO invece di affianco — title lunghi (Eredità
-       e successioni, Diritto previdenziale, Contrattualistica) avevano box col 2
-       troppo stretto. */
-    .sl-competenza--long-title .sl-competenza__hero .sl-container {
         display: block;
     }
-    .sl-competenza--long-title .sl-competenza__hero .sl-container > .sl-competenza__answer-wrap {
-        grid-row: auto;
-        grid-column: auto;
+    .sl-competenza__hero .sl-container > .sl-competenza__answer-wrap {
         max-width: 60ch;
         margin-block: 24px 16px;
         margin-inline: 0;
-    }
-    .sl-competenza__hero .sl-container > .sl-page__breadcrumb,
-    .sl-competenza__hero .sl-container > .sl-competenza__back,
-    .sl-competenza__hero .sl-container > .sl-competenza__eyebrow,
-    .sl-competenza__hero .sl-container > .sl-competenza__title,
-    .sl-competenza__hero .sl-container > .sl-competenza__sub {
-        grid-column: 1;
-    }
-    .sl-competenza__hero .sl-container > .sl-competenza__answer-wrap {
-        grid-column: 2;
-        /* Elena fix 2026-05-14 (revised x3): allinea top del box col TOP del titolo h1.
-           Markup col 1: row1=breadcrumb · row2=back · row3=eyebrow · row4=title · row5=subtitle
-           Box parte da row 4 (= row del title) → top edges allineati. */
-        grid-row: 4 / span 2;
-        align-self: start;
-        margin-top: 0;
-    }
-    .sl-competenza__hero .sl-container > .sl-competenza__cta-top,
-    .sl-competenza__hero .sl-container > .sl-competenza__hero-cta,
-    .sl-competenza__hero .sl-container > .sl-competenza__ref-lawyer {
-        grid-column: 1 / -1;
     }
 }
 
