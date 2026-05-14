@@ -128,6 +128,16 @@
       "wrapper": {"width": "50"}
     },
     {
+      "key": "field_tat_scenario1_url",
+      "label": "§ 01 — Scenario 1 · URL link \"Leggi →\"",
+      "name": "tipo_area_term_scenario1_url",
+      "type": "text",
+      "instructions": "URL destinazione del link \"Leggi →\" sotto Scenario 1. Esempi: /aree-di-pratica/privati/diritto-di-famiglia/ (relativo) oppure https://staging.studiolegalesaltelli.it/... (assoluto). Vuoto = link predefinito alla competenza del cluster.",
+      "default_value": "",
+      "wrapper": {"width": ""},
+      "placeholder": "/aree-di-pratica/privati/diritto-di-famiglia/"
+    },
+    {
       "key": "field_tat_scenario2_title",
       "label": "§ 01 — Scenario 2 · Titolo",
       "name": "tipo_area_term_scenario2_title",
@@ -149,6 +159,16 @@
       "wrapper": {"width": "50"}
     },
     {
+      "key": "field_tat_scenario2_url",
+      "label": "§ 01 — Scenario 2 · URL link \"Leggi →\"",
+      "name": "tipo_area_term_scenario2_url",
+      "type": "text",
+      "instructions": "URL destinazione del link \"Leggi →\" sotto Scenario 2. Esempi: relativo o assoluto. Vuoto = link predefinito.",
+      "default_value": "",
+      "wrapper": {"width": ""},
+      "placeholder": "/aree-di-pratica/privati/diritto-delle-successioni/"
+    },
+    {
       "key": "field_tat_scenario3_title",
       "label": "§ 01 — Scenario 3 · Titolo",
       "name": "tipo_area_term_scenario3_title",
@@ -168,6 +188,16 @@
       "rows": 3,
       "new_lines": "",
       "wrapper": {"width": "50"}
+    },
+    {
+      "key": "field_tat_scenario3_url",
+      "label": "§ 01 — Scenario 3 · URL link \"Leggi →\"",
+      "name": "tipo_area_term_scenario3_url",
+      "type": "text",
+      "instructions": "URL destinazione del link \"Leggi →\" sotto Scenario 3. Esempi: relativo o assoluto. Vuoto = link predefinito.",
+      "default_value": "",
+      "wrapper": {"width": ""},
+      "placeholder": "/aree-di-pratica/privati/risarcimento-danni/"
     },
     {
       "key": "field_tat_aree_tab",

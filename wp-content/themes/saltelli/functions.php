@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.54-elena-fix-footer-aree-menu-mobile');
+define('SALTELLI_THEME_VERSION', '1.3.55-elena-fix-tipo-area-scenari-url-scf');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
