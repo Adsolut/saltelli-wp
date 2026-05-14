@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.92-elena-feat-yoast-editor-bridge');
+define('SALTELLI_THEME_VERSION', '1.3.93-elena-fix-yoast-real-frontend-html');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
