@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.45-elena-fix-chi-siamo-banner-attach');
+define('SALTELLI_THEME_VERSION', '1.3.46-elena-fix-chi-siamo-hero-grid-align');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
