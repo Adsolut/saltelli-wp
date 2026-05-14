@@ -10346,13 +10346,16 @@ body.single-post .entry-content > p:first-of-type::first-letter {
     line-height: var(--lh-mono);
     color: var(--text-muted);
     max-width: 56ch;
-    margin: 0 0 56px 0;
+    /* Elena fix 2026-05-14: margin 0 0 56 0 → 8 0 16 0 — subtitle vicino al title
+       (top 8) + gap inferiore ridotto (bottom 16, era 56). */
+    margin: 8px 0 16px 0;
     font-weight: 400;
 }
 @media (max-width: 767px) {
     .sl-competenza__sub {
         font-size: var(--fs-body-marketing);
-        margin-bottom: 32px;
+        /* Elena fix 2026-05-14: mobile bottom 32 → 12 */
+        margin-bottom: 12px;
     }
 }
 /* tier-2: subtitle resa neutra body, no italic display */
@@ -10395,7 +10398,8 @@ body.single-post .entry-content > p:first-of-type::first-letter {
 
 /* --- Tier-1 hero display-band H1 + asym grid (modifier-scoped) ---------- */
 .sl-competenza--tier-1 .sl-competenza__hero {
-    padding-block: clamp(64px, 8vw, 120px) clamp(32px, 4vw, 48px);
+    /* Elena fix 2026-05-14: padding-top 64-120 → 24-48 (attacco header), bottom 32-48 → 16-24 (compressione). */
+    padding-block: clamp(24px, 3vw, 48px) clamp(16px, 2vw, 24px);
 }
 .sl-competenza--tier-1 .sl-competenza__eyebrow {
     margin-bottom: 24px;
