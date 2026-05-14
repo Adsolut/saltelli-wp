@@ -279,21 +279,12 @@ $sl_plate_has_image = is_array($sl_plate_image) && !empty($sl_plate_image['url']
     </div>
 </section>
 
-<section class="sl-chi-siamo__cta" aria-labelledby="chi-siamo-cta-h">
-    <div class="sl-container sl-chi-siamo__cta-grid">
-        <div class="sl-mono"><?php echo esc_html(saltelli_page_field('lo_studio_cta_eyebrow', '§ 06 — Primo incontro')); ?></div>
-        <div>
-            <h2 class="sl-chi-siamo__cta-title" id="chi-siamo-cta-h">
-                <?php echo esc_html(saltelli_page_field('lo_studio_cta_h2_l1', 'Prenota')); ?><br>
-                <em><?php echo esc_html(saltelli_page_field('lo_studio_cta_h2_l2', 'una consulenza')); ?><br><?php echo esc_html(saltelli_page_field('lo_studio_cta_h2_l3', 'gratuita.')); ?></em>
-            </h2>
-            <p class="sl-chi-siamo__cta-lede">
-                <?php echo esc_html(saltelli_page_field('lo_studio_cta_lede', 'Il primo incontro è gratuito e dura il tempo necessario. Riceviamo solo su appuntamento.')); ?>
-            </p>
-            <a class="sl-btn sl-btn--primary" href="<?php echo esc_url(home_url(saltelli_page_field('lo_studio_cta_url', '/contatti/'))); ?>">
-                <span><?php echo esc_html(saltelli_page_field('lo_studio_cta_btn_label', 'Prenota un primo incontro')); ?></span>
-                <span class="arrow" aria-hidden="true">→</span>
-            </a>
-        </div>
-    </div>
-</section>
+<?php
+/* Elena fix 2026-05-14: rimossa <section sl-chi-siamo__cta> §06 "Primo
+   incontro" perché ridondante con il footer pre-CTA "§ Contattaci"
+   (footer.php fascia 1) che già appare su TUTTE le pagine inclusa /chi-siamo/.
+   SCF fields lo_studio_cta_eyebrow / _h2_l1 / _h2_l2 / _h2_l3 / _lede /
+   _url / _btn_label restano nel group_lo_studio_v1.json come orphan (target
+   cleanup Wave 6.1 per docs/SCF_ORPHAN_FIELDS.md). CSS .sl-chi-siamo__cta*
+   resta orphan in sections.css. */
+?>
