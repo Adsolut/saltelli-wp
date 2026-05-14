@@ -989,10 +989,19 @@
  * ========================================================= */
 .sl-footer {
   /* v0.14.1 — padding-block + .sl-footer__inner ha .sl-container-like behavior (max-width + margin auto + padding-inline)
-     ma NON ha class .sl-container. Manteniamo padding-inline minimale a footer mobile (20px) per fallback. */
+     ma NON ha class .sl-container. Manteniamo padding-inline minimale a footer mobile (20px) per fallback.
+     Elena fix 2026-05-14: padding mobile compattato (era 48 24, ora 28 16 per look più stretto mobile). */
   background: var(--primary);
   color: var(--background);
-  padding: 48px 20px 24px;
+  padding: 28px 16px 16px;
+}
+/* Elena fix 2026-05-14: gap tra colonne stacked su mobile (cols default block stack <1024) */
+@media (max-width: 1023px) {
+  .sl-footer__cols .sl-foot-col + .sl-foot-col {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
 }
 .sl-footer__inner { max-width: var(--container-max); margin: 0 auto; }
 .sl-footer__brand {

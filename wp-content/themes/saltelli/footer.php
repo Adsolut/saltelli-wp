@@ -72,25 +72,32 @@ $ftr_social = [
 
 /* Wave 4.7.fix.2 P4: tier-1 aree footer ora editable da SCF tab "Footer Aree".
  * Repeater rows con sub-fields numero/label/url. Fallback su valori legacy
- * se SCF è vuoto / repeater non ancora inizializzato. */
+ * se SCF è vuoto / repeater non ancora inizializzato.
+ * Elena fix 2026-05-14: skip row con label vuota (SCF aveva 3 row vuote in DB
+ * che bypassavano il fallback hardcoded → footer column vuota). + nuovo
+ * fallback ai 3 CLUSTER (Privati/Imprese/Cont.Amm.) per matching logica
+ * menu mega L2, invece delle 3 singole competenze tier-1. */
 $ftr_tier1_raw = saltelli_option('footer_tier1_aree', null);
+$ftr_tier1 = [];
 if (is_array($ftr_tier1_raw) && !empty($ftr_tier1_raw)) {
-    $ftr_tier1 = [];
     foreach ($ftr_tier1_raw as $row) {
         if (!is_array($row)) continue;
+        $label = trim((string) ($row['label'] ?? ''));
+        $url   = trim((string) ($row['url']   ?? ''));
+        if ($label === '' || $url === '') continue; // skip row vuote
         $ftr_tier1[] = [
             'n'    => (string) ($row['numero'] ?? ''),
-            't'    => (string) ($row['label']  ?? ''),
-            'href' => (string) ($row['url']    ?? '#'),
+            't'    => $label,
+            'href' => $url,
         ];
     }
 }
 if (empty($ftr_tier1)) {
-    // Fallback editoriale (legacy v0.20.2 + v0.21.3 [F1] no tier-2 col).
+    // Fallback Elena 2026-05-14: 3 CLUSTER L2 (matching menu mega).
     $ftr_tier1 = [
-        ['n' => '01', 't' => __('Diritto tributario', 'saltelli'),         'href' => '/aree-di-pratica/privati/diritto-tributario/'],
-        ['n' => '02', 't' => __('Diritto del lavoro', 'saltelli'),         'href' => '/aree-di-pratica/privati/diritto-del-lavoro/'],
-        ['n' => '03', 't' => __('Diritto di famiglia LGBTQ+', 'saltelli'), 'href' => '/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/'],
+        ['n' => '01', 't' => __('Per i Privati', 'saltelli'),              'href' => '/aree-di-pratica/privati/'],
+        ['n' => '02', 't' => __('Per le Imprese', 'saltelli'),             'href' => '/aree-di-pratica/imprese/'],
+        ['n' => '03', 't' => __('Contenzioso Amministrativo', 'saltelli'), 'href' => '/aree-di-pratica/contenzioso-amministrativo/'],
     ];
 }
 
