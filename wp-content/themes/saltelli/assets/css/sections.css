@@ -400,7 +400,8 @@
   padding-block: 56px;
 }
 @media (min-width: 1024px) {
-  .sl-areas { padding-block: 80px; /* v0.17.2 armonia rhythm desktop */ }
+  /* Elena fix 2026-05-14 (armonizzazione globale): 80 → 56 desktop */
+  .sl-areas { padding-block: 56px; }
 }
 .sl-areas__head {
   display: grid;
@@ -581,7 +582,8 @@
 .sl-studio__plate-meta { margin-top: 4px; text-align: center; }
 
 @media (min-width: 1024px) {
-  .sl-studio { padding-block: 80px; /* v0.16.2 era 128, ridotto per gap sezioni più stretto */ }
+  /* Elena fix 2026-05-14: 80 → 56 (armonizzazione cross-section) */
+  .sl-studio { padding-block: 56px; }
   .sl-studio__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
@@ -684,7 +686,8 @@
 }
 
 @media (min-width: 1024px) {
-  .sl-team { padding-block: 80px; /* v0.16.2 era 128 */ }
+  /* Elena fix 2026-05-14: 80 → 56 (armonizzazione cross-section) */
+  .sl-team { padding-block: 56px; }
   .sl-team__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
@@ -767,9 +770,10 @@
 }
 
 @media (min-width: 1024px) {
-  .sl-cases { padding-block: 80px; /* v0.16.2 era 128 */ }
-  /* Elena fix 2026-05-13: home override desktop */
-  .home .sl-cases { padding-bottom: 32px; }
+  /* Elena fix 2026-05-14: 80 → 56 (armonizzazione cross-section) */
+  .sl-cases { padding-block: 56px; }
+  /* Home override desktop (gap pre-press band) */
+  .home .sl-cases { padding-bottom: 24px; }
   .sl-cases__head {
     grid-template-columns: auto 1fr;
     gap: 32px;
@@ -792,7 +796,8 @@
  * 3-col grid desktop, 1-col stack mobile. Card cream + hover lift.
  * ========================================================= */
 .sl-front-blog {
-  padding-block: clamp(56px, 7vw, 96px);
+  /* Elena fix 2026-05-14: armonizzazione clamp(56,7vw,96) → clamp(40,5vw,56) */
+  padding-block: clamp(40px, 5vw, 56px);
   background: var(--background);
 }
 .sl-front-blog__grid {
@@ -979,11 +984,11 @@
     padding-left: 20%;
   }
   /* Elena fix 2026-05-14: layout 2-col quando c'è mappa (voci stack sx + mappa dx).
-     Revised: mappa "cartolina" 360px max, voci col fluid → mappa NON domina. */
+     Revised v2: padding-left 20→12, gap 48→32 per chiudere il vuoto tra voci e mappa. */
   .sl-contact__grid--with-map {
     grid-template-columns: 1fr 360px;
-    gap: 48px;
-    padding-left: 20%;
+    gap: 32px;
+    padding-left: 12%;
     align-items: start;
   }
   .sl-contact__item-label { margin-bottom: 16px; font-size: var(--fs-micro); }
@@ -1734,10 +1739,12 @@ html.sl-menu-open body { overflow: hidden; }
   margin: 0;
 }
 .sl-contact__big a { color: inherit; }
-.sl-contact__cta { margin-top: 48px; }
+.sl-contact__cta { margin-top: 32px; }
 @media (min-width: 1024px) {
   .sl-contact__big { font-size: 24px; }
-  .sl-contact__cta { margin-top: 96px; padding-left: 20%; }
+  /* Elena fix 2026-05-14: CTA padding-left 20→12 per allineare con grid--with-map.
+     margin-top 96→32 per compressione verticale. */
+  .sl-contact__cta { margin-top: 32px; padding-left: 12%; }
 }
 
 /* Site footer (footer.php usa naming legacy) */

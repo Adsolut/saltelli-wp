@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.61-elena-fix-home-contact-map-smaller');
+define('SALTELLI_THEME_VERSION', '1.3.62-elena-fix-global-section-compaction');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
