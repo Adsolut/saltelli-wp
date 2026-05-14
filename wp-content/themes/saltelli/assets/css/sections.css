@@ -787,6 +787,91 @@
 }
 
 /* =========================================================
+ * 6.5 — FRONT BLOG (Elena fix 2026-05-14)
+ * Sezione §05 homepage: preview 3 articoli più recenti.
+ * 3-col grid desktop, 1-col stack mobile. Card cream + hover lift.
+ * ========================================================= */
+.sl-front-blog {
+  padding-block: clamp(56px, 7vw, 96px);
+  background: var(--background);
+}
+.sl-front-blog__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 32px;
+}
+@media (min-width: 768px) {
+  .sl-front-blog__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+}
+.sl-front-blog__card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform var(--dur-fast, 200ms) ease,
+              box-shadow var(--dur-fast, 200ms) ease;
+}
+.sl-front-blog__card:hover,
+.sl-front-blog__card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(27, 43, 75, 0.08);
+  outline: none;
+}
+.sl-front-blog__card-img {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--border);
+}
+.sl-front-blog__card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 600ms var(--ease-editorial);
+}
+.sl-front-blog__card:hover .sl-front-blog__card-img img {
+  transform: scale(1.04);
+}
+.sl-front-blog__card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+.sl-front-blog__card-cat {
+  color: var(--accent);
+  font-size: 11px;
+}
+.sl-front-blog__card-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--primary);
+  margin: 0;
+  font-weight: 400;
+}
+.sl-front-blog__card-excerpt {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text);
+  margin: 0;
+}
+.sl-front-blog__card-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+/* =========================================================
  * 7. PRESS — Earned media strip
  * ========================================================= */
 .sl-press {

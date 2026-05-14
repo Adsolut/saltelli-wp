@@ -417,6 +417,67 @@ $press = saltelli_press_outlets();
     </div>
 </section>
 
+<?php
+/* Elena fix 2026-05-14: nuova sezione §05 "Dal blog" — preview 3 articoli più
+   recenti del CPT 'post'. Auto-aggiornata: l'editor pubblica un nuovo articolo
+   da WP-Admin, frontend lo mostra senza intervento dev. */
+$sl_blog_posts = get_posts([
+    'post_type'      => 'post',
+    'posts_per_page' => 3,
+    'orderby'        => 'date',
+    'order'          => 'DESC',
+    'post_status'    => 'publish',
+    'no_found_rows'  => true,
+]);
+?>
+<?php if (!empty($sl_blog_posts)) : ?>
+<section class="sl-front-blog" id="blog" aria-labelledby="blog-h">
+    <div class="sl-container">
+        <div class="sl-section-head">
+            <div class="sl-mono"><?php echo esc_html(saltelli_page_field('home_blog_eyebrow', '§ 05 — Dal blog')); ?></div>
+            <h2 class="sl-section-title" id="blog-h">
+                <?php echo esc_html(saltelli_page_field('home_blog_h2_main', 'Ultime letture')); ?><br>
+                <em><?php echo esc_html(saltelli_page_field('home_blog_h2_em', 'dal nostro studio.')); ?></em>
+            </h2>
+        </div>
+
+        <div class="sl-front-blog__grid">
+            <?php foreach ($sl_blog_posts as $bp) :
+                $cats     = get_the_category($bp->ID);
+                $cat_name = !empty($cats) ? $cats[0]->name : '';
+                $author   = get_the_author_meta('display_name', $bp->post_author);
+                $thumb    = get_the_post_thumbnail_url($bp->ID, 'medium_large');
+                $excerpt  = get_the_excerpt($bp);
+                ?>
+                <a class="sl-front-blog__card" href="<?php echo esc_url(get_permalink($bp)); ?>">
+                    <?php if ($thumb) : ?>
+                        <div class="sl-front-blog__card-img">
+                            <img src="<?php echo esc_url($thumb); ?>" alt="" loading="lazy" decoding="async">
+                        </div>
+                    <?php endif; ?>
+                    <div class="sl-front-blog__card-body">
+                        <?php if ($cat_name !== '') : ?>
+                            <div class="sl-mono sl-front-blog__card-cat"><?php echo esc_html($cat_name); ?></div>
+                        <?php endif; ?>
+                        <h3 class="sl-front-blog__card-title"><?php echo esc_html(get_the_title($bp)); ?></h3>
+                        <?php if ($excerpt !== '') : ?>
+                            <p class="sl-front-blog__card-excerpt"><?php echo esc_html(wp_trim_words($excerpt, 20, '…')); ?></p>
+                        <?php endif; ?>
+                        <div class="sl-mono sl-front-blog__card-meta">
+                            <time datetime="<?php echo esc_attr(get_the_date('c', $bp)); ?>"><?php echo esc_html(get_the_date('j M Y', $bp)); ?></time>
+                            <?php if ($author !== '') : ?>
+                                <span aria-hidden="true"> · </span>
+                                <span><?php echo esc_html($author); ?></span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
 <?php /* Wave 6 Pattern 6 — Testimonials block (renderizza solo se ci sono trust items con type=testimonianza). */ ?>
 <section class="sl-front-testimonials">
     <div class="sl-container">
@@ -424,7 +485,7 @@ $press = saltelli_press_outlets();
     </div>
 </section>
 
-<?php /* Elena fix 2026-05-13: §05 ora "Recensioni Google" placeholder — integrazione
+<?php /* Elena fix 2026-05-13: §06 ora "Recensioni Google" placeholder (era §05 — renumber post-aggiunta §05 Dal blog 2026-05-14) — integrazione
        reale (API Places vs SCF manuale) da decidere quando Elena ha accessi
        Google Cloud / Place ID. Rimosse 6 voci press: Il Mattino, La Repubblica,
        Il Sole 24 Ore, Diritto.it, Altalex, Camera Avvocati Napoli. */ ?>
