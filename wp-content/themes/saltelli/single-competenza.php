@@ -402,39 +402,12 @@ while (have_posts()) :
             </section>
         <?php endif; ?>
 
-        <?php /* Wave 6 Pattern 4 — Mini-form contestuale, prima della CTA finale */ ?>
-        <section class="sl-competenza__mini-form-wrap">
-            <div class="sl-container">
-                <?php
-                $sl_mini_topic = get_post_field('post_name', $post_id);
-                $sl_mini_title = sprintf(
-                    /* translators: %s = titolo competenza */
-                    __('Hai una domanda su %s?', 'saltelli'),
-                    get_the_title($post_id)
-                );
-                get_template_part('template-parts/mini-form', null, [
-                    'topic_default' => $sl_mini_topic,
-                    'title'         => $sl_mini_title,
-                ]);
-                ?>
-            </div>
-        </section>
-
-        <section class="sl-competenza__cta">
-            <div class="sl-container">
-                <div class="sl-mono">§ <?php esc_html_e('Pronto?', 'saltelli'); ?></div>
-                <h2 class="sl-section-title">
-                    <?php esc_html_e('Hai una pratica simile?', 'saltelli'); ?>
-                </h2>
-                <a class="sl-btn sl-btn--primary" href="<?php echo esc_url($cta_url); ?>">
-                    <span><?php echo esc_html($cta_label); ?></span>
-                    <span class="arrow" aria-hidden="true">→</span>
-                </a>
-                <div class="sl-mono sl-competenza__cta-note">
-                    <?php esc_html_e('Prima consulenza conoscitiva gratuita · Risposta entro 24 ore · In studio o online', 'saltelli'); ?>
-                </div>
-            </div>
-        </section>
+        <?php /* Elena fix 2026-05-14: rimosse <section sl-competenza__mini-form-wrap>
+                  (Pattern 4 "PARLA CON NOI · Hai una domanda su X?") + <section
+                  sl-competenza__cta> ("§ PRONTO? · Hai una pratica simile?") finale —
+                  ENTRAMBE ridondanti con footer pre-CTA "§ Contattaci" cross-page +
+                  hero CTA top. Template-parts/mini-form.php + CSS .sl-competenza__cta*
+                  restano orphan (cleanup Wave 6.1). */ ?>
 
     </article>
     <?php
