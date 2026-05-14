@@ -66,15 +66,7 @@ while (have_posts()) :
         $render_tier1_clusters = ! empty($tier1_clusters_data);
     }
     ?>
-    <?php
-    /* Elena fix 2026-05-14: modifier --long-title se title > 20 chars
-       → CSS stack del box answer sotto invece di affianco (evita box "tower
-       narrow" per title lunghi tipo "Eredità e successioni", "Contrattualistica"). */
-    $sl_title_long = mb_strlen(get_the_title()) > 20;
-    $sl_comp_classes = 'sl-competenza sl-competenza--' . ($is_tier_1 ? 'tier-1' : 'tier-2')
-                     . ($sl_title_long ? ' sl-competenza--long-title' : '');
-    ?>
-    <article <?php post_class($sl_comp_classes); ?>>
+    <article <?php post_class('sl-competenza sl-competenza--' . ($is_tier_1 ? 'tier-1' : 'tier-2')); ?>>
 
         <header class="sl-competenza__hero sl-page-hero">
             <div class="sl-container">

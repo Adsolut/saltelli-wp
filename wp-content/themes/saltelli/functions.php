@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.81-elena-fix-competenza-prose-emoji-size');
+define('SALTELLI_THEME_VERSION', '1.3.82-elena-fix-competenza-stack-default-all');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
