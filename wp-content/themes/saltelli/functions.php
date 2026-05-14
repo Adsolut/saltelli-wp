@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.67-elena-fix-sl-page-hub-hero-top-zero');
+define('SALTELLI_THEME_VERSION', '1.3.68-elena-fix-hub-hero-align-uniform');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
