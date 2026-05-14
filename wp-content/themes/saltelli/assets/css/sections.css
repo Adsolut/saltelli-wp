@@ -2356,6 +2356,23 @@ html:not(.js-reveal-ready) [data-reveal] {
     text-transform: uppercase;
 }
 
+/* Elena fix 2026-05-14: emoji auto-convertite da WP (filter emoji_to_image) in
+   <img src="s.w.org/.../emoji/...svg"> renderizzate full-width nel prose container.
+   Constraint a 1em inline come dovrebbe essere. */
+.sl-competenza__prose img[src*="s.w.org/images/core/emoji"],
+.sl-page__prose img[src*="s.w.org/images/core/emoji"],
+.entry-content img[src*="s.w.org/images/core/emoji"],
+.sl-competenza__prose img.wp-smiley {
+    display: inline-block;
+    width: 1.1em;
+    height: 1.1em;
+    max-width: none;
+    margin: 0 .15em;
+    padding: 0;
+    border: 0;
+    vertical-align: text-bottom;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    FIX P0.2 — h2 nel content competenza: scala più contenuta + no transform
    I content da source page possono contenere h2/h3 con kerning Playfair
