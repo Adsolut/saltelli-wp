@@ -2415,7 +2415,9 @@ html:not(.js-reveal-ready) [data-reveal] {
    ═══════════════════════════════════════════════════════════════ */
 
 .sl-page {
-    padding-block: clamp(64px, 8vw, 128px);
+    /* Elena fix 2026-05-14: padding-top clamp(64,8vw,128) → 0 per attacco header
+       sticky. Bottom ridotto 64-128 → 40-80 per compressione coerente. */
+    padding-block: 0 clamp(40px, 5vw, 80px);
 }
 .sl-page__hero {
     margin-bottom: 48px;
@@ -10047,7 +10049,10 @@ body.single-post .entry-content > p:first-of-type::first-letter {
    ═══════════════════════════════════════════════════════════════ */
 
 .sl-hub-hero {
-    padding: clamp(80px, 12vw, 160px) 0 clamp(48px, 6vw, 80px);
+    /* Elena fix 2026-05-14: padding-top clamp(80,12vw,160) → clamp(16,2vw,32)
+       per attacco header sticky cross-hub (Aree/Risorse/Costi/Chi-siamo).
+       Bottom 48-80 → 32-56 compressione coerente. */
+    padding: clamp(16px, 2vw, 32px) 0 clamp(32px, 4vw, 56px);
 }
 .sl-hub-hero__inner {
     max-width: 920px;
