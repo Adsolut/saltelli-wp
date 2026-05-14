@@ -5861,6 +5861,17 @@ textarea.sl-input {
     color: var(--accent);
     margin-bottom: 16px;
 }
+/* Elena fix 2026-05-14: icona immagine (alternativa al glyph) — stessa altezza
+   visiva del glyph (~56px) per layout coerente, object-fit:contain per evitare
+   stretch su immagini non-quadrate. */
+.sl-tipoarea__scenario-icon {
+    display: block;
+    width: auto;
+    height: clamp(40px, 5vw, 56px);
+    max-width: 64px;
+    object-fit: contain;
+    margin-bottom: 16px;
+}
 .sl-tipoarea__scenario-title {
     font-family: var(--font-display);
     font-weight: 400;
