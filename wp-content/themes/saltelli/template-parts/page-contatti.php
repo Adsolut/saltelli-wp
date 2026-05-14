@@ -245,36 +245,9 @@ $chain_contact = saltelli_get_breadcrumb_chain();
         </div>
     </section>
 
-    <?php
-    /* Elena fix 2026-05-14: §04 Mappa Google. Editor incolla l'intero iframe
-       da Google Maps → Condividi → Incorpora. Render solo se SCF popolato. */
-    $sl_map_embed = (string) saltelli_field('contatti_map_embed', $pid, '');
-    if ($sl_map_embed !== '') :
-        $sl_map_eyebrow = (string) saltelli_field('contatti_map_eyebrow', $pid, '§ 04 — Dove trovarci');
-        $sl_map_allowed = [
-            'iframe' => [
-                'src'             => true,
-                'width'           => true,
-                'height'          => true,
-                'style'           => true,
-                'allowfullscreen' => true,
-                'loading'         => true,
-                'referrerpolicy'  => true,
-                'frameborder'     => true,
-                'title'           => true,
-                'aria-label'      => true,
-            ],
-        ];
-        ?>
-    <section class="sl-contatti-w3__map" aria-labelledby="contatti-map-h">
-        <div class="sl-contatti-w3__map-head">
-            <div class="sl-mono sl-contatti-w3__map-eyebrow" id="contatti-map-h"><?php echo esc_html($sl_map_eyebrow); ?></div>
-        </div>
-        <div class="sl-contatti-w3__map-frame">
-            <?php echo wp_kses($sl_map_embed, $sl_map_allowed); ?>
-        </div>
-    </section>
-    <?php endif; ?>
+    <?php /* Elena fix 2026-05-14 revised: §04 Mappa standalone RIMOSSA — la mappa
+       Google Maps va nel sidebar §02 Studio (già renderizzata via `map_iframe`
+       SCF a riga 173). PR #37 era ridondante. */ ?>
 
     <section class="sl-contatti-w3__trust" aria-label="<?php esc_attr_e('La nostra professionalità', 'saltelli'); ?>">
         <div class="sl-contatti-w3__trust-inner">

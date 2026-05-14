@@ -243,34 +243,8 @@
       "default_value": "Stazione FS, 10 minuti a piedi."
     },
     {
-      "key": "field_contatti_map_tab",
-      "label": "Mappa (§04)",
-      "name": "",
-      "type": "tab",
-      "placement": "top",
-      "endpoint": 0
-    },
-    {
-      "key": "field_contatti_map_eyebrow",
-      "label": "§04 Mappa — etichetta sezione",
-      "name": "contatti_map_eyebrow",
-      "type": "text",
-      "instructions": "Etichetta sopra la mappa Google.",
-      "default_value": "§ 04 — Dove trovarci"
-    },
-    {
-      "key": "field_contatti_map_embed",
-      "label": "§04 Mappa — codice embed Google Maps",
-      "name": "contatti_map_embed",
-      "type": "textarea",
-      "instructions": "Su Google Maps: cerca l'indirizzo dello studio → Condividi → Incorpora una mappa → Copia HTML → incolla qui l'intero <iframe ...></iframe>. Se lasci vuoto la sezione non viene mostrata.",
-      "default_value": "",
-      "rows": 6,
-      "new_lines": ""
-    },
-    {
       "key": "field_contatti_trust_tab",
-      "label": "Trust (§05)",
+      "label": "Trust (§04)",
       "name": "",
       "type": "tab",
       "placement": "top",
