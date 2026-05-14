@@ -248,6 +248,26 @@
             "placeholder": ""
         },
         {
+            "key": "field_ls_plate_image",
+            "label": "Plate I — Foto facciata studio",
+            "name": "lo_studio_plate_image",
+            "type": "image",
+            "instructions": "Foto della facciata dello studio (banner subito sotto hero). Ideale: B/N o seppia, formato orizzontale 1440×560 px. Se vuoto, mostra placeholder grafico.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg,jpeg,png,webp"
+        },
+        {
             "key": "field_ls_sezioni_tab",
             "label": "Sezioni §01 lede – §05 cronologia",
             "name": "",
