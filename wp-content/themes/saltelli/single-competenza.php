@@ -297,18 +297,11 @@ while (have_posts()) :
             endif;
         endif; ?>
 
-        <?php /* Wave 6 — CTA progressive middle (primary), prima della FAQ */ ?>
-        <?php if ($cta_middle_label !== '' && $cta_middle_url !== '') : ?>
-            <section class="sl-competenza__cta-middle" aria-label="<?php esc_attr_e('Parla con noi', 'saltelli'); ?>">
-                <div class="sl-container">
-                    <div class="sl-mono">§ <?php esc_html_e('Pronto a iniziare?', 'saltelli'); ?></div>
-                    <a class="sl-btn sl-btn--primary" href="<?php echo esc_url($cta_middle_url); ?>">
-                        <span><?php echo esc_html($cta_middle_label); ?></span>
-                        <span class="arrow" aria-hidden="true">→</span>
-                    </a>
-                </div>
-            </section>
-        <?php endif; ?>
+        <?php /* Elena fix 2026-05-14: rimossa <section sl-competenza__cta-middle>
+                  "§ Pronto a iniziare? · Parlane con i nostri avvocati" — ridondante con
+                  footer pre-CTA "§ Contattaci" cross-page (footer.php) e con la CTA-top
+                  del hero competenza. SCF helper $cta_middle_label/_url restano definiti
+                  (dead vars, cleanup Wave 6.1). */ ?>
 
         <?php
         // Wave 6 — Normalizza FAQ: supporta legacy rows fake-repeater + Wave 1+ post_object (saltelli_faq CPT)

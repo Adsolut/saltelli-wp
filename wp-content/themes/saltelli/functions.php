@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.69-elena-fix-risorse-hub-remove-guide-card');
+define('SALTELLI_THEME_VERSION', '1.3.70-elena-fix-competenza-remove-cta-middle');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
