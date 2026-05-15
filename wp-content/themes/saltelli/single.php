@@ -137,7 +137,7 @@ while (have_posts()) :
                         <a class="sl-team__portrait sl-post__author-portrait" href="<?php echo esc_url(get_permalink($linked_avv_id)); ?>">
                             <?php
                             if (has_post_thumbnail($linked_avv_id)) {
-                                echo get_the_post_thumbnail($linked_avv_id, 'saltelli-attorney-square', [
+                                echo get_the_post_thumbnail($linked_avv_id, 'saltelli-attorney-portrait', [
                                     'loading'  => 'lazy',
                                     'decoding' => 'async',
                                     'alt'      => esc_attr(get_the_title($linked_avv_id)),
