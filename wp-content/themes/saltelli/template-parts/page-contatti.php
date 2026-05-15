@@ -185,7 +185,14 @@ $chain_contact = saltelli_get_breadcrumb_chain();
                             'allowfullscreen' => true,
                         ],
                     ]); ?>
-                    <div class="sl-mono sl-contatti-w3__map-tag"><?php echo esc_html($map_caption); ?></div>
+                    <?php /* Elena fix 2026-05-15 — rimosso label overlay
+                       <div class="sl-mono sl-contatti-w3__map-tag"> con caption
+                       "CHIAIA · NAPOLI" sopra la mappa. Era posizionato absolute
+                       top-left e intercettava i click sulla mappa, impedendo
+                       l'interazione zoom/drag su Google Maps embed. La caption
+                       è ridondante con l'indirizzo già mostrato accanto (Via
+                       Vannella Gaetani 27 — Chiaia, Napoli). $map_caption
+                       SCF resta in DB ma non più renderizzato (cleanup post-cut). */ ?>
                 </div>
                 <?php endif; ?>
 
