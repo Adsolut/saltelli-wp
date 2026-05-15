@@ -68,10 +68,16 @@ while (have_posts()) :
                 <h1 class="sl-post__title" data-split-reveal><?php echo wp_kses(saltelli_split_h1_words(get_the_title()), ['span' => ['class' => true, 'data-i' => true]]); ?></h1>
 
                 <?php
-                $excerpt = get_the_excerpt();
-                if ($excerpt) :
+                /* Elena fix 2026-05-15 — lede sotto H1 mostrato solo se l'autore
+                   ha scritto un excerpt MANUALE nel campo dedicato (has_excerpt).
+                   Pre-fix: get_the_excerpt() ritornava sempre qualcosa (auto-fallback
+                   dalle prime parole del post_content) → duplicazione visibile col
+                   primo paragrafo del body subito sotto la featured image. Post-fix:
+                   solo i 12 post che hanno excerpt manuale dedicato mostrano il
+                   lede, gli altri vanno H1 → image → body senza ridondanza. */
+                if (has_excerpt()) :
                     ?>
-                    <p class="sl-post__lede"><?php echo esc_html($excerpt); ?></p>
+                    <p class="sl-post__lede"><?php echo esc_html(get_the_excerpt()); ?></p>
                 <?php endif; ?>
 
                 <?php
