@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.4.01-elena-fix-blog-lede-dedup');
+define('SALTELLI_THEME_VERSION', '1.4.02-elena-fix-blog-author-card-align');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
