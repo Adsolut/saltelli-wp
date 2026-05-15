@@ -1227,3 +1227,23 @@ function saltelli_split_h1_words($title, $extra_class = '') {
     }
     return $out;
 }
+
+/**
+ * URL canonico per le CTA WhatsApp dello Studio (NON per le CTA per-avvocato).
+ *
+ * Elena fix 2026-05-15: il cliente ha attivato WhatsApp Business con
+ * click-to-chat URL dedicato (`wa.me/message/{CODE}`) che include già un
+ * messaggio di apertura preimpostato nel dashboard WA Business. Sostituisce
+ * il pattern legacy `wa.me/{phone_digits}?text=<urlencode>` usato in
+ * 5 location del tema (header sticky FAB, footer link, 404, mobile sticky
+ * bar, contatti page CTA).
+ *
+ * Per le CTA per-avvocato (single-avvocato.php) il numero personale del
+ * lawyer resta — questo helper è solo per lo Studio.
+ *
+ * @return string URL completo WhatsApp Business.
+ * @since 1.4.09 Elena fix 2026-05-15
+ */
+function saltelli_whatsapp_studio_url() {
+    return 'https://wa.me/message/DQ4AYW6E5RM6F1';
+}

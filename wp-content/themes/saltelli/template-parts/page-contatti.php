@@ -35,8 +35,8 @@ $tel_href  = 'tel:' . preg_replace('/[^0-9+]/', '', $tel_label);
 $email_pub = saltelli_option('studio_email', $studio['email'] ?? 'info@studiolegalesaltelli.it');
 if ($email_pub === '') $email_pub = $studio['email'] ?? '';
 
-$wa_digits = preg_replace('/[^0-9]/', '', (string) ($studio['whatsapp'] ?? ''));
-$wa_href   = 'https://wa.me/' . $wa_digits;
+// Elena fix 2026-05-15: WA URL via helper centralizzato (business click-to-chat).
+$wa_href   = saltelli_whatsapp_studio_url();
 
 $chain_contact = saltelli_get_breadcrumb_chain();
 ?>

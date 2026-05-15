@@ -43,7 +43,7 @@ $contact_url = home_url('/contatti/');
     <?php endif; ?>
     <?php if (!empty($whatsapp)) : ?>
         <a
-            href="https://wa.me/<?php echo esc_attr(ltrim($whatsapp, '+')); ?>"
+            href="<?php echo esc_url(saltelli_whatsapp_studio_url()); ?>"
             class="sl-mobile-bar__action"
             target="_blank"
             rel="noopener"

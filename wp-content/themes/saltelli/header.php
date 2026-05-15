@@ -184,7 +184,7 @@ $sl_wa_message = $sl_wa_context !== ''
 /* === IMPECCABLE v0.20.0 [persuasion + harden] END === */
 ?>
 <a class="sl-whatsapp-sticky"
-   href="https://wa.me/<?php echo esc_attr(ltrim($saltelli_phone_e164, '+')); ?>?text=<?php echo rawurlencode($sl_wa_message); ?>"
+   href="<?php echo esc_url(saltelli_whatsapp_studio_url()); ?>"
    target="_blank"
    rel="noopener"
    aria-label="<?php esc_attr_e('Contatta lo studio su WhatsApp', 'saltelli'); ?>">
