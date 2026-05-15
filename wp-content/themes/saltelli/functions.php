@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.4.04-elena-fix-blog-author-thumb-size-portrait');
+define('SALTELLI_THEME_VERSION', '1.4.05-elena-feat-richiedi-preventivo-cf7-form');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
