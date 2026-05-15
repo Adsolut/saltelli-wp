@@ -20,8 +20,8 @@ $sl404_studio    = saltelli_studio_data();
 /* Wave 4.6: legge da studio_telefono_pubblico (Wave 1 schema) — dead alias contact_* rimosso. */
 $sl404_phone     = (string) saltelli_option('studio_telefono_pubblico', '+39 081 1813 1119');
 $sl404_phone_e164 = saltelli_studio_phone_e164();
-$sl404_wa_digits = preg_replace('/[^0-9]/', '', (string) $sl404_studio['whatsapp']);
-$sl404_wa_href   = 'https://wa.me/' . $sl404_wa_digits . '?text=' . rawurlencode("Ciao, sono arrivato qui per errore — vorrei una consulenza presso lo Studio Saltelli.");
+// Elena fix 2026-05-15: WA URL ora helper centralizzato (business click-to-chat link).
+$sl404_wa_href   = saltelli_whatsapp_studio_url();
 
 // Aree: tier-1 prima, poi tier-2 in menu_order, max 6 (range 5-7 da spec).
 // Wave 4.6: use is_tier_1 (Wave 1 ACF schema canonico).

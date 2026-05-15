@@ -361,7 +361,7 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                         <?php if (!empty($ftr_social['twitter'])) : ?>
                             <a class="sl-foot-link sl-mono sl-foot-social__link sl-foot-social__link--twitter" href="<?php echo esc_url($ftr_social['twitter']); ?>" rel="noopener" target="_blank" aria-label="<?php esc_attr_e('X', 'saltelli'); ?>">X</a>
                         <?php endif; ?>
-                        <a class="sl-foot-link sl-mono" href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', (string) $studio['whatsapp'])); ?>" rel="noopener" target="_blank">WhatsApp</a>
+                        <a class="sl-foot-link sl-mono" href="<?php echo esc_url(saltelli_whatsapp_studio_url()); ?>" rel="noopener" target="_blank">WhatsApp</a>
                     </div>
 
                     <?php /* DEPRECATED v0.21.3 [F3]: AI-friendly endpoint list + "Citazione consentita" + badge "Verificabile in studio".
