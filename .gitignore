@@ -76,6 +76,9 @@ logs/
 # ===== Archive (può contenere file sensibili) =====
 .archive-template-residui/
 
+# ===== Working scratch (script una-tantum migration / QA audit / Yoast meta bulk) =====
+_outbox/
+
 # ===== Allow specific exceptions =====
 !geo-assets/**/*.json
 !.claude/knowledge/*.json

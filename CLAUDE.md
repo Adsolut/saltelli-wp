@@ -17,23 +17,24 @@ Custom WordPress theme deliberatamente differenziato, AI-ready, performance-obse
 
 **Strategy:** "Legal Luxury Minimal" — boutique editoriale italiano, tipografia dominante, palette navy/crema/bronzo. Tier-1 deep clusters: Tributario · Lavoro · Famiglia LGBTQ+. Le altre 16 practice areas → tier-2 lighter pages.
 
-## Current state — v1.3.25-fix-home-areas-numerazione (CUT-READY)
+## Current state — v1.4.04-elena-fix-blog-author-thumb-size-portrait (CUT-READY)
 
-**Updated:** 2026-05-13 · **Branch:** `main` · last merge `d186262` (Elena fix #1 v1.3.25) · prev merge `d93b50a` (rollback template v1.3.23) · prev merge `9b5221c` (Wave 6.0 partial v1.3.22) · ~48 commit post-v1.3.13
+**Updated:** 2026-05-15 · **Branch:** `main` · last merge `46ac835` (PR #83 author thumb portrait) · ~19 PR mergiati 2026-05-14/15 batch QA Elena (PR #65 → #83)
 
 **Status:**
-- Demo ✅ presentata · feedback Elena 23 punti triage: 18 chiusi + 1 pre-batch + 1 zero-code deferred + 3 defer post-cut
-- Wave Elena post-onboarding fix #1 (2026-05-13): primo contributo Elena via Code session autonoma — branch `feat/elena-fix-home-areas-numerazione-cluster` (`55e35b7`) → merge no-ff in `d186262` → tag `v1.3.25-fix-home-areas-numerazione`
-- Fix homepage §01 Aree: numerazione per-cluster coerente (era globale sequenziale, "buca" 02,06,08…) + visibilità competenze tier-2 orphan (rimosso INNER JOIN gotcha `meta_key=is_tier_1 + orderby=meta_value_num`, sort tier-1-first ora PHP-side via usort)
-- Staging `https://staging.studiolegalesaltelli.it` allineato v1.3.25
-- 13 Page WP Gutenberg-disabled · 18 Pages canoniche
-- Design Handoff completato 12/12 template · Wave Elena FB Batch 1+2+3 + Wave 6.0 partial COMPLETATI
-- tokens.css rebuilt da DESIGN.md (Wave 5 STEP 2) · sections.css drift cleanup STEP 4 (328 token swaps)
-- Cross-page smoke test PASS
+- Demo ✅ presentata · feedback Elena 23 punti triage chiusi
+- **Wave Elena QA 2026-05-14/15** (sessione corrente): ~19 PR merged in 2 giorni intensivi
+  - **Homepage**: Elfsight Google Reviews widget (#67) · Aree multi-cluster fix (#66) · home reviews tighten gap (#68) · font-display swap FOUT fix (#65)
+  - **Chi Siamo**: founding_paragraphs re-render in §01 Lede (#73) · link inline navy editoriale globale (#75)
+  - **SEO/Yoast**: meta title/desc/focus per 51 post (Pages+CPT) via wp eval-file · content analysis bridge SCF (#70) · editor JS bridge (#71) · cURL loopback fix (#72) · GSC audit recovery (#77)
+  - **Blog single**: CTA ridondante rimossa (#79) · lede dedup has_excerpt (#80) · author card left-align (#81) · portrait 3:4 verticale (#82) · thumb size square→portrait (#83) · prose link styling include .sl-post__body (#78)
+- **Blog migration audit** (PR #77 + post-merge): 99.7% URL Google coperti — 22 articoli draft→publish + 2 articoli migrati dal vecchio Elementor + 1 articolo aggiunto 13 maggio (post #3199 Tredicesima) → totale 332 blog post pubblicati. ~2.755 impressioni Google preserved. **Sticky_posts trap risolto**: 23 sticky orfani da draft bloccavano archive ordering.
+- **Staging** `https://staging.studiolegalesaltelli.it` allineato v1.4.04
+- 13 Page WP Gutenberg-disabled · 18 Pages canoniche · 332 blog post
 
-**Active phase:** Elena pre-cut minor UX fix via WP-Admin · cleanup 15 branch feat/chore orfani (post-cut) · attesa cliente per finestra cut produzione (DNS switch staging → prod)
+**Active phase:** Elena pre-cut QA continuo via Code session autonoma · attesa cliente per finestra cut produzione (DNS switch staging → prod)
 
-**Next:** Cut produzione · backlog post-cut: Wave 6.0 full (disable Gutenberg CPT competenza) · Wave 6.1 SCF orphan cleanup (13 field in `docs/SCF_ORPHAN_FIELDS.md`) · P11 contatti · Wave 5.1 Image Expansion · Wave 5 STEP 5 phantom (~460) · single-post JSX Design · EDITOR-HANDOFF v6.1
+**Next:** Cut produzione · backlog post-cut: Wave 6.0 full (disable Gutenberg CPT competenza) · Wave 6.1 SCF orphan cleanup · P11 contatti · Wave 5.1 Image Expansion · single-post JSX Design · EDITOR-HANDOFF v6.1 · Yoast content analysis JS bridge cleanup (post-cut)
 
 ### Infra staging (consolidata 2026-04-30)
 - DO droplet `saltelli-staging-ams3-01` · `178.62.207.50` · ams3 · s-1vcpu-2gb · Ubuntu 24.04 LTS
@@ -281,6 +282,6 @@ Rileggi questo file. Se persiste il dubbio, chiedi a Duccio. Don't guess su:
 - Anything che apparirebbe in schema markup come fact
 
 ---
-*Updated: 2026-05-13 · v1.3.25-fix-home-areas-numerazione CUT-READY*
+*Updated: 2026-05-15 · v1.4.04-elena-fix-blog-author-thumb-size-portrait CUT-READY*
 *Storia dettagliata → `docs/CHANGELOG.md` · Pattern operativi → `docs/LESSONS-LEARNED.md`*
 *Maintained by orchestrator dopo ogni milestone.*
