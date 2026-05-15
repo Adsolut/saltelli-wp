@@ -3165,11 +3165,11 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
                     </section>
    ─────────────────────────────────────────────────────────────── */
 .sl-post__author-card {
-    /* Elena fix 2026-05-15: margin auto → 0 per left-align con body content
-       del post. Pre-fix la card era centrata orizzontalmente; era out-of-sync
-       col resto della pagina (lista "Leggi anche", related, etc. tutto a left). */
+    /* Elena fix 2026-05-15 #1: margin auto → 0 per left-align con body content.
+       Elena fix 2026-05-15 #2: grid-template-columns 80px → 90px per ospitare
+       il ritratto verticale 3:4 senza shift sul testo. */
     display: grid;
-    grid-template-columns: 80px 1fr;
+    grid-template-columns: 90px 1fr;
     gap: 24px;
     align-items: start;
     max-width: 60ch;
@@ -3180,12 +3180,14 @@ figure.sl-attorney__portrait .sl-attorney__placeholder {
 }
 
 /* Override portrait wrapper SOLO dentro author-card (preserva archive/single avvocato).
-   Specificità: .sl-post__author-card .sl-team__portrait (0,2,0) batte .sl-team__portrait (0,1,0). */
+   Specificità: .sl-post__author-card .sl-team__portrait (0,2,0) batte .sl-team__portrait (0,1,0).
+   Elena fix 2026-05-15: aspect 1/1 → 3/4 (verticale) per evitare crop teste sui ritratti
+   formato portrait. Width 90px height 120px. */
 .sl-post__author-card .sl-team__portrait,
 .sl-post__author-card .sl-post__author-portrait {
-    width: 80px !important;
-    height: 80px !important;
-    aspect-ratio: 1 / 1 !important;
+    width: 90px !important;
+    height: 120px !important;
+    aspect-ratio: 3 / 4 !important;
     margin: 0 !important;
     overflow: hidden;
     border: 1px solid var(--border);
