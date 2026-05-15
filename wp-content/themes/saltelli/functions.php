@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.4.06-elena-fix-richiedi-preventivo-form-align');
+define('SALTELLI_THEME_VERSION', '1.4.07-elena-fix-header-hide-phone-mobile');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 

@@ -7742,6 +7742,16 @@ a.sl-tipoarea__scenario:focus-visible .sl-tipoarea__scenario-leggi {
 }
 /* === IMPECCABLE v0.20.0 [interaction-design — header tel] END === */
 
+/* === v1.4.07 Elena fix 2026-05-15 — hide phone link su mobile + tablet.
+   Su <1024px c'è già una sticky mobile bar in basso (.sl-mobile-sticky-bar)
+   con CTA "Chiama" + WhatsApp. Mostrare ANCHE il numero in header crea
+   ridondanza e occupa spazio prezioso. Phone resta visibile su desktop. */
+@media (max-width: 1023px) {
+    .sl-header__phone {
+        display: none !important;
+    }
+}
+
 /* === IMPECCABLE v0.21.2 [perf-T4] BEGIN — A11y touch target + contrast ===
    Lighthouse mobile flagged: touch targets <48×48 + insufficient contrast.
    Fix mirato senza modificare tokens (palette locked). */
