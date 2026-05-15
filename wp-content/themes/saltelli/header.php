@@ -30,7 +30,7 @@ $saltelli_brand_payoff = (string) saltelli_option('brand_payoff', 'Diritto, con 
         <a class="sl-header__brand sl-logo--horizontal" href="<?php echo esc_url(home_url('/')); ?>" rel="home" aria-label="Studio Legale Saltelli — Home">
             <span class="sl-logo__h-left">
                 <span class="sl-logo__h-top">Studio Legale</span>
-                <span class="sl-logo__h-bot">Napoli · 1999</span>
+                <span class="sl-logo__h-bot">Napoli · 2008</span>
             </span>
             <span class="sl-logo__h-rule" aria-hidden="true"></span>
             <span class="sl-logo__h-name"><span class="sl-logo__swash">S</span>altelli</span>
