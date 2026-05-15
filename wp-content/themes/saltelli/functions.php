@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.3.99-elena-fix-blog-single-prose-link');
+define('SALTELLI_THEME_VERSION', '1.4.00-elena-fix-blog-remove-redundant-cta');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
