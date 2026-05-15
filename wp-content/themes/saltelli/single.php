@@ -181,13 +181,11 @@ while (have_posts()) :
                     </section>
                 <?php endif; ?>
 
-                <section class="sl-post__cta">
-                    <h2 class="sl-section-title"><?php esc_html_e('Hai un caso simile?', 'saltelli'); ?></h2>
-                    <a class="sl-btn sl-btn--primary" href="<?php echo esc_url(home_url('/contatti/')); ?>">
-                        <span><?php esc_html_e('Prenota un primo incontro', 'saltelli'); ?></span>
-                        <span class="arrow" aria-hidden="true">→</span>
-                    </a>
-                </section>
+                <?php /* Elena fix 2026-05-15 — rimossa sezione .sl-post__cta
+                       "Hai un caso simile? Prenota un primo incontro" perché
+                       ridondante con il footer §Contattaci ("Vorresti raccontarci
+                       il tuo caso?") che ha già il CTA prenotazione e copertura
+                       visiva più forte (background scuro + accent bronze). */ ?>
             </div>
         </footer>
 
