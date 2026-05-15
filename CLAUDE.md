@@ -17,24 +17,31 @@ Custom WordPress theme deliberatamente differenziato, AI-ready, performance-obse
 
 **Strategy:** "Legal Luxury Minimal" — boutique editoriale italiano, tipografia dominante, palette navy/crema/bronzo. Tier-1 deep clusters: Tributario · Lavoro · Famiglia LGBTQ+. Le altre 16 practice areas → tier-2 lighter pages.
 
-## Current state — v1.4.04-elena-fix-blog-author-thumb-size-portrait (CUT-READY)
+## Current state — v1.4.13-elena-fix-famiglia-merge-lgbtq-into-generale (CUT-READY)
 
-**Updated:** 2026-05-15 · **Branch:** `main` · last merge `46ac835` (PR #83 author thumb portrait) · ~19 PR mergiati 2026-05-14/15 batch QA Elena (PR #65 → #83)
+**Updated:** 2026-05-15 · **Branch:** `main` · last merge `d9af3ad` (PR #92 famiglia merge) · ~28 PR mergiati 2026-05-14/15 batch QA Elena (PR #65 → #92)
 
 **Status:**
 - Demo ✅ presentata · feedback Elena 23 punti triage chiusi
-- **Wave Elena QA 2026-05-14/15** (sessione corrente): ~19 PR merged in 2 giorni intensivi
+- **Wave Elena QA 2026-05-14/15** (sessione corrente): **28 PR merged in 2 giorni** intensivi
   - **Homepage**: Elfsight Google Reviews widget (#67) · Aree multi-cluster fix (#66) · home reviews tighten gap (#68) · font-display swap FOUT fix (#65)
   - **Chi Siamo**: founding_paragraphs re-render in §01 Lede (#73) · link inline navy editoriale globale (#75)
   - **SEO/Yoast**: meta title/desc/focus per 51 post (Pages+CPT) via wp eval-file · content analysis bridge SCF (#70) · editor JS bridge (#71) · cURL loopback fix (#72) · GSC audit recovery (#77)
   - **Blog single**: CTA ridondante rimossa (#79) · lede dedup has_excerpt (#80) · author card left-align (#81) · portrait 3:4 verticale (#82) · thumb size square→portrait (#83) · prose link styling include .sl-post__body (#78)
+  - **Forms & UX**: CF7 form inline su richiedi-preventivo + prenota-appuntamento (#84) · form align grid §01 body (#85) · header hide phone mobile (#86) · contatti map label remove (#87) · WhatsApp Business click-to-chat URL globale (#88)
+  - **Content corrections**: founding year 1999 → 2008 global (#89, #90, #91) · CPT famiglia consolidamento DEC-021 reverse — 2666 LGBTQ+ merged into 2669 (#92)
 - **Blog migration audit** (PR #77 + post-merge): 99.7% URL Google coperti — 22 articoli draft→publish + 2 articoli migrati dal vecchio Elementor + 1 articolo aggiunto 13 maggio (post #3199 Tredicesima) → totale 332 blog post pubblicati. ~2.755 impressioni Google preserved. **Sticky_posts trap risolto**: 23 sticky orfani da draft bloccavano archive ordering.
-- **Staging** `https://staging.studiolegalesaltelli.it` allineato v1.4.04
-- 13 Page WP Gutenberg-disabled · 18 Pages canoniche · 332 blog post
+- **Staging** `https://staging.studiolegalesaltelli.it` allineato v1.4.13
+- 13 Page WP Gutenberg-disabled · 18 Pages canoniche · 332 blog post · 20 CPT competenza (post-consolidamento famiglia)
 
 **Active phase:** Elena pre-cut QA continuo via Code session autonoma · attesa cliente per finestra cut produzione (DNS switch staging → prod)
 
 **Next:** Cut produzione · backlog post-cut: Wave 6.0 full (disable Gutenberg CPT competenza) · Wave 6.1 SCF orphan cleanup · P11 contatti · Wave 5.1 Image Expansion · single-post JSX Design · EDITOR-HANDOFF v6.1 · Yoast content analysis JS bridge cleanup (post-cut)
+
+**Open follow-ups Elena editorial (post-cut):**
+- Timeline §05 Chi Siamo: eventi "2007 Ingresso Fabiana" + "2019 Vent'anni" incoerenti con founding 2008 (template-parts/page-lo-studio.php:53-58)
+- founding_paragraphs SCF: testo "nasce nel 1999" potrebbe persistere in DB (controllare valore stored, default JSON già aggiornato)
+- 12 location ACF JSON post-2008 founding: verifica visiva post-cut
 
 ### Infra staging (consolidata 2026-04-30)
 - DO droplet `saltelli-staging-ams3-01` · `178.62.207.50` · ams3 · s-1vcpu-2gb · Ubuntu 24.04 LTS
@@ -282,6 +289,6 @@ Rileggi questo file. Se persiste il dubbio, chiedi a Duccio. Don't guess su:
 - Anything che apparirebbe in schema markup come fact
 
 ---
-*Updated: 2026-05-15 · v1.4.04-elena-fix-blog-author-thumb-size-portrait CUT-READY*
+*Updated: 2026-05-15 · v1.4.13-elena-fix-famiglia-merge-lgbtq-into-generale CUT-READY*
 *Storia dettagliata → `docs/CHANGELOG.md` · Pattern operativi → `docs/LESSONS-LEARNED.md`*
 *Maintained by orchestrator dopo ogni milestone.*
