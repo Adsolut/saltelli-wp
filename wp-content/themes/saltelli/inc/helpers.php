@@ -433,7 +433,7 @@ function saltelli_studio_data() {
         'price_range'   => '€800–€3500',
         // Studio attuale fondato gennaio 2019. Lineage: studio precedente
         // (studiolegaleavvass.it) dal 2008 con ex socio, abilitazione piena 2013.
-        'founding_date' => '2019-01',
+        'founding_date' => '2008-01',
         // Social — confermati 2026-04-28. URL ripuliti dai parametri di tracking.
         // NOTA: la "pagina LinkedIn studio" è in realtà il profilo personale di
         // Emiliano (https://www.linkedin.com/in/emilianosaltelli/) — lo agganciamo

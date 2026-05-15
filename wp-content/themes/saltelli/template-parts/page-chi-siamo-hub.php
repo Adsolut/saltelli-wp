@@ -21,7 +21,7 @@ $sl_casi_count    = wp_count_posts('saltelli_caso')->publish ?? 9;
 $sl_hub_eyebrow = (string) saltelli_page_field('hub_chisiamo_eyebrow', __('§ Chi siamo', 'saltelli'));
 $sl_hub_h1_main = (string) saltelli_page_field('hub_chisiamo_h1_main', __('Quattro avvocati,', 'saltelli'));
 $sl_hub_h1_em   = (string) saltelli_page_field('hub_chisiamo_h1_emphasis', __('un atelier.', 'saltelli'));
-$sl_hub_intro   = (string) saltelli_page_field('hub_chisiamo_intro', __("Studio Legale Emiliano Saltelli & Partners. Quattro professionisti in Via Vannella Gaetani, Chiaia. Una bottega — non una catena. Dal 1999.", 'saltelli'));
+$sl_hub_intro   = (string) saltelli_page_field('hub_chisiamo_intro', __("Studio Legale Emiliano Saltelli & Partners. Quattro professionisti in Via Vannella Gaetani, Chiaia. Una bottega — non una catena. Dal 2008.", 'saltelli'));
 ?>
 
 <section class="sl-page-hero sl-hub-hero" aria-labelledby="hub-chi-siamo-h1">
@@ -50,7 +50,7 @@ $sl_hub_intro   = (string) saltelli_page_field('hub_chisiamo_intro', __("Studio 
                     <p class="sl-mono sl-hub-card__num">01 / 03</p>
                     <h2 class="sl-hub-card__title"><?php echo esc_html(saltelli_page_field('hub_chisiamo_card1_title', 'Lo Studio')); ?></h2>
                     <p class="sl-hub-card__desc">
-                        <?php echo esc_html(saltelli_page_field('hub_chisiamo_card1_desc', 'Storia dal 1999, valori, sede in Via Vannella Gaetani 27. Atelier napoletano in Chiaia.')); ?>
+                        <?php echo esc_html(saltelli_page_field('hub_chisiamo_card1_desc', 'Storia dal 2008, valori, sede in Via Vannella Gaetani 27. Atelier napoletano in Chiaia.')); ?>
                     </p>
                     <span class="sl-mono sl-hub-card__cta"><?php echo esc_html(saltelli_page_field('hub_chisiamo_card1_cta', 'Scopri →')); ?></span>
                 </a>

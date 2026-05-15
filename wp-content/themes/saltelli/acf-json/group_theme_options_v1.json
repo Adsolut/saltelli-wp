@@ -983,7 +983,7 @@
             "name": "archive_avvocato_trust_eyebrow",
             "type": "text",
             "instructions": "Etichetta in maiuscoletto nel riquadro 'trust' a destra del hero archivio Team.",
-            "default_value": "§ Dal 1999",
+            "default_value": "§ Dal 2008",
             "maxlength": 60
         },
         {
