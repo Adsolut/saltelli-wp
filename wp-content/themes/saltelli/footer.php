@@ -227,7 +227,7 @@ $ftr_indirizzo_lines = preg_split('/\r?\n/', (string) $ftr_indirizzo);
                     <a class="sl-foot-logo" href="<?php echo esc_url(home_url('/')); ?>" rel="home" aria-label="<?php esc_attr_e('Studio Legale Saltelli — Home', 'saltelli'); ?>">
                         <span class="sl-mono sl-foot-logo__row1"><?php esc_html_e('Studio Legale', 'saltelli'); ?></span>
                         <span class="sl-foot-logo__row2"><span class="sl-foot-logo__swash">S</span>altelli</span>
-                        <span class="sl-mono sl-foot-logo__row3"><?php esc_html_e('Napoli · Dal 1999', 'saltelli'); ?></span>
+                        <span class="sl-mono sl-foot-logo__row3"><?php esc_html_e('Napoli · Dal 2008', 'saltelli'); ?></span>
                     </a>
 
                     <?php /* Wave 4.6: brand_statement_short editabile via Theme Options.

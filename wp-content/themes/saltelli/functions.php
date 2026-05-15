@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.4.10-elena-fix-header-year-1999-2008');
+define('SALTELLI_THEME_VERSION', '1.4.11-elena-fix-footer-year-1999-2008');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
