@@ -112,10 +112,13 @@ function saltelli_mvp_to_audit_redirect_map() {
         '/competenze/consulenze-online/'          => '/aree-di-pratica/',
         '/competenze/diritto-commerciale/'        => '/aree-di-pratica/',
 
-        // DISCOVERY-01 consolidamento (Wave 5 mini-fix BLOCKER B, 2026-05-06):
-        // Post 2669 `diritto-di-famiglia` (NO LGBTQ+) eliminato per consolidamento
-        // con sibling 2666 `diritto-di-famiglia-lgbtq` (DEC-021 cliente-firmato).
-        '/aree-di-pratica/privati/diritto-di-famiglia/' => '/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/',
+        // Elena fix 2026-05-15: REVERSE consolidamento. DEC-021 originale (2666
+        // LGBTQ+ canonical) era stato pianificato ma esecuzione si è invertita —
+        // 2669 publish con content broken, 2666 in draft. Decisione Elena:
+        // 2669 `diritto-di-famiglia` resta canonical con content UNIFICATO
+        // (generale + LGBTQ+ migrato da 2666). Post 2666 trashed. Redirect
+        // ora reverse: /diritto-di-famiglia-lgbtq/ → /diritto-di-famiglia/.
+        '/aree-di-pratica/privati/diritto-di-famiglia-lgbtq/' => '/aree-di-pratica/privati/diritto-di-famiglia/',
 
         // Elena fix 2026-05-14 — GSC audit recovery 4 URL 404 con backlink Google:
         // a) Typo apostrofo /bonifico-ai-figli .../l-agenzia .../ (38 impr Google,

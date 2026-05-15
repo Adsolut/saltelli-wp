@@ -11,7 +11,7 @@
 
 defined('ABSPATH') || exit;
 
-define('SALTELLI_THEME_VERSION', '1.4.12-elena-fix-founding-year-global-2008');
+define('SALTELLI_THEME_VERSION', '1.4.13-elena-fix-famiglia-merge-lgbtq-into-generale');
 define('SALTELLI_THEME_DIR', get_template_directory());
 define('SALTELLI_THEME_URI', get_template_directory_uri());
 
