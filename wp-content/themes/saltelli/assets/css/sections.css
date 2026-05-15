@@ -9665,6 +9665,26 @@ h2.sl-casi__cta-title {
     color: var(--text);
     max-width: 60ch;
 }
+
+/* === v1.4.06 Elena fix 2026-05-15 — H2 modulo form inline (richiedi-preventivo /
+   prenota-appuntamento). Riusa wrapper .sl-info-page__body grid (3fr/9fr) per
+   allinearsi al body §01 sopra. H2 specifico più impattante (Playfair clamp). */
+.sl-info-page__form-h {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 56px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--primary);
+    margin: 0 0 32px;
+    font-weight: 400;
+}
+.sl-info-page__form-h em {
+    font-style: italic;
+    color: var(--text-muted);
+}
+.sl-info-page__body--form {
+    padding-block-start: 0; /* sezione body §01 sopra già fornisce padding-bottom; evita doppio gap */
+}
 .sl-info-page__prose > p {
     margin: 0 0 24px;
 }

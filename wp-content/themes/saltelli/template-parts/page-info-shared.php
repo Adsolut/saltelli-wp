@@ -144,10 +144,13 @@ $trust_headline = $aside_h3;
     <?php
     /* Elena fix 2026-05-15 — modulo CF7 inline su /costi-e-consulenze/richiedi-preventivo/
        (e /prenota-appuntamento/ per consistenza). Stesso form ID di /contatti/
-       ("Saltelli Contatti", ID 2703, slug `saltelli-contatti`). L'utente
-       chiede di NON dover navigare a /contatti/ ma compilare direttamente
-       dalla pagina richiedi-preventivo. Markup riusa le classi della
-       page-contatti.php per design consistency. */
+       ("Saltelli Contatti", ID 2703, slug `saltelli-contatti`).
+
+       v1.4.06 fix layout: markup riusa wrapper `.sl-info-page__body` (grid
+       3fr/9fr eyebrow|content) per allinearsi al body editorial della
+       sezione §01 sopra. Prima usava classi `.sl-contatti-w3__main` che
+       hanno grid diverso → eyebrow + H2 collassati a left margin invece
+       di rispettare la colonna sinistra. Adesso layout coerente. */
     if (in_array($slug, ['richiedi-preventivo', 'prenota-appuntamento'], true) && shortcode_exists('contact-form-7')) :
         $form_post = get_page_by_path('saltelli-contatti', OBJECT, 'wpcf7_contact_form');
         if ($form_post) :
@@ -161,16 +164,14 @@ $trust_headline = $aside_h3;
                 ? __('e prepariamo un preventivo.', 'saltelli')
                 : __('incontro gratuito.', 'saltelli');
             ?>
-            <section class="sl-info-page__form sl-contatti-w3__main" aria-labelledby="info-page-form-h">
-                <div class="sl-contatti-w3__main-grid">
-                    <div class="sl-contatti-w3__form-col">
-                        <div class="sl-mono"><?php echo esc_html($form_eyebrow); ?></div>
-                        <h2 class="sl-contatti-w3__form-h" id="info-page-form-h">
-                            <?php echo esc_html($form_h2_main); ?><br>
-                            <em><?php echo esc_html($form_h2_em); ?></em>
-                        </h2>
-                        <?php echo do_shortcode('[contact-form-7 id="' . (int) $form_post->ID . '" title="Saltelli Contatti"]'); ?>
-                    </div>
+            <section class="sl-info-page__body sl-info-page__body--form" aria-labelledby="info-page-form-h">
+                <div class="sl-mono sl-info-page__body-eyebrow"><?php echo esc_html($form_eyebrow); ?></div>
+                <div class="sl-info-page__prose sl-info-page__form-col">
+                    <h2 class="sl-info-page__form-h" id="info-page-form-h">
+                        <?php echo esc_html($form_h2_main); ?><br>
+                        <em><?php echo esc_html($form_h2_em); ?></em>
+                    </h2>
+                    <?php echo do_shortcode('[contact-form-7 id="' . (int) $form_post->ID . '" title="Saltelli Contatti"]'); ?>
                 </div>
             </section>
         <?php endif;
