@@ -45,7 +45,7 @@ $sl_arch_intro   = (string) saltelli_option('archive_avvocato_intro', __('Un ate
         </div>
         <aside class="sl-team__archive-trust">
             <div class="sl-mono sl-team__archive-trust-eyebrow">
-                <?php echo esc_html(saltelli_option('archive_avvocato_trust_eyebrow', '§ Dal 1999')); ?>
+                <?php echo esc_html(saltelli_option('archive_avvocato_trust_eyebrow', '§ Dal 2008')); ?>
             </div>
             <p class="sl-team__archive-trust-headline">
                 <?php echo esc_html(saltelli_option('archive_avvocato_trust_headline_l1', 'Vannella Gaetani, 27.')); ?><br>

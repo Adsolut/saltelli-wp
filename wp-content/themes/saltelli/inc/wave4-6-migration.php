@@ -41,7 +41,7 @@ function saltelli_w46_migrate_lo_studio_timeline() {
     }
 
     $events = [
-        ['year' => '1999', 'title' => 'Fondazione',         'description' => 'Emiliano Saltelli apre lo studio in Via Vannella Gaetani, focalizzato sul contenzioso tributario.'],
+        ['year' => '2008', 'title' => 'Fondazione',         'description' => 'Emiliano Saltelli apre lo studio in Via Vannella Gaetani, focalizzato sul contenzioso tributario.'],
         ['year' => '2007', 'title' => 'Ingresso di Fabiana', 'description' => 'Si aggiunge la prima associate — area diritto del lavoro.'],
         ['year' => '2014', 'title' => 'Apertura LGBTQ+',     'description' => 'Antonia Battista inaugura una pratica dedicata, prima a Napoli sud.'],
         ['year' => '2019', 'title' => "Vent'anni",           'description' => 'Lo studio passa da 2 a 4 professionisti stabili. Atelier a tutti gli effetti.'],
@@ -53,7 +53,7 @@ function saltelli_w46_migrate_lo_studio_timeline() {
 
     $year_range = (string) get_field('timeline_year_range', $page->ID);
     if ($year_range === '') {
-        update_field('timeline_year_range', '1999 → 2026.', $page->ID);
+        update_field('timeline_year_range', '2008 → 2026.', $page->ID);
     }
 }
 endif;

@@ -11,7 +11,7 @@ $studio = saltelli_studio_data();
 
 // Wave 4.7.fix.3: hero/studio/team/cases ora attaccati a Page WP "Home" (page_on_front).
 // Edita da WP-Admin → Pagine → Home. Helper saltelli_page_field auto-resolve homepage_id.
-$hero_eyebrow    = saltelli_page_field('hero_eyebrow', 'Studio Legale · Napoli · Chiaia · Dal 1999');
+$hero_eyebrow    = saltelli_page_field('hero_eyebrow', 'Studio Legale · Napoli · Chiaia · Dal 2008');
 $hero_headline   = saltelli_page_field('hero_headline', 'Diritto, con misura.');
 $hero_sub        = saltelli_page_field('hero_subheadline', "Studio Legale Saltelli &amp; Partners. Quattro avvocati a Chiaia, diciassette aree di pratica, vent'anni di lavoro accanto a famiglie e imprese di Napoli.");
 $hero_cta_label  = saltelli_page_field('hero_cta_label', 'Prenota una consulenza gratuita');

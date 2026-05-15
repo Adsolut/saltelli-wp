@@ -34,7 +34,7 @@ $sl_lawyers_chi = get_posts([
 ]);
 
 /* Wave 4.6 — Timeline ACF (group_lo_studio_v1). Fallback hardcoded preservato. */
-$sl_timeline_year_range = (string) saltelli_field('timeline_year_range', $sl_lo_studio_pid, '1999 → 2026.');
+$sl_timeline_year_range = (string) saltelli_field('timeline_year_range', $sl_lo_studio_pid, '2008 → 2026.');
 
 $sl_timeline_acf = saltelli_field('timeline_events', $sl_lo_studio_pid, []);
 $sl_timeline = [];
@@ -50,7 +50,7 @@ if (is_array($sl_timeline_acf) && !empty($sl_timeline_acf)) {
 }
 if (empty($sl_timeline)) {
     $sl_timeline = [
-        ['y' => '1999', 't' => __('Fondazione', 'saltelli'),         'd' => __('Emiliano Saltelli apre lo studio in Via Vannella Gaetani, focalizzato sul contenzioso tributario.', 'saltelli')],
+        ['y' => '2008', 't' => __('Fondazione', 'saltelli'),         'd' => __('Emiliano Saltelli apre lo studio in Via Vannella Gaetani, focalizzato sul contenzioso tributario.', 'saltelli')],
         ['y' => '2007', 't' => __('Ingresso di Fabiana', 'saltelli'),'d' => __('Si aggiunge la prima associate — area diritto del lavoro.', 'saltelli')],
         ['y' => '2014', 't' => __('Apertura LGBTQ+', 'saltelli'),    'd' => __('Antonia Battista inaugura una pratica dedicata, prima a Napoli sud.', 'saltelli')],
         ['y' => '2019', 't' => __("Vent'anni", 'saltelli'),          'd' => __("Lo studio passa da 2 a 4 professionisti stabili. Atelier a tutti gli effetti.", 'saltelli')],
@@ -109,7 +109,7 @@ $sl_plate_has_image = is_array($sl_plate_image) && !empty($sl_plate_image['url']
                 <?php echo esc_html(saltelli_page_field('lo_studio_hero_meta_l2', 'di quattro avvocati')); ?><br>
                 <?php echo esc_html(saltelli_page_field('lo_studio_hero_meta_l3', 'in Via Vannella Gaetani 27')); ?><br>
                 <?php echo esc_html(saltelli_page_field('lo_studio_hero_meta_l4', 'Chiaia · Napoli')); ?><br>
-                <?php echo esc_html(saltelli_page_field('lo_studio_hero_meta_l5', 'Dal 1999')); ?>
+                <?php echo esc_html(saltelli_page_field('lo_studio_hero_meta_l5', 'Dal 2008')); ?>
             </p>
         </aside>
         <h1 class="sl-chi-siamo__h1" id="chi-siamo-h1" data-split-reveal>
